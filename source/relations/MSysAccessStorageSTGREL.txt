@@ -1,0 +1,8 @@
+4096
+MSysAccessStorageSTGREL
+MSysAccessStorage
+MSysAccessStorage
+Field = Begin
+Id
+ParentId
+End

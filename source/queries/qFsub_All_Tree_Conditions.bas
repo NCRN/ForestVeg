@@ -1,0 +1,46 @@
+﻿dbMemo "SQL" ="SELECT \"VINE\" AS Category, tlu_Plants.Latin_Name as Description, \"na\" AS Per"
+    "centAfflicted\015\012FROM (tbl_Tree_Data INNER JOIN tbl_Tree_Vines ON tbl_Tree_D"
+    "ata.Tree_Data_ID = tbl_Tree_Vines.Tree_Data_ID) INNER JOIN tlu_Plants ON tbl_Tre"
+    "e_Vines.TSN = tlu_Plants.TSN\015\012WHERE (((tbl_Tree_Data.Tree_Data_ID)=[Forms]"
+    "![frm_Events]![fsub_Tree_Data]![Tree_Data_ID]))\015\012UNION ALL\015\012SELECT I"
+    "If([Pest]=True,\"PEST\",\"CONDITION\") AS Description, tbl_Tree_Conditions.Condi"
+    "tion, \"na\" AS PercentAff\015\012FROM (tbl_Tree_Data INNER JOIN tbl_Tree_Condit"
+    "ions ON tbl_Tree_Data.Tree_Data_ID = tbl_Tree_Conditions.Tree_Data_ID) INNER JOI"
+    "N tlu_Tree_Condition ON tbl_Tree_Conditions.Condition = tlu_Tree_Condition.Descr"
+    "iption\015\012WHERE (((tbl_Tree_Conditions.Tree_Data_ID)=[Forms]![frm_Events]![f"
+    "sub_Tree_Data]![Tree_Data_ID]))\015\012UNION ALL SELECT \"FOLIAGE\" AS Descripti"
+    "on, tbl_Tree_Foliage_Conditions.Condition, tbl_Tree_Foliage_Conditions.Percent_A"
+    "fflicted\015\012FROM tbl_Tree_Data INNER JOIN tbl_Tree_Foliage_Conditions ON tbl"
+    "_Tree_Data.Tree_Data_ID = tbl_Tree_Foliage_Conditions.Tree_Data_ID\015\012WHERE "
+    "(((tbl_Tree_Data.Tree_Data_ID)=[Forms]![frm_Events]![fsub_Tree_Data]![Tree_Data_"
+    "ID]));\015\012"
+dbMemo "Connect" =""
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+dbByte "RecordsetType" ="0"
+dbBoolean "OrderByOn" ="0"
+dbByte "Orientation" ="0"
+dbByte "DefaultView" ="2"
+dbBoolean "FilterOnLoad" ="0"
+dbBoolean "OrderByOnLoad" ="-1"
+dbBoolean "TotalsRow" ="0"
+Begin
+    Begin
+        dbText "Name" ="Description"
+        dbLong "AggregateType" ="-1"
+        dbInteger "ColumnWidth" ="1365"
+        dbBoolean "ColumnHidden" ="0"
+    End
+    Begin
+        dbText "Name" ="Category"
+        dbInteger "ColumnWidth" ="1245"
+        dbBoolean "ColumnHidden" ="0"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="PercentAfflicted"
+        dbInteger "ColumnWidth" ="1680"
+        dbBoolean "ColumnHidden" ="0"
+        dbLong "AggregateType" ="-1"
+    End
+End

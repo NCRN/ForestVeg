@@ -1,0 +1,17 @@
+﻿dbMemo "SQL" ="SELECT tbl_Locations.Location_ID, tbl_Events.Event_ID, tbl_Locations.Admin_Unit_"
+    "Code, tbl_Locations.Subunit_Code, tbl_Events.Event_Date, tbl_Tags.Tag, Round(((("
+    "Sum(3.1415*((IIf([Live]=True,[DBH],0))/2)^2))*(1/3.1415))^0.5)*2,6) AS EquivDBH\015"
+    "\012FROM ((tbl_Locations INNER JOIN tbl_Events ON tbl_Locations.Location_ID = tb"
+    "l_Events.Location_ID) INNER JOIN (tbl_Tree_Data INNER JOIN tbl_Tags ON tbl_Tree_"
+    "Data.Tag_ID = tbl_Tags.Tag_ID) ON tbl_Events.Event_ID = tbl_Tree_Data.Event_ID) "
+    "INNER JOIN tbl_Tree_DBH ON tbl_Tree_Data.Tree_Data_ID = tbl_Tree_DBH.Tree_Data_I"
+    "D\015\012GROUP BY tbl_Locations.Location_ID, tbl_Events.Event_ID, tbl_Locations."
+    "Admin_Unit_Code, tbl_Locations.Subunit_Code, tbl_Events.Event_Date, tbl_Tags.Tag"
+    "\015\012HAVING (((tbl_Locations.Location_ID) = \"{04F4D723-1911-40A2-864C-61C822"
+    "4E2D78}\") And ((tbl_Tags.Tag) = 23252))\015\012ORDER BY tbl_Events.Event_Date;\015"
+    "\012"
+dbMemo "Connect" =""
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+Begin
+End

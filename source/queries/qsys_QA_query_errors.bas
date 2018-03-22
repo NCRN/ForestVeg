@@ -1,0 +1,37 @@
+﻿dbMemo "SQL" ="SELECT tbl_QA_Results.Query_name, \"No longer exists, but in result set\" AS Iss"
+    "ue, tbl_QA_Results.Time_frame\015\012FROM MSysObjects RIGHT JOIN tbl_QA_Results "
+    "ON MSysObjects.Name = tbl_QA_Results.Query_name\015\012WHERE (((tbl_QA_Results.T"
+    "ime_frame)=[Forms]![frm_Data_QA]![cmbTimeframe]) AND ((tbl_QA_Results.Data_scope"
+    ")=[Forms]![frm_Data_QA]![optgScope]) AND ((MSysObjects.Name) Is Null))\015\012\015"
+    "\012UNION SELECT MSysObjects.Name AS Query_name, \"Not in result set\" AS Issue,"
+    " tbl_QA_Results.Time_frame\015\012FROM MSysObjects LEFT JOIN tbl_QA_Results ON M"
+    "SysObjects.Name = tbl_QA_Results.Query_name\015\012WHERE (((MSysObjects.Name) Li"
+    "ke \"qQA_*\") AND ((tbl_QA_Results.Query_name) Is Null))\015\012\015\012UNION SE"
+    "LECT tbl_QA_Results.Query_name, \"Not running properly\" AS Issue, tbl_QA_Result"
+    "s.Time_frame\015\012FROM tbl_QA_Results\015\012WHERE (((tbl_QA_Results.Time_fram"
+    "e)=[Forms]![frm_Data_QA]![cmbTimeframe]) AND ((tbl_QA_Results.Query_run_time) Is"
+    " Null)) OR (((tbl_QA_Results.Time_frame)=[Forms]![frm_Data_QA]![cmbTimeframe]) A"
+    "ND ((tbl_QA_Results.Query_result) Is Null));\015\012"
+dbMemo "Connect" =""
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+dbBoolean "OrderByOn" ="0"
+dbByte "Orientation" ="0"
+dbByte "DefaultView" ="2"
+dbText "Description" ="System query listing validation queries that are not updating correctly"
+dbBoolean "FilterOnLoad" ="0"
+dbBoolean "OrderByOnLoad" ="-1"
+Begin
+    Begin
+        dbText "Name" ="tbl_QA_Results.Query_name"
+        dbInteger "ColumnWidth" ="4836"
+        dbBoolean "ColumnHidden" ="0"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Issue"
+        dbInteger "ColumnWidth" ="2865"
+        dbBoolean "ColumnHidden" ="0"
+        dbLong "AggregateType" ="-1"
+    End
+End

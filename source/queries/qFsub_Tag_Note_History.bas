@@ -1,0 +1,46 @@
+﻿dbMemo "SQL" ="SELECT tbl_Tags_History.Record_ID as Tag_ID, tbl_Tags_History.Change_Date, [Fiel"
+    "d_Name] & \" was changed by \" & [First_Name] & \" \" & [Last_Name] & \" from \""
+    " & [Value_Old] & \" to \" & [Value_New] AS Change_Desc\015\012FROM tbl_Tags_Hist"
+    "ory LEFT JOIN tlu_Contacts ON tbl_Tags_History.Contact_ID = tlu_Contacts.Contact"
+    "_ID\015\012\015\012UNION ALL SELECT tbl_Tree_Data.Tag_ID, tbl_Events.Event_Date,"
+    " \"Recorded as \" & [Tree_Status] & \" TREE\" AS Change_Desc\015\012FROM tbl_Eve"
+    "nts INNER JOIN tbl_Tree_Data ON tbl_Events.Event_ID = tbl_Tree_Data.Event_ID\015"
+    "\012\015\012UNION ALL SELECT tbl_Sapling_Data.Tag_ID, tbl_Events.Event_Date, \"R"
+    "ecorded as \" & [Sapling_Status] & \" SAPLING\" AS Change_Desc\015\012FROM tbl_E"
+    "vents INNER JOIN tbl_Sapling_Data ON tbl_Events.Event_ID = tbl_Sapling_Data.Even"
+    "t_ID\015\012\015\012UNION ALL SELECT tbl_Tree_Data.Tag_ID, tbl_Events.Event_Date"
+    ", \"Noted during event: \" & [Tree_Notes] AS Change_Desc\015\012FROM tbl_Events "
+    "INNER JOIN tbl_Tree_Data ON tbl_Events.Event_ID = tbl_Tree_Data.Event_ID\015\012"
+    "WHERE Not(IsNull(tbl_Tree_Data.Tree_Notes))\015\012\015\012UNION ALL SELECT tbl_"
+    "Sapling_Data.Tag_ID, tbl_Events.Event_Date, \"Noted during event: \" & [Sapling_"
+    "Notes] AS Change_Desc\015\012FROM tbl_Events INNER JOIN tbl_Sapling_Data ON tbl_"
+    "Events.Event_ID = tbl_Sapling_Data.Event_ID\015\012WHERE Not(IsNull(tbl_Sapling_"
+    "Data.Sapling_Notes));\015\012"
+dbMemo "Connect" =""
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+dbBoolean "OrderByOn" ="0"
+dbByte "Orientation" ="0"
+dbByte "DefaultView" ="2"
+dbBoolean "FilterOnLoad" ="0"
+dbBoolean "OrderByOnLoad" ="-1"
+Begin
+    Begin
+        dbText "Name" ="Tag_ID"
+        dbLong "AggregateType" ="-1"
+        dbInteger "ColumnWidth" ="4170"
+        dbBoolean "ColumnHidden" ="0"
+    End
+    Begin
+        dbText "Name" ="tbl_Tags_History.Change_Date"
+        dbInteger "ColumnWidth" ="2670"
+        dbBoolean "ColumnHidden" ="0"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Change_Desc"
+        dbInteger "ColumnWidth" ="6780"
+        dbBoolean "ColumnHidden" ="0"
+        dbLong "AggregateType" ="-1"
+    End
+End
