@@ -526,8 +526,36 @@ Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Compare Database
+Option Explicit
 
-Private Sub cboTag_Status_BeforeUpdate(Cancel As Integer)
+' =================================
+' MODULE:       fsub_Tag_Sapling
+' Level:        Application module
+' Version:      1.00
+'
+' Description:  Sapling tag related functions & procedures for version control
+'
+' Source/date:  Mark Lehman, Geoff Sanders, Unknown
+' Adapted/date: Bonnie Campbell, March 26, 2018
+' Revisions:    BLC - 3/26/2018 - 1.00 - initial version
+' =================================
+
+' ---------------------------------
+' SUB:          cboTag_Status_BeforeUpdate
+' Description:  Tag status actions for before record update
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+' Source/date:  Bonnie Campbell, March 26, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 3/26/2018 - initial version (w/ documentation)
+' ---------------------------------
+Public Sub cboTag_Status_BeforeUpdate(Cancel As Integer)
+On Error GoTo Err_Handler
+
     Dim frm As Form
     Dim ctl As Control
     Dim ChangeDescription As String
@@ -540,9 +568,35 @@ Private Sub cboTag_Status_BeforeUpdate(Cancel As Integer)
     
     'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
     OpenConfirmValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, "tbl_Tags", "Tag_Status", "Tag_ID", Me!Tag_ID, Nz(Me!cboTag_Status.OldValue, "Null"), Me!cboTag_Status, "", "", ""
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cboTag_Status_BeforeUpdate[fsub_Tag_Sapling])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub cboTSN_BeforeUpdate(Cancel As Integer)
+' ---------------------------------
+' SUB:          cboTSN_BeforeUpdate
+' Description:  TSN actions before record update
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+' Source/date:  Bonnie Campbell, March 26, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 3/26/2018 - initial version (w/ documentation)
+' ---------------------------------
+Public Sub cboTSN_BeforeUpdate(Cancel As Integer)
+On Error GoTo Err_Handler
+
     'Dim frm As Form
     'Dim ctl As Control
     
@@ -563,14 +617,34 @@ Private Sub cboTSN_BeforeUpdate(Cancel As Integer)
     
     'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
     OpenConfirmValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, "tbl_Tags", "TSN", "Tag_ID", Me!Tag_ID, Nz(Me!cboTSN.OldValue, "Null"), Me!cboTSN, "tlu_Plants", "Latin_Name", "TSN"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cboTSN_BeforeUpdate[fsub_Tag_Sapling])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Public Sub SaveRecord()
-    DoCmd.RunCommand acCmdSaveRecord
-End Sub
-
-Private Sub cmdReplace_Tag_Click()
-On Error GoTo Err_cmdReplace_Tag_Click
+' ---------------------------------
+' SUB:          cmdReplace_Tag_Click
+' Description:  Replace tag button actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+' Source/date:  Bonnie Campbell, March 26, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 3/26/2018 - initial version (w/ documentation)
+' ---------------------------------
+Public Sub cmdReplace_Tag_Click()
+On Error GoTo Err_Handler
 
     Dim frm As Form
     Dim ctl As Control
@@ -584,16 +658,34 @@ On Error GoTo Err_cmdReplace_Tag_Click
     
     'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
     OpenChangeValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, "tbl_Tags", "Tag", "Tag_ID", Me!Tag_ID, Me!Tag.Value
-
-Exit_cmdReplace_Tag_Click:
+    
+Exit_Handler:
     Exit Sub
-Err_cmdReplace_Tag_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdReplace_Tag_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cmdReplace_Tag_Click[fsub_Tag_Sapling])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub txtAzimuth_Click()
-On Error GoTo Err_txtAzimuth_Click
+' ---------------------------------
+' SUB:          txtAzimuth_Click
+' Description:  Azimuth textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+' Source/date:  Bonnie Campbell, March 26, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 3/26/2018 - initial version (w/ documentation)
+' ---------------------------------
+Public Sub txtAzimuth_Click()
+On Error GoTo Err_Handler
 
     Dim frm As Form
     Dim ctl As Control
@@ -607,16 +699,34 @@ On Error GoTo Err_txtAzimuth_Click
     
     'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
     OpenChangeValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, "tbl_Tags", "Azimuth", "Tag_ID", Me!Tag_ID, Nz(Me!Azimuth.Value, "Null")
-
-Exit_txtAzimuth_Click:
+    
+Exit_Handler:
     Exit Sub
-Err_txtAzimuth_Click:
-    MsgBox Err.Description
-    Resume Exit_txtAzimuth_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - txtAzimuth_Click[fsub_Tag_Sapling])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub txtDistance_Click()
-On Error GoTo Err_txtDistance_Click
+' ---------------------------------
+' SUB:          txtDistance_Click()
+' Description:  Distance textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+' Source/date:  Bonnie Campbell, March 26, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 3/26/2018 - initial version (w/ documentation)
+' ---------------------------------
+Public Sub txtDistance_Click()
+On Error GoTo Err_Handler
 
     Dim frm As Form
     Dim ctl As Control
@@ -630,16 +740,34 @@ On Error GoTo Err_txtDistance_Click
     
     'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
     OpenChangeValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, "tbl_Tags", "Distance", "Tag_ID", Me!Tag_ID, Nz(Me!Distance.Value, "Null")
-
-Exit_txtDistance_Click:
+    
+Exit_Handler:
     Exit Sub
-Err_txtDistance_Click:
-    MsgBox Err.Description
-    Resume Exit_txtDistance_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - txtDistance_Click[fsub_Tag_Sapling])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub txtMicroplot_Number_Click()
-On Error GoTo Err_txtMicroplot_Number_Click
+' ---------------------------------
+' SUB:          txtMicroplot_Number_Click
+' Description:  Microplot number textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+' Source/date:  Bonnie Campbell, March 26, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 3/26/2018 - initial version (w/ documentation)
+' ---------------------------------
+Public Sub txtMicroplot_Number_Click()
+On Error GoTo Err_Handler
 
     Dim frm As Form
     Dim ctl As Control
@@ -653,10 +781,45 @@ On Error GoTo Err_txtMicroplot_Number_Click
     
     'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
     OpenChangeValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, "tbl_Tags", "Microplot_Number", "Tag_ID", Me!Tag_ID, Nz(Me!Microplot_Number.Value, "Null")
-
-Exit_txtMicroplot_Number_Click:
+  
+Exit_Handler:
     Exit Sub
-Err_txtMicroplot_Number_Click:
-    MsgBox Err.Description
-    Resume Exit_txtMicroplot_Number_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - txtMicroplot_Number_Click[fsub_Tag_Sapling])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          SaveRecord
+' Description:  Save record actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+' Source/date:  Bonnie Campbell, March 26, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 3/26/2018 - initial version (w/ documentation)
+' ---------------------------------
+Public Sub SaveRecord()
+On Error GoTo Err_Handler
+
+    DoCmd.RunCommand acCmdSaveRecord
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - XX[fsub_Tag_Sapling])"
+    End Select
+    Resume Exit_Handler
 End Sub

@@ -71,7 +71,7 @@ Begin
     Begin
         dbText "Name" ="FirstOfTag_ID"
         dbLong "AggregateType" ="-1"
-        dbInteger "ColumnWidth" ="1245"
+        dbInteger "ColumnWidth" ="1800"
         dbInteger "ColumnOrder" ="3"
         dbBoolean "ColumnHidden" ="0"
     End
@@ -109,13 +109,15 @@ Begin
         dbText "Name" ="tbl_Sapling_Data.Sapling_Data_ID"
         dbInteger "ColumnOrder" ="1"
         dbLong "AggregateType" ="-1"
-        dbInteger "ColumnWidth" ="1710"
+        dbInteger "ColumnWidth" ="2100"
         dbBoolean "ColumnHidden" ="0"
     End
     Begin
         dbText "Name" ="tbl_Sapling_Data.Event_ID"
         dbInteger "ColumnOrder" ="2"
         dbLong "AggregateType" ="-1"
+        dbInteger "ColumnWidth" ="2280"
+        dbBoolean "ColumnHidden" ="0"
     End
     Begin
         dbText "Name" ="StemsDead"
@@ -133,14 +135,14 @@ Begin
 End
 Begin
     State =0
-    Left =41
-    Top =154
-    Right =1360
-    Bottom =918
+    Left =-94
+    Top =174
+    Right =1225
+    Bottom =938
     Left =-1
     Top =-1
-    Right =1287
-    Bottom =206
+    Right =1301
+    Bottom =189
     Left =0
     Top =0
     ColumnsShown =543
