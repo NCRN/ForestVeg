@@ -94,7 +94,7 @@ Begin Form
                     FontSize =18
                     FontWeight =700
                     TabIndex =1
-                    Name ="cboLocation_ID"
+                    Name ="cbxLocationID"
                     ControlSource ="Location_ID"
                     RowSourceType ="Table/Query"
                     ColumnWidths ="0;2160"
@@ -113,7 +113,7 @@ Begin Form
                             Height =515
                             FontSize =18
                             FontWeight =700
-                            Name ="lblPick_Plot"
+                            Name ="lblPlot"
                             Caption ="Plot"
                             LayoutCachedLeft =540
                             LayoutCachedTop =1440
@@ -133,7 +133,7 @@ Begin Form
                     FontSize =18
                     FontWeight =700
                     TabIndex =2
-                    Name ="txtEvent_Date"
+                    Name ="tbxEventDate"
                     ControlSource ="Event_Date"
                     Format ="Short Date"
                     DefaultValue ="=Date()"
@@ -153,7 +153,7 @@ Begin Form
                             Height =510
                             FontSize =18
                             FontWeight =700
-                            Name ="lblEvent_Date"
+                            Name ="lblEventDate"
                             Caption ="Date"
                             LayoutCachedLeft =540
                             LayoutCachedTop =2040
@@ -172,7 +172,7 @@ Begin Form
                     FontWeight =700
                     BackColor =275078
                     ForeColor =16777215
-                    Name ="lblEvent_Add"
+                    Name ="lblTitle"
                     Caption ="Create New Event"
                     LayoutCachedWidth =4320
                     LayoutCachedHeight =540
@@ -190,7 +190,7 @@ Begin Form
                     ColumnWidth =1320
                     FontSize =8
                     TabIndex =5
-                    Name ="txtEvent_ID"
+                    Name ="tbxEventID"
                     ControlSource ="Event_ID"
                     StatusBarText ="M. Event identifier (Event_ID)"
 
@@ -207,7 +207,7 @@ Begin Form
                             Width =975
                             Height =210
                             FontSize =8
-                            Name ="lblEvent_ID"
+                            Name ="lblEventID"
                             Caption ="Event ID:"
                             LayoutCachedLeft =240
                             LayoutCachedTop =600
@@ -226,7 +226,7 @@ Begin Form
                     FontSize =14
                     TabIndex =3
                     ForeColor =0
-                    Name ="cmdEvent_Create"
+                    Name ="btnCreate"
                     Caption ="Create Event"
                     OnClick ="[Event Procedure]"
                     LeftPadding =60
@@ -271,7 +271,7 @@ Begin Form
                     FontSize =14
                     TabIndex =4
                     ForeColor =0
-                    Name ="cmdEvent_Cancel"
+                    Name ="btnCancel"
                     Caption ="Cancel"
                     OnClick ="[Event Procedure]"
                     LeftPadding =60
@@ -314,7 +314,7 @@ Begin Form
                     Top =600
                     Height =315
                     TabIndex =6
-                    Name ="txtProtocol_Name"
+                    Name ="tbxProtocolName"
                     ControlSource ="Protocol_Name"
                     DefaultValue ="=[Forms]![frm_Switchboard]![Protocol_Name]"
 
@@ -330,7 +330,7 @@ Begin Form
                             Top =600
                             Width =1080
                             Height =315
-                            Name ="lblProtocol_Name"
+                            Name ="lblProtocolName"
                             Caption ="Protocol:"
                             LayoutCachedLeft =960
                             LayoutCachedTop =600
@@ -352,7 +352,7 @@ Begin Form
                     FontSize =18
                     FontWeight =700
                     ColumnInfo ="\"\";\"\";\"10\";\"100\""
-                    Name ="cboPark_Code"
+                    Name ="cbxParkCode"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tlu_Enumerations.Enum_Code FROM tlu_Enumerations WHERE (((tlu_Enumeration"
                         "s.Enum_Group)=\"Unit Code\")) ORDER BY tlu_Enumerations.Enum_Code;"
@@ -374,7 +374,7 @@ Begin Form
                             Height =515
                             FontSize =18
                             FontWeight =700
-                            Name ="lblPick_Park"
+                            Name ="lblPark"
                             Caption ="Park"
                             LayoutCachedLeft =540
                             LayoutCachedTop =840
@@ -393,54 +393,134 @@ Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Compare Database
+Option Explicit
 
-Private Sub cboPark_Code_AfterUpdate()
-    Me.cboLocation_ID.RowSource = "SELECT tbl_Locations.Location_ID, tbl_Locations.Plot_Name, tbl_Locations.Panel, tbl_Locations.Frame, tbl_Locations.Unit_Code FROM tbl_Locations WHERE (((tbl_Locations.Panel) = [Forms]![frm_Switchboard]![Panel]) And ((tbl_Locations.Unit_Code) = '" & Me.cboPark_Code & "')) ORDER BY tbl_Locations.Plot_Name;"
-    Me.cboLocation_ID = Me.cboLocation_ID.ItemData(0)
-End Sub
+' =================================
+' MODULE:       frm_Event_Add
+' Level:        Application module
+' Version:      1.01
+'
+' Description:  add event related functions & procedures
+'
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 5, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC   - 4/5/2018 - 1.01 - added documentation, error handling
+' =================================
 
+' ---------------------------------
+'  Declarations
+' ---------------------------------
+
+' ----------------
+'  Events
+' ----------------
+
+' ---------------------------------
+' SUB:          Form_BeforeUpdate
+' Description:  form before update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/5/2018 - added documentation, error handling
+' ---------------------------------
 Private Sub Form_BeforeUpdate(Cancel As Integer)
-'Generate string GUID for Event_ID
+On Error GoTo Err_Handler
+
+    'Generate string GUID for Event_ID
     If Me.NewRecord Then
         If GetDataType("tbl_Events", "Event_ID") = dbText Then
             Me!Event_ID = fxnGUIDGen
         End If
     End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[frm_Event_Add])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub cmdEvent_Create_Click()
-'Save the new event if all of the needed information is provided, and open the Event form
-On Error GoTo Err_cmdEvent_Create_Click
+' ---------------------------------
+' SUB:          btnCreate_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/5/2018 - added documentation, error handling
+'                                  renamed cmdEvent_Create > btnCreate
+' ---------------------------------
+Private Sub btnCreate_Click()
+On Error GoTo Err_Handler
 
-    Dim stDocName As String
-    Dim stLinkCriteria As String
+    'Save the new event if all of the needed information is provided, and open the Event form
+
+    Dim strDocName As String
+    Dim strLinkCriteria As String
     
-    If IsNull(Me!cboLocation_ID) Then
-        MsgBox "You must select a location before you can enter record details!", vbExclamation, "Enter Location First"
-        Me!cboLocation_ID.SetFocus
+    If IsNull(Me!cbxLocationID) Then
+        MsgBox "You must select a location before you can enter record details!", _
+            vbExclamation, "Enter Location First"
+        Me!cbxLocationID.SetFocus
     Else
-        If IsNull(Me!txtEvent_Date) Then
-            MsgBox "You must enter a date before you can enter record details!", vbExclamation, "Enter Start Date"
-            Me!txtEvent_Date.SetFocus
+        If IsNull(Me!tbxEventDate) Then
+            MsgBox "You must enter a date before you can enter record details!", _
+                vbExclamation, "Enter Start Date"
+            Me!tbxEventDate.SetFocus
         Else
             DoCmd.RunCommand acCmdSaveRecord
-            stDocName = "frm_Events"
-            stLinkCriteria = "[Event_ID]=" & "'" & Me![txtEvent_ID] & "'"
-            DoCmd.OpenForm stDocName, , , stLinkCriteria, , , "(Creating)"
+            strDocName = "frm_Events"
+            strLinkCriteria = "[Event_ID]=" & "'" & Me![tbxEventID] & "'"
+            DoCmd.OpenForm strDocName, , , strLinkCriteria, , , "(Creating)"
             DoCmd.Close acForm, "frm_Event_Add"
         End If
     End If
 
-Exit_cmdEvent_Create_Click:
+Exit_Handler:
     Exit Sub
-Err_cmdEvent_Create_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdEvent_Create_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnCreate_Click[frm_Event_Add])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub cmdEvent_Cancel_Click()
-'Close the Create Event form without creating a record
-On Error GoTo Err_cmdEvent_Cancel_Click
+' ---------------------------------
+' SUB:          btnCancel_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/5/2018 - added documentation, error handling
+'                                  renamed cmdEvent_Cancel > btnCancel
+' ---------------------------------
+Private Sub btnCancel_Click()
+On Error GoTo Err_Handler
+
+    'Close the Create Event form without creating a record
 
     If Me.Dirty Then Me.Undo
     If Not Me.NewRecord Then
@@ -449,9 +529,52 @@ On Error GoTo Err_cmdEvent_Cancel_Click
     
     DoCmd.Close
     
-Exit_cmdEvent_Cancel_Click:
+Exit_Handler:
     Exit Sub
-Err_cmdEvent_Cancel_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdEvent_Cancel_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnCancel_Click[frm_Event_Add])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxParkCode_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/5/2018 - added documentation, error handling
+'                                  renamed cboPark_Code > cbxParkCode
+' ---------------------------------
+Private Sub cbxParkCode_AfterUpdate()
+On Error GoTo Err_Handler
+
+    Me.cbxLocationID.RowSource = "SELECT tbl_Locations.Location_ID, tbl_Locations.Plot_Name, " _
+            & "tbl_Locations.Panel, tbl_Locations.Frame, tbl_Locations.Unit_Code " _
+            & "FROM tbl_Locations " _
+            & "WHERE (((tbl_Locations.Panel) = [Forms]![frm_Switchboard]![Panel]) " _
+            & "AND ((tbl_Locations.Unit_Code) = '" & Me.cbxParkCode & "')) " _
+            & "ORDER BY tbl_Locations.Plot_Name;"
+
+    Me.cbxLocationID = Me.cbxLocationID.ItemData(0)
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxParkCode_AfterUpdate[frm_Event_Add])"
+    End Select
+    Resume Exit_Handler
 End Sub

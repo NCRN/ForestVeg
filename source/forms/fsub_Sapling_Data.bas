@@ -13,11 +13,11 @@ Begin Form
     GridY =24
     Width =13920
     DatasheetFontHeight =9
-    ItemSuffix =71
-    Left =540
-    Top =465
-    Right =14310
-    Bottom =6780
+    ItemSuffix =73
+    Left =3975
+    Top =2820
+    Right =17745
+    Bottom =9135
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0xd0ed4c4b94aee340
@@ -115,15 +115,28 @@ Begin Form
                     RightMargin =22
                     BottomMargin =22
                     BorderColor =0
-                    Name ="txtComments"
+                    Name ="tbxComments"
                     ControlSource ="Sapling_Notes"
                     StatusBarText ="Notes about this sampling of this tree"
                     OnEnter ="[Event Procedure]"
+                    ConditionalFormat = Begin
+                        0x0100000098000000010000000100000000000000000000001b00000001000000 ,
+                        0x00000000faf3e800000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x4c0065006e0028005400720069006d0028005b0074006200780043006f006d00 ,
+                        0x6d0065006e00740073005d00290029003e00300000000000
+                    End
 
                     LayoutCachedLeft =1619
                     LayoutCachedTop =5340
                     LayoutCachedWidth =13858
                     LayoutCachedHeight =5701
+                    ConditionalFormat14 = Begin
+                        0x01000100000001000000000000000100000000000000faf3e8001a0000004c00 ,
+                        0x65006e0028005400720069006d0028005b0074006200780043006f006d006d00 ,
+                        0x65006e00740073005d00290029003e0030000000000000000000000000000000 ,
+                        0x00000000000000
+                    End
                     Begin
                         Begin Label
                             BackStyle =1
@@ -139,7 +152,7 @@ Begin Form
                             RightMargin =22
                             BottomMargin =22
                             BackColor =15527148
-                            Name ="Label19"
+                            Name ="lblComments"
                             Caption ="Comments"
                             LayoutCachedLeft =60
                             LayoutCachedTop =5340
@@ -181,17 +194,17 @@ Begin Form
                     FontSize =14
                     TabIndex =4
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"4\";\"4\""
-                    Name ="cboSelect_UnsampledTag"
+                    Name ="cbxSelectUnsampledTag"
                     RowSourceType ="Table/Query"
-                    RowSource ="SELECT tbl_Tags.Tag_ID, tbl_Tags.Tag, tbl_Tags.Tag_Status AS Class, tbl_Tags.Mic"
-                        "roplot_Number AS MP, IIf(IsNull([azimuth]),\"\",[Azimuth] & \" / \" & [distance]"
-                        " & \"m\") AS Azi_Dist FROM (tbl_Tags LEFT JOIN qry_Status_Sapling_Current_Event "
-                        "ON tbl_Tags.Tag_ID = qry_Status_Sapling_Current_Event.Tag_ID) LEFT JOIN qry_Stat"
-                        "us_Tree_Current_Event ON tbl_Tags.Tag_ID = qry_Status_Tree_Current_Event.Tag_ID "
-                        "WHERE (((qry_Status_Sapling_Current_Event.Event_ID) Is Null) AND ((tbl_Tags.Loca"
-                        "tion_ID)=[Forms]![frm_Events]![Location_ID]) AND ((qry_Status_Tree_Current_Event"
-                        ".Event_ID) Is Null)) ORDER BY tbl_Tags.Tag_Status, tbl_Tags.Tag;"
-                    ColumnWidths ="0;1080;1440;720;1440"
+                    RowSource ="SELECT tbl_Tags.Tag_ID, tbl_Tags.Tag, tbl_Tags.Tag_Status AS Class,  IIf(IsNull("
+                        "[azimuth]),\"\",[Azimuth] & \" / \" & [distance] & \"m\") AS Azi_Dist, tbl_Tags."
+                        "Microplot_Number AS MP  FROM (tbl_Tags  LEFT JOIN qry_Status_Sapling_Current_Eve"
+                        "nt  ON tbl_Tags.Tag_ID = qry_Status_Sapling_Current_Event.Tag_ID)  LEFT JOIN qry"
+                        "_Status_Tree_Current_Event  ON tbl_Tags.Tag_ID = qry_Status_Tree_Current_Event.T"
+                        "ag_ID WHERE (((qry_Status_Sapling_Current_Event.Event_ID) Is Null)  AND ((tbl_Ta"
+                        "gs.Location_ID)=[Forms]![frm_Events]![Location_ID])  AND ((qry_Status_Tree_Curre"
+                        "nt_Event.Event_ID) Is Null)) ORDER BY tbl_Tags.Tag_Status, tbl_Tags.Tag;"
+                    ColumnWidths ="0;1080;2520;1440;720"
                     AfterUpdate ="[Event Procedure]"
                     OnEnter ="[Event Procedure]"
                     LayoutCachedLeft =2881
@@ -209,7 +222,7 @@ Begin Form
                             Height =315
                             FontSize =12
                             FontWeight =700
-                            Name ="lblSelect_Tag"
+                            Name ="lblSelectTag"
                             Caption ="Select an unsampled tag ->"
                             LayoutCachedLeft =60
                             LayoutCachedTop =60
@@ -219,7 +232,6 @@ Begin Form
                     End
                 End
                 Begin Subform
-                    Visible = NotDefault
                     OverlapFlags =85
                     SpecialEffect =2
                     Left =1319
@@ -270,13 +282,13 @@ Begin Form
                     BorderColor =0
                     ColumnInfo ="\"\";\"\";\"10\";\"100\""
                     ConditionalFormat = Begin
-                        0x010000009e000000010000000100000000000000000000001e00000001000000 ,
+                        0x010000009c000000010000000100000000000000000000001d00000001000000 ,
                         0x00000000dfa7a500000000000000000000000000000000000000000000000000 ,
                         0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x490073004e0075006c006c0028005b00630062006f0054007200650065005f00 ,
-                        0x5300740061007400750073005d0029003d00540072007500650000000000
+                        0x490073004e0075006c006c0028005b0063006200780054007200650065005300 ,
+                        0x740061007400750073005d0029003d00540072007500650000000000
                     End
-                    Name ="cboTree_Status"
+                    Name ="cbxSaplingStatus"
                     ControlSource ="Sapling_Status"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tlu_Enumerations.Enum_Code, tlu_Enumerations.Enum_Group FROM tlu_Enumerat"
@@ -286,6 +298,7 @@ Begin Form
                     StatusBarText ="Health status of this specimen"
                     AfterUpdate ="[Event Procedure]"
                     OnEnter ="[Event Procedure]"
+                    OnChange ="[Event Procedure]"
                     LeftMargin =22
                     TopMargin =22
                     RightMargin =22
@@ -296,10 +309,10 @@ Begin Form
                     LayoutCachedWidth =4137
                     LayoutCachedHeight =1918
                     ConditionalFormat14 = Begin
-                        0x01000100000001000000000000000100000000000000dfa7a5001d0000004900 ,
-                        0x73004e0075006c006c0028005b00630062006f0054007200650065005f005300 ,
-                        0x740061007400750073005d0029003d0054007200750065000000000000000000 ,
-                        0x00000000000000000000000000
+                        0x01000100000001000000000000000100000000000000dfa7a5001c0000004900 ,
+                        0x73004e0075006c006c0028005b00630062007800540072006500650053007400 ,
+                        0x61007400750073005d0029003d00540072007500650000000000000000000000 ,
+                        0x0000000000000000000000
                     End
                     Begin
                         Begin Label
@@ -316,7 +329,7 @@ Begin Form
                             RightMargin =22
                             BottomMargin =22
                             BackColor =15527148
-                            Name ="Label17"
+                            Name ="lblStatus"
                             Caption ="Status"
                             LayoutCachedLeft =60
                             LayoutCachedTop =1559
@@ -368,7 +381,7 @@ Begin Form
                     FontSize =12
                     TabIndex =7
                     ForeColor =0
-                    Name ="cmdTag_New_Specimen"
+                    Name ="btnTagNewSpecimen"
                     Caption ="Tag New Specimen"
                     OnClick ="[Event Procedure]"
                     LeftPadding =60
@@ -413,7 +426,7 @@ Begin Form
                     Height =285
                     FontWeight =700
                     ForeColor =3751056
-                    Name ="Label49"
+                    Name ="lblOr2"
                     Caption ="or"
                     LayoutCachedLeft =6900
                     LayoutCachedTop =60
@@ -437,10 +450,10 @@ Begin Form
                         0x0100000092000000010000000100000000000000000000001800000001000000 ,
                         0x00000000dfa7a500000000000000000000000000000000000000000000000000 ,
                         0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x490073004e0075006c006c0028005b00630062006f0048006100620069007400 ,
+                        0x490073004e0075006c006c0028005b0063006200780048006100620069007400 ,
                         0x5d0029003d00540072007500650000000000
                     End
-                    Name ="cboHabit"
+                    Name ="cbxHabit"
                     ControlSource ="Habit"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tlu_Enumerations.Enum_Description, tlu_Enumerations.Enum_Code FROM tlu_En"
@@ -458,7 +471,7 @@ Begin Form
                     LayoutCachedHeight =2339
                     ConditionalFormat14 = Begin
                         0x01000100000001000000000000000100000000000000dfa7a500170000004900 ,
-                        0x73004e0075006c006c0028005b00630062006f00480061006200690074005d00 ,
+                        0x73004e0075006c006c0028005b00630062007800480061006200690074005d00 ,
                         0x29003d0054007200750065000000000000000000000000000000000000000000 ,
                         0x00
                     End
@@ -490,7 +503,7 @@ Begin Form
                     Height =360
                     FontSize =8
                     BackColor =14276557
-                    Name ="Label61"
+                    Name ="lblDeerBrowse"
                     Caption ="Deer Browse"
                     LayoutCachedLeft =8220
                     LayoutCachedTop =1500
@@ -512,7 +525,7 @@ Begin Form
                     Height =315
                     FontSize =14
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"4\";\"4\""
-                    Name ="cboSelect_SampledTag"
+                    Name ="cbxSelectSampledTag"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tbl_Tags.Tag_ID, tbl_Tags.Tag, tbl_Tags.Microplot_Number AS MP, qry_Statu"
                         "s_Sapling_Current_Event.Sapling_Status, tlu_Plants.Latin_Name FROM (tbl_Tags LEF"
@@ -538,7 +551,7 @@ Begin Form
                             Height =315
                             FontSize =12
                             FontWeight =700
-                            Name ="lblSelect_Sample"
+                            Name ="lblSelectSample"
                             Caption ="Select an existing sample ->"
                             LayoutCachedLeft =3600
                             LayoutCachedTop =60
@@ -556,7 +569,7 @@ Begin Form
                     Height =285
                     FontWeight =700
                     ForeColor =3751056
-                    Name ="Label64"
+                    Name ="lblOr1"
                     Caption ="or"
                     LayoutCachedLeft =3240
                     LayoutCachedTop =60
@@ -571,7 +584,7 @@ Begin Form
                     Height =396
                     TabIndex =11
                     ForeColor =0
-                    Name ="cmdDelete_Sample"
+                    Name ="btnDeleteSample"
                     Caption ="Command73"
                     OnClick ="[Event Procedure]"
                     PictureData = Begin
@@ -632,7 +645,7 @@ Begin Form
                     FontWeight =700
                     TabIndex =12
                     ForeColor =0
-                    Name ="cmdOpen_Form_Tag_Transitions"
+                    Name ="btnOpenFormTagTransitions"
                     Caption ="?"
                     OnClick ="[Event Procedure]"
                     LeftPadding =60
@@ -677,7 +690,7 @@ Begin Form
                     Height =285
                     FontWeight =700
                     ForeColor =3751056
-                    Name ="Label67"
+                    Name ="lblOr3"
                     Caption ="or"
                     LayoutCachedLeft =9840
                     LayoutCachedTop =60
@@ -703,7 +716,7 @@ Begin Form
                     BorderColor =5026082
                     ForeColor =-2147483640
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"10\";\"100\""
-                    Name ="cboBrowsePick"
+                    Name ="cbxBrowsePick"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tlu_Enumerations.Enum_Code, tlu_Enumerations.Enum_Description FROM tlu_En"
                         "umerations WHERE (((tlu_Enumerations.Enum_Group)=\"Browse_Status\")) ORDER BY tl"
@@ -728,9 +741,10 @@ Begin Form
                     Height =358
                     FontSize =13
                     TabIndex =10
-                    Name ="txtBrowsable"
+                    Name ="tbxBrowsable"
                     ControlSource ="Browsable"
                     StatusBarText ="This sapling was browseable (leaves below 2 meters)"
+                    OnEnter ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x0100000094000000010000000100000000000000000000001900000001000000 ,
                         0x00000000dfa7a500000000000000000000000000000000000000000000000000 ,
@@ -758,7 +772,7 @@ Begin Form
                             Width =1860
                             Height =300
                             FontSize =10
-                            Name ="Label60"
+                            Name ="lblBrowse"
                             Caption =" Browsable / Browsed"
                             LayoutCachedLeft =9120
                             LayoutCachedTop =1560
@@ -776,9 +790,10 @@ Begin Form
                     Height =358
                     FontSize =13
                     TabIndex =9
-                    Name ="txtBrowsed"
+                    Name ="tbxBrowsed"
                     ControlSource ="Browsed"
                     StatusBarText ="Deer browse was noticable on this sapling"
+                    OnEnter ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x0100000090000000010000000100000000000000000000001700000001000000 ,
                         0x00000000dfa7a500000000000000000000000000000000000000000000000000 ,
@@ -805,7 +820,7 @@ Begin Form
                             Width =180
                             Height =360
                             FontSize =13
-                            Name ="Label59"
+                            Name ="lblSlash"
                             Caption ="/"
                             LayoutCachedLeft =11640
                             LayoutCachedTop =1500
@@ -821,7 +836,7 @@ Begin Form
                     Width =210
                     Height =209
                     TabIndex =14
-                    Name ="chkConditions_Checked"
+                    Name ="chkConditionsChecked"
                     ControlSource ="Conditions_Checked"
                     StatusBarText ="This tree was checked for disease/damage conditions"
 
@@ -838,7 +853,7 @@ Begin Form
                     Width =210
                     Height =209
                     TabIndex =15
-                    Name ="chkFoliage_Conditions_Checked"
+                    Name ="chkFoliageConditionsChecked"
                     ControlSource ="Foliage_Conditions_Checked"
                     StatusBarText ="This tree was checked for foliage conditions"
 
@@ -860,14 +875,14 @@ Begin Form
                     TabIndex =16
                     BackColor =15527148
                     BorderColor =0
-                    Name ="txtVines_Highlight"
+                    Name ="tbxHighlightVines"
                     ControlSource ="=\"\""
                     ConditionalFormat = Begin
-                        0x0100000094000000010000000100000000000000000000001900000001000000 ,
+                        0x0100000092000000010000000100000000000000000000001800000001000000 ,
                         0x00000000dfa7a500000000000000000000000000000000000000000000000000 ,
                         0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b00630068006b00560069006e00650073005f0043006800650063006b006500 ,
-                        0x64005d003c003e00540072007500650000000000
+                        0x5b00630068006b00560069006e006500730043006800650063006b0065006400 ,
+                        0x5d003c003e00540072007500650000000000
                     End
 
                     LayoutCachedLeft =4380
@@ -875,10 +890,10 @@ Begin Form
                     LayoutCachedWidth =5580
                     LayoutCachedHeight =1920
                     ConditionalFormat14 = Begin
-                        0x01000100000001000000000000000100000000000000dfa7a500180000005b00 ,
-                        0x630068006b00560069006e00650073005f0043006800650063006b0065006400 ,
-                        0x5d003c003e005400720075006500000000000000000000000000000000000000 ,
-                        0x000000
+                        0x01000100000001000000000000000100000000000000dfa7a500170000005b00 ,
+                        0x630068006b00560069006e006500730043006800650063006b00650064005d00 ,
+                        0x3c003e0054007200750065000000000000000000000000000000000000000000 ,
+                        0x00
                     End
                 End
                 Begin Subform
@@ -927,7 +942,7 @@ Begin Form
                     FontSize =10
                     TabIndex =18
                     ForeColor =6108695
-                    Name ="cmdOpen_Form_Conditions_and_Pests"
+                    Name ="btnOpenFormConditionsAndPests"
                     Caption ="Conditions and Pests"
                     OnClick ="[Event Procedure]"
                     ControlTipText ="Open Form"
@@ -955,7 +970,7 @@ Begin Form
                     Width =210
                     Height =209
                     TabIndex =19
-                    Name ="chkVines_Checked"
+                    Name ="chkVinesChecked"
                     ControlSource ="Vines_Checked"
                     StatusBarText ="This tree was checked for vines"
 
@@ -1088,7 +1103,7 @@ Begin Form
                     FontSize =12
                     TabIndex =24
                     ForeColor =0
-                    Name ="cmdShow_Vines"
+                    Name ="btnShowVines"
                     Caption ="Vines"
                     OnClick ="[Event Procedure]"
                     LeftPadding =60
@@ -1138,14 +1153,14 @@ Begin Form
                     TabIndex =25
                     BackColor =15527148
                     BorderColor =0
-                    Name ="txtCondition_Highlight"
+                    Name ="tbxHighlightCondition"
                     ControlSource ="=\"\""
                     ConditionalFormat = Begin
-                        0x010000009e000000010000000100000000000000000000001e00000001000000 ,
+                        0x010000009c000000010000000100000000000000000000001d00000001000000 ,
                         0x00000000dfa7a500000000000000000000000000000000000000000000000000 ,
                         0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b00630068006b0043006f006e0064006900740069006f006e0073005f004300 ,
-                        0x6800650063006b00650064005d003c003e00540072007500650000000000
+                        0x5b00630068006b0043006f006e0064006900740069006f006e00730043006800 ,
+                        0x650063006b00650064005d003c003e00540072007500650000000000
                     End
 
                     LayoutCachedLeft =5580
@@ -1153,10 +1168,10 @@ Begin Form
                     LayoutCachedWidth =6780
                     LayoutCachedHeight =1920
                     ConditionalFormat14 = Begin
-                        0x01000100000001000000000000000100000000000000dfa7a5001d0000005b00 ,
-                        0x630068006b0043006f006e0064006900740069006f006e0073005f0043006800 ,
-                        0x650063006b00650064005d003c003e0054007200750065000000000000000000 ,
-                        0x00000000000000000000000000
+                        0x01000100000001000000000000000100000000000000dfa7a5001c0000005b00 ,
+                        0x630068006b0043006f006e0064006900740069006f006e007300430068006500 ,
+                        0x63006b00650064005d003c003e00540072007500650000000000000000000000 ,
+                        0x0000000000000000000000
                     End
                 End
                 Begin CommandButton
@@ -1167,7 +1182,7 @@ Begin Form
                     FontSize =12
                     TabIndex =26
                     ForeColor =0
-                    Name ="cmdShow_Condition"
+                    Name ="btnShowCondition"
                     Caption ="Condition"
                     OnClick ="[Event Procedure]"
                     LeftPadding =60
@@ -1217,15 +1232,15 @@ Begin Form
                     TabIndex =27
                     BackColor =15527148
                     BorderColor =0
-                    Name ="txtFoliage_Highlight"
+                    Name ="tbxHighlightFoliage"
                     ControlSource ="=\"\""
                     ConditionalFormat = Begin
-                        0x01000000ae000000010000000100000000000000000000002600000001000000 ,
+                        0x01000000aa000000010000000100000000000000000000002400000001000000 ,
                         0x00000000dfa7a500000000000000000000000000000000000000000000000000 ,
                         0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b00630068006b0046006f006c0069006100670065005f0043006f006e006400 ,
-                        0x6900740069006f006e0073005f0043006800650063006b00650064005d003c00 ,
-                        0x3e00540072007500650000000000
+                        0x5b00630068006b0046006f006c00690061006700650043006f006e0064006900 ,
+                        0x740069006f006e00730043006800650063006b00650064005d003c003e005400 ,
+                        0x72007500650000000000
                     End
 
                     LayoutCachedLeft =6780
@@ -1233,10 +1248,10 @@ Begin Form
                     LayoutCachedWidth =7980
                     LayoutCachedHeight =1920
                     ConditionalFormat14 = Begin
-                        0x01000100000001000000000000000100000000000000dfa7a500250000005b00 ,
-                        0x630068006b0046006f006c0069006100670065005f0043006f006e0064006900 ,
-                        0x740069006f006e0073005f0043006800650063006b00650064005d003c003e00 ,
-                        0x5400720075006500000000000000000000000000000000000000000000
+                        0x01000100000001000000000000000100000000000000dfa7a500230000005b00 ,
+                        0x630068006b0046006f006c00690061006700650043006f006e00640069007400 ,
+                        0x69006f006e00730043006800650063006b00650064005d003c003e0054007200 ,
+                        0x75006500000000000000000000000000000000000000000000
                     End
                 End
                 Begin CommandButton
@@ -1247,7 +1262,7 @@ Begin Form
                     FontSize =12
                     TabIndex =28
                     ForeColor =0
-                    Name ="cmdShow_Foliage"
+                    Name ="btnShowFoliage"
                     Caption ="Foliage"
                     OnClick ="[Event Procedure]"
                     LeftPadding =60
@@ -1295,7 +1310,7 @@ Begin Form
                     FontSize =12
                     TabIndex =29
                     ColumnInfo ="\"\";\"\";\"10\";\"100\""
-                    Name ="cboQuick_Comment"
+                    Name ="cbxQuickComment"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tlu_Enumerations.Enum_Code FROM tlu_Enumerations WHERE (((tlu_Enumeration"
                         "s.Enum_Group)=\"Tree Comments\")) ORDER BY tlu_Enumerations.Sort_Order;"
@@ -1323,10 +1338,10 @@ Begin Form
                         0x0100000092000000010000000100000000000000000000001800000001000000 ,
                         0x00000000dfa7a500000000000000000000000000000000000000000000000000 ,
                         0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x490073004e0075006c006c0028005b00630062006f0048006100620069007400 ,
+                        0x490073004e0075006c006c0028005b0063006200780048006100620069007400 ,
                         0x5d0029003d00540072007500650000000000
                     End
-                    Name ="cboSapVigor"
+                    Name ="cbxSapVigor"
                     ControlSource ="SaplingVigor"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tluTreeVigor.TreeVigorCode, tluTreeVigor.TreeVigorClass FROM tluTreeVigor"
@@ -1341,7 +1356,7 @@ Begin Form
                     LayoutCachedHeight =2759
                     ConditionalFormat14 = Begin
                         0x01000100000001000000000000000100000000000000dfa7a500170000004900 ,
-                        0x73004e0075006c006c0028005b00630062006f00480061006200690074005d00 ,
+                        0x73004e0075006c006c0028005b00630062007800480061006200690074005d00 ,
                         0x29003d0054007200750065000000000000000000000000000000000000000000 ,
                         0x00
                     End
@@ -1354,7 +1369,7 @@ Begin Form
                             Width =1199
                             Height =360
                             FontSize =13
-                            Name ="Label70"
+                            Name ="lblVigor"
                             Caption ="Vigor"
                             LayoutCachedLeft =60
                             LayoutCachedTop =2400
@@ -1362,6 +1377,50 @@ Begin Form
                             LayoutCachedHeight =2760
                         End
                     End
+                End
+                Begin CheckBox
+                    Visible = NotDefault
+                    OverlapFlags =85
+                    Left =1080
+                    Top =3420
+                    Width =210
+                    Height =209
+                    TabIndex =31
+                    Name ="chkDBHCheck"
+                    ControlSource ="DBH_Check"
+                    StatusBarText ="DBH was double checked"
+                    DefaultValue ="0"
+
+                    LayoutCachedLeft =1080
+                    LayoutCachedTop =3420
+                    LayoutCachedWidth =1290
+                    LayoutCachedHeight =3629
+                End
+                Begin TextBox
+                    Locked = NotDefault
+                    FontItalic = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    TextAlign =3
+                    IMESentenceMode =3
+                    Top =3360
+                    Width =1035
+                    Height =285
+                    FontSize =10
+                    TabIndex =32
+                    LeftMargin =22
+                    TopMargin =22
+                    RightMargin =22
+                    BottomMargin =22
+                    BackColor =15527148
+                    BorderColor =0
+                    Name ="lblDBHCheck"
+                    ControlSource ="DBH double checked?"
+                    ControlTipText ="Was DBH double checked?"
+
+                    LayoutCachedTop =3360
+                    LayoutCachedWidth =1035
+                    LayoutCachedHeight =3645
                 End
             End
         End
@@ -1377,470 +1436,378 @@ Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Compare Database
-Public strStatus As String
+Option Explicit
 
-Private Sub ValidateSaplingSubform()
-    ' Description:  Confirms that a Tag has been selected
-    If IsNull(Me!fsub_Tag_Sapling!txtTag) Then
-    MsgBox "You must SELECT A TAG before you can enter record details!", vbExclamation, "Enter Tag First"
-End If
-End Sub
+' =================================
+' FORM:         fsub_Sapling_Data
+' Level:        Application report
+' Version:      1.02
+'
+' Description:  Form related functions & procedures for application
+' Requires:     Keypad Utils module
+'
+' Source/date:  Bonnie Campbell, April 3, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC   - 4/3/2018 - 1.01 - added documentation, error handling
+'               BLC   - 4/9/2018 - 1.02 - updated TreeStatus > SaplingStatus
+'                                         updated checkbox naming (removed _)
+'                                         added tag vs. sapling status check
+' =================================
 
-Private Sub cboBrowsePick_AfterUpdate()
+' ---------------------------------
+'  Properties
+' ---------------------------------
+Public SaplingStatus As String
+
+' ---------------------------------
+'  Events
+' ---------------------------------
+
+' ---------------------------------
+' SUB:          Form_Current
+' Description:  form current actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'   BLC - 4/9/2018 - check tag status vs sapling status
+' ---------------------------------
+Private Sub Form_Current()
 On Error GoTo Err_Handler
-    Select Case Me!cboBrowsePick.Column(0)
-        Case "Yes / Yes"
-            Me!txtBrowsable.Value = "Yes"
-            Me!txtBrowsed.Value = "Yes"
-        Case "Yes / No"
-            Me!txtBrowsable.Value = "Yes"
-            Me!txtBrowsed.Value = "No"
-        Case "No / No"
-            Me!txtBrowsable.Value = "No"
-            Me!txtBrowsed.Value = "No"
-    End Select
-Exit_Procedure:
+    
+    If Me!cbxHabit = "Tree" Then
+        Me!fsub_Sapling_DBH.Visible = True
+    Else
+        Me!fsub_Sapling_DBH.Visible = False
+    End If
+
+    'compare status
+    CheckTagStatus "Sapling"
+
+Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox Error$
-    Resume Exit_Procedure
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Current[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub cboQuick_Comment_AfterUpdate()
-    Me.txtComments = LTrim(Me.txtComments & " " & Me.cboQuick_Comment)
-    Me.txtComments.Requery
-End Sub
-
-Private Sub cboTree_Status_AfterUpdate()
-Dim Response As String
-
-If Left(strStatus, 4) = "Dead" And Left(Me!cboTree_Status, 5) = "Alive" Then
-    Response = MsgBox("You have changed the status of this sapling from dead to alive", vbOKCancel, "NCRN Forest Vegetation Monitoring")
-        If Response = vbOK Then
-            MsgBox "Changes approved"
-        Else
-            MsgBox "Changes rejected"
-            Me!cboTree_Status = strStatus
-            
+' ---------------------------------
+' SUB:          Form_BeforeUpdate
+' Description:  form before update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+' ---------------------------------
+Private Sub Form_BeforeUpdate(Cancel As Integer)
+On Error GoTo Err_Handler
+    
+    If Me.NewRecord Then
+        If GetDataType("tbl_Sapling_Data", "Sapling_Data_ID") = dbText Then
+            Me!Sapling_Data_ID = fxnGUIDGen
         End If
-           
-End If
-
-End Sub
-
-Private Sub cboTree_Status_Enter()
-    ValidateSaplingSubform
-    On Error GoTo ErrorHandler
+    End If
     
-    strStatus = Me!cboTree_Status
-ErrorHandler:
-Select Case Err.Number
-    Case 94
-    Resume Next
-End Select
-    
-End Sub
-
-Private Sub cboHabit_Enter()
-    ValidateSaplingSubform
-End Sub
-
-Private Sub Browsable_Enter()
-    ValidateSaplingSubform
-End Sub
-
-Private Sub Browsed_Enter()
-    ValidateSaplingSubform
-End Sub
-
-Private Sub cmdOpen_Form_Tag_Transitions_Click()
-    Dim stDocName As String
-    Dim stLinkCriteria As String
-
-    stDocName = "frm_Popup_Tag_Transitions"
-    DoCmd.OpenForm stDocName, , , stLinkCriteria
-
-Exit_cmdOpen_Popup_Click:
+Exit_Handler:
     Exit Sub
-Err_cmdOpen_Popup_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpen_Popup_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub cmdShow_Vines_Click()
+' ----------------
+'  Click Events
+' ----------------
+
+' ---------------------------------
+' SUB:          btnOpenFormTagTransitions_Click
+' Description:  open form tag transitions button actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation,
+'                    renamed cmdOpen_Form_Tag_Transitions > btnOpenFormTagTransitions
+' ---------------------------------
+Private Sub btnOpenFormTagTransitions_Click()
 On Error GoTo Err_Handler
 
+    Dim strDocName As String
+    Dim strLinkCriteria As String
+    
+    strDocName = "frm_Popup_Tag_Transitions"
+    DoCmd.OpenForm strDocName, , , strLinkCriteria
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnOpenFormTagTransitions_Click[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ----------------
+'  Show/Open Form Events
+' ----------------
+
+' ---------------------------------
+' SUB:          btnShowVines_Click
+' Description:  show vines button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed cmdShow_Vines > btnShowVines
+'   BLC - 4/9/2018 - updated checkbox naming (removed _)
+' ---------------------------------
+Private Sub btnShowVines_Click()
+On Error GoTo Err_Handler
+    
     DoCmd.SetProperty "lblCompleted", acPropertyVisible, True
     DoCmd.SetProperty "lblVines", acPropertyVisible, True
-    DoCmd.SetProperty "chkVines_Checked", acPropertyVisible, True
+    DoCmd.SetProperty "chkVinesChecked", acPropertyVisible, True
     DoCmd.SetProperty "fsub_Sapling_Vines", acPropertyVisible, True
-    DoCmd.SetProperty "cmdOpen_Form_Conditions_and_Pests", acPropertyVisible, "0"
-    DoCmd.SetProperty "chkConditions_Checked", acPropertyVisible, "0"
+    DoCmd.SetProperty "btnOpenFormConditionsAndPests", acPropertyVisible, "0"
+    DoCmd.SetProperty "chkConditionsChecked", acPropertyVisible, "0"
     DoCmd.SetProperty "fsub_Sapling_Conditions", acPropertyVisible, "0"
-    DoCmd.SetProperty "lblFoliage_Conditions", acPropertyVisible, "0"
-    DoCmd.SetProperty "chkFoliage_Conditions_Checked", acPropertyVisible, "0"
+    DoCmd.SetProperty "lblFoliageConditions", acPropertyVisible, "0"
+    DoCmd.SetProperty "chkFoliageConditions_Checked", acPropertyVisible, "0"
     DoCmd.SetProperty "fsub_Sapling_Foliage_Conditions", acPropertyVisible, "0"
     DoCmd.RunCommand acCmdRefresh
-
-Exit_Procedure:
+   
+Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox Error$
-    Resume Exit_Procedure
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnShowVines_Click[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-
-Private Sub cmdShow_Condition_Click()
+' ---------------------------------
+' SUB:          btnShowCondition_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed cmdShow_Condition > btnShowCondition
+'   BLC - 4/9/2018 - updated checkbox naming (removed _)
+' ---------------------------------
+Private Sub btnShowCondition_Click()
 On Error GoTo Err_Handler
 
     DoCmd.SetProperty "lblCompleted", acPropertyVisible, True
     DoCmd.SetProperty "lblVines", acPropertyVisible, False
-    DoCmd.SetProperty "chkVines_Checked", acPropertyVisible, False
+    DoCmd.SetProperty "chkVinesChecked", acPropertyVisible, False
     DoCmd.SetProperty "fsub_Sapling_Vines", acPropertyVisible, False
-    DoCmd.SetProperty "cmdOpen_Form_Conditions_and_Pests", acPropertyVisible, True
+    DoCmd.SetProperty "btnOpenFormConditionsAndPests", acPropertyVisible, True
     DoCmd.SetProperty "chkConditions_Checked", acPropertyVisible, True
     DoCmd.SetProperty "fsub_Sapling_Conditions", acPropertyVisible, True
-    DoCmd.SetProperty "lblFoliage_Conditions", acPropertyVisible, "0"
-    DoCmd.SetProperty "chkFoliage_Conditions_Checked", acPropertyVisible, "0"
+    DoCmd.SetProperty "lblFoliageConditions", acPropertyVisible, "0"
+    DoCmd.SetProperty "chkFoliageConditionsChecked", acPropertyVisible, "0"
     DoCmd.SetProperty "fsub_Sapling_Foliage_Conditions", acPropertyVisible, "0"
     DoCmd.RunCommand acCmdRefresh
-
-Exit_Procedure:
+    
+Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox Error$
-    Resume Exit_Procedure
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnShowCondition_Click[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub cmdShow_Foliage_Click()
+' ---------------------------------
+' SUB:          btnShowFoliage_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed cmdShow_Foliage > btnShowFoliage
+'   BLC - 4/9/2018 - updated checkbox naming (removed _)
+' ---------------------------------
+Private Sub btnShowFoliage_Click()
 On Error GoTo Err_Handler
-
+    
     DoCmd.SetProperty "lblCompleted", acPropertyVisible, True
     DoCmd.SetProperty "lblVines", acPropertyVisible, False
-    DoCmd.SetProperty "chkVines_Checked", acPropertyVisible, False
+    DoCmd.SetProperty "chkVinesChecked", acPropertyVisible, False
     DoCmd.SetProperty "fsub_Sapling_Vines", acPropertyVisible, False
-    DoCmd.SetProperty "cmdOpen_Form_Conditions_and_Pests", acPropertyVisible, False
-    DoCmd.SetProperty "chkConditions_Checked", acPropertyVisible, False
+    DoCmd.SetProperty "btnOpenFormConditionsAndPests", acPropertyVisible, False
+    DoCmd.SetProperty "chkConditionsChecked", acPropertyVisible, False
     DoCmd.SetProperty "fsub_Sapling_Conditions", acPropertyVisible, False
-    DoCmd.SetProperty "lblFoliage_Conditions", acPropertyVisible, True
-    DoCmd.SetProperty "chkFoliage_Conditions_Checked", acPropertyVisible, True
+    DoCmd.SetProperty "lblFoliageConditions", acPropertyVisible, True
+    DoCmd.SetProperty "chkFoliageConditionsChecked", acPropertyVisible, True
     DoCmd.SetProperty "fsub_Sapling_Foliage_Conditions", acPropertyVisible, True
     DoCmd.RunCommand acCmdRefresh
-
-Exit_Procedure:
+    
+Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox Error$
-    Resume Exit_Procedure
-End Sub
-
-Private Sub Form_Current()
-If Me!cboHabit = "Tree" Then
-    Me!fsub_Sapling_DBH.Visible = True
-Else
-    Me!fsub_Sapling_DBH.Visible = False
-End If
-
-    
-End Sub
-
-Private Sub fsub_Sapling_DBH_Exit(Cancel As Integer)
-
-Me.Refresh
-
-Dim db As DAO.Database
-Set db = CurrentDb
-
-'Check to see if the temporary query exists and if it does delete it.
-
-If fxnQueryExists("_qCOMPARE_DBH") Then
-    db.QueryDefs.Delete ("_qCOMPARE_DBH")
-End If
-
-Dim strLocID As String
-strLocID = Forms!frm_Events!txtLocation_ID
-
-Dim intTag As Integer
-intTag = Forms!frm_Events!fsub_Sapling_Data!fsub_Tag_Sapling!txtTag
-
-Dim varDBH_Current As Variant
-Dim varDBH_Past As Variant
-
-Dim strSQL As String
-strSQL = "SELECT tbl_Locations.Location_ID, tbl_Events.Event_ID, tbl_Locations.Admin_Unit_Code, tbl_Locations.Subunit_Code, tbl_Events.Event_Date, tbl_Tags.Tag, " _
-        & "Round((((Sum(3.1415*((IIf([Live]=True,[DBH],0))/2)^2))*(1/3.1415))^0.5)*2,6) AS EquivDBH " _
-        & "FROM ((tbl_Locations INNER JOIN tbl_Events ON tbl_Locations.Location_ID = tbl_Events.Location_ID) " _
-        & "INNER JOIN (tbl_Sapling_Data INNER JOIN tbl_Tags ON tbl_Sapling_Data.Tag_ID = tbl_Tags.Tag_ID) ON tbl_Events.Event_ID = tbl_Sapling_Data.Event_ID) " _
-        & "INNER JOIN tbl_Sapling_DBH ON tbl_Sapling_Data.Sapling_Data_ID = tbl_Sapling_DBH.Sapling_Data_ID " _
-        & "GROUP BY tbl_Locations.Location_ID, tbl_Events.Event_ID, tbl_Locations.Admin_Unit_Code, tbl_Locations.Subunit_Code, tbl_Events.Event_Date, tbl_Tags.Tag " _
-        & "HAVING (((tbl_Locations.Location_ID) = """ & strLocID & """) And ((tbl_Tags.Tag) = " & intTag & ")) " _
-        & "ORDER BY tbl_Events.Event_Date;"
-
-Dim qDef As DAO.QueryDef
-Set qDef = db.CreateQueryDef("_qCOMPARE_DBH", strSQL)
-
-Dim rs As DAO.Recordset
-Set rs = db.OpenRecordset("_qCOMPARE_DBH")
-
-rs.MoveLast
-If rs.RecordCount > 1 Then
-
-    varDBH_Current = rs![EquivDBH]
-    rs.MovePrevious
-    varDBH_Past = rs![EquivDBH]
-    
-    If varDBH_Current - varDBH_Past >= 4 Or varDBH_Current - varDBH_Past <= -4 Then
-        MsgBox "Warning...change in DBH exceeds threshold. Please check value.", vbExclamation, "NCRN Vegetation Monitoring"
-    End If
-End If
-
-
-If Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH!txtEquivDBH < 1 Then
-    MsgBox "Saplings must have a minimum DBH of 1.0. Please address the issue"
-    Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH!txtDBH.SetFocus
-End If
-
-DoCmd.DeleteObject acQuery, "_qCOMPARE_DBH"
-Set varDBH_Current = Nothing
-Set varDBH_Past = Nothing
-Set rs = Nothing
-Set qDef = Nothing
-Set db = Nothing
-
-
-
-   
-
-
-
-End Sub
-
-Private Sub txtComments_Enter()
-    ValidateSaplingSubform
-End Sub
-
-Private Function Show_Hide_DBH()
-    Select Case Me!cboHabit.Value
-        Case "Tree"
-            Me!fsub_Sapling_DBH.Visible = True
-        Case "Shrub"
-            Me!fsub_Sapling_DBH.Visible = False
-        Case Else
-            Me!fsub_Sapling_DBH.Visible = True
-    End Select
-End Function
-Private Sub cboHabit_AfterUpdate()
-    Show_Hide_DBH
-End Sub
-
-Private Sub cboSelect_SampledTag_Enter()
-    Me!cboSelect_SampledTag.Requery
-End Sub
-
-Private Sub cboSelect_SampledTag_AfterUpdate()
-    ' Find the record that matches the control, if record doesn't exist, create it.
-    
-    On Error GoTo HandleErrors
-    
-    Dim rstClone As DAO.Recordset
-    Dim strFind As String
-    Dim strSearchField As String
-    
-    strFind = Me!cboSelect_SampledTag.Column(0)
-    strSearchField = "Tag_ID"
-    
-    'Search for a matching record
-    Set rstClone = Me.Recordset.Clone
-    
-    Do Until rstClone.EOF
-        If rstClone(strSearchField) = strFind Then
-            'Goto matching record and exit subroutine
-            Me.Bookmark = rstClone.Bookmark
-            GoTo ExitHere
-        End If
-        rstClone.MoveNext
-    Loop
-'    'If we haven't found record and exited by now, create new record.
-'    DoCmd.GoToRecord , , acNewRec
-'    Tag_ID.Value = strFind
-'    DoCmd.RunCommand acCmdSaveRecord
-'    Me!fsub_Tag_Sapling.Requery
-'    Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tag_Sapling]!txtTag_Status = "Sapling"
-'    Me!fsub_Tag_Sapling.Requery
-'    Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tag_Sapling]!cmdShow_Species.Visible = True
-'    Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tags_History_Summary].Requery
-    
-ExitHere:
-    Show_Hide_DBH
-    Exit Sub
-HandleErrors:
     Select Case Err.Number
-        Case 3200 'Record cannot be edited or saved because it has related records?
-            MsgBox "Could not move to the requested record, because it would adversely affect related records.", vbOKOnly
-            rst.CancelUpdate 'I hope this is the correct fix.
-        Case Else
-            MsgBox "Error " & Err.Number & ": " & Err.Description, vbCritical, "Error encountered in procedure" & strProcName
-            Exit Sub
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnShowFoliage_Click[fsub_Sapling_Data])"
     End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub cboSelect_UnsampledTag_Enter()
-    Me!cboSelect_UnsampledTag.Requery
-End Sub
-
-Private Sub cboSelect_UnsampledTag_AfterUpdate()
-    ' Find the record that matches the control, if record doesn't exist, create it.
-    
-    On Error GoTo HandleErrors
-    
-    Dim rstClone As DAO.Recordset
-    Dim strFind As String
-    Dim strSearchField As String
-    
-    strFind = Me!cboSelect_UnsampledTag.Column(0)
-    strSearchField = "Tag_ID"
-    
-    If Me!cboSelect_UnsampledTag.Column(2) = "Tree" Then
-        If MsgBox("You are downgrading a TREE to a SAPLING.  Is this OK?", vbOKCancel) = vbCancel Then GoTo ExitHere
-    End If
-        
-    'Search for a matching record
-    Set rstClone = Me.Recordset.Clone
-    
-    Do Until rstClone.EOF
-        If rstClone(strSearchField) = strFind Then
-            'Goto matching record and exit subroutine
-            Me.Bookmark = rstClone.Bookmark
-            GoTo ExitHere
-        End If
-        rstClone.MoveNext
-    Loop
-    'If we haven't found record and exited by now, create new record.
-    DoCmd.GoToRecord , , acNewRec
-    Tag_ID.Value = strFind
-    DoCmd.RunCommand acCmdSaveRecord
-    Me!fsub_Tag_Sapling.Requery
-    Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tag_Sapling]!txtTag_Status = "Sapling"
-    Me!fsub_Tag_Sapling.Requery
-    Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tags_History_Summary].Requery
-    
-ExitHere:
-    Exit Sub
-HandleErrors:
-    Select Case Err.Number
-        Case 3200 'Record cannot be edited or saved because it has related records?
-            MsgBox "Could not move to the requested record, because it would adversely affect related records.", vbOKOnly
-            rst.CancelUpdate 'I hope this is the correct fix.
-        Case 3021 'record not found .... Mel says DOUBLE CHECK
-            MsgBox ("Case 3021 error cboSelect_UnsampledTag code")
-            DoCmd.GoToRecord , , acNewRec
-            txtTag_ID.Value = Me!cboSelect_UnsampledTag.Column(0)
-            DoCmd.RunCommand acCmdSaveRecord
-            Me!fsub_Sapling_Data.Requery
-        Case Else
-            MsgBox "Error " & Err.Number & ": " & Err.Description, vbCritical, "Error encountered in procedure" & strProcName
-            Exit Sub
-    End Select
- 
-End Sub
-
-Private Sub cboTag_Finder_AfterUpdate()
-    ' Find the record that matches the control, if record doesn't exist, create it.
-    
-    On Error GoTo HandleErrors
-    
-    Dim rstClone As DAO.Recordset
-    Dim strFind As String
-    Dim strSearchField As String
-    
-    strFind = Me!cboTag_Finder.Column(0)
-    strSearchField = "Tag_ID"
-    
-    If Me!cboTag_Finder.Column(2) = "Tree" Then
-        If MsgBox("You are downgrading a TREE to a SAPLING.  Is this OK?", vbOKCancel) = vbCancel Then GoTo ExitHere
-        
-    End If
-        
-    'Search for a matching record
-    Set rstClone = Me.Recordset.Clone
-    
-    Do Until rstClone.EOF
-        If rstClone(strSearchField) = strFind Then
-            'Goto matching record and exit subroutine
-            Me.Bookmark = rstClone.Bookmark
-            GoTo ExitHere
-        End If
-        rstClone.MoveNext
-    Loop
-    'If we haven't found record and exited by now, create new record.
-    DoCmd.GoToRecord , , acNewRec
-    Tag_ID.Value = strFind
-    DoCmd.RunCommand acCmdSaveRecord
-    Me!fsub_Tag_Sapling.Requery
-    Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tag_Sapling]!txtTag_Status = "Sapling"
-    Me!fsub_Tag_Sapling.Requery
-    Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tags_History_Summary].Requery
-    
-ExitHere:
-    Exit Sub
-HandleErrors:
-    Select Case Err.Number
-        Case 3200 'Record cannot be edited or saved because it has related records?
-            MsgBox "Could not move to the requested record, because it would adversely affect related records.", vbOKOnly
-            rst.CancelUpdate 'I hope this is the correct fix.
-        Case 3021 'record not found .... Mel says DOUBLE CHECK
-            MsgBox ("Case 3021 error cboTagFinder code")
-            DoCmd.GoToRecord , , acNewRec
-            txtTag_ID.Value = Me!cboTag_Finder.Column(0)
-            DoCmd.RunCommand acCmdSaveRecord
-            Me!fsub_Sapling_Data.Requery
-        Case Else
-            MsgBox "Error " & Err.Number & ": " & Err.Description, vbCritical, "Error encountered in procedure" & strProcName
-            Exit Sub
-    End Select
- 
-End Sub
-
-Private Sub cboTag_Finder_Enter()
-        Me!cboTag_Finder.Requery
-End Sub
-
-Private Sub cmdOpen_Form_Conditions_and_Pests_Click()
-    Dim stDocName As String
-    Dim stLinkCriteria As String
-
-    stDocName = "frm_Popup_Conditions_and_Pests"
-    DoCmd.OpenForm stDocName, , , stLinkCriteria
-
-Exit_cmdOpen_Popup_Click:
-    Exit Sub
-Err_cmdOpen_Popup_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpen_Popup_Click
-End Sub
-
-Private Sub cmdOpen_Form_Crown_Class_Click()
-    Dim stDocName As String
-    Dim stLinkCriteria As String
-
-    stDocName = "frm_Popup_Crown_Classes"
-    DoCmd.OpenForm stDocName, , , stLinkCriteria
-
-Exit_cmdOpen_Popup_Click:
-    Exit Sub
-Err_cmdOpen_Popup_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpen_Popup_Click
-End Sub
-
-Private Sub cmdDelete_Sample_Click()
+' ---------------------------------
+' SUB:          btnOpenFormConditionsAndPests_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed cmdOpen_Form_Conditions_and_Pests > btnOpenFormConditionsAndPests
+' ---------------------------------
+Private Sub btnOpenFormConditionsAndPests_Click()
 On Error GoTo Err_Handler
+    
+    Dim strDocName As String
+    Dim strLinkCriteria As String
 
-    If MsgBox("You are about to DELETE all data for this sapling for this sampling event only." & vbNewLine & vbNewLine & "Is this OK?", vbOKCancel + vbDefaultButton2, "Warning") = vbCancel Then GoTo Exit_Procedure
+    strDocName = "frm_Popup_Conditions_and_Pests"
+    DoCmd.OpenForm strDocName, , , strLinkCriteria
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnOpenFormConditionsAndPests_Click[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnOpenFormCrownClass_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    rename cmdOpen_Form_Crown_Class > btnOpenFormCrownClass
+' ---------------------------------
+Private Sub btnOpenFormCrownClass_Click(Cancel As Integer)
+On Error GoTo Err_Handler
+    Dim strDocName As String
+    Dim strLinkCriteria As String
+    
+    strDocName = "frm_Popup_Crown_Classes"
+    DoCmd.OpenForm strDocName, , , strLinkCriteria
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnOpenFormCrownClass_Click[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnDeleteSample_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    rename cmdDelete_Sample > btnDeleteSample
+'   BLC - 4/9/2018 - updated TreeStatus > SaplingStatus
+' ---------------------------------
+Private Sub btnDeleteSample_Click()
+On Error GoTo Err_Handler
+    
+    If MsgBox("You are about to DELETE all data for this sapling for this sampling event only." _
+            & vbNewLine & vbNewLine & "Is this OK?", vbOKCancel + vbDefaultButton2, "Warning") = vbCancel Then _
+            GoTo Exit_Handler
+            
     With CodeContextObject
         On Error Resume Next
         'DoCmd.GoToControl Screen.PreviousControl.Name
-        DoCmd.GoToControl cboTree_Status
+        DoCmd.GoToControl cbxSaplingStatus
         Err.Clear
         If (Not .Form.NewRecord) Then
             DoCmd.RunCommand acCmdDeleteRecord
@@ -1853,41 +1820,938 @@ On Error GoTo Err_Handler
         End If
     End With
 
-Me.Parent.Refresh
-
-Exit_Procedure:
+    Me.Parent.Refresh
+    
+Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox Error$
-    Resume Exit_Procedure
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnDeleteSample_Click[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub cmdTag_New_Specimen_Click()
-On Error GoTo Err_cmdTag_New_Specimen_Click
+' ---------------------------------
+' SUB:          btnTagNewSpecimen_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    rename cmdTag_New_Specimen > btnTagNewSpecimen
+' ---------------------------------
+Private Sub btnTagNewSpecimen_Click()
+On Error GoTo Err_Handler
+    
     Dim strCriteria As String
-
+    
     strCriteria = GetCriteriaString("[Location_ID]=", "tbl_Locations", "Location_ID", Me.Parent.Name, "txtLocation_ID")
     DoCmd.OpenForm "frm_Locations", , , strCriteria, , , "Filter by location"
-
-Exit_cmdTag_New_Specimen_Click:
+    
+Exit_Handler:
     Exit Sub
-Err_cmdTag_New_Specimen_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdTag_New_Specimen_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnTagNewSpecimen_Click[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub Form_BeforeUpdate(Cancel As Integer)
+' ----------------
+'  Enter Events
+' ----------------
+
+' ---------------------------------
+' SUB:          cbxSaplingStatus_Enter
+' Description:  combobox enter actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed cboTree_Status > cbxTreeStatus
+'   BLC - 4/9/2018 - renamed SaplingStatus vs. TreeStatus
+' ---------------------------------
+Private Sub cbxSaplingStatus_Enter()
 On Error GoTo Err_Handler
 
-    If Me.NewRecord Then
-        If GetDataType("tbl_Sapling_Data", "Sapling_Data_ID") = dbText Then
-            Me!Sapling_Data_ID = fxnGUIDGen
-        End If
-    End If
-
-Exit_Procedure:
+    ValidateSaplingSubform
+    
+    SaplingStatus = Me!cbxSaplingStatus
+    
+Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Select Case Err.Number
+        Case 94
+            Resume Next
+        Case Else
+            MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxSaplingStatus_Enter[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' SUB:          cbxHabit_Enter
+' Description:  combobox enter actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed cboHabit > cbxHabit
+' ---------------------------------
+Private Sub cbxHabit_Enter()
+On Error GoTo Err_Handler
+    
+    ValidateSaplingSubform
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxHabit_Enter[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          tbxBrowsable_Enter
+' Description:  textbox enter actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed Browsable > tbxBrowsable
+' ---------------------------------
+Private Sub tbxBrowsable_Enter()
+On Error GoTo Err_Handler
+
+    ValidateSaplingSubform
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxBrowsable_Enter[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          tbxBrowsed_Enter
+' Description:  textbox enter actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed Browsed > tbxBrowsed
+' ---------------------------------
+Private Sub tbxBrowsed_Enter()
+On Error GoTo Err_Handler
+    
+    ValidateSaplingSubform
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxBrowsed_Enter[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          tbxComments_Enter
+' Description:  textbox enter actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed txtComments > tbxComments
+' ---------------------------------
+Private Sub tbxComments_Enter()
+On Error GoTo Err_Handler
+
+    ValidateSaplingSubform
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxComments_Enter[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxSelectSampledTag_Enter
+' Description:  combobox enter actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed cboSelect_SampledTag > cbxSelectSampledTag
+' ---------------------------------
+Private Sub cbxSelectSampledTag_Enter()
+On Error GoTo Err_Handler
+
+    Me!cbxSelectSampledTag.Requery
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxSelectSampledTag_Enter[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxTagFinder_Enter
+' Description:  combobox enter actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed cboTag_Finder > cbxTagFinder
+' ---------------------------------
+Private Sub cbxTagFinder_Enter()
+On Error GoTo Err_Handler
+    
+    Me!cboTag_Finder.Requery
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxTagFinder_Enter[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxSelectUnsampledTag_Enter
+' Description:  combobox enter actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed cboSelect_UnsampledTag > cbxSelectUnsampledTag
+' ---------------------------------
+Private Sub cbxSelectUnsampledTag_Enter()
+On Error GoTo Err_Handler
+
+    Me!cbxSelectUnsampledTag.Requery
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxSelectUnsampledTag_Enter[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ----------------
+'  Change Events
+' ----------------
+
+' ---------------------------------
+' SUB:          cbxSaplingStatus_Change
+' Description:  combobox change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 9, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/9/2018 - initial version
+' ---------------------------------
+Private Sub cbxSaplingStatus_Change()
+On Error GoTo Err_Handler
+
+    CheckTagStatus "Sapling"
+
+'    'sapling status = Dead* ?
+'    ' --> trigger tag status = RIO (Retired (In Office))
+'    If Left(cbxSaplingStatus, 4) = "Dead" Then
+'
+''Debug.Print "tag status = " & Me.fsub_Tag_Sapling.Controls("cbxTagStatus")
+'
+'        Select Case fsub_Tag_Sapling.Controls("cbxTagStatus")
+'         Case Is <> "Retired (In Office)"
+'            Me.fsub_Tag_Sapling.Controls("cbxTagStatus").BackColor = lngYellow
+'
+'         Case Is = Null
+'Debug.Print "tag status = NULL " & Me.fsub_Tag_Sapling.Controls("cbxTagStatus")
+'                'set the value
+'                fsub_Tag_Sapling.Controls("cbxTagStatus") = "Retired (In Office)"
+'         Case Else
+'            'do nothing
+'        End Select
+'
+'    Else
+'
+'        Me.fsub_Tag_Sapling.Controls("cbxTagStatus").BackColor = lngWhite
+'
+'    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxSaplingStatus_Change[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ----------------
+'  After Update Events
+' ----------------
+
+' ---------------------------------
+' SUB:          cbxBrowsePick_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed cboBrowsePick > cbxBrowsePick
+' ---------------------------------
+Private Sub cbxBrowsePick_AfterUpdate()
+On Error GoTo Err_Handler
+
+    Select Case Me!cboBrowsePick.Column(0)
+        Case "Yes / Yes"
+            Me!txtBrowsable.Value = "Yes"
+            Me!txtBrowsed.Value = "Yes"
+        Case "Yes / No"
+            Me!txtBrowsable.Value = "Yes"
+            Me!txtBrowsed.Value = "No"
+        Case "No / No"
+            Me!txtBrowsable.Value = "No"
+            Me!txtBrowsed.Value = "No"
+    End Select
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxBrowsePick_AfterUpdate[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxQuickComment_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed cboQuick_Comment > cbxQuickComment
+' ---------------------------------
+Private Sub cbxQuickComment_AfterUpdate()
+On Error GoTo Err_Handler
+
+    Me.tbxComments = LTrim(Me.tbxComments & " " & Me.cbxQuickComment)
+    Me.tbxComments.Requery
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxQuickComment_AfterUpdate[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxSaplingStatus_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed cboTree_Status > cbxTreeStatus
+'   BLC - 4/9/2018 - renamed SaplingStatus vs. TreeStatus
+' ---------------------------------
+Private Sub cbxSaplingStatus_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Dim Response As String
+    
+    If Left(SaplingStatus, 4) = "Dead" And Left(Me!cbxSaplingStatus, 5) = "Alive" Then
+        Response = MsgBox("You have changed the status of this sapling from dead to alive", vbOKCancel, "NCRN Forest Vegetation Monitoring")
+            If Response = vbOK Then
+                MsgBox "Changes approved"
+            Else
+                MsgBox "Changes rejected"
+                Me!cbxSaplingStatus = SaplingStatus
+                
+            End If
+               
+    End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxSaplingStatus_AfterUpdate[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxHabit_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed cboHabit > cbxHabit
+' ---------------------------------
+Private Sub cbxHabit_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    ToggleDBH
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxHabit_AfterUpdate[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxSelectSampledTag_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed cboSelect_SampledTag > cbxSelectSampledTag
+'                    revised error 3200 issue to use rstClone vs. rst
+' ---------------------------------
+Private Sub cbxSelectSampledTag_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    ' Find the record that matches the control, if record doesn't exist, create it.
+    
+    Dim rstClone As DAO.Recordset
+    Dim strFind As String
+    Dim strSearchField As String
+    
+    strFind = Me!cbxSelectSampledTag.Column(0)
+    strSearchField = "Tag_ID"
+    
+    'Search for a matching record
+    Set rstClone = Me.Recordset.Clone
+    
+    Do Until rstClone.EOF
+        If rstClone(strSearchField) = strFind Then
+            'Goto matching record and exit subroutine
+            Me.Bookmark = rstClone.Bookmark
+            GoTo Exit_Handler
+        End If
+        rstClone.MoveNext
+    Loop
+'    'If we haven't found record and exited by now, create new record.
+'    DoCmd.GoToRecord , , acNewRec
+'    Tag_ID.Value = strFind
+'    DoCmd.RunCommand acCmdSaveRecord
+'    Me!fsub_Tag_Sapling.Requery
+'    Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tag_Sapling]!txtTag_Status = "Sapling"
+'    Me!fsub_Tag_Sapling.Requery
+'    Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tag_Sapling]!cmdShow_Species.Visible = True
+'    Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tags_History_Summary].Requery
+
+Exit_Handler:
+    ToggleDBH
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+        Case 3200 'Record cannot be edited or saved because it has related records?
+            MsgBox "Could not move to the requested record, because it would adversely affect related records.", vbOKOnly
+            'rst.CancelUpdate 'I hope this is the correct fix.
+            rstClone.CancelUpdate
+        Case Else
+          MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+              "Error encountered (#" & Err.Number & " - cbxSelectSampledTag_AfterUpdate[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxSelectUnsampledTag_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed cboSelect_UnsampledTag > btnSelectUnsampledTag
+'                    revised error 3200 issue to use rstClone vs. rst
+' ---------------------------------
+Private Sub cbxSelectUnsampledTag_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    ' Find the record that matches the control, if record doesn't exist, create it.
+    
+    Dim rstClone As DAO.Recordset
+    Dim strFind As String
+    Dim strSearchField As String
+    
+    strFind = Me!cbxSelectUnsampledTag.Column(0)
+    strSearchField = "Tag_ID"
+    
+    If Me!cbxSelectUnsampledTag.Column(2) = "Tree" Then
+        If MsgBox("You are downgrading a TREE to a SAPLING.  Is this OK?", vbOKCancel) = vbCancel Then GoTo Exit_Handler
+    End If
+        
+    'Search for a matching record
+    Set rstClone = Me.Recordset.Clone
+    
+    Do Until rstClone.EOF
+        If rstClone(strSearchField) = strFind Then
+            'Goto matching record and exit subroutine
+            Me.Bookmark = rstClone.Bookmark
+            GoTo Exit_Handler
+        End If
+        rstClone.MoveNext
+    Loop
+    'If we haven't found record and exited by now, create new record.
+    DoCmd.GoToRecord , , acNewRec
+    Tag_ID.Value = strFind
+    DoCmd.RunCommand acCmdSaveRecord
+    Me!fsub_Tag_Sapling.Requery
+    Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tag_Sapling]!tbxTagStatus = "Sapling"
+    Me!fsub_Tag_Sapling.Requery
+    Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tags_History_Summary].Requery
+        
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+        Case 3200 'Record cannot be edited or saved because it has related records?
+            MsgBox "Could not move to the requested record, because it would adversely affect related records.", vbOKOnly
+            'rst.CancelUpdate 'I hope this is the correct fix.
+            rstClone.CancelUpdate
+        Case 3021 'record not found .... Mel says DOUBLE CHECK
+            MsgBox ("Case 3021 error cbxSelectUnsampledTag code")
+            DoCmd.GoToRecord , , acNewRec
+'FIX            txtTag_ID.Value = Me!cbxSelectUnsampledTag.Column(0)
+            DoCmd.RunCommand acCmdSaveRecord
+            Me!fsub_Sapling_Data.Requery
+        Case Else
+          MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+              "Error encountered (#" & Err.Number & " - cbxSelectUnsampledTag_AfterUpdate[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnTagFinder_AfterUpdate
+' Description:  button after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed cboTag_Finder > btnTagFinder
+'                    revised error 3200 issue to use rstClone vs. rst
+' ---------------------------------
+Private Sub btnTagFinder_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    ' Find the record that matches the control, if record doesn't exist, create it.
+       
+    Dim rstClone As DAO.Recordset
+    Dim strFind As String
+    Dim strSearchField As String
+    
+    strFind = Me!cboTag_Finder.Column(0)
+    strSearchField = "Tag_ID"
+    
+    If Me!cboTag_Finder.Column(2) = "Tree" Then
+        If MsgBox("You are downgrading a TREE to a SAPLING.  Is this OK?", _
+            vbOKCancel) = vbCancel Then GoTo Exit_Handler
+        
+    End If
+        
+    'Search for a matching record
+    Set rstClone = Me.Recordset.Clone
+    
+    Do Until rstClone.EOF
+        If rstClone(strSearchField) = strFind Then
+            'Goto matching record and exit subroutine
+            Me.Bookmark = rstClone.Bookmark
+            GoTo Exit_Handler
+        End If
+        rstClone.MoveNext
+    Loop
+    'If we haven't found record and exited by now, create new record.
+    DoCmd.GoToRecord , , acNewRec
+    Tag_ID.Value = strFind
+    DoCmd.RunCommand acCmdSaveRecord
+    Me!fsub_Tag_Sapling.Requery
+    Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tag_Sapling]!tbxTagStatus = "Sapling"
+    Me!fsub_Tag_Sapling.Requery
+    Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tags_History_Summary].Requery
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+        Case 3200 'Record cannot be edited or saved because it has related records?
+            MsgBox "Could not move to the requested record, because it would adversely affect related records.", vbOKOnly
+            'rst.CancelUpdate 'I hope this is the correct fix.
+            rstClone.CancelUpdate
+        Case 3021 'record not found .... Mel says DOUBLE CHECK
+            MsgBox ("Case 3021 error cbxTagFinder code")
+            DoCmd.GoToRecord , , acNewRec
+'FIX            txtTag_ID.Value = Me!cbxTag_Finder.Column(0)
+            DoCmd.RunCommand acCmdSaveRecord
+            Me!fsub_Sapling_Data.Requery
+        Case Else
+          MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+              "Error encountered (#" & Err.Number & " - btnTagFinder_AfterUpdate[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ----------------
+'  Exit Events
+' ----------------
+
+' ---------------------------------
+' SUB:          fsub_Sapling_DBH_Exit
+' Description:  subreport exit actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+' ---------------------------------
+Private Sub fsub_Sapling_DBH_Exit(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    Me.Refresh
+    
+    'check for +/-4cm or < 1cm sapling DBH
+    Select Case ValidDBH
+        Case True
+            tbxComments.BackColor = lngWhite
+            'hide DBH double check
+            lblDBHCheck.BackColor = lngWhite
+            lblDBHCheck.Visible = False
+            chkDBHCheck.Visible = False
+        Case False
+            tbxComments.BackColor = lngYellow
+            'expose DBH double check
+            lblDBHCheck.BackColor = lngYellow
+            lblDBHCheck.Visible = True
+            chkDBHCheck.Visible = True
+            MsgBox "Warning...change in DBH exceeds threshold. Please check value.", vbExclamation, "NCRN Vegetation Monitoring"
+    End Select
+    
+'    Dim db As DAO.Database
+'    Set db = CurrentDb
+'
+'    'Check to see if the temporary query exists and if it does delete it.
+'
+'    If fxnQueryExists("_qCOMPARE_DBH") Then
+'        db.QueryDefs.Delete ("_qCOMPARE_DBH")
+'    End If
+'
+'    Dim strLocID As String
+'    strLocID = Forms!frm_Events!txtLocation_ID
+'
+'    Dim intTag As Integer
+'    intTag = Forms!frm_Events!fsub_Sapling_Data!fsub_Tag_Sapling!txtTag
+'
+'    Dim varDBH_Current As Variant
+'    Dim varDBH_Past As Variant
+'
+'    Dim strSQL As String
+'    strSQL = "SELECT tbl_Locations.Location_ID, tbl_Events.Event_ID, tbl_Locations.Admin_Unit_Code, tbl_Locations.Subunit_Code, tbl_Events.Event_Date, tbl_Tags.Tag, " _
+'            & "Round((((Sum(3.1415*((IIf([Live]=True,[DBH],0))/2)^2))*(1/3.1415))^0.5)*2,6) AS EquivDBH " _
+'            & "FROM ((tbl_Locations INNER JOIN tbl_Events ON tbl_Locations.Location_ID = tbl_Events.Location_ID) " _
+'            & "INNER JOIN (tbl_Sapling_Data INNER JOIN tbl_Tags ON tbl_Sapling_Data.Tag_ID = tbl_Tags.Tag_ID) ON tbl_Events.Event_ID = tbl_Sapling_Data.Event_ID) " _
+'            & "INNER JOIN tbl_Sapling_DBH ON tbl_Sapling_Data.Sapling_Data_ID = tbl_Sapling_DBH.Sapling_Data_ID " _
+'            & "GROUP BY tbl_Locations.Location_ID, tbl_Events.Event_ID, tbl_Locations.Admin_Unit_Code, tbl_Locations.Subunit_Code, tbl_Events.Event_Date, tbl_Tags.Tag " _
+'            & "HAVING (((tbl_Locations.Location_ID) = """ & strLocID & """) And ((tbl_Tags.Tag) = " & intTag & ")) " _
+'            & "ORDER BY tbl_Events.Event_Date;"
+'
+'    Dim qDef As DAO.QueryDef
+'    Set qDef = db.CreateQueryDef("_qCOMPARE_DBH", strSQL)
+'
+'    Dim rs As DAO.Recordset
+'    Set rs = db.OpenRecordset("_qCOMPARE_DBH")
+'
+'    rs.MoveLast
+'    If rs.RecordCount > 1 Then
+'
+'        varDBH_Current = rs![EquivDBH]
+'        rs.MovePrevious
+'        varDBH_Past = rs![EquivDBH]
+'
+'        If varDBH_Current - varDBH_Past >= 4 Or varDBH_Current - varDBH_Past <= -4 Then
+'            MsgBox "Warning...change in DBH exceeds threshold. Please check value.", vbExclamation, "NCRN Vegetation Monitoring"
+'        End If
+'    End If
+'
+'
+'    If Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH!txtEquivDBH < 1 Then
+'        MsgBox "Saplings must have a minimum DBH of 1.0. Please address the issue"
+'        Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH!txtDBH.SetFocus
+'    End If
+'
+'    DoCmd.DeleteObject acQuery, "_qCOMPARE_DBH"
+'    Set varDBH_Current = Nothing
+'    Set varDBH_Past = Nothing
+'    Set rs = Nothing
+'    Set qDef = Nothing
+'    Set db = Nothing
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - fsub_Sapling_DBH_Exit[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+'  Methods
+' ---------------------------------
+
+' ---------------------------------
+' SUB:          ValidateSaplingSubform
+' Description:  form validation actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+' ---------------------------------
+Private Sub ValidateSaplingSubform()
+On Error GoTo Err_Handler
+    
+    ' confirm a Tag has been selected
+    If IsNull(Me!fsub_Tag_Sapling!tbxTag) Then
+        MsgBox "You must SELECT A TAG before you can enter record details!", vbExclamation, "Enter Tag First"
+    End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ValidateSaplingSubform[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+'  Functions
+' ---------------------------------
+
+' ---------------------------------
+' FUNCTION:     ToggleDBH
+' Description:  DBH show/hide actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+'                    renamed Show_Hide_DBH > ToggleDBH
+' ---------------------------------
+Private Function ToggleDBH()
+On Error GoTo Err_Handler
+    
+    Select Case Me!cbxHabit.Value
+        Case "Tree"
+            Me!fsub_Sapling_DBH.Visible = True
+        Case "Shrub"
+            Me!fsub_Sapling_DBH.Visible = False
+        Case Else
+            Me!fsub_Sapling_DBH.Visible = True
+    End Select
+    
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ToggleDBH[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Function

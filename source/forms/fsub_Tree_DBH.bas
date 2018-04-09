@@ -13,10 +13,10 @@ Begin Form
     Width =2460
     DatasheetFontHeight =10
     ItemSuffix =14
-    Left =795
-    Top =7065
-    Right =3255
-    Bottom =8625
+    Left =3030
+    Top =6930
+    Right =5565
+    Bottom =8865
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xcd25f3b3b063e440
@@ -31,9 +31,6 @@ Begin Form
         0x6801000068010000680100006801000000000000201c0000e010000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
-    AllowPivotTableView =0
-    AllowPivotChartView =0
-    AllowPivotChartView =0
     FilterOnLoad =0
     ShowPageMargins =0
     DatasheetGridlinesColor12 =12632256
@@ -141,7 +138,7 @@ Begin Form
                     ColumnOrder =1
                     FontSize =12
                     FontWeight =700
-                    Name ="txtEquivDBH"
+                    Name ="tbxEquivDBH"
                     ControlSource ="=(((Sum(3.1415*((IIf([Live]=True,[DBH],0))/2)^2))*(1/3.1415))^0.5)*2"
                     Format ="Fixed"
                     FontName ="Calibri"
@@ -169,7 +166,7 @@ Begin Form
                             Width =420
                             Height =300
                             FontSize =12
-                            Name ="Label8"
+                            Name ="lblLD"
                             Caption ="L/D:"
                             FontName ="Calibri"
                             LayoutCachedTop =60
@@ -185,7 +182,7 @@ Begin Form
                     Width =336
                     Height =306
                     TabIndex =1
-                    Name ="cmdRefresh_Calculation"
+                    Name ="btnRefreshCalc"
                     Caption ="Command10"
                     OnClick ="[Event Procedure]"
                     PictureData = Begin
@@ -259,19 +256,11 @@ Begin Form
                     ControlSource ="=(((Sum(3.1415*((IIf([Live]=False,[DBH],0))/2)^2))*(1/3.1415))^0.5)*2"
                     Format ="Fixed"
                     FontName ="Calibri"
-                    ConditionalFormat = Begin
-                        0x0100000060000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000
-                    End
 
                     LayoutCachedLeft =1320
                     LayoutCachedTop =60
                     LayoutCachedWidth =2040
                     LayoutCachedHeight =360
-                    ConditionalFormat14 = Begin
-                        0x010000000000
-                    End
                 End
             End
         End
@@ -289,7 +278,7 @@ Begin Form
                     Height =300
                     ColumnWidth =900
                     FontSize =12
-                    Name ="txtDBH"
+                    Name ="tbxDBH"
                     ControlSource ="DBH"
                     FontName ="Calibri"
                     OnClick ="[Event Procedure]"
@@ -318,7 +307,7 @@ Begin Form
                             Width =480
                             Height =300
                             FontSize =12
-                            Name ="DBH_Label"
+                            Name ="lblDBH"
                             Caption ="DBH"
                             FontName ="Calibri"
                             LayoutCachedLeft =420
@@ -335,7 +324,7 @@ Begin Form
                     Width =351
                     Height =291
                     TabIndex =1
-                    Name ="cmd_Tree_DBH_delete"
+                    Name ="btnDeleteTreeDBH"
                     Caption ="Command6"
                     OnClick ="[Event Procedure]"
                     PictureData = Begin
@@ -399,7 +388,7 @@ Begin Form
                     Top =120
                     Width =245
                     TabIndex =2
-                    Name ="Live"
+                    Name ="chkLive"
                     ControlSource ="Live"
                     StatusBarText ="Indicates that the stem is alive"
                     DefaultValue ="True"
@@ -416,7 +405,7 @@ Begin Form
                             Width =420
                             Height =299
                             FontSize =12
-                            Name ="Label11"
+                            Name ="lblLive"
                             Caption ="Live"
                             FontName ="Calibri"
                             LayoutCachedLeft =1620
@@ -441,30 +430,186 @@ Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Compare Database
+Option Explicit
 
-Private Sub cmd_DBH_Keypad_Click()
-On Error GoTo Err_cmdOpenKeyPad_Click
-    'This routine requires the presence of the Keypad_Utils module.
+' =================================
+' FORM:         fsub_Tree_DBH
+' Level:        Application report
+' Version:      1.01
+'
+' Description:  Form related functions & procedures for application
+' Requires:     Keypad Utils module
+'
+' Source/date:  Bonnie Campbell, April 3, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC   - 4/3/2018 - 1.01 - added documentation, error handling
+' =================================
+
+' ---------------------------------
+' SUB:          Form_BeforeUpdate
+' Description:  form before update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+' ---------------------------------
+Private Sub Form_BeforeUpdate(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    If Me.NewRecord Then
+        If GetDataType("tbl_Tree_DBH", "Tree_DBH_ID") = dbText Then
+            Me!Tree_DBH_ID = fxnGUIDGen
+        End If
+    End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[fsub_Tree_DBH])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          Form_AfterUpdate
+' Description:  form after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+' ---------------------------------
+Private Sub Form_AfterUpdate()
+On Error GoTo Err_Handler
+
+    Me.Refresh
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_AfterUpdate[fsub_Tree_DBH])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          tbxDBH_Click
+' Description:  DBH textbox click actions
+' Requires:     Keypad Utils module
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+' ---------------------------------
+Private Sub tbxDBH_Click()
+On Error GoTo Err_Handler
+
     Dim strKeypadFormName As String
     Dim strControlToUpdate As String
     Dim frmFormToUpdate As Form
     
-    'The two lines below should be changed to reflect the name of the keypad to open
-    '    and the name of the control to be updated.
+    'set keypad form to launch & control on this form to be updated by it
     strKeypadFormName = "frm_Pad_Num"
-    strControlToUpdate = "txtDBH"
-    'The lines below should not usually be edited.
+    strControlToUpdate = "tbxDBH"
+    
+    'launch keypad
     Set frmFormToUpdate = Me
     Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
-
-Exit_cmdOpenKeyPad_Click:
+    
+Exit_Handler:
     Exit Sub
-Err_cmdOpenKeyPad_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpenKeyPad_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxDBH_Click[fsub_Tree_DBH])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub cmd_Tree_DBH_delete_Click()
+' ---------------------------------
+' SUB:          btnKeypadDBH_Click
+' Description:  DBH keypad button click actions
+' Requires:     Keypad Utils module
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+' ---------------------------------
+Private Sub btnKeypadDBH_Click()
+On Error GoTo Err_Handler
+
+    Dim strKeypadFormName As String
+    Dim strControlToUpdate As String
+    Dim frmFormToUpdate As Form
+    
+    'set keypad form to launch & control on this form to be updated by it
+    strKeypadFormName = "frm_Pad_Num"
+    strControlToUpdate = "tbxDBH"
+    
+    'launch keypad
+    Set frmFormToUpdate = Me
+    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnKeypadDBH_Click[fsub_Tree_DBH])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnDeleteTreeDBH_Click
+' Description:  delete button actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+' ---------------------------------
+Private Sub btnDeleteTreeDBH_Click()
 On Error GoTo Err_Handler
 
     'If MsgBox("You are about to DELETE all data for this tree for this sampling event only." & vbNewLine & vbNewLine & "Is this OK?", vbOKCancel + vbDefaultButton2, "Warning") = vbCancel Then GoTo Exit_Procedure
@@ -483,63 +628,45 @@ On Error GoTo Err_Handler
         End If
     End With
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox Error$
-    Resume Exit_Procedure
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnDeleteTreeDBH_Click[fsub_Tree_DBH])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub cmdRefresh_Calculation_Click()
-On Error GoTo Err_cmdRefresh_Calculation_Click
-
-    DoCmd.RunCommand acCmdRefresh
-
-Exit_cmdRefresh_Calculation_Click:
-    Exit Sub
-Err_cmdRefresh_Calculation_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdRefresh_Calculation_Click
-End Sub
-
-Private Sub Form_AfterUpdate()
-    Me.Refresh
-End Sub
-
-Private Sub Form_BeforeUpdate(Cancel As Integer)
+' ---------------------------------
+' SUB:          btnRefreshCalc_Click
+' Description:  refresh calculation button actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 3, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/3/2018 - added error handling, documentation
+' ---------------------------------
+Private Sub btnRefreshCalc_Click()
 On Error GoTo Err_Handler
 
-    If Me.NewRecord Then
-        If GetDataType("tbl_Tree_DBH", "Tree_DBH_ID") = dbText Then
-            Me!Tree_DBH_ID = fxnGUIDGen
-        End If
-    End If
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
-
-Private Sub txtDBH_Click()
-On Error GoTo Err_cmdOpenKeyPad_Click
-    'This routine requires the presence of the Keypad_Utils module.
-    Dim strKeypadFormName As String
-    Dim strControlToUpdate As String
-    Dim frmFormToUpdate As Form
+    DoCmd.RunCommand acCmdRefresh
     
-    'The two lines below should be changed to reflect the name of the keypad to open
-    '    and the name of the control to be updated.
-    strKeypadFormName = "frm_Pad_Num"
-    strControlToUpdate = "txtDBH"
-    'The lines below should not usually be edited.
-    Set frmFormToUpdate = Me
-    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
-
-Exit_cmdOpenKeyPad_Click:
+Exit_Handler:
     Exit Sub
-Err_cmdOpenKeyPad_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpenKeyPad_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnRefreshCalc_Click[fsub_Tree_DBH])"
+    End Select
+    Resume Exit_Handler
 End Sub

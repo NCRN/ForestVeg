@@ -1,0 +1,16 @@
+﻿dbMemo "SQL" ="INSERT INTO tbl_Tags_History ( Table_Name, Record_ID_Field_Name, Record_ID, Fiel"
+    "d_Name, Value_New, Value_Old, Value_History_Notes, Contact_ID, Network_User_Name"
+    ", Change_Date, Updated_Date )\015\012VALUES ('tbl_Tags', 'Tag_ID', '{6D8E3A98-6E"
+    "18-4DAE-8687-ED8B5CC63515}', 'Tag_Status', 'Retired (In Office)', 'Tree', '2018 "
+    "pre-season: update dead sapling tag statuses to Retired (In Office)', '201803271"
+    "44817-533424019.813538', 'blcampbell', Now(), Now());\015\012"
+dbMemo "Connect" =""
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+dbBoolean "OrderByOn" ="0"
+dbByte "Orientation" ="0"
+dbByte "DefaultView" ="2"
+dbBoolean "FilterOnLoad" ="0"
+dbBoolean "OrderByOnLoad" ="-1"
+Begin
+End

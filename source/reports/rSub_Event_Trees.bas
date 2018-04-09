@@ -14,8 +14,8 @@ Begin Report
     Width =10800
     DatasheetFontHeight =10
     ItemSuffix =42
-    Left =645
-    Top =1365
+    Left =75
+    Top =6180
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xc47eed94f4efe440
@@ -201,7 +201,7 @@ Begin Report
                     TextFontCharSet =238
                     TextAlign =2
                     TextFontFamily =34
-                    Left =6660
+                    Left =6600
                     Top =60
                     Width =660
                     Height =540
@@ -211,16 +211,16 @@ Begin Report
                     Caption ="Crown Class"
                     FontName ="Calibri"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =6660
+                    LayoutCachedLeft =6600
                     LayoutCachedTop =60
-                    LayoutCachedWidth =7320
+                    LayoutCachedWidth =7260
                     LayoutCachedHeight =600
                 End
                 Begin Label
                     FontItalic = NotDefault
                     TextFontCharSet =238
                     TextFontFamily =34
-                    Left =9960
+                    Left =9660
                     Top =300
                     Width =780
                     Height =300
@@ -230,9 +230,9 @@ Begin Report
                     Caption ="Status"
                     FontName ="Calibri"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =9960
+                    LayoutCachedLeft =9660
                     LayoutCachedTop =300
-                    LayoutCachedWidth =10740
+                    LayoutCachedWidth =10440
                     LayoutCachedHeight =600
                 End
                 Begin Label
@@ -240,7 +240,7 @@ Begin Report
                     TextFontCharSet =238
                     TextAlign =2
                     TextFontFamily =34
-                    Left =8040
+                    Left =7920
                     Top =300
                     Width =615
                     Height =300
@@ -250,16 +250,16 @@ Begin Report
                     Caption ="V-C-F"
                     FontName ="Calibri"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =8040
+                    LayoutCachedLeft =7920
                     LayoutCachedTop =300
-                    LayoutCachedWidth =8655
+                    LayoutCachedWidth =8535
                     LayoutCachedHeight =600
                 End
                 Begin Label
                     FontItalic = NotDefault
                     TextAlign =2
                     TextFontFamily =34
-                    Left =8805
+                    Left =8685
                     Top =300
                     Width =645
                     Height =300
@@ -269,9 +269,9 @@ Begin Report
                     Caption ="Vigor"
                     FontName ="Calibri"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =8805
+                    LayoutCachedLeft =8685
                     LayoutCachedTop =300
-                    LayoutCachedWidth =9450
+                    LayoutCachedWidth =9330
                     LayoutCachedHeight =600
                 End
             End
@@ -297,7 +297,7 @@ Begin Report
                 Begin TextBox
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =7920
+                    Left =7800
                     Width =720
                     Height =239
                     TabIndex =14
@@ -318,8 +318,8 @@ Begin Report
                         0x650064005d003d00460061006c007300650000000000
                     End
 
-                    LayoutCachedLeft =7920
-                    LayoutCachedWidth =8640
+                    LayoutCachedLeft =7800
+                    LayoutCachedWidth =8520
                     LayoutCachedHeight =239
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000faf3e800250000004900 ,
@@ -478,7 +478,7 @@ Begin Report
                     TextAlign =2
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =6540
+                    Left =6480
                     Width =1260
                     FontSize =9
                     TabIndex =5
@@ -494,8 +494,8 @@ Begin Report
                         0x2c0031002c00300029000000000022002000220000000000
                     End
 
-                    LayoutCachedLeft =6540
-                    LayoutCachedWidth =7800
+                    LayoutCachedLeft =6480
+                    LayoutCachedWidth =7740
                     LayoutCachedHeight =240
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000faf3e800250000004900 ,
@@ -511,8 +511,8 @@ Begin Report
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =9780
-                    Width =960
+                    Left =9480
+                    Width =1319
                     FontSize =9
                     TabIndex =6
                     Name ="tbxTreeStatus"
@@ -526,8 +526,8 @@ Begin Report
                         0x7400750073005d00290000000000
                     End
 
-                    LayoutCachedLeft =9780
-                    LayoutCachedWidth =10740
+                    LayoutCachedLeft =9480
+                    LayoutCachedWidth =10799
                     LayoutCachedHeight =240
                     ConditionalFormat14 = Begin
                         0x01000100000001000000000000000100000000000000ed1c2400150000004900 ,
@@ -587,33 +587,33 @@ Begin Report
 
                 End
                 Begin CheckBox
-                    Left =8040
+                    Left =7920
                     TabIndex =11
                     Name ="chkVines_Checked"
                     ControlSource ="Vines_Checked"
 
-                    LayoutCachedLeft =8040
-                    LayoutCachedWidth =8300
+                    LayoutCachedLeft =7920
+                    LayoutCachedWidth =8180
                     LayoutCachedHeight =240
                 End
                 Begin CheckBox
-                    Left =8220
+                    Left =8100
                     TabIndex =12
                     Name ="chkConditions_Checked"
                     ControlSource ="Conditions_Checked"
 
-                    LayoutCachedLeft =8220
-                    LayoutCachedWidth =8480
+                    LayoutCachedLeft =8100
+                    LayoutCachedWidth =8360
                     LayoutCachedHeight =240
                 End
                 Begin CheckBox
-                    Left =8400
+                    Left =8280
                     TabIndex =13
                     Name ="chkFoliage_Conditions_Checked"
                     ControlSource ="Foliage_Conditions_Checked"
 
-                    LayoutCachedLeft =8400
-                    LayoutCachedWidth =8660
+                    LayoutCachedLeft =8280
+                    LayoutCachedWidth =8540
                     LayoutCachedHeight =240
                 End
                 Begin TextBox
@@ -621,7 +621,7 @@ Begin Report
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =8700
+                    Left =8580
                     Width =1020
                     FontSize =9
                     TabIndex =15
@@ -637,8 +637,8 @@ Begin Report
                         0x2c0031002c00300029000000000022002000220000000000
                     End
 
-                    LayoutCachedLeft =8700
-                    LayoutCachedWidth =9720
+                    LayoutCachedLeft =8580
+                    LayoutCachedWidth =9600
                     LayoutCachedHeight =240
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000faf3e800250000004900 ,
@@ -652,7 +652,6 @@ Begin Report
                 Begin Label
                     FontItalic = NotDefault
                     BackStyle =1
-                    OverlapFlags =12
                     TextAlign =2
                     TextFontFamily =34
                     Left =4500

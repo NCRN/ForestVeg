@@ -11,7 +11,7 @@ Begin Report
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =10800
+    Width =10740
     DatasheetFontHeight =10
     ItemSuffix =40
     Top =600
@@ -153,7 +153,7 @@ Begin Report
                     TextFontCharSet =238
                     TextAlign =3
                     TextFontFamily =34
-                    Left =5220
+                    Left =5580
                     Top =240
                     Width =720
                     Height =300
@@ -163,9 +163,9 @@ Begin Report
                     Caption ="Stems"
                     FontName ="Calibri"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =5220
+                    LayoutCachedLeft =5580
                     LayoutCachedTop =240
-                    LayoutCachedWidth =5940
+                    LayoutCachedWidth =6300
                     LayoutCachedHeight =540
                 End
                 Begin Label
@@ -173,7 +173,7 @@ Begin Report
                     TextFontCharSet =238
                     TextAlign =3
                     TextFontFamily =34
-                    Left =7080
+                    Left =7380
                     Top =60
                     Width =930
                     Height =480
@@ -183,9 +183,9 @@ Begin Report
                     Caption ="Equivalent DBH (cm)"
                     FontName ="Calibri"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =7080
+                    LayoutCachedLeft =7380
                     LayoutCachedTop =60
-                    LayoutCachedWidth =8010
+                    LayoutCachedWidth =8310
                     LayoutCachedHeight =540
                 End
                 Begin Label
@@ -211,9 +211,29 @@ Begin Report
                 Begin Label
                     FontItalic = NotDefault
                     TextFontCharSet =238
+                    TextAlign =2
                     TextFontFamily =34
-                    Left =9959
-                    Top =299
+                    Left =4620
+                    Top =240
+                    Width =465
+                    Height =300
+                    FontSize =10
+                    ForeColor =7633277
+                    Name ="lblDRC"
+                    Caption ="DRC"
+                    FontName ="Calibri"
+                    Tag ="DetachedLabel"
+                    LayoutCachedLeft =4620
+                    LayoutCachedTop =240
+                    LayoutCachedWidth =5085
+                    LayoutCachedHeight =540
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    TextFontCharSet =238
+                    TextFontFamily =34
+                    Left =9780
+                    Top =240
                     Width =780
                     Height =300
                     FontSize =10
@@ -222,10 +242,10 @@ Begin Report
                     Caption ="Status"
                     FontName ="Calibri"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =9959
-                    LayoutCachedTop =299
-                    LayoutCachedWidth =10739
-                    LayoutCachedHeight =599
+                    LayoutCachedLeft =9780
+                    LayoutCachedTop =240
+                    LayoutCachedWidth =10560
+                    LayoutCachedHeight =540
                 End
                 Begin Label
                     FontItalic = NotDefault
@@ -250,20 +270,20 @@ Begin Report
                 Begin Label
                     FontItalic = NotDefault
                     TextFontFamily =34
-                    Left =8205
-                    Top =299
-                    Width =645
+                    Left =8640
+                    Top =240
+                    Width =780
                     Height =300
                     FontSize =10
                     ForeColor =0
-                    Name ="lblVigor"
+                    Name ="Label36"
                     Caption ="Vigor"
                     FontName ="Calibri"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =8205
-                    LayoutCachedTop =299
-                    LayoutCachedWidth =8850
-                    LayoutCachedHeight =599
+                    LayoutCachedLeft =8640
+                    LayoutCachedTop =240
+                    LayoutCachedWidth =9420
+                    LayoutCachedHeight =540
                 End
             End
         End
@@ -327,7 +347,7 @@ Begin Report
         Begin Section
             KeepTogether = NotDefault
             CanGrow = NotDefault
-            Height =600
+            Height =660
             Name ="Detail"
             Begin
                 Begin TextBox
@@ -380,7 +400,7 @@ Begin Report
                     TextFontCharSet =238
                     TextAlign =2
                     IMESentenceMode =3
-                    Left =4740
+                    Left =5100
                     Width =2325
                     FontSize =9
                     TabIndex =2
@@ -388,17 +408,17 @@ Begin Report
                     ControlSource ="=MakeSaplingStemList([Event_ID],[Sapling_Data_ID])"
                     FontName ="Calibri"
 
-                    LayoutCachedLeft =4740
-                    LayoutCachedWidth =7065
+                    LayoutCachedLeft =5100
+                    LayoutCachedWidth =7425
                     LayoutCachedHeight =240
                 End
                 Begin TextBox
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =7200
-                    Width =720
-                    FontSize =9
+                    Left =7500
+                    Width =1500
+                    FontSize =7
                     TabIndex =3
                     Name ="txtSum_BasalArea"
                     Format ="Standard"
@@ -414,8 +434,8 @@ Begin Report
                         0x5d0029002c00300029003c00310000000000
                     End
 
-                    LayoutCachedLeft =7200
-                    LayoutCachedWidth =7920
+                    LayoutCachedLeft =7500
+                    LayoutCachedWidth =9000
                     LayoutCachedHeight =240
                     ConditionalFormat14 = Begin
                         0x01000200000000000000040000000100000000000000ed1c2400020000003100 ,
@@ -429,26 +449,42 @@ Begin Report
                     End
                 End
                 Begin TextBox
+                    TextFontCharSet =238
+                    TextAlign =2
+                    IMESentenceMode =3
+                    Left =4560
+                    Width =525
+                    FontSize =9
+                    TabIndex =4
+                    ForeColor =7633277
+                    Name ="txtDRC"
+                    ControlSource ="DRC"
+                    FontName ="Calibri"
+
+                    LayoutCachedLeft =4560
+                    LayoutCachedWidth =5085
+                    LayoutCachedHeight =240
+                End
+                Begin TextBox
                     CanGrow = NotDefault
                     IMESentenceMode =3
                     Left =2400
                     Top =300
                     Width =7380
                     Height =0
-                    TabIndex =4
+                    TabIndex =5
                     Name ="txtSapling_Notes"
                     ControlSource ="Sapling_Notes"
 
                 End
                 Begin TextBox
-                    CanGrow = NotDefault
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3
                     Left =9360
-                    Width =1319
+                    Width =1320
                     FontSize =9
-                    TabIndex =5
+                    TabIndex =6
                     Name ="txtSapling_Status"
                     ControlSource ="Sapling_Status"
                     FontName ="Calibri"
@@ -461,7 +497,7 @@ Begin Report
                     End
 
                     LayoutCachedLeft =9360
-                    LayoutCachedWidth =10679
+                    LayoutCachedWidth =10680
                     LayoutCachedHeight =240
                     ConditionalFormat14 = Begin
                         0x01000100000001000000000000000100000000000000ed1c24001b0000004900 ,
@@ -477,7 +513,7 @@ Begin Report
                     Left =3900
                     Width =615
                     FontSize =9
-                    TabIndex =6
+                    TabIndex =7
                     Name ="txtHabit"
                     ControlSource ="Habit"
                     Format ="Standard"
@@ -519,7 +555,7 @@ Begin Report
                     Left =2940
                     Width =825
                     FontSize =9
-                    TabIndex =7
+                    TabIndex =8
                     Name ="txtBrowse_Status"
                     ControlSource ="=[Browsable] & \"/\" & [Browsed]"
                     Format ="Standard"
@@ -561,7 +597,7 @@ Begin Report
                     Top =360
                     Width =2956
                     Height =120
-                    TabIndex =8
+                    TabIndex =9
                     Name ="rSub_Event_rSub_Sapling_Conditions"
                     SourceObject ="Report.rSub_Event_rSub_Sapling_Conditions"
                     LinkChildFields ="Sapling_Data_ID"
@@ -577,9 +613,9 @@ Begin Report
                     Top =360
                     Width =2956
                     Height =180
-                    TabIndex =9
-                    Name ="rSub_Event_rSub_Sapling_Vines"
-                    SourceObject ="Report.rSub_Event_rSub_Sapling_Vines"
+                    TabIndex =10
+                    Name ="rSub_Event_rSub_Sapliing_Vines"
+                    SourceObject ="Report.rSub_Event_rSub_Sapliing_Vines"
                     LinkChildFields ="Sapling_Data_ID"
                     LinkMasterFields ="Sapling_Data_ID"
 
@@ -589,14 +625,13 @@ Begin Report
                     LayoutCachedHeight =540
                 End
                 Begin TextBox
-                    CanGrow = NotDefault
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =8100
+                    Left =8220
                     Width =1140
                     FontSize =9
-                    TabIndex =10
+                    TabIndex =11
                     Name ="txtVigor"
                     ControlSource ="Vig"
                     FontName ="Calibri"
@@ -612,8 +647,8 @@ Begin Report
                         0x000022002000220000000000
                     End
 
-                    LayoutCachedLeft =8100
-                    LayoutCachedWidth =9240
+                    LayoutCachedLeft =8220
+                    LayoutCachedWidth =9360
                     LayoutCachedHeight =240
                     ConditionalFormat14 = Begin
                         0x01000300000001000000000000000100000000000000ffffff00280000004900 ,
@@ -626,6 +661,37 @@ Begin Report
                         0x0079002200000000000000000000000000000000000000000000000000000200 ,
                         0x00000100000000000000ed1c2400030000002200200022000000000000000000 ,
                         0x00000000000000000000000000
+                    End
+                End
+                Begin TextBox
+                    IMESentenceMode =3
+                    Left =8940
+                    Top =360
+                    Width =1080
+                    Height =225
+                    TabIndex =12
+                    Name ="tbxEquivDBH"
+                    ControlSource ="Equiv_DBH_cm"
+
+                    LayoutCachedLeft =8940
+                    LayoutCachedTop =360
+                    LayoutCachedWidth =10020
+                    LayoutCachedHeight =585
+                    Begin
+                        Begin Label
+                            OverlapFlags =12
+                            TextAlign =0
+                            Left =7500
+                            Top =360
+                            Width =780
+                            Height =300
+                            Name ="Label39"
+                            Caption ="Text38:"
+                            LayoutCachedLeft =7500
+                            LayoutCachedTop =360
+                            LayoutCachedWidth =8280
+                            LayoutCachedHeight =660
+                        End
                     End
                 End
             End
