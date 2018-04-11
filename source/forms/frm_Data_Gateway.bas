@@ -21,10 +21,10 @@ Begin Form
     Width =11340
     DatasheetFontHeight =10
     ItemSuffix =60
-    Left =4245
-    Top =1680
-    Right =15585
-    Bottom =9225
+    Left =4275
+    Top =1950
+    Right =15615
+    Bottom =9495
     DatasheetGridlinesColor =12632256
     Filter ="Admin_Unit_Code='CHOH'"
     OrderBy ="Event_Date DESC"
@@ -1351,7 +1351,8 @@ On Error GoTo Err_Handler
     Else
         'Record what the current record is so we can go back to that record on return
         WriteRecordCriteria
-        strDocName = "rpt_Event_Summary_Unfiltered"
+        'strDocName = "rpt_Event_Summary_Unfiltered"
+        strDocName = "Copy of rpt_Event_Summary_Unfiltered"
         strCriteria = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
         'DoCmd.OpenReport stDocName, acPreview, "qRpt_Event_Summary_Unfiltered", stCriteria
         DoCmd.OpenReport strDocName, acPreview, , strCriteria

@@ -82,7 +82,7 @@ Begin Report
                     FontWeight =800
                     ForeColor =5855577
                     Name ="lblHdrClass"
-                    Caption ="Class"
+                    Caption ="Tag Status"
                     LayoutCachedLeft =900
                     LayoutCachedWidth =2340
                     LayoutCachedHeight =225

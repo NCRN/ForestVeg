@@ -28,7 +28,6 @@ Begin Form
     Right =16395
     Bottom =10260
     DatasheetGridlinesColor =12632256
-    Filter ="[Event_ID]='{35FBAFC3-15CA-448F-8AC4-634C2D055B5F}'"
     RecSrcDt = Begin
         0x58c05212730ae440
     End

@@ -13,12 +13,12 @@ Begin Report
     GridY =24
     Width =11160
     DatasheetFontHeight =10
-    ItemSuffix =64
-    Left =375
+    ItemSuffix =67
+    Left =15
     Top =240
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
-        0x1d220c6fb4dfe340
+        0x1e595cfd0c18e540
     End
     RecordSource ="qRpt_Event_Summary_Unfiltered"
     DatasheetFontName ="Arial"
@@ -58,7 +58,7 @@ Begin Report
         Begin Section
             KeepTogether = NotDefault
             CanGrow = NotDefault
-            Height =5640
+            Height =6240
             Name ="Detail"
             Begin
                 Begin Subform
@@ -259,7 +259,7 @@ Begin Report
                     FontSize =22
                     FontWeight =700
                     TabIndex =10
-                    Name ="Text5"
+                    Name ="tbxPlotName"
                     ControlSource ="=[Plot_Name]"
                     FontName ="Calibri"
 
@@ -278,7 +278,7 @@ Begin Report
                     FontSize =18
                     FontWeight =700
                     TabIndex =11
-                    Name ="Text8"
+                    Name ="tbxEventDate"
                     ControlSource ="Event_Date"
                     Format ="mm/dd/yyyy"
                     FontName ="Calibri"
@@ -808,6 +808,54 @@ Begin Report
                     LayoutCachedWidth =4200
                     LayoutCachedHeight =5490
                 End
+                Begin Subform
+                    Locked = NotDefault
+                    OldBorderStyle =0
+                    Top =6180
+                    Width =10800
+                    Height =0
+                    TabIndex =22
+                    Name ="rsub_Monster_Saplings"
+                    SourceObject ="Report.rSub_Event_Monster_Saplings"
+                    LinkChildFields ="Event_ID"
+                    LinkMasterFields ="Event_ID"
+
+                    LayoutCachedTop =6180
+                    LayoutCachedWidth =10800
+                    LayoutCachedHeight =6180
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    FontUnderline = NotDefault
+                    TextAlign =1
+                    TextFontFamily =34
+                    Top =5700
+                    Width =4200
+                    Height =390
+                    FontSize =14
+                    FontWeight =700
+                    Name ="lblHdrMonsterSaplings"
+                    Caption ="Monster Saplings"
+                    FontName ="Calibri"
+                    LayoutCachedTop =5700
+                    LayoutCachedWidth =4200
+                    LayoutCachedHeight =6090
+                End
+                Begin Label
+                    TextAlign =1
+                    TextFontFamily =34
+                    Left =8280
+                    Top =5880
+                    Width =2400
+                    Height =225
+                    FontWeight =700
+                    Name ="lblDBHgt10cm"
+                    Caption ="DBH > 10 cm"
+                    LayoutCachedLeft =8280
+                    LayoutCachedTop =5880
+                    LayoutCachedWidth =10680
+                    LayoutCachedHeight =6105
+                End
             End
         End
         Begin PageFooter
@@ -823,7 +871,7 @@ Begin Report
                     Top =180
                     Width =2280
                     ForeColor =8421504
-                    Name ="Text18"
+                    Name ="tbxPrintDate"
                     ControlSource ="=Now()"
 
                     LayoutCachedLeft =8880
@@ -858,7 +906,7 @@ Begin Report
                     Width =1380
                     TabIndex =1
                     ForeColor =8421504
-                    Name ="Text54"
+                    Name ="tbxFooterPlotName"
                     ControlSource ="Plot_Name"
 
                     LayoutCachedTop =180
@@ -875,7 +923,7 @@ Begin Report
                     Width =2520
                     TabIndex =2
                     ForeColor =8421504
-                    Name ="Text56"
+                    Name ="tbxFooterEventDate"
                     ControlSource ="Event_Date"
 
                     LayoutCachedLeft =1440
