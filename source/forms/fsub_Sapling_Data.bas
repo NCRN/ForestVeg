@@ -4,6 +4,7 @@ Begin Form
     RecordSelectors = NotDefault
     NavigationButtons = NotDefault
     DividingLines = NotDefault
+    FilterOn = NotDefault
     AllowDesignChanges = NotDefault
     DefaultView =0
     TabularCharSet =204
@@ -15,9 +16,9 @@ Begin Form
     DatasheetFontHeight =9
     ItemSuffix =73
     Left =3975
-    Top =2820
+    Top =3675
     Right =17745
-    Bottom =9135
+    Bottom =9990
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0xd0ed4c4b94aee340
@@ -922,7 +923,7 @@ Begin Form
                             Width =1620
                             Height =306
                             FontSize =10
-                            Name ="lblFoliage_Conditions"
+                            Name ="lblFoliageConditions"
                             Caption ="Foliage Conditions"
                             LayoutCachedLeft =4440
                             LayoutCachedTop =1980
@@ -1379,7 +1380,6 @@ Begin Form
                     End
                 End
                 Begin CheckBox
-                    Visible = NotDefault
                     OverlapFlags =85
                     Left =1080
                     Top =3420
@@ -1387,40 +1387,37 @@ Begin Form
                     Height =209
                     TabIndex =31
                     Name ="chkDBHCheck"
-                    ControlSource ="DBH_Check"
-                    StatusBarText ="DBH was double checked"
+                    StatusBarText ="Check if DBH was double checked"
                     DefaultValue ="0"
+                    ControlTipText ="Check if DBH was double checked"
 
                     LayoutCachedLeft =1080
                     LayoutCachedTop =3420
                     LayoutCachedWidth =1290
                     LayoutCachedHeight =3629
                 End
-                Begin TextBox
-                    Locked = NotDefault
+                Begin Label
                     FontItalic = NotDefault
-                    OldBorderStyle =0
+                    BackStyle =1
                     OverlapFlags =85
                     TextAlign =3
-                    IMESentenceMode =3
+                    Left =180
                     Top =3360
-                    Width =1035
-                    Height =285
+                    Width =855
+                    Height =780
                     FontSize =10
-                    TabIndex =32
                     LeftMargin =22
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
                     BackColor =15527148
-                    BorderColor =0
                     Name ="lblDBHCheck"
-                    ControlSource ="DBH double checked?"
+                    Caption ="DBH Double Checked?"
                     ControlTipText ="Was DBH double checked?"
-
+                    LayoutCachedLeft =180
                     LayoutCachedTop =3360
                     LayoutCachedWidth =1035
-                    LayoutCachedHeight =3645
+                    LayoutCachedHeight =4140
                 End
             End
         End
@@ -1481,11 +1478,11 @@ Public SaplingStatus As String
 Private Sub Form_Current()
 On Error GoTo Err_Handler
     
-    If Me!cbxHabit = "Tree" Then
-        Me!fsub_Sapling_DBH.Visible = True
-    Else
-        Me!fsub_Sapling_DBH.Visible = False
-    End If
+'    If Me!cbxHabit = "Tree" Then
+'        Me!fsub_Sapling_DBH.Visible = True
+'    Else
+'        Me!fsub_Sapling_DBH.Visible = False
+'    End If
 
     'compare status
     CheckTagStatus "Sapling"
@@ -1608,7 +1605,7 @@ On Error GoTo Err_Handler
     DoCmd.SetProperty "chkConditionsChecked", acPropertyVisible, "0"
     DoCmd.SetProperty "fsub_Sapling_Conditions", acPropertyVisible, "0"
     DoCmd.SetProperty "lblFoliageConditions", acPropertyVisible, "0"
-    DoCmd.SetProperty "chkFoliageConditions_Checked", acPropertyVisible, "0"
+    DoCmd.SetProperty "chkFoliageConditionsChecked", acPropertyVisible, "0"
     DoCmd.SetProperty "fsub_Sapling_Foliage_Conditions", acPropertyVisible, "0"
     DoCmd.RunCommand acCmdRefresh
    
@@ -1648,7 +1645,7 @@ On Error GoTo Err_Handler
     DoCmd.SetProperty "chkVinesChecked", acPropertyVisible, False
     DoCmd.SetProperty "fsub_Sapling_Vines", acPropertyVisible, False
     DoCmd.SetProperty "btnOpenFormConditionsAndPests", acPropertyVisible, True
-    DoCmd.SetProperty "chkConditions_Checked", acPropertyVisible, True
+    DoCmd.SetProperty "chkConditionsChecked", acPropertyVisible, True
     DoCmd.SetProperty "fsub_Sapling_Conditions", acPropertyVisible, True
     DoCmd.SetProperty "lblFoliageConditions", acPropertyVisible, "0"
     DoCmd.SetProperty "chkFoliageConditionsChecked", acPropertyVisible, "0"
@@ -2429,6 +2426,7 @@ End Sub
 '   BLC - 4/3/2018 - added error handling, documentation
 '                    renamed cboSelect_UnsampledTag > btnSelectUnsampledTag
 '                    revised error 3200 issue to use rstClone vs. rst
+'   BLC - 4/17/2018 - revosed tbxTagStatus > cbxTagStatus
 ' ---------------------------------
 Private Sub cbxSelectUnsampledTag_AfterUpdate()
 On Error GoTo Err_Handler
@@ -2462,7 +2460,7 @@ On Error GoTo Err_Handler
     Tag_ID.Value = strFind
     DoCmd.RunCommand acCmdSaveRecord
     Me!fsub_Tag_Sapling.Requery
-    Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tag_Sapling]!tbxTagStatus = "Sapling"
+    Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tag_Sapling]!cbxTagStatus = "Sapling"
     Me!fsub_Tag_Sapling.Requery
     Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tags_History_Summary].Requery
         

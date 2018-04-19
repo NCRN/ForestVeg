@@ -2,7 +2,6 @@
 VersionRequired =20
 Begin Report
     LayoutForPrint = NotDefault
-    AllowDesignChanges = NotDefault
     DefaultView =0
     TabularFamily =127
     DateGrouping =1
@@ -13,12 +12,13 @@ Begin Report
     GridY =24
     Width =8640
     DatasheetFontHeight =10
-    ItemSuffix =48
-    Left =735
-    Top =5250
+    ItemSuffix =49
+    Left =1320
+    Top =2190
     DatasheetGridlinesColor =12632256
+    OnNoData ="[Event Procedure]"
     RecSrcDt = Begin
-        0x43cceae31318e540
+        0xf5f977bf4a18e540
     End
     RecordSource ="SELECT d.DBH, sd.Sapling_Data_ID, l.Plot_Name, e.Event_Date, e.Event_ID, p.Latin"
         "_Name, tg.Tag_Status, sd.Sapling_Status, sd.Status, tg.Azimuth, tg.Distance, tg."
@@ -27,14 +27,16 @@ Begin Report
         " sd.Sapling_Data_ID) LEFT JOIN tbl_Events AS e ON sd.Event_ID = e.Event_ID) LEFT"
         " JOIN tbl_Locations AS l ON e.Location_ID = l.Location_ID) LEFT JOIN tbl_Tags AS"
         " tg ON sd.Tag_ID = tg.Tag_ID) LEFT JOIN tlu_Plants AS p ON tg.TSN = p.TSN WHERE "
-        "(((d.DBH)>10) AND ((e.Event_ID)=[eid]));"
+        "d.DBH>10;"
     Caption ="rSub_Event_UnsampledTags"
+    OnOpen ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0xf0000000f0000000190100000301000000000000c02100003c00000001000000 ,
+        0x0000000000000000000000000000000000000000c02100005901000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
+    AllowLayoutView =0
     DatasheetGridlinesColor12 =12632256
     Begin
         Begin Label
@@ -93,43 +95,15 @@ Begin Report
         End
         Begin FormHeader
             KeepTogether = NotDefault
-            Height =285
+            Height =360
             BackColor =15590879
             Name ="ReportHeader"
             Begin
                 Begin Label
                     FontItalic = NotDefault
-                    TextFontCharSet =238
                     TextAlign =2
                     TextFontFamily =34
-                    Left =60
-                    Width =8520
-                    Height =285
-                    FontSize =10
-                    ForeColor =0
-                    Name ="lblMonsterSaplings"
-                    Caption ="M O N S T E R  S A P L I N G S"
-                    FontName ="Calibri"
-                    Tag ="DetachedLabel"
-                    LayoutCachedLeft =60
-                    LayoutCachedWidth =8580
-                    LayoutCachedHeight =285
-                End
-            End
-        End
-        Begin PageHeader
-            Height =300
-            Name ="PageHeaderSection"
-            Begin
-                Begin Line
-                    BorderWidth =2
-                    Width =0
-                    Name ="Line14"
-                End
-                Begin Label
-                    FontItalic = NotDefault
-                    TextAlign =2
-                    TextFontFamily =34
+                    Top =60
                     Width =840
                     Height =225
                     FontSize =8
@@ -138,8 +112,9 @@ Begin Report
                     Name ="lblHdrTag"
                     Caption ="Tag"
                     FontName ="Arial"
+                    LayoutCachedTop =60
                     LayoutCachedWidth =840
-                    LayoutCachedHeight =225
+                    LayoutCachedHeight =285
                     ForeThemeColorIndex =0
                     ForeTint =65.0
                 End
@@ -148,6 +123,7 @@ Begin Report
                     TextAlign =2
                     TextFontFamily =34
                     Left =900
+                    Top =60
                     Width =1440
                     Height =225
                     FontSize =8
@@ -157,8 +133,9 @@ Begin Report
                     Caption ="Tag Status"
                     FontName ="Arial"
                     LayoutCachedLeft =900
+                    LayoutCachedTop =60
                     LayoutCachedWidth =2340
-                    LayoutCachedHeight =225
+                    LayoutCachedHeight =285
                     ForeThemeColorIndex =0
                     ForeTint =65.0
                 End
@@ -167,6 +144,7 @@ Begin Report
                     TextAlign =2
                     TextFontFamily =34
                     Left =2520
+                    Top =60
                     Width =840
                     Height =225
                     FontSize =8
@@ -176,8 +154,9 @@ Begin Report
                     Caption ="Azi/Dist"
                     FontName ="Arial"
                     LayoutCachedLeft =2520
+                    LayoutCachedTop =60
                     LayoutCachedWidth =3360
-                    LayoutCachedHeight =225
+                    LayoutCachedHeight =285
                     ForeThemeColorIndex =0
                     ForeTint =65.0
                 End
@@ -186,6 +165,7 @@ Begin Report
                     TextAlign =2
                     TextFontFamily =34
                     Left =3360
+                    Top =60
                     Width =840
                     Height =225
                     FontSize =8
@@ -195,8 +175,9 @@ Begin Report
                     Caption ="MP"
                     FontName ="Arial"
                     LayoutCachedLeft =3360
+                    LayoutCachedTop =60
                     LayoutCachedWidth =4200
-                    LayoutCachedHeight =225
+                    LayoutCachedHeight =285
                     ForeThemeColorIndex =0
                     ForeTint =65.0
                 End
@@ -205,6 +186,7 @@ Begin Report
                     TextAlign =2
                     TextFontFamily =34
                     Left =4305
+                    Top =60
                     Width =1455
                     Height =225
                     FontSize =8
@@ -214,8 +196,9 @@ Begin Report
                     Caption ="Sapling Status"
                     FontName ="Arial"
                     LayoutCachedLeft =4305
+                    LayoutCachedTop =60
                     LayoutCachedWidth =5760
-                    LayoutCachedHeight =225
+                    LayoutCachedHeight =285
                     ForeThemeColorIndex =0
                     ForeTint =65.0
                 End
@@ -224,6 +207,7 @@ Begin Report
                     TextAlign =2
                     TextFontFamily =34
                     Left =5805
+                    Top =60
                     Width =1485
                     Height =225
                     FontSize =8
@@ -233,17 +217,30 @@ Begin Report
                     Caption ="Tag Notes"
                     FontName ="Arial"
                     LayoutCachedLeft =5805
+                    LayoutCachedTop =60
                     LayoutCachedWidth =7290
-                    LayoutCachedHeight =225
+                    LayoutCachedHeight =285
                     ForeThemeColorIndex =0
                     ForeTint =65.0
+                End
+            End
+        End
+        Begin PageHeader
+            Height =15
+            Name ="PageHeaderSection"
+            Begin
+                Begin Line
+                    BorderWidth =2
+                    Width =0
+                    Name ="Line14"
                 End
             End
         End
         Begin Section
             KeepTogether = NotDefault
             CanGrow = NotDefault
-            Height =60
+            CanShrink = NotDefault
+            Height =224
             OnFormat ="[Event Procedure]"
             Name ="Detail"
             Begin
@@ -320,7 +317,7 @@ Begin Report
                     TextAlign =2
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =3240
+                    Left =3360
                     Width =780
                     Height =0
                     TabIndex =4
@@ -328,8 +325,8 @@ Begin Report
                     Name ="tbxMP"
                     ControlSource ="Microplot_Number"
 
-                    LayoutCachedLeft =3240
-                    LayoutCachedWidth =4020
+                    LayoutCachedLeft =3360
+                    LayoutCachedWidth =4140
                     ForeThemeColorIndex =0
                     ForeTint =75.0
                 End
@@ -350,6 +347,25 @@ Begin Report
                     LayoutCachedWidth =8040
                     ForeThemeColorIndex =0
                     ForeTint =75.0
+                End
+                Begin Label
+                    Visible = NotDefault
+                    FontItalic = NotDefault
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =3300
+                    Width =1905
+                    Height =224
+                    FontSize =8
+                    ForeColor =5855577
+                    Name ="lblNoData"
+                    Caption ="-- No Data Found --"
+                    FontName ="Arial"
+                    LayoutCachedLeft =3300
+                    LayoutCachedWidth =5205
+                    LayoutCachedHeight =224
+                    ForeThemeColorIndex =0
+                    ForeTint =65.0
                 End
             End
         End
@@ -381,15 +397,44 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' REPORT:       rSub_Event_UnsampledTags
+' REPORT:       rSub_Event_Monster_Saplings
 ' Level:        Application report
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  Report related functions & procedures for application
 '
 ' Source/date:  Bonnie Campbell, April 5, 2018
 ' Revisions:    BLC - 4/5/2018 - 1.00 - initial version
+'               BLC - 4/12/2018 - 1.01 - added NoData event
 ' =================================
+
+' ---------------------------------
+' SUB:          Report_Open
+' Description:  report open actions
+' Assumptions:  -
+' Parameters:   Cancel - whether open action(s) should be cancelled (boolean)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 12, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/12/2018 - initial version
+' ---------------------------------
+Private Sub Report_Open(Cancel As Integer)
+On Error GoTo Err_Handler
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Report_Open[rpt_Event_Monster_Saplings])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
 ' ---------------------------------
 ' SUB:          Detail_Format
@@ -401,14 +446,16 @@ Option Explicit
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Bonnie Campbell, April 5, 2018
+' Source/date:  Bonnie Campbell, April 12, 2018
 ' Adapted:      -
 ' Revisions:
-'   BLC - 4/5/2018 - initial version
+'   BLC - 4/12/2018 - initial version
 ' ---------------------------------
 Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
 On Error GoTo Err_Handler
 
+    'show/hide label
+    Me.lblNoData.Visible = Not Me.Report.HasData
     
 Exit_Handler:
     Exit Sub
@@ -418,6 +465,40 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - Detail_Format[rpt_rSub_Event_UnsampledTags])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          Report_NoData
+' Description:  report no data actions
+' Assumptions:  -
+' Parameters:   Cancel - whether no data action(s) should be cancelled (boolean)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 12, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/12/2018 - initial version
+' ---------------------------------
+Private Sub Report_NoData(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    If Me.Recordset.RecordCount = 0 Then
+        lblNoData.Visible = False
+    Else
+        lblNoData.Visible = False
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Report_NoData[rpt_Event_Monster_Saplings])"
     End Select
     Resume Exit_Handler
 End Sub

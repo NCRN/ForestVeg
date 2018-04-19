@@ -139,6 +139,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/4/2018 - initial version
+'   BLC - 4/18/2018 - renamed txtTag > tbxTag
 ' ---------------------------------
 Public Function ValidDBH() As Boolean 'fsub_Sapling_DBH_Exit(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -163,7 +164,7 @@ On Error GoTo Err_Handler
     strLocID = Forms!frm_Events!txtLocation_ID
     
     Dim intTag As Integer
-    intTag = Forms!frm_Events!fsub_Sapling_Data!fsub_Tag_Sapling!txtTag
+    intTag = Forms!frm_Events!fsub_Sapling_Data!fsub_Tag_Sapling!tbxTag
     
     Dim CurrentDBH As Variant
     Dim PastDBH As Variant
@@ -254,6 +255,76 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - CalcEquivDBH[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     GetPriorDBH
+' Description:  retrieve the tag's previous DBH value
+' Assumptions:  -
+' Parameters:   DataID - tag identifier (string)
+'               VegType - tree or sapling (string)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 16, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/16/2018 - initial version
+' ---------------------------------
+Public Function GetPriorDBH(DataID As String, VegType As String) As Double
+On Error GoTo Err_Handler
+    Dim rs As DAO.Recordset
+    Dim qdf As DAO.QueryDef
+    Dim strSQL As String
+    Dim tblName As String
+    Dim fldName As String
+    
+    tblName = "tbl_" & VegType & "_DBH"
+    fldName = VegType & "_Data_ID"
+    
+'    fails --> aggregate Max in WHERE clause
+'    strSQL = "SELECT DBH FROM " & tblName & _
+'             "WHERE " & fldName & _
+'             "= '" & DataID & _
+'             "' AND Max(Updated_Date);"
+    
+    strSQL = "SELECT TOP 1 DBH FROM " & tblName & " " & _
+             "WHERE " & fldName & _
+             "= '" & DataID & "' " & _
+             "ORDER BY Updated_Date;"
+    
+    'use usys_temp_qdf
+    Set qdf = CurrentDb.QueryDefs("usys_temp_qdf")
+    qdf.SQL = strSQL
+    
+    Set rs = CurrentDb.OpenRecordset("usys_temp_qdf")
+    
+    If Not (rs.BOF And rs.EOF) Then
+        rs.MoveLast
+    
+        If rs.RecordCount = 1 Then
+            'valid
+            GetPriorDBH = rs("DBH")
+        Else
+            'invalid
+            GetPriorDBH = 99
+            'GoTo Exit_Handler
+        End If
+    
+    Else
+        GetPriorDBH = 0
+    End If
+    
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetPriorDBH[mod_App_Data])"
     End Select
     Resume Exit_Handler
 End Function

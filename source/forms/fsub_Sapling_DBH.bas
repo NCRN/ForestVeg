@@ -4,22 +4,21 @@ Begin Form
     RecordSelectors = NotDefault
     AutoCenter = NotDefault
     NavigationButtons = NotDefault
-    AllowDesignChanges = NotDefault
     TabularFamily =0
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =2459
+    Width =2460
     DatasheetFontHeight =10
-    ItemSuffix =11
-    Left =2820
-    Top =6525
-    Right =5355
-    Bottom =8460
+    ItemSuffix =13
+    Left =1680
+    Top =1740
+    Right =5475
+    Bottom =6840
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
-        0xb554b7c8b163e440
+        0x37d06983d518e540
     End
     RecordSource ="SELECT tbl_Sapling_DBH.Sapling_DBH_ID, tbl_Sapling_DBH.Sapling_Data_ID, tbl_Sapl"
         "ing_DBH.DBH, tbl_Sapling_DBH.Live FROM tbl_Sapling_DBH;"
@@ -32,6 +31,7 @@ Begin Form
     End
     FilterOnLoad =0
     ShowPageMargins =0
+    AllowLayoutView =0
     DatasheetGridlinesColor12 =12632256
     Begin
         Begin Label
@@ -134,6 +134,7 @@ Begin Form
                     Top =60
                     Width =900
                     Height =299
+                    ColumnOrder =0
                     FontSize =12
                     FontWeight =700
                     Name ="txtEquivDBH"
@@ -248,6 +249,7 @@ Begin Form
                     Top =60
                     Width =720
                     Height =300
+                    ColumnOrder =1
                     FontSize =12
                     FontWeight =700
                     TabIndex =2
@@ -283,9 +285,11 @@ Begin Form
                     FontName ="Calibri"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
-                        0x0100000084000000020000000000000006000000000000000300000001010000 ,
-                        0xff000000ffffff00010000000000000004000000110000000100000000000000 ,
-                        0xd6dfec0000000000000000000000000000000000000000000000000000000000 ,
+                        0x01000000c4000000030000000100000000000000000000001f00000001000000 ,
+                        0x00000000ffcccc000000000006000000200000002300000001010000ff000000 ,
+                        0xffffff00010000000000000024000000310000000100000000000000d6dfec00 ,
+                        0x41006200730028005b007400780074004400420048005d002d005b0074006200 ,
+                        0x78005000720069006f0072004400420048005d0029003e003d00340000000000 ,
                         0x31003000000000005b004c006900760065005d003d00460061006c0073006500 ,
                         0x00000000
                     End
@@ -295,10 +299,14 @@ Begin Form
                     LayoutCachedWidth =1620
                     LayoutCachedHeight =359
                     ConditionalFormat14 = Begin
-                        0x010002000000000000000600000001010000ff000000ffffff00020000003100 ,
-                        0x3000000000000000000000000000000000000000000000010000000000000001 ,
-                        0x00000000000000d6dfec000c0000005b004c006900760065005d003d00460061 ,
-                        0x006c0073006500000000000000000000000000000000000000000000
+                        0x01000300000001000000000000000100000000000000ffcccc001e0000004100 ,
+                        0x6200730028005b007400780074004400420048005d002d005b00740062007800 ,
+                        0x5000720069006f0072004400420048005d0029003e003d003400000000000000 ,
+                        0x000000000000000000000000000000000000000600000001010000ff000000ff ,
+                        0xffff000200000031003000000000000000000000000000000000000000000000 ,
+                        0x01000000000000000100000000000000d6dfec000c0000005b004c0069007600 ,
+                        0x65005d003d00460061006c007300650000000000000000000000000000000000 ,
+                        0x0000000000
                     End
                     Begin
                         Begin Label
@@ -362,7 +370,7 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin CheckBox
-                    OverlapFlags =85
+                    OverlapFlags =93
                     Left =2160
                     Top =120
                     Width =245
@@ -378,7 +386,7 @@ Begin Form
                     LayoutCachedHeight =360
                     Begin
                         Begin Label
-                            OverlapFlags =85
+                            OverlapFlags =93
                             Left =1680
                             Top =60
                             Width =420
@@ -393,6 +401,22 @@ Begin Form
                             LayoutCachedHeight =359
                         End
                     End
+                End
+                Begin TextBox
+                    OverlapFlags =247
+                    IMESentenceMode =3
+                    Left =1860
+                    Top =120
+                    Width =600
+                    TabIndex =3
+                    Name ="tbxPriorDBH"
+                    ControlSource ="=IIf(IsNull([Sapling_Data_ID]),0,Nz(GetPriorDBH([Sapling_Data_ID],\"Sapling\"),9"
+                        "99))"
+
+                    LayoutCachedLeft =1860
+                    LayoutCachedTop =120
+                    LayoutCachedWidth =2460
+                    LayoutCachedHeight =360
                 End
             End
         End

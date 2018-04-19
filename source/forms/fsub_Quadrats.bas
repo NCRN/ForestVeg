@@ -16,12 +16,11 @@ Begin Form
     Width =14040
     DatasheetFontHeight =10
     ItemSuffix =124
-    Left =5085
-    Top =1860
-    Right =18855
-    Bottom =8175
+    Left =435
+    Top =2355
+    Right =14460
+    Bottom =8925
     DatasheetGridlinesColor =12632256
-    Filter ="[Quadrat_Number] = \"120-8m\" "
     RecSrcDt = Begin
         0x382bdd274ff0e240
     End
@@ -34,9 +33,6 @@ Begin Form
     End
     OnLoad ="[Event Procedure]"
     AllowDatasheetView =0
-    AllowPivotTableView =0
-    AllowPivotChartView =0
-    AllowPivotChartView =0
     FilterOnLoad =255
     ShowPageMargins =0
     DatasheetGridlinesColor12 =12632256
@@ -108,6 +104,7 @@ Begin Form
             Name ="Detail"
             Begin
                 Begin TextBox
+                    Visible = NotDefault
                     Enabled = NotDefault
                     Locked = NotDefault
                     TabStop = NotDefault
@@ -124,7 +121,6 @@ Begin Form
                     TabIndex =1
                     Name ="txtQuadrat_Number"
                     ControlSource ="Quadrat_Number"
-                    DefaultValue ="'120-8m'"
                     FontName ="Calibri"
 
                     LayoutCachedLeft =3240
@@ -133,6 +129,7 @@ Begin Form
                     LayoutCachedHeight =480
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     EnterKeyBehavior = NotDefault
                     ScrollBars =2
                     OverlapFlags =87
@@ -171,6 +168,7 @@ Begin Form
                     End
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =87
                     Left =60
                     Top =3120
@@ -213,6 +211,7 @@ Begin Form
                             Height =300
                             FontSize =12
                             BackColor =15527148
+                            ForeColor =255
                             Name ="lblQuadrat_Selection"
                             Caption ="Select a Quadrat"
                             FontName ="Calibri"
@@ -796,6 +795,7 @@ Begin Form
                     End
                 End
                 Begin Subform
+                    Visible = NotDefault
                     OverlapFlags =85
                     Left =7440
                     Top =3120
@@ -929,6 +929,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =11040
@@ -979,6 +980,7 @@ Begin Form
                     End
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =6000
@@ -1029,6 +1031,7 @@ Begin Form
                     End
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =7740
@@ -1079,6 +1082,7 @@ Begin Form
                     End
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =9360
@@ -1129,6 +1133,7 @@ Begin Form
                     End
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =13200
@@ -1180,6 +1185,7 @@ Begin Form
                     End
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =13200
@@ -1231,6 +1237,7 @@ Begin Form
                     End
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =11070
@@ -1282,6 +1289,7 @@ Begin Form
                     End
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =9375
@@ -1333,6 +1341,7 @@ Begin Form
                     End
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =7755
@@ -1384,6 +1393,7 @@ Begin Form
                     End
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     OverlapFlags =215
                     IMESentenceMode =3
                     Left =6000

@@ -10,13 +10,13 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =2460
+    Width =2639
     DatasheetFontHeight =10
-    ItemSuffix =14
-    Left =3030
-    Top =6930
-    Right =5565
-    Bottom =8865
+    ItemSuffix =16
+    Left =750
+    Top =1620
+    Right =5805
+    Bottom =5220
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xcd25f3b3b063e440
@@ -265,7 +265,7 @@ Begin Form
             End
         End
         Begin Section
-            Height =449
+            Height =420
             BackColor =15527148
             Name ="Detail"
             Begin
@@ -283,9 +283,11 @@ Begin Form
                     FontName ="Calibri"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
-                        0x010000007c000000010000000100000000000000000000000d00000001000000 ,
-                        0x00000000d6dfec00000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x01000000bc000000020000000100000000000000000000001f00000001000000 ,
+                        0x00000000ffcccc000100000000000000200000002d0000000100000000000000 ,
+                        0xd6dfec0000000000000000000000000000000000000000000000000000000000 ,
+                        0x41006200730028005b007400620078004400420048005d002d005b0074006200 ,
+                        0x78005000720069006f0072004400420048005d0029003e003d00340000000000 ,
                         0x5b004c006900760065005d003d00460061006c007300650000000000
                     End
 
@@ -294,9 +296,12 @@ Begin Form
                     LayoutCachedWidth =1560
                     LayoutCachedHeight =360
                     ConditionalFormat14 = Begin
-                        0x01000100000001000000000000000100000000000000d6dfec000c0000005b00 ,
-                        0x4c006900760065005d003d00460061006c007300650000000000000000000000 ,
-                        0x0000000000000000000000
+                        0x01000200000001000000000000000100000000000000ffcccc001e0000004100 ,
+                        0x6200730028005b007400620078004400420048005d002d005b00740062007800 ,
+                        0x5000720069006f0072004400420048005d0029003e003d003400000000000000 ,
+                        0x00000000000000000000000000000001000000000000000100000000000000d6 ,
+                        0xdfec000c0000005b004c006900760065005d003d00460061006c007300650000 ,
+                        0x0000000000000000000000000000000000000000
                     End
                     Begin
                         Begin Label
@@ -383,7 +388,7 @@ Begin Form
                     WebImagePaddingBottom =7
                 End
                 Begin CheckBox
-                    OverlapFlags =85
+                    OverlapFlags =93
                     Left =2100
                     Top =120
                     Width =245
@@ -399,7 +404,7 @@ Begin Form
                     LayoutCachedHeight =360
                     Begin
                         Begin Label
-                            OverlapFlags =85
+                            OverlapFlags =93
                             Left =1620
                             Top =60
                             Width =420
@@ -414,6 +419,21 @@ Begin Form
                             LayoutCachedHeight =359
                         End
                     End
+                End
+                Begin TextBox
+                    OverlapFlags =247
+                    IMESentenceMode =3
+                    Left =1740
+                    Top =60
+                    Width =780
+                    TabIndex =3
+                    Name ="tbxPriorDBH"
+                    ControlSource ="=IIf(IsNull([Tree_Data_ID]),0,Nz(GetPriorDBH([Tree_Data_ID],\"Tree\"),999))"
+
+                    LayoutCachedLeft =1740
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =2520
+                    LayoutCachedHeight =300
                 End
             End
         End

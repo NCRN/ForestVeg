@@ -13,10 +13,10 @@ Begin Form
     Width =3240
     DatasheetFontHeight =10
     ItemSuffix =6
-    Left =7455
-    Top =5445
-    Right =10980
-    Bottom =7830
+    Left =4845
+    Top =4575
+    Right =8370
+    Bottom =6960
     DatasheetGridlinesColor =12632256
     AfterDelConfirm ="[Event Procedure]"
     RecSrcDt = Begin
@@ -262,119 +262,273 @@ Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Compare Database
+Option Explicit
 
-Private Sub cboCondition_AfterUpdate()
-'Validation checks to ensure that specific pests are only associated with the specific target species.
+' =================================
+' MODULE:       fsub_Sapling_Conditions
+' Level:        Application module
+' Version:      1.01
+'
+' Description:  add event related functions & procedures
+'
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC   - 4/16/2018 - 1.01 - added documentation, error handling
+' =================================
 
-Dim intTSN As Long
-Dim strTaxa As String
+' ---------------------------------
+'  Declarations
+' ---------------------------------
 
-intTSN = Forms!frm_Events!fsub_Sapling_Data!fsub_Tag_Sapling!cboTSN.Value
+' ----------------
+'  Events
+' ----------------
 
-'MsgBox intTSN
+' ---------------------------------
+' SUB:          Form_BeforeUpdate
+' Description:  form before update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/16/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub Form_BeforeUpdate(Cancel As Integer)
+On Error GoTo Err_Handler
 
-Select Case Me!cboCondition
-
-Case "Beech bark disease" 'Fagus grandifolia
-    If intTSN <> "19462" Then
-        MsgBox "Please Check", vbCritical, "NCRN Vegetation Monitoring"
+    If Me.NewRecord Then
+        If GetDataType("tbl_Sapling_Condtions", "Sapling_Condition_ID") = dbText Then
+            Me!Sapling_Condition_ID = fxnGUIDGen
+        End If
     End If
-
-Case "Butternut canker"
-    
-    Select Case intTSN
-        Case 19250 'Juglans
-            GoTo Exitsub
-        Case 19254 'Juglans
-            GoTo Exitsub
-        Case 501306 'Carya
-            GoTo Exitsub
-        Case 19227 'Carya
-            GoTo Exitsub
-        Case 19231 'Carya
-            GoTo Exitsub
-        Case 19234 'Carya
-            GoTo Exitsub
-        Case 19235 'Carya
-            GoTo Exitsub
-        Case 19241 'Carya
-            GoTo Exitsub
-        Case 19243 'Carya
-            GoTo Exitsub
-        Case Else
-        
-        MsgBox "Please Check", vbCritical, "NCRN Vegetation Monitoring"
-        
-    End Select
-    
-Case "Chestnut blight"
-    
-    Select Case intTSN
-        Case 505160 'Castanea
-            GoTo Exitsub
-        Case 19454 'Castanea
-            GoTo Exitsub
-        Case 501318 'Castanea
-            GoTo Exitsub
-        Case 19457 'Castanea
-            GoTo Exitsub
-        Case Else
-            MsgBox "Please Check", vbCritical, "NCRN Vegetation Monitoring"
-    End Select
-    
-Case "Dogwood anthracnose"
-    
-    strTaxa = DLookup("[Genus]", "tlu_Plants", "[TSN_Accepted] = " & intTSN)
-    
-    If strTaxa = "Cornus" Then ' Dogwood genus
-        Exit Sub
-    Else
-        MsgBox "Please Check", vbCritical, "NCRN Vegetation Monitoring"
-    End If
-
-Case "Emerald ash borer" 'Oleaceae Family
-    strTaxa = DLookup("[Family]", "tlu_Plants", "[TSN_Accepted] = " & intTSN)
-    
-    If strTaxa = "Oleaceae" Then
-        Exit Sub
-    Else
-        MsgBox "Please Check", vbCritical, "NCRN Vegetation Monitoring"
-    End If
-    
-Case "Hemlock scale"
-
-    If intTSN <> 183397 Then 'Tsuga Canadensis
-         MsgBox "Please Check", vbCritical, "NCRN Vegetation Monitoring"
-    End If
-
-Case "Oak wilt" 'Oak family
-    
-    strTaxa = DLookup("[Family]", "tlu_Plants", "[TSN_Accepted] = " & intTSN)
-    
-    If strTaxa <> "Fagaceae" Then
-        MsgBox "Please Check", vbCritical, "NCRN Vegetation Monitoring"
-    End If
-    
-    
-Case "Thousand cankers disease"
-    Select Case intTSN
-        Case 19250 'Juglans
-            GoTo Exitsub
-        Case 19254 'Juglans
-            GoTo Exitsub
-        Case Else
-             MsgBox "Please Check", vbCritical, "NCRN Vegetation Monitoring"
-    End Select
-        
-Case Else
-    
-End Select
-Exitsub:
+   
+Exit_Handler:
     Exit Sub
     
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[fsub_Sapling_Conditions])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          Form_AfterDelConfirm
+' Description:  form after delete actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/16/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub Form_AfterDelConfirm(Status As Integer)
+On Error GoTo Err_Handler
 
+    Me.Parent.Refresh
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_AfterDelConfirm[fsub_Sapling_Conditions])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          Form_AfterUpdate
+' Description:  form after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/16/2018 - added documentation, error handling
+'                                   rename chkConditions_Checked > chkConditionsChecked
+' ---------------------------------
+Private Sub Form_AfterUpdate()
+On Error GoTo Err_Handler
+
+    Forms![frm_Events]![fsub_Sapling_Data]![chkConditionsChecked].Value = True
+    Me.Parent.Refresh
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_AfterUpdate[fsub_Sapling_Conditions])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cboCondition_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/16/2018 - added documentation, error handling
+'                                   renamed cboTSN > cbxTSN
+' ---------------------------------
+Private Sub cboCondition_AfterUpdate()
+On Error GoTo Err_Handler
+
+    'Validation checks to ensure that specific pests are only associated with the specific target species.
+    
+    Dim intTSN As Long
+    Dim strTaxa As String
+    
+    intTSN = Forms!frm_Events!fsub_Sapling_Data!fsub_Tag_Sapling!cbxTSN.Value
+    
+    'MsgBox intTSN
+    
+    Select Case Me!cboCondition
+    
+        Case "Beech bark disease" 'Fagus grandifolia
+            If intTSN <> "19462" Then
+                MsgBox "Please Check", vbCritical, "NCRN Vegetation Monitoring"
+            End If
+        
+        Case "Butternut canker"
+            
+            Select Case intTSN
+                Case 19250 'Juglans
+                    GoTo Exit_Handler
+                Case 19254 'Juglans
+                    GoTo Exit_Handler
+                Case 501306 'Carya
+                    GoTo Exit_Handler
+                Case 19227 'Carya
+                    GoTo Exit_Handler
+                Case 19231 'Carya
+                    GoTo Exit_Handler
+                Case 19234 'Carya
+                    GoTo Exit_Handler
+                Case 19235 'Carya
+                    GoTo Exit_Handler
+                Case 19241 'Carya
+                    GoTo Exit_Handler
+                Case 19243 'Carya
+                    GoTo Exit_Handler
+                Case Else
+                
+                MsgBox "Please Check", vbCritical, "NCRN Vegetation Monitoring"
+                
+            End Select
+            
+        Case "Chestnut blight"
+            
+            Select Case intTSN
+                Case 505160 'Castanea
+                    GoTo Exit_Handler
+                Case 19454 'Castanea
+                    GoTo Exit_Handler
+                Case 501318 'Castanea
+                    GoTo Exit_Handler
+                Case 19457 'Castanea
+                    GoTo Exit_Handler
+                Case Else
+                    MsgBox "Please Check", vbCritical, "NCRN Vegetation Monitoring"
+            End Select
+            
+        Case "Dogwood anthracnose"
+            
+            strTaxa = DLookup("[Genus]", "tlu_Plants", "[TSN_Accepted] = " & intTSN)
+            
+            If strTaxa = "Cornus" Then ' Dogwood genus
+                Exit Sub
+            Else
+                MsgBox "Please Check", vbCritical, "NCRN Vegetation Monitoring"
+            End If
+        
+        Case "Emerald ash borer" 'Oleaceae Family
+            strTaxa = DLookup("[Family]", "tlu_Plants", "[TSN_Accepted] = " & intTSN)
+            
+            If strTaxa = "Oleaceae" Then
+                Exit Sub
+            Else
+                MsgBox "Please Check", vbCritical, "NCRN Vegetation Monitoring"
+            End If
+            
+        Case "Hemlock scale"
+        
+            If intTSN <> 183397 Then 'Tsuga Canadensis
+                 MsgBox "Please Check", vbCritical, "NCRN Vegetation Monitoring"
+            End If
+        
+        Case "Oak wilt" 'Oak family
+            
+            strTaxa = DLookup("[Family]", "tlu_Plants", "[TSN_Accepted] = " & intTSN)
+            
+            If strTaxa <> "Fagaceae" Then
+                MsgBox "Please Check", vbCritical, "NCRN Vegetation Monitoring"
+            End If
+            
+            
+        Case "Thousand cankers disease"
+            Select Case intTSN
+                Case 19250 'Juglans
+                    GoTo Exit_Handler
+                Case 19254 'Juglans
+                    GoTo Exit_Handler
+                Case Else
+                     MsgBox "Please Check", vbCritical, "NCRN Vegetation Monitoring"
+            End Select
+                
+        Case Else
+            
+    End Select
+   
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cboCondition_AfterUpdate[fsub_Sapling_Conditions])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cmd_Sapling_Condition_Delete_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/16/2018 - added documentation, error handling
+' ---------------------------------
 Private Sub cmd_Sapling_Condition_Delete_Click()
 On Error GoTo Err_Handler
 
@@ -393,35 +547,15 @@ On Error GoTo Err_Handler
             DoCmd.RunCommand acCmdUndo
         End If
     End With
-
-Exit_Procedure:
+   
+Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox Error$
-    Resume Exit_Procedure
-End Sub
-
-Private Sub Form_AfterDelConfirm(Status As Integer)
-    Me.Parent.Refresh
-End Sub
-
-Private Sub Form_AfterUpdate()
-    Forms![frm_Events]![fsub_Sapling_Data]![chkConditions_Checked].Value = True
-    Me.Parent.Refresh
-End Sub
-
-Private Sub Form_BeforeUpdate(Cancel As Integer)
-On Error GoTo Err_Handler
-
-    If Me.NewRecord Then
-        If GetDataType("tbl_Sapling_Condtions", "Sapling_Condition_ID") = dbText Then
-            Me!Sapling_Condition_ID = fxnGUIDGen
-        End If
-    End If
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cmd_Sapling_Condition_Delete_Click[fsub_Sapling_Conditions])"
+    End Select
+    Resume Exit_Handler
 End Sub

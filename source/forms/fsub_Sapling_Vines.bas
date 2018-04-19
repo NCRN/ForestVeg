@@ -13,10 +13,10 @@ Begin Form
     Width =3246
     DatasheetFontHeight =10
     ItemSuffix =9
-    Left =9825
-    Top =3975
-    Right =13065
-    Bottom =6120
+    Left =4605
+    Top =4410
+    Right =8130
+    Bottom =6795
     DatasheetGridlinesColor =12632256
     AfterDelConfirm ="[Event Procedure]"
     RecSrcDt = Begin
@@ -291,9 +291,139 @@ Attribute VB_Exposed = False
 Option Compare Database
 Option Explicit
 
+' =================================
+' MODULE:       fsub_Sapling_Vines
+' Level:        Application module
+' Version:      1.01
+'
+' Description:  add event related functions & procedures
+'
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC   - 4/16/2018 - 1.01 - added documentation, error handling
+' =================================
 
+' ---------------------------------
+'  Declarations
+' ---------------------------------
+
+' ----------------
+'  Events
+' ----------------
+
+' ---------------------------------
+' SUB:          Form_BeforeUpdate
+' Description:  form before update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/16/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub Form_BeforeUpdate(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    If Me.NewRecord Then
+        If GetDataType("tbl_Sapling_Vines", "Sapling_Vines_ID") = dbText Then
+            Me!Sapling_Vines_ID = fxnGUIDGen
+        End If
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[fsub_Sapling_Vines])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          Form_AfterDelConfirm
+' Description:  form after delete actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/16/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub Form_AfterDelConfirm(Status As Integer)
+On Error GoTo Err_Handler
+
+    Me.Parent.Refresh
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_AfterDelConfirm[fsub_Sapling_Vines])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          Form_AfterUpdate
+' Description:  form after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/16/2018 - added documentation, error handling
+'                                   renamed chkVines_Checked > chkVinesChecked
+' ---------------------------------
+Private Sub Form_AfterUpdate()
+On Error GoTo Err_Handler
+
+    Forms![frm_Events]![fsub_Sapling_Data]![chkVinesChecked].Value = True
+    Me.Parent.Refresh
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_AfterUpdate[fsub_Sapling_Vines])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cboTSN_Enter
+' Description:  combobox enter actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/16/2018 - added documentation, error handling
+' ---------------------------------
 Private Sub cboTSN_Enter()
-On Error GoTo Err_cmdOpenKeyPad_Click
+On Error GoTo Err_Handler
+
   'This routine requires the presence of the Keypad_Utils module.
   Dim strKeypadFormName As String
   Dim strControlToUpdate As String
@@ -310,15 +440,32 @@ On Error GoTo Err_cmdOpenKeyPad_Click
   'The lines below should not usually be edited.
   Set frmFormToUpdate = Me
   Call OpenSpeciespad(strKeypadFormName, frmFormToUpdate, strControlToUpdate, strSpeciesType)
-
-Exit_cmdOpenKeyPad_Click:
-  Exit Sub
-Err_cmdOpenKeyPad_Click:
-  MsgBox Err.Description
-  Resume Exit_cmdOpenKeyPad_Click
+   
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cboTSN_Enter[fsub_Sapling_Vines])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-
+' ---------------------------------
+' SUB:          cmd_Sapling_Vine_Delete_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/16/2018 - added documentation, error handling
+' ---------------------------------
 Private Sub cmd_Sapling_Vine_Delete_Click()
 On Error GoTo Err_Handler
 
@@ -338,15 +485,33 @@ On Error GoTo Err_Handler
         End If
     End With
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox Error$
-    Resume Exit_Procedure
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cmd_Sapling_Vine_Delete_Click[fsub_Sapling_Vines])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          cmdAdd_To_Quickfind_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/16/2018 - added documentation, error handling
+' ---------------------------------
 Private Sub cmdAdd_To_Quickfind_Click()
-On Error GoTo Err_cmdAdd_To_Quickfind_Click
+On Error GoTo Err_Handler
 
     Dim stDocName As String
     Dim stLinkCriteria As String
@@ -356,37 +521,16 @@ On Error GoTo Err_cmdAdd_To_Quickfind_Click
     DoCmd.OpenForm stDocName, , , stLinkCriteria
     'Form_frm_Field_Data_Foliage_Problems.Data_ID.DefaultValue = StringFromGUID(Me!Data_ID)
     
-Exit_cmdAdd_To_Quickfind_Click:
+Exit_Handler:
     Exit Sub
-
-Err_cmdAdd_To_Quickfind_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdAdd_To_Quickfind_Click
-End Sub
-
-Private Sub Form_AfterDelConfirm(Status As Integer)
-    Me.Parent.Refresh
-End Sub
-
-Private Sub Form_AfterUpdate()
-    Forms![frm_Events]![fsub_Sapling_Data]![chkVines_Checked].Value = True
-    Me.Parent.Refresh
-End Sub
-
-Private Sub Form_BeforeUpdate(Cancel As Integer)
-On Error GoTo Err_Handler
-
-    If Me.NewRecord Then
-        If GetDataType("tbl_Sapling_Vines", "Sapling_Vines_ID") = dbText Then
-            Me!Sapling_Vines_ID = fxnGUIDGen
-        End If
-    End If
-
-Exit_Procedure:
-    Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cmdAdd_To_Quickfind_Click[fsub_Sapling_Vines])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 'Private Sub cboTSN_Enter()

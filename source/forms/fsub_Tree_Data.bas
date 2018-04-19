@@ -14,10 +14,10 @@ Begin Form
     Width =14040
     DatasheetFontHeight =9
     ItemSuffix =79
-    Left =1380
-    Top =930
-    Right =15150
-    Bottom =7740
+    Left =3075
+    Top =3675
+    Right =17100
+    Bottom =10740
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0x4d5502714caae340
@@ -233,7 +233,7 @@ Begin Form
                             Width =1620
                             Height =306
                             FontSize =10
-                            Name ="lblFoliage_Conditions"
+                            Name ="lblFoliageConditions"
                             Caption ="Foliage Conditions"
                             LayoutCachedLeft =4440
                             LayoutCachedTop =1980
@@ -1317,6 +1317,48 @@ Begin Form
                     WebImagePaddingBottom =1
                     Overlaps =1
                 End
+                Begin CheckBox
+                    OverlapFlags =85
+                    Left =1020
+                    Top =3360
+                    Width =210
+                    Height =209
+                    TabIndex =30
+                    Name ="chkDBHCheck"
+                    StatusBarText ="Check if DBH was double checked"
+                    DefaultValue ="0"
+                    ControlTipText ="Check if DBH was double checked"
+
+                    LayoutCachedLeft =1020
+                    LayoutCachedTop =3360
+                    LayoutCachedWidth =1230
+                    LayoutCachedHeight =3569
+                    Begin
+                        Begin Label
+                            FontItalic = NotDefault
+                            BackStyle =1
+                            OverlapFlags =85
+                            TextAlign =3
+                            Left =120
+                            Top =3300
+                            Width =855
+                            Height =780
+                            FontSize =10
+                            LeftMargin =22
+                            TopMargin =22
+                            RightMargin =22
+                            BottomMargin =22
+                            BackColor =15527148
+                            Name ="lblDBHCheck"
+                            Caption ="DBH Double Checked?"
+                            ControlTipText ="Was DBH double checked?"
+                            LayoutCachedLeft =120
+                            LayoutCachedTop =3300
+                            LayoutCachedWidth =975
+                            LayoutCachedHeight =4080
+                        End
+                    End
+                End
             End
         End
         Begin FormFooter
@@ -1826,7 +1868,7 @@ On Error GoTo Err_Handler
     DoCmd.SetProperty "lblVines", acPropertyVisible, True
     DoCmd.SetProperty "chkVinesChecked", acPropertyVisible, True
     DoCmd.SetProperty "fsub_Tree_Vines", acPropertyVisible, True
-    DoCmd.SetProperty "cmdOpenFormConditionsAndPests", acPropertyVisible, "0"
+    DoCmd.SetProperty "btnOpenFormConditionsAndPests", acPropertyVisible, "0"
     DoCmd.SetProperty "chkConditionsChecked", acPropertyVisible, "0"
     DoCmd.SetProperty "fsub_Tree_Conditions", acPropertyVisible, "0"
     DoCmd.SetProperty "lblFoliageConditions", acPropertyVisible, "0"

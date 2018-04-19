@@ -13,10 +13,10 @@ Begin Form
     Width =3240
     DatasheetFontHeight =10
     ItemSuffix =9
-    Left =1140
-    Top =1980
-    Right =6165
-    Bottom =5145
+    Left =4605
+    Top =4410
+    Right =8130
+    Bottom =6795
     DatasheetGridlinesColor =12632256
     AfterDelConfirm ="[Event Procedure]"
     RecSrcDt = Begin
@@ -31,9 +31,6 @@ Begin Form
         0x6801000068010000680100006801000000000000201c0000e010000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
-    AllowPivotTableView =0
-    AllowPivotChartView =0
-    AllowPivotChartView =0
     FilterOnLoad =255
     ShowPageMargins =0
     DatasheetGridlinesColor12 =12632256
@@ -315,7 +312,138 @@ Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Compare Database
+Option Explicit
 
+' =================================
+' MODULE:       fsub_Tree_Foliage_Conditions
+' Level:        Application module
+' Version:      1.01
+'
+' Description:  add event related functions & procedures
+'
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC   - 4/16/2018 - 1.01 - added documentation, error handling
+' =================================
+
+' ---------------------------------
+'  Declarations
+' ---------------------------------
+
+' ----------------
+'  Events
+' ----------------
+
+' ---------------------------------
+' SUB:          Form_BeforeUpdate
+' Description:  form actions before update
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/16/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub Form_BeforeUpdate(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    If Me.NewRecord Then
+        If GetDataType("tbl_Tree_Foliage_Condtions", "Tree_Foliage_Condition_ID") = dbText Then
+            Me!Tree_Foliage_Condition_ID = fxnGUIDGen
+        End If
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[fsub_Tree_Foliage_Conditions])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          Form_AfterDelConfirm
+' Description:  form after delete actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/16/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub Form_AfterDelConfirm(Status As Integer)
+On Error GoTo Err_Handler
+
+    Me.Parent.Refresh
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_AfterDelConfirm[fsub_Tree_Foliage_Conditions])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          Form_AfterUpdate
+' Description:  form after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/16/2018 - added documentation, error handling
+'                                   renamed chkFoliage_Conditions_Checked > chkFoliageConditionsChecked
+' ---------------------------------
+Private Sub Form_AfterUpdate()
+On Error GoTo Err_Handler
+
+    Forms![frm_Events]![fsub_Tree_Data]![chkFoliageConditionsChecked].Value = True
+    Me.Parent.Refresh
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_AfterUpdate[fsub_Tree_Foliage_Conditions])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cmd_Tree_Condition_Delete_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/16/2018 - added documentation, error handling
+' ---------------------------------
 Private Sub cmd_Tree_Condition_Delete_Click()
 On Error GoTo Err_Handler
 
@@ -335,40 +463,34 @@ On Error GoTo Err_Handler
         End If
     End With
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox Error$
-    Resume Exit_Procedure
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cmd_Tree_Condition_Delete_Click[fsub_Tree_Foliage_Conditions])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub Form_AfterDelConfirm(Status As Integer)
-    Me.Parent.Refresh
-End Sub
-
-Private Sub Form_AfterUpdate()
-    Forms![frm_Events]![fsub_Tree_Data]![chkFoliage_Conditions_Checked].Value = True
-    Me.Parent.Refresh
-End Sub
-
-Private Sub Form_BeforeUpdate(Cancel As Integer)
+' ---------------------------------
+' SUB:          Percent_Afflicted_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 16, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 4/16/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub Percent_Afflicted_Click()
 On Error GoTo Err_Handler
 
-    If Me.NewRecord Then
-        If GetDataType("tbl_Tree_Foliage_Condtions", "Tree_Foliage_Condition_ID") = dbText Then
-            Me!Tree_Foliage_Condition_ID = fxnGUIDGen
-        End If
-    End If
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
-
-Private Sub Percent_Afflicted_Click()
-On Error GoTo Err_cmdOpenKeyPad_Click
   'This routine requires the presence of the Keypad_Utils module.
   Dim strKeypadFormName As String
   Dim strControlToUpdate As String
@@ -381,10 +503,15 @@ On Error GoTo Err_cmdOpenKeyPad_Click
   'The lines below should not usually be edited.
   Set frmFormToUpdate = Me
   Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
-
-Exit_cmdOpenKeyPad_Click:
-  Exit Sub
-Err_cmdOpenKeyPad_Click:
-  MsgBox Err.Description
-  Resume Exit_cmdOpenKeyPad_Click
+   
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Percent_Afflicted_Click[fsub_Tree_Foliage_Conditions])"
+    End Select
+    Resume Exit_Handler
 End Sub

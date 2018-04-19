@@ -842,16 +842,17 @@ Begin Report
                     LayoutCachedHeight =6090
                 End
                 Begin Label
-                    TextAlign =1
+                    OverlapFlags =4
+                    TextAlign =3
                     TextFontFamily =34
-                    Left =8280
+                    Left =9480
                     Top =5880
-                    Width =2400
+                    Width =1200
                     Height =225
                     FontWeight =700
                     Name ="lblDBHgt10cm"
                     Caption ="DBH > 10 cm"
-                    LayoutCachedLeft =8280
+                    LayoutCachedLeft =9480
                     LayoutCachedTop =5880
                     LayoutCachedWidth =10680
                     LayoutCachedHeight =6105

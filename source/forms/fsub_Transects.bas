@@ -13,12 +13,12 @@ Begin Form
     Width =9780
     DatasheetFontHeight =10
     ItemSuffix =9
-    Left =3030
-    Top =5865
-    Right =9315
-    Bottom =12270
+    Left =2895
+    Top =2535
+    Right =12930
+    Bottom =8940
     DatasheetGridlinesColor =12632256
-    Filter ="[Transect_Azimuth] = \"240\" "
+    Filter ="[Transect_Azimuth] = \"360\" "
     RecSrcDt = Begin
         0xe883dba6cff2e240
     End
@@ -31,9 +31,6 @@ Begin Form
         0x010000006801000000000000a10700000100000001000000
     End
     OnLoad ="[Event Procedure]"
-    AllowPivotTableView =0
-    AllowPivotChartView =0
-    AllowPivotChartView =0
     FilterOnLoad =255
     ShowPageMargins =0
     DatasheetGridlinesColor12 =12632256
@@ -300,7 +297,7 @@ Begin Form
                     TabIndex =7
                     Name ="txtTransect_Azimuth"
                     ControlSource ="Transect_Azimuth"
-                    DefaultValue ="'240'"
+                    DefaultValue ="360"
                     FontName ="Calibri"
 
                     LayoutCachedLeft =60

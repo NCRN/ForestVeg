@@ -17,8 +17,8 @@ Begin Form
     ItemSuffix =18
     Left =1320
     Top =6330
-    Right =6525
-    Bottom =7515
+    Right =7305
+    Bottom =11400
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0x816d9c7d10a7e340
@@ -86,6 +86,7 @@ Begin Form
             Name ="Detail"
             Begin
                 Begin ComboBox
+                    LimitToList = NotDefault
                     OverlapFlags =85
                     TextAlign =1
                     IMESentenceMode =3
@@ -112,6 +113,7 @@ Begin Form
                     GroupTable =10
                     RightPadding =38
                     BottomPadding =38
+                    AllowValueListEdits =0
                     LeftMargin =22
                     TopMargin =22
                     RightMargin =22
@@ -240,6 +242,7 @@ Begin Form
                     End
                 End
                 Begin ComboBox
+                    LimitToList = NotDefault
                     OverlapFlags =85
                     TextAlign =1
                     IMESentenceMode =3
@@ -267,6 +270,7 @@ Begin Form
                     GroupTable =10
                     RightPadding =38
                     BottomPadding =38
+                    AllowValueListEdits =0
                     LeftMargin =22
                     TopMargin =22
                     RightMargin =22

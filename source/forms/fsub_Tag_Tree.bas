@@ -16,10 +16,10 @@ Begin Form
     Width =13500
     DatasheetFontHeight =9
     ItemSuffix =31
-    Left =180
-    Top =240
-    Right =13680
-    Bottom =1860
+    Left =210
+    Top =2640
+    Right =14025
+    Bottom =3540
     DatasheetGridlinesColor =15062992
     OrderBy ="[tbl_Tags].[Tag]"
     RecSrcDt = Begin
@@ -480,11 +480,6 @@ Begin Form
                     FontSize =12
                     TabIndex =3
                     ColumnInfo ="\"\";\"\";\"10\";\"100\""
-                    ConditionalFormat = Begin
-                        0x0100000060000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000
-                    End
                     Name ="cbxTagStatus"
                     ControlSource ="Tag_Status"
                     RowSourceType ="Table/Query"
@@ -501,9 +496,6 @@ Begin Form
                     LayoutCachedTop =480
                     LayoutCachedWidth =5220
                     LayoutCachedHeight =854
-                    ConditionalFormat14 = Begin
-                        0x010000000000
-                    End
                     Begin
                         Begin Label
                             OverlapFlags =85
@@ -545,7 +537,7 @@ Option Explicit
 ' =================================
 ' MODULE:       fsub_Tag_Tree
 ' Level:        Application module
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  add event related functions & procedures
 '
@@ -553,6 +545,9 @@ Option Explicit
 ' Adapted:      Bonnie Campbell, April 5, 2018
 ' Revisions:    ML/GS - unknown  - 1.00 - initial version
 '               BLC   - 4/5/2018 - 1.01 - added documentation, error handling
+'               BLC   - 4/16/2018 - 1.02 - renamed cboTag_Status > cbxTagStatus,
+'                                          txtMicroplot_Number > tbxMicroplotNumber,
+'                                          txtDistance > tbxDistance
 ' =================================
 
 ' ---------------------------------
@@ -575,6 +570,7 @@ Option Explicit
 ' Adapted:      Bonnie Campbell, April 9, 2018
 ' Revisions:    ML/GS - unknown  - initial version
 '               BLC   - 4/9/2018 - added documentation, error handling
+'               BLC   - 4/16/2018 - renamed cboTag_Status > cbxTagStatus
 ' ---------------------------------
 Private Sub cbxTagStatus_BeforeUpdate(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -590,7 +586,10 @@ On Error GoTo Err_Handler
     ChangeFieldType = "Combo_Box"
     
     'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
-    OpenConfirmValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, "tbl_Tags", "Tag_Status", "Tag_ID", Me!Tag_ID, Nz(Me!cboTag_Status.OldValue, "Null"), Me!cboTag_Status, "", "", ""
+    OpenConfirmValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, _
+       "tbl_Tags", "Tag_Status", "Tag_ID", _
+       Me!Tag_ID, Nz(Me!cbxTagStatus.OldValue, "Null"), _
+       Me!cbxTagStatus, "", "", ""
 
 Exit_Handler:
     Exit Sub
@@ -745,6 +744,7 @@ End Sub
 ' Adapted:      Bonnie Campbell, April 9, 2018
 ' Revisions:    ML/GS - unknown  - initial version
 '               BLC   - 4/9/2018 - added documentation, error handling
+'               BLC   - 4/16/2018 - renamed txtDistance > tbxDistance
 ' ---------------------------------
 Private Sub tbxDistance_Click()
 On Error GoTo Err_Handler
@@ -755,7 +755,7 @@ On Error GoTo Err_Handler
     Dim ChangeFieldType As String
     
     Set frm = Me
-    Set ctl = Me!txtDistance
+    Set ctl = Me!tbxDistance
     ChangeDescription = "Please enter the revised DISTANCE below"
     ChangeFieldType = "Text_Box"
     
@@ -788,6 +788,7 @@ End Sub
 ' Adapted:      Bonnie Campbell, April 9, 2018
 ' Revisions:    ML/GS - unknown  - initial version
 '               BLC   - 4/9/2018 - added documentation, error handling
+'               BLC   - 4/16/2018 - renamed txtMicroplot_Number > tbxMicroplotNumber
 ' ---------------------------------
 Private Sub tbxMicroplotNumber_Click()
 On Error GoTo Err_Handler
@@ -798,7 +799,7 @@ On Error GoTo Err_Handler
     Dim ChangeFieldType As String
     
     Set frm = Me
-    Set ctl = Me!txtMicroplot_Number
+    Set ctl = Me!tbxMicroplotNumber
     ChangeDescription = "Please enter the revised MICROPLOT NUMBER below"
     ChangeFieldType = "Text_Box"
     

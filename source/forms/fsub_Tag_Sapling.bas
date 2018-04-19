@@ -16,10 +16,10 @@ Begin Form
     Width =13650
     DatasheetFontHeight =9
     ItemSuffix =30
-    Left =780
-    Top =360
-    Right =14280
-    Bottom =2775
+    Left =510
+    Top =2805
+    Right =14265
+    Bottom =3705
     DatasheetGridlinesColor =15062992
     OrderBy ="[tbl_Tags].[Tag]"
     RecSrcDt = Begin
