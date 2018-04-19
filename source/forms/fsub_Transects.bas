@@ -13,10 +13,10 @@ Begin Form
     Width =9780
     DatasheetFontHeight =10
     ItemSuffix =9
-    Left =2895
-    Top =2535
-    Right =12930
-    Bottom =8940
+    Left =4500
+    Top =3855
+    Right =14535
+    Bottom =10260
     DatasheetGridlinesColor =12632256
     Filter ="[Transect_Azimuth] = \"360\" "
     RecSrcDt = Begin

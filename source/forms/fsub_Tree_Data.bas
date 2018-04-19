@@ -14,9 +14,9 @@ Begin Form
     Width =14040
     DatasheetFontHeight =9
     ItemSuffix =79
-    Left =3075
+    Left =2040
     Top =3675
-    Right =17100
+    Right =14625
     Bottom =10740
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
@@ -25,6 +25,7 @@ Begin Form
     RecordSource ="tbl_Tree_Data"
     OnCurrent ="[Event Procedure]"
     BeforeUpdate ="[Event Procedure]"
+    OnOpen ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
         0x6801000068010000680100006801000000000000201c0000e010000001000000 ,
@@ -135,6 +136,24 @@ Begin Form
             BackColor =15527148
             Name ="Detail"
             Begin
+                Begin TextBox
+                    Visible = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =93
+                    IMESentenceMode =3
+                    Left =60
+                    Top =3255
+                    Width =1260
+                    Height =855
+                    TabIndex =31
+                    BackColor =15527148
+                    Name ="tbxHighlightChk"
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =3255
+                    LayoutCachedWidth =1320
+                    LayoutCachedHeight =4110
+                End
                 Begin CheckBox
                     Visible = NotDefault
                     OverlapFlags =93
@@ -410,7 +429,7 @@ Begin Form
                     End
                 End
                 Begin Subform
-                    OverlapFlags =85
+                    OverlapFlags =119
                     SpecialEffect =2
                     Left =1320
                     Top =2880
@@ -1318,16 +1337,25 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CheckBox
-                    OverlapFlags =85
+                    Visible = NotDefault
+                    SpecialEffect =0
+                    OverlapFlags =247
+                    OldBorderStyle =0
                     Left =1020
                     Top =3360
                     Width =210
                     Height =209
                     TabIndex =30
+                    BorderColor =255
                     Name ="chkDBHCheck"
                     StatusBarText ="Check if DBH was double checked"
                     DefaultValue ="0"
+                    OnClick ="[Event Procedure]"
                     ControlTipText ="Check if DBH was double checked"
+                    GridlineStyleLeft =1
+                    GridlineStyleTop =1
+                    GridlineStyleRight =1
+                    GridlineStyleBottom =1
 
                     LayoutCachedLeft =1020
                     LayoutCachedTop =3360
@@ -1335,9 +1363,9 @@ Begin Form
                     LayoutCachedHeight =3569
                     Begin
                         Begin Label
+                            Visible = NotDefault
                             FontItalic = NotDefault
-                            BackStyle =1
-                            OverlapFlags =85
+                            OverlapFlags =247
                             TextAlign =3
                             Left =120
                             Top =3300
@@ -1379,7 +1407,7 @@ Option Explicit
 ' =================================
 ' MODULE:       fsub_Tree_Data
 ' Level:        Application module
-' Version:      1.02
+' Version:      1.03
 '
 ' Description:  add event related functions & procedures
 '
@@ -1388,6 +1416,8 @@ Option Explicit
 ' Revisions:    ML/GS - unknown  - 1.00 - initial version
 '               BLC   - 4/5/2018 - 1.01 - added documentation, error handling
 '               BLC   - 4/9/2018 - 1.02 - added tag vs. sapling status check
+'               BLC   - 4/19/2018 - 1.03 - added Form_Open, chkDBHCheck_Click events
+'                                          update ValidDBH w/ Habit
 ' =================================
 
 ' ---------------------------------
@@ -1401,6 +1431,42 @@ Option Explicit
 ' ----------------
 '  Form
 ' ----------------
+' ---------------------------------
+' SUB:          Form_Open
+' Description:  form open actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 19, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/19/2018 - initial version
+' ---------------------------------
+Private Sub Form_Open(Cancel As Integer)
+On Error GoTo Err_Handler
+    
+    'hide double check unless necessary
+    lblDBHCheck.Visible = False
+    chkDBHCheck.Visible = False
+    tbxHighlightChk.Visible = False
+    
+    'set default comment bgd color
+    tbxComments.BackColor = lngWhite
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[fsub_Tree_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 ' ---------------------------------
 ' SUB:          Form_Current
 ' Description:  form current actions
@@ -1416,7 +1482,7 @@ Option Explicit
 ' ---------------------------------
 Private Sub Form_Current()
 On Error GoTo Err_Handler
-    
+       
     'compare status
     CheckTagStatus "Tree"
 
@@ -1571,67 +1637,90 @@ End Sub
 ' Adapted:      Bonnie Campbell, April 9, 2018
 ' Revisions:    ML/GS - unknown  - initial version
 '               BLC   - 4/9/2018 - added documentation, error handling
+'   BLC - 4/19/2018 - update ValidDBH w/ Habit
 ' ---------------------------------
 Private Sub fsub_Tree_DBH_Exit(Cancel As Integer)
 On Error GoTo Err_Handler
+   
+    Me.Refresh
+    
+    'check for +/-4cm or < 1cm sapling DBH
+    ValidDBH ("Tree")
+'    Select Case ValidDBH("Tree")
+'        Case True
+'            tbxComments.BackColor = lngWhite
+'            'hide DBH double check
+'            lblDBHCheck.BackColor = lngWhite
+'            lblDBHCheck.Visible = False
+'            chkDBHCheck.Visible = False
+'        Case False
+'            tbxComments.BackColor = lngYellow
+'            'expose DBH double check
+'            lblDBHCheck.BackColor = lngYellow
+'            lblDBHCheck.Visible = True
+'            chkDBHCheck.Visible = True
+'            MsgBox "Warning...change in DBH exceeds threshold. Please check value.", vbExclamation, "NCRN Vegetation Monitoring"
+'    End Select
 
-    Dim db As DAO.Database
-    Set db = CurrentDb
-    
-    'Check to see if the temporary query exists and if it does delete it.
-    
-    If fxnQueryExists("_qCOMPARE_DBH") Then
-        db.QueryDefs.Delete ("_qCOMPARE_DBH")
-    End If
-    
-    Dim strLocID As String
-    strLocID = Forms!frm_Events!txtLocation_ID
-    
-    Dim intTag As Integer
-    intTag = Forms!frm_Events!fsub_Tree_Data!fsub_Tag_Tree!tbxTag
-    
-    'dbh variables for current and previous sampling events.
-    
-    Dim varDBH_Current As Variant
-    Dim varDBH_Past As Variant
-    
-    'This code creates a temporary query that will pulls the dbh from the previous sampling event as well as the dbh that was entered for the current event.
-    
-    Dim strSQL As String
-    strSQL = "SELECT tbl_Locations.Location_ID, tbl_Events.Event_ID, tbl_Locations.Admin_Unit_Code, tbl_Locations.Subunit_Code, tbl_Events.Event_Date, tbl_Tags.Tag, " _
-            & "Round((((Sum(3.1415*((IIf([Live]=True,[DBH],0))/2)^2))*(1/3.1415))^0.5)*2,6) AS EquivDBH " _
-            & "FROM ((tbl_Locations INNER JOIN tbl_Events ON tbl_Locations.Location_ID = tbl_Events.Location_ID) " _
-            & "INNER JOIN (tbl_Tree_Data INNER JOIN tbl_Tags ON tbl_Tree_Data.Tag_ID = tbl_Tags.Tag_ID) ON tbl_Events.Event_ID = tbl_Tree_Data.Event_ID) " _
-            & "INNER JOIN tbl_Tree_DBH ON tbl_Tree_Data.Tree_Data_ID = tbl_Tree_DBH.Tree_Data_ID " _
-            & "GROUP BY tbl_Locations.Location_ID, tbl_Events.Event_ID, tbl_Locations.Admin_Unit_Code, tbl_Locations.Subunit_Code, tbl_Events.Event_Date, tbl_Tags.Tag " _
-            & "HAVING (((tbl_Locations.Location_ID) = """ & strLocID & """) And ((tbl_Tags.Tag) = " & intTag & ")) " _
-            & "ORDER BY tbl_Events.Event_Date;"
-    
-    Dim qDef As DAO.QueryDef
-    Set qDef = db.CreateQueryDef("_qCOMPARE_DBH", strSQL)
-    
-    Dim rs As DAO.Recordset
-    Set rs = db.OpenRecordset("_qCOMPARE_DBH")
-    
-    rs.MoveLast
-    If rs.RecordCount <= 1 Then
-        Exit Sub
-    Else
-        varDBH_Current = rs![EquivDBH]
-            rs.MovePrevious
-        varDBH_Past = rs![EquivDBH]
-    End If
-    
-    If varDBH_Current - varDBH_Past >= 4 Or varDBH_Current - varDBH_Past <= -4 Then
-        MsgBox "Warning!!!!! change in DBH exceeds threshold. Please check value.", vbExclamation, "NCRN Vegetation Monitoring"
-    End If
-    
-    DoCmd.DeleteObject acQuery, "_qCOMPARE_DBH"
-    Set varDBH_Current = Nothing
-    Set varDBH_Past = Nothing
-    Set rs = Nothing
-    Set qDef = Nothing
-    Set db = Nothing
+'    Dim db As DAO.Database
+'    Set db = CurrentDb
+'
+'    'Check to see if the temporary query exists and if it does delete it.
+'
+'    If fxnQueryExists("_qCOMPARE_DBH") Then
+'        db.QueryDefs.Delete ("_qCOMPARE_DBH")
+'    End If
+'
+'    Dim strLocID As String
+'    strLocID = Forms!frm_Events!txtLocation_ID
+'
+'    Dim intTag As Integer
+'    intTag = Forms!frm_Events!fsub_Tree_Data!fsub_Tag_Tree!tbxTag
+'
+'    'dbh variables for current and previous sampling events.
+'
+'    Dim varDBH_Current As Variant
+'    Dim varDBH_Past As Variant
+'
+'    'This code creates a temporary query that will pulls the dbh from the previous sampling event as well as the dbh that was entered for the current event.
+'
+'    Dim strSQL As String
+'    strSQL = "SELECT tbl_Locations.Location_ID, tbl_Events.Event_ID, tbl_Locations.Admin_Unit_Code, tbl_Locations.Subunit_Code, tbl_Events.Event_Date, tbl_Tags.Tag, " _
+'            & "Round((((Sum(3.1415*((IIf([Live]=True,[DBH],0))/2)^2))*(1/3.1415))^0.5)*2,6) AS EquivDBH " _
+'            & "FROM ((tbl_Locations INNER JOIN tbl_Events ON tbl_Locations.Location_ID = tbl_Events.Location_ID) " _
+'            & "INNER JOIN (tbl_Tree_Data INNER JOIN tbl_Tags ON tbl_Tree_Data.Tag_ID = tbl_Tags.Tag_ID) ON tbl_Events.Event_ID = tbl_Tree_Data.Event_ID) " _
+'            & "INNER JOIN tbl_Tree_DBH ON tbl_Tree_Data.Tree_Data_ID = tbl_Tree_DBH.Tree_Data_ID " _
+'            & "GROUP BY tbl_Locations.Location_ID, tbl_Events.Event_ID, tbl_Locations.Admin_Unit_Code, tbl_Locations.Subunit_Code, tbl_Events.Event_Date, tbl_Tags.Tag " _
+'            & "HAVING (((tbl_Locations.Location_ID) = """ & strLocID & """) And ((tbl_Tags.Tag) = " & intTag & ")) " _
+'            & "ORDER BY tbl_Events.Event_Date;"
+'
+'Debug.Print "Tree_DBH_Exit: " & strSQL
+'
+'    Dim qDef As DAO.QueryDef
+'    Set qDef = db.CreateQueryDef("_qCOMPARE_DBH", strSQL)
+'
+'    Dim rs As DAO.Recordset
+'    Set rs = db.OpenRecordset("_qCOMPARE_DBH")
+'
+'    rs.MoveLast
+'    If rs.RecordCount <= 1 Then
+'        Exit Sub
+'    Else
+'        varDBH_Current = rs![EquivDBH]
+'            rs.MovePrevious
+'        varDBH_Past = rs![EquivDBH]
+'    End If
+'
+'    If varDBH_Current - varDBH_Past >= 4 Or varDBH_Current - varDBH_Past <= -4 Then
+'        MsgBox "Warning!!!!! change in DBH exceeds threshold. Please check value.", vbExclamation, "NCRN Vegetation Monitoring"
+'    End If
+'
+'    DoCmd.DeleteObject acQuery, "_qCOMPARE_DBH"
+'    Set varDBH_Current = Nothing
+'    Set varDBH_Past = Nothing
+'    Set rs = Nothing
+'    Set qDef = Nothing
+'    Set db = Nothing
 
 Exit_Handler:
     Exit Sub
@@ -1675,6 +1764,37 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - cbxCrownClass_Enter[fsub_Tree_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          chkDBHCheck_Click
+' Description:  checkbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 19, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/19/2018 - initial version
+' ---------------------------------
+Private Sub chkDBHCheck_Click()
+On Error GoTo Err_Handler
+    
+    'Toggle check label color based on if checked or not
+    lblDBHCheck.ForeColor = IIf(chkDBHCheck, lngBlue, lngRed)
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - chkDBHCheck_Click[fsub_Tree_Data])"
     End Select
     Resume Exit_Handler
 End Sub

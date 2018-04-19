@@ -10,7 +10,6 @@ Begin Form
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
-    FilterOn = NotDefault
     DefaultView =0
     ScrollBars =0
     ViewsAllowed =1
@@ -24,18 +23,17 @@ Begin Form
     Width =14400
     DatasheetFontHeight =10
     ItemSuffix =154
-    Left =360
-    Top =165
-    Right =14760
-    Bottom =9360
+    Left =1965
+    Top =1485
+    Right =16365
+    Bottom =10680
     DatasheetGridlinesColor =12632256
-    Filter ="[Event_ID]='{9A9B4100-C698-4B2F-A7F6-C27B6CFF5E2A}'"
     RecSrcDt = Begin
         0x58c05212730ae440
     End
     RecordSource ="qfrm_Events"
     Caption ="NCRN Sampling Event - (Browsing) - (Browsing) - (Browsing) - (Browsing) - (Brows"
-        "ing) - (Browsing) - (Browsing)"
+        "ing) - (Browsing) - (Browsing) - (Browsing)"
     OnCurrent ="[Event Procedure]"
     BeforeInsert ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -1788,7 +1786,7 @@ Begin Form
                     Name ="lblLink_to_Google_Maps"
                     Caption ="Show on Google Maps"
                     FontName ="Calibri"
-                    HyperlinkAddress ="http://maps.google.com/maps?q=ANTI-0045@39.483246,-77.743994&iwloc=A&t=h"
+                    HyperlinkAddress ="http://maps.google.com/maps?q=WOTR-0009@38.9350462,-77.2613041&iwloc=A&t=h"
                     LayoutCachedLeft =7080
                     LayoutCachedTop =1260
                     LayoutCachedWidth =9060

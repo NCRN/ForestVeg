@@ -13,10 +13,10 @@ Begin Form
     Width =2639
     DatasheetFontHeight =10
     ItemSuffix =16
-    Left =750
-    Top =1620
-    Right =5805
-    Bottom =5220
+    Left =3360
+    Top =6555
+    Right =7740
+    Bottom =9975
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xcd25f3b3b063e440
@@ -252,7 +252,7 @@ Begin Form
                     FontWeight =700
                     TabIndex =2
                     BackColor =8421504
-                    Name ="Text12"
+                    Name ="tbxSumDBH"
                     ControlSource ="=(((Sum(3.1415*((IIf([Live]=False,[DBH],0))/2)^2))*(1/3.1415))^0.5)*2"
                     Format ="Fixed"
                     FontName ="Calibri"
@@ -282,6 +282,7 @@ Begin Form
                     ControlSource ="DBH"
                     FontName ="Calibri"
                     OnClick ="[Event Procedure]"
+                    OnChange ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000bc000000020000000100000000000000000000001f00000001000000 ,
                         0x00000000ffcccc000100000000000000200000002d0000000100000000000000 ,
@@ -455,7 +456,7 @@ Option Explicit
 ' =================================
 ' FORM:         fsub_Tree_DBH
 ' Level:        Application report
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  Form related functions & procedures for application
 ' Requires:     Keypad Utils module
@@ -463,6 +464,7 @@ Option Explicit
 ' Source/date:  Bonnie Campbell, April 3, 2018
 ' Revisions:    ML/GS - unknown  - 1.00 - initial version
 '               BLC   - 4/3/2018 - 1.01 - added documentation, error handling
+'               BLC   - 4/19/2018 - 1.02 - validate DBH
 ' =================================
 
 ' ---------------------------------
@@ -628,6 +630,7 @@ End Sub
 ' Revisions:
 '   ML/GS - unknown - initial version
 '   BLC - 4/3/2018 - added error handling, documentation
+'   BLC - 4/19/2018 - validate DBH
 ' ---------------------------------
 Private Sub btnDeleteTreeDBH_Click()
 On Error GoTo Err_Handler
@@ -648,6 +651,9 @@ On Error GoTo Err_Handler
         End If
     End With
 
+    'check DBH
+    ValidDBH "Sapling"
+
 Exit_Handler:
     Exit Sub
     
@@ -656,6 +662,37 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnDeleteTreeDBH_Click[fsub_Tree_DBH])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          tbxDBH_Change
+' Description:  DBH textbox change actions
+' Requires:     -
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 19, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/19/2018 - initial version
+' ---------------------------------
+Private Sub tbxDBH_Change()
+On Error GoTo Err_Handler
+    
+    ValidDBH "Tree"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxDBH_Change[fsub_Tree_DBH])"
     End Select
     Resume Exit_Handler
 End Sub

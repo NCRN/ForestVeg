@@ -1,47 +1,23 @@
-﻿dbMemo "SQL" ="UPDATE tbl_Tags SET TSN = 999999\015\012WHERE Tag IN (SELECT t.Tag \015\012FROM "
-    "((tbl_Tags t\015\012INNER JOIN tbl_Locations l ON t.Location_ID = l.Location_ID)"
-    "\015\012LEFT JOIN tlu_Plants p ON t.TSN = p.TSN)\015\012WHERE t.Tag = 1364 AND l"
-    ".Plot_Name = 'CHOH-0788');\015\012"
+﻿dbMemo "SQL" ="SELECT l.Location_ID, e.Event_ID, l.Admin_Unit_Code, l.Subunit_Code, e.Event_Dat"
+    "e, t.Tag, Round((((Sum(3.1415*((IIf([Live]=True,[DBH],0))/2)^2))*(1/3.1415))^0.5"
+    ")*2,6) AS EquivDBH\015\012FROM ((tbl_Locations AS l INNER JOIN tbl_Events AS e O"
+    "N l.Location_ID = e.Location_ID) INNER JOIN (tbl_Sapling_Data AS sd INNER JOIN t"
+    "bl_Tags AS t ON sd.Tag_ID = t.Tag_ID) ON e.Event_ID = sd.Event_ID) INNER JOIN tb"
+    "l_Sapling_DBH AS sbh ON sd.Sapling_Data_ID = sbh.Sapling_Data_ID\015\012GROUP BY"
+    " l.Location_ID, e.Event_ID, l.Admin_Unit_Code, l.Subunit_Code, e.Event_Date, t.T"
+    "ag\015\012HAVING (((l.Location_ID) = \"20170725080104-227781593.799591\") AND (("
+    "t.Tag) = 23102))\015\012ORDER BY e.Event_Date;\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
-dbBoolean "OrderByOn" ="-1"
+dbBoolean "OrderByOn" ="0"
 dbByte "Orientation" ="0"
 dbByte "DefaultView" ="2"
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
-dbMemo "OrderBy" ="[Query1].[Tag], [Query1].[Plot_Name]"
 Begin
     Begin
-        dbText "Name" ="tbl_Locations.Location_ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Plot_Name"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Panel"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Frame"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Unit_Code"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="t.Tag"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="l.Plot_Name"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="l.Unit_Code"
         dbLong "AggregateType" ="-1"
     End
     Begin
@@ -49,23 +25,23 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="t.Tag_ID"
+        dbText "Name" ="EquivDBH"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="t.TSN"
+        dbText "Name" ="e.Event_ID"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="p.PLANTS_Code"
+        dbText "Name" ="l.Admin_Unit_Code"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="p.Latin_Name"
+        dbText "Name" ="l.Subunit_Code"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="TSN"
+        dbText "Name" ="e.Event_Date"
         dbLong "AggregateType" ="-1"
     End
 End

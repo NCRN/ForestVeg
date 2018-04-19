@@ -4,7 +4,6 @@ Begin Form
     RecordSelectors = NotDefault
     NavigationButtons = NotDefault
     DividingLines = NotDefault
-    FilterOn = NotDefault
     AllowDesignChanges = NotDefault
     DefaultView =0
     TabularCharSet =204
@@ -14,11 +13,11 @@ Begin Form
     GridY =24
     Width =13920
     DatasheetFontHeight =9
-    ItemSuffix =73
-    Left =3975
-    Top =3675
-    Right =17745
-    Bottom =9990
+    ItemSuffix =75
+    Left =1680
+    Top =5115
+    Right =14010
+    Bottom =11430
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0xd0ed4c4b94aee340
@@ -26,6 +25,7 @@ Begin Form
     RecordSource ="tbl_Sapling_Data"
     OnCurrent ="[Event Procedure]"
     BeforeUpdate ="[Event Procedure]"
+    OnOpen ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
         0x6801000068010000680100006801000000000000201c0000e010000001000000 ,
@@ -97,6 +97,24 @@ Begin Form
             BackColor =15527148
             Name ="Detail"
             Begin
+                Begin TextBox
+                    Visible = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =93
+                    IMESentenceMode =3
+                    Left =60
+                    Top =3300
+                    Width =1260
+                    Height =855
+                    TabIndex =32
+                    BackColor =15527148
+                    Name ="tbxHighlightChk"
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =3300
+                    LayoutCachedWidth =1320
+                    LayoutCachedHeight =4155
+                End
                 Begin TextBox
                     EnterKeyBehavior = NotDefault
                     ScrollBars =2
@@ -233,7 +251,7 @@ Begin Form
                     End
                 End
                 Begin Subform
-                    OverlapFlags =85
+                    OverlapFlags =119
                     SpecialEffect =2
                     Left =1319
                     Top =2880
@@ -1380,16 +1398,23 @@ Begin Form
                     End
                 End
                 Begin CheckBox
-                    OverlapFlags =85
+                    SpecialEffect =0
+                    OverlapFlags =247
                     Left =1080
                     Top =3420
                     Width =210
                     Height =209
                     TabIndex =31
+                    BorderColor =255
                     Name ="chkDBHCheck"
                     StatusBarText ="Check if DBH was double checked"
                     DefaultValue ="0"
+                    OnClick ="[Event Procedure]"
                     ControlTipText ="Check if DBH was double checked"
+                    GridlineStyleLeft =1
+                    GridlineStyleTop =1
+                    GridlineStyleRight =1
+                    GridlineStyleBottom =1
 
                     LayoutCachedLeft =1080
                     LayoutCachedTop =3420
@@ -1398,8 +1423,7 @@ Begin Form
                 End
                 Begin Label
                     FontItalic = NotDefault
-                    BackStyle =1
-                    OverlapFlags =85
+                    OverlapFlags =247
                     TextAlign =3
                     Left =180
                     Top =3360
@@ -1438,7 +1462,7 @@ Option Explicit
 ' =================================
 ' FORM:         fsub_Sapling_Data
 ' Level:        Application report
-' Version:      1.02
+' Version:      1.03
 '
 ' Description:  Form related functions & procedures for application
 ' Requires:     Keypad Utils module
@@ -1449,6 +1473,8 @@ Option Explicit
 '               BLC   - 4/9/2018 - 1.02 - updated TreeStatus > SaplingStatus
 '                                         updated checkbox naming (removed _)
 '                                         added tag vs. sapling status check
+'               BLC   - 4/19/2018 - 1.03 - update ValidDBH w/ Habit
+'                                         added Form_Open, chkDBHCheck_Click events
 ' =================================
 
 ' ---------------------------------
@@ -1459,6 +1485,42 @@ Public SaplingStatus As String
 ' ---------------------------------
 '  Events
 ' ---------------------------------
+
+' ---------------------------------
+' SUB:          Form_Open
+' Description:  form open actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 19, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/19/2018 - initial version
+' ---------------------------------
+Private Sub Form_Open(Cancel As Integer)
+On Error GoTo Err_Handler
+    
+    'hide double check unless necessary
+    lblDBHCheck.Visible = False
+    chkDBHCheck.Visible = False
+    tbxHighlightChk.Visible = False
+    
+    'set default comment bgd color
+    tbxComments.BackColor = lngWhite
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
 ' ---------------------------------
 ' SUB:          Form_Current
@@ -1483,6 +1545,11 @@ On Error GoTo Err_Handler
 '    Else
 '        Me!fsub_Sapling_DBH.Visible = False
 '    End If
+
+    'hide double check unless necessary
+    lblDBHCheck.Visible = False
+    chkDBHCheck.Visible = False
+    tbxHighlightChk.Visible = False
 
     'compare status
     CheckTagStatus "Sapling"
@@ -1537,6 +1604,37 @@ End Sub
 ' ----------------
 '  Click Events
 ' ----------------
+
+' ---------------------------------
+' SUB:          chkDBHCheck_Click
+' Description:  checkbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 19, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/19/2018 - initial version
+' ---------------------------------
+Private Sub chkDBHCheck_Click()
+On Error GoTo Err_Handler
+    
+    'Toggle check label color based on if checked or not
+    lblDBHCheck.ForeColor = IIf(chkDBHCheck, lngBlue, lngRed)
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - chkDBHCheck_Click[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
 ' ---------------------------------
 ' SUB:          btnOpenFormTagTransitions_Click
@@ -2579,6 +2677,7 @@ End Sub
 ' Revisions:
 '   ML/GS - unknown - initial version
 '   BLC - 4/3/2018 - added error handling, documentation
+'   BLC - 4/19/2018 - update ValidDBH w/ Habit
 ' ---------------------------------
 Private Sub fsub_Sapling_DBH_Exit(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -2586,21 +2685,22 @@ On Error GoTo Err_Handler
     Me.Refresh
     
     'check for +/-4cm or < 1cm sapling DBH
-    Select Case ValidDBH
-        Case True
-            tbxComments.BackColor = lngWhite
-            'hide DBH double check
-            lblDBHCheck.BackColor = lngWhite
-            lblDBHCheck.Visible = False
-            chkDBHCheck.Visible = False
-        Case False
-            tbxComments.BackColor = lngYellow
-            'expose DBH double check
-            lblDBHCheck.BackColor = lngYellow
-            lblDBHCheck.Visible = True
-            chkDBHCheck.Visible = True
-            MsgBox "Warning...change in DBH exceeds threshold. Please check value.", vbExclamation, "NCRN Vegetation Monitoring"
-    End Select
+    ValidDBH ("Sapling")
+'    Select Case ValidDBH("Sapling")
+'        Case True
+'            tbxComments.BackColor = lngWhite
+'            'hide DBH double check
+'            lblDBHCheck.BackColor = lngWhite
+'            lblDBHCheck.Visible = False
+'            chkDBHCheck.Visible = False
+'        Case False
+'            tbxComments.BackColor = lngYellow
+'            'expose DBH double check
+'            lblDBHCheck.BackColor = lngYellow
+'            lblDBHCheck.Visible = True
+'            chkDBHCheck.Visible = True
+'            MsgBox "Warning...change in DBH exceeds threshold. Please check value.", vbExclamation, "NCRN Vegetation Monitoring"
+'    End Select
     
 '    Dim db As DAO.Database
 '    Set db = CurrentDb

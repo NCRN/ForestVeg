@@ -1,7 +1,0 @@
-CREATE TABLE [_tbl_Tree_DBH_Import_20170908_PRIMARY] (
-  [Tree_DBH_ID] VARCHAR (50) CONSTRAINT [PrimaryKey] PRIMARY KEY  UNIQUE  NOT NULL ,
-  [Tree_Data_ID] VARCHAR (50),
-  [DBH] SINGLE ,
-  [Live] BIT ,
-  [Updated_Date] DATETIME 
-)
