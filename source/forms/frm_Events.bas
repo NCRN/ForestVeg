@@ -10,6 +10,7 @@ Begin Form
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
+    FilterOn = NotDefault
     DefaultView =0
     ScrollBars =0
     ViewsAllowed =1
@@ -23,11 +24,12 @@ Begin Form
     Width =14400
     DatasheetFontHeight =10
     ItemSuffix =154
-    Left =1965
-    Top =1485
-    Right =16365
-    Bottom =10680
+    Left =915
+    Top =810
+    Right =15315
+    Bottom =10005
     DatasheetGridlinesColor =12632256
+    Filter ="[Event_ID]='{76636FB6-C229-41E8-924F-5325CB032D53}'"
     RecSrcDt = Begin
         0x58c05212730ae440
     End

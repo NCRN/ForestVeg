@@ -17,13 +17,15 @@ Begin Report
     Left =15
     Top =240
     DatasheetGridlinesColor =12632256
+    Filter ="[Event_ID]='{76636FB6-C229-41E8-924F-5325CB032D53}'"
     RecSrcDt = Begin
         0x1e595cfd0c18e540
     End
     RecordSource ="qRpt_Event_Summary_Unfiltered"
+    OnOpen ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0xf801000038040000f80100003804000000000000982b00000816000001000000 ,
+        0xf801000038040000f80100003804000000000000982b00006018000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
@@ -59,6 +61,7 @@ Begin Report
             KeepTogether = NotDefault
             CanGrow = NotDefault
             Height =6240
+            OnFormat ="[Event Procedure]"
             Name ="Detail"
             Begin
                 Begin Subform
@@ -784,8 +787,8 @@ Begin Report
                     TabIndex =21
                     Name ="rSub_UnsampledTags"
                     SourceObject ="Report.rSub_Event_UnsampledTags"
-                    LinkChildFields ="Event_ID"
-                    LinkMasterFields ="Event_ID"
+                    LinkChildFields ="Location_ID"
+                    LinkMasterFields ="Location_ID"
 
                     LayoutCachedTop =5580
                     LayoutCachedWidth =10800
@@ -817,8 +820,8 @@ Begin Report
                     TabIndex =22
                     Name ="rsub_Monster_Saplings"
                     SourceObject ="Report.rSub_Event_Monster_Saplings"
-                    LinkChildFields ="Event_ID"
-                    LinkMasterFields ="Event_ID"
+                    LinkChildFields ="Event_ID;Location_ID;Event_Date"
+                    LinkMasterFields ="Event_ID;Location_ID;Event_Date"
 
                     LayoutCachedTop =6180
                     LayoutCachedWidth =10800
@@ -827,22 +830,23 @@ Begin Report
                 Begin Label
                     FontItalic = NotDefault
                     FontUnderline = NotDefault
+                    BackStyle =1
                     TextAlign =1
                     TextFontFamily =34
                     Top =5700
-                    Width =4200
+                    Width =10800
                     Height =390
                     FontSize =14
                     FontWeight =700
+                    BackColor =12443391
                     Name ="lblHdrMonsterSaplings"
                     Caption ="Monster Saplings"
                     FontName ="Calibri"
                     LayoutCachedTop =5700
-                    LayoutCachedWidth =4200
+                    LayoutCachedWidth =10800
                     LayoutCachedHeight =6090
                 End
                 Begin Label
-                    OverlapFlags =4
                     TextAlign =3
                     TextFontFamily =34
                     Left =9480
@@ -856,6 +860,44 @@ Begin Report
                     LayoutCachedTop =5880
                     LayoutCachedWidth =10680
                     LayoutCachedHeight =6105
+                End
+                Begin Label
+                    Visible = NotDefault
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =2880
+                    Top =5160
+                    Width =1905
+                    Height =288
+                    FontWeight =700
+                    ForeColor =5855577
+                    Name ="lblNoDataUnsampled"
+                    Caption ="-- None Found --"
+                    LayoutCachedLeft =2880
+                    LayoutCachedTop =5160
+                    LayoutCachedWidth =4785
+                    LayoutCachedHeight =5448
+                    ForeThemeColorIndex =0
+                    ForeTint =65.0
+                End
+                Begin Label
+                    Visible = NotDefault
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =2880
+                    Top =5760
+                    Width =1905
+                    Height =288
+                    FontWeight =700
+                    ForeColor =5855577
+                    Name ="lblNoDataMonster"
+                    Caption ="-- None Found --"
+                    LayoutCachedLeft =2880
+                    LayoutCachedTop =5760
+                    LayoutCachedWidth =4785
+                    LayoutCachedHeight =6048
+                    ForeThemeColorIndex =0
+                    ForeTint =65.0
                 End
             End
         End
@@ -936,3 +978,83 @@ Begin Report
         End
     End
 End
+CodeBehindForm
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Compare Database
+Option Explicit
+
+' =================================
+' REPORT:       rpt_Event_Summary_Unfiltered
+' Level:        Application report
+' Version:      1.00
+'
+' Description:  Report related functions & procedures for application
+'
+' Source/date:  Bonnie Campbell, April 20, 2018
+' Revisions:    BLC - 4/20/2018 - 1.00 - initial version
+' =================================
+
+' ---------------------------------
+' SUB:          Report_Open
+' Description:  report open actions
+' Assumptions:  -
+' Parameters:   Cancel - whether open action(s) should be cancelled (boolean)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 12, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/12/2018 - initial version
+' ---------------------------------
+Private Sub Report_Open(Cancel As Integer)
+On Error GoTo Err_Handler
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Report_Open[rpt_Event_Summary_Unfiltered])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          Detail_Format
+' Description:  report format actions
+' Assumptions:  -
+' Parameters:   Cancel - whether format action should be cancelled (boolean)
+'               FormatCount - number of times a section (in this case the detail section)
+'                             is formatted (integer)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 20, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/20/2018 - initial version
+' ---------------------------------
+Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
+On Error GoTo Err_Handler
+
+    'show/hide label
+    Me.lblNoDataUnsampled.Visible = Not Me.Report.Controls("rSub_UnsampledTags").Report.HasData
+    Me.lblNoDataMonster.Visible = Not Me.Report.Controls("rSub_Monster_Saplings").Report.HasData
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Detail_Format[rpt_Event_Summary_Unfiltered])"
+    End Select
+    Resume Exit_Handler
+End Sub

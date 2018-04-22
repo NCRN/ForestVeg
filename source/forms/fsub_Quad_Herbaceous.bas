@@ -15,10 +15,10 @@ Begin Form
     Width =6300
     DatasheetFontHeight =10
     ItemSuffix =24
-    Left =5985
-    Top =5370
-    Right =12060
-    Bottom =8505
+    Left =9810
+    Top =6120
+    Right =16140
+    Bottom =9510
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xebd3667b958fe440
@@ -187,8 +187,10 @@ Begin Form
                     Width =480
                     Height =300
                     FontSize =11
-                    Name ="txtHerb_Percent_Cover"
+                    Name ="tbxHerbPercentCover"
                     ControlSource ="Percent_Cover"
+                    ValidationRule ="(>=0 And <=100) Or Is Null"
+                    ValidationText ="Choose a % cover between 0 and 100 (inclusive)"
                     FontName ="Calibri"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
@@ -222,7 +224,7 @@ Begin Form
                     Width =456
                     Height =306
                     TabIndex =1
-                    Name ="cmdDeleteRec"
+                    Name ="btnDelete"
                     Caption ="Command17"
                     OnClick ="[Event Procedure]"
                     PictureData = Begin
@@ -287,7 +289,7 @@ Begin Form
                     FontSize =11
                     TabIndex =2
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"10\";\"200\""
-                    Name ="cboTSN"
+                    Name ="cbxTSN"
                     ControlSource ="TSN"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tlu_Plants.TSN, tlu_Plants.Latin_Name, tlu_Plants.Rank_Name, tlu_Plants.C"
@@ -351,37 +353,255 @@ Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Compare Database
+Option Explicit
 
-Private Sub cboTSN_Enter()
-On Error GoTo Err_cmdOpenKeyPad_Click
-  'This routine requires the presence of the Keypad_Utils module.
-  Dim strKeypadFormName As String
-  Dim strControlToUpdate As String
-  Dim strSpeciesType As String
-  Dim frmFormToUpdate As Form
-    
-  'The two lines below should be changed to reflect the name of the keypad to open
-  '    and the name of the control to be updated.
-  strKeypadFormName = "frm_Pad_Species"
-  strControlToUpdate = "cboTSN"
-  'Choose TREE, SAPLING, SEEDLING, CWD, VINE or TARGETED HERB
-  strSpeciesType = "TARGETED HERB"
-  
-  'The lines below should not usually be edited.
-  Set frmFormToUpdate = Me
-  Call OpenSpeciespad(strKeypadFormName, frmFormToUpdate, strControlToUpdate, strSpeciesType)
+' =================================
+' FORM:         fsub_Quad_Herbaceous
+' Level:        Application report
+' Version:      1.01
+'
+' Description:  Form related functions & procedures for application
+' Requires:     Keypad Utils module
+'
+' Source/date:  Bonnie Campbell, April 20, 2018
+' Revisions:    ML/GS - unknown   - 1.00 - initial version
+'               BLC   - 4/20/2018 - 1.01 - added documentation, error handling
+'                                          field renaming cmd>btn, Label>lbl, txt>tbx
+'                                          cmd_DBH_Keypad_Click() removed
+' =================================
 
-Exit_cmdOpenKeyPad_Click:
-  Exit Sub
-Err_cmdOpenKeyPad_Click:
-  MsgBox Err.Description
-  Resume Exit_cmdOpenKeyPad_Click
-End Sub
-
-Private Sub cmdDeleteRec_Click()
+' ---------------------------------
+' SUB:          Form_BeforeUpdate
+' Description:  form before update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 20, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/20/2018 - added error handling, documentation
+' ---------------------------------
+Private Sub Form_BeforeUpdate(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    If MsgBox("You are about to DELETE all data for this tree for this herb event only." & vbNewLine & vbNewLine & "Is this OK?", vbOKCancel + vbDefaultButton2, "Warning") = vbCancel Then GoTo Exit_Procedure
+    If Me.NewRecord Then
+        If GetDataType("tbl_Quadrat_Herbaceous_Data", "Quadrat_Herbaceous_ID") = dbText Then
+            Me!Quadrat_Herbaceous_ID = fxnGUIDGen
+        End If
+    End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[fsub_Quad_Herbaceous])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxTSN_Enter
+' Description:  combobox click actions
+' Requires:     -
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 20, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/20/2018 - added error handling, documentation
+' ---------------------------------
+Private Sub cbxTSN_Enter()
+On Error GoTo Err_Handler
+
+    Dim strKeypadFormName As String
+    Dim strControlToUpdate As String
+    Dim strSpeciesType As String
+    Dim frmFormToUpdate As Form
+    
+    'set keypad form to launch & control on this form to be updated by it
+    strKeypadFormName = "frm_Pad_Species"
+    strControlToUpdate = "cbxTSN"
+    
+    'Choose TREE, SAPLING, SEEDLING, CWD, VINE or TARGETED HERB
+    strSpeciesType = "TARGETED HERB"
+  
+    'launch keypad
+    Set frmFormToUpdate = Me
+    Call OpenSpeciespad(strKeypadFormName, frmFormToUpdate, strControlToUpdate, strSpeciesType)
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxDBH_Click[fsub_Quad_Herbaceous])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          tbxHerbPercentCover_Click
+' Description:  textbox click actions
+' Requires:     -
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 20, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/20/2018 - initial version
+' ---------------------------------
+Private Sub tbxHerbPercentCover_Click()
+On Error GoTo Err_Handler
+    
+    Dim strKeypadFormName As String
+    Dim strControlToUpdate As String
+    Dim frmFormToUpdate As Form
+    
+    'set keypad form to launch & control on this form to be updated by it
+    strKeypadFormName = "frm_Pad_Num"
+    strControlToUpdate = "tbxHerbPercentCover"
+    
+    'launch keypad
+    Set frmFormToUpdate = Me
+    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxHerbPercentCover_Click[fsub_Quad_Herbaceous])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          tbxHerbPercentCover_OnExit
+' Description:  textbox exit actions
+' Note:         Even an empty sub for OnExit for a control will
+'               evaluate & trigger Validation rules & Validation text
+'               for the control
+'               Without this subroutine the validation rule is not
+'               evaluated and the text is not displayed.
+' Requires:     -
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 20, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/20/2018 - initial version
+' ---------------------------------
+Private Sub tbxHerbPercentCover_OnExit()
+On Error GoTo Err_Handler
+
+    'runs tbx validation rule vs. entered value
+    Dim ctl As Control
+    Set ctl = tbxHerbPercentCover
+    
+    If ctl < 0 _
+        Or ctl > 100 _
+        Or ctl Is Null Then
+        
+        MsgBox "Please check your percent value." _
+            & "Percentages must be between 0 and 100 (inclusive)", _
+            vbOKOnly & "Invalid Percent Value"
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxHerbPercentCover_OnExit[fsub_Quad_Herbaceous])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnKeypad_Click
+' Description:  keypad button click actions
+' Requires:     Keypad Utils module
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 20, 2018
+' Revisions:
+'   ML/GS - unknown - initial version (cmdHerb_Cover_Keypad_Click)
+'   BLC - 4/20/2018 - added error handling, documentation
+' ---------------------------------
+Private Sub btnKeypad_Click()
+On Error GoTo Err_Handler
+
+    Dim strKeypadFormName As String
+    Dim strControlToUpdate As String
+    Dim frmFormToUpdate As Form
+    
+    'set keypad form to launch & control on this form to be updated by it
+    strKeypadFormName = "frm_Pad_Num"
+    strControlToUpdate = "tbxHerbPercentCover"
+    
+    'launch keypad
+    Set frmFormToUpdate = Me
+    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnKeypadDBH_Click[fsub_Quad_Herbaceous])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnDelete_Click
+' Description:  delete button actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  ML/GS, unknown
+' Adapted:      Bonnie Campbell, April 20, 2018
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 4/20/2018 - added error handling, documentation
+'                     validate DBH
+' ---------------------------------
+Private Sub btnDelete_Click()
+On Error GoTo Err_Handler
+
+    If MsgBox("You are about to DELETE all data for this tree for " _
+        & "this herb event only." & vbNewLine & vbNewLine & "Is this OK?", _
+        vbOKCancel + vbDefaultButton2, "Warning") = vbCancel Then GoTo Exit_Handler
     With CodeContextObject
         On Error Resume Next
         DoCmd.GoToControl Screen.PreviousControl.Name
@@ -397,70 +617,14 @@ On Error GoTo Err_Handler
         End If
     End With
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox Error$
-    Resume Exit_Procedure
-    
-End Sub
-
-Private Sub cmdHerb_Cover_Keypad_Click()
-On Error GoTo Err_cmdOpenKeyPad_Click
-  'This routine requires the presence of the Keypad_Utils module.
-  Dim strKeypadFormName As String
-  Dim strControlToUpdate As String
-  Dim frmFormToUpdate As Form
-    
-  'The two lines below should be changed to reflect the name of the keypad to open
-  '    and the name of the control to be updated.
-  strKeypadFormName = "frm_Pad_Num"
-  strControlToUpdate = "txtHerb_Percent_Cover"
-  'The lines below should not usually be edited.
-  Set frmFormToUpdate = Me
-  Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
-
-Exit_cmdOpenKeyPad_Click:
-  Exit Sub
-Err_cmdOpenKeyPad_Click:
-  MsgBox Err.Description
-  Resume Exit_cmdOpenKeyPad_Click
-End Sub
-
-Private Sub Form_BeforeUpdate(Cancel As Integer)
-On Error GoTo Err_Handler
-
-    If Me.NewRecord Then
-        If GetDataType("tbl_Quadrat_Herbaceous_Data", "Quadrat_Herbaceous_ID") = dbText Then
-            Me!Quadrat_Herbaceous_ID = fxnGUIDGen
-        End If
-    End If
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
-
-Private Sub txtHerb_Percent_Cover_Click()
-On Error GoTo Err_cmdOpenKeyPad_Click
-  'This routine requires the presence of the Keypad_Utils module.
-  Dim strKeypadFormName As String
-  Dim strControlToUpdate As String
-  Dim frmFormToUpdate As Form
-    
-  'The two lines below should be changed to reflect the name of the keypad to open
-  '    and the name of the control to be updated.
-  strKeypadFormName = "frm_Pad_Num"
-  strControlToUpdate = "txtHerb_Percent_Cover"
-  'The lines below should not usually be edited.
-  Set frmFormToUpdate = Me
-  Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
-
-Exit_cmdOpenKeyPad_Click:
-  Exit Sub
-Err_cmdOpenKeyPad_Click:
-  MsgBox Err.Description
-  Resume Exit_cmdOpenKeyPad_Click
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnDeleteDBH_Click[fsub_Quad_Herbaceous])"
+    End Select
+    Resume Exit_Handler
 End Sub

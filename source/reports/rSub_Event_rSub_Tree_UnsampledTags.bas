@@ -14,26 +14,25 @@ Begin Report
     Width =4320
     DatasheetFontHeight =9
     ItemSuffix =6
-    Left =1980
-    Top =2985
+    Left =900
+    Top =5220
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
-        0xe3bb1da07217e540
+        0x22e446e54c19e540
     End
-    RecordSource ="SELECT tbl_Tags.Tag_ID, tbl_Tags.Tag, tbl_Tags.Tag_Status AS Class,  IIf(IsNull("
-        "[azimuth]),\"\",[Azimuth] & \" / \" & [distance] & \"m\") AS Azi_Dist,  tbl_Tags"
-        ".Microplot_Number AS MP FROM (tbl_Tags  LEFT JOIN qry_Status_Tree_Current_Event "
-        " ON tbl_Tags.Tag_ID = qry_Status_Tree_Current_Event.Tag_ID)  LEFT JOIN qry_Statu"
-        "s_Sapling_Current_Event  ON tbl_Tags.Tag_ID = qry_Status_Sapling_Current_Event.T"
-        "ag_ID WHERE (((qry_Status_Sapling_Current_Event.Event_ID) Is Null)  AND ((qry_St"
-        "atus_Tree_Current_Event.Event_ID) Is Null)  AND ((tbl_Tags.Location_ID)=[Forms]!"
-        "[frm_Events]![Location_ID])) ORDER BY tbl_Tags.Tag_Status DESC , tbl_Tags.Tag;"
+    RecordSource ="SELECT t.Tag_ID, t.Tag, t.Tag_Status AS Class, IIf(IsNull([azimuth]),\"\",[Azimu"
+        "th] & \" / \" & [distance] & \"m\") AS Azi_Dist, t.Microplot_Number AS MP, t.Loc"
+        "ation_ID FROM (tbl_Tags t  LEFT JOIN qry_Status_Tree_Current_Event ON t.Tag_ID ="
+        " qry_Status_Tree_Current_Event.Tag_ID)  LEFT JOIN qry_Status_Sapling_Current_Eve"
+        "nt ON t.Tag_ID = qry_Status_Sapling_Current_Event.Tag_ID WHERE  (qry_Status_Sapl"
+        "ing_Current_Event.Event_ID Is Null)  AND (qry_Status_Tree_Current_Event.Event_ID"
+        " Is Null)  ORDER BY t.Tag_Status DESC , t.Tag;"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0x55010000f000000055010000f0000000000000007c0b00000e00000001000000 ,
+        0xe0010000e00100006801000068010000000000007c0b00000e00000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
-    FilterOnLoad =0
+    FilterOnLoad =255
     DatasheetGridlinesColor12 =12632256
     Begin
         Begin Label

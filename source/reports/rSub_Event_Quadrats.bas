@@ -27,7 +27,7 @@ Begin Report
     Caption ="sfrm_Quadrats subreport"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0x55010000f000000055010000f000000000000000f42900005004000001000000 ,
+        0xe0010000e0010000680100006801000000000000f42900005004000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
@@ -149,7 +149,6 @@ Begin Report
             Name ="Detail"
             Begin
                 Begin TextBox
-                    OverlapFlags =12
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3
@@ -178,7 +177,6 @@ Begin Report
                     End
                 End
                 Begin TextBox
-                    OverlapFlags =12
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3
@@ -211,7 +209,6 @@ Begin Report
                     End
                 End
                 Begin TextBox
-                    OverlapFlags =12
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3
@@ -241,7 +238,6 @@ Begin Report
                     End
                 End
                 Begin TextBox
-                    OverlapFlags =12
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3
@@ -272,7 +268,6 @@ Begin Report
                     End
                 End
                 Begin TextBox
-                    OverlapFlags =12
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3
@@ -304,7 +299,6 @@ Begin Report
                     End
                 End
                 Begin TextBox
-                    OverlapFlags =12
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3
@@ -336,7 +330,6 @@ Begin Report
                     End
                 End
                 Begin TextBox
-                    OverlapFlags =12
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3
@@ -368,7 +361,6 @@ Begin Report
                     End
                 End
                 Begin TextBox
-                    OverlapFlags =12
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3
@@ -620,7 +612,7 @@ Begin Report
                             TextFontCharSet =238
                             TextAlign =2
                             TextFontFamily =34
-                            Left =5520
+                            Left =5760
                             Top =720
                             Width =3000
                             Height =240
@@ -630,9 +622,9 @@ Begin Report
                             Name ="lblHerbaceous_Subreport"
                             Caption ="T a r g e t e d   H e r b a c e o u s"
                             FontName ="Calibri"
-                            LayoutCachedLeft =5520
+                            LayoutCachedLeft =5760
                             LayoutCachedTop =720
-                            LayoutCachedWidth =8520
+                            LayoutCachedWidth =8760
                             LayoutCachedHeight =960
                         End
                     End
@@ -670,7 +662,6 @@ Begin Report
                     End
                 End
                 Begin TextBox
-                    OverlapFlags =4
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3
@@ -718,7 +709,6 @@ Begin Report
                     LayoutCachedHeight =240
                 End
                 Begin TextBox
-                    OverlapFlags =4
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3

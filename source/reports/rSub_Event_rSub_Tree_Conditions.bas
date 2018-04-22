@@ -24,7 +24,7 @@ Begin Report
         "omGUID([Tree_Data_ID]) AS Tree_Data_txt FROM tbl_Tree_Conditions;"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0x55010000f000000055010000f0000000000000007c0b00003c00000001000000 ,
+        0xe0010000e00100006801000068010000000000007c0b00003c00000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
@@ -82,8 +82,8 @@ Begin Report
                     Width =2865
                     Height =225
                     FontWeight =700
-                    ForeColor =9868950
-                    Name ="lblTreeConditions"
+                    ForeColor =6250335
+                    Name ="lblHdr"
                     Caption ="T r e e   C o n d i t i o n s"
                     LayoutCachedLeft =-15
                     LayoutCachedWidth =2850
@@ -109,7 +109,7 @@ Begin Report
                     Left =60
                     Width =2760
                     Height =0
-                    ForeColor =9868950
+                    ForeColor =6250335
                     Name ="tbxCondition"
                     ControlSource ="Condition"
                     ConditionalFormat = Begin

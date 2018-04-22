@@ -18,22 +18,20 @@ Begin Report
     Top =3165
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
-        0x9d7646507217e540
+        0x1a37490b4d19e540
     End
-    RecordSource ="SELECT tbl_Tags.Tag_ID, tbl_Tags.Tag, tbl_Tags.Tag_Status AS Class, tbl_Tags.Mic"
-        "roplot_Number AS MP, IIf(IsNull([azimuth]),\"\",[Azimuth] & \" / \" & [distance]"
-        " & \"m\") AS Azi_Dist, tbl_Tree_Data.Tree_Data_ID, tbl_Sapling_Data.Sapling_Data"
-        "_ID FROM (((tbl_Tags LEFT JOIN qry_Status_Sapling_Current_Event ON tbl_Tags.Tag_"
-        "ID = qry_Status_Sapling_Current_Event.Tag_ID) LEFT JOIN qry_Status_Tree_Current_"
-        "Event ON tbl_Tags.Tag_ID = qry_Status_Tree_Current_Event.Tag_ID) INNER JOIN tbl_"
-        "Tree_Data ON tbl_Tags.Tag_ID = tbl_Tree_Data.Tag_ID) INNER JOIN tbl_Sapling_Data"
-        " ON tbl_Tags.Tag_ID = tbl_Sapling_Data.Tag_ID WHERE (((qry_Status_Sapling_Curren"
-        "t_Event.Event_ID) Is Null) AND ((tbl_Tags.Location_ID)=[Forms]![frm_Events]![Loc"
-        "ation_ID]) AND ((qry_Status_Tree_Current_Event.Event_ID) Is Null)) ORDER BY tbl_"
-        "Tags.Tag_Status, tbl_Tags.Tag;"
+    RecordSource ="SELECT t.Tag_ID, t.Tag, t.Tag_Status AS Class, t.Microplot_Number AS MP, IIf(IsN"
+        "ull([azimuth]),\"\",[Azimuth] & \" / \" & [distance] & \"m\") AS Azi_Dist, td.Tr"
+        "ee_Data_ID, sd.Sapling_Data_ID,t.Location_ID FROM (((tbl_Tags t  LEFT JOIN qry_S"
+        "tatus_Sapling_Current_Event ON t.Tag_ID = qry_Status_Sapling_Current_Event.Tag_I"
+        "D)  LEFT JOIN qry_Status_Tree_Current_Event ON t.Tag_ID = qry_Status_Tree_Curren"
+        "t_Event.Tag_ID)  INNER JOIN tbl_Tree_Data td ON t.Tag_ID = td.Tag_ID)  INNER JOI"
+        "N tbl_Sapling_Data sd ON t.Tag_ID = sd.Tag_ID WHERE ( (qry_Status_Sapling_Curren"
+        "t_Event.Event_ID Is Null)  AND (qry_Status_Tree_Current_Event.Event_ID Is Null) "
+        ") ORDER BY t.Tag_Status, t.Tag;"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0x55010000f000000055010000f000000000000000e01000003c00000001000000 ,
+        0xe0010000e0010000680100006801000000000000e01000003c00000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0

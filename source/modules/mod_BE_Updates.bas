@@ -78,11 +78,16 @@ On Error GoTo Err_Handler
     'type:          bit --> comes out as
     'default:       0
     'description:   'DBH double check flag (0-not double checked, 1-double checked)'
-    strSQL = "ALTER TABLE tbl_Sapling_Data_DUPE " _
-           & "ADD COLUMN DBH_Check2 BYTE DEFAULT 0 " _
+    '-----------------------------------------------------------------
+    strSQL = "ALTER TABLE tbl_Sapling_Data " _
+           & "ADD COLUMN DBH_Check BYTE DEFAULT 0 " _
            & " 'DBH double check flag (0-not double checked, 1-double checked)'"
     
     conn.Execute strSQL
+    Debug.Print "Sapling: " & strSQL
+    
+    strSQL = Replace(strSQL, "Sapling", "Tree")
+    Debug.Print "Tree: " & strSQL
     
 Exit_Handler:
     conn.Close

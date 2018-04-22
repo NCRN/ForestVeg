@@ -25,7 +25,7 @@ Begin Report
         "ns;"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0x55010000f000000055010000f0000000000000007c0b00000e00000001000000 ,
+        0xe0010000e00100006801000068010000000000007c0b00000e00000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
@@ -51,7 +51,7 @@ Begin Report
         End
         Begin FormHeader
             KeepTogether = NotDefault
-            Height =300
+            Height =225
             Name ="ReportHeader"
             Begin
                 Begin Label
@@ -61,8 +61,8 @@ Begin Report
                     Width =2895
                     Height =225
                     FontWeight =700
-                    ForeColor =9868950
-                    Name ="Label0"
+                    ForeColor =6250335
+                    Name ="lblHdr"
                     Caption ="S a p l i n g   C o n d i t i o n s"
                     LayoutCachedLeft =-30
                     LayoutCachedWidth =2865
@@ -88,8 +88,8 @@ Begin Report
                     Left =60
                     Width =2760
                     Height =0
-                    ForeColor =9868950
-                    Name ="Text1"
+                    ForeColor =6250335
+                    Name ="tbxCondition"
                     ControlSource ="Condition"
 
                 End

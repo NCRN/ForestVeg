@@ -14,10 +14,10 @@ Begin Form
     Width =14040
     DatasheetFontHeight =9
     ItemSuffix =79
-    Left =2040
-    Top =3675
-    Right =14625
-    Bottom =10740
+    Left =135
+    Top =915
+    Right =12720
+    Bottom =6810
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0x4d5502714caae340
@@ -1337,7 +1337,6 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CheckBox
-                    Visible = NotDefault
                     SpecialEffect =0
                     OverlapFlags =247
                     OldBorderStyle =0
@@ -1348,6 +1347,7 @@ Begin Form
                     TabIndex =30
                     BorderColor =255
                     Name ="chkDBHCheck"
+                    ControlSource ="DBH_Check"
                     StatusBarText ="Check if DBH was double checked"
                     DefaultValue ="0"
                     OnClick ="[Event Procedure]"
@@ -1363,7 +1363,6 @@ Begin Form
                     LayoutCachedHeight =3569
                     Begin
                         Begin Label
-                            Visible = NotDefault
                             FontItalic = NotDefault
                             OverlapFlags =247
                             TextAlign =3
@@ -1448,8 +1447,8 @@ Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
     
     'hide double check unless necessary
-    lblDBHCheck.Visible = False
-    chkDBHCheck.Visible = False
+    'lblDBHCheck.Visible = False
+    'chkDBHCheck.Visible = False
     tbxHighlightChk.Visible = False
     
     'set default comment bgd color

@@ -223,7 +223,7 @@ On Error GoTo Err_Handler
     'unhighlight DBH Double Checked as default
     With Forms!frm_Events.Form.Controls(frmDataName).Form
         .Controls("lblDBHCheck").ForeColor = lngBlack
-        .Controls("tbxHighlightChk").Visible = False
+        '.Controls("tbxHighlightChk").Visible = False
         .Controls("tbxComments").BackColor = lngWhite
     End With
     
@@ -275,6 +275,8 @@ Debug.Print "DBH_mod_App_Data: " & strSQL
     
     If Not (rs.BOF And rs.EOF) Then
         rs.MoveLast
+        
+        'validate if there are DBH records
         If rs.RecordCount > 1 Then
         
             CurrentDBH = rs![EquivDBH]
@@ -284,15 +286,15 @@ Debug.Print "DBH_mod_App_Data: " & strSQL
             ' +/- 4cm threshold check
             If CurrentDBH - PastDBH >= 4 Or CurrentDBH - PastDBH <= -4 Then
     
-                'highlight DBH Double Checked
-                With Forms!frm_Events.Form.Controls(frmDataName).Form
-                    .Controls("lblDBHCheck").Visible = True
-                    .Controls("chkDBHCheck").Visible = True
-                    .Controls("tbxHighlightChk").Visible = True
-                    .Controls("lblDBHCheck").ForeColor = lngRed
-                    .Controls("tbxHighlightChk").BackColor = lngLtYellow
-                    .Controls("tbxComments").BackColor = lngYellow
-                End With
+'                'highlight DBH Double Checked
+'                With Forms!frm_Events.Form.Controls(frmDataName).Form
+'                    '.Controls("lblDBHCheck").Visible = True
+'                    '.Controls("chkDBHCheck").Visible = True
+'                    .Controls("tbxHighlightChk").Visible = True
+'                    '.Controls("lblDBHCheck").ForeColor = lngRed
+'                    .Controls("tbxHighlightChk").BackColor = lngLtYellow
+'                    .Controls("tbxComments").BackColor = lngYellow
+'                End With
             
                  'exceeds +/- 4cm threshold
                 MsgBox "Warning...change in DBH exceeds +/- 4cm. Please check value.", _
@@ -310,6 +312,9 @@ Debug.Print "DBH_mod_App_Data: " & strSQL
         Case "Sapling"
             'saplings DBH > = 1 (minimum threshold)
             If Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH!tbxEquivDBH < 1 Then
+            
+
+            
                 MsgBox "Saplings must have a minimum DBH of 1.0. Please address the issue"
                 Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH!tbxDBH.SetFocus
                 IsValid = False
@@ -322,7 +327,19 @@ Debug.Print "DBH_mod_App_Data: " & strSQL
     End Select
     
     'set focus if not valid
-    If Not IsValid = True Then
+    If Not (IsValid = True) And _
+        Forms!frm_Events.Form.Controls(frmDataName).Form.Recordset.RecordCount > 0 Then
+        
+        'highlight DBH Double Checked
+        With Forms!frm_Events.Form.Controls(frmDataName).Form
+            '.Controls("lblDBHCheck").Visible = True
+            '.Controls("chkDBHCheck").Visible = True
+            .Controls("tbxHighlightChk").Visible = True
+            .Controls("lblDBHCheck").ForeColor = lngRed
+            .Controls("tbxHighlightChk").BackColor = lngLtYellow
+            .Controls("tbxComments").BackColor = lngYellow
+        End With
+        
         'dbh form
         frmDBHName = Replace("fsub_HABIT_DBH", "HABIT", Habit)
     

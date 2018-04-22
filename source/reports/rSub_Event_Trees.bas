@@ -35,7 +35,7 @@ Begin Report
     Caption ="srpt_Trees"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0xf0000000f0000000190100000301000000000000302a0000a401000001000000 ,
+        0xe0010000e0010000680100006801000000000000302a0000a401000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
@@ -161,7 +161,7 @@ Begin Report
                     TextFontCharSet =238
                     TextAlign =2
                     TextFontFamily =34
-                    Left =4080
+                    Left =3960
                     Top =300
                     Width =780
                     Height =300
@@ -171,9 +171,9 @@ Begin Report
                     Caption ="Stems"
                     FontName ="Calibri"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =4080
+                    LayoutCachedLeft =3960
                     LayoutCachedTop =300
-                    LayoutCachedWidth =4860
+                    LayoutCachedWidth =4740
                     LayoutCachedHeight =600
                 End
                 Begin Label
@@ -181,7 +181,7 @@ Begin Report
                     TextFontCharSet =238
                     TextAlign =2
                     TextFontFamily =34
-                    Left =5520
+                    Left =5400
                     Top =60
                     Width =1035
                     Height =540
@@ -191,9 +191,9 @@ Begin Report
                     Caption ="Equivalent DBH (cm)"
                     FontName ="Calibri"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =5520
+                    LayoutCachedLeft =5400
                     LayoutCachedTop =60
-                    LayoutCachedWidth =6555
+                    LayoutCachedWidth =6435
                     LayoutCachedHeight =600
                 End
                 Begin Label
@@ -201,7 +201,7 @@ Begin Report
                     TextFontCharSet =238
                     TextAlign =2
                     TextFontFamily =34
-                    Left =6600
+                    Left =6480
                     Top =60
                     Width =660
                     Height =540
@@ -211,9 +211,9 @@ Begin Report
                     Caption ="Crown Class"
                     FontName ="Calibri"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =6600
+                    LayoutCachedLeft =6480
                     LayoutCachedTop =60
-                    LayoutCachedWidth =7260
+                    LayoutCachedWidth =7140
                     LayoutCachedHeight =600
                 End
                 Begin Label
@@ -413,7 +413,7 @@ Begin Report
                     TextFontCharSet =238
                     TextAlign =2
                     IMESentenceMode =3
-                    Left =3660
+                    Left =3540
                     Width =1980
                     FontSize =9
                     TabIndex =3
@@ -421,15 +421,15 @@ Begin Report
                     ControlSource ="=MakeTreeStemList([Event_ID],[Tree_Data_ID])"
                     FontName ="Calibri"
 
-                    LayoutCachedLeft =3660
-                    LayoutCachedWidth =5640
+                    LayoutCachedLeft =3540
+                    LayoutCachedWidth =5520
                     LayoutCachedHeight =240
                 End
                 Begin TextBox
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =5640
+                    Left =5520
                     Width =720
                     FontSize =9
                     TabIndex =4
@@ -453,8 +453,8 @@ Begin Report
                         0x61005d0029002c00300029003c003100300000000000
                     End
 
-                    LayoutCachedLeft =5640
-                    LayoutCachedWidth =6360
+                    LayoutCachedLeft =5520
+                    LayoutCachedWidth =6240
                     LayoutCachedHeight =240
                     ConditionalFormat14 = Begin
                         0x01000300000001000000000000000100000000000000faf3e800250000004900 ,
@@ -475,10 +475,11 @@ Begin Report
                     End
                 End
                 Begin TextBox
+                    CanGrow = NotDefault
                     TextAlign =2
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =6480
+                    Left =6360
                     Width =1260
                     FontSize =9
                     TabIndex =5
@@ -494,8 +495,8 @@ Begin Report
                         0x2c0031002c00300029000000000022002000220000000000
                     End
 
-                    LayoutCachedLeft =6480
-                    LayoutCachedWidth =7740
+                    LayoutCachedLeft =6360
+                    LayoutCachedWidth =7620
                     LayoutCachedHeight =240
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100000000000000faf3e800250000004900 ,
@@ -536,7 +537,7 @@ Begin Report
                     End
                 End
                 Begin Subform
-                    Left =1560
+                    Left =1440
                     Top =300
                     Width =2956
                     Height =60
@@ -546,9 +547,13 @@ Begin Report
                     LinkChildFields ="Tree_Data_ID"
                     LinkMasterFields ="Tree_Data_ID"
 
+                    LayoutCachedLeft =1440
+                    LayoutCachedTop =300
+                    LayoutCachedWidth =4396
+                    LayoutCachedHeight =360
                 End
                 Begin Subform
-                    Left =4560
+                    Left =4440
                     Top =300
                     Width =2956
                     Height =60
@@ -558,6 +563,10 @@ Begin Report
                     LinkChildFields ="Tree_Data_ID"
                     LinkMasterFields ="Tree_Data_ID"
 
+                    LayoutCachedLeft =4440
+                    LayoutCachedTop =300
+                    LayoutCachedWidth =7396
+                    LayoutCachedHeight =360
                 End
                 Begin Subform
                     Left =7680
@@ -660,7 +669,7 @@ Begin Report
                     Height =225
                     FontSize =8
                     BackColor =2366701
-                    ForeColor =9868950
+                    ForeColor =16777215
                     Name ="lblNoTreeConditions"
                     Caption ="N o  T r e e   C o n d i t i o n s"
                     FontName ="Arial"

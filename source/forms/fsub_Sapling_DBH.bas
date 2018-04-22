@@ -12,10 +12,10 @@ Begin Form
     Width =2460
     DatasheetFontHeight =10
     ItemSuffix =13
-    Left =1680
-    Top =1740
-    Right =5475
-    Bottom =6840
+    Left =2655
+    Top =5580
+    Right =5445
+    Bottom =7770
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x37d06983d518e540
@@ -284,16 +284,21 @@ Begin Form
                     Name ="tbxDBH"
                     ControlSource ="DBH"
                     FontName ="Calibri"
+                    OnLostFocus ="[Event Procedure]"
                     OnClick ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
                     ConditionalFormat = Begin
-                        0x01000000c4000000030000000100000000000000000000001f00000001000000 ,
-                        0x00000000ffcccc000000000006000000200000002300000001010000ff000000 ,
-                        0xffffff00010000000000000024000000310000000100000000000000d6dfec00 ,
-                        0x41006200730028005b007400620078004400420048005d002d005b0074006200 ,
-                        0x78005000720069006f0072004400420048005d0029003e003d00340000000000 ,
-                        0x31003000000000005b004c006900760065005d003d00460061006c0073006500 ,
-                        0x00000000
+                        0x0100000050010000030000000100000000000000000000006500000001000000 ,
+                        0x00000000ffcccc000000000006000000660000006900000001010000ff000000 ,
+                        0xffffff0001000000000000006a000000770000000100000000000000d6dfec00 ,
+                        0x49004900660028005b004c006900760065005d003d0054007200750065002c00 ,
+                        0x49004900660028005b0074006200780045007100750069007600440042004800 ,
+                        0x5d002e005b0046006f007200650043006f006c006f0072005d003d005b007600 ,
+                        0x62005200650064005d002c0031002c00300029002c0049004900660028005b00 ,
+                        0x740062007800530075006d004400420048005d002e005b0046006f0072006500 ,
+                        0x43006f006c006f0072005d003d005b00760062005200650064005d002c003100 ,
+                        0x2c003000290029000000000031003000000000005b004c006900760065005d00 ,
+                        0x3d00460061006c007300650000000000
                     End
 
                     LayoutCachedLeft =1020
@@ -301,14 +306,18 @@ Begin Form
                     LayoutCachedWidth =1620
                     LayoutCachedHeight =359
                     ConditionalFormat14 = Begin
-                        0x01000300000001000000000000000100000000000000ffcccc001e0000004100 ,
-                        0x6200730028005b007400620078004400420048005d002d005b00740062007800 ,
-                        0x5000720069006f0072004400420048005d0029003e003d003400000000000000 ,
-                        0x000000000000000000000000000000000000000600000001010000ff000000ff ,
-                        0xffff000200000031003000000000000000000000000000000000000000000000 ,
-                        0x01000000000000000100000000000000d6dfec000c0000005b004c0069007600 ,
-                        0x65005d003d00460061006c007300650000000000000000000000000000000000 ,
-                        0x0000000000
+                        0x01000300000001000000000000000100000000000000ffcccc00640000004900 ,
+                        0x4900660028005b004c006900760065005d003d0054007200750065002c004900 ,
+                        0x4900660028005b00740062007800450071007500690076004400420048005d00 ,
+                        0x2e005b0046006f007200650043006f006c006f0072005d003d005b0076006200 ,
+                        0x5200650064005d002c0031002c00300029002c0049004900660028005b007400 ,
+                        0x62007800530075006d004400420048005d002e005b0046006f00720065004300 ,
+                        0x6f006c006f0072005d003d005b00760062005200650064005d002c0031002c00 ,
+                        0x3000290029000000000000000000000000000000000000000000000000000006 ,
+                        0x00000001010000ff000000ffffff000200000031003000000000000000000000 ,
+                        0x00000000000000000000000001000000000000000100000000000000d6dfec00 ,
+                        0x0c0000005b004c006900760065005d003d00460061006c007300650000000000 ,
+                        0x0000000000000000000000000000000000
                     End
                     Begin
                         Begin Label
@@ -372,7 +381,7 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin CheckBox
-                    OverlapFlags =93
+                    OverlapFlags =85
                     Left =2160
                     Top =120
                     Width =245
@@ -388,7 +397,7 @@ Begin Form
                     LayoutCachedHeight =360
                     Begin
                         Begin Label
-                            OverlapFlags =93
+                            OverlapFlags =85
                             Left =1680
                             Top =60
                             Width =420
@@ -403,22 +412,6 @@ Begin Form
                             LayoutCachedHeight =359
                         End
                     End
-                End
-                Begin TextBox
-                    OverlapFlags =247
-                    IMESentenceMode =3
-                    Left =1860
-                    Top =120
-                    Width =600
-                    TabIndex =3
-                    Name ="tbxPriorDBH"
-                    ControlSource ="=IIf(IsNull([Sapling_Data_ID]),0,Nz(GetPriorDBH([Sapling_Data_ID],\"Sapling\"),9"
-                        "99))"
-
-                    LayoutCachedLeft =1860
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =2460
-                    LayoutCachedHeight =360
                 End
             End
         End
@@ -678,6 +671,38 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - tbxDBH_Change[fsub_Sapling_DBH])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          tbxDBH_LostFocus
+' Description:  DBH textbox LostFocus actions
+' Requires:     -
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 21, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/21/2018 - initial version
+' ---------------------------------
+Private Sub tbxDBH_LostFocus()
+On Error GoTo Err_Handler
+    
+    If Me.Recordset.RecordCount > 0 Then _
+        ValidDBH "Sapling"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxDBH_LostFocus[fsub_Sapling_DBH])"
     End Select
     Resume Exit_Handler
 End Sub

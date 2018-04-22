@@ -12,30 +12,34 @@ Begin Report
     GridY =24
     Width =8640
     DatasheetFontHeight =10
-    ItemSuffix =49
+    ItemSuffix =61
     Left =1320
     Top =2190
     DatasheetGridlinesColor =12632256
     OnNoData ="[Event Procedure]"
     RecSrcDt = Begin
-        0xf5f977bf4a18e540
+        0x13ebb6604c19e540
     End
-    RecordSource ="SELECT d.DBH, sd.Sapling_Data_ID, l.Plot_Name, e.Event_Date, e.Event_ID, p.Latin"
-        "_Name, tg.Tag_Status, sd.Sapling_Status, sd.Status, tg.Azimuth, tg.Distance, tg."
-        "Microplot_Number, tg.Azimuth/tg.Distance AS Azi_Dist, tg.Tag_Notes, tg.Tag FROM "
-        "((((tbl_Sapling_DBH AS d LEFT JOIN tbl_Sapling_Data AS sd ON d.Sapling_Data_ID ="
-        " sd.Sapling_Data_ID) LEFT JOIN tbl_Events AS e ON sd.Event_ID = e.Event_ID) LEFT"
-        " JOIN tbl_Locations AS l ON e.Location_ID = l.Location_ID) LEFT JOIN tbl_Tags AS"
-        " tg ON sd.Tag_ID = tg.Tag_ID) LEFT JOIN tlu_Plants AS p ON tg.TSN = p.TSN WHERE "
-        "d.DBH>10;"
-    Caption ="rSub_Event_UnsampledTags"
+    RecordSource ="SELECT DISTINCT l.Plot_Name, e.Event_Date, l.Panel, t.Tag, t.Microplot_Number, q"
+        "Calc_Basal_Area_per_Sapling.Stems, qCalc_Basal_Area_per_Sapling.SumBasalArea_cm2"
+        ", qCalc_Basal_Area_per_Sapling.Equiv_DBH_cm, sd.Sapling_Status, d.DBH, sd.Saplin"
+        "g_Data_ID, sd.Status, t.Tag_Status, sd.Habit, t.Azimuth, t.Distance, t.Azimuth/t"
+        ".Distance AS Azi_Dist, t.Tag_Notes, p.Latin_Name, e.Event_ID,l.Location_ID FROM "
+        "(tbl_Locations AS l INNER JOIN (((tbl_Events AS e INNER JOIN qCalc_Basal_Area_pe"
+        "r_Sapling ON e.Event_ID = qCalc_Basal_Area_per_Sapling.Event_ID) INNER JOIN (tbl"
+        "_Tags AS t INNER JOIN tbl_Sapling_Data AS sd ON t.Tag_ID = sd.Tag_ID) ON qCalc_B"
+        "asal_Area_per_Sapling.FirstOfTag_ID = t.Tag_ID) LEFT JOIN tlu_Plants AS p ON t.T"
+        "SN = p.TSN) ON l.Location_ID = e.Location_ID) LEFT JOIN tbl_Sapling_DBH AS d ON "
+        "sd.Sapling_Data_ID = d.Sapling_Data_ID WHERE (((qCalc_Basal_Area_per_Sapling.Equ"
+        "iv_DBH_cm)>=10)) ORDER BY l.Plot_Name, e.Event_Date, t.Tag;"
+    Caption ="rSub_Event_Monster_Saplings"
     OnOpen ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0x0000000000000000000000000000000000000000c02100005901000001000000 ,
+        0xe0010000e0010000680100006801000000000000c02100002001000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
-    FilterOnLoad =0
+    FilterOnLoad =255
     AllowLayoutView =0
     DatasheetGridlinesColor12 =12632256
     Begin
@@ -93,12 +97,120 @@ Begin Report
             OldBorderStyle =0
             BorderLineStyle =0
         End
+        Begin BreakLevel
+            ControlSource ="Plot_Name"
+        End
+        Begin BreakLevel
+            GroupOn =3
+            ControlSource ="Event_Date"
+        End
+        Begin BreakLevel
+            GroupHeader = NotDefault
+            ControlSource ="Microplot_Number"
+        End
+        Begin BreakLevel
+            GroupHeader = NotDefault
+            ControlSource ="Tag"
+        End
         Begin FormHeader
             KeepTogether = NotDefault
-            Height =360
-            BackColor =15590879
+            Height =1080
             Name ="ReportHeader"
+            BackThemeColorIndex =1
             Begin
+                Begin Rectangle
+                    BackStyle =1
+                    Top =720
+                    Width =8640
+                    Height =300
+                    Name ="boxHdrDBH"
+                    LayoutCachedTop =720
+                    LayoutCachedWidth =8640
+                    LayoutCachedHeight =1020
+                End
+                Begin Rectangle
+                    BackStyle =1
+                    Width =8640
+                    Height =360
+                    BackColor =13434879
+                    Name ="boxHdrMP"
+                    LayoutCachedWidth =8640
+                    LayoutCachedHeight =360
+                End
+                Begin Rectangle
+                    BackStyle =1
+                    Top =360
+                    Width =8640
+                    Height =360
+                    BackColor =16776935
+                    Name ="boxHdrTag"
+                    GridlineWidthLeft =0
+                    GridlineWidthRight =0
+                    LayoutCachedTop =360
+                    LayoutCachedWidth =8640
+                    LayoutCachedHeight =720
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    TextAlign =2
+                    TextFontFamily =34
+                    Top =420
+                    Width =840
+                    Height =225
+                    FontSize =8
+                    FontWeight =800
+                    ForeColor =5855577
+                    Name ="lblHdrTag"
+                    Caption ="Tag"
+                    FontName ="Arial"
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =840
+                    LayoutCachedHeight =645
+                    ForeThemeColorIndex =0
+                    ForeTint =65.0
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =900
+                    Top =420
+                    Width =1440
+                    Height =225
+                    FontSize =8
+                    FontWeight =800
+                    ForeColor =5855577
+                    Name ="lblHdrClass"
+                    Caption ="Tag Status"
+                    FontName ="Arial"
+                    LayoutCachedLeft =900
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =2340
+                    LayoutCachedHeight =645
+                    ForeThemeColorIndex =0
+                    ForeTint =65.0
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =900
+                    Top =60
+                    Width =840
+                    Height =225
+                    FontSize =8
+                    FontWeight =800
+                    ForeColor =5855577
+                    Name ="lblHdrAziDist"
+                    Caption ="Azi/Dist"
+                    FontName ="Arial"
+                    LayoutCachedLeft =900
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =1740
+                    LayoutCachedHeight =285
+                    ForeThemeColorIndex =0
+                    ForeTint =65.0
+                End
                 Begin Label
                     FontItalic = NotDefault
                     TextAlign =2
@@ -109,8 +221,8 @@ Begin Report
                     FontSize =8
                     FontWeight =800
                     ForeColor =5855577
-                    Name ="lblHdrTag"
-                    Caption ="Tag"
+                    Name ="lblHdrMP"
+                    Caption ="MP"
                     FontName ="Arial"
                     LayoutCachedTop =60
                     LayoutCachedWidth =840
@@ -122,72 +234,9 @@ Begin Report
                     FontItalic = NotDefault
                     TextAlign =2
                     TextFontFamily =34
-                    Left =900
-                    Top =60
-                    Width =1440
-                    Height =225
-                    FontSize =8
-                    FontWeight =800
-                    ForeColor =5855577
-                    Name ="lblHdrClass"
-                    Caption ="Tag Status"
-                    FontName ="Arial"
-                    LayoutCachedLeft =900
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =2340
-                    LayoutCachedHeight =285
-                    ForeThemeColorIndex =0
-                    ForeTint =65.0
-                End
-                Begin Label
-                    FontItalic = NotDefault
-                    TextAlign =2
-                    TextFontFamily =34
-                    Left =2520
-                    Top =60
-                    Width =840
-                    Height =225
-                    FontSize =8
-                    FontWeight =800
-                    ForeColor =5855577
-                    Name ="lblHdrAziDist"
-                    Caption ="Azi/Dist"
-                    FontName ="Arial"
-                    LayoutCachedLeft =2520
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =3360
-                    LayoutCachedHeight =285
-                    ForeThemeColorIndex =0
-                    ForeTint =65.0
-                End
-                Begin Label
-                    FontItalic = NotDefault
-                    TextAlign =2
-                    TextFontFamily =34
-                    Left =3360
-                    Top =60
-                    Width =840
-                    Height =225
-                    FontSize =8
-                    FontWeight =800
-                    ForeColor =5855577
-                    Name ="lblHdrMP"
-                    Caption ="MP"
-                    FontName ="Arial"
-                    LayoutCachedLeft =3360
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =4200
-                    LayoutCachedHeight =285
-                    ForeThemeColorIndex =0
-                    ForeTint =65.0
-                End
-                Begin Label
-                    FontItalic = NotDefault
-                    TextAlign =2
-                    TextFontFamily =34
-                    Left =4305
-                    Top =60
-                    Width =1455
+                    Left =4020
+                    Top =720
+                    Width =4440
                     Height =225
                     FontSize =8
                     FontWeight =800
@@ -195,10 +244,10 @@ Begin Report
                     Name ="lblHdrSaplingStatus"
                     Caption ="Sapling Status"
                     FontName ="Arial"
-                    LayoutCachedLeft =4305
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =5760
-                    LayoutCachedHeight =285
+                    LayoutCachedLeft =4020
+                    LayoutCachedTop =720
+                    LayoutCachedWidth =8460
+                    LayoutCachedHeight =945
                     ForeThemeColorIndex =0
                     ForeTint =65.0
                 End
@@ -206,8 +255,8 @@ Begin Report
                     FontItalic = NotDefault
                     TextAlign =2
                     TextFontFamily =34
-                    Left =5805
-                    Top =60
+                    Left =6960
+                    Top =420
                     Width =1485
                     Height =225
                     FontSize =8
@@ -216,10 +265,94 @@ Begin Report
                     Name ="lblHdrTagNotes"
                     Caption ="Tag Notes"
                     FontName ="Arial"
-                    LayoutCachedLeft =5805
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =7290
-                    LayoutCachedHeight =285
+                    LayoutCachedLeft =6960
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =8445
+                    LayoutCachedHeight =645
+                    ForeThemeColorIndex =0
+                    ForeTint =65.0
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =2460
+                    Top =420
+                    Width =840
+                    Height =225
+                    FontSize =8
+                    FontWeight =800
+                    ForeColor =5855577
+                    Name ="lblEquivDBH"
+                    Caption ="Equiv DBH"
+                    FontName ="Arial"
+                    LayoutCachedLeft =2460
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =3300
+                    LayoutCachedHeight =645
+                    ForeThemeColorIndex =0
+                    ForeTint =65.0
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =3420
+                    Top =420
+                    Width =840
+                    Height =225
+                    FontSize =8
+                    FontWeight =800
+                    ForeColor =5855577
+                    Name ="lblStems"
+                    Caption ="Stems"
+                    FontName ="Arial"
+                    LayoutCachedLeft =3420
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =4260
+                    LayoutCachedHeight =645
+                    ForeThemeColorIndex =0
+                    ForeTint =65.0
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =4320
+                    Top =420
+                    Width =2400
+                    Height =225
+                    FontSize =8
+                    FontWeight =800
+                    ForeColor =5855577
+                    Name ="lblLatinName"
+                    Caption ="Latin Name"
+                    FontName ="Arial"
+                    LayoutCachedLeft =4320
+                    LayoutCachedTop =420
+                    LayoutCachedWidth =6720
+                    LayoutCachedHeight =645
+                    ForeThemeColorIndex =0
+                    ForeTint =65.0
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =2460
+                    Top =720
+                    Width =840
+                    Height =225
+                    FontSize =8
+                    FontWeight =800
+                    ForeColor =5855577
+                    Name ="lblDBH"
+                    Caption ="DBH"
+                    FontName ="Arial"
+                    LayoutCachedLeft =2460
+                    LayoutCachedTop =720
+                    LayoutCachedWidth =3300
+                    LayoutCachedHeight =945
                     ForeThemeColorIndex =0
                     ForeTint =65.0
                 End
@@ -236,136 +369,216 @@ Begin Report
                 End
             End
         End
+        Begin BreakHeader
+            KeepTogether = NotDefault
+            CanGrow = NotDefault
+            CanShrink = NotDefault
+            Height =288
+            BreakLevel =2
+            BackColor =13434879
+            Name ="GroupHeader2"
+            AlternateBackShade =95.0
+            Begin
+                Begin TextBox
+                    CanGrow = NotDefault
+                    TextAlign =2
+                    IMESentenceMode =3
+                    Left =60
+                    Width =780
+                    Height =288
+                    FontSize =9
+                    FontWeight =600
+                    BackColor =0
+                    ForeColor =4210752
+                    Name ="tbxMP"
+                    ControlSource ="Microplot_Number"
+
+                    LayoutCachedLeft =60
+                    LayoutCachedWidth =840
+                    LayoutCachedHeight =288
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                End
+                Begin TextBox
+                    CanGrow = NotDefault
+                    TextAlign =2
+                    IMESentenceMode =3
+                    Left =1140
+                    Width =780
+                    Height =288
+                    TabIndex =1
+                    ForeColor =4210752
+                    Name ="tbxAziDist"
+                    ControlSource ="Azi_Dist"
+
+                    LayoutCachedLeft =1140
+                    LayoutCachedWidth =1920
+                    LayoutCachedHeight =288
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                End
+            End
+        End
+        Begin BreakHeader
+            KeepTogether = NotDefault
+            CanGrow = NotDefault
+            CanShrink = NotDefault
+            Height =288
+            BreakLevel =3
+            BackColor =16776935
+            Name ="GroupHeader3"
+            Begin
+                Begin TextBox
+                    CanGrow = NotDefault
+                    TextAlign =2
+                    IMESentenceMode =3
+                    Width =780
+                    Height =288
+                    FontSize =9
+                    FontWeight =500
+                    ForeColor =4210752
+                    Name ="tbxTag"
+                    ControlSource ="Tag"
+
+                    LayoutCachedWidth =780
+                    LayoutCachedHeight =288
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                End
+                Begin TextBox
+                    CanGrow = NotDefault
+                    TextAlign =2
+                    IMESentenceMode =3
+                    Left =900
+                    Height =288
+                    TabIndex =1
+                    ForeColor =4210752
+                    Name ="tbxClass"
+                    ControlSource ="Tag_Status"
+
+                    LayoutCachedLeft =900
+                    LayoutCachedWidth =2340
+                    LayoutCachedHeight =288
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                End
+                Begin TextBox
+                    CanGrow = NotDefault
+                    TextAlign =2
+                    IMESentenceMode =3
+                    Left =6720
+                    Width =1740
+                    Height =288
+                    TabIndex =2
+                    ForeColor =4210752
+                    Name ="tbxTagNotes"
+                    ControlSource ="Tag_Notes"
+
+                    LayoutCachedLeft =6720
+                    LayoutCachedWidth =8460
+                    LayoutCachedHeight =288
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                End
+                Begin TextBox
+                    CanGrow = NotDefault
+                    FontItalic = NotDefault
+                    TextAlign =2
+                    IMESentenceMode =3
+                    Left =4260
+                    Width =2220
+                    Height =288
+                    TabIndex =3
+                    ForeColor =4210752
+                    Name ="tbxLatinName"
+                    ControlSource ="Latin_Name"
+
+                    LayoutCachedLeft =4260
+                    LayoutCachedWidth =6480
+                    LayoutCachedHeight =288
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                End
+                Begin TextBox
+                    CanGrow = NotDefault
+                    TextAlign =2
+                    IMESentenceMode =3
+                    Left =3420
+                    Width =780
+                    Height =288
+                    TabIndex =4
+                    ForeColor =4210752
+                    Name ="tbxStems"
+                    ControlSource ="Stems"
+
+                    LayoutCachedLeft =3420
+                    LayoutCachedWidth =4200
+                    LayoutCachedHeight =288
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                End
+                Begin TextBox
+                    CanGrow = NotDefault
+                    TextAlign =2
+                    IMESentenceMode =3
+                    Left =2520
+                    Width =780
+                    Height =288
+                    TabIndex =5
+                    ForeColor =4210752
+                    Name ="tbxEquivDBH"
+                    ControlSource ="Equiv_DBH_cm"
+
+                    LayoutCachedLeft =2520
+                    LayoutCachedWidth =3300
+                    LayoutCachedHeight =288
+                    ForeThemeColorIndex =0
+                    ForeTint =75.0
+                End
+            End
+        End
         Begin Section
             KeepTogether = NotDefault
             CanGrow = NotDefault
             CanShrink = NotDefault
-            Height =224
+            Height =288
             OnFormat ="[Event Procedure]"
             Name ="Detail"
             Begin
                 Begin TextBox
                     CanGrow = NotDefault
                     TextAlign =2
-                    BackStyle =1
                     IMESentenceMode =3
-                    Width =780
-                    Height =0
-                    ForeColor =4210752
-                    Name ="tbxTag"
-                    ControlSource ="Tag"
-
-                    LayoutCachedWidth =780
-                    ForeThemeColorIndex =0
-                    ForeTint =75.0
-                End
-                Begin TextBox
-                    CanGrow = NotDefault
-                    TextAlign =2
-                    BackStyle =1
-                    IMESentenceMode =3
-                    Left =840
-                    Height =0
-                    TabIndex =1
-                    ForeColor =4210752
-                    Name ="tbxClass"
-                    ControlSource ="Tag_Status"
-
-                    LayoutCachedLeft =840
-                    LayoutCachedWidth =2280
-                    ForeThemeColorIndex =0
-                    ForeTint =75.0
-                End
-                Begin TextBox
-                    CanGrow = NotDefault
-                    TextAlign =2
-                    BackStyle =1
-                    IMESentenceMode =3
-                    Left =2400
-                    Width =780
-                    Height =0
-                    TabIndex =2
-                    ForeColor =4210752
-                    Name ="tbxAziDist"
-                    ControlSource ="Azi_Dist"
-
-                    LayoutCachedLeft =2400
-                    LayoutCachedWidth =3180
-                    ForeThemeColorIndex =0
-                    ForeTint =75.0
-                End
-                Begin TextBox
-                    CanGrow = NotDefault
-                    TextAlign =2
-                    BackStyle =1
-                    IMESentenceMode =3
-                    Left =4440
-                    Width =1260
-                    Height =0
-                    TabIndex =3
+                    Left =4020
+                    Width =4440
+                    Height =288
                     ForeColor =4210752
                     Name ="tbxSaplingStatus"
                     ControlSource ="Sapling_Status"
 
-                    LayoutCachedLeft =4440
-                    LayoutCachedWidth =5700
+                    LayoutCachedLeft =4020
+                    LayoutCachedWidth =8460
+                    LayoutCachedHeight =288
                     ForeThemeColorIndex =0
                     ForeTint =75.0
                 End
                 Begin TextBox
                     CanGrow = NotDefault
                     TextAlign =2
-                    BackStyle =1
                     IMESentenceMode =3
-                    Left =3360
+                    Left =2520
                     Width =780
-                    Height =0
-                    TabIndex =4
+                    Height =288
+                    TabIndex =1
                     ForeColor =4210752
-                    Name ="tbxMP"
-                    ControlSource ="Microplot_Number"
+                    Name ="tbxDBH"
+                    ControlSource ="DBH"
 
-                    LayoutCachedLeft =3360
-                    LayoutCachedWidth =4140
+                    LayoutCachedLeft =2520
+                    LayoutCachedWidth =3300
+                    LayoutCachedHeight =288
                     ForeThemeColorIndex =0
                     ForeTint =75.0
-                End
-                Begin TextBox
-                    CanGrow = NotDefault
-                    TextAlign =2
-                    BackStyle =1
-                    IMESentenceMode =3
-                    Left =5880
-                    Width =2160
-                    Height =0
-                    TabIndex =5
-                    ForeColor =4210752
-                    Name ="tbxTagNotes"
-                    ControlSource ="Tag_Notes"
-
-                    LayoutCachedLeft =5880
-                    LayoutCachedWidth =8040
-                    ForeThemeColorIndex =0
-                    ForeTint =75.0
-                End
-                Begin Label
-                    Visible = NotDefault
-                    FontItalic = NotDefault
-                    TextAlign =2
-                    TextFontFamily =34
-                    Left =3300
-                    Width =1905
-                    Height =224
-                    FontSize =8
-                    ForeColor =5855577
-                    Name ="lblNoData"
-                    Caption ="-- No Data Found --"
-                    FontName ="Arial"
-                    LayoutCachedLeft =3300
-                    LayoutCachedWidth =5205
-                    LayoutCachedHeight =224
-                    ForeThemeColorIndex =0
-                    ForeTint =65.0
                 End
             End
         End
@@ -455,7 +668,7 @@ Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
 On Error GoTo Err_Handler
 
     'show/hide label
-    Me.lblNoData.Visible = Not Me.Report.HasData
+    'Me.lblNoData.Visible = Not Me.Report.HasData
     
 Exit_Handler:
     Exit Sub
@@ -486,9 +699,9 @@ Private Sub Report_NoData(Cancel As Integer)
 On Error GoTo Err_Handler
 
     If Me.Recordset.RecordCount = 0 Then
-        lblNoData.Visible = False
+        'lblNoData.Visible = False
     Else
-        lblNoData.Visible = False
+        'lblNoData.Visible = False
     End If
 
 Exit_Handler:

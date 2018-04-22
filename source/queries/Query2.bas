@@ -1,12 +1,10 @@
-﻿dbMemo "SQL" ="SELECT l.Location_ID, e.Event_ID, l.Admin_Unit_Code, l.Subunit_Code, e.Event_Dat"
-    "e, t.Tag, Round((((Sum(3.1415*((IIf([Live]=True,[DBH],0))/2)^2))*(1/3.1415))^0.5"
-    ")*2,6) AS EquivDBH\015\012FROM ((tbl_Locations AS l INNER JOIN tbl_Events AS e O"
-    "N l.Location_ID = e.Location_ID) INNER JOIN (tbl_Sapling_Data AS sd INNER JOIN t"
-    "bl_Tags AS t ON sd.Tag_ID = t.Tag_ID) ON e.Event_ID = sd.Event_ID) INNER JOIN tb"
-    "l_Sapling_DBH AS sbh ON sd.Sapling_Data_ID = sbh.Sapling_Data_ID\015\012GROUP BY"
-    " l.Location_ID, e.Event_ID, l.Admin_Unit_Code, l.Subunit_Code, e.Event_Date, t.T"
-    "ag\015\012HAVING (((l.Location_ID) = \"20170725080104-227781593.799591\") AND (("
-    "t.Tag) = 23102))\015\012ORDER BY e.Event_Date;\015\012"
+﻿dbMemo "SQL" ="SELECT t.Tag_ID, t.Tag, t.Tag_Status, IIf(IsNull([azimuth]),\"\",[Azimuth] & \" "
+    "/ \" & [distance] & \"m\") AS Azi_Dist, t.Microplot_Number AS MP, t.Location_ID\015"
+    "\012FROM (tbl_Tags AS t LEFT JOIN qry_Status_Sapling_Current_Event ON t.Tag_ID ="
+    " qry_Status_Sapling_Current_Event.Tag_ID) LEFT JOIN qry_Status_Tree_Current_Even"
+    "t ON t.Tag_ID = qry_Status_Tree_Current_Event.Tag_ID\015\012WHERE (\015\012((qry"
+    "_Status_Sapling_Current_Event.Event_ID) Is Null) \015\012AND ((qry_Status_Tree_C"
+    "urrent_Event.Event_ID) Is Null))\015\012ORDER BY t.Tag_Status, t.Tag;\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -17,55 +15,63 @@ dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 Begin
     Begin
+        dbText "Name" ="tbl_Tags.Tag_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
         dbText "Name" ="tbl_Tags.Tag"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Location_ID"
+        dbText "Name" ="t.Tag_Status"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="EquivDBH"
+        dbText "Name" ="Class"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Event_ID"
+        dbText "Name" ="Azi_Dist"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Admin_Unit_Code"
+        dbText "Name" ="MP"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Subunit_Code"
+        dbText "Name" ="t.Tag_ID"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Event_Date"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="e.Event_ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="l.Location_ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="l.Admin_Unit_Code"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="l.Subunit_Code"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="e.Event_Date"
+        dbText "Name" ="t.Location_ID"
         dbLong "AggregateType" ="-1"
     End
     Begin
         dbText "Name" ="t.Tag"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="%$##@_Alias.t.Tag_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="%$##@_Alias.t.Tag"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="%$##@_Alias.t.Tag_Status"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="%$##@_Alias.Azi_Dist"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="%$##@_Alias.MP"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="%$##@_Alias.t.Location_ID"
         dbLong "AggregateType" ="-1"
     End
 End

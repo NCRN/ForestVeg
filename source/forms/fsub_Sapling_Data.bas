@@ -14,10 +14,10 @@ Begin Form
     Width =13920
     DatasheetFontHeight =9
     ItemSuffix =75
-    Left =1680
-    Top =5115
-    Right =14010
-    Bottom =11430
+    Left =660
+    Top =1770
+    Right =11610
+    Bottom =7200
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0xd0ed4c4b94aee340
@@ -1407,7 +1407,9 @@ Begin Form
                     TabIndex =31
                     BorderColor =255
                     Name ="chkDBHCheck"
+                    ControlSource ="=CheckboxToBit([DBH_Check])"
                     StatusBarText ="Check if DBH was double checked"
+                    ValidationRule ="0 Or 1"
                     DefaultValue ="0"
                     OnClick ="[Event Procedure]"
                     ControlTipText ="Check if DBH was double checked"
@@ -1503,8 +1505,8 @@ Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
     
     'hide double check unless necessary
-    lblDBHCheck.Visible = False
-    chkDBHCheck.Visible = False
+    'lblDBHCheck.Visible = False
+    'chkDBHCheck.Visible = False
     tbxHighlightChk.Visible = False
     
     'set default comment bgd color
@@ -1547,8 +1549,8 @@ On Error GoTo Err_Handler
 '    End If
 
     'hide double check unless necessary
-    lblDBHCheck.Visible = False
-    chkDBHCheck.Visible = False
+    'lblDBHCheck.Visible = False
+    'chkDBHCheck.Visible = False
     tbxHighlightChk.Visible = False
 
     'compare status
