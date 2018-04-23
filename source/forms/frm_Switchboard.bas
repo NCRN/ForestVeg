@@ -23,10 +23,10 @@ Begin Form
     Width =10140
     DatasheetFontHeight =10
     ItemSuffix =88
-    Left =1275
-    Top =1335
-    Right =11415
-    Bottom =6315
+    Left =270
+    Top =405
+    Right =10410
+    Bottom =5385
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x3b82f36a92b1e340
@@ -40,9 +40,6 @@ Begin Form
     End
     OnLoad ="[Event Procedure]"
     AllowDatasheetView =0
-    AllowPivotTableView =0
-    AllowPivotChartView =0
-    AllowPivotChartView =0
     FilterOnLoad =0
     ShowPageMargins =0
     AllowLayoutView =0

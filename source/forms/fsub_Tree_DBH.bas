@@ -4,6 +4,7 @@ Begin Form
     RecordSelectors = NotDefault
     AutoCenter = NotDefault
     NavigationButtons = NotDefault
+    FilterOn = NotDefault
     AllowDesignChanges = NotDefault
     TabularFamily =0
     PictureAlignment =2
@@ -13,10 +14,10 @@ Begin Form
     Width =2639
     DatasheetFontHeight =10
     ItemSuffix =16
-    Left =1875
-    Top =4275
-    Right =6255
-    Bottom =7695
+    Left =2295
+    Top =3870
+    Right =4830
+    Bottom =5805
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xcd25f3b3b063e440
@@ -280,7 +281,9 @@ Begin Form
                     FontSize =12
                     Name ="tbxDBH"
                     ControlSource ="DBH"
+                    AfterUpdate ="[Event Procedure]"
                     FontName ="Calibri"
+                    OnLostFocus ="[Event Procedure]"
                     OnClick ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
                     ConditionalFormat = Begin
@@ -450,7 +453,7 @@ Option Explicit
 ' =================================
 ' FORM:         fsub_Tree_DBH
 ' Level:        Application report
-' Version:      1.02
+' Version:      1.03
 '
 ' Description:  Form related functions & procedures for application
 ' Requires:     Keypad Utils module
@@ -459,6 +462,8 @@ Option Explicit
 ' Revisions:    ML/GS - unknown  - 1.00 - initial version
 '               BLC   - 4/3/2018 - 1.01 - added documentation, error handling
 '               BLC   - 4/19/2018 - 1.02 - validate DBH
+'               BLC - 4/21/2018   - 1.03 - added record count check, ctbxDBH lost focus event
+'                                          code cleanup
 ' =================================
 
 ' ---------------------------------
@@ -646,7 +651,7 @@ On Error GoTo Err_Handler
     End With
 
     'check DBH
-    ValidDBH "Sapling"
+    ValidDBH "Tree"
 
 Exit_Handler:
     Exit Sub
@@ -673,11 +678,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/19/2018 - initial version
+'   BLC - 4/21/2018 - added record count check
 ' ---------------------------------
 Private Sub tbxDBH_Change()
 On Error GoTo Err_Handler
     
-    ValidDBH "Tree"
+    If Me.Recordset.RecordCount > 0 Then _
+        ValidDBH "Tree"
     
 Exit_Handler:
     Exit Sub
@@ -691,6 +698,70 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          tbxDBH_LostFocus
+' Description:  DBH textbox LostFocus actions
+' Requires:     -
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 21, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/21/2018 - initial version
+' ---------------------------------
+Private Sub tbxDBH_LostFocus()
+On Error GoTo Err_Handler
+    
+    If Me.Recordset.RecordCount > 0 Then _
+        ValidDBH "Tree"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxDBH_LostFocus[fsub_Tree_DBH])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+
+' ---------------------------------
+' SUB:          tbxDBH_AfterUpdate
+' Description:  DBH textbox AfterUpdate actions
+' Requires:     -
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 21, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/21/2018 - initial version
+' ---------------------------------
+Private Sub tbxDBH_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If Me.Recordset.RecordCount > 0 Then _
+        ValidDBH "Tree"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxDBH_AfterUpdate[fsub_Tree_DBH])"
+    End Select
+    Resume Exit_Handler
+End Sub
 ' ---------------------------------
 ' SUB:          btnRefreshCalc_Click
 ' Description:  refresh calculation button actions

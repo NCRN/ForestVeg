@@ -101,3 +101,99 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Function
+
+' ---------------------------------
+' SUB:          LaunchKeypad
+' Description:  keypad launch actions
+' Requires:     Keypad Utils module
+' Assumptions:  -
+' Parameters:   frm - form to update (form)
+'               keypad - name of keypad form (string)
+'               ctlName - name of control to update (string)
+' Returns:      -
+' Throws:       none
+' References:   Mark Lehman/Geoffrey Sanders, unknown
+' Source/date:  Bonnie Campbell, April 22, 2018
+' Adapted:      -
+' Revisions:    BLC - 4/22/2018 - 1.00 - initial version
+' ---------------------------------
+Public Sub LaunchKeypad(frm As Form, keypad As String, ctlName As String)
+On Error GoTo Err_Handler
+    
+    Call OpenKeypad(keypad, frm, ctlName)
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - LaunchKeypad[mod_App_UI])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          ValidPct
+' Description:  percent validating actions
+' Usage:        =ValidPct(ctrlValue) in the LostFocus event of the control
+'               used to trigger ValidationRule, ValidationText
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 22, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/22/2018 - initial version
+' ---------------------------------
+Public Function ValidPct(pct As Double) As Double
+On Error GoTo Err_Handler
+    
+    Dim IsValid As Boolean
+    
+    'default
+    ValidPct = 0
+    IsValid = False
+    
+    Select Case pct
+'        Case Is = 0
+'            ValidPct = pct
+'            IsValid = True
+        Case 0 To 100
+            ValidPct = pct
+            IsValid = True
+'        Case Is = 100
+'            ValidPct = pct
+'            IsValid = True
+        Case Else
+            'use default
+'           ValidPct = 0
+    End Select
+    
+    'set the control value?
+    'Screen.ActiveControl = ValidPct
+    If IsValid = False Then
+        Screen.ActiveControl.BackColor = lngYellow
+        Screen.ActiveControl.ForeColor = lngRed
+        MsgBox "Percent cover values range from 0 to 100 (inclusive). " _
+                & vbCrLf & "Please check the highlighted value.", vbOKOnly, _
+                "NCRN Vegetation Monitoring > Invalid Percent Value"
+    Else
+        Screen.ActiveControl.BackColor = lngWhite
+        Screen.ActiveControl.ForeColor = lngBlack
+    End If
+    
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ValidPct[mod_App_UI])"
+    End Select
+    Resume Exit_Handler
+End Function

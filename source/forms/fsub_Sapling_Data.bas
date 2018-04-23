@@ -14,10 +14,10 @@ Begin Form
     Width =13920
     DatasheetFontHeight =9
     ItemSuffix =75
-    Left =660
-    Top =1770
-    Right =11610
-    Bottom =7200
+    Left =1095
+    Top =2190
+    Right =14865
+    Bottom =7455
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0xd0ed4c4b94aee340
@@ -98,7 +98,6 @@ Begin Form
             Name ="Detail"
             Begin
                 Begin TextBox
-                    Visible = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =93
                     IMESentenceMode =3
@@ -107,7 +106,7 @@ Begin Form
                     Width =1260
                     Height =855
                     TabIndex =32
-                    BackColor =15527148
+                    BackColor =14745599
                     Name ="tbxHighlightChk"
 
                     LayoutCachedLeft =60
@@ -133,6 +132,7 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
+                    BackColor =65535
                     BorderColor =0
                     Name ="tbxComments"
                     ControlSource ="Sapling_Notes"
@@ -226,6 +226,7 @@ Begin Form
                     ColumnWidths ="0;1080;2520;1440;720"
                     AfterUpdate ="[Event Procedure]"
                     OnEnter ="[Event Procedure]"
+                    OnChange ="[Event Procedure]"
                     LayoutCachedLeft =2881
                     LayoutCachedTop =60
                     LayoutCachedWidth =3121
@@ -555,6 +556,7 @@ Begin Form
                     ColumnWidths ="0;1080;720;2160;2880"
                     AfterUpdate ="[Event Procedure]"
                     OnEnter ="[Event Procedure]"
+                    OnChange ="[Event Procedure]"
                     LayoutCachedLeft =6570
                     LayoutCachedTop =60
                     LayoutCachedWidth =6810
@@ -1407,9 +1409,7 @@ Begin Form
                     TabIndex =31
                     BorderColor =255
                     Name ="chkDBHCheck"
-                    ControlSource ="=CheckboxToBit([DBH_Check])"
                     StatusBarText ="Check if DBH was double checked"
-                    ValidationRule ="0 Or 1"
                     DefaultValue ="0"
                     OnClick ="[Event Procedure]"
                     ControlTipText ="Check if DBH was double checked"
@@ -1437,6 +1437,7 @@ Begin Form
                     RightMargin =22
                     BottomMargin =22
                     BackColor =15527148
+                    ForeColor =16711680
                     Name ="lblDBHCheck"
                     Caption ="DBH Double Checked?"
                     ControlTipText ="Was DBH double checked?"
@@ -1464,7 +1465,7 @@ Option Explicit
 ' =================================
 ' FORM:         fsub_Sapling_Data
 ' Level:        Application report
-' Version:      1.03
+' Version:      1.05
 '
 ' Description:  Form related functions & procedures for application
 ' Requires:     Keypad Utils module
@@ -1476,7 +1477,11 @@ Option Explicit
 '                                         updated checkbox naming (removed _)
 '                                         added tag vs. sapling status check
 '               BLC   - 4/19/2018 - 1.03 - update ValidDBH w/ Habit
-'                                         added Form_Open, chkDBHCheck_Click events
+'                                          added Form_Open, chkDBHCheck_Click events
+'               BLC - 4/21/2018   - 1.04 - added record count check, set DBH_Check value,
+'                                          code cleanup
+'               BLC - 4/22/2018   - 1.05 - added change events for tags (sampled/unsampled),
+'                                          CheckDBH
 ' =================================
 
 ' ---------------------------------
@@ -1500,6 +1505,8 @@ Public SaplingStatus As String
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/19/2018 - initial version
+'   BLC - 4/21/2018 - set DBH check from db
+'   BLC - 4/22/2018 - revised to use CheckDBH
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1509,8 +1516,24 @@ On Error GoTo Err_Handler
     'chkDBHCheck.Visible = False
     tbxHighlightChk.Visible = False
     
-    'set default comment bgd color
-    tbxComments.BackColor = lngWhite
+'    'set default comment bgd color
+'    tbxComments.BackColor = lngWhite
+'
+'    'fetch DBH_Check value from db (convert 1 -> -1 for Access logic)
+'    chkDBHCheck = IIf(Me!DBH_Check = 1, -1, 0)
+'
+'    'DBH records?
+'    If Me.Form.Controls("fsub_Sapling_DBH").Form.Recordset.RecordCount > 0 Then
+'
+'        'check for +/-4cm or < 1cm sapling DBH
+'        ValidDBH ("Sapling")
+'
+'    End If
+'
+'    'set text color if checked
+'    If Me!DBH_Check = 1 Then Me.lblDBHCheck.ForeColor = lngBlue
+
+    CheckDBH
 
 Exit_Handler:
     Exit Sub
@@ -1551,7 +1574,7 @@ On Error GoTo Err_Handler
     'hide double check unless necessary
     'lblDBHCheck.Visible = False
     'chkDBHCheck.Visible = False
-    tbxHighlightChk.Visible = False
+    'tbxHighlightChk.Visible = False
 
     'compare status
     CheckTagStatus "Sapling"
@@ -1619,12 +1642,16 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/19/2018 - initial version
+'   BLC - 4/21/2018 - set DBH value
 ' ---------------------------------
 Private Sub chkDBHCheck_Click()
 On Error GoTo Err_Handler
     
     'Toggle check label color based on if checked or not
     lblDBHCheck.ForeColor = IIf(chkDBHCheck, lngBlue, lngRed)
+    
+    'update the record's value (since DBH_Check is 0/1 vs. 0/-1)
+    SetDBHCheck Me.Sapling_Data_ID, "Sapling", chkDBHCheck
     
 Exit_Handler:
     Exit Sub
@@ -2234,6 +2261,74 @@ End Sub
 ' ----------------
 '  Change Events
 ' ----------------
+' ----------------
+'  Change Events
+' ----------------
+' ---------------------------------
+' SUB:          cbxSelectUnsampledTag_Change
+' Description:  combobox change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 22, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/22/2018 - initial version
+' ---------------------------------
+Private Sub cbxSelectUnsampledTag_Change()
+On Error GoTo Err_Handler
+
+'    'fetch DBH_Check value from db (convert 1 -> -1 for Access logic)
+'    chkDBHCheck = IIf(Me!DBH_Check = 1, -1, 0)
+
+    CheckDBH
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+        Case Else
+          MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+              "Error encountered (#" & Err.Number & " - cbxSelectUnsampledTag_Change[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxSelectSampledTag_Change
+' Description:  combobox change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 22, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/22/2018 - initial version
+' ---------------------------------
+Private Sub cbxSelectSampledTag_Change()
+On Error GoTo Err_Handler
+
+'    'fetch DBH_Check value from db (convert 1 -> -1 for Access logic)
+'    chkDBHCheck = IIf(Me!DBH_Check = 1, -1, 0)
+
+    CheckDBH
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+        Case Else
+          MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+              "Error encountered (#" & Err.Number & " - cbxSelectSampledTag_Change[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
 ' ---------------------------------
 ' SUB:          cbxSaplingStatus_Change
@@ -2247,35 +2342,12 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/9/2018 - initial version
+'   BLC - 4/21/2018 - code cleanup
 ' ---------------------------------
 Private Sub cbxSaplingStatus_Change()
 On Error GoTo Err_Handler
 
     CheckTagStatus "Sapling"
-
-'    'sapling status = Dead* ?
-'    ' --> trigger tag status = RIO (Retired (In Office))
-'    If Left(cbxSaplingStatus, 4) = "Dead" Then
-'
-''Debug.Print "tag status = " & Me.fsub_Tag_Sapling.Controls("cbxTagStatus")
-'
-'        Select Case fsub_Tag_Sapling.Controls("cbxTagStatus")
-'         Case Is <> "Retired (In Office)"
-'            Me.fsub_Tag_Sapling.Controls("cbxTagStatus").BackColor = lngYellow
-'
-'         Case Is = Null
-'Debug.Print "tag status = NULL " & Me.fsub_Tag_Sapling.Controls("cbxTagStatus")
-'                'set the value
-'                fsub_Tag_Sapling.Controls("cbxTagStatus") = "Retired (In Office)"
-'         Case Else
-'            'do nothing
-'        End Select
-'
-'    Else
-'
-'        Me.fsub_Tag_Sapling.Controls("cbxTagStatus").BackColor = lngWhite
-'
-'    End If
 
 Exit_Handler:
     Exit Sub
@@ -2680,88 +2752,20 @@ End Sub
 '   ML/GS - unknown - initial version
 '   BLC - 4/3/2018 - added error handling, documentation
 '   BLC - 4/19/2018 - update ValidDBH w/ Habit
+'   BLC - 4/21/2018 - added record count check, code cleanup
 ' ---------------------------------
 Private Sub fsub_Sapling_DBH_Exit(Cancel As Integer)
 On Error GoTo Err_Handler
 
     Me.Refresh
     
-    'check for +/-4cm or < 1cm sapling DBH
-    ValidDBH ("Sapling")
-'    Select Case ValidDBH("Sapling")
-'        Case True
-'            tbxComments.BackColor = lngWhite
-'            'hide DBH double check
-'            lblDBHCheck.BackColor = lngWhite
-'            lblDBHCheck.Visible = False
-'            chkDBHCheck.Visible = False
-'        Case False
-'            tbxComments.BackColor = lngYellow
-'            'expose DBH double check
-'            lblDBHCheck.BackColor = lngYellow
-'            lblDBHCheck.Visible = True
-'            chkDBHCheck.Visible = True
-'            MsgBox "Warning...change in DBH exceeds threshold. Please check value.", vbExclamation, "NCRN Vegetation Monitoring"
-'    End Select
-    
-'    Dim db As DAO.Database
-'    Set db = CurrentDb
-'
-'    'Check to see if the temporary query exists and if it does delete it.
-'
-'    If fxnQueryExists("_qCOMPARE_DBH") Then
-'        db.QueryDefs.Delete ("_qCOMPARE_DBH")
-'    End If
-'
-'    Dim strLocID As String
-'    strLocID = Forms!frm_Events!txtLocation_ID
-'
-'    Dim intTag As Integer
-'    intTag = Forms!frm_Events!fsub_Sapling_Data!fsub_Tag_Sapling!txtTag
-'
-'    Dim varDBH_Current As Variant
-'    Dim varDBH_Past As Variant
-'
-'    Dim strSQL As String
-'    strSQL = "SELECT tbl_Locations.Location_ID, tbl_Events.Event_ID, tbl_Locations.Admin_Unit_Code, tbl_Locations.Subunit_Code, tbl_Events.Event_Date, tbl_Tags.Tag, " _
-'            & "Round((((Sum(3.1415*((IIf([Live]=True,[DBH],0))/2)^2))*(1/3.1415))^0.5)*2,6) AS EquivDBH " _
-'            & "FROM ((tbl_Locations INNER JOIN tbl_Events ON tbl_Locations.Location_ID = tbl_Events.Location_ID) " _
-'            & "INNER JOIN (tbl_Sapling_Data INNER JOIN tbl_Tags ON tbl_Sapling_Data.Tag_ID = tbl_Tags.Tag_ID) ON tbl_Events.Event_ID = tbl_Sapling_Data.Event_ID) " _
-'            & "INNER JOIN tbl_Sapling_DBH ON tbl_Sapling_Data.Sapling_Data_ID = tbl_Sapling_DBH.Sapling_Data_ID " _
-'            & "GROUP BY tbl_Locations.Location_ID, tbl_Events.Event_ID, tbl_Locations.Admin_Unit_Code, tbl_Locations.Subunit_Code, tbl_Events.Event_Date, tbl_Tags.Tag " _
-'            & "HAVING (((tbl_Locations.Location_ID) = """ & strLocID & """) And ((tbl_Tags.Tag) = " & intTag & ")) " _
-'            & "ORDER BY tbl_Events.Event_Date;"
-'
-'    Dim qDef As DAO.QueryDef
-'    Set qDef = db.CreateQueryDef("_qCOMPARE_DBH", strSQL)
-'
-'    Dim rs As DAO.Recordset
-'    Set rs = db.OpenRecordset("_qCOMPARE_DBH")
-'
-'    rs.MoveLast
-'    If rs.RecordCount > 1 Then
-'
-'        varDBH_Current = rs![EquivDBH]
-'        rs.MovePrevious
-'        varDBH_Past = rs![EquivDBH]
-'
-'        If varDBH_Current - varDBH_Past >= 4 Or varDBH_Current - varDBH_Past <= -4 Then
-'            MsgBox "Warning...change in DBH exceeds threshold. Please check value.", vbExclamation, "NCRN Vegetation Monitoring"
-'        End If
-'    End If
-'
-'
-'    If Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH!txtEquivDBH < 1 Then
-'        MsgBox "Saplings must have a minimum DBH of 1.0. Please address the issue"
-'        Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH!txtDBH.SetFocus
-'    End If
-'
-'    DoCmd.DeleteObject acQuery, "_qCOMPARE_DBH"
-'    Set varDBH_Current = Nothing
-'    Set varDBH_Past = Nothing
-'    Set rs = Nothing
-'    Set qDef = Nothing
-'    Set db = Nothing
+    'DBH records?
+    If Me.Form.Controls("fsub_Sapling_DBH").Form.Recordset.RecordCount > 0 Then
+        
+        'check for +/-4cm or < 1cm sapling DBH
+        ValidDBH ("Sapling")
+
+    End If
 
 Exit_Handler:
     Exit Sub
@@ -2809,6 +2813,51 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - ValidateSaplingSubform[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          CheckDBH
+' Description:  form validation actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 22, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/22/2018 - initial version
+' ---------------------------------
+Private Sub CheckDBH()
+On Error GoTo Err_Handler
+    
+    'set default comment bgd color
+    tbxComments.BackColor = lngWhite
+    
+    'fetch DBH_Check value from db (convert 1 -> -1 for Access logic)
+    chkDBHCheck = IIf(Me!DBH_Check = 1, -1, 0)
+
+    'DBH records?
+    If Me.Form.Controls("fsub_Sapling_DBH").Form.Recordset.RecordCount > 0 Then
+        
+        'check for +/-4cm or < 1cm sapling DBH
+        ValidDBH ("Sapling")
+
+    End If
+
+    'set text color if checked
+    If Me!DBH_Check = 1 Then Me.lblDBHCheck.ForeColor = lngBlue
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - CheckDBH[fsub_Sapling_Data])"
     End Select
     Resume Exit_Handler
 End Sub

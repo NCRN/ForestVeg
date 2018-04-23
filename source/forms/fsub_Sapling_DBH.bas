@@ -12,10 +12,10 @@ Begin Form
     Width =2460
     DatasheetFontHeight =10
     ItemSuffix =13
-    Left =2655
-    Top =5580
-    Right =5445
-    Bottom =7770
+    Left =2490
+    Top =5070
+    Right =5280
+    Bottom =7260
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x37d06983d518e540
@@ -433,7 +433,7 @@ Option Explicit
 ' =================================
 ' FORM:         fsub_Sapling_DBH
 ' Level:        Application report
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  Form related functions & procedures for application
 ' Requires:     Keypad Utils module
@@ -443,6 +443,7 @@ Option Explicit
 '               BLC   - 4/19/2018 - 1.01 - added documentation, error handling
 '                                          field renaming cmd>btn, Label>lbl, txt>tbx
 '                                          cmd_DBH_Keypad_Click() removed
+'               BLC   - 4/21/2018 - 1.02 - added tbxDBH lost focus event
 ' =================================
 
 ' ---------------------------------
@@ -661,8 +662,9 @@ End Sub
 Private Sub tbxDBH_Change()
 On Error GoTo Err_Handler
     
-    ValidDBH "Sapling"
-    
+    If Me.Recordset.RecordCount > 0 Then _
+        ValidDBH "Sapling"
+        
 Exit_Handler:
     Exit Sub
     

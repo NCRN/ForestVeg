@@ -16,16 +16,17 @@ Begin Form
     Width =14040
     DatasheetFontHeight =10
     ItemSuffix =124
-    Left =2040
-    Top =3675
-    Right =16065
-    Bottom =10245
+    Left =1095
+    Top =2190
+    Right =15120
+    Bottom =8760
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x382bdd274ff0e240
     End
     RecordSource ="SELECT tbl_Quadrat_Data.* FROM tbl_Quadrat_Data; "
     BeforeUpdate ="[Event Procedure]"
+    OnOpen ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
         0xa0050000a0050000a0050000a005000000000000201c0000e010000001000000 ,
@@ -940,7 +941,10 @@ Begin Form
                     TabIndex =15
                     Name ="txtPercent_FWD"
                     ControlSource ="Percent_Fine_Woody_Debris"
+                    ValidationRule ="Is Null Or Between 0 And 1"
+                    ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
                     FontName ="Calibri"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl])"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x010000009e000000010000000100000000000000000000001e00000001000000 ,
@@ -990,7 +994,10 @@ Begin Form
                     FontSize =12
                     Name ="txtPercent_Trees"
                     ControlSource ="Percent_Trees"
+                    ValidationRule ="Is Null Or Between 0 And 1"
+                    ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
                     FontName ="Calibri"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl])"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a2000000010000000100000000000000000000002000000001000000 ,
@@ -1042,7 +1049,10 @@ Begin Form
                     TabIndex =2
                     Name ="txtPercent_Rock"
                     ControlSource ="Percent_Rock"
+                    ValidationRule ="Is Null Or Between 0 And 1"
+                    ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
                     FontName ="Calibri"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl])"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a0000000010000000100000000000000000000001f00000001000000 ,
@@ -1093,7 +1103,10 @@ Begin Form
                     TabIndex =3
                     Name ="txtPercent_CWD"
                     ControlSource ="Percent_Woody_Debris"
+                    ValidationRule ="Is Null Or Between 0 And 1"
+                    ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
                     FontName ="Calibri"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl])"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x010000009e000000010000000100000000000000000000001e00000001000000 ,
@@ -1144,6 +1157,8 @@ Begin Form
                     TabIndex =5
                     Name ="txtPercent_Other"
                     ControlSource ="Percent_Other"
+                    ValidationRule ="Is Null Or Between 0 And 1"
+                    ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
                     FontName ="Calibri"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
@@ -1196,6 +1211,8 @@ Begin Form
                     TabIndex =4
                     Name ="txtPercent_Bryophytes"
                     ControlSource ="Percent_Bryophytes"
+                    ValidationRule ="Is Null Or Between 0 And 1"
+                    ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
                     FontName ="Calibri"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
@@ -1248,7 +1265,10 @@ Begin Form
                     TabIndex =9
                     Name ="txtPercent_Ferns"
                     ControlSource ="Percent_Ferns"
+                    ValidationRule ="Is Null Or Between 0 And 1"
+                    ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
                     FontName ="Calibri"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl])"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a2000000010000000100000000000000000000002000000001000000 ,
@@ -1300,7 +1320,10 @@ Begin Form
                     TabIndex =8
                     Name ="txtPercent_Herbs"
                     ControlSource ="Percent_Herbs"
+                    ValidationRule ="Is Null Or Between 0 And 1"
+                    ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
                     FontName ="Calibri"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl])"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a2000000010000000100000000000000000000002000000001000000 ,
@@ -1352,7 +1375,10 @@ Begin Form
                     TabIndex =7
                     Name ="txtPercent_Sedges"
                     ControlSource ="Percent_Sedges"
+                    ValidationRule ="Is Null Or Between 0 And 1"
+                    ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
                     FontName ="Calibri"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl])"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a4000000010000000100000000000000000000002100000001000000 ,
@@ -1404,7 +1430,10 @@ Begin Form
                     TabIndex =6
                     Name ="txtPercent_Grasses"
                     ControlSource ="Percent_Grasses"
+                    ValidationRule ="Is Null Or Between 0 And 1"
+                    ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
                     FontName ="Calibri"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl])"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a6000000010000000100000000000000000000002200000001000000 ,
@@ -1480,283 +1509,77 @@ Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Compare Database
+Option Explicit
 
-Private Sub cboQuick_Comment_AfterUpdate()
-    Me.txtQuadrat_Comments = LTrim(Me.txtQuadrat_Comments & " " & Me.cboQuick_Comment)
-    Me.txtQuadrat_Comments.Requery
-End Sub
+' =================================
+' MODULE:       fsub_Quadrats
+' Level:        Application module
+' Version:      1.01
+'
+' Description:  add event related functions & procedures
+'
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC   - 4/22/2018 - 1.01 - added documentation, error handling
+' =================================
 
-Private Sub txtPercent_Trees_Click()
-On Error GoTo Err_cmdOpenKeyPad_Click
-    'This routine requires the presence of the Keypad_Utils module.
-    Dim strKeypadFormName As String
-    Dim strControlToUpdate As String
-    Dim frmFormToUpdate As Form
-    
-    'The two lines below should be changed to reflect the name of the keypad to open
-    '    and the name of the control to be updated.
-    strKeypadFormName = "frm_Pad_Percent"
-    strControlToUpdate = "txtPercent_Trees"
-    'The lines below should not usually be edited.
-    Set frmFormToUpdate = Me
-    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
+' ---------------------------------
+'  Declarations
+' ---------------------------------
 
-Exit_cmdOpenKeyPad_Click:
-    Exit Sub
-Err_cmdOpenKeyPad_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpenKeyPad_Click
-End Sub
+' ----------------
+'  Events
+' ----------------
 
-Private Sub txtPercent_Rock_Click()
-On Error GoTo Err_cmdOpenKeyPad_Click
-    'This routine requires the presence of the Keypad_Utils module.
-    Dim strKeypadFormName As String
-    Dim strControlToUpdate As String
-    Dim frmFormToUpdate As Form
-    
-    'The two lines below should be changed to reflect the name of the keypad to open
-    '    and the name of the control to be updated.
-    strKeypadFormName = "frm_Pad_Percent"
-    strControlToUpdate = "txtPercent_Rock"
-    'The lines below should not usually be edited.
-    Set frmFormToUpdate = Me
-    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
-
-Exit_cmdOpenKeyPad_Click:
-    Exit Sub
-Err_cmdOpenKeyPad_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpenKeyPad_Click
-End Sub
-
-Private Sub txtPercent_CWD_Click()
-On Error GoTo Err_cmdOpenKeyPad_Click
-    'This routine requires the presence of the Keypad_Utils module.
-    Dim strKeypadFormName As String
-    Dim strControlToUpdate As String
-    Dim frmFormToUpdate As Form
-    
-    'The two lines below should be changed to reflect the name of the keypad to open
-    '    and the name of the control to be updated.
-    strKeypadFormName = "frm_Pad_Percent"
-    strControlToUpdate = "txtPercent_CWD"
-    'The lines below should not usually be edited.
-    Set frmFormToUpdate = Me
-    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
-
-Exit_cmdOpenKeyPad_Click:
-    Exit Sub
-Err_cmdOpenKeyPad_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpenKeyPad_Click
-End Sub
-
-Private Sub txtPercent_FWD_Click()
-On Error GoTo Err_cmdOpenKeyPad_Click
-    'This routine requires the presence of the Keypad_Utils module.
-    Dim strKeypadFormName As String
-    Dim strControlToUpdate As String
-    Dim frmFormToUpdate As Form
-    
-    'The two lines below should be changed to reflect the name of the keypad to open
-    '    and the name of the control to be updated.
-    strKeypadFormName = "frm_Pad_Percent"
-    strControlToUpdate = "txtPercent_FWD"
-    'The lines below should not usually be edited.
-    Set frmFormToUpdate = Me
-    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
-
-Exit_cmdOpenKeyPad_Click:
-    Exit Sub
-Err_cmdOpenKeyPad_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpenKeyPad_Click
-End Sub
-
-Private Sub txtPercent_Other_Click()
-On Error GoTo Err_cmdOpenKeyPad_Click
-    'This routine requires the presence of the Keypad_Utils module.
-    Dim strKeypadFormName As String
-    Dim strControlToUpdate As String
-    Dim frmFormToUpdate As Form
-    
-    'The two lines below should be changed to reflect the name of the keypad to open
-    '    and the name of the control to be updated.
-    strKeypadFormName = "frm_Pad_Percent"
-    strControlToUpdate = "txtPercent_Other"
-    'The lines below should not usually be edited.
-    Set frmFormToUpdate = Me
-    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
-
-Exit_cmdOpenKeyPad_Click:
-    Exit Sub
-Err_cmdOpenKeyPad_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpenKeyPad_Click
-End Sub
-
-Private Sub txtPercent_Grasses_Click()
-On Error GoTo Err_cmdOpenKeyPad_Click
-    'This routine requires the presence of the Keypad_Utils module.
-    Dim strKeypadFormName As String
-    Dim strControlToUpdate As String
-    Dim frmFormToUpdate As Form
-    
-    'The two lines below should be changed to reflect the name of the keypad to open
-    '    and the name of the control to be updated.
-    strKeypadFormName = "frm_Pad_Percent"
-    strControlToUpdate = "txtPercent_Grasses"
-    'The lines below should not usually be edited.
-    Set frmFormToUpdate = Me
-    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
-
-Exit_cmdOpenKeyPad_Click:
-    Exit Sub
-Err_cmdOpenKeyPad_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpenKeyPad_Click
-End Sub
-
-Private Sub txtPercent_Sedges_Click()
-On Error GoTo Err_cmdOpenKeyPad_Click
-    'This routine requires the presence of the Keypad_Utils module.
-    Dim strKeypadFormName As String
-    Dim strControlToUpdate As String
-    Dim frmFormToUpdate As Form
-    
-    'The two lines below should be changed to reflect the name of the keypad to open
-    '    and the name of the control to be updated.
-    strKeypadFormName = "frm_Pad_Percent"
-    strControlToUpdate = "txtPercent_Sedges"
-    'The lines below should not usually be edited.
-    Set frmFormToUpdate = Me
-    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
-
-Exit_cmdOpenKeyPad_Click:
-    Exit Sub
-Err_cmdOpenKeyPad_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpenKeyPad_Click
-End Sub
-
-Private Sub txtPercent_Herbs_Click()
-On Error GoTo Err_cmdOpenKeyPad_Click
-    'This routine requires the presence of the Keypad_Utils module.
-    Dim strKeypadFormName As String
-    Dim strControlToUpdate As String
-    Dim frmFormToUpdate As Form
-    
-    'The two lines below should be changed to reflect the name of the keypad to open
-    '    and the name of the control to be updated.
-    strKeypadFormName = "frm_Pad_Percent"
-    strControlToUpdate = "txtPercent_Herbs"
-    'The lines below should not usually be edited.
-    Set frmFormToUpdate = Me
-    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
-
-Exit_cmdOpenKeyPad_Click:
-    Exit Sub
-Err_cmdOpenKeyPad_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpenKeyPad_Click
-End Sub
-
-Private Sub txtPercent_Ferns_Click()
-On Error GoTo Err_cmdOpenKeyPad_Click
-    'This routine requires the presence of the Keypad_Utils module.
-    Dim strKeypadFormName As String
-    Dim strControlToUpdate As String
-    Dim frmFormToUpdate As Form
-    
-    'The two lines below should be changed to reflect the name of the keypad to open
-    '    and the name of the control to be updated.
-    strKeypadFormName = "frm_Pad_Percent"
-    strControlToUpdate = "txtPercent_Ferns"
-    'The lines below should not usually be edited.
-    Set frmFormToUpdate = Me
-    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
-
-Exit_cmdOpenKeyPad_Click:
-    Exit Sub
-Err_cmdOpenKeyPad_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpenKeyPad_Click
-End Sub
-
-Private Sub txtPercent_Bryophytes_Click()
-On Error GoTo Err_cmdOpenKeyPad_Click
-    'This routine requires the presence of the Keypad_Utils module.
-    Dim strKeypadFormName As String
-    Dim strControlToUpdate As String
-    Dim frmFormToUpdate As Form
-    
-    'The two lines below should be changed to reflect the name of the keypad to open
-    '    and the name of the control to be updated.
-    strKeypadFormName = "frm_Pad_Percent"
-    strControlToUpdate = "txtPercent_Bryophytes"
-    'The lines below should not usually be edited.
-    Set frmFormToUpdate = Me
-    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
-
-Exit_cmdOpenKeyPad_Click:
-    Exit Sub
-Err_cmdOpenKeyPad_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpenKeyPad_Click
-End Sub
-
-Private Sub cmdOpen_Popup_Floor_Condition_Click()
-On Error GoTo Err_cmdOpen_Popup_Click
-
-    Dim stDocName As String
-    Dim stLinkCriteria As String
-
-    stDocName = "frm_Popup_Floor_and_Cover"
-    DoCmd.OpenForm stDocName, , , stLinkCriteria
-
-Exit_cmdOpen_Popup_Click:
-    Exit Sub
-
-Err_cmdOpen_Popup_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpen_Popup_Click
-End Sub
-
-Private Sub cmdOpen_Popup_Veg_Cover_Click()
-On Error GoTo Err_cmdOpen_Popup_Click
-
-    Dim stDocName As String
-    Dim stLinkCriteria As String
-
-    stDocName = "frm_Popup_Floor_and_Cover"
-    DoCmd.OpenForm stDocName, , , stLinkCriteria
-
-Exit_cmdOpen_Popup_Click:
-    Exit Sub
-
-Err_cmdOpen_Popup_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpen_Popup_Click
-End Sub
-
-Private Sub Form_BeforeUpdate(Cancel As Integer)
+' ----------------
+'  Form
+' ----------------
+' ---------------------------------
+' SUB:          Form_Open
+' Description:  form open actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 22, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/22/2018 - initial version
+' ---------------------------------
+Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
-
-    If Me.NewRecord Then
-        If GetDataType("tbl_Quadrat_Data", "Quadrat_Data_ID") = dbText Then
-            Me!Quadrat_Data_ID = fxnGUIDGen
-        End If
-    End If
-
-Exit_Procedure:
+    
+    
+Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[fsub_Quadrats])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          Form_Load
+' Description:  form loading actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC - 4/22/2018 - added documentation, error handling
+' ---------------------------------
 Private Sub Form_Load()
+On Error GoTo Err_Handler
+    
     Dim strQuadrat As String
     Me!txtQuadrat_Number.DefaultValue = ""
     Me!txtQuadrat_Number.Requery
@@ -1776,11 +1599,619 @@ Private Sub Form_Load()
     Me!txtPercent_Sedges.Visible = False
     Me!txtPercent_Herbs.Visible = False
     Me!txtPercent_Ferns.Visible = False
+Exit_Handler:
+    Exit Sub
     
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Load[fsub_Quadrats])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          Form_BeforeUpdate
+' Description:  form actions before updates
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC - 4/22/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub Form_BeforeUpdate(Cancel As Integer)
+On Error GoTo Err_Handler
+    
+    If Me.NewRecord Then
+        If GetDataType("tbl_Quadrat_Data", "Quadrat_Data_ID") = dbText Then
+            Me!Quadrat_Data_ID = fxnGUIDGen
+        End If
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[fsub_Quadrats])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ----------------
+'  Click
+' ----------------
+
+' ---------------------------------
+' SUB:          txtPercent_Trees_Click
+' Description:  textbox click actions
+' Requires:     Keypad Utils module
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC - 4/22/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub txtPercent_Trees_Click()
+On Error GoTo Err_Handler
+    
+'    Dim strKeypadFormName As String
+'    Dim strControlToUpdate As String
+'    Dim frmFormToUpdate As Form
+'
+'    'set keypad form to launch & control on this form to be updated by it
+'    strKeypadFormName = "frm_Pad_Percent"
+'    strControlToUpdate = "txtPercent_Trees"
+'
+'    'launch keypad
+'    Set frmFormToUpdate = Me
+'    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
+    
+    'launch keypad
+    LaunchKeypad Me, "frm_Pad_Percent", "txtPercent_Trees"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - txtPercent_Trees_Click[fsub_Quadrats])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          txtPercent_Rock_Click
+' Description:  textbox click actions
+' Requires:     Keypad Utils module
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC - 4/22/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub txtPercent_Rock_Click()
+On Error GoTo Err_Handler
+    
+'    'This routine requires the presence of the Keypad_Utils module.
+'    Dim strKeypadFormName As String
+'    Dim strControlToUpdate As String
+'    Dim frmFormToUpdate As Form
+'
+'    'The two lines below should be changed to reflect the name of the keypad to open
+'    '    and the name of the control to be updated.
+'    strKeypadFormName = "frm_Pad_Percent"
+'    strControlToUpdate = "txtPercent_Rock"
+'    'The lines below should not usually be edited.
+'    Set frmFormToUpdate = Me
+'    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
+    
+    'launch keypad
+    LaunchKeypad Me, "frm_Pad_Percent", "txtPercent_Rock"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - txtPercent_Rock_Click[fsub_Quadrats])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          txtPercent_CWD_Click
+' Description:  textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC - 4/22/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub txtPercent_CWD_Click()
+On Error GoTo Err_Handler
+    
+'    'This routine requires the presence of the Keypad_Utils module.
+'    Dim strKeypadFormName As String
+'    Dim strControlToUpdate As String
+'    Dim frmFormToUpdate As Form
+'
+'    'The two lines below should be changed to reflect the name of the keypad to open
+'    '    and the name of the control to be updated.
+'    strKeypadFormName = "frm_Pad_Percent"
+'    strControlToUpdate = "txtPercent_CWD"
+'    'The lines below should not usually be edited.
+'    Set frmFormToUpdate = Me
+'    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
+    
+    LaunchKeypad Me, "frm_Pad_Percent", "txtPercent_CWD"
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - txtPercent_CWD_Click[fsub_Quadrats])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          txtPercent_FWD_Click
+' Description:  textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC - 4/22/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub txtPercent_FWD_Click()
+On Error GoTo Err_Handler
+    
+'    'This routine requires the presence of the Keypad_Utils module.
+'    Dim strKeypadFormName As String
+'    Dim strControlToUpdate As String
+'    Dim frmFormToUpdate As Form
+'
+'    'The two lines below should be changed to reflect the name of the keypad to open
+'    '    and the name of the control to be updated.
+'    strKeypadFormName = "frm_Pad_Percent"
+'    strControlToUpdate = "txtPercent_FWD"
+'    'The lines below should not usually be edited.
+'    Set frmFormToUpdate = Me
+'    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
+
+    LaunchKeypad Me, "frm_Pad_Percent", "txtPercent_FWD"
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - txtPercent_FWD_Click[fsub_Quadrats])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          txtPercent_Other_Click
+' Description:  textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC - 4/22/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub txtPercent_Other_Click()
+On Error GoTo Err_Handler
+    
+'    'This routine requires the presence of the Keypad_Utils module.
+'    Dim strKeypadFormName As String
+'    Dim strControlToUpdate As String
+'    Dim frmFormToUpdate As Form
+'
+'    'The two lines below should be changed to reflect the name of the keypad to open
+'    '    and the name of the control to be updated.
+'    strKeypadFormName = "frm_Pad_Percent"
+'    strControlToUpdate = "txtPercent_Other"
+'    'The lines below should not usually be edited.
+'    Set frmFormToUpdate = Me
+'    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
+    
+    LaunchKeypad Me, "frm_Pad_Percent", "txtPercent_Other"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - txtPercent_Other_Click[fsub_Quadrats])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          txtPercent_Grasses_Click
+' Description:  textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC - 4/22/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub txtPercent_Grasses_Click()
+On Error GoTo Err_Handler
+    
+'    'This routine requires the presence of the Keypad_Utils module.
+'    Dim strKeypadFormName As String
+'    Dim strControlToUpdate As String
+'    Dim frmFormToUpdate As Form
+'
+'    'The two lines below should be changed to reflect the name of the keypad to open
+'    '    and the name of the control to be updated.
+'    strKeypadFormName = "frm_Pad_Percent"
+'    strControlToUpdate = "txtPercent_Grasses"
+'    'The lines below should not usually be edited.
+'    Set frmFormToUpdate = Me
+'    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
+    
+    LaunchKeypad Me, "frm_Pad_Percent", "txtPercent_Grasses"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - txtPercent_Grasses_Click[fsub_Quadrats])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          txtPercent_Sedges_Click
+' Description:  textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC - 4/22/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub txtPercent_Sedges_Click()
+On Error GoTo Err_Handler
+    
+'    'This routine requires the presence of the Keypad_Utils module.
+'    Dim strKeypadFormName As String
+'    Dim strControlToUpdate As String
+'    Dim frmFormToUpdate As Form
+'
+'    'The two lines below should be changed to reflect the name of the keypad to open
+'    '    and the name of the control to be updated.
+'    strKeypadFormName = "frm_Pad_Percent"
+'    strControlToUpdate = "txtPercent_Sedges"
+'    'The lines below should not usually be edited.
+'    Set frmFormToUpdate = Me
+'    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
+
+    LaunchKeypad Me, "frm_Pad_Percent", "txtPercent_Sedges"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - txtPercent_Sedges_Click[fsub_Quadrats])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          txtPercent_Herbs_Click
+' Description:  textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC - 4/22/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub txtPercent_Herbs_Click()
+On Error GoTo Err_Handler
+    
+'    'This routine requires the presence of the Keypad_Utils module.
+'    Dim strKeypadFormName As String
+'    Dim strControlToUpdate As String
+'    Dim frmFormToUpdate As Form
+'
+'    'The two lines below should be changed to reflect the name of the keypad to open
+'    '    and the name of the control to be updated.
+'    strKeypadFormName = "frm_Pad_Percent"
+'    strControlToUpdate = "txtPercent_Herbs"
+'    'The lines below should not usually be edited.
+'    Set frmFormToUpdate = Me
+'    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
+    
+    LaunchKeypad Me, "frm_Pad_Percent", "txtPercent_Herbs"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - txtPercent_Herbs_Click[fsub_Quadrats])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          txtPercent_Ferns_Click
+' Description:  textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC - 4/22/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub txtPercent_Ferns_Click()
+On Error GoTo Err_Handler
+    
+'    'This routine requires the presence of the Keypad_Utils module.
+'    Dim strKeypadFormName As String
+'    Dim strControlToUpdate As String
+'    Dim frmFormToUpdate As Form
+'
+'    'The two lines below should be changed to reflect the name of the keypad to open
+'    '    and the name of the control to be updated.
+'    strKeypadFormName = "frm_Pad_Percent"
+'    strControlToUpdate = "txtPercent_Ferns"
+'    'The lines below should not usually be edited.
+'    Set frmFormToUpdate = Me
+'    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
+    
+    LaunchKeypad Me, "frm_Pad_Percent", "txtPercent_Ferns"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - txtPercent_Ferns_Click[fsub_Quadrats])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          txtPercent_Bryophytes_Click
+' Description:  textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC - 4/22/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub txtPercent_Bryophytes_Click()
+On Error GoTo Err_Handler
+
+'    'This routine requires the presence of the Keypad_Utils module.
+'    Dim strKeypadFormName As String
+'    Dim strControlToUpdate As String
+'    Dim frmFormToUpdate As Form
+'
+'    'The two lines below should be changed to reflect the name of the keypad to open
+'    '    and the name of the control to be updated.
+'    strKeypadFormName = "frm_Pad_Percent"
+'    strControlToUpdate = "txtPercent_Bryophytes"
+'    'The lines below should not usually be edited.
+'    Set frmFormToUpdate = Me
+'    Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
+    
+    LaunchKeypad Me, "frm_Pad_Percent", "txtPercent_Bryophytes"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - txtPercent_Bryophytes_Click[fsub_Quadrats])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ----------------
+'  Form Opening
+' ----------------
+' ---------------------------------
+' SUB:          cmdOpen_Popup_Floor_Condition_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC - 4/22/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub cmdOpen_Popup_Floor_Condition_Click()
+On Error GoTo Err_Handler
+    
+    Dim stDocName As String
+    Dim stLinkCriteria As String
+
+    stDocName = "frm_Popup_Floor_and_Cover"
+    DoCmd.OpenForm stDocName, , , stLinkCriteria
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cmdOpen_Popup_Floor_Condition_Click[fsub_Quadrats])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cmdOpen_Popup_Veg_Cover_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC - 4/22/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub cmdOpen_Popup_Veg_Cover_Click()
+On Error GoTo Err_Handler
+    
+    Dim stDocName As String
+    Dim stLinkCriteria As String
+
+    stDocName = "frm_Popup_Floor_and_Cover"
+    DoCmd.OpenForm stDocName, , , stLinkCriteria
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cmdOpen_Popup_Veg_Cover_Click[fsub_Quadrats])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ----------------
+'  After Update
+' ----------------
+' ---------------------------------
+' SUB:          cboQuick_Comment_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC - 4/22/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub cboQuick_Comment_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.txtQuadrat_Comments = LTrim(Me.txtQuadrat_Comments & " " & Me.cboQuick_Comment)
+    Me.txtQuadrat_Comments.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cboQuick_Comment_AfterUpdate[fsub_Quadrats])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          grpQuadrat_Selection_AfterUpdate
+' Description:  group after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC - 4/22/2018 - added documentation, error handling,
+'                                 adjusted
+' ---------------------------------
 Private Sub grpQuadrat_Selection_AfterUpdate()
+On Error GoTo Err_Handler
+    
     Dim strQuadrat As String
+    Dim aryPct() As Variant
+    Dim strPct As Variant
+    Dim ctlName As String
+    
+    'percents
+    aryPct = Array("Trees", "Bryophytes", "CWD", "FWD", "Rock", "Other", _
+                "Grasses", "Sedges", "Herbs", "Ferns")
+    
+    'determine quadrat
     Select Case Me!grpQuadrat_Selection.Value
         Case 1
             strQuadrat = "360-3m"
@@ -1807,49 +2238,68 @@ Private Sub grpQuadrat_Selection_AfterUpdate()
         Case 12
             strQuadrat = "300"
     End Select
+    
     Me!lblQuadrat_Selection.ForeColor = 0
     Me!fsub_Quad_Herbaceous.Visible = True
     Me!fsub_Quad_Seedlings.Visible = True
     Me!txtQuadrat_Comments.Visible = True
     Me!txtQuadrat_Number.Visible = True
-    Me!txtPercent_Trees.Visible = True
-    Me!txtPercent_Bryophytes.Visible = True
-    Me!txtPercent_CWD.Visible = True
-    Me!txtPercent_FWD.Visible = True
-    Me!txtPercent_Rock.Visible = True
-    Me!txtPercent_Other.Visible = True
-    Me!txtPercent_Grasses.Visible = True
-    Me!txtPercent_Sedges.Visible = True
-    Me!txtPercent_Herbs.Visible = True
-    Me!txtPercent_Ferns.Visible = True
+    
+'    Me!txtPercent_Trees.Visible = True
+'    Me!txtPercent_Bryophytes.Visible = True
+'    Me!txtPercent_CWD.Visible = True
+'    Me!txtPercent_FWD.Visible = True
+'    Me!txtPercent_Rock.Visible = True
+'    Me!txtPercent_Other.Visible = True
+'    Me!txtPercent_Grasses.Visible = True
+'    Me!txtPercent_Sedges.Visible = True
+'    Me!txtPercent_Herbs.Visible = True
+'    Me!txtPercent_Ferns.Visible = True
+    
+    For Each strPct In aryPct
+        
+        ctlName = "txtPercent_" & strPct
+    
+        With Me.Form.Controls(ctlName)
+        
+            .Visible = True
+            .Locked = False
+            .Enabled = True
+            
+        End With
+        
+    
+    Next
     
     Me!fsub_Quad_Herbaceous.Locked = False
     Me!fsub_Quad_Seedlings.Locked = False
     Me!txtQuadrat_Comments.Locked = False
-    Me!txtPercent_Trees.Locked = False
-    Me!txtPercent_Bryophytes.Locked = False
-    Me!txtPercent_CWD.Locked = False
-    Me!txtPercent_FWD.Locked = False
-    Me!txtPercent_Rock.Locked = False
-    Me!txtPercent_Other.Locked = False
-    Me!txtPercent_Grasses.Locked = False
-    Me!txtPercent_Sedges.Locked = False
-    Me!txtPercent_Herbs.Locked = False
-    Me!txtPercent_Ferns.Locked = False
+    
+'    Me!txtPercent_Trees.Locked = False
+'    Me!txtPercent_Bryophytes.Locked = False
+'    Me!txtPercent_CWD.Locked = False
+'    Me!txtPercent_FWD.Locked = False
+'    Me!txtPercent_Rock.Locked = False
+'    Me!txtPercent_Other.Locked = False
+'    Me!txtPercent_Grasses.Locked = False
+'    Me!txtPercent_Sedges.Locked = False
+'    Me!txtPercent_Herbs.Locked = False
+'    Me!txtPercent_Ferns.Locked = False
     
     Me!fsub_Quad_Herbaceous.Enabled = True
     Me!fsub_Quad_Seedlings.Enabled = True
     Me!txtQuadrat_Comments.Enabled = True
-    Me!txtPercent_Trees.Enabled = True
-    Me!txtPercent_Bryophytes.Enabled = True
-    Me!txtPercent_CWD.Enabled = True
-    Me!txtPercent_FWD.Enabled = True
-    Me!txtPercent_Rock.Enabled = True
-    Me!txtPercent_Other.Enabled = True
-    Me!txtPercent_Grasses.Enabled = True
-    Me!txtPercent_Sedges.Enabled = True
-    Me!txtPercent_Herbs.Enabled = True
-    Me!txtPercent_Ferns.Enabled = True
+    
+'    Me!txtPercent_Trees.Enabled = True
+'    Me!txtPercent_Bryophytes.Enabled = True
+'    Me!txtPercent_CWD.Enabled = True
+'    Me!txtPercent_FWD.Enabled = True
+'    Me!txtPercent_Rock.Enabled = True
+'    Me!txtPercent_Other.Enabled = True
+'    Me!txtPercent_Grasses.Enabled = True
+'    Me!txtPercent_Sedges.Enabled = True
+'    Me!txtPercent_Herbs.Enabled = True
+'    Me!txtPercent_Ferns.Enabled = True
     
     'strQuadrat = Me!Frame_Quadrat_Selection.Value
     Me.txtQuadrat_Number.DefaultValue = "'" & strQuadrat & "'"
@@ -1862,4 +2312,15 @@ Private Sub grpQuadrat_Selection_AfterUpdate()
     'Me!txt_Percent_Trees.SetFocus
     Me!fsub_Quad_Herbaceous.Requery
     Me!fsub_Quad_Seedlings.Requery
-    End Sub
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - grpQuadrat_Selection_AfterUpdate[fsub_Quadrats])"
+    End Select
+    Resume Exit_Handler
+End Sub

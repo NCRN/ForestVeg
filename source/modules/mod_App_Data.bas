@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Data
 ' Level:        Application module
-' Version:      1.01
+' Version:      1.03
 '
 ' Description:  application data related functions & procedures
 '
@@ -13,6 +13,7 @@ Option Explicit
 '               BLC - 4/9/2018 - 1.01 - added CheckTagStatus
 '               BLC - 4/19/2018 - 1.02 - add CurrDb property (normally resides in framework)
 '                                        added colors
+'               BLC - 4/21/2018  - 1.03 - revised VaidateDBH condense logic
 ' =================================
 
 ' ---------------------------------
@@ -185,6 +186,7 @@ End Sub
 '   BLC - 4/4/2018 - initial version
 '   BLC - 4/18/2018 - renamed txtTag > tbxTag
 '   BLC - 4/19/2018 - revised to use CurrDb & accept Sapling/Tree to determine value
+'   BLC - 4/21/2018 - revise & condense logic
 ' ---------------------------------
 Public Function ValidDBH(Habit As String) As Boolean 'fsub_Sapling_DBH_Exit(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -206,25 +208,28 @@ On Error GoTo Err_Handler
     'default
     IsValid = True
 
+    Select Case Habit
+        Case "Sapling", "Tree"
+            'proceed
+        Case Else
+            GoTo Exit_Handler
+    End Select
+
 '   Me.Refresh
     
     Set db = CurrDb
-    
-'    'Check to see if the temporary query exists and if it does delete it.
-'
-'    If fxnQueryExists("_qCOMPARE_DBH") Then
-'        db.QueryDefs.Delete ("_qCOMPARE_DBH")
-'    End If
         
     'fetch tree/sapling form names
     frmDataName = Replace("fsub_Habit_Data", "Habit", Habit)
     frmTagName = Replace("fsub_Tag_Habit", "Habit", Habit)
+    'dbh form
+    frmDBHName = Replace("fsub_HABIT_DBH", "HABIT", Habit)
     
     'unhighlight DBH Double Checked as default
     With Forms!frm_Events.Form.Controls(frmDataName).Form
         .Controls("lblDBHCheck").ForeColor = lngBlack
         '.Controls("tbxHighlightChk").Visible = False
-        .Controls("tbxComments").BackColor = lngWhite
+        '.Controls("tbxComments").BackColor = lngWhite
     End With
     
     strLocID = Forms!frm_Events!txtLocation_ID
@@ -262,95 +267,88 @@ On Error GoTo Err_Handler
     strSQL = Replace(strSQL, "HABIT", Habit)
 
 Debug.Print "DBH_mod_App_Data: " & strSQL
-
-    'Dim qdf As DAO.QueryDef
-    'Set qdf = db.CreateQueryDef("_qCOMPARE_DBH", strSQL)
     
     'use usys_temp_qdf
     Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
     qdf.SQL = strSQL
     
-    'Set rs = db.OpenRecordset("_qCOMPARE_DBH")
     Set rs = db.OpenRecordset("usys_temp_qdf")
     
     If Not (rs.BOF And rs.EOF) Then
         rs.MoveLast
         
-        'validate if there are DBH records
-        If rs.RecordCount > 1 Then
+        ' ------------------------------------
+        '  validate if there are DBH records
+        ' ------------------------------------
+        'more than one record (Trees)
+        If rs.RecordCount > 1 And Habit = "Tree" Then
         
             CurrentDBH = rs![EquivDBH]
             rs.MovePrevious
             PastDBH = rs![EquivDBH]
-            
+                        
             ' +/- 4cm threshold check
             If CurrentDBH - PastDBH >= 4 Or CurrentDBH - PastDBH <= -4 Then
-    
-'                'highlight DBH Double Checked
-'                With Forms!frm_Events.Form.Controls(frmDataName).Form
-'                    '.Controls("lblDBHCheck").Visible = True
-'                    '.Controls("chkDBHCheck").Visible = True
-'                    .Controls("tbxHighlightChk").Visible = True
-'                    '.Controls("lblDBHCheck").ForeColor = lngRed
-'                    .Controls("tbxHighlightChk").BackColor = lngLtYellow
-'                    .Controls("tbxComments").BackColor = lngYellow
-'                End With
             
                  'exceeds +/- 4cm threshold
-                MsgBox "Warning...change in DBH exceeds +/- 4cm. Please check value.", _
-                    vbExclamation, "NCRN Vegetation Monitoring"
+                MsgBox "Warning...change in DBH exceeds +/- 4cm. " _
+                    & vbCrLf & "Please check DBH values.", _
+                    vbExclamation, "NCRN Vegetation Monitoring > Suspect DBH"
                 
                 IsValid = False
+                
+            End If
+        
+        'any records (Saplings)
+        ElseIf rs.RecordCount >= 1 Then
+                
+            'saplings DBH > = 1 (minimum threshold) check
+'            If Habit = "Sapling" And _
+'                Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH!tbxEquivDBH < 1 Then
+
+            If Habit = "Sapling" Then
+            
+                'nest IF since Tree doesn't have fsub_Sapling_DBH
+                'avoids error #2455 - you have entered an invalid reference to the property Form/Report
+                If Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH!tbxEquivDBH < 1 Then
+                        
+                    MsgBox "Saplings must have a minimum DBH of 1.0. " _
+                            & "Please check sapling DBH values.", _
+                        vbExclamation, "NCRN Vegetation Monitoring > Invalid DBH"
+                        
+                    IsValid = False
+                End If
                 
             End If
         End If
-    End If
-    
-    
-    Select Case Habit
-    
-        Case "Sapling"
-            'saplings DBH > = 1 (minimum threshold)
-            If Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH!tbxEquivDBH < 1 Then
+        
+        'highlight & set focus if not valid & DBH records exist
+        If IsValid = False And rs.RecordCount > 0 Then
             
-
+            'highlight DBH Double Checked
+            With Forms!frm_Events.Form.Controls(frmDataName).Form
+                '.Controls("lblDBHCheck").Visible = True
+                '.Controls("chkDBHCheck").Visible = True
+                .Controls("tbxHighlightChk").Visible = True
+                .Controls("lblDBHCheck").ForeColor = lngRed
+                .Controls("tbxHighlightChk").BackColor = lngLtYellow
+                .Controls("tbxComments").BackColor = lngYellow
             
-                MsgBox "Saplings must have a minimum DBH of 1.0. Please address the issue"
-                Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH!tbxDBH.SetFocus
-                IsValid = False
-            End If
+                'set focus
+                .Controls(frmDBHName).Form.Controls("tbxDBH").SetFocus
+            
+            End With
         
-        Case "Tree"
-            'do nothing
-        Case Else
-            GoTo Exit_Handler
-    End Select
-    
-    'set focus if not valid
-    If Not (IsValid = True) And _
-        Forms!frm_Events.Form.Controls(frmDataName).Form.Recordset.RecordCount > 0 Then
+            'set focus
+'            Forms!frm_Events.Form.Controls(frmDataName).Form.Controls(frmDBHName).Form.Controls("tbxDBH").SetFocus
         
-        'highlight DBH Double Checked
-        With Forms!frm_Events.Form.Controls(frmDataName).Form
-            '.Controls("lblDBHCheck").Visible = True
-            '.Controls("chkDBHCheck").Visible = True
-            .Controls("tbxHighlightChk").Visible = True
-            .Controls("lblDBHCheck").ForeColor = lngRed
-            .Controls("tbxHighlightChk").BackColor = lngLtYellow
-            .Controls("tbxComments").BackColor = lngYellow
-        End With
-        
-        'dbh form
-        frmDBHName = Replace("fsub_HABIT_DBH", "HABIT", Habit)
-    
-        Forms!frm_Events.Form.Controls(frmDataName).Form.Controls(frmDBHName).Form.Controls("tbxDBH").SetFocus
+        End If
     End If
-    
+        
     ValidDBH = IsValid
 
 Exit_Handler:
     'cleanup
-    'DoCmd.DeleteObject acQuery, "_qCOMPARE_DBH"
     Set CurrentDBH = Nothing
     Set PastDBH = Nothing
     Set rs = Nothing
@@ -467,6 +465,145 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - GetPriorDBH[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     GetDBHCheck
+' Description:  retrieve DBH value
+' Assumptions:  -
+' Parameters:   DataID - tag identifier (string)
+'               Habit - tree or sapling (string)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 21, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/16/2018 - initial version
+'   BLC - 4/19/2018 - revise to use CurrDb
+' ---------------------------------
+Public Function GetDBHCheck(DataID As String, Habit As String) As Byte
+On Error GoTo Err_Handler
+    Dim rs As DAO.Recordset
+    Dim qdf As DAO.QueryDef
+    Dim strSQL As String
+    Dim tblName As String
+    Dim fldName As String
+    
+    tblName = "tbl_" & Habit & "_DBH"
+    fldName = Habit & "_Data_ID"
+    
+    strSQL = "SELECT TOP 1 DBH_Check FROM " & tblName & " " & _
+             "WHERE " & fldName & _
+             "= '" & DataID & "' " & _
+             "ORDER BY Updated_Date;"
+    
+    'use usys_temp_qdf
+    Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
+    qdf.SQL = strSQL
+    
+    Set rs = CurrDb.OpenRecordset("usys_temp_qdf")
+    
+    If Not (rs.BOF And rs.EOF) Then
+        rs.MoveLast
+    
+        If rs.RecordCount = 1 Then
+            'valid
+            GetDBHCheck = rs("DBH_Check")
+        Else
+            'invalid
+            GetDBHCheck = 0
+            'GoTo Exit_Handler
+        End If
+    
+    Else
+        GetDBHCheck = 0
+    End If
+    
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetDBHCheck[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     SetDBHCheck
+' Description:  retrieve DBH value
+' Assumptions:  DBH_Check is a byte field (0 - false, 1 - true)
+'               so checkbox values must be converted from -1 = true to 1 = true
+' Parameters:   DataID - tag identifier (string)
+'               Habit - tree or sapling (string)
+'               chk - checkbox value (boolean)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 21, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/16/2018 - initial version
+'   BLC - 4/19/2018 - revise to use CurrDb
+' ---------------------------------
+Public Function SetDBHCheck(DataID As String, Habit As String, chk As Boolean) As Byte
+On Error GoTo Err_Handler
+    Dim rs As DAO.Recordset
+    Dim qdf As DAO.QueryDef
+    Dim strSQL As String
+    Dim tblName As String
+    Dim fldName As String
+    
+    tblName = "tbl_" & Habit & "_Data"
+    fldName = Habit & "_Data_ID"
+    
+    strSQL = "SELECT * FROM " & tblName & " " & _
+             "WHERE " & fldName & _
+             "= '" & DataID & "';"
+    
+    'use usys_temp_qdf
+    Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
+    qdf.SQL = strSQL
+    
+    Set rs = CurrDb.OpenRecordset("usys_temp_qdf")
+    
+    If Not (rs.BOF And rs.EOF) Then
+        rs.MoveLast
+    
+        If rs.RecordCount = 1 Then
+            
+            'update the record
+            With rs
+                .Edit
+                !DBH_Check = Abs(chk)
+                !Updated_Date = Now
+                .Update
+                
+                SetDBHCheck = True
+            End With
+            
+        Else
+            SetDBHCheck = False
+            GoTo Exit_Handler
+        End If
+    
+    Else
+        SetDBHCheck = False
+    End If
+    
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SetDBHCheck[mod_App_Data])"
     End Select
     Resume Exit_Handler
 End Function
