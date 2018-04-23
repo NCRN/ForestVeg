@@ -22,11 +22,11 @@ Begin Form
     GridY =24
     Width =10140
     DatasheetFontHeight =10
-    ItemSuffix =88
+    ItemSuffix =93
     Left =270
     Top =405
     Right =10410
-    Bottom =5385
+    Bottom =5700
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x3b82f36a92b1e340
@@ -124,7 +124,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =4995
+            Height =5310
             BackColor =0
             Name ="Detail"
             BackThemeColorIndex =0
@@ -146,14 +146,14 @@ Begin Form
                     TextFontCharSet =204
                     Top =1800
                     Width =10140
-                    Height =3195
+                    Height =3510
                     FontWeight =700
                     Name ="tabMenu"
                     FontName ="Arial"
 
                     LayoutCachedTop =1800
                     LayoutCachedWidth =10140
-                    LayoutCachedHeight =4995
+                    LayoutCachedHeight =5310
                     UseTheme =255
                     BackColor =14277081
                     BackThemeColorIndex =1
@@ -177,13 +177,13 @@ Begin Form
                             Left =75
                             Top =2220
                             Width =9990
-                            Height =2702
+                            Height =3008
                             Name ="pagMain"
                             Caption =" Main menu"
                             LayoutCachedLeft =75
                             LayoutCachedTop =2220
                             LayoutCachedWidth =10065
-                            LayoutCachedHeight =4922
+                            LayoutCachedHeight =5228
                             WebImagePaddingLeft =2
                             WebImagePaddingTop =2
                             WebImagePaddingRight =2
@@ -911,6 +911,112 @@ Begin Form
                                     QuickStyleMask =-1
                                     WebImagePaddingTop =1
                                 End
+                                Begin TextBox
+                                    Locked = NotDefault
+                                    CanGrow = NotDefault
+                                    CanShrink = NotDefault
+                                    TabStop = NotDefault
+                                    SpecialEffect =0
+                                    OverlapFlags =223
+                                    TextAlign =1
+                                    BackStyle =0
+                                    Left =120
+                                    Top =4980
+                                    Width =1512
+                                    Height =234
+                                    TabIndex =7
+                                    ForeColor =9870754
+                                    Name ="tbxVersionFE"
+                                    StatusBarText ="Currently linked back-end database version"
+                                    FontName ="Calibri"
+                                    ConditionalFormat = Begin
+                                        0x01000000a0000000010000000100000000000000000000001f00000001000000 ,
+                                        0xff7d7d00ffffff00000000000000000000000000000000000000000000000000 ,
+                                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                                        0x5b00740062007800560065007200730069006f006e00460045005d003c003e00 ,
+                                        0x5b00740062007800560065007200730069006f006e00460045005d0000000000
+                                    End
+
+                                    LayoutCachedLeft =120
+                                    LayoutCachedTop =4980
+                                    LayoutCachedWidth =1632
+                                    LayoutCachedHeight =5214
+                                    ConditionalFormat14 = Begin
+                                        0x010001000000010000000000000001000000ff7d7d00ffffff001e0000005b00 ,
+                                        0x740062007800560065007200730069006f006e00460045005d003c003e005b00 ,
+                                        0x740062007800560065007200730069006f006e00460045005d00000000000000 ,
+                                        0x000000000000000000000000000000
+                                    End
+                                End
+                                Begin TextBox
+                                    Locked = NotDefault
+                                    CanGrow = NotDefault
+                                    CanShrink = NotDefault
+                                    TabStop = NotDefault
+                                    SpecialEffect =0
+                                    OverlapFlags =223
+                                    TextAlign =3
+                                    BackStyle =0
+                                    Left =8460
+                                    Top =4980
+                                    Width =1512
+                                    Height =234
+                                    TabIndex =8
+                                    ForeColor =9870754
+                                    Name ="tbxVersionBE"
+                                    StatusBarText ="Currently linked back-end database version"
+                                    FontName ="Calibri"
+                                    ConditionalFormat = Begin
+                                        0x01000000bc000000010000000100000000000000000000002d00000001000000 ,
+                                        0xff7d7d00ffffff00000000000000000000000000000000000000000000000000 ,
+                                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                                        0x4e007a0028005b00740062007800560065007200730069006f006e0046004500 ,
+                                        0x5d002c002700270029003c003e004e007a0028005b0074006200780056006500 ,
+                                        0x7200730069006f006e00420045005d002c0027002700290000000000
+                                    End
+
+                                    LayoutCachedLeft =8460
+                                    LayoutCachedTop =4980
+                                    LayoutCachedWidth =9972
+                                    LayoutCachedHeight =5214
+                                    ConditionalFormat14 = Begin
+                                        0x010001000000010000000000000001000000ff7d7d00ffffff002c0000004e00 ,
+                                        0x7a0028005b00740062007800560065007200730069006f006e00460045005d00 ,
+                                        0x2c002700270029003c003e004e007a0028005b00740062007800560065007200 ,
+                                        0x730069006f006e00420045005d002c0027002700290000000000000000000000 ,
+                                        0x0000000000000000000000
+                                    End
+                                End
+                                Begin Label
+                                    OverlapFlags =247
+                                    Left =120
+                                    Top =4800
+                                    Width =907
+                                    Height =210
+                                    FontWeight =500
+                                    ForeColor =9870754
+                                    Name ="lblVersionFE"
+                                    Caption ="FE Version"
+                                    LayoutCachedLeft =120
+                                    LayoutCachedTop =4800
+                                    LayoutCachedWidth =1027
+                                    LayoutCachedHeight =5010
+                                End
+                                Begin Label
+                                    OverlapFlags =247
+                                    Left =9125
+                                    Top =4800
+                                    Width =847
+                                    Height =210
+                                    FontWeight =500
+                                    ForeColor =9870754
+                                    Name ="lblVersionBE"
+                                    Caption ="BE Version"
+                                    LayoutCachedLeft =9125
+                                    LayoutCachedTop =4800
+                                    LayoutCachedWidth =9972
+                                    LayoutCachedHeight =5010
+                                End
                             End
                         End
                         Begin Page
@@ -918,13 +1024,13 @@ Begin Form
                             Left =75
                             Top =2220
                             Width =9990
-                            Height =2700
+                            Height =3015
                             Name ="pagDefaults"
                             Caption =" Defaults"
                             LayoutCachedLeft =75
                             LayoutCachedTop =2220
                             LayoutCachedWidth =10065
-                            LayoutCachedHeight =4920
+                            LayoutCachedHeight =5235
                             WebImagePaddingLeft =2
                             WebImagePaddingTop =2
                             WebImagePaddingRight =2
@@ -1307,13 +1413,13 @@ Begin Form
                             Left =75
                             Top =2220
                             Width =9990
-                            Height =2700
+                            Height =3015
                             Name ="pagAbout"
                             Caption =" About"
                             LayoutCachedLeft =75
                             LayoutCachedTop =2220
                             LayoutCachedWidth =10065
-                            LayoutCachedHeight =4920
+                            LayoutCachedHeight =5235
                             WebImagePaddingLeft =2
                             WebImagePaddingTop =2
                             WebImagePaddingRight =2
@@ -4031,21 +4137,44 @@ Attribute VB_Exposed = False
 Option Compare Database
 Option Explicit
 
-
 ' =================================
-' FORM NAME:    frm_Switchboard
+' FORM:         frm_Switchboard
+' Level:        Application form
+' Version:      1.02
+'
 ' Description:  Standard module - main screen of the user interface, viewed at startup
 ' Data source:  tsys_App_Defaults
 ' Data access:  edit only, no additions, moving between records or deletions
 ' Pages:        pagMain, pagDefaults, pagAbout
 ' Functions:    none
 ' References:   fxnMakeBackup, fxnFileExists, fxnDeleteFile
+'
+' Description:  Form related functions & procedures for application
+' Requires:     -
+'
 ' Source/date:  John R. Boetsch, May 24, 2006
-' Revisions:    Simon Kingston, Sept. 2006 - added lookup for release information to look at tsys_App_Releases
+' Adapted:      Bonnie Campbell, April 22, 2018
+' Revisions:    Simon Kingston, Sept. 2006 - 1.00 - added lookup for release information to look at tsys_App_Releases
+'               ML/GS - unknown   - 1.01 - initial version updates
+'               BLC   - 4/22/2018 - 1.02 - added documentation, error handling
 ' =================================
 
+' ---------------------------------
+' SUB:          Form_Open
+' Description:  form opening actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 22, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/22/2018 - initial version
+' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
-    On Error GoTo Err_Handler
+On Error GoTo Err_Handler
+
     Dim strCaption As String
 
     ' Set the application font to more closely match the forms.
@@ -4058,11 +4187,22 @@ Private Sub Form_Open(Cancel As Integer)
         & Me!Release_ID & "'"), "")
     Me.Caption = strCaption
 
-Exit_Procedure:
-    Exit Sub
+    'get front & back-end versions
+    tbxVersionFE = Nz(CurrDb.Properties("Db Version"), "-")
+    tbxVersionBE = Nz(CurrDb.Properties("Db Version BE"), "-")
+    
+    'hide BE label for now
+    lblVersionBE.Visible = False
 
+    
+Exit_Handler:
+    Exit Sub
+    
 Err_Handler:
     Select Case Err.Number
+        Case 3270 'property not found
+            'continue on w/o error
+            Resume Next
         Case 3078   ' Can't find the system table
             MsgBox "Error #" & Err.Number & ":  Missing a system table. Please notify" & _
                 vbCrLf & "the database administrator before using this application.", _
@@ -4076,10 +4216,10 @@ Err_Handler:
                 vbCrLf & "the database administrator before using this application.", _
                 vbCritical, "System table error (tsys_App_Releases)"
         Case Else
-            MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+            MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+                "Error encountered (#" & Err.Number & " - Form_Open[frm_Switchboard])"
     End Select
-    Resume Exit_Procedure
-
+    Resume Exit_Handler
 End Sub
 
 Private Sub Form_Load()
