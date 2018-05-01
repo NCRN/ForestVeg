@@ -1407,7 +1407,7 @@ Option Explicit
 ' =================================
 ' MODULE:       fsub_Tree_Data
 ' Level:        Application module
-' Version:      1.05
+' Version:      1.06
 '
 ' Description:  add event related functions & procedures
 '
@@ -1421,6 +1421,7 @@ Option Explicit
 '               BLC   - 4/21/2018 - 1.04 - set record's DBH_Check value, code cleanup
 '               BLC - 4/22/2018   - 1.05 - added change events for tags (sampled/unsampled),
 '                                          CheckDBH
+'               BLC - 4/30/2018   - 1.06 - add DBH validation on exit (shift from DBH subform events)
 ' =================================
 
 ' ---------------------------------

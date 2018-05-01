@@ -4,6 +4,7 @@ Begin Form
     RecordSelectors = NotDefault
     NavigationButtons = NotDefault
     DividingLines = NotDefault
+    FilterOn = NotDefault
     AllowDesignChanges = NotDefault
     DefaultView =0
     TabularCharSet =204
@@ -14,10 +15,10 @@ Begin Form
     Width =13920
     DatasheetFontHeight =9
     ItemSuffix =75
-    Left =1095
-    Top =2190
-    Right =14865
-    Bottom =7455
+    Left =2040
+    Top =3000
+    Right =15810
+    Bottom =9315
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0xd0ed4c4b94aee340
@@ -1482,6 +1483,7 @@ Option Explicit
 '                                          code cleanup
 '               BLC - 4/22/2018   - 1.05 - added change events for tags (sampled/unsampled),
 '                                          CheckDBH
+'               BLC - 4/24/2018   - 1.06 - fixed cboBrowsePick > cbxBrowsePick, txtBrowsable/txtBrowsed > tbxBrowsable/tbxBrowsed
 ' =================================
 
 ' ---------------------------------
@@ -2261,9 +2263,6 @@ End Sub
 ' ----------------
 '  Change Events
 ' ----------------
-' ----------------
-'  Change Events
-' ----------------
 ' ---------------------------------
 ' SUB:          cbxSelectUnsampledTag_Change
 ' Description:  combobox change actions
@@ -2379,20 +2378,21 @@ End Sub
 '   ML/GS - unknown - initial version
 '   BLC - 4/3/2018 - added error handling, documentation
 '                    renamed cboBrowsePick > cbxBrowsePick
+'   BLC - 4/24/2018 - fixed cboBrowsePick > cbxBrowsePick, txtBrowsable/txtBrowsed > tbxBrowsable/tbxBrowsed
 ' ---------------------------------
 Private Sub cbxBrowsePick_AfterUpdate()
 On Error GoTo Err_Handler
 
-    Select Case Me!cboBrowsePick.Column(0)
+    Select Case Me!cbxBrowsePick.Column(0)
         Case "Yes / Yes"
-            Me!txtBrowsable.Value = "Yes"
-            Me!txtBrowsed.Value = "Yes"
+            Me!tbxBrowsable.Value = "Yes"
+            Me!tbxBrowsed.Value = "Yes"
         Case "Yes / No"
-            Me!txtBrowsable.Value = "Yes"
-            Me!txtBrowsed.Value = "No"
+            Me!tbxBrowsable.Value = "Yes"
+            Me!tbxBrowsed.Value = "No"
         Case "No / No"
-            Me!txtBrowsable.Value = "No"
-            Me!txtBrowsed.Value = "No"
+            Me!tbxBrowsable.Value = "No"
+            Me!tbxBrowsed.Value = "No"
     End Select
 
 Exit_Handler:

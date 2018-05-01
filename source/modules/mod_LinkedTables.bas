@@ -71,6 +71,7 @@ Do Until rst.EOF
     intI = intI + 1
     varReturn = SysCmd(acSysCmdUpdateMeter, intI)
     strLinkTableName = rst![Name]
+Debug.Print strLinkTableName
     ' Make sure the linked table opens properly
     If fxnCheckLink(strLinkTableName) = False Then
         ' Unable to open a linked table (not a critical error)

@@ -1,0 +1,18 @@
+﻿dbMemo "SQL" ="INSERT INTO tsys_App_Releases ( Release_ID, Release_date, Database_title, Versio"
+    "n_number, File_name, Release_by, Release_notes, Author_phone, Author_email, Auth"
+    "or_org, Author_org_name )\015\012VALUES ('20180422222018-705547511.577606', #4/2"
+    "3/2018#, 'NCRN Forest Vegetation Monitoring 2018', '6.1.9009', 'ForestVeg', 'Cam"
+    "pbell, Bonnie', '2018 Pre-Season Updates:\015\012- DBH double check flag added\015"
+    "\012- % cover constraints\015\012- Event Report updates \015\012-- monster sapli"
+    "ng, unsampled tag sections\015\012-- highlighting fixes\015\012', '202-339-8324'"
+    ", 'bonnie_campbell@nps.gov', 'NCRN', 'National Capital Region Network');\015\012"
+dbMemo "Connect" =""
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+dbBoolean "OrderByOn" ="0"
+dbByte "Orientation" ="0"
+dbByte "DefaultView" ="2"
+dbBoolean "FilterOnLoad" ="0"
+dbBoolean "OrderByOnLoad" ="-1"
+Begin
+End

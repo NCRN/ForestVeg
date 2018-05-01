@@ -4,7 +4,6 @@ Begin Form
     RecordSelectors = NotDefault
     AutoCenter = NotDefault
     NavigationButtons = NotDefault
-    FilterOn = NotDefault
     AllowDesignChanges = NotDefault
     TabularFamily =0
     PictureAlignment =2
@@ -14,10 +13,10 @@ Begin Form
     Width =2639
     DatasheetFontHeight =10
     ItemSuffix =16
-    Left =2295
-    Top =3870
-    Right =4830
-    Bottom =5805
+    Left =2775
+    Top =6450
+    Right =5310
+    Bottom =8385
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xcd25f3b3b063e440
@@ -453,7 +452,7 @@ Option Explicit
 ' =================================
 ' FORM:         fsub_Tree_DBH
 ' Level:        Application report
-' Version:      1.03
+' Version:      1.04
 '
 ' Description:  Form related functions & procedures for application
 ' Requires:     Keypad Utils module
@@ -464,6 +463,7 @@ Option Explicit
 '               BLC   - 4/19/2018 - 1.02 - validate DBH
 '               BLC - 4/21/2018   - 1.03 - added record count check, ctbxDBH lost focus event
 '                                          code cleanup
+'               BLC - 4/30/2018   - 1.04 - remove DBH validation (shift to fsub Exit event)
 ' =================================
 
 ' ---------------------------------
@@ -630,6 +630,7 @@ End Sub
 '   ML/GS - unknown - initial version
 '   BLC - 4/3/2018 - added error handling, documentation
 '   BLC - 4/19/2018 - validate DBH
+'   BLC - 4/30/2018 - remove DBH validation
 ' ---------------------------------
 Private Sub btnDeleteTreeDBH_Click()
 On Error GoTo Err_Handler
@@ -651,7 +652,7 @@ On Error GoTo Err_Handler
     End With
 
     'check DBH
-    ValidDBH "Tree"
+    'ValidDBH "Tree"
 
 Exit_Handler:
     Exit Sub
@@ -679,12 +680,13 @@ End Sub
 ' Revisions:
 '   BLC - 4/19/2018 - initial version
 '   BLC - 4/21/2018 - added record count check
+'   BLC - 4/30/2018 - remove DBH validation
 ' ---------------------------------
 Private Sub tbxDBH_Change()
 On Error GoTo Err_Handler
     
-    If Me.Recordset.RecordCount > 0 Then _
-        ValidDBH "Tree"
+    'If Me.Recordset.RecordCount > 0 Then _
+    '    ValidDBH "Tree"
     
 Exit_Handler:
     Exit Sub
@@ -711,12 +713,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/21/2018 - initial version
+'   BLC - 4/30/2018 - remove DBH validation
 ' ---------------------------------
 Private Sub tbxDBH_LostFocus()
 On Error GoTo Err_Handler
     
-    If Me.Recordset.RecordCount > 0 Then _
-        ValidDBH "Tree"
+'    If Me.Recordset.RecordCount > 0 Then _
+'        ValidDBH "Tree"
     
 Exit_Handler:
     Exit Sub
@@ -729,7 +732,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
 
 ' ---------------------------------
 ' SUB:          tbxDBH_AfterUpdate
@@ -744,12 +746,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/21/2018 - initial version
+'   BLC - 4/30/2018 - remove DBH validation
 ' ---------------------------------
 Private Sub tbxDBH_AfterUpdate()
 On Error GoTo Err_Handler
     
-    If Me.Recordset.RecordCount > 0 Then _
-        ValidDBH "Tree"
+'    If Me.Recordset.RecordCount > 0 Then _
+'        ValidDBH "Tree"
     
 Exit_Handler:
     Exit Sub
@@ -762,6 +765,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
 ' ---------------------------------
 ' SUB:          btnRefreshCalc_Click
 ' Description:  refresh calculation button actions

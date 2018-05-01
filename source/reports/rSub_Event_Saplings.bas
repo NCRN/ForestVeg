@@ -17,7 +17,7 @@ Begin Report
     Top =600
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
-        0x100ee30ba119e540
+        0x1a8ba6632e17e540
     End
     RecordSource ="SELECT tbl_Sapling_Data.Event_ID, tbl_Sapling_Data.Tag_ID, tbl_Tags.Location_ID,"
         " tbl_Tags.Tag, tlu_Plants.Latin_Name, [SaplingVigor] & \" \" & [TreeVigorClass] "
@@ -25,15 +25,19 @@ Begin Report
         "nts.Shrub, tbl_Sapling_Data.DRC, tbl_Tags.Microplot_Number, qCalc_Basal_Area_per"
         "_Sapling.Stems, tbl_Sapling_Data.Sapling_Data_ID, tbl_Sapling_Data.Habit, tbl_Sa"
         "pling_Data.Browsed, tbl_Sapling_Data.Browsable, qCalc_Basal_Area_per_Sapling.Equ"
-        "iv_DBH_cm FROM (((tbl_Sapling_Data LEFT JOIN tbl_Tags ON tbl_Sapling_Data.Tag_ID"
-        " = tbl_Tags.Tag_ID) LEFT JOIN qCalc_Basal_Area_per_Sapling ON tbl_Sapling_Data.S"
-        "apling_Data_ID = qCalc_Basal_Area_per_Sapling.Sapling_Data_ID) LEFT JOIN tlu_Pla"
-        "nts ON tbl_Tags.TSN = tlu_Plants.TSN) LEFT JOIN tluTreeVigor ON tbl_Sapling_Data"
-        ".SaplingVigor = tluTreeVigor.TreeVigorCode ORDER BY tbl_Tags.Tag;"
+        "iv_DBH_cm, Len(qCalc_Basal_Area_per_Sapling.Equiv_DBH_cm) AS len_equiv_dbh, Type"
+        "Name(qCalc_Basal_Area_per_Sapling.Equiv_DBH_cm) AS typename_eqiv_dbh, Left(qCalc"
+        "_Basal_Area_per_Sapling.Equiv_DBH_cm,4) AS left4_equiv_dbh, CStr(qCalc_Basal_Are"
+        "a_per_Sapling.Equiv_DBH_cm) AS cstr_equiv_dbh FROM (((tbl_Sapling_Data LEFT JOIN"
+        " tbl_Tags ON tbl_Sapling_Data.Tag_ID = tbl_Tags.Tag_ID) LEFT JOIN qCalc_Basal_Ar"
+        "ea_per_Sapling ON tbl_Sapling_Data.Sapling_Data_ID = qCalc_Basal_Area_per_Saplin"
+        "g.Sapling_Data_ID) LEFT JOIN tlu_Plants ON tbl_Tags.TSN = tlu_Plants.TSN) LEFT J"
+        "OIN tluTreeVigor ON tbl_Sapling_Data.SaplingVigor = tluTreeVigor.TreeVigorCode O"
+        "RDER BY tbl_Tags.Tag;"
     Caption ="srpt_Microplots"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0xe0010000e0010000680100006801000000000000302a00005802000001000000 ,
+        0xe0010000e0010000680100006801000000000000f42900001c02000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0

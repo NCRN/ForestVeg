@@ -18,7 +18,7 @@ Begin Form
     Left =1320
     Top =6330
     Right =7305
-    Bottom =11400
+    Bottom =11370
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0x816d9c7d10a7e340
@@ -110,7 +110,6 @@ Begin Form
                         "ions WHERE (((tlu_Enumerations.Enum_Group)=\"Percent Broad\")) ORDER BY tlu_Enum"
                         "erations.Sort_Order; "
                     StatusBarText ="Percent of the plot covered by rocks"
-                    ValidationRule =">=0 And <=100 Or Is Null"
                     ValidationText ="Choose a % cover between 0 and 100 (inclusive)"
                     GroupTable =10
                     RightPadding =38
@@ -189,7 +188,6 @@ Begin Form
                         "ions WHERE (((tlu_Enumerations.Enum_Group)=\"Percent Broad\")) ORDER BY tlu_Enum"
                         "erations.Sort_Order; "
                     StatusBarText ="Percent of the plot covered by bare soil"
-                    ValidationRule =">=0 And <=100 Or Is Null"
                     ValidationText ="Choose a % cover between 0 and 100 (inclusive)"
                     GroupTable =10
                     RightPadding =38
@@ -271,7 +269,6 @@ Begin Form
                         "ions WHERE (((tlu_Enumerations.Enum_Group)=\"Percent Broad\")) ORDER BY tlu_Enum"
                         "erations.Sort_Order; "
                     StatusBarText ="Percent of the plot trampled"
-                    ValidationRule =">=0 And <=100 Or Is Null"
                     ValidationText ="Choose a % cover between 0 and 100 (inclusive)"
                     GroupTable =10
                     RightPadding =38

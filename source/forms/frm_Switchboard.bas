@@ -22,11 +22,11 @@ Begin Form
     GridY =24
     Width =10140
     DatasheetFontHeight =10
-    ItemSuffix =93
+    ItemSuffix =88
     Left =270
     Top =405
     Right =10410
-    Bottom =5700
+    Bottom =5685
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x3b82f36a92b1e340
@@ -124,7 +124,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =5310
+            Height =5295
             BackColor =0
             Name ="Detail"
             BackThemeColorIndex =0
@@ -146,14 +146,14 @@ Begin Form
                     TextFontCharSet =204
                     Top =1800
                     Width =10140
-                    Height =3510
+                    Height =3495
                     FontWeight =700
                     Name ="tabMenu"
                     FontName ="Arial"
 
                     LayoutCachedTop =1800
                     LayoutCachedWidth =10140
-                    LayoutCachedHeight =5310
+                    LayoutCachedHeight =5295
                     UseTheme =255
                     BackColor =14277081
                     BackThemeColorIndex =1
@@ -177,13 +177,13 @@ Begin Form
                             Left =75
                             Top =2220
                             Width =9990
-                            Height =3008
+                            Height =2994
                             Name ="pagMain"
                             Caption =" Main menu"
                             LayoutCachedLeft =75
                             LayoutCachedTop =2220
                             LayoutCachedWidth =10065
-                            LayoutCachedHeight =5228
+                            LayoutCachedHeight =5214
                             WebImagePaddingLeft =2
                             WebImagePaddingTop =2
                             WebImagePaddingRight =2
@@ -769,6 +769,7 @@ Begin Form
                                     ForeColor =9870754
                                     Name ="txtLinkPath"
                                     StatusBarText ="Currently linked back-end database file"
+                                    OnDblClick ="[Event Procedure]"
                                     FontName ="Calibri"
 
                                     LayoutCachedLeft =1140
@@ -920,7 +921,7 @@ Begin Form
                                     OverlapFlags =223
                                     TextAlign =1
                                     BackStyle =0
-                                    Left =120
+                                    Left =180
                                     Top =4980
                                     Width =1512
                                     Height =234
@@ -937,9 +938,9 @@ Begin Form
                                         0x5b00740062007800560065007200730069006f006e00460045005d0000000000
                                     End
 
-                                    LayoutCachedLeft =120
+                                    LayoutCachedLeft =180
                                     LayoutCachedTop =4980
-                                    LayoutCachedWidth =1632
+                                    LayoutCachedWidth =1692
                                     LayoutCachedHeight =5214
                                     ConditionalFormat14 = Begin
                                         0x010001000000010000000000000001000000ff7d7d00ffffff001e0000005b00 ,
@@ -957,7 +958,7 @@ Begin Form
                                     OverlapFlags =223
                                     TextAlign =3
                                     BackStyle =0
-                                    Left =8460
+                                    Left =8520
                                     Top =4980
                                     Width =1512
                                     Height =234
@@ -975,9 +976,9 @@ Begin Form
                                         0x7200730069006f006e00420045005d002c0027002700290000000000
                                     End
 
-                                    LayoutCachedLeft =8460
+                                    LayoutCachedLeft =8520
                                     LayoutCachedTop =4980
-                                    LayoutCachedWidth =9972
+                                    LayoutCachedWidth =10032
                                     LayoutCachedHeight =5214
                                     ConditionalFormat14 = Begin
                                         0x010001000000010000000000000001000000ff7d7d00ffffff002c0000004e00 ,
@@ -989,7 +990,7 @@ Begin Form
                                 End
                                 Begin Label
                                     OverlapFlags =247
-                                    Left =120
+                                    Left =180
                                     Top =4800
                                     Width =907
                                     Height =210
@@ -997,14 +998,14 @@ Begin Form
                                     ForeColor =9870754
                                     Name ="lblVersionFE"
                                     Caption ="FE Version"
-                                    LayoutCachedLeft =120
+                                    LayoutCachedLeft =180
                                     LayoutCachedTop =4800
-                                    LayoutCachedWidth =1027
+                                    LayoutCachedWidth =1087
                                     LayoutCachedHeight =5010
                                 End
                                 Begin Label
                                     OverlapFlags =247
-                                    Left =9125
+                                    Left =9185
                                     Top =4800
                                     Width =847
                                     Height =210
@@ -1012,9 +1013,9 @@ Begin Form
                                     ForeColor =9870754
                                     Name ="lblVersionBE"
                                     Caption ="BE Version"
-                                    LayoutCachedLeft =9125
+                                    LayoutCachedLeft =9185
                                     LayoutCachedTop =4800
-                                    LayoutCachedWidth =9972
+                                    LayoutCachedWidth =10032
                                     LayoutCachedHeight =5010
                                 End
                             End
@@ -1024,13 +1025,13 @@ Begin Form
                             Left =75
                             Top =2220
                             Width =9990
-                            Height =3015
+                            Height =3000
                             Name ="pagDefaults"
                             Caption =" Defaults"
                             LayoutCachedLeft =75
                             LayoutCachedTop =2220
                             LayoutCachedWidth =10065
-                            LayoutCachedHeight =5235
+                            LayoutCachedHeight =5220
                             WebImagePaddingLeft =2
                             WebImagePaddingTop =2
                             WebImagePaddingRight =2
@@ -1413,13 +1414,13 @@ Begin Form
                             Left =75
                             Top =2220
                             Width =9990
-                            Height =3015
+                            Height =3000
                             Name ="pagAbout"
                             Caption =" About"
                             LayoutCachedLeft =75
                             LayoutCachedTop =2220
                             LayoutCachedWidth =10065
-                            LayoutCachedHeight =5235
+                            LayoutCachedHeight =5220
                             WebImagePaddingLeft =2
                             WebImagePaddingTop =2
                             WebImagePaddingRight =2

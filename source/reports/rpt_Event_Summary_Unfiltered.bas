@@ -2,7 +2,6 @@
 VersionRequired =20
 Begin Report
     LayoutForPrint = NotDefault
-    AllowDesignChanges = NotDefault
     DefaultView =0
     TabularFamily =0
     DateGrouping =1
@@ -13,11 +12,10 @@ Begin Report
     GridY =24
     Width =11160
     DatasheetFontHeight =10
-    ItemSuffix =67
+    ItemSuffix =70
     Left =15
-    Top =240
+    Top =-2280
     DatasheetGridlinesColor =12632256
-    Filter ="[Event_ID]='{76636FB6-C229-41E8-924F-5325CB032D53}'"
     RecSrcDt = Begin
         0x1e595cfd0c18e540
     End
@@ -25,10 +23,11 @@ Begin Report
     OnOpen ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0xf801000038040000f80100003804000000000000982b00006018000001000000 ,
+        0xf801000038040000f80100003804000000000000982b00007c1a000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
+    AllowLayoutView =0
     DatasheetGridlinesColor12 =12632256
     Begin
         Begin Label
@@ -60,7 +59,7 @@ Begin Report
         Begin Section
             KeepTogether = NotDefault
             CanGrow = NotDefault
-            Height =6240
+            Height =6780
             OnFormat ="[Event Procedure]"
             Name ="Detail"
             Begin
@@ -797,24 +796,27 @@ Begin Report
                 Begin Label
                     FontItalic = NotDefault
                     FontUnderline = NotDefault
+                    BackStyle =1
+                    OverlapFlags =12
                     TextAlign =1
                     TextFontFamily =34
                     Top =5100
-                    Width =4200
+                    Width =10800
                     Height =390
                     FontSize =14
                     FontWeight =700
+                    BackColor =12581629
                     Name ="lblHdrUnsampledTags"
                     Caption ="Unsampled Tags"
                     FontName ="Calibri"
                     LayoutCachedTop =5100
-                    LayoutCachedWidth =4200
+                    LayoutCachedWidth =10800
                     LayoutCachedHeight =5490
                 End
                 Begin Subform
                     Locked = NotDefault
                     OldBorderStyle =0
-                    Top =6180
+                    Top =6660
                     Width =10800
                     Height =0
                     TabIndex =22
@@ -823,43 +825,44 @@ Begin Report
                     LinkChildFields ="Event_ID;Location_ID;Event_Date"
                     LinkMasterFields ="Event_ID;Location_ID;Event_Date"
 
-                    LayoutCachedTop =6180
+                    LayoutCachedTop =6660
                     LayoutCachedWidth =10800
-                    LayoutCachedHeight =6180
+                    LayoutCachedHeight =6660
                 End
                 Begin Label
                     FontItalic = NotDefault
                     FontUnderline = NotDefault
                     BackStyle =1
+                    OverlapFlags =12
                     TextAlign =1
                     TextFontFamily =34
-                    Top =5700
+                    Top =6180
                     Width =10800
                     Height =390
                     FontSize =14
                     FontWeight =700
-                    BackColor =12443391
+                    BackColor =12581629
                     Name ="lblHdrMonsterSaplings"
                     Caption ="Monster Saplings"
                     FontName ="Calibri"
-                    LayoutCachedTop =5700
+                    LayoutCachedTop =6180
                     LayoutCachedWidth =10800
-                    LayoutCachedHeight =6090
+                    LayoutCachedHeight =6570
                 End
                 Begin Label
                     TextAlign =3
                     TextFontFamily =34
                     Left =9480
-                    Top =5880
+                    Top =6360
                     Width =1200
                     Height =225
                     FontWeight =700
                     Name ="lblDBHgt10cm"
                     Caption ="DBH > 10 cm"
                     LayoutCachedLeft =9480
-                    LayoutCachedTop =5880
+                    LayoutCachedTop =6360
                     LayoutCachedWidth =10680
-                    LayoutCachedHeight =6105
+                    LayoutCachedHeight =6585
                 End
                 Begin Label
                     Visible = NotDefault
@@ -885,7 +888,7 @@ Begin Report
                     TextAlign =2
                     TextFontFamily =34
                     Left =2880
-                    Top =5760
+                    Top =6240
                     Width =1905
                     Height =288
                     FontWeight =700
@@ -893,9 +896,63 @@ Begin Report
                     Name ="lblNoDataMonster"
                     Caption ="-- None Found --"
                     LayoutCachedLeft =2880
-                    LayoutCachedTop =5760
+                    LayoutCachedTop =6240
                     LayoutCachedWidth =4785
-                    LayoutCachedHeight =6048
+                    LayoutCachedHeight =6528
+                    ForeThemeColorIndex =0
+                    ForeTint =65.0
+                End
+                Begin Subform
+                    Locked = NotDefault
+                    OldBorderStyle =0
+                    Top =6120
+                    Width =10800
+                    Height =0
+                    TabIndex =23
+                    Name ="rSub_Unsampled_Quadrats"
+                    SourceObject ="Report.rSub_Event_UnsampledQuadrats"
+                    LinkChildFields ="Location_ID;Event_ID"
+                    LinkMasterFields ="Location_ID;Event_ID"
+
+                    LayoutCachedTop =6120
+                    LayoutCachedWidth =10800
+                    LayoutCachedHeight =6120
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    FontUnderline = NotDefault
+                    BackStyle =1
+                    TextAlign =1
+                    TextFontFamily =34
+                    Top =5640
+                    Width =10800
+                    Height =390
+                    FontSize =14
+                    FontWeight =700
+                    BackColor =12581629
+                    Name ="lblUnsampledQuadrats"
+                    Caption ="Unsampled Quadrats"
+                    FontName ="Calibri"
+                    LayoutCachedTop =5640
+                    LayoutCachedWidth =10800
+                    LayoutCachedHeight =6030
+                End
+                Begin Label
+                    Visible = NotDefault
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =2880
+                    Top =5700
+                    Width =1905
+                    Height =288
+                    FontWeight =700
+                    ForeColor =5855577
+                    Name ="lblNoDataUnsampledQuadrats"
+                    Caption ="-- None Found --"
+                    LayoutCachedLeft =2880
+                    LayoutCachedTop =5700
+                    LayoutCachedWidth =4785
+                    LayoutCachedHeight =5988
                     ForeThemeColorIndex =0
                     ForeTint =65.0
                 End
@@ -989,12 +1046,13 @@ Option Explicit
 ' =================================
 ' REPORT:       rpt_Event_Summary_Unfiltered
 ' Level:        Application report
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  Report related functions & procedures for application
 '
 ' Source/date:  Bonnie Campbell, April 20, 2018
 ' Revisions:    BLC - 4/20/2018 - 1.00 - initial version
+'               BLC - 5/1/2018  - 1.01 - added unsampled quadrats
 ' =================================
 
 ' ---------------------------------
@@ -1039,12 +1097,14 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/20/2018 - initial version
+'   BLC - 5/1/2018 - added unsampled quadrats
 ' ---------------------------------
 Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
 On Error GoTo Err_Handler
 
     'show/hide label
     Me.lblNoDataUnsampled.Visible = Not Me.Report.Controls("rSub_UnsampledTags").Report.HasData
+    Me.lblNoDataUnsampledQuadrats.Visible = Not Me.Report.Controls("rSub_Unsampled_Quadrats").Report.HasData
     Me.lblNoDataMonster.Visible = Not Me.Report.Controls("rSub_Monster_Saplings").Report.HasData
     
 Exit_Handler:
