@@ -13,29 +13,27 @@ Begin Report
     GridY =24
     Width =10800
     DatasheetFontHeight =10
-    ItemSuffix =42
-    Left =75
-    Top =6180
+    ItemSuffix =43
+    Left =135
+    Top =2490
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
-        0xc47eed94f4efe440
+        0x159b418f4c1ce540
     End
-    RecordSource ="SELECT tbl_Tags.Tag, tlu_Plants.Latin_Name, qCalc_Basal_Area_per_Tree.Stems, qCa"
-        "lc_Basal_Area_per_Tree.Equiv_DBH_cm, [Crown_Class] & \" \" & [CrownClass] AS CC,"
-        " [TreeVigor] & \" \" & [TreeVigorClass] AS Vig, tbl_Tree_Data.Vines_Checked, tbl"
-        "_Tree_Data.Conditions_Checked, tbl_Tree_Data.Foliage_Conditions_Checked, tbl_Tre"
-        "e_Data.Tree_Status, tbl_Tags.Azimuth, tbl_Tags.Distance, tbl_Tree_Data.Tree_Note"
-        "s, tbl_Tree_Data.Tree_Data_ID, tbl_Tree_Data.Event_ID, maketreestemlist([tbl_tre"
-        "e_data]![Event_ID],[tbl_tree_data]![Tree_Data_Id]) AS StemList FROM (((tbl_Tree_"
-        "Data LEFT JOIN qCalc_Basal_Area_per_Tree ON tbl_Tree_Data.Tree_Data_ID = qCalc_B"
-        "asal_Area_per_Tree.Tree_Data_ID) LEFT JOIN tbl_Tags ON tbl_Tree_Data.Tag_ID = tb"
-        "l_Tags.Tag_ID) LEFT JOIN tlu_Plants ON tbl_Tags.TSN = tlu_Plants.TSN) LEFT JOIN "
-        "tluTreeVigor ON tbl_Tree_Data.TreeVigor = tluTreeVigor.TreeVigorCode ORDER BY tb"
-        "l_Tags.Tag;"
+    RecordSource ="SELECT t.Tag, p.Latin_Name,  q.Stems, q.Equiv_DBH_cm, [Crown_Class] & \" \" & [C"
+        "rownClass] AS CC,  [TreeVigor] & \" \" & [TreeVigorClass] AS Vig,  td.Vines_Chec"
+        "ked, td.Conditions_Checked, td.Foliage_Conditions_Checked, td.Tree_Status, t.Azi"
+        "muth, t.Distance, td.Tree_Notes, td.Tree_Data_ID, td.Event_ID, MakeStemList('Tre"
+        "e',[tbl_tree_data]![Event_ID],[tbl_tree_data]![Tree_Data_Id]) AS StemList, MakeL"
+        "iveFlag('Tree',[tbl_tree_data]![Event_ID],[tbl_tree_data]![Tree_Data_Id]) AS Liv"
+        "eFlag FROM (((tbl_Tree_Data td LEFT JOIN qCalc_Basal_Area_per_Tree q ON td.Tree_"
+        "Data_ID = q.Tree_Data_ID)  LEFT JOIN tbl_Tags t ON td.Tag_ID = t.Tag_ID)  LEFT J"
+        "OIN tlu_Plants p ON t.TSN = p.TSN)  LEFT JOIN tluTreeVigor tv ON td.TreeVigor = "
+        "tv.TreeVigorCode ORDER BY t.Tag;"
     Caption ="srpt_Trees"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0xe0010000e0010000680100006801000000000000302a0000a401000001000000 ,
+        0xe0010000e0010000680100006801000000000000302a00001c02000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
@@ -290,7 +288,7 @@ Begin Report
         Begin Section
             KeepTogether = NotDefault
             CanGrow = NotDefault
-            Height =525
+            Height =540
             OnFormat ="[Event Procedure]"
             Name ="Detail"
             Begin
@@ -301,7 +299,7 @@ Begin Report
                     Width =720
                     Height =239
                     TabIndex =14
-                    Name ="txtCheck_Background"
+                    Name ="tbxCheckBackground"
                     ControlSource ="=\"\""
                     ConditionalFormat = Begin
                         0x0100000076010000020000000100000000000000000000002600000001000000 ,
@@ -344,7 +342,7 @@ Begin Report
                     Height =270
                     FontSize =9
                     FontWeight =700
-                    Name ="txtTag"
+                    Name ="tbxTag"
                     ControlSource ="Tag"
                     StatusBarText ="Number of physical tag attached to tree"
                     FontName ="Calibri"
@@ -352,19 +350,20 @@ Begin Report
                 End
                 Begin TextBox
                     TextAlign =2
+                    BackStyle =1
                     IMESentenceMode =3
                     Left =780
                     Width =1320
                     Height =270
                     FontSize =9
                     TabIndex =1
-                    Name ="txtLocation"
+                    Name ="tbxLocation"
                     ControlSource ="=[Azimuth] & \"º  \" & Format([Distance],\"Fixed\") & \"m\""
                     StatusBarText ="Distance (m) from plot center to near EDGE of tree"
                     FontName ="Calibri"
                     ConditionalFormat = Begin
                         0x01000000b2000000010000000100000000000000000000002800000001000000 ,
-                        0x00000000cf7b7900000000000000000000000000000000000000000000000000 ,
+                        0x00000000ed1c2400000000000000000000000000000000000000000000000000 ,
                         0x0000000000000000000000000000000000000000000000000000000000000000 ,
                         0x490073004e0075006c006c0028005b00440069007300740061006e0063006500 ,
                         0x5d00290020004f0072002000490073004e0075006c006c0028005b0041007a00 ,
@@ -372,7 +371,7 @@ Begin Report
                     End
 
                     ConditionalFormat14 = Begin
-                        0x01000100000001000000000000000100000000000000cf7b7900270000004900 ,
+                        0x01000100000001000000000000000100000000000000ed1c2400270000004900 ,
                         0x73004e0075006c006c0028005b00440069007300740061006e00630065005d00 ,
                         0x290020004f0072002000490073004e0075006c006c0028005b0041007a006900 ,
                         0x6d007500740068005d0029000000000000000000000000000000000000000000 ,
@@ -387,38 +386,38 @@ Begin Report
                     Height =270
                     FontSize =9
                     TabIndex =2
-                    Name ="txtLatin_Name"
+                    Name ="tbxLatinName"
                     ControlSource ="Latin_Name"
                     StatusBarText ="Genus of specimen"
                     FontName ="Calibri"
                     ConditionalFormat = Begin
-                        0x0100000092000000010000000100000000000000000000001800000001000000 ,
+                        0x0100000090000000010000000100000000000000000000001700000001000000 ,
                         0x00000000ed1c2400000000000000000000000000000000000000000000000000 ,
                         0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x490073004e0075006c006c0028005b007400780074004c006100740069006e00 ,
-                        0x5f004e0061006d0065005d00290000000000
+                        0x490073004e0075006c006c0028005b007400620078004c006100740069006e00 ,
+                        0x4e0061006d0065005d00290000000000
                     End
 
                     LayoutCachedLeft =2160
                     LayoutCachedWidth =3600
                     LayoutCachedHeight =270
                     ConditionalFormat14 = Begin
-                        0x01000100000001000000000000000100000000000000ed1c2400170000004900 ,
-                        0x73004e0075006c006c0028005b007400780074004c006100740069006e005f00 ,
-                        0x4e0061006d0065005d0029000000000000000000000000000000000000000000 ,
-                        0x00
+                        0x01000100000001000000000000000100000000000000ed1c2400160000004900 ,
+                        0x73004e0075006c006c0028005b007400620078004c006100740069006e004e00 ,
+                        0x61006d0065005d002900000000000000000000000000000000000000000000
                     End
                 End
                 Begin TextBox
                     TextFontCharSet =238
                     TextAlign =2
+                    BackStyle =1
                     IMESentenceMode =3
                     Left =3540
                     Width =1980
                     FontSize =9
                     TabIndex =3
-                    Name ="txtStems"
-                    ControlSource ="=MakeTreeStemList([Event_ID],[Tree_Data_ID])"
+                    Name ="tbxStems"
+                    ControlSource ="=MakeStemList('Tree',[Event_ID],[Tree_Data_ID])"
                     FontName ="Calibri"
 
                     LayoutCachedLeft =3540
@@ -433,45 +432,54 @@ Begin Report
                     Width =720
                     FontSize =9
                     TabIndex =4
-                    Name ="txtSum_BasalArea"
+                    Name ="tbxSumBasalArea"
                     ControlSource ="Equiv_DBH_cm"
                     FontName ="Calibri"
                     ConditionalFormat = Begin
-                        0x01000000b6010000030000000100000000000000000000002600000001000000 ,
-                        0x00000000faf3e800010000000000000027000000880000000100000000000000 ,
-                        0xed1c2400010000000000000089000000aa0000000100000000000000ed1c2400 ,
+                        0x01000000b2010000030000000100000000000000000000002600000001000000 ,
+                        0x00000000faf3e800010000000000000027000000870000000100000000000000 ,
+                        0xed1c2400010000000000000088000000a80000000100000000000000ed1c2400 ,
                         0x49004900660028004c0065006600740028005b0054007200650065005f005300 ,
                         0x740061007400750073005d002c00340029003d00220044004500410044002200 ,
                         0x2c0031002c00300029000000000049004900660028005b005400720065006500 ,
                         0x5f005300740061007400750073005d003d002200440065006100640020007300 ,
                         0x740061006e00640069006e006700220020004f00720020005b00540072006500 ,
                         0x65005f005300740061007400750073005d003d00220044006500610064002000 ,
-                        0x6c00650061006e0069006e0067002200200041006e00640020005b0074007800 ,
-                        0x7400530075006d005f0042006100730061006c0041007200650061005d003d00 ,
-                        0x220022002c0031002c0030002900000000004e007a00280049006e0074002800 ,
-                        0x5b00740078007400530075006d005f0042006100730061006c00410072006500 ,
-                        0x61005d0029002c00300029003c003100300000000000
+                        0x6c00650061006e0069006e0067002200200041006e00640020005b0074006200 ,
+                        0x7800530075006d0042006100730061006c0041007200650061005d003d002200 ,
+                        0x22002c0031002c0030002900000000004e007a00280049006e00740028005b00 ,
+                        0x740062007800530075006d0042006100730061006c0041007200650061005d00 ,
+                        0x29002c00300029003c003100300000000000
                     End
 
                     LayoutCachedLeft =5520
                     LayoutCachedWidth =6240
                     LayoutCachedHeight =240
                     ConditionalFormat14 = Begin
-                        0x01000300000001000000000000000100000000000000faf3e800250000004900 ,
+                        0x01000400000001000000000000000100000000000000faf3e800250000004900 ,
                         0x4900660028004c0065006600740028005b0054007200650065005f0053007400 ,
                         0x61007400750073005d002c00340029003d002200440045004100440022002c00 ,
                         0x31002c0030002900000000000000000000000000000000000000000000010000 ,
-                        0x00000000000100000000000000ed1c24006000000049004900660028005b0054 ,
+                        0x00000000000100000000000000ed1c24005f00000049004900660028005b0054 ,
                         0x007200650065005f005300740061007400750073005d003d0022004400650061 ,
                         0x00640020007300740061006e00640069006e006700220020004f00720020005b ,
                         0x0054007200650065005f005300740061007400750073005d003d002200440065 ,
                         0x006100640020006c00650061006e0069006e0067002200200041006e00640020 ,
-                        0x005b00740078007400530075006d005f0042006100730061006c004100720065 ,
-                        0x0061005d003d00220022002c0031002c00300029000000000000000000000000 ,
-                        0x0000000000000000000001000000000000000100000000000000ed1c24002000 ,
-                        0x00004e007a00280049006e00740028005b00740078007400530075006d005f00 ,
-                        0x42006100730061006c0041007200650061005d0029002c00300029003c003100 ,
-                        0x3000000000000000000000000000000000000000000000
+                        0x005b00740062007800530075006d0042006100730061006c0041007200650061 ,
+                        0x005d003d00220022002c0031002c003000290000000000000000000000000000 ,
+                        0x000000000000000001000000000000000100000000000000ed1c24001f000000 ,
+                        0x4e007a00280049006e00740028005b00740062007800530075006d0042006100 ,
+                        0x730061006c0041007200650061005d0029002c00300029003c00310030000000 ,
+                        0x0000000000000000000000000000000000000001000000000000000101000000 ,
+                        0x000000ed1c24007a0000004900490066002800280028004c0065006600740024 ,
+                        0x0028005b0074006200780054007200650065005300740061007400750073005d ,
+                        0x002c00340029003d00270044006500610064002700200041006e006400200028 ,
+                        0x005b004c0069007600650046006c00610067005d003e0030002900290020004f ,
+                        0x0072002000280028004c00650066007400240028005b00740062007800540072 ,
+                        0x00650065005300740061007400750073005d002c00350029003d00270041006c ,
+                        0x0069007600650027002900200041006e006400200028005b004c006900760065 ,
+                        0x0046006c00610067005d003d0030002900290029002c0031002c003000290000 ,
+                        0x0000000000000000000000000000000000000000
                     End
                 End
                 Begin TextBox
@@ -483,7 +491,7 @@ Begin Report
                     Width =1260
                     FontSize =9
                     TabIndex =5
-                    Name ="txtCrown_Class"
+                    Name ="tbxCrownClass"
                     ControlSource ="CC"
                     FontName ="Calibri"
                     ConditionalFormat = Begin
@@ -520,20 +528,37 @@ Begin Report
                     ControlSource ="Tree_Status"
                     FontName ="Calibri"
                     ConditionalFormat = Begin
-                        0x010000008e000000010000000100000000000000000000001600000001000000 ,
-                        0x00000000ed1c2400000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0100000086010000020000000100000000000000000000001600000001000000 ,
+                        0x00000000ed1c2400010000000000000017000000920000000100000000000000 ,
+                        0xed1c240000000000000000000000000000000000000000000000000000000000 ,
                         0x490073004e0075006c006c0028005b0054007200650065005f00530074006100 ,
-                        0x7400750073005d00290000000000
+                        0x7400750073005d002900000000004900490066002800280028004c0065006600 ,
+                        0x7400240028005b00740062007800540072006500650053007400610074007500 ,
+                        0x73005d002c00340029003d00270044006500610064002700200041006e006400 ,
+                        0x200028005b004c0069007600650046006c00610067005d003e00300029002900 ,
+                        0x20004f0072002000280028004c00650066007400240028005b00740062007800 ,
+                        0x54007200650065005300740061007400750073005d002c00350029003d002700 ,
+                        0x41006c0069007600650027002900200041006e006400200028005b004c006900 ,
+                        0x7600650046006c00610067005d003d0030002900290029002c0031002c003000 ,
+                        0x290000000000
                     End
 
                     LayoutCachedLeft =9480
                     LayoutCachedWidth =10799
                     LayoutCachedHeight =240
                     ConditionalFormat14 = Begin
-                        0x01000100000001000000000000000100000000000000ed1c2400150000004900 ,
+                        0x01000200000001000000000000000100000000000000ed1c2400150000004900 ,
                         0x73004e0075006c006c0028005b0054007200650065005f005300740061007400 ,
-                        0x750073005d002900000000000000000000000000000000000000000000
+                        0x750073005d002900000000000000000000000000000000000000000000010000 ,
+                        0x00000000000100000000000000ed1c24007a0000004900490066002800280028 ,
+                        0x004c00650066007400240028005b007400620078005400720065006500530074 ,
+                        0x0061007400750073005d002c00340029003d0027004400650061006400270020 ,
+                        0x0041006e006400200028005b004c0069007600650046006c00610067005d003e ,
+                        0x0030002900290020004f0072002000280028004c00650066007400240028005b ,
+                        0x0074006200780054007200650065005300740061007400750073005d002c0035 ,
+                        0x0029003d00270041006c0069007600650027002900200041006e006400200028 ,
+                        0x005b004c0069007600650046006c00610067005d003d0030002900290029002c ,
+                        0x0031002c0030002900000000000000000000000000000000000000000000
                     End
                 End
                 Begin Subform
@@ -590,7 +615,7 @@ Begin Report
                     FontSize =6
                     TabIndex =10
                     ForeColor =8421504
-                    Name ="txtTree_Notes"
+                    Name ="tbxTreeNotes"
                     ControlSource ="Tree_Notes"
                     StatusBarText ="Number of physical tag attached to tree"
 
@@ -634,7 +659,7 @@ Begin Report
                     Width =1020
                     FontSize =9
                     TabIndex =15
-                    Name ="txtVigor"
+                    Name ="tbxVigor"
                     ControlSource ="Vig"
                     FontName ="Calibri"
                     ConditionalFormat = Begin

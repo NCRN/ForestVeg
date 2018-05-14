@@ -607,3 +607,265 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Function
+
+' ---------------------------------
+' FUNCTION:     MakeTreeStemList
+' Description:  Collapse all tree stems into a single field (for event report)
+' Assumptions:  -
+' Parameters:   EventID - event identifier (string)
+'               TreeDataID - tree identifier (string)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman, August 21, 2006
+' Adapted:      Bonnie Campbell, May 14, 2018
+' Revisions:
+'   MEL - 8/21/2006 - initial version
+'   BLC - 5/14/2018 - move from mod_AppSpecific > mod_App_Data
+' ---------------------------------
+Public Function MakeTreeStemList(EventID As String, TreeDataID As String) As String
+On Error GoTo Err_Handler
+
+    'Collapse all tree stems into a single field   mel 8/21/06
+    Dim strSQL As String
+    Dim rs As DAO.Recordset
+    Dim strStemList As String
+    Dim strStemListLive As String
+    Dim strStemListDead As String
+    
+    strSQL = "SELECT d.DBH, d.Live, td.Event_ID, td.Tree_Data_ID " _
+            & "FROM tbl_Tree_Data td " _
+            & "INNER JOIN tbl_Tree_DBH d ON td.Tree_Data_ID = d.Tree_Data_ID " _
+            & "WHERE td.Event_ID= """ & EventID & """ " _
+            & "AND td.Tree_Data_ID= """ & TreeDataID & """;"
+
+    Set rs = CurrentDb.OpenRecordset(strSQL)
+
+    Do Until rs.EOF
+        If rs!Live = True Then
+            strStemListLive = strStemListLive & ", " & Format(rs!DBH, "#0.0")
+        Else
+            strStemListDead = strStemListDead & ", " & Format(rs!DBH, "#0.0")
+        End If
+        rs.MoveNext
+    Loop
+
+    strStemListLive = Mid(strStemListLive, 3)
+    strStemListDead = Mid(strStemListDead, 3)
+    strStemList = "L: " & strStemListLive & " D: " & strStemListDead
+    
+    MakeTreeStemList = strStemList
+
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - MakeTreeStemList[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     MakeSaplingStemList
+' Description:  Collapse all sapling stems into a single field (for event report)
+' Assumptions:  -
+' Parameters:   EventID - event identifier (string)
+'               SaplingDataID - sapling identifier (string)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman, August 21, 2006
+' Adapted:      Bonnie Campbell, May 14, 2018
+' Revisions:
+'   MEL - 8/21/2006 - initial version
+'   BLC - 5/14/2018 - move from mod_AppSpecific > mod_App_Data
+' ---------------------------------
+Public Function MakeSaplingStemList(EventID As String, SaplingDataID As String) As String
+On Error GoTo Err_Handler
+
+    'Collapse all sapling stems into a single field   mel 8/21/06
+    Dim strSQL As String
+    Dim rs As DAO.Recordset
+    Dim strStemList As String
+    Dim strStemListLive As String
+    Dim strStemListDead As String
+    
+    strSQL = "SELECT d.DBH, d.Live, sd.Event_ID, sd.Sapling_Data_ID " _
+        & "FROM tbl_Sapling_Data sd " _
+        & "INNER JOIN tbl_Sapling_DBH d ON sd.Sapling_Data_ID = d.Sapling_Data_ID " _
+        & "WHERE sd.Event_ID= """ & EventID & """ " _
+        & "AND sd.Sapling_Data_ID= """ & SaplingDataID & """;"
+    
+    Set rs = CurrentDb.OpenRecordset(strSQL)
+
+    Do Until rs.EOF
+        If rs!Live = True Then
+            strStemListLive = strStemListLive & ", " & Format(rs!DBH, "#0.0")
+        Else
+            strStemListDead = strStemListDead & ", " & Format(rs!DBH, "#0.0")
+        End If
+        rs.MoveNext
+    Loop
+
+    strStemListLive = Mid(strStemListLive, 3)
+    strStemListDead = Mid(strStemListDead, 3)
+    strStemList = "L: " & strStemListLive & " D: " & strStemListDead
+    
+    MakeSaplingStemList = strStemList
+
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - MakeSaplingStemList[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     MakeStemList
+' Description:  Collapse all tree/sapling stems into a single field (for event report)
+' Assumptions:  -
+' Parameters:   Mode - tree or stem (string)
+'               EventID - event identifier (string)
+'               SaplingDataID - sapling identifier (string)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Used in:      Event report - tree & sapling subforms
+' Source/date:  Mark Lehman, August 21, 2006
+' Adapted:      Bonnie Campbell, May 14, 2018 from MakeTreeStemList/MakeSaplingStemList
+' Revisions:
+'   MEL - 8/21/2006 - initial version (MakeTreeStemList/MakeSaplingStemList)
+'   BLC - 5/14/2018 - move from mod_AppSpecific > mod_App_Data & revise to accommodate both
+'                     trees & saplings
+' ---------------------------------
+Public Function MakeStemList(Mode As String, EventID As String, DataID As String) As String
+On Error GoTo Err_Handler
+
+    'Collapse all sapling stems into a single field   mel 8/21/06
+    Dim strSQL As String
+    Dim rs As DAO.Recordset
+    Dim strStemList As String
+    Dim strStemListLive As String
+    Dim strStemListDead As String
+    
+    Select Case Mode
+        Case "Sapling"
+            strSQL = "SELECT d.DBH, d.Live, sd.Event_ID, sd.Sapling_Data_ID " _
+                & "FROM tbl_Sapling_Data sd " _
+                & "INNER JOIN tbl_Sapling_DBH d ON sd.Sapling_Data_ID = d.Sapling_Data_ID " _
+                & "WHERE sd.Event_ID= """ & EventID & """ " _
+                & "AND sd.Sapling_Data_ID= """ & DataID & """;"
+        
+        Case "Tree"
+            strSQL = "SELECT d.DBH, d.Live, td.Event_ID, td.Tree_Data_ID " _
+                    & "FROM tbl_Tree_Data td " _
+                    & "INNER JOIN tbl_Tree_DBH d ON td.Tree_Data_ID = d.Tree_Data_ID " _
+                    & "WHERE td.Event_ID= """ & EventID & """ " _
+                    & "AND td.Tree_Data_ID= """ & DataID & """;"
+    End Select
+    
+    Set rs = CurrentDb.OpenRecordset(strSQL)
+
+    Do Until rs.EOF
+        If rs!Live = True Then
+            strStemListLive = strStemListLive & ", " & Format(rs!DBH, "#0.0")
+        Else
+            strStemListDead = strStemListDead & ", " & Format(rs!DBH, "#0.0")
+        End If
+        rs.MoveNext
+    Loop
+
+    strStemListLive = Mid(strStemListLive, 3)
+    strStemListDead = Mid(strStemListDead, 3)
+    strStemList = "L: " & strStemListLive & " D: " & strStemListDead
+    
+    MakeStemList = strStemList
+
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - MakeStemList[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     MakeLiveFlag
+' Description:  Collapse all tree/sapling stem live/dead flags into a single value (for event report)
+' Assumptions:  Live/Dead flags should match with sapling status
+'
+' Parameters:   Mode - tree or sapling (string)
+'               EventID - event identifier (string)
+'               SaplingDataID - sapling identifier (string)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 14, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 5/14/2018 - initial version
+' ---------------------------------
+Public Function MakeLiveFlag(Mode As String, EventID As String, DataID As String) As String
+On Error GoTo Err_Handler
+
+    Dim strSQL As String
+    Dim rs As DAO.Recordset
+    Dim iStemsLive As Integer
+    'Dim iStemsDead As Integer
+    
+    Select Case Mode
+        Case "Sapling"
+            strSQL = "SELECT d.DBH, d.Live, sd.Event_ID, sd.Sapling_Data_ID " _
+                & "FROM tbl_Sapling_Data sd " _
+                & "INNER JOIN tbl_Sapling_DBH d ON sd.Sapling_Data_ID = d.Sapling_Data_ID " _
+                & "WHERE sd.Event_ID= """ & EventID & """ " _
+                & "AND sd.Sapling_Data_ID= """ & DataID & """;"
+        
+        Case "Tree"
+            strSQL = "SELECT d.DBH, d.Live, td.Event_ID, td.Tree_Data_ID " _
+                    & "FROM tbl_Tree_Data td " _
+                    & "INNER JOIN tbl_Tree_DBH d ON td.Tree_Data_ID = d.Tree_Data_ID " _
+                    & "WHERE td.Event_ID= """ & EventID & """ " _
+                    & "AND td.Tree_Data_ID= """ & DataID & """;"
+    End Select
+    
+    Set rs = CurrentDb.OpenRecordset(strSQL)
+
+    Do Until rs.EOF
+    
+        iStemsLive = iStemsLive + Abs(CInt(rs!Live))
+    
+'        If rs!Live = True Then
+'            iStemsLive = iStemsLive + 1
+'        Else
+'            iStemsDead = iStemsDead + 1
+'        End If
+        rs.MoveNext
+    
+    Loop
+    
+    MakeLiveFlag = iStemsLive
+
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - MakeLiveFlag[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function

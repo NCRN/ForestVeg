@@ -109,7 +109,7 @@ Begin Form
                     Height =300
                     FontSize =10
                     ColumnInfo ="\"\";\"\";\"10\";\"510\""
-                    Name ="cboSelect_Query"
+                    Name ="cbxSelectQuery"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT MSysObjects.Name, MSysObjects.Type, * FROM MSysObjects WHERE (((MSysObjec"
                         "ts.Name) Like \"qSum_*\") AND ((MSysObjects.Type)=5)) ORDER BY MSysObjects.Name;"
@@ -132,7 +132,7 @@ Begin Form
                             Width =1560
                             Height =240
                             FontSize =10
-                            Name ="labQuery"
+                            Name ="lblQuery"
                             Caption ="Select the query:"
                             FontName ="Calibri"
                             LayoutCachedLeft =3420
@@ -166,7 +166,7 @@ Begin Form
                     Height =426
                     FontSize =10
                     TabIndex =7
-                    Name ="cmdDesign"
+                    Name ="btnDesign"
                     Caption ="Design view"
                     OnClick ="[Event Procedure]"
                     PictureData = Begin
@@ -207,7 +207,7 @@ Begin Form
                     Height =426
                     FontSize =10
                     TabIndex =2
-                    Name ="cmdChart"
+                    Name ="btnChart"
                     Caption ="Chart view"
                     OnClick ="[Event Procedure]"
                     PictureData = Begin
@@ -248,7 +248,7 @@ Begin Form
                     Height =426
                     FontSize =10
                     TabIndex =3
-                    Name ="cmdPivotTable"
+                    Name ="btnPivotTable"
                     Caption ="Table view"
                     OnClick ="[Event Procedure]"
                     PictureData = Begin
@@ -289,7 +289,7 @@ Begin Form
                     Height =426
                     FontSize =10
                     TabIndex =4
-                    Name ="cmdCloseup"
+                    Name ="btnCloseup"
                     Caption ="Zoom"
                     OnClick ="[Event Procedure]"
                     PictureData = Begin
@@ -330,7 +330,7 @@ Begin Form
                     Height =426
                     FontSize =10
                     TabIndex =5
-                    Name ="cmdExportExcel"
+                    Name ="btnExportExcel"
                     Caption ="Zoom"
                     OnClick ="[Event Procedure]"
                     PictureData = Begin
@@ -371,7 +371,7 @@ Begin Form
                     Height =426
                     FontSize =10
                     TabIndex =6
-                    Name ="cmdExportText"
+                    Name ="btnExportText"
                     Caption ="Zoom"
                     OnClick ="[Event Procedure]"
                     PictureData = Begin
@@ -417,7 +417,7 @@ Begin Form
                     Width =7440
                     Height =630
                     TabIndex =1
-                    Name ="txtDesc"
+                    Name ="tbxDesc"
                     FontName ="Calibri"
 
                     LayoutCachedLeft =5040
@@ -436,7 +436,7 @@ Begin Form
                     FontWeight =700
                     TabIndex =11
                     ForeColor =0
-                    Name ="cmdRequery"
+                    Name ="btnRequery"
                     Caption ="Requery"
                     OnClick ="[Event Procedure]"
                     FontName ="Calibri"
@@ -467,7 +467,7 @@ Begin Form
                     BackColor =-2147483643
                     ForeColor =-2147483640
                     ColumnInfo ="\"\";\"\";\"10\";\"100\""
-                    Name ="cboParkFilter"
+                    Name ="cbxParkFilter"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tlu_Enumerations.Enum_Code FROM tlu_Enumerations WHERE (((tlu_Enumeration"
                         "s.Enum_Group)=\"Unit Code\")) ORDER BY tlu_Enumerations.Enum_Code; "
@@ -513,7 +513,7 @@ Begin Form
                     FontSize =10
                     TabIndex =13
                     ForeColor =0
-                    Name ="togFilterByPark"
+                    Name ="tglFilterByPark"
                     AfterUpdate ="[Event Procedure]"
                     DefaultValue ="0"
                     Caption ="Filter on"
@@ -559,7 +559,7 @@ Begin Form
                     BackColor =-2147483643
                     ForeColor =-2147483640
                     ColumnInfo ="\"\";\"\";\"10\";\"100\""
-                    Name ="cboAdminParkFilter"
+                    Name ="cbxAdminParkFilter"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tlu_Enumerations.Enum_Code, tlu_Enumerations.Enum_Group FROM tlu_Enumerat"
                         "ions WHERE (((tlu_Enumerations.Enum_Group)=\"Unit Code\")) ORDER BY tlu_Enumerat"
@@ -606,7 +606,7 @@ Begin Form
                     FontSize =10
                     TabIndex =15
                     ForeColor =0
-                    Name ="togFilterByAdminPark"
+                    Name ="tglFilterByAdminPark"
                     AfterUpdate ="[Event Procedure]"
                     DefaultValue ="0"
                     Caption ="Filter on"
@@ -652,7 +652,7 @@ Begin Form
                     BackColor =-2147483643
                     ForeColor =-2147483640
                     ColumnInfo ="\"\";\"\";\"3\";\"2\""
-                    Name ="cboYearFilter"
+                    Name ="cbxYearFilter"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT qfrm_Data_Gateway.Event_Year FROM qfrm_Data_Gateway WHERE (((qfrm_Data_Ga"
                         "teway.Event_Year) Is Not Null)) GROUP BY qfrm_Data_Gateway.Event_Year ORDER BY q"
@@ -699,7 +699,7 @@ Begin Form
                     FontSize =10
                     TabIndex =21
                     ForeColor =0
-                    Name ="togFilterByYear"
+                    Name ="tglFilterByYear"
                     AfterUpdate ="[Event Procedure]"
                     DefaultValue ="0"
                     Caption ="Filter on"
@@ -740,7 +740,7 @@ Begin Form
                     FontWeight =700
                     TabIndex =10
                     ForeColor =0
-                    Name ="cmdFiltersOff"
+                    Name ="btnFiltersOff"
                     Caption ="Filters off"
                     OnClick ="[Event Procedure]"
                     FontName ="Calibri"
@@ -766,7 +766,7 @@ Begin Form
                     FontSize =10
                     TabIndex =19
                     ForeColor =0
-                    Name ="togFilterByPanel"
+                    Name ="tglFilterByPanel"
                     AfterUpdate ="[Event Procedure]"
                     DefaultValue ="0"
                     Caption ="Filter on"
@@ -810,7 +810,7 @@ Begin Form
                     TabIndex =18
                     BackColor =-2147483643
                     ColumnInfo ="\"\";\"\";\"4\";\"4\""
-                    Name ="cboPanelFilter"
+                    Name ="cbxPanelFilter"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tbl_Locations.Panel AS Expr1 FROM tbl_Locations GROUP BY tbl_Locations.Pa"
                         "nel ORDER BY tbl_Locations.Panel; "
@@ -860,7 +860,7 @@ Begin Form
                     TabIndex =22
                     BackColor =-2147483643
                     ForeColor =-2147483640
-                    Name ="txtStartDateFilter"
+                    Name ="tbxStartDateFilter"
                     Format ="yyyy mmm dd"
                     StatusBarText ="Start date for filters"
                     AfterUpdate ="[Event Procedure]"
@@ -907,7 +907,7 @@ Begin Form
                     TabIndex =23
                     BackColor =-2147483643
                     ForeColor =-2147483640
-                    Name ="txtEndDateFilter"
+                    Name ="tbxEndDateFilter"
                     Format ="yyyy mmm dd"
                     StatusBarText ="End date for filters"
                     AfterUpdate ="[Event Procedure]"
@@ -950,7 +950,7 @@ Begin Form
                     FontSize =12
                     FontWeight =700
                     BackColor =15527148
-                    Name ="labLocFilters"
+                    Name ="lblLocFilters"
                     Caption ="F I L T E R S"
                     FontName ="Calibri"
                     LayoutCachedLeft =60
@@ -968,7 +968,7 @@ Begin Form
                     FontSize =10
                     TabIndex =24
                     ForeColor =0
-                    Name ="togFilterByRange"
+                    Name ="tglFilterByRange"
                     AfterUpdate ="[Event Procedure]"
                     DefaultValue ="0"
                     Caption ="Filter on"
@@ -1008,7 +1008,7 @@ Begin Form
                     Width =1215
                     Height =255
                     FontSize =10
-                    Name ="labOr"
+                    Name ="lblOr"
                     Caption ="Or"
                     FontName ="Calibri"
                     LayoutCachedLeft =1296
@@ -1032,7 +1032,7 @@ Begin Form
                     TabIndex =16
                     BackColor =-2147483643
                     ColumnInfo ="\"\";\"\";\"10\";\"32\""
-                    Name ="cboFrameFilter"
+                    Name ="cbxFrameFilter"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tbl_Locations.Frame FROM tbl_Locations GROUP BY tbl_Locations.Frame ORDER"
                         " BY tbl_Locations.Frame; "
@@ -1077,7 +1077,7 @@ Begin Form
                     FontSize =10
                     TabIndex =17
                     ForeColor =0
-                    Name ="togFilterByFrame"
+                    Name ="tglFilterByFrame"
                     AfterUpdate ="[Event Procedure]"
                     DefaultValue ="0"
                     Caption ="Filter on"
@@ -1113,7 +1113,7 @@ Begin Form
                     Top =450
                     Width =3240
                     Height =6060
-                    Name ="Box22"
+                    Name ="boxFilter"
                     LayoutCachedLeft =60
                     LayoutCachedTop =450
                     LayoutCachedWidth =3300
@@ -1133,7 +1133,7 @@ Begin Form
                     FontSize =10
                     TabIndex =9
                     BackColor =8454143
-                    Name ="txtUnfilteredFlag"
+                    Name ="tbxUnfilteredFlag"
                     FontName ="Calibri"
                     ControlTipText ="Indicates whether results for the selected query can be filtered"
 
@@ -1151,7 +1151,7 @@ Begin Form
                             Width =2655
                             Height =255
                             FontSize =10
-                            Name ="labUnfilteredFlag"
+                            Name ="lblUnfilteredFlag"
                             Caption ="Query returning filtered results?"
                             FontName ="Calibri"
                             ControlTipText ="Indicates whether results for the selected query can be filtered"
@@ -1171,7 +1171,7 @@ Begin Form
                     FontSize =10
                     FontWeight =700
                     TabIndex =25
-                    Name ="cmdEvent_Summary"
+                    Name ="btnEventSummary"
                     Caption ="Event Summary"
                     OnClick ="[Event Procedure]"
                     FontName ="Calibri"
@@ -1199,7 +1199,7 @@ Begin Form
                     FontSize =12
                     FontWeight =700
                     BackColor =15527148
-                    Name ="Label30"
+                    Name ="lblReportsExports"
                     Caption ="R E P O R T S   &&   E X P O R T S"
                     FontName ="Calibri"
                     LayoutCachedLeft =30
@@ -1218,7 +1218,7 @@ Begin Form
                     FontSize =10
                     TabIndex =26
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"10\";\"200\""
-                    Name ="cboEvent_Selection"
+                    Name ="cbxEventSelection"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT qFiltered_Events.Event_ID, qFiltered_Locations.Plot_Name, Format([tbl_Eve"
                         "nts].[Event_Date],\"mm/dd/yyyy\") AS [Date] FROM qFiltered_Locations INNER JOIN "
@@ -1242,7 +1242,7 @@ Begin Form
                     FontSize =10
                     TabIndex =27
                     ForeColor =0
-                    Name ="togFilterByStatus"
+                    Name ="tglFilterByStatus"
                     AfterUpdate ="[Event Procedure]"
                     DefaultValue ="0"
                     Caption ="Filter on"
@@ -1291,7 +1291,7 @@ Begin Form
                     TabIndex =28
                     BackColor =-2147483643
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"100\""
-                    Name ="cboStatusFilter"
+                    Name ="cbxStatusFilter"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tlu_Enumerations.Enum_Code, tlu_Enumerations.Enum_Description FROM tlu_En"
                         "umerations WHERE (((tlu_Enumerations.Enum_Group)=\"Location Status\")) ORDER BY "
@@ -1346,7 +1346,7 @@ Begin Form
                     TabIndex =29
                     BackColor =-2147483643
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"10\";\"200\""
-                    Name ="cboLocationFilter"
+                    Name ="cbxLocationFilter"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tbl_Locations.Location_ID, tbl_Locations.Plot_Name, tbl_Locations.Unit_Co"
                         "de, tbl_Locations.Admin_Unit_Code FROM tbl_Locations WHERE (((tbl_Locations.Unit"
@@ -1394,7 +1394,7 @@ Begin Form
                     FontSize =10
                     TabIndex =30
                     ForeColor =0
-                    Name ="togFilterByLocation"
+                    Name ="tglFilterByLocation"
                     AfterUpdate ="[Event Procedure]"
                     DefaultValue ="0"
                     Caption ="Filter on"
@@ -1438,7 +1438,7 @@ Begin Form
                     FontWeight =700
                     TabIndex =31
                     ForeColor =0
-                    Name ="cmdClear_Filters"
+                    Name ="btnFiltersClear"
                     Caption ="Clear Filters"
                     OnClick ="[Event Procedure]"
                     FontName ="Calibri"
@@ -1475,7 +1475,7 @@ Begin Form
                     BackColor =-2147483643
                     ForeColor =-2147483640
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"100\""
-                    Name ="cboSubunitFilter"
+                    Name ="cbxSubunitFilter"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tlu_Enumerations.Enum_Code, tlu_Enumerations.Enum_Description FROM tlu_En"
                         "umerations WHERE (((tlu_Enumerations.Enum_Group)=\"Subunit Code\")) ORDER BY tlu"
@@ -1523,7 +1523,8 @@ Begin Form
                     FontSize =10
                     TabIndex =33
                     ForeColor =0
-                    Name ="togFilterBySubunit"
+                    Name ="tglFilterBySubunit"
+                    AfterUpdate ="[Event Procedure]"
                     DefaultValue ="0"
                     Caption ="Filter on"
                     PictureData = Begin
@@ -1565,7 +1566,7 @@ Begin Form
                     FontSize =10
                     FontWeight =700
                     TabIndex =34
-                    Name ="cmd_Rpt_Tag_History"
+                    Name ="btnRptTagHistory"
                     Caption ="Tag History"
                     OnClick ="[Event Procedure]"
                     FontName ="Calibri"
@@ -1610,7 +1611,7 @@ Begin Form
                             FontSize =10
                             FontWeight =700
                             BackColor =13025979
-                            Name ="labIncludeCertified"
+                            Name ="lblIncludeCertified"
                             Caption ="D a t a    s c o p e"
                             FontName ="Calibri"
                             LayoutCachedLeft =255
@@ -1653,6 +1654,7 @@ Begin Form
                             OverlapFlags =247
                             Left =285
                             Top =5340
+                            TabIndex =1
                             OptionValue =1
                             Name ="optBoth"
 
@@ -1684,6 +1686,7 @@ Begin Form
                             OverlapFlags =247
                             Left =285
                             Top =5640
+                            TabIndex =2
                             OptionValue =2
                             Name ="optCertOnly"
 
@@ -1722,7 +1725,7 @@ Begin Form
                     Width =4245
                     Height =255
                     FontSize =10
-                    Name ="Label62"
+                    Name ="lblNote"
                     Caption ="Note that Crosstab queries (_x) are never filtered."
                     FontName ="Calibri"
                     ControlTipText ="Indicates whether results for the selected query can be filtered"
@@ -1741,7 +1744,7 @@ Begin Form
                     FontSize =10
                     FontWeight =700
                     TabIndex =36
-                    Name ="cmdExport_Products"
+                    Name ="btnExportProducts"
                     Caption ="Export 4 Yr Products"
                     OnClick ="[Event Procedure]"
                     FontName ="Calibri"
@@ -1764,7 +1767,7 @@ Begin Form
                     FontSize =10
                     FontWeight =700
                     TabIndex =37
-                    Name ="cmdExport_All"
+                    Name ="btnExportAll"
                     Caption ="Export All Data"
                     OnClick ="[Event Procedure]"
                     FontName ="Calibri"
@@ -1787,7 +1790,7 @@ Begin Form
                     FontSize =10
                     FontWeight =700
                     TabIndex =38
-                    Name ="cmdOpen_Basic_Summary_Form"
+                    Name ="btnOpenBasicSummaryForm"
                     Caption ="Basic Summaries"
                     OnClick ="[Event Procedure]"
                     FontName ="Calibri"
@@ -1814,43 +1817,104 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' FORM NAME:    frm_Summary_Tool
-' Description:  Standard form for summarizing and exploring project data
-' Data source:  unbound
-' Data access:  edit only, no additions or deletions
-' Pages:        none
-' Functions:    fxnFilterRecords
-' References:   fxnSwitchboardIsOpen
-' Source/date:  John R. Boetsch, Jan 2010
-' Revisions:    <name, date - desc>
+' MODULE:       frm_Data_Summary_Advanced
+' Level:        Application module
+' Version:      1.01
+'
+' Description:  Standard form for summarizing/exploring project data
+' Source/date:  John Boetsch, Jan 2010
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, May 14, 2018
+' Revisions:    JB/ML/GS - 1/2010+  - 1.00 - initial version
+'               BLC   - 5/14/2018 - 1.01 - added documentation, error handling
 ' =================================
 
+' ---------------------------------
+'  Declarations
+' ---------------------------------
+
+' ----------------
+'  Events
+' ----------------
+
+' ----------------
+'  Form
+' ----------------
+' ---------------------------------
+' SUB:          Form_Open
+' Description:  form open actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  John R. Boetsch, Jan 2010
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   JB/ML/GS - 1/2010+ - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
-    On Error GoTo Err_Handler
+On Error GoTo Err_Handler
 
     ' Close the form if the switchboard is not open
     If fxnSwitchboardIsOpen = False Then
         MsgBox "The main database switchboard must be" & vbCrLf & _
             "open for this form to function properly.", , "Cannot open the form ..."
         DoCmd.CancelEvent
-        GoTo Exit_Procedure
+        GoTo Exit_Handler
     End If
     fxnFilterRecords
-
-Exit_Procedure:
+    
+Exit_Handler:
     Exit Sub
-
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
+
+' ---------------------------------
+' SUB:          cbxSelectQuery_NotInList
+' Description:  combobox not in list actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+
+' ---------------------------------
+Private Sub cbxSelectQuery_NotInList(NewData As String, Response As Integer)
+On Error GoTo Err_Handler
+    
+    Me.ActiveControl.Undo
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxSelectQuery_NotInList[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 Private Sub cboSelect_Query_NotInList(NewData As String, Response As Integer)
     On Error GoTo Err_Handler
 
-    Me.ActiveControl.Undo
-
 Exit_Procedure:
     Exit Sub
 Err_Handler:
@@ -1858,20 +1922,35 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
-Private Sub cboSelect_Query_AfterUpdate()
-    On Error GoTo Err_Handler
+' ---------------------------------
+' SUB:          cbxSelectQuery_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
 
+' ---------------------------------
+Private Sub cbxSelectQuery_AfterUpdate()
+On Error GoTo Err_Handler
+    
     ' Exit if no query selected
-    If IsNull(Me.cboSelect_Query) Then
-        Me.txtUnfilteredFlag = ""
-        Me.txtUnfilteredFlag.ForeColor = 0          'black
-        Me.txtUnfilteredFlag.BackColor = 8454143    'yellow
+    If IsNull(Me.cbxSelectQuery) Then
+        Me.tbxUnfilteredFlag = ""
+        Me.tbxUnfilteredFlag.ForeColor = 0          'black
+        Me.tbxUnfilteredFlag.BackColor = 8454143    'yellow
         Me.subResults.SourceObject = ""
-        GoTo Exit_Procedure
+        GoTo Exit_Handler
     End If
 
     ' Update the description
-    Me.txtDesc = ""
+    Me.tbxDesc = ""
 
     Dim qdf As DAO.QueryDef
     Dim qdfs As DAO.QueryDefs
@@ -1879,52 +1958,104 @@ Private Sub cboSelect_Query_AfterUpdate()
 
     On Error Resume Next
     For Each qdf In qdfs
-        If qdf.Name = Me.cboSelect_Query.Value Then
-            Me.txtDesc = qdf.Properties("Description")
+        If qdf.Name = Me.cbxSelectQuery.Value Then
+            Me.tbxDesc = qdf.Properties("Description")
         End If
     Next qdf
 
     On Error GoTo Err_Handler
     ' Bind the subform to the newly-selected object
-    Me.subResults.SourceObject = "Query." & Me.cboSelect_Query.Value
+    Me.subResults.SourceObject = "Query." & Me.cbxSelectQuery.Value
 
     ' Update the visual flag to indicate whether or not the query returns filtered results
     '   Note: suffix of "_X" means that the query cannot accept parameters (e.g., crosstab)
-    If Right(Me.cboSelect_Query.Value, 2) = "_X" Then
-        Me.txtUnfilteredFlag = "No"
-        Me.txtUnfilteredFlag.ForeColor = 16777215   'white
-        Me.txtUnfilteredFlag.BackColor = 255        'red
+    If Right(Me.cbxSelectQuery.Value, 2) = "_X" Then
+        Me.tbxUnfilteredFlag = "No"
+        Me.tbxUnfilteredFlag.ForeColor = 16777215   'white
+        Me.tbxUnfilteredFlag.BackColor = 255        'red
     Else
-        Me.txtUnfilteredFlag = "Yes"
-        Me.txtUnfilteredFlag.ForeColor = 16777215   'white
-        Me.txtUnfilteredFlag.BackColor = 4227072    'green
+        Me.tbxUnfilteredFlag = "Yes"
+        Me.tbxUnfilteredFlag.ForeColor = 16777215   'white
+        Me.tbxUnfilteredFlag.BackColor = 4227072    'green
     End If
 
     ' Set focus to the subform to allow scrolling, etc.
     Me.subResults.SetFocus
-
-Exit_Procedure:
-    On Error Resume Next
+    
+Exit_Handler:
     Set qdfs = Nothing
     Exit Sub
+    
 Err_Handler:
     Select Case Err.Number
       Case 3011, 7874   ' Object not found
         MsgBox "This query is not found in the application:" & _
-            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
+            vbCrLf & """" & Me.cbxSelectQuery & """", , "Object not found"
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxSelectQuery_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+Private Sub cboSelect_Query_AfterUpdate()
+    On Error GoTo Err_Handler
+
+
+Exit_Procedure:
+'    On Error Resume Next
+'    Set qdfs = Nothing
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+'      Case 3011, 7874   ' Object not found
+'        MsgBox "This query is not found in the application:" & _
+'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     End Select
     Resume Exit_Procedure
 End Sub
 
-Private Sub cmdOpenBrowser_Click()
-    On Error GoTo Err_Handler
+' ---------------------------------
+' SUB:          btnOpenBrowser_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
 
+' ---------------------------------
+Private Sub btnOpenBrowser_Click()
+On Error GoTo Err_Handler
+    
     Set gvarRefForm = Me.Form
     Set gvarRefCtl = Me.subResults
     ' Open to a blank record - to distinguish from opening to the selected record in the subform
     DoCmd.OpenForm "frm_Data_Browser", , , , acFormAdd, , "off"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case 3011, 7874   ' Object not found
+        MsgBox "The table, query or form is no longer available in the application.", , _
+            "Object not found"
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnOpenBrowser_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+Private Sub cmdOpenBrowser_Click()
+    On Error GoTo Err_Handler
+
 
 Exit_Procedure:
     Exit Sub
@@ -1939,15 +2070,46 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
-Private Sub cmdRequery_Click()
-    On Error GoTo Err_Handler
+' ---------------------------------
+' SUB:          btnRequery_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
 
+' ---------------------------------
+Private Sub btnRequery_Click()
+On Error GoTo Err_Handler
+    
     ' Bail out if no query is currently selected
-    If IsNull(Me.cboSelect_Query) Then GoTo Exit_Procedure
+    If IsNull(Me.cbxSelectQuery) Then GoTo Exit_Handler
 
     ' Requery the selected record in the recordset, and update the subform
     Me.subResults.Requery
     Me.subResults.SetFocus
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnRequery_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+Private Sub cmdRequery_Click()
+    On Error GoTo Err_Handler
+
+
 
 Exit_Procedure:
     Exit Sub
@@ -1956,28 +2118,61 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
+' ----------------
+'  Filters
+' ----------------
+' ---------------------------------
+' SUB:          btnFiltersOff_Click
+' Description:  button click
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+
+' ---------------------------------
+Private Sub btnFiltersOff_Click()
+On Error GoTo Err_Handler
+    
+    ' Turn off the filters
+    Me.btnRequery.SetFocus
+    ' Undo the filter toggles
+    Me.tglFilterByPark = False
+    Me.tglFilterByAdminPark = False
+    Me.tglFilterBySubunit = False
+    Me.tglFilterByPanel = False
+    Me.tglFilterByFrame = False
+    Me.tglFilterByStatus = False
+    Me.tglFilterByLocation = False
+    Me.tglFilterByYear = False
+    Me.tglFilterByRange = False
+
+    fxnFilterRecords
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnFiltersOff_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 ' =================================
 ' The next set of procedures filters the recordset depending on user input
 
 Private Sub cmdFiltersOff_Click()
     On Error GoTo Err_Handler
 
-    ' Turn off the filters
-    Me.cmdRequery.SetFocus
-    ' Undo the filter toggles
-    Me.togFilterByPark = False
-    Me.togFilterByAdminPark = False
-    Me.togFilterBySubunit = False
-    Me.togFilterByPanel = False
-    Me.togFilterByFrame = False
-    Me.togFilterByStatus = False
-    Me.togFilterByLocation = False
-    Me.togFilterByYear = False
-    Me.togFilterByRange = False
-
-    fxnFilterRecords
-    Me.cboLocationFilter.Requery
-    Me.cboEvent_Selection.Requery
     
 Exit_Procedure:
     Exit Sub
@@ -1986,25 +2181,56 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
+' ---------------------------------
+' SUB:          btnFiltersClear_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+
+' ---------------------------------
+Private Sub btnFiltersClear_Click()
+On Error GoTo Err_Handler
+    
+    'Clear the filters
+    Me.btnRequery.SetFocus
+    Me.cbxParkFilter = Null
+    Me.cbxAdminParkFilter = Null
+    Me.cbxSubunitFilter = Null
+    Me.cbxPanelFilter = Null
+    Me.cbxFrameFilter = Null
+    Me.cbxStatusFilter = Null
+    Me.cbxLocationFilter = Null
+    Me.cbxYearFilter = Null
+    Me.tbxStartDateFilter = Null
+    Me.tbxEndDateFilter = Null
+    
+    fxnFilterRecords
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnFiltersClear_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub cmdClear_Filters_Click()
     On Error GoTo Err_Handler
 
-    'Clear the filters
-    Me.cmdRequery.SetFocus
-    Me.cboParkFilter = Null
-    Me.cboAdminParkFilter = Null
-    Me.cboSubunitFilter = Null
-    Me.cboPanelFilter = Null
-    Me.cboFrameFilter = Null
-    Me.cboStatusFilter = Null
-    Me.cboLocationFilter = Null
-    Me.cboYearFilter = Null
-    Me.txtStartDateFilter = Null
-    Me.txtEndDateFilter = Null
-    
-    fxnFilterRecords
-    Me.cboLocationFilter.Requery
-    Me.cboEvent_Selection.Requery
+
 
 Exit_Procedure:
     Exit Sub
@@ -2013,17 +2239,47 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
+' ---------------------------------
+' SUB:          cbxParkFilter_AfterUpdate
+' Description:  combobox after udpate actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+
+' ---------------------------------
+Private Sub cbxParkFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterByPark = Not IsNull(Me.cbxParkFilter)
+    fxnFilterRecords
+    Me.tglFilterByPark.SetFocus
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxParkFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 ' =================================
 ' Location filter controls
 
 Private Sub cboParkFilter_AfterUpdate()
     On Error GoTo Err_Handler
 
-    Me.togFilterByPark = Not IsNull(Me.cboParkFilter)
-    fxnFilterRecords
-    Me.togFilterByPark.SetFocus
-    Me.cboLocationFilter.Requery
-    Me.cboEvent_Selection.Requery
 
 Exit_Procedure:
     Exit Sub
@@ -2032,27 +2288,89 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
+' ---------------------------------
+' SUB:          tglFilterByPark_AfterUpdate
+' Description:  toggle after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+
+' ---------------------------------
+Private Sub tglFilterByPark_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If IsNull(Me.cbxParkFilter) = True Then Me.tglFilterByPark = False
+    fxnFilterRecords
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglFilterByPark_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub togFilterByPark_AfterUpdate()
     On Error GoTo Err_Handler
 
-    If IsNull(Me.cboParkFilter) = True Then Me.togFilterByPark = False
-    fxnFilterRecords
+
 
 Exit_Procedure:
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
+End Sub
+
+' ---------------------------------
+' SUB:          cbxAdminParkFilter_AfterUpdate
+' Description:  combobox after update
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub cbxAdminParkFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterByAdminPark = Not IsNull(Me.cbxAdminParkFilter)
+    fxnFilterRecords
+    Me.tglFilterByAdminPark.SetFocus
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxAdminParkFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 Private Sub cboAdminParkFilter_AfterUpdate()
     On Error GoTo Err_Handler
 
-    Me.togFilterByAdminPark = Not IsNull(Me.cboAdminParkFilter)
-    fxnFilterRecords
-    Me.togFilterByAdminPark.SetFocus
-    Me.cboLocationFilter.Requery
-    Me.cboEvent_Selection.Requery
+
 
 Exit_Procedure:
     Exit Sub
@@ -2061,27 +2379,89 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
+' ---------------------------------
+' SUB:          tglFilterByAdminPark_AfterUpdate
+' Description:  toggle after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+
+' ---------------------------------
+Private Sub tglFilterByAdminPark_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If IsNull(Me.cbxAdminParkFilter) = True Then Me.tglFilterByAdminPark = False
+    fxnFilterRecords
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglFilterByAdminPark_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub togFilterByAdminPark_AfterUpdate()
     On Error GoTo Err_Handler
 
-    If IsNull(Me.cboAdminParkFilter) = True Then Me.togFilterByAdminPark = False
-    fxnFilterRecords
+
 
 Exit_Procedure:
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
+End Sub
+
+' ---------------------------------
+' SUB:          cbxSubunitFilter_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub cbxSubunitFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterBySubunit = Not IsNull(Me.cbxSubunitFilter)
+    fxnFilterRecords
+    Me.tglFilterBySubunit.SetFocus
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxSubunitFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 Private Sub cboSubunitFilter_AfterUpdate()
     On Error GoTo Err_Handler
 
-    Me.togFilterBySubunit = Not IsNull(Me.cboSubunitFilter)
-    fxnFilterRecords
-    Me.togFilterBySubunit.SetFocus
-    Me.cboLocationFilter.Requery
-    Me.cboEvent_Selection.Requery
+
 
 Exit_Procedure:
     Exit Sub
@@ -2089,12 +2469,41 @@ Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
 End Sub
-
+' ---------------------------------
+' SUB:          tglFilterBySubunit_AfterUpdate
+' Description:  toggle after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub tglFilterBySubunit_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If IsNull(Me.cbxSubunitFilter) = True Then Me.tglFilterBySubunit = False
+    fxnFilterRecords
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglFilterBySubunit_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub togFilterBySubunit_AfterUpdate()
     On Error GoTo Err_Handler
 
-    If IsNull(Me.cboSubunitFilter) = True Then Me.togFilterBySubunit = False
-    fxnFilterRecords
+
 
 Exit_Procedure:
     Exit Sub
@@ -2103,14 +2512,45 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
+' ---------------------------------
+' SUB:          cbxFrameFilter_AfterUpdate
+' Description:  form open actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+
+' ---------------------------------
+Private Sub cbxFrameFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterByFrame = Not IsNull(Me.cbxFrameFilter)
+    fxnFilterRecords
+    Me.tglFilterByFrame.SetFocus
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxFrameFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub cboFrameFilter_AfterUpdate()
     On Error GoTo Err_Handler
 
-    Me.togFilterByFrame = Not IsNull(Me.cboFrameFilter)
-    fxnFilterRecords
-    Me.togFilterByFrame.SetFocus
-    Me.cboLocationFilter.Requery
-    Me.cboEvent_Selection.Requery
+
     
 Exit_Procedure:
     Exit Sub
@@ -2118,12 +2558,42 @@ Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
 End Sub
+' ---------------------------------
+' SUB:          tglFilterByFrame_AfterUpdate
+' Description:  toggle after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
 
+' ---------------------------------
+Private Sub tglFilterByFrame_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If IsNull(Me.cbxFrameFilter) = True Then Me.tglFilterByFrame = False
+    fxnFilterRecords
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglFilterByFrame_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub togFilterByFrame_AfterUpdate()
     On Error GoTo Err_Handler
 
-    If IsNull(Me.cboFrameFilter) = True Then Me.togFilterByFrame = False
-    fxnFilterRecords
+
 
 Exit_Procedure:
     Exit Sub
@@ -2131,28 +2601,86 @@ Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
 End Sub
+' ---------------------------------
+' SUB:          cbxPanelFilter_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
 
+' ---------------------------------
+Private Sub cbxPanelFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterByPanel = Not IsNull(Me.cbxPanelFilter)
+    fxnFilterRecords
+    Me.tglFilterByPanel.SetFocus
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxPanelFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub cboPanelFilter_AfterUpdate()
     On Error GoTo Err_Handler
 
-    Me.togFilterByPanel = Not IsNull(Me.cboPanelFilter)
-    fxnFilterRecords
-    Me.togFilterByPanel.SetFocus
-    Me.cboLocationFilter.Requery
-    Me.cboEvent_Selection.Requery
-    
+
 Exit_Procedure:
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
 End Sub
-
+' ---------------------------------
+' SUB:          tglFilterByPanel_AfterUpdate
+' Description:  toggle after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub tglFilterByPanel_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If IsNull(Me.cbxPanelFilter) = True Then Me.tglFilterByPanel = False
+    fxnFilterRecords
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglFilterByPanel_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub togFilterByPanel_AfterUpdate()
     On Error GoTo Err_Handler
 
-    If IsNull(Me.cboPanelFilter) = True Then Me.togFilterByPanel = False
-    fxnFilterRecords
+
 
 Exit_Procedure:
     Exit Sub
@@ -2160,15 +2688,45 @@ Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
 End Sub
+' ---------------------------------
+' SUB:          cbxStatusFilter_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
 
+' ---------------------------------
+Private Sub cbxStatusFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterByStatus = Not IsNull(Me.cbxStatusFilter)
+    fxnFilterRecords
+    Me.tglFilterByStatus.SetFocus
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxStatusFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub cboStatusFilter_AfterUpdate()
     On Error GoTo Err_Handler
 
-    Me.togFilterByStatus = Not IsNull(Me.cboStatusFilter)
-    fxnFilterRecords
-    Me.togFilterByStatus.SetFocus
-    Me.cboLocationFilter.Requery
-    Me.cboEvent_Selection.Requery
+
     
 Exit_Procedure:
     Exit Sub
@@ -2176,12 +2734,41 @@ Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
 End Sub
-
+' ---------------------------------
+' SUB:          tglFilterByStatus_AfterUpdate
+' Description:  toggle after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub tglFilterByStatus_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If IsNull(Me.cbxStatusFilter) = True Then Me.tglFilterByStatus = False
+    fxnFilterRecords
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglFilterByStatus_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub togFilterByStatus_AfterUpdate()
     On Error GoTo Err_Handler
 
-    If IsNull(Me.cboStatusFilter) = True Then Me.togFilterByStatus = False
-    fxnFilterRecords
+
 
 Exit_Procedure:
     Exit Sub
@@ -2189,13 +2776,42 @@ Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
 End Sub
-
+' ---------------------------------
+' SUB:          cbxLocationFilter_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub cbxLocationFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterByLocation = Not IsNull(Me.cbxLocationFilter)
+    fxnFilterRecords
+    Me.tglFilterByLocation.SetFocus
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxLocationFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub cboLocationFilter_AfterUpdate()
     On Error GoTo Err_Handler
 
-    Me.togFilterByLocation = Not IsNull(Me.cboLocationFilter)
-    fxnFilterRecords
-    Me.togFilterByLocation.SetFocus
+
 
 Exit_Procedure:
     Exit Sub
@@ -2203,12 +2819,41 @@ Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
 End Sub
-
+' ---------------------------------
+' SUB:          tglFilterByLocation_AfterUpdate
+' Description:  toggle after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub tglFilterByLocation_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If IsNull(Me.cbxLocationFilter) = True Then Me.tglFilterByLocation = False
+    fxnFilterRecords
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglFilterByLocation_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub togFilterByLocation_AfterUpdate()
     On Error GoTo Err_Handler
 
-    If IsNull(Me.cboLocationFilter) = True Then Me.togFilterByLocation = False
-    fxnFilterRecords
+
 
 Exit_Procedure:
     Exit Sub
@@ -2217,18 +2862,48 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
+' ---------------------------------
+' SUB:          cbxYearFilter_AfterUpdate
+' Description:  combobox after udpate actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub cbxYearFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterByYear = Not IsNull(Me.cbxYearFilter)
+    If Me.tglFilterByYear = True Then Me.tglFilterByRange = False
+    fxnFilterRecords
+    Me.tglFilterByYear.SetFocus
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxYearFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 ' =================================
 ' Event filter controls
 
 Private Sub cboYearFilter_AfterUpdate()
     On Error GoTo Err_Handler
 
-    Me.togFilterByYear = Not IsNull(Me.cboYearFilter)
-    If Me.togFilterByYear = True Then Me.togFilterByRange = False
-    fxnFilterRecords
-    Me.togFilterByYear.SetFocus
-    Me.cboLocationFilter.Requery
-    Me.cboEvent_Selection.Requery
+
     
 Exit_Procedure:
     Exit Sub
@@ -2236,13 +2911,42 @@ Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
 End Sub
-
+' ---------------------------------
+' SUB:          tglFilterByYear_AfterUpdate
+' Description:  toggle after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub tglFilterByYear_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If IsNull(Me.cbxYearFilter) Then Me.tglFilterByYear = False
+    If Me.tglFilterByYear = True Then Me.tglFilterByRange = False
+    fxnFilterRecords
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglFilterByYear_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub togFilterByYear_AfterUpdate()
     On Error GoTo Err_Handler
 
-    If IsNull(Me.cboYearFilter) Then Me.togFilterByYear = False
-    If Me.togFilterByYear = True Then Me.togFilterByRange = False
-    fxnFilterRecords
+
 
 Exit_Procedure:
     Exit Sub
@@ -2250,32 +2954,120 @@ Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
 End Sub
-
+' ---------------------------------
+' SUB:          tbxStartDateFilter_AfterUpdate
+' Description:  textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub tbxStartDateFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterByRange = (Not IsNull(Me.tbxStartDateFilter)) And (Not IsNull(Me.tbxEndDateFilter))
+    If Me.tglFilterByRange = True Then Me.tglFilterByYear = False
+    fxnFilterRecords
+    Me.tglFilterByYear.SetFocus
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxStartDateFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub txtStartDateFilter_AfterUpdate()
-    Me.togFilterByRange = (Not IsNull(Me.txtStartDateFilter)) And (Not IsNull(Me.txtEndDateFilter))
-    If Me.togFilterByRange = True Then Me.togFilterByYear = False
-    fxnFilterRecords
-    Me.togFilterByYear.SetFocus
-    Me.cboLocationFilter.Requery
-    Me.cboEvent_Selection.Requery
-End Sub
 
+End Sub
+' ---------------------------------
+' SUB:          tbxEndDateFilter_AfterUpdate
+' Description:  textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+
+' ---------------------------------
+Private Sub tbxEndDateFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterByRange = (Not IsNull(Me.tbxStartDateFilter)) And (Not IsNull(Me.tbxEndDateFilter))
+    If Me.tglFilterByRange = True Then Me.tglFilterByYear = False
+    fxnFilterRecords
+    Me.tglFilterByYear.SetFocus
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxEndDateFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub txtEndDateFilter_AfterUpdate()
-    Me.togFilterByRange = (Not IsNull(Me.txtStartDateFilter)) And (Not IsNull(Me.txtEndDateFilter))
-    If Me.togFilterByRange = True Then Me.togFilterByYear = False
-    fxnFilterRecords
-    Me.togFilterByYear.SetFocus
-    Me.cboLocationFilter.Requery
-    Me.cboEvent_Selection.Requery
-End Sub
 
+End Sub
+' ---------------------------------
+' SUB:          tglFilterByRange_AfterUpdate
+' Description:  toggle after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub tglFilterByRange_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If IsNull(Me.tbxStartDateFilter) And IsNull(Me.tbxEndDateFilter) _
+        Then Me.tglFilterByRange = False
+    If Me.tglFilterByRange = True Then Me.tglFilterByYear = False
+    fxnFilterRecords
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglFilterByRange_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub togFilterByRange_AfterUpdate()
     On Error GoTo Err_Handler
 
-    If IsNull(Me.txtStartDateFilter) And IsNull(Me.txtEndDateFilter) _
-        Then Me.togFilterByRange = False
-    If Me.togFilterByRange = True Then Me.togFilterByYear = False
-    fxnFilterRecords
+
 
 Exit_Procedure:
     Exit Sub
@@ -2283,9 +3075,24 @@ Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
 End Sub
+' ---------------------------------
+' SUB:          optgScope_AfterUpdate
+' Description:  option group after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
 
+' ---------------------------------
 Private Sub optgScope_AfterUpdate()
-    On Error GoTo Err_Handler
+On Error GoTo Err_Handler
+    
     'Revised MEL 8/23/2010 to better handle to three scope options
     Select Case Me.optgScope
       Case 0    'Selected Only Uncertified Data
@@ -2328,8 +3135,8 @@ Private Sub optgScope_AfterUpdate()
             Me.lblCertifiedOnly.FontBold = True
     End Select
 
-    Me.cboEvent_Selection.Requery
-    Me.cboLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    Me.cbxLocationFilter.Requery
 
 '    If Me.optgScope = 1 Then
 '        If MsgBox("Warning: The summary results may be based on data" & vbCrLf & _
@@ -2353,6 +3160,20 @@ Private Sub optgScope_AfterUpdate()
 '        Me.labBoth.FontBold = False
 '        Me.labBoth.ForeColor = 0
 '    End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - optgScope_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+Private Sub xoptgScope_AfterUpdate()
+    On Error GoTo Err_Handler
 
 Exit_Procedure:
     Exit Sub
@@ -2392,106 +3213,244 @@ End Sub
 '    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
 '    Resume Exit_Procedure
 'End Sub
-
+' ---------------------------------
+' SUB:          btnViewExcluded_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub btnViewExcluded_Click()
+On Error GoTo Err_Handler
+    
+    ' Open the query to view event records flagged for exclusion from summaries
+    DoCmd.OpenQuery "qsub_Excluded_events", acViewNormal, acReadOnly
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case 3011, 7874   ' Object not found
+        MsgBox "This query is not found in the application:" & _
+            vbCrLf & """" & Me.cbxSelectQuery & """", , "Object not found"
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnViewExcluded_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub cmdViewExcluded_Click()
     On Error GoTo Err_Handler
 
-    ' Open the query to view event records flagged for exclusion from summaries
-    DoCmd.OpenQuery "qsub_Excluded_events", acViewNormal, acReadOnly
+
 
 Exit_Procedure:
     Exit Sub
 Err_Handler:
     Select Case Err.Number
-      Case 3011, 7874   ' Object not found
-        MsgBox "This query is not found in the application:" & _
-            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
+'      Case 3011, 7874   ' Object not found
+'        MsgBox "This query is not found in the application:" & _
+'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     End Select
     Resume Exit_Procedure
 End Sub
-
+' ---------------------------------
+' SUB:          btnChart_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub btnChart_Click()
+On Error GoTo Err_Handler
+    
+    ' Open the selected query as a pivot chart after checking that a query is selected
+    If IsNull(Me.cbxSelectQuery) = False Then
+        DoCmd.OpenQuery Me.cbxSelectQuery.Value, acViewPivotChart, acReadOnly
+        DoCmd.Maximize
+    End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case 3011, 7874   ' Object not found
+        MsgBox "This query is not found in the application:" & _
+            vbCrLf & """" & Me.cbxSelectQuery & """", , "Object not found"
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 ' =================================
 ' The next set of procedures relate to manipulating the selected query/results
 
 Private Sub cmdChart_Click()
     On Error GoTo Err_Handler
 
-    ' Open the selected query as a pivot chart after checking that a query is selected
-    If IsNull(Me.cboSelect_Query) = False Then
-        DoCmd.OpenQuery Me.cboSelect_Query.Value, acViewPivotChart, acReadOnly
-        DoCmd.Maximize
-    End If
+
 
 Exit_Procedure:
     Exit Sub
 Err_Handler:
     Select Case Err.Number
-      Case 3011, 7874   ' Object not found
-        MsgBox "This query is not found in the application:" & _
-            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
+'      Case 3011, 7874   ' Object not found
+'        MsgBox "This query is not found in the application:" & _
+'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     End Select
     Resume Exit_Procedure
 End Sub
-
+' ---------------------------------
+' SUB:          btnPivotTable_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub btnPivotTable_Click()
+On Error GoTo Err_Handler
+    
+    ' Open the selected query as a pivot table after checking that a query is selected
+    If IsNull(Me.cbxSelectQuery) = False Then
+        DoCmd.OpenQuery Me.cbxSelectQuery.Value, acViewPivotTable, acReadOnly
+        DoCmd.Maximize
+    End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case 3011, 7874   ' Object not found
+        MsgBox "This query is not found in the application:" & _
+            vbCrLf & """" & Me.cbxSelectQuery & """", , "Object not found"
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnPivotTable_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub cmdPivotTable_Click()
     On Error GoTo Err_Handler
 
-    ' Open the selected query as a pivot table after checking that a query is selected
-    If IsNull(Me.cboSelect_Query) = False Then
-        DoCmd.OpenQuery Me.cboSelect_Query.Value, acViewPivotTable, acReadOnly
-        DoCmd.Maximize
-    End If
+
 
 Exit_Procedure:
     Exit Sub
 Err_Handler:
     Select Case Err.Number
-      Case 3011, 7874   ' Object not found
-        MsgBox "This query is not found in the application:" & _
-            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
+'      Case 3011, 7874   ' Object not found
+'        MsgBox "This query is not found in the application:" & _
+'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     End Select
     Resume Exit_Procedure
 End Sub
-
+' ---------------------------------
+' SUB:          btnCloseup_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub btnCloseup_Click()
+On Error GoTo Err_Handler
+    
+    ' Open the selected query in a new window after checking that a query is selected
+    If IsNull(Me.cbxSelectQuery) = False Then
+        DoCmd.OpenQuery Me.cbxSelectQuery.Value, acViewNormal, acReadOnly
+        DoCmd.Maximize
+    End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnCloseup_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub cmdCloseup_Click()
     On Error GoTo Err_Handler
 
-    ' Open the selected query in a new window after checking that a query is selected
-    If IsNull(Me.cboSelect_Query) = False Then
-        DoCmd.OpenQuery Me.cboSelect_Query.Value, acViewNormal, acReadOnly
-        DoCmd.Maximize
-    End If
+
 
 Exit_Procedure:
     Exit Sub
 Err_Handler:
     Select Case Err.Number
-      Case 3011, 7874   ' Object not found
-        MsgBox "This query is not found in the application:" & _
-            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
+'      Case 3011, 7874   ' Object not found
+'        MsgBox "This query is not found in the application:" & _
+'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     End Select
     Resume Exit_Procedure
 End Sub
-
-Private Sub cmdExportExcel_Click()
-    On Error GoTo Err_Handler
-
+' ---------------------------------
+' SUB:          btnExportExcel_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub btnExportExcel_Click()
+On Error GoTo Err_Handler
+    
     Dim strQryName As String
     Dim strInitFile As String
     Dim strSaveFile As String
 
     ' Bail out if no query is currently selected
-    If IsNull(Me.cboSelect_Query) Then GoTo Exit_Procedure
-
-    strQryName = Me.cboSelect_Query
+    If IsNull(Me.cbxSelectQuery) Then GoTo Exit_Handler
+    
+    strQryName = Me.cbxSelectQuery
 
     strInitFile = Application.CurrentProject.Path & "\" & _
         strQryName & "_" & CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".xls"
@@ -2499,6 +3458,26 @@ Private Sub cmdExportExcel_Click()
     strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.xls)", "*.xls")
     DoCmd.OutputTo acOutputQuery, strQryName, acFormatXLS, strSaveFile, True
     'MsgBox "File saved to:" & vbCrLf & vbCrLf & strSaveFile
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case 94, 2001
+        ' User canceled dialog box - do nothing
+      Case 2501
+        ' Canceled open report action - do nothing
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnExportExcel_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+Private Sub cmdExportExcel_Click()
+    On Error GoTo Err_Handler
+
+
 
 Exit_Procedure:
     Exit Sub
@@ -2513,18 +3492,31 @@ Err_Handler:
     End Select
     Resume Exit_Procedure
 End Sub
-
-Private Sub cmdExportText_Click()
-    On Error GoTo Err_Handler
-
+' ---------------------------------
+' SUB:          btnExportText_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub btnExportText_Click()
+On Error GoTo Err_Handler
+    
     Dim strQryName As String
     Dim strInitFile As String
     Dim strSaveFile As String
 
     ' Bail out if no query is currently selected
-    If IsNull(Me.cboSelect_Query) Then GoTo Exit_Procedure
+    If IsNull(Me.cbxSelectQuery) Then GoTo Exit_Handler
 
-    strQryName = Me.cboSelect_Query
+    strQryName = Me.cbxSelectQuery
 
     strInitFile = Application.CurrentProject.Path & "\" & _
         strQryName & "_" & CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".txt"
@@ -2532,6 +3524,26 @@ Private Sub cmdExportText_Click()
     strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.txt)", "*.txt")
     DoCmd.OutputTo acOutputQuery, strQryName, acFormatTXT, strSaveFile, True
     'MsgBox "File saved to:" & vbCrLf & vbCrLf & strSaveFile
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case 94, 2001
+        ' User canceled dialog box - do nothing
+      Case 2501
+        ' Canceled open report action - do nothing
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnExportText_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+Private Sub cmdExportText_Click()
+    On Error GoTo Err_Handler
+
+
 
 Exit_Procedure:
     Exit Sub
@@ -2546,41 +3558,78 @@ Err_Handler:
     End Select
     Resume Exit_Procedure
 End Sub
-
+' ---------------------------------
+' SUB:          btnDesign_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub btnDesign_Click()
+On Error GoTo Err_Handler
+    
+    ' Open the selected query in design view after checking that a query is selected
+    If IsNull(Me.cbxSelectQuery) = False Then _
+        DoCmd.OpenQuery Me.cbxSelectQuery.Value, acViewDesign, acReadOnly
+        
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case 3011, 7874   ' Object not found
+        MsgBox "This query is not found in the application:" & _
+            vbCrLf & """" & Me.cbxSelectQuery & """", , "Object not found"
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnDesign_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub cmdDesign_Click()
     On Error GoTo Err_Handler
 
-    ' Open the selected query in design view after checking that a query is selected
-    If IsNull(Me.cboSelect_Query) = False Then _
-        DoCmd.OpenQuery Me.cboSelect_Query.Value, acViewDesign, acReadOnly
+
 
 Exit_Procedure:
     Exit Sub
 Err_Handler:
     Select Case Err.Number
-      Case 3011, 7874   ' Object not found
-        MsgBox "This query is not found in the application:" & _
-            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
+'      Case 3011, 7874   ' Object not found
+'        MsgBox "This query is not found in the application:" & _
+'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     End Select
     Resume Exit_Procedure
 End Sub
 
-' =================================
-' FUNCTION:     fxnFilterRecords
-' Description:  Filter the records by the indicated field
-' Parameters:   none
-' Returns:      none
+' ---------------------------------
+' FUNCTION:     FilterRecords
+' Description:  filter records on the desired field
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
 ' Throws:       none
-' References:   none
-' Source/date:  John R. Boetsch, May 5, 2006
-' Revisions:    JRB, 1/5/2010 - adapted to summarization tool, mainly for formatting filters
-' =================================
-
-Private Function fxnFilterRecords()
-    On Error GoTo Err_Handler
-
+' References:   -
+' Source/date:  John Boetsch, May 5, 2006
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   JB    - 5/5/2010 - initial version adapted to summarization tool, mainly for formatting filters
+'   ML/GS - unknown - initial version
+'   BLC   - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Function FilterRecords()
+On Error GoTo Err_Handler
+    
     Dim bFilterOn As Boolean
 
     bFilterOn = False
@@ -2601,16 +3650,43 @@ Reformat_controls:
     'Me.cmdFiltersOff.Enabled = bFilterOn
  
     ' Make the labels bold or not depending on filter settings
-    Me.lblParkFilter.FontBold = Me.togFilterByPark
-    Me.lblAdminParkFilter.FontBold = Me.togFilterByAdminPark
-    Me.lblSubunitFilter.FontBold = Me.togFilterBySubunit
-    Me.lblStatusFilter.FontBold = Me.togFilterByStatus
-    Me.lblLocationFilter.FontBold = Me.togFilterByLocation
-    Me.lblFrameFilter.FontBold = Me.togFilterByFrame
-    Me.lblPanelFilter.FontBold = Me.togFilterByPanel
-    Me.lblYearFilter.FontBold = Me.togFilterByYear
-    Me.lblStartDateFilter.FontBold = Me.togFilterByRange
-    Me.lblEndDateFilter.FontBold = Me.togFilterByRange
+    Me.lblParkFilter.FontBold = Me.tglFilterByPark
+    Me.lblAdminParkFilter.FontBold = Me.tglFilterByAdminPark
+    Me.lblSubunitFilter.FontBold = Me.tglFilterBySubunit
+    Me.lblStatusFilter.FontBold = Me.tglFilterByStatus
+    Me.lblLocationFilter.FontBold = Me.tglFilterByLocation
+    Me.lblFrameFilter.FontBold = Me.tglFilterByFrame
+    Me.lblPanelFilter.FontBold = Me.tglFilterByPanel
+    Me.lblYearFilter.FontBold = Me.tglFilterByYear
+    Me.lblStartDateFilter.FontBold = Me.tglFilterByRange
+    Me.lblEndDateFilter.FontBold = Me.tglFilterByRange
+    
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - FilterRecords[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Function
+' =================================
+' FUNCTION:     fxnFilterRecords
+' Description:  Filter the records by the indicated field
+' Parameters:   none
+' Returns:      none
+' Throws:       none
+' References:   none
+' Source/date:  John R. Boetsch, May 5, 2006
+' Revisions:    JRB, 1/5/2010 - adapted to summarization tool, mainly for formatting filters
+' =================================
+
+Private Function fxnFilterRecords()
+    On Error GoTo Err_Handler
+
+
 
 Exit_Procedure:
     Exit Function
@@ -2620,12 +3696,42 @@ Err_Handler:
     Resume Exit_Procedure
 End Function
 
+' ---------------------------------
+' SUB:          btnEventSummary_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub btnEventSummary_Click()
+On Error GoTo Err_Handler
+    
+    Dim sttDocName As String
+    sttDocName = "rpt_Event_Summary"
+    DoCmd.OpenReport sttDocName, acPreview
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnEventSummary_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub cmdEvent_Summary_Click()
 On Error GoTo Err_cmdEvent_Summary_Click
     
-    Dim stDocName As String
-    stDocName = "rpt_Event_Summary"
-    DoCmd.OpenReport stDocName, acPreview
+
 
 Exit_cmdEvent_Summary_Click:
     Exit Sub
@@ -2633,13 +3739,42 @@ Err_cmdEvent_Summary_Click:
     MsgBox Err.Description
     Resume Exit_cmdEvent_Summary_Click
 End Sub
-
+' ---------------------------------
+' SUB:          btnRptTagHistory_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub btnRptTagHistory_Click()
+On Error GoTo Err_Handler
+    
+    Dim strDocName As String
+    strDocName = "rpt_Tag_History"
+    DoCmd.OpenReport strDocName, acPreview
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnRptTagHistory_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub cmd_Rpt_Tag_History_Click()
 On Error GoTo Err_cmd_Rpt_Tag_History_Click
 
-    Dim stDocName As String
-    stDocName = "rpt_Tag_History"
-    DoCmd.OpenReport stDocName, acPreview
+
 
 Exit_cmd_Rpt_Tag_History_Click:
     Exit Sub
@@ -2649,10 +3784,23 @@ Err_cmd_Rpt_Tag_History_Click:
     Resume Exit_cmd_Rpt_Tag_History_Click
     
 End Sub
-
-Private Sub cmdExport_Products_Click()
-    On Error GoTo Err_Handler
-
+' ---------------------------------
+' SUB:          btnExportProducts_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub btnExportProducts_Click()
+On Error GoTo Err_Handler
+    
     Dim strQryName(8, 2) As String
     Dim qNum As Integer
     Dim qDef As QueryDef
@@ -2664,15 +3812,15 @@ Private Sub cmdExport_Products_Click()
     Set db = CurrentDb
     
     ' Bail out if no start year is currently selected
-    If IsNull(Me.cboYearFilter) Then
+    If IsNull(Me.cbxYearFilter) Then
         MsgBox ("A YEAR filter must be entered above for these products to be generated. Please enter the starting year of the 4 year period desired and try again")
-        GoTo Exit_Procedure
+        GoTo Exit_Handler
     End If
     'Set the name of the group of records to be exported to Region if all Parks, otherwise use the Park Code
-    If IsNull(Me.cboAdminParkFilter) Then
+    If IsNull(Me.cbxAdminParkFilter) Then
         strParkName = "REGION"
     Else
-        strParkName = Me.cboAdminParkFilter
+        strParkName = Me.cbxAdminParkFilter
     End If
 
     strQryName(0, 0) = "qSum_4YR_PRODUCT_Event_List_for_4_Year_Cycle"
@@ -2702,7 +3850,7 @@ Private Sub cmdExport_Products_Click()
 '   Next
     
     'Generate the default output file name and allow user to edit it
-    strInitFile = Application.CurrentProject.Path & "\Exports\NCRN_ForestVeg_All_" & strParkName & "_" & Me.cboYearFilter & "-" & Me.cboYearFilter + 3 & "_" & CStr(Format(Now(), "yyyymmdd")) & ".xlsx"
+    strInitFile = Application.CurrentProject.Path & "\Exports\NCRN_ForestVeg_All_" & strParkName & "_" & Me.cbxYearFilter & "-" & Me.cbxYearFilter + 3 & "_" & CStr(Format(Now(), "yyyymmdd")) & ".xlsx"
     strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.xls*)", "*.xls*")
     strSaveFolder = fPathParsing(strSaveFile, "D")
     'Cycle through queries and create an worksheet tab for each one
@@ -2716,6 +3864,22 @@ Private Sub cmdExport_Products_Click()
     Next
     
     MsgBox "File saved to:" & vbCrLf & vbCrLf & strSaveFile
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnExportProducts_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+Private Sub cmdExport_Products_Click()
+    On Error GoTo Err_Handler
+
+
 
 Exit_Procedure:
     Exit Sub
@@ -2730,9 +3894,23 @@ Err_Handler:
     End Select
     Resume Exit_Procedure
 End Sub
-
-Private Sub cmdExport_All_Click()
+' ---------------------------------
+' SUB:          btnExportAll_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub btnExportAll_Click()
 On Error GoTo Err_Handler
+    
 'This routines exports all data to a single XLSX file as well as individual CSV files and is typically triggered from a button on the Data Summary form.
     
     Dim strQryName(15, 2) As String
@@ -2795,6 +3973,20 @@ On Error GoTo Err_Handler
     Next
     
     MsgBox "File saved to:" & vbCrLf & vbCrLf & strSaveFile
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnExportAll_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+Private Sub cmdExport_All_Click()
+On Error GoTo Err_Handler
 
 Exit_Procedure:
     Exit Sub
@@ -2802,13 +3994,43 @@ Err_Handler:
     MsgBox Err.Description
     Resume Exit_Procedure
 End Sub
+' ---------------------------------
+' SUB:          btnOpenBasicSummaryForm_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
 
-Private Sub cmdOpen_Basic_Summary_Form_Click()
+' ---------------------------------
+Private Sub btnOpenBasicSummaryForm_Click()
 On Error GoTo Err_Handler
-
+    
     'record what the current record is so we can go back to that record on return
     DoCmd.Close acForm, "frm_Data_Summary_Advanced"
     DoCmd.OpenForm "frm_Data_Summary_Basic"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnOpenBasicSummaryForm_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+Private Sub cmdOpen_Basic_Summary_Form_Click()
+On Error GoTo Err_Handler
+
+
         
 Exit_Procedure:
     Exit Sub

@@ -2604,7 +2604,6 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-
 ' ---------------------------------
 ' SUB:          CheckDBH
 ' Description:  form validation actions
