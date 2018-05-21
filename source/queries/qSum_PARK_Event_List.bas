@@ -40,6 +40,21 @@ dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
 Begin
     Begin
+        dbText "Name" ="qFiltered_Events_Cycle.Event_ID"
+        dbLong "AggregateType" ="-1"
+        dbInteger "ColumnOrder" ="10"
+    End
+    Begin
+        dbText "Name" ="qFiltered_Events_Cycle.Event_Date"
+        dbLong "AggregateType" ="-1"
+        dbInteger "ColumnOrder" ="6"
+    End
+    Begin
+        dbText "Name" ="qFiltered_Events_Cycle.Certified"
+        dbLong "AggregateType" ="-1"
+        dbInteger "ColumnOrder" ="8"
+    End
+    Begin
         dbText "Name" ="qFiltered_Locations.Location_ID"
         dbInteger "ColumnWidth" ="1695"
         dbInteger "ColumnOrder" ="9"

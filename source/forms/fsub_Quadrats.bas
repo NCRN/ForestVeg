@@ -3,7 +3,6 @@ VersionRequired =20
 Begin Form
     RecordSelectors = NotDefault
     NavigationButtons = NotDefault
-    FilterOn = NotDefault
     AllowDesignChanges = NotDefault
     DefaultView =0
     ScrollBars =0
@@ -943,8 +942,9 @@ Begin Form
                     ControlSource ="Percent_Fine_Woody_Debris"
                     ValidationRule ="Is Null Or Between 0 And 1"
                     ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
+                    DefaultValue ="Null"
                     FontName ="Calibri"
-                    OnLostFocus ="=ValidPct([Screen].[ActiveControl])"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl],True)"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x010000009e000000010000000100000000000000000000001e00000001000000 ,
@@ -996,8 +996,9 @@ Begin Form
                     ControlSource ="Percent_Trees"
                     ValidationRule ="Is Null Or Between 0 And 1"
                     ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
+                    DefaultValue ="Null"
                     FontName ="Calibri"
-                    OnLostFocus ="=ValidPct([Screen].[ActiveControl])"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl],True)"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a2000000010000000100000000000000000000002000000001000000 ,
@@ -1051,8 +1052,9 @@ Begin Form
                     ControlSource ="Percent_Rock"
                     ValidationRule ="Is Null Or Between 0 And 1"
                     ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
+                    DefaultValue ="Null"
                     FontName ="Calibri"
-                    OnLostFocus ="=ValidPct([Screen].[ActiveControl])"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl],True)"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a0000000010000000100000000000000000000001f00000001000000 ,
@@ -1105,8 +1107,9 @@ Begin Form
                     ControlSource ="Percent_Woody_Debris"
                     ValidationRule ="Is Null Or Between 0 And 1"
                     ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
+                    DefaultValue ="Null"
                     FontName ="Calibri"
-                    OnLostFocus ="=ValidPct([Screen].[ActiveControl])"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl],True)"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x010000009e000000010000000100000000000000000000001e00000001000000 ,
@@ -1159,7 +1162,9 @@ Begin Form
                     ControlSource ="Percent_Other"
                     ValidationRule ="Is Null Or Between 0 And 1"
                     ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
+                    DefaultValue ="Null"
                     FontName ="Calibri"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl],True)"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a2000000010000000100000000000000000000002000000001000000 ,
@@ -1213,7 +1218,9 @@ Begin Form
                     ControlSource ="Percent_Bryophytes"
                     ValidationRule ="Is Null Or Between 0 And 1"
                     ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
+                    DefaultValue ="Null"
                     FontName ="Calibri"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl],True)"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000ac000000010000000100000000000000000000002500000001000000 ,
@@ -1267,8 +1274,9 @@ Begin Form
                     ControlSource ="Percent_Ferns"
                     ValidationRule ="Is Null Or Between 0 And 1"
                     ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
+                    DefaultValue ="Null"
                     FontName ="Calibri"
-                    OnLostFocus ="=ValidPct([Screen].[ActiveControl])"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl],True)"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a2000000010000000100000000000000000000002000000001000000 ,
@@ -1322,8 +1330,9 @@ Begin Form
                     ControlSource ="Percent_Herbs"
                     ValidationRule ="Is Null Or Between 0 And 1"
                     ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
+                    DefaultValue ="Null"
                     FontName ="Calibri"
-                    OnLostFocus ="=ValidPct([Screen].[ActiveControl])"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl],True)"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a2000000010000000100000000000000000000002000000001000000 ,
@@ -1377,8 +1386,9 @@ Begin Form
                     ControlSource ="Percent_Sedges"
                     ValidationRule ="Is Null Or Between 0 And 1"
                     ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
+                    DefaultValue ="Null"
                     FontName ="Calibri"
-                    OnLostFocus ="=ValidPct([Screen].[ActiveControl])"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl],True)"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a4000000010000000100000000000000000000002100000001000000 ,
@@ -1432,8 +1442,9 @@ Begin Form
                     ControlSource ="Percent_Grasses"
                     ValidationRule ="Is Null Or Between 0 And 1"
                     ValidationText ="Enter % cover values between 0 and 100% (inclusive)"
+                    DefaultValue ="Null"
                     FontName ="Calibri"
-                    OnLostFocus ="=ValidPct([Screen].[ActiveControl])"
+                    OnLostFocus ="=ValidPct([Screen].[ActiveControl],True)"
                     OnClick ="[Event Procedure]"
                     ConditionalFormat = Begin
                         0x01000000a6000000010000000100000000000000000000002200000001000000 ,
@@ -2303,7 +2314,7 @@ On Error GoTo Err_Handler
     
     'strQuadrat = Me!Frame_Quadrat_Selection.Value
     Me.txtQuadrat_Number.DefaultValue = "'" & strQuadrat & "'"
-    Me.filter = "[Quadrat_Number] = """ & strQuadrat & """ "
+    Me.Filter = "[Quadrat_Number] = """ & strQuadrat & """ "
     Me.FilterOn = True
     'Temporary fix to save Quadrat record before entering subform
     Me!txtQuadrat_Comments.Value = Me!txtQuadrat_Comments.Value & " "

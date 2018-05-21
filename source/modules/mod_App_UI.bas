@@ -4,12 +4,13 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_UI
 ' Level:        Application module
-' Version:      1.00
-
+' Version:      1.01
+'
 ' Description:  Application User Interface related functions & subroutines
 '
 ' Source/date:  Bonnie Campbell, April 2018
 ' Revisions:    BLC, 4/19/2018  - 1.00 - initial version
+'               BLC, 5/21/2018  - 1.01 - accommodate NULL if user hasn't set value
 ' =================================
 
 ' ---------------------------------
@@ -137,10 +138,13 @@ End Sub
 ' ---------------------------------
 ' SUB:          ValidPct
 ' Description:  percent validating actions
-' Usage:        =ValidPct(ctrlValue) in the LostFocus event of the control
+' Usage:        =ValidPct(ctrlValue, NullOK) in the LostFocus event of the control
+'               for example:
+'               =ValidPct([Screen].[ActiveControl],True)
 '               used to trigger ValidationRule, ValidationText
 ' Assumptions:  -
-' Parameters:   -
+' Parameters:   pct - value for the percent (double)
+'               NullOK - whether NULL is an acceptable value (boolean, optional, default = False)
 ' Returns:      -
 ' Throws:       none
 ' References:   -
@@ -148,8 +152,9 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/22/2018 - initial version
+'   BLC - 5/21/2018 - accommodate NULL if user hasn't set value
 ' ---------------------------------
-Public Function ValidPct(pct As Double) As Double
+Public Function ValidPct(pct As Variant, Optional NullOK As Boolean = False) As Double
 On Error GoTo Err_Handler
     
     Dim IsValid As Boolean
@@ -157,6 +162,12 @@ On Error GoTo Err_Handler
     'default
     ValidPct = 0
     IsValid = False
+    
+    'handle when NULLs are OK (i.e. when no value is yet set)
+    If (NullOK = True) And (IsNull(pct) = True) Then
+        IsValid = True
+        GoTo Exit_Handler
+    End If
     
     Select Case pct
 '        Case Is = 0

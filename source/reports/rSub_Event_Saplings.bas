@@ -169,6 +169,7 @@ Begin Report
                     LayoutCachedHeight =540
                 End
                 Begin Label
+                    Visible = NotDefault
                     FontItalic = NotDefault
                     TextFontCharSet =238
                     TextAlign =3
@@ -393,6 +394,7 @@ Begin Report
                     LayoutCachedHeight =240
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3

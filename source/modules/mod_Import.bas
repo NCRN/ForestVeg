@@ -22,7 +22,7 @@ strFilter = adhAddFilterItem( _
     
     varImportFileName = adhCommonFileOpenSave( _
         OpenFile:=True, _
-        filter:=strFilter, _
+        Filter:=strFilter, _
         Flags:=lngFlags, _
         DialogTitle:="Locate data file")
     

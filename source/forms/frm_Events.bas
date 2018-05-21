@@ -2087,7 +2087,7 @@ Dim strTransect As String
     strTransect = Me!grpTransect_Selection.Value
     Me.txtTransect_Selection.Value = "'" & strTransect & "'"
     Forms![frm_Events]![fsub_Transects]!txtTransect_Azimuth.DefaultValue = "'" & strTransect & "'"
-    Forms![frm_Events]![fsub_Transects].Form.filter = "[Transect_Azimuth] = """ & strTransect & """ "
+    Forms![frm_Events]![fsub_Transects].Form.Filter = "[Transect_Azimuth] = """ & strTransect & """ "
     Forms![frm_Events]![fsub_Transects].Form.FilterOn = True
 End Sub
 

@@ -14,13 +14,13 @@ Begin Form
     DatasheetFontHeight =11
     ItemSuffix =29
     Left =11895
-    Top =5490
+    Top =5295
     Right =21360
-    Bottom =10155
+    Bottom =9960
     DatasheetGridlinesColor =15062992
-    OrderBy ="[qSum_Active_Trees_Shrubs_Herbs_Vines_by_Event].[Plot_Name], [qSum_Active_Trees_"
-        "Shrubs_Herbs_Vines_by_Event].[Habit_Class], [qSum_Active_Trees_Shrubs_Herbs_Vine"
-        "s_by_Event].[Date]"
+    OrderBy ="[qSum_Active_Trees_Shrubs_Herbs_Vines_by_Event].[Date], [qSum_Active_Trees_Shrub"
+        "s_Herbs_Vines_by_Event].[Plot_Name], [qSum_Active_Trees_Shrubs_Herbs_Vines_by_Ev"
+        "ent].[Habit_Class]"
     RecSrcDt = Begin
         0xa71c6b6f13c8e340
     End

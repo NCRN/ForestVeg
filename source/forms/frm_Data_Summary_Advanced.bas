@@ -21,10 +21,10 @@ Begin Form
     Width =14400
     DatasheetFontHeight =9
     ItemSuffix =66
-    Left =3405
-    Top =1455
-    Right =17805
-    Bottom =11340
+    Left =555
+    Top =765
+    Right =14955
+    Bottom =10650
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x2680758ff389e340
@@ -1217,7 +1217,7 @@ Begin Form
                     Top =7140
                     FontSize =10
                     TabIndex =26
-                    ColumnInfo ="\"Event ID\";\"\";\"\";\"\";\"\";\"\";\"10\";\"200\""
+                    ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"10\";\"200\""
                     Name ="cbxEventSelection"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT qFiltered_Events.Event_ID, qFiltered_Locations.Plot_Name, Format([tbl_Eve"
@@ -1819,7 +1819,7 @@ Option Explicit
 ' =================================
 ' MODULE:       frm_Data_Summary_Advanced
 ' Level:        Application module
-' Version:      1.02
+' Version:      1.01
 '
 ' Description:  Standard form for summarizing/exploring project data
 ' Source/date:  John Boetsch, Jan 2010
@@ -1827,7 +1827,6 @@ Option Explicit
 ' Adapted:      Bonnie Campbell, May 14, 2018
 ' Revisions:    JB/ML/GS - 1/2010+  - 1.00 - initial version
 '               BLC   - 5/14/2018 - 1.01 - added documentation, error handling
-'               BLC   - 5/15/2018 - 1.02 - revise to use ToggleFilters(), SetFilters()
 ' =================================
 
 ' ---------------------------------
@@ -1866,7 +1865,7 @@ On Error GoTo Err_Handler
         DoCmd.CancelEvent
         GoTo Exit_Handler
     End If
-    FilterRecords
+    fxnFilterRecords
     
 Exit_Handler:
     Exit Sub
@@ -1879,6 +1878,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
 
 ' ---------------------------------
 ' SUB:          cbxSelectQuery_NotInList
@@ -1893,6 +1893,7 @@ End Sub
 ' Revisions:
 '   ML/GS - unknown - initial version
 '   BLC - 5/14/2018 - documentation, error handling
+
 ' ---------------------------------
 Private Sub cbxSelectQuery_NotInList(NewData As String, Response As Integer)
 On Error GoTo Err_Handler
@@ -1911,6 +1912,16 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+Private Sub cboSelect_Query_NotInList(NewData As String, Response As Integer)
+    On Error GoTo Err_Handler
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
+
 ' ---------------------------------
 ' SUB:          cbxSelectQuery_AfterUpdate
 ' Description:  combobox after update actions
@@ -1924,6 +1935,7 @@ End Sub
 ' Revisions:
 '   ML/GS - unknown - initial version
 '   BLC - 5/14/2018 - documentation, error handling
+
 ' ---------------------------------
 Private Sub cbxSelectQuery_AfterUpdate()
 On Error GoTo Err_Handler
@@ -1985,6 +1997,24 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub cboSelect_Query_AfterUpdate()
+    On Error GoTo Err_Handler
+
+
+Exit_Procedure:
+'    On Error Resume Next
+'    Set qdfs = Nothing
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+'      Case 3011, 7874   ' Object not found
+'        MsgBox "This query is not found in the application:" & _
+'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    End Select
+    Resume Exit_Procedure
+End Sub
 
 ' ---------------------------------
 ' SUB:          btnOpenBrowser_Click
@@ -1999,6 +2029,7 @@ End Sub
 ' Revisions:
 '   ML/GS - unknown - initial version
 '   BLC - 5/14/2018 - documentation, error handling
+
 ' ---------------------------------
 Private Sub btnOpenBrowser_Click()
 On Error GoTo Err_Handler
@@ -2022,6 +2053,22 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub cmdOpenBrowser_Click()
+    On Error GoTo Err_Handler
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case 3011, 7874   ' Object not found
+        MsgBox "The table, query or form is no longer available in the application.", , _
+            "Object not found"
+      Case Else
+        MsgBox Err.Number & ": " & Err.Description
+    End Select
+    Resume Exit_Procedure
+End Sub
 
 ' ---------------------------------
 ' SUB:          btnRequery_Click
@@ -2036,6 +2083,7 @@ End Sub
 ' Revisions:
 '   ML/GS - unknown - initial version
 '   BLC - 5/14/2018 - documentation, error handling
+
 ' ---------------------------------
 Private Sub btnRequery_Click()
 On Error GoTo Err_Handler
@@ -2058,6 +2106,17 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub cmdRequery_Click()
+    On Error GoTo Err_Handler
+
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
 
 ' ----------------
 '  Filters
@@ -2075,28 +2134,27 @@ End Sub
 ' Revisions:
 '   ML/GS - unknown - initial version
 '   BLC - 5/14/2018 - documentation, error handling
-'   BLC - 5/15/2018 - revise to use ToggleFilters()
+
 ' ---------------------------------
 Private Sub btnFiltersOff_Click()
 On Error GoTo Err_Handler
+    
+    ' Turn off the filters
+    Me.btnRequery.SetFocus
+    ' Undo the filter toggles
+    Me.tglFilterByPark = False
+    Me.tglFilterByAdminPark = False
+    Me.tglFilterBySubunit = False
+    Me.tglFilterByPanel = False
+    Me.tglFilterByFrame = False
+    Me.tglFilterByStatus = False
+    Me.tglFilterByLocation = False
+    Me.tglFilterByYear = False
+    Me.tglFilterByRange = False
 
-    ToggleFilters "off"
-'    ' Turn off the filters
-'    Me.btnRequery.SetFocus
-'    ' Undo the filter toggles
-'    Me.tglFilterByPark = False
-'    Me.tglFilterByAdminPark = False
-'    Me.tglFilterBySubunit = False
-'    Me.tglFilterByPanel = False
-'    Me.tglFilterByFrame = False
-'    Me.tglFilterByStatus = False
-'    Me.tglFilterByLocation = False
-'    Me.tglFilterByYear = False
-'    Me.tglFilterByRange = False
-'
-'    fxnFilterRecords
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
+    fxnFilterRecords
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
     
 Exit_Handler:
     Exit Sub
@@ -2108,6 +2166,19 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - btnFiltersOff_Click[frm_Data_Summary_Advanced])"
     End Select
     Resume Exit_Handler
+End Sub
+' =================================
+' The next set of procedures filters the recordset depending on user input
+
+Private Sub cmdFiltersOff_Click()
+    On Error GoTo Err_Handler
+
+    
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -2123,28 +2194,27 @@ End Sub
 ' Revisions:
 '   ML/GS - unknown - initial version
 '   BLC - 5/14/2018 - documentation, error handling
+
 ' ---------------------------------
 Private Sub btnFiltersClear_Click()
 On Error GoTo Err_Handler
     
-    ToggleFilters "clear"
+    'Clear the filters
+    Me.btnRequery.SetFocus
+    Me.cbxParkFilter = Null
+    Me.cbxAdminParkFilter = Null
+    Me.cbxSubunitFilter = Null
+    Me.cbxPanelFilter = Null
+    Me.cbxFrameFilter = Null
+    Me.cbxStatusFilter = Null
+    Me.cbxLocationFilter = Null
+    Me.cbxYearFilter = Null
+    Me.tbxStartDateFilter = Null
+    Me.tbxEndDateFilter = Null
     
-'    'Clear the filters
-'    Me.btnRequery.SetFocus
-'    Me.cbxParkFilter = Null
-'    Me.cbxAdminParkFilter = Null
-'    Me.cbxSubunitFilter = Null
-'    Me.cbxPanelFilter = Null
-'    Me.cbxFrameFilter = Null
-'    Me.cbxStatusFilter = Null
-'    Me.cbxLocationFilter = Null
-'    Me.cbxYearFilter = Null
-'    Me.tbxStartDateFilter = Null
-'    Me.tbxEndDateFilter = Null
-'
-'    fxnFilterRecords
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
+    fxnFilterRecords
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
     
 Exit_Handler:
     Exit Sub
@@ -2157,10 +2227,17 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub cmdClear_Filters_Click()
+    On Error GoTo Err_Handler
 
-' ----------------
-'  Filter Selection
-' ----------------
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
 
 ' ---------------------------------
 ' SUB:          cbxParkFilter_AfterUpdate
@@ -2175,14 +2252,13 @@ End Sub
 ' Revisions:
 '   ML/GS - unknown - initial version
 '   BLC - 5/14/2018 - documentation, error handling
+
 ' ---------------------------------
 Private Sub cbxParkFilter_AfterUpdate()
 On Error GoTo Err_Handler
     
-'    SelectFilter Me.cbxParkFilter
-    
     Me.tglFilterByPark = Not IsNull(Me.cbxParkFilter)
-    FilterRecords 'fxnFilterRecords
+    fxnFilterRecords
     Me.tglFilterByPark.SetFocus
     Me.cbxLocationFilter.Requery
     Me.cbxEventSelection.Requery
@@ -2198,344 +2274,19 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+' =================================
+' Location filter controls
 
-' ---------------------------------
-' SUB:          cbxAdminParkFilter_AfterUpdate
-' Description:  combobox after update
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
-' Adapted:      -
-' Revisions:
-'   ML/GS - unknown - initial version
-'   BLC - 5/14/2018 - documentation, error handling
-' ---------------------------------
-Private Sub cbxAdminParkFilter_AfterUpdate()
-On Error GoTo Err_Handler
-    
-    SelectFilter Me.cbxAdminParkFilter
-    
-'    Me.tglFilterByAdminPark = Not IsNull(Me.cbxAdminParkFilter)
-'    fxnFilterRecords
-'    Me.tglFilterByAdminPark.SetFocus
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
-    
-Exit_Handler:
+Private Sub cboParkFilter_AfterUpdate()
+    On Error GoTo Err_Handler
+
+
+Exit_Procedure:
     Exit Sub
-    
 Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxAdminParkFilter_AfterUpdate[frm_Data_Summary_Advanced])"
-    End Select
-    Resume Exit_Handler
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
 End Sub
-
-' ---------------------------------
-' SUB:          cbxSubunitFilter_AfterUpdate
-' Description:  combobox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
-' Adapted:      -
-' Revisions:
-'   ML/GS - unknown - initial version
-'   BLC - 5/14/2018 - documentation, error handling
-' ---------------------------------
-Private Sub cbxSubunitFilter_AfterUpdate()
-On Error GoTo Err_Handler
-    
-    SelectFilter Me.cbxSubunitFilter
-        
-'    Me.tglFilterBySubunit = Not IsNull(Me.cbxSubunitFilter)
-'    fxnFilterRecords
-'    Me.tglFilterBySubunit.SetFocus
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxSubunitFilter_AfterUpdate[frm_Data_Summary_Advanced])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' SUB:          cbxFrameFilter_AfterUpdate
-' Description:  form open actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
-' Adapted:      -
-' Revisions:
-'   ML/GS - unknown - initial version
-'   BLC - 5/14/2018 - documentation, error handling
-' ---------------------------------
-Private Sub cbxFrameFilter_AfterUpdate()
-On Error GoTo Err_Handler
-    
-    SelectFilter Me.cbxFrameFilter
-    
-'    Me.tglFilterByFrame = Not IsNull(Me.cbxFrameFilter)
-'    fxnFilterRecords
-'    Me.tglFilterByFrame.SetFocus
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxFrameFilter_AfterUpdate[frm_Data_Summary_Advanced])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' SUB:          cbxPanelFilter_AfterUpdate
-' Description:  combobox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
-' Adapted:      -
-' Revisions:
-'   ML/GS - unknown - initial version
-'   BLC - 5/14/2018 - documentation, error handling
-' ---------------------------------
-Private Sub cbxPanelFilter_AfterUpdate()
-On Error GoTo Err_Handler
-    
-    SelectFilter Me.cbxPanelFilter
-    
-'    Me.tglFilterByPanel = Not IsNull(Me.cbxPanelFilter)
-'    fxnFilterRecords
-'    Me.tglFilterByPanel.SetFocus
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxPanelFilter_AfterUpdate[frm_Data_Summary_Advanced])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' SUB:          cbxStatusFilter_AfterUpdate
-' Description:  combobox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
-' Adapted:      -
-' Revisions:
-'   ML/GS - unknown - initial version
-'   BLC - 5/14/2018 - documentation, error handling
-' ---------------------------------
-Private Sub cbxStatusFilter_AfterUpdate()
-On Error GoTo Err_Handler
-    
-    SelectFilter Me.cbxStatusFilter
-    
-'    Me.tglFilterByStatus = Not IsNull(Me.cbxStatusFilter)
-'    fxnFilterRecords
-'    Me.tglFilterByStatus.SetFocus
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxStatusFilter_AfterUpdate[frm_Data_Summary_Advanced])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' SUB:          cbxYearFilter_AfterUpdate
-' Description:  combobox after udpate actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
-' Adapted:      -
-' Revisions:
-'   ML/GS - unknown - initial version
-'   BLC - 5/14/2018 - documentation, error handling
-' ---------------------------------
-Private Sub cbxYearFilter_AfterUpdate()
-On Error GoTo Err_Handler
-    
-    SelectFilter Me.cbxYearFilter
-    
-'    Me.tglFilterByYear = Not IsNull(Me.cbxYearFilter)
-'    If Me.tglFilterByYear = True Then Me.tglFilterByRange = False
-'    fxnFilterRecords
-'    Me.tglFilterByYear.SetFocus
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxYearFilter_AfterUpdate[frm_Data_Summary_Advanced])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' SUB:          cbxLocationFilter_AfterUpdate
-' Description:  combobox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
-' Adapted:      -
-' Revisions:
-'   ML/GS - unknown - initial version
-'   BLC - 5/14/2018 - documentation, error handling
-' ---------------------------------
-Private Sub cbxLocationFilter_AfterUpdate()
-On Error GoTo Err_Handler
-    
-    SelectFilter Me.cbxLocationFilter
-    
-'    Me.tglFilterByLocation = Not IsNull(Me.cbxLocationFilter)
-'    fxnFilterRecords
-'    Me.tglFilterByLocation.SetFocus
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxLocationFilter_AfterUpdate[frm_Data_Summary_Advanced])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' SUB:          tbxStartDateFilter_AfterUpdate
-' Description:  textbox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
-' Adapted:      -
-' Revisions:
-'   ML/GS - unknown - initial version
-'   BLC - 5/14/2018 - documentation, error handling
-' ---------------------------------
-Private Sub tbxStartDateFilter_AfterUpdate()
-On Error GoTo Err_Handler
-    
-    SelectFilter Me.tbxStartDateFilter
-    
-'    Me.tglFilterByRange = (Not IsNull(Me.tbxStartDateFilter)) And (Not IsNull(Me.tbxEndDateFilter))
-'    If Me.tglFilterByRange = True Then Me.tglFilterByYear = False
-'    fxnFilterRecords
-'    Me.tglFilterByYear.SetFocus
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxStartDateFilter_AfterUpdate[frm_Data_Summary_Advanced])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' SUB:          tbxEndDateFilter_AfterUpdate
-' Description:  textbox after update actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
-' Adapted:      -
-' Revisions:
-'   ML/GS - unknown - initial version
-'   BLC - 5/14/2018 - documentation, error handling
-' ---------------------------------
-Private Sub tbxEndDateFilter_AfterUpdate()
-On Error GoTo Err_Handler
-    
-    SelectFilter Me.tbxEndDateFilter
-    
-'    Me.tglFilterByRange = (Not IsNull(Me.tbxStartDateFilter)) And (Not IsNull(Me.tbxEndDateFilter))
-'    If Me.tglFilterByRange = True Then Me.tglFilterByYear = False
-'    fxnFilterRecords
-'    Me.tglFilterByYear.SetFocus
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxEndDateFilter_AfterUpdate[frm_Data_Summary_Advanced])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ----------------
-'  Filter Toggles
-' ----------------
 
 ' ---------------------------------
 ' SUB:          tglFilterByPark_AfterUpdate
@@ -2555,10 +2306,8 @@ End Sub
 Private Sub tglFilterByPark_AfterUpdate()
 On Error GoTo Err_Handler
     
-    SetFilter Me.tglFilterByPark
-    
-'    If IsNull(Me.cbxParkFilter) = True Then Me.tglFilterByPark = False
-'    fxnFilterRecords
+    If IsNull(Me.cbxParkFilter) = True Then Me.tglFilterByPark = False
+    fxnFilterRecords
     
 Exit_Handler:
     Exit Sub
@@ -2570,6 +2319,64 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - tglFilterByPark_AfterUpdate[frm_Data_Summary_Advanced])"
     End Select
     Resume Exit_Handler
+End Sub
+Private Sub togFilterByPark_AfterUpdate()
+    On Error GoTo Err_Handler
+
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
+
+' ---------------------------------
+' SUB:          cbxAdminParkFilter_AfterUpdate
+' Description:  combobox after update
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub cbxAdminParkFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterByAdminPark = Not IsNull(Me.cbxAdminParkFilter)
+    fxnFilterRecords
+    Me.tglFilterByAdminPark.SetFocus
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxAdminParkFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+Private Sub cboAdminParkFilter_AfterUpdate()
+    On Error GoTo Err_Handler
+
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -2585,13 +2392,13 @@ End Sub
 ' Revisions:
 '   ML/GS - unknown - initial version
 '   BLC - 5/14/2018 - documentation, error handling
+
 ' ---------------------------------
 Private Sub tglFilterByAdminPark_AfterUpdate()
 On Error GoTo Err_Handler
     
-    SetFilter Me.tglFilterByAdminPark
-'    If IsNull(Me.cbxAdminParkFilter) = True Then Me.tglFilterByAdminPark = False
-'    fxnFilterRecords
+    If IsNull(Me.cbxAdminParkFilter) = True Then Me.tglFilterByAdminPark = False
+    fxnFilterRecords
     
 Exit_Handler:
     Exit Sub
@@ -2604,7 +2411,64 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub togFilterByAdminPark_AfterUpdate()
+    On Error GoTo Err_Handler
 
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
+
+' ---------------------------------
+' SUB:          cbxSubunitFilter_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub cbxSubunitFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterBySubunit = Not IsNull(Me.cbxSubunitFilter)
+    fxnFilterRecords
+    Me.tglFilterBySubunit.SetFocus
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxSubunitFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+Private Sub cboSubunitFilter_AfterUpdate()
+    On Error GoTo Err_Handler
+
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
 ' ---------------------------------
 ' SUB:          tglFilterBySubunit_AfterUpdate
 ' Description:  toggle after update actions
@@ -2622,9 +2486,8 @@ End Sub
 Private Sub tglFilterBySubunit_AfterUpdate()
 On Error GoTo Err_Handler
     
-    SetFilter Me.tglFilterBySubunit
-'    If IsNull(Me.cbxSubunitFilter) = True Then Me.tglFilterBySubunit = False
-'    fxnFilterRecords
+    If IsNull(Me.cbxSubunitFilter) = True Then Me.tglFilterBySubunit = False
+    fxnFilterRecords
     
 Exit_Handler:
     Exit Sub
@@ -2637,7 +2500,64 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub togFilterBySubunit_AfterUpdate()
+    On Error GoTo Err_Handler
 
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
+
+' ---------------------------------
+' SUB:          cbxFrameFilter_AfterUpdate
+' Description:  form open actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+
+' ---------------------------------
+Private Sub cbxFrameFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterByFrame = Not IsNull(Me.cbxFrameFilter)
+    fxnFilterRecords
+    Me.tglFilterByFrame.SetFocus
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxFrameFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+Private Sub cboFrameFilter_AfterUpdate()
+    On Error GoTo Err_Handler
+
+
+    
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
 ' ---------------------------------
 ' SUB:          tglFilterByFrame_AfterUpdate
 ' Description:  toggle after update actions
@@ -2651,13 +2571,13 @@ End Sub
 ' Revisions:
 '   ML/GS - unknown - initial version
 '   BLC - 5/14/2018 - documentation, error handling
+
 ' ---------------------------------
 Private Sub tglFilterByFrame_AfterUpdate()
 On Error GoTo Err_Handler
-
-    SetFilter Me.tglFilterByFrame
-'    If IsNull(Me.cbxFrameFilter) = True Then Me.tglFilterByFrame = False
-'    fxnFilterRecords
+    
+    If IsNull(Me.cbxFrameFilter) = True Then Me.tglFilterByFrame = False
+    fxnFilterRecords
     
 Exit_Handler:
     Exit Sub
@@ -2670,7 +2590,62 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub togFilterByFrame_AfterUpdate()
+    On Error GoTo Err_Handler
 
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
+' ---------------------------------
+' SUB:          cbxPanelFilter_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+
+' ---------------------------------
+Private Sub cbxPanelFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterByPanel = Not IsNull(Me.cbxPanelFilter)
+    fxnFilterRecords
+    Me.tglFilterByPanel.SetFocus
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxPanelFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+Private Sub cboPanelFilter_AfterUpdate()
+    On Error GoTo Err_Handler
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
 ' ---------------------------------
 ' SUB:          tglFilterByPanel_AfterUpdate
 ' Description:  toggle after update actions
@@ -2688,9 +2663,8 @@ End Sub
 Private Sub tglFilterByPanel_AfterUpdate()
 On Error GoTo Err_Handler
     
-    SetFilter Me.tglFilterByPanel
-'    If IsNull(Me.cbxPanelFilter) = True Then Me.tglFilterByPanel = False
-'    fxnFilterRecords
+    If IsNull(Me.cbxPanelFilter) = True Then Me.tglFilterByPanel = False
+    fxnFilterRecords
     
 Exit_Handler:
     Exit Sub
@@ -2703,7 +2677,63 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub togFilterByPanel_AfterUpdate()
+    On Error GoTo Err_Handler
 
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
+' ---------------------------------
+' SUB:          cbxStatusFilter_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+
+' ---------------------------------
+Private Sub cbxStatusFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterByStatus = Not IsNull(Me.cbxStatusFilter)
+    fxnFilterRecords
+    Me.tglFilterByStatus.SetFocus
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxStatusFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+Private Sub cboStatusFilter_AfterUpdate()
+    On Error GoTo Err_Handler
+
+
+    
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
 ' ---------------------------------
 ' SUB:          tglFilterByStatus_AfterUpdate
 ' Description:  toggle after update actions
@@ -2721,9 +2751,8 @@ End Sub
 Private Sub tglFilterByStatus_AfterUpdate()
 On Error GoTo Err_Handler
     
-    SetFilter Me.tglFilterByStatus
-'    If IsNull(Me.cbxStatusFilter) = True Then Me.tglFilterByStatus = False
-'    fxnFilterRecords
+    If IsNull(Me.cbxStatusFilter) = True Then Me.tglFilterByStatus = False
+    fxnFilterRecords
     
 Exit_Handler:
     Exit Sub
@@ -2736,7 +2765,60 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub togFilterByStatus_AfterUpdate()
+    On Error GoTo Err_Handler
 
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
+' ---------------------------------
+' SUB:          cbxLocationFilter_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub cbxLocationFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterByLocation = Not IsNull(Me.cbxLocationFilter)
+    fxnFilterRecords
+    Me.tglFilterByLocation.SetFocus
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxLocationFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+Private Sub cboLocationFilter_AfterUpdate()
+    On Error GoTo Err_Handler
+
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
 ' ---------------------------------
 ' SUB:          tglFilterByLocation_AfterUpdate
 ' Description:  toggle after update actions
@@ -2754,10 +2836,8 @@ End Sub
 Private Sub tglFilterByLocation_AfterUpdate()
 On Error GoTo Err_Handler
     
-    SetFilter Me.tglFilterByLocation
-    
-'    If IsNull(Me.cbxLocationFilter) = True Then Me.tglFilterByLocation = False
-'    fxnFilterRecords
+    If IsNull(Me.cbxLocationFilter) = True Then Me.tglFilterByLocation = False
+    fxnFilterRecords
     
 Exit_Handler:
     Exit Sub
@@ -2770,7 +2850,67 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub togFilterByLocation_AfterUpdate()
+    On Error GoTo Err_Handler
 
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
+
+' ---------------------------------
+' SUB:          cbxYearFilter_AfterUpdate
+' Description:  combobox after udpate actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub cbxYearFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterByYear = Not IsNull(Me.cbxYearFilter)
+    If Me.tglFilterByYear = True Then Me.tglFilterByRange = False
+    fxnFilterRecords
+    Me.tglFilterByYear.SetFocus
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxYearFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+' =================================
+' Event filter controls
+
+Private Sub cboYearFilter_AfterUpdate()
+    On Error GoTo Err_Handler
+
+
+    
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
 ' ---------------------------------
 ' SUB:          tglFilterByYear_AfterUpdate
 ' Description:  toggle after update actions
@@ -2788,10 +2928,9 @@ End Sub
 Private Sub tglFilterByYear_AfterUpdate()
 On Error GoTo Err_Handler
     
-    SetFilter Me.tglFilterByYear
-'    If IsNull(Me.cbxYearFilter) Then Me.tglFilterByYear = False
-'    If Me.tglFilterByYear = True Then Me.tglFilterByRange = False
-'    fxnFilterRecords
+    If IsNull(Me.cbxYearFilter) Then Me.tglFilterByYear = False
+    If Me.tglFilterByYear = True Then Me.tglFilterByRange = False
+    fxnFilterRecords
     
 Exit_Handler:
     Exit Sub
@@ -2804,7 +2943,94 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub togFilterByYear_AfterUpdate()
+    On Error GoTo Err_Handler
 
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
+' ---------------------------------
+' SUB:          tbxStartDateFilter_AfterUpdate
+' Description:  textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Sub tbxStartDateFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterByRange = (Not IsNull(Me.tbxStartDateFilter)) And (Not IsNull(Me.tbxEndDateFilter))
+    If Me.tglFilterByRange = True Then Me.tglFilterByYear = False
+    fxnFilterRecords
+    Me.tglFilterByYear.SetFocus
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxStartDateFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+Private Sub txtStartDateFilter_AfterUpdate()
+
+End Sub
+' ---------------------------------
+' SUB:          tbxEndDateFilter_AfterUpdate
+' Description:  textbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   ML/GS - unknown - initial version
+'   BLC - 5/14/2018 - documentation, error handling
+
+' ---------------------------------
+Private Sub tbxEndDateFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me.tglFilterByRange = (Not IsNull(Me.tbxStartDateFilter)) And (Not IsNull(Me.tbxEndDateFilter))
+    If Me.tglFilterByRange = True Then Me.tglFilterByYear = False
+    fxnFilterRecords
+    Me.tglFilterByYear.SetFocus
+    Me.cbxLocationFilter.Requery
+    Me.cbxEventSelection.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxEndDateFilter_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+Private Sub txtEndDateFilter_AfterUpdate()
+
+End Sub
 ' ---------------------------------
 ' SUB:          tglFilterByRange_AfterUpdate
 ' Description:  toggle after update actions
@@ -2822,11 +3048,10 @@ End Sub
 Private Sub tglFilterByRange_AfterUpdate()
 On Error GoTo Err_Handler
     
-    SetFilter Me.tglFilterByRange
-'    If IsNull(Me.tbxStartDateFilter) And IsNull(Me.tbxEndDateFilter) _
-'        Then Me.tglFilterByRange = False
-'    If Me.tglFilterByRange = True Then Me.tglFilterByYear = False
-'    fxnFilterRecords
+    If IsNull(Me.tbxStartDateFilter) And IsNull(Me.tbxEndDateFilter) _
+        Then Me.tglFilterByRange = False
+    If Me.tglFilterByRange = True Then Me.tglFilterByYear = False
+    fxnFilterRecords
     
 Exit_Handler:
     Exit Sub
@@ -2839,7 +3064,17 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub togFilterByRange_AfterUpdate()
+    On Error GoTo Err_Handler
 
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
 ' ---------------------------------
 ' SUB:          optgScope_AfterUpdate
 ' Description:  option group after update actions
@@ -2853,6 +3088,7 @@ End Sub
 ' Revisions:
 '   ML/GS - unknown - initial version
 '   BLC - 5/14/2018 - documentation, error handling
+
 ' ---------------------------------
 Private Sub optgScope_AfterUpdate()
 On Error GoTo Err_Handler
@@ -2936,10 +3172,47 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub xoptgScope_AfterUpdate()
+    On Error GoTo Err_Handler
 
-' ----------------
-'  Buttons
-' ----------------
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
+
+'Private Sub optgExcluded_AfterUpdate()
+'    On Error GoTo Err_Handler
+'
+'    If Me.optgExcluded = 1 Then
+'        If MsgBox("Include all sampling events in query results, even" & vbCrLf & _
+'            "those that have been flagged for exclusion from" & vbCrLf & _
+'            "summary output?" & vbCrLf & vbCrLf & _
+'            "Note that this may change summary statistics already" & vbCrLf & _
+'            "reported on for prior years.", _
+'            vbExclamation + vbOKCancel + vbDefaultButton2, _
+'            "Override sampling event exclusion flags?") = vbCancel Then
+'            Me.optgExcluded = 0
+'            Me.labExclude.FontBold = True
+'            Me.labInclude.FontBold = False
+'            Me.labInclude.ForeColor = 0
+'        Else
+'            Me.labExclude.FontBold = False
+'            Me.labInclude.FontBold = True
+'            Me.labInclude.ForeColor = 255
+'        End If
+'    Else
+'        Me.labExclude.FontBold = True
+'        Me.labInclude.FontBold = False
+'        Me.labInclude.ForeColor = 0
+'    End If
+'Exit_Procedure:
+'    Exit Sub
+'Err_Handler:
+'    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+'    Resume Exit_Procedure
+'End Sub
 ' ---------------------------------
 ' SUB:          btnViewExcluded_Click
 ' Description:  button click actions
@@ -2974,7 +3247,23 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub cmdViewExcluded_Click()
+    On Error GoTo Err_Handler
 
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+'      Case 3011, 7874   ' Object not found
+'        MsgBox "This query is not found in the application:" & _
+'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    End Select
+    Resume Exit_Procedure
+End Sub
 ' ---------------------------------
 ' SUB:          btnChart_Click
 ' Description:  button click actions
@@ -3008,11 +3297,30 @@ Err_Handler:
             vbCrLf & """" & Me.cbxSelectQuery & """", , "Object not found"
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnChart_Click[frm_Data_Summary_Advanced])"
+            "Error encountered (#" & Err.Number & " - Form_Open[frm_Data_Summary_Advanced])"
     End Select
     Resume Exit_Handler
 End Sub
+' =================================
+' The next set of procedures relate to manipulating the selected query/results
 
+Private Sub cmdChart_Click()
+    On Error GoTo Err_Handler
+
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+'      Case 3011, 7874   ' Object not found
+'        MsgBox "This query is not found in the application:" & _
+'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    End Select
+    Resume Exit_Procedure
+End Sub
 ' ---------------------------------
 ' SUB:          btnPivotTable_Click
 ' Description:  button click actions
@@ -3050,7 +3358,23 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub cmdPivotTable_Click()
+    On Error GoTo Err_Handler
 
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+'      Case 3011, 7874   ' Object not found
+'        MsgBox "This query is not found in the application:" & _
+'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    End Select
+    Resume Exit_Procedure
+End Sub
 ' ---------------------------------
 ' SUB:          btnCloseup_Click
 ' Description:  button click actions
@@ -3085,7 +3409,23 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub cmdCloseup_Click()
+    On Error GoTo Err_Handler
 
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+'      Case 3011, 7874   ' Object not found
+'        MsgBox "This query is not found in the application:" & _
+'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    End Select
+    Resume Exit_Procedure
+End Sub
 ' ---------------------------------
 ' SUB:          btnExportExcel_Click
 ' Description:  button click actions
@@ -3134,7 +3474,24 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub cmdExportExcel_Click()
+    On Error GoTo Err_Handler
 
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case 94, 2001
+        ' User canceled dialog box - do nothing
+      Case 2501
+        ' Canceled open report action - do nothing
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    End Select
+    Resume Exit_Procedure
+End Sub
 ' ---------------------------------
 ' SUB:          btnExportText_Click
 ' Description:  button click actions
@@ -3183,7 +3540,24 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub cmdExportText_Click()
+    On Error GoTo Err_Handler
 
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case 94, 2001
+        ' User canceled dialog box - do nothing
+      Case 2501
+        ' Canceled open report action - do nothing
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    End Select
+    Resume Exit_Procedure
+End Sub
 ' ---------------------------------
 ' SUB:          btnDesign_Click
 ' Description:  button click actions
@@ -3219,6 +3593,108 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub cmdDesign_Click()
+    On Error GoTo Err_Handler
+
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+'      Case 3011, 7874   ' Object not found
+'        MsgBox "This query is not found in the application:" & _
+'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    End Select
+    Resume Exit_Procedure
+End Sub
+
+' ---------------------------------
+' FUNCTION:     FilterRecords
+' Description:  filter records on the desired field
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  John Boetsch, May 5, 2006
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   JB    - 5/5/2010 - initial version adapted to summarization tool, mainly for formatting filters
+'   ML/GS - unknown - initial version
+'   BLC   - 5/14/2018 - documentation, error handling
+' ---------------------------------
+Private Function FilterRecords()
+On Error GoTo Err_Handler
+    
+    Dim bFilterOn As Boolean
+
+    bFilterOn = False
+
+    ' If any toggles are on, the filter is on
+    'If Me.togFilterByPark Or Me.togFilterByType Or Me.togFilterByStatus Or _
+        Me.togFilterByLoc Or Me.togFilterByStratum Then bFilterOn = True
+    ' And for loc filters that allow null values ...
+    'If Me.togFilterByRegion Or Me.togFilterByPanelType Or _
+    '     Me.togFilterByPanelName Then bFilterOn = True
+    '  And for event filters
+    ' If Me.togFilterByYear Or Me.togFilterByRange Then bFilterOn = True
+    ' Non-standard fields
+    'If Me.togFilterByWatershed Then bFilterOn = True
+
+Reformat_controls:
+    ' Enable/disable the command button accordingly
+    'Me.cmdFiltersOff.Enabled = bFilterOn
+ 
+    ' Make the labels bold or not depending on filter settings
+    Me.lblParkFilter.FontBold = Me.tglFilterByPark
+    Me.lblAdminParkFilter.FontBold = Me.tglFilterByAdminPark
+    Me.lblSubunitFilter.FontBold = Me.tglFilterBySubunit
+    Me.lblStatusFilter.FontBold = Me.tglFilterByStatus
+    Me.lblLocationFilter.FontBold = Me.tglFilterByLocation
+    Me.lblFrameFilter.FontBold = Me.tglFilterByFrame
+    Me.lblPanelFilter.FontBold = Me.tglFilterByPanel
+    Me.lblYearFilter.FontBold = Me.tglFilterByYear
+    Me.lblStartDateFilter.FontBold = Me.tglFilterByRange
+    Me.lblEndDateFilter.FontBold = Me.tglFilterByRange
+    
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - FilterRecords[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Function
+' =================================
+' FUNCTION:     fxnFilterRecords
+' Description:  Filter the records by the indicated field
+' Parameters:   none
+' Returns:      none
+' Throws:       none
+' References:   none
+' Source/date:  John R. Boetsch, May 5, 2006
+' Revisions:    JRB, 1/5/2010 - adapted to summarization tool, mainly for formatting filters
+' =================================
+
+Private Function fxnFilterRecords()
+    On Error GoTo Err_Handler
+
+
+
+Exit_Procedure:
+    Exit Function
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+        "Error encountered (#" & Err.Number & " - fxnFilterRecords)"
+    Resume Exit_Procedure
+End Function
 
 ' ---------------------------------
 ' SUB:          btnEventSummary_Click
@@ -3252,7 +3728,17 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub cmdEvent_Summary_Click()
+On Error GoTo Err_cmdEvent_Summary_Click
+    
 
+
+Exit_cmdEvent_Summary_Click:
+    Exit Sub
+Err_cmdEvent_Summary_Click:
+    MsgBox Err.Description
+    Resume Exit_cmdEvent_Summary_Click
+End Sub
 ' ---------------------------------
 ' SUB:          btnRptTagHistory_Click
 ' Description:  button click actions
@@ -3285,7 +3771,19 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub cmd_Rpt_Tag_History_Click()
+On Error GoTo Err_cmd_Rpt_Tag_History_Click
 
+
+
+Exit_cmd_Rpt_Tag_History_Click:
+    Exit Sub
+
+Err_cmd_Rpt_Tag_History_Click:
+    MsgBox Err.Description
+    Resume Exit_cmd_Rpt_Tag_History_Click
+    
+End Sub
 ' ---------------------------------
 ' SUB:          btnExportProducts_Click
 ' Description:  button click actions
@@ -3378,7 +3876,24 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub cmdExport_Products_Click()
+    On Error GoTo Err_Handler
 
+
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case 94, 2001
+        ' User canceled dialog box - do nothing
+      Case 2501
+        ' Canceled open report action - do nothing
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    End Select
+    Resume Exit_Procedure
+End Sub
 ' ---------------------------------
 ' SUB:          btnExportAll_Click
 ' Description:  button click actions
@@ -3470,7 +3985,15 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+Private Sub cmdExport_All_Click()
+On Error GoTo Err_Handler
 
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox Err.Description
+    Resume Exit_Procedure
+End Sub
 ' ---------------------------------
 ' SUB:          btnOpenBasicSummaryForm_Click
 ' Description:  button click actions
@@ -3484,6 +4007,7 @@ End Sub
 ' Revisions:
 '   ML/GS - unknown - initial version
 '   BLC - 5/14/2018 - documentation, error handling
+
 ' ---------------------------------
 Private Sub btnOpenBasicSummaryForm_Click()
 On Error GoTo Err_Handler
@@ -3503,413 +4027,14 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
-' ----------------
-'  Functions
-' ----------------
-' ---------------------------------
-' FUNCTION:     FilterRecords
-' Description:  filter records on the desired field
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  John Boetsch, May 5, 2006
-'               Mark Lehman/Geoffrey Sanders, unknown
-' Adapted:      -
-' Revisions:
-'   JB    - 5/5/2010 - initial version adapted to summarization tool, mainly for formatting filters
-'   ML/GS - unknown - initial version
-'   BLC   - 5/14/2018 - documentation, error handling
-' ---------------------------------
-Private Function FilterRecords()
+Private Sub cmdOpen_Basic_Summary_Form_Click()
 On Error GoTo Err_Handler
-    
-    Dim bFilterOn As Boolean
 
-    bFilterOn = False
 
-    ' If any toggles are on, the filter is on
-    'If Me.togFilterByPark Or Me.togFilterByType Or Me.togFilterByStatus Or _
-        Me.togFilterByLoc Or Me.togFilterByStratum Then bFilterOn = True
-    ' And for loc filters that allow null values ...
-    'If Me.togFilterByRegion Or Me.togFilterByPanelType Or _
-    '     Me.togFilterByPanelName Then bFilterOn = True
-    '  And for event filters
-    ' If Me.togFilterByYear Or Me.togFilterByRange Then bFilterOn = True
-    ' Non-standard fields
-    'If Me.togFilterByWatershed Then bFilterOn = True
-
-Reformat_controls:
-    ' Enable/disable the command button accordingly
-    'Me.cmdFiltersOff.Enabled = bFilterOn
- 
-    ' Make the labels bold or not depending on filter settings
-    Me.lblParkFilter.FontBold = Me.tglFilterByPark
-    Me.lblAdminParkFilter.FontBold = Me.tglFilterByAdminPark
-    Me.lblSubunitFilter.FontBold = Me.tglFilterBySubunit
-    Me.lblStatusFilter.FontBold = Me.tglFilterByStatus
-    Me.lblLocationFilter.FontBold = Me.tglFilterByLocation
-    Me.lblFrameFilter.FontBold = Me.tglFilterByFrame
-    Me.lblPanelFilter.FontBold = Me.tglFilterByPanel
-    Me.lblYearFilter.FontBold = Me.tglFilterByYear
-    Me.lblStartDateFilter.FontBold = Me.tglFilterByRange
-    Me.lblEndDateFilter.FontBold = Me.tglFilterByRange
-    
-Exit_Handler:
-    Exit Function
-    
+        
+Exit_Procedure:
+    Exit Sub
 Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - FilterRecords[frm_Data_Summary_Advanced])"
-    End Select
-    Resume Exit_Handler
-End Function
-
-' ---------------------------------
-' FUNCTION:     SetFilter
-' Description:  prepare filter display based on filter being set
-' Assumptions:  -
-' Parameters:   ctl - control being toggled (control)
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, May 15, 2018
-' Adapted:      -
-' Revisions:
-'   BLC   - 5/15/2018 - initial version
-' ---------------------------------
-Private Function SetFilter(ctl As Control)
-On Error GoTo Err_Handler
-    
-'    Select Case filter
-'        Case "park"
-'        Case "adminpark"
-'        Case "subunit"
-'        Case "panel"
-'        Case "frame"
-'        Case "status"
-'        Case "location"
-'        Case "eventyr"
-'        Case "eventdate"
-'    End Select
-'
-    Dim cbx As String
-    Dim filterby As String
-    
-    With Me
-        
-        'determine filter
-        filterby = Replace(ctl.Name, "tglFilterBy", "")
-        cbx = "cbx" & Replace(ctl.Name, "tglFilterBy", "") & "Filter"
-        
-        Select Case filterby
-            Case "year" 'tglFilterByYear
-                If IsNull(.Controls(cbx)) = True Then ctl = False
-                If ctl = True Then .tglFilterByRange = False
-            Case "range" 'tglFilterByRange
-                If IsNull(.tbxStartDateFilter) And IsNull(.tbxEndDateFilter) _
-                    Then ctl = False
-                If ctl = True Then .tglFilterByYear = False
-            Case Else
-                If IsNull(.Controls(cbx)) = True Then ctl = False
-        End Select
-        
-'        'handle date ranges
-'        If Left$(ctl.Name, 3) = "tbx" Then
-'            tgl = "tglFilterByRange"
-'            .Controls(tgl) = (Not IsNull(Me.tbxStartDateFilter)) And (Not IsNull(Me.tbxEndDateFilter))
-'        Else
-'            tgl = "tglFilterBy" & Remove(Remove(ctl.Name, "cbx", ""), "Filter", "")
-'            .Controls(tgl) = Not IsNull(.Controls(ctl.Name))
-'        End If
-'
-'        'handle year & range filters
-'        'year -> If Me.tglFilterByYear = True Then Me.tglFilterByRange = False
-'        'range ->If Me.tglFilterByRange = True Then Me.tglFilterByYear = False
-'        If .Controls(tgl) = True Then
-'            'set tglOr = range if year, year if range
-'            tglOr = IIf(filterby = "year", "range", "year")
-'
-'            .Controls(tglOr) = False
-'        End If
-    
-        FilterRecords
-        
-    End With
-
-'    If IsNull(Me.cbxParkFilter) = True Then Me.tglFilterByPark = False
-'    fxnFilterRecords
-
-'    If IsNull(Me.cbxAdminParkFilter) = True Then Me.tglFilterByAdminPark = False
-'    fxnFilterRecords
-
-'    If IsNull(Me.cbxSubunitFilter) = True Then Me.tglFilterBySubunit = False
-'    fxnFilterRecords
-
-'    If IsNull(Me.cbxFrameFilter) = True Then Me.tglFilterByFrame = False
-'    fxnFilterRecords
-
-'    If IsNull(Me.cbxPanelFilter) = True Then Me.tglFilterByPanel = False
-'    fxnFilterRecords
-
-'    If IsNull(Me.cbxLocationFilter) = True Then Me.tglFilterByLocation = False
-'    fxnFilterRecords
-
-'    If IsNull(Me.cbxStatusFilter) = True Then Me.tglFilterByStatus = False
-'    fxnFilterRecords
-
-'    If IsNull(Me.cbxYearFilter) Then Me.tglFilterByYear = False
-'    If Me.tglFilterByYear = True Then Me.tglFilterByRange = False
-'    fxnFilterRecords
-
-'    If IsNull(Me.tbxStartDateFilter) And IsNull(Me.tbxEndDateFilter) _
-'        Then Me.tglFilterByRange = False
-'    If Me.tglFilterByRange = True Then Me.tglFilterByYear = False
-'    fxnFilterRecords
-    
-Exit_Handler:
-    Exit Function
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - SetFilter[frm_Data_Summary_Advanced])"
-    End Select
-    Resume Exit_Handler
-End Function
-
-' ---------------------------------
-' FUNCTION:     ToggleFilters
-' Description:  prepare filter display based on filter being set
-' Assumptions:  -
-' Parameters:   state - whether the filters should be on, off, or clear
-' Returns:      -
-' Throws:       none
-' References:
-'   Microsoft,  unknown
-'   https://msdn.microsoft.com/en-us/library/office/aa224135(v=office.11).aspx
-' Source/date:  Bonnie Campbell, May 15, 2018
-' Adapted:      -
-' Revisions:
-'   BLC   - 5/15/2018 - initial version
-' ---------------------------------
-Private Function ToggleFilters(state As String)
-On Error GoTo Err_Handler
-    
-    Dim FilterState As Variant
-    Dim ctl As Control
-    
-    Select Case state
-        Case "on"
-            FilterState = True
-        Case "off"
-            FilterState = False
-        Case "clear"
-            FilterState = Null
-    End Select
-
-    With Me
-        
-        .btnRequery.SetFocus
-        
-        'iterate through the controls to set to appropriate state
-        For Each ctl In .Controls
-        
-            Select Case ctl.ControlType
-                Case acComboBox, acTextBox, acToggleButton
-                    If Left(ctl.Name, 11) = "tglFilterBy" And state = "off" Then
-                        ctl = FilterState
-                    ElseIf Right(ctl.Name, 6) = "Filter" And state = "clear" Then
-                        ctl = FilterState
-                    End If
-                Case Else
-            End Select
-        Next
-        
-'   OFF
-'        .tglFilterByPark
-'        .tglFilterByAdminPark
-'        .tglFilterBySubunit
-'        .tglFilterByPanel
-'        .tglFilterByFrame
-'        .tglFilterByStatus
-'        .tglFilterByLocation
-'        .tglFilterByYear
-'        .tglFilterByRange
-        
-'   CLEAR
-'    'Clear the filters
-'    Me.cbxParkFilter = Null
-'    Me.cbxAdminParkFilter = Null
-'    Me.cbxSubunitFilter = Null
-'    Me.cbxPanelFilter = Null
-'    Me.cbxFrameFilter = Null
-'    Me.cbxStatusFilter = Null
-'    Me.cbxLocationFilter = Null
-'    Me.cbxYearFilter = Null
-'    Me.tbxStartDateFilter = Null
-'    Me.tbxEndDateFilter = Null
-        
-        
-        FilterRecords
-        
-        cbxLocationFilter.Requery
-        cbxEventSelection.Requery
-        
-    End With
-    
-Exit_Handler:
-    Exit Function
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - ToggleFilters[frm_Data_Summary_Advanced])"
-    End Select
-    Resume Exit_Handler
-End Function
-
-' ---------------------------------
-' FUNCTION:     SelectFilter
-' Description:  prepare filter display based on filter being set
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Bonnie Campbell, May 15, 2018
-' Adapted:      -
-' Revisions:
-'   BLC   - 5/15/2018 - initial version
-' ---------------------------------
-Private Function SelectFilter(ctl As Control)
-On Error GoTo Err_Handler
-    
-    Dim tgl As String
-    Dim tglOr As String
-    Dim filterby As String
-    
-    With Me
-        
-        'default
-        tglOr = ""
-        
-        'determine filter
-        filterby = Replace(Replace(ctl.Name, "cbx", ""), "Filter", "")
-
-        'handle date ranges
-        If Left$(ctl.Name, 3) = "tbx" Then
-            tgl = "tglFilterByRange"
-            .Controls(tgl) = (Not IsNull(Me.tbxStartDateFilter)) And (Not IsNull(Me.tbxEndDateFilter))
-        Else
-            tgl = "tglFilterBy" & Replace(Replace(ctl.Name, "cbx", ""), "Filter", "")
-            .Controls(tgl) = Not IsNull(.Controls(ctl.Name))
-        End If
-    
-        'handle year & range filters
-        'year -> If Me.tglFilterByYear = True Then Me.tglFilterByRange = False
-        'range ->If Me.tglFilterByRange = True Then Me.tglFilterByYear = False
-        If .Controls(tgl) = True And (filterby = "year" Or filterby = "range") Then
-            'set tglOr = range if year, year if range
-            tglOr = IIf(filterby = "year", "range", "year")
-            
-            tglOr = "tglFilterBy" & tglOr
-            
-            .Controls(tglOr) = False
-        End If
-    
-    
-        FilterRecords
-        
-        If Len(tglOr) = 0 Then
-            .Controls(tgl).SetFocus
-        Else
-            .Controls(tglOr).SetFocus
-        End If
-        
-        'handle location filters
-        If Not ctl.Name = "cbxLocationFilter" Then
-            .cbxLocationFilter.Requery
-            .cbxEventSelection.Requery
-        End If
-        
-    End With
-    
-'   .tglFilterByPark = Not IsNull(.cbxParkFilter)
-'    FilterRecords
-'    .tglFilterByPark.SetFocus
-'    .cbxLocationFilter.Requery
-'    .cbxEventSelection.Requery
-
-'    Me.tglFilterByAdminPark = Not IsNull(Me.cbxAdminParkFilter)
-'    fxnFilterRecords
-'    Me.tglFilterByAdminPark.SetFocus
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
-
-'    Me.tglFilterBySubunit = Not IsNull(Me.cbxSubunitFilter)
-'    fxnFilterRecords
-'    Me.tglFilterBySubunit.SetFocus
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
-
-'    Me.tglFilterByFrame = Not IsNull(Me.cbxFrameFilter)
-'    fxnFilterRecords
-'    Me.tglFilterByFrame.SetFocus
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
-
-'    Me.tglFilterByPanel = Not IsNull(Me.cbxPanelFilter)
-'    fxnFilterRecords
-'    Me.tglFilterByPanel.SetFocus
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
-
-'    Me.tglFilterByStatus = Not IsNull(Me.cbxStatusFilter)
-'    fxnFilterRecords
-'    Me.tglFilterByStatus.SetFocus
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
-
-'    Me.tglFilterByLocation = Not IsNull(Me.cbxLocationFilter)
-'    fxnFilterRecords
-'    Me.tglFilterByLocation.SetFocus
-
-'    Me.tglFilterByYear = Not IsNull(Me.cbxYearFilter)
-'    If Me.tglFilterByYear = True Then Me.tglFilterByRange = False
-'    fxnFilterRecords
-'    Me.tglFilterByYear.SetFocus
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
-
-'    Me.tglFilterByRange = (Not IsNull(Me.tbxStartDateFilter)) And (Not IsNull(Me.tbxEndDateFilter))
-'    If Me.tglFilterByRange = True Then Me.tglFilterByYear = False
-'    fxnFilterRecords
-'    Me.tglFilterByYear.SetFocus
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
-
-'    Me.tglFilterByRange = (Not IsNull(Me.tbxStartDateFilter)) And (Not IsNull(Me.tbxEndDateFilter))
-'    If Me.tglFilterByRange = True Then Me.tglFilterByYear = False
-'    fxnFilterRecords
-'    Me.tglFilterByYear.SetFocus
-'    Me.cbxLocationFilter.Requery
-'    Me.cbxEventSelection.Requery
-
-Exit_Handler:
-    Exit Function
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - SelectFilter[frm_Data_Summary_Advanced])"
-    End Select
-    Resume Exit_Handler
-End Function
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
