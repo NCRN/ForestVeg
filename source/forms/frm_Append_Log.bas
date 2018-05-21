@@ -96,7 +96,7 @@ Begin Form
                     IMESentenceMode =3
                     Left =840
                     Top =1260
-                    ColumnWidth =6885
+                    ColumnWidth =5850
                     TabIndex =2
                     Name ="Append_Table"
                     ControlSource ="Append_Table_Name"

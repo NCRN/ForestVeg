@@ -343,7 +343,7 @@ Public Function fxnSaveFile(strFileName As String, strFileType As String, _
 
     fxnSaveFile = adhCommonFileOpenSave( _
         OpenFile:=False, _
-        Filter:=strFilter, _
+        filter:=strFilter, _
         Flags:=lngFlags, _
         DialogTitle:="Save As", _
         FileName:=strFileName)

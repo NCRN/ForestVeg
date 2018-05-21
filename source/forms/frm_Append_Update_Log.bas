@@ -17,7 +17,7 @@ Begin Form
     Right =10320
     Bottom =6315
     DatasheetGridlinesColor =12632256
-    OrderBy ="[tsys_Update_Log].[Update_Date] DESC"
+    OrderBy ="[tsys_Update_Log].[Update_Date] DESC, [tsys_Update_Log].[Update_Table] DESC"
     RecSrcDt = Begin
         0xd7107ed611b2e340
     End

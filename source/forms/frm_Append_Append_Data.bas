@@ -17,9 +17,8 @@ Begin Form
     DatasheetFontHeight =10
     ItemSuffix =41
     Left =1080
-    Top =-225
-    Right =12435
-    Bottom =11160
+    Right =11160
+    Bottom =9585
     DatasheetGridlinesColor =12632256
     OrderBy ="Append_Order"
     RecSrcDt = Begin

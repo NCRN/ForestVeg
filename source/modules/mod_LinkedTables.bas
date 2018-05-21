@@ -186,7 +186,7 @@ Public Function fxnGetLinkFile(Optional ByVal varInitialDir As Variant) As Varia
     fxnGetLinkFile = adhCommonFileOpenSave( _
         InitialDir:=varInitialDir, _
         OpenFile:=True, _
-        Filter:=strFilter, _
+        filter:=strFilter, _
         Flags:=lngFlags, _
         DialogTitle:="Locate data file")
 

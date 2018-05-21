@@ -1356,7 +1356,7 @@ Dim strCriteria As String
 On Error GoTo Error_Handler
 
 strCriteria = GetCriteriaString("[Contact_ID]=", "tlu_Contacts", "Contact_ID", Me.Name, "cboContact")
-Me.Filter = strCriteria
+Me.filter = strCriteria
 Me.FilterOn = True
 
 Exit_Handler:

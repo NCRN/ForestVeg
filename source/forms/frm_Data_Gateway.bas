@@ -1562,7 +1562,7 @@ Private Sub cmdClearFilter_Click()
     Me!cboFrameFilter = Null
     Me!cboYearFilter = Null
     Me!cboStatusFilter = Null
-    Me.Filter = ""
+    Me.filter = ""
     
 Exit_Procedure:
     Exit Sub
@@ -1738,7 +1738,7 @@ If booFilterOn Then
     varFilter = FilterString(Me!cboYearFilter, "Event_Year", varFilter)
     'add status filter to filter string
     varFilter = FilterString(Me!cboStatusFilter, "Location_Status", varFilter)
-    Me.Filter = Nz(varFilter)
+    Me.filter = Nz(varFilter)
 Else
     Me!tglFilter.Caption = "Filter Is Off"
 End If

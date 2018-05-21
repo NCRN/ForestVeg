@@ -740,7 +740,7 @@ Private Sub Form_Load()
 Dim strTransect As String
     strTransect = "360"
     Me.txtTransect_Azimuth.DefaultValue = strTransect
-    Forms![frm_Events]![fsub_Transects].Form.Filter = "[Transect_Azimuth] = """ & strTransect & """ "
+    Forms![frm_Events]![fsub_Transects].Form.filter = "[Transect_Azimuth] = """ & strTransect & """ "
     Forms![frm_Events]![fsub_Transects].Form.FilterOn = True
 End Sub
 Private Sub cmdOpen_Form_Decay_Class_Click()

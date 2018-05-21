@@ -423,7 +423,7 @@ End Sub
 
 Private Sub Form_Open(Cancel As Integer)
 
-Me.Filter = " [Delete_Table] =  " & False
+Me.filter = " [Delete_Table] =  " & False
 
 Me.FilterOn = True
 

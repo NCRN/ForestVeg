@@ -100,10 +100,6 @@ Begin
         dbInteger "ColumnWidth" ="1470"
         dbBoolean "ColumnHidden" ="0"
     End
-    Begin
-        dbText "Name" ="qCalc_Basal_Area_per_Sapling.Dead"
-        dbLong "AggregateType" ="-1"
-    End
 End
 Begin
     State =0

@@ -15,12 +15,12 @@ Begin Form
     Width =11100
     DatasheetFontHeight =10
     ItemSuffix =5
-    Left =2940
-    Top =4230
-    Right =12705
-    Bottom =11805
+    Left =-90
+    Top =2550
+    Right =9675
+    Bottom =7920
     DatasheetGridlinesColor =12632256
-    OrderBy ="Import_Date DESC"
+    OrderBy ="[tsys_Import_Log].[Import_Date] DESC"
     RecSrcDt = Begin
         0x2f53581f0fb2e340
     End
@@ -28,63 +28,26 @@ Begin Form
     Caption ="Import Log"
     DatasheetFontName ="Arial"
     FilterOnLoad =0
-    DatasheetBackColor12 =16777215
     ShowPageMargins =0
-    DisplayOnSharePointSite =0
     DatasheetGridlinesColor12 =12632256
     Begin
         Begin Label
             BackStyle =0
             FontName ="Tahoma"
-            LeftPadding =30
-            TopPadding =30
-            RightPadding =30
-            BottomPadding =30
-            GridlineStyleLeft =0
-            GridlineStyleTop =0
-            GridlineStyleRight =0
-            GridlineStyleBottom =0
-            GridlineWidthLeft =1
-            GridlineWidthTop =1
-            GridlineWidthRight =1
-            GridlineWidthBottom =1
         End
         Begin CheckBox
             SpecialEffect =2
+            BorderLineStyle =0
             LabelX =230
             LabelY =-30
-            LeftPadding =30
-            TopPadding =30
-            RightPadding =30
-            BottomPadding =30
-            GridlineStyleLeft =0
-            GridlineStyleTop =0
-            GridlineStyleRight =0
-            GridlineStyleBottom =0
-            GridlineWidthLeft =1
-            GridlineWidthTop =1
-            GridlineWidthRight =1
-            GridlineWidthBottom =1
         End
         Begin TextBox
             FELineBreak = NotDefault
             SpecialEffect =2
             OldBorderStyle =0
+            BorderLineStyle =0
             FontName ="Tahoma"
             AsianLineBreak =255
-            LeftPadding =30
-            TopPadding =30
-            RightPadding =30
-            BottomPadding =30
-            GridlineStyleLeft =0
-            GridlineStyleTop =0
-            GridlineStyleRight =0
-            GridlineStyleBottom =0
-            GridlineWidthLeft =1
-            GridlineWidthTop =1
-            GridlineWidthRight =1
-            GridlineWidthBottom =1
-            ShowDatePicker =1
         End
         Begin Section
             Height =2880
