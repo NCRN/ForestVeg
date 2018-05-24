@@ -15,8 +15,8 @@ Begin Form
     Width =10080
     DatasheetFontHeight =10
     ItemSuffix =41
-    Left =1080
-    Right =11415
+    Left =255
+    Right =10590
     Bottom =9585
     DatasheetGridlinesColor =12632256
     OrderBy ="Append_Order"

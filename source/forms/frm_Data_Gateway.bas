@@ -21,13 +21,13 @@ Begin Form
     Width =11340
     DatasheetFontHeight =10
     ItemSuffix =60
-    Left =4275
-    Top =1950
-    Right =15615
-    Bottom =9495
+    Left =1920
+    Top =1170
+    Right =13260
+    Bottom =8715
     DatasheetGridlinesColor =12632256
     Filter ="Admin_Unit_Code='CHOH'"
-    OrderBy ="Event_Date DESC"
+    OrderBy ="Plot_Name"
     RecSrcDt = Begin
         0x0f463b98b308e440
     End
@@ -683,7 +683,7 @@ Begin Form
                     FontSize =12
                     FontWeight =700
                     TabIndex =12
-                    Name ="cmd_View_Report"
+                    Name ="btnViewReport"
                     Caption ="Browse PLANTS"
                     OnClick ="[Event Procedure]"
                     PictureData = Begin
@@ -766,7 +766,7 @@ Begin Form
                     FontSize =12
                     FontWeight =700
                     TabIndex =11
-                    Name ="cmd_View_Photos"
+                    Name ="btnViewPhotos"
                     Caption ="Browse PLANTS"
                     OnClick ="[Event Procedure]"
                     PictureData = Begin
@@ -1321,52 +1321,23 @@ Dim strSortOrder As String
 Dim strSortFieldLabel As String
 Dim strCurrentRecordCriteria As String
 
-Private Sub cmd_View_Photos_Click()
-    On Error GoTo Err_Handler
-    Dim strCriteria As String
-
-    'record what the current record is so we can go back to that record on return
-    If Not IsNothing(Me!Location_ID) Then
-        WriteRecordCriteria
-        strCriteria = GetCriteriaString("[Location_ID]=", "tbl_Locations", "Location_ID", Me.Name, "txtLocation_ID")
-        DoCmd.OpenForm "frm_Photos", , , strCriteria, , , "Filter by location"
-    End If
-    
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
-
-Private Sub cmd_View_Report_Click()
-On Error GoTo Err_Handler
-    Dim strDocName As String
-    Dim strCriteria As String
-    
-    If IsNothing(Me!Event_ID) Then
-        'Trap records that do not contain an event.
-        MsgBox ("This Record is not linked to an Event.  Please choose another Record.")
-        GoTo Exit_Procedure
-    Else
-        'Record what the current record is so we can go back to that record on return
-        WriteRecordCriteria
-        'strDocName = "rpt_Event_Summary_Unfiltered"
-        strDocName = "Copy of rpt_Event_Summary_Unfiltered"
-        strCriteria = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
-        'DoCmd.OpenReport stDocName, acPreview, "qRpt_Event_Summary_Unfiltered", stCriteria
-        DoCmd.OpenReport strDocName, acPreview, , strCriteria
-    End If
-    
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox Err.Description
-    Resume Exit_Procedure
-End Sub
-
+' ---------------------------------
+' SUB:          Form_Open
+' Description:  form open actions
+' Assumptions:  -
+' Parameters:   Cancel - whether open action(s) should be cancelled (boolean)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknonwn - initial version
+'   BLC - 5/23/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
-    On Error GoTo Err_Handler
+On Error GoTo Err_Handler
+
     Dim varReturn As Variant
 
     ' On opening the form, set the initial sort order
@@ -1379,6 +1350,99 @@ Private Sub Form_Open(Cancel As Integer)
         Me.FilterGateway (True)
     End If
 
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          Form_GotFocus
+' Description:  form open actions
+' Assumptions:  -
+' Parameters:   Cancel - whether open action(s) should be cancelled (boolean)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknonwn - initial version
+'   BLC - 5/23/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub Form_GotFocus()
+On Error GoTo Err_Handler
+
+    Dim rst As DAO.Recordset
+    
+    'return to same record when coming back to Data Gateway from another form
+    If Not IsNothing(strCurrentRecordCriteria) Then
+        Set rst = Me.RecordsetClone
+        rst.FindFirst strCurrentRecordCriteria
+        Me.Bookmark = rst.Bookmark
+        Set rst = Nothing
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_GotFocus[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnViewPhotos_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknonwn - initial version
+'   BLC - 5/23/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub btnViewPhotos_Click()
+On Error GoTo Err_Handler
+
+    Dim strCriteria As String
+
+    'record what the current record is so we can go back to that record on return
+    If Not IsNothing(Me!Location_ID) Then
+        WriteRecordCriteria
+        strCriteria = GetCriteriaString("[Location_ID]=", "tbl_Locations", "Location_ID", Me.Name, "txtLocation_ID")
+        DoCmd.OpenForm "frm_Photos", , , strCriteria, , , "Filter by location"
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnViewPhotos_Click[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+Private Sub cmd_View_Photos_Click()
+    On Error GoTo Err_Handler
+
+    
 Exit_Procedure:
     Exit Sub
 Err_Handler:
@@ -1386,23 +1450,62 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
-Private Sub Form_GotFocus()
-Dim rst As DAO.Recordset
+' ---------------------------------
+' SUB:          btnViewReport_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknonwn - initial version
+'   BLC - 5/23/2018 - update documentation, error handling,
+'                     revise to open rpt_Event_Summary_Unfiltered vs.
+'                     Copy of rpt_Event_Summary_Unfiltered
+' ---------------------------------
+Private Sub btnViewReport_Click()
+On Error GoTo Err_Handler
 
-On Error GoTo Error_Handler
-
-'return to same record when coming back to Data Gateway from another form
-If Not IsNothing(strCurrentRecordCriteria) Then
-    Set rst = Me.RecordsetClone
-    rst.FindFirst strCurrentRecordCriteria
-    Me.Bookmark = rst.Bookmark
-    Set rst = Nothing
-End If
+    Dim strDocName As String
+    Dim strCriteria As String
+    
+    If IsNothing(Me!Event_ID) Then
+        'Trap records that do not contain an event.
+        MsgBox ("This Record is not linked to an Event.  Please choose another Record.")
+        GoTo Exit_Handler
+    Else
+        'Record what the current record is so we can go back to that record on return
+        WriteRecordCriteria
+        strDocName = "rpt_Event_Summary_Unfiltered"
+        'strDocName = "Copy of rpt_Event_Summary_Unfiltered"
+        strCriteria = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
+        'DoCmd.OpenReport stDocName, acPreview, "qRpt_Event_Summary_Unfiltered", stCriteria
+        DoCmd.OpenReport strDocName, acPreview, , strCriteria
+    End If
 
 Exit_Handler:
     Exit Sub
-Error_Handler:
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnViewReport_Click[frm_Data_Gateway])"
+    End Select
     Resume Exit_Handler
+End Sub
+
+Private Sub cmd_View_Report_Click()
+On Error GoTo Err_Handler
+    
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox Err.Description
+    Resume Exit_Procedure
 End Sub
 
 'CODE TO UPDATE FILTER WHEN ON-SCREEN SELECTIONS CHANGE
