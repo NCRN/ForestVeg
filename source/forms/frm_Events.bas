@@ -24,11 +24,12 @@ Begin Form
     Width =14400
     DatasheetFontHeight =10
     ItemSuffix =154
-    Left =1020
-    Right =15420
-    Bottom =9195
+    Left =510
+    Top =615
+    Right =14910
+    Bottom =9810
     DatasheetGridlinesColor =12632256
-    Filter ="[Event_ID]='{5DD03496-502A-462F-AF9C-34C036D06379}'"
+    Filter ="[Event_ID]='{7A2453B5-B719-41D4-8AF4-EB31F12DF43E}'"
     RecSrcDt = Begin
         0x58c05212730ae440
     End
@@ -1937,6 +1938,59 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Compare Database
 Option Explicit
+
+' =================================
+' FORM:         frm_Events
+' Level:        Application module
+' Version:      1.01
+'
+' Description:  add event related functions & procedures
+'
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, May 24, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC   - 5/24/2018 - 1.01 - added documentation, error handling
+' =================================
+
+' ---------------------------------
+'  Declarations
+' ---------------------------------
+
+' ----------------
+'  Events
+' ----------------
+
+' ----------------
+'  Form
+' ----------------
+' ---------------------------------
+' SUB:          Form_Open
+' Description:  form open actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 4/24/2018 -
+' ---------------------------------
+Private Sub xForm_Open(Cancel As Integer)
+On Error GoTo Err_Handler
+   
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[frm_Events])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
 Private Sub chkPictures_Taken_AfterUpdate()
     lblPictures_Taken.Requery

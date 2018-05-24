@@ -21,10 +21,10 @@ Begin Form
     Width =11340
     DatasheetFontHeight =10
     ItemSuffix =60
-    Left =1920
-    Top =1170
-    Right =13260
-    Bottom =8715
+    Left =225
+    Top =1815
+    Right =11565
+    Bottom =9360
     DatasheetGridlinesColor =12632256
     Filter ="Admin_Unit_Code='CHOH'"
     OrderBy ="Plot_Name"
@@ -148,7 +148,7 @@ Begin Form
                     Width =630
                     Height =300
                     FontSize =12
-                    Name ="lblUnit_code"
+                    Name ="lblUnitCode"
                     Caption ="Unit"
                     FontName ="Calibri"
                     Tag ="DetachedLabel"
@@ -182,7 +182,7 @@ Begin Form
                     Width =1665
                     Height =300
                     FontSize =12
-                    Name ="lblEvent_date"
+                    Name ="lblEventDate"
                     Caption ="Sample Date*"
                     FontName ="Calibri"
                     OnDblClick ="[Event Procedure]"
@@ -200,7 +200,7 @@ Begin Form
                     Width =780
                     Height =300
                     FontSize =12
-                    Name ="lblEvent_Year"
+                    Name ="lblEventYear"
                     Caption ="Year*"
                     FontName ="Calibri"
                     OnDblClick ="[Event Procedure]"
@@ -218,7 +218,7 @@ Begin Form
                     Width =1485
                     Height =300
                     FontSize =12
-                    Name ="lblPlot_Name"
+                    Name ="lblPlotName"
                     Caption ="Plot Name*"
                     FontName ="Calibri"
                     OnDblClick ="[Event Procedure]"
@@ -241,7 +241,7 @@ Begin Form
                     ColumnOrder =1
                     FontSize =11
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"0\""
-                    Name ="cboParkFilter"
+                    Name ="cbxParkFilter"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT DISTINCT Nz([tbl_Locations]![Unit_Code],\"[Null]\") AS Expr1, Nz([Descrip"
                         "tion],\"[Null]\") AS Expr2 FROM tbl_Locations LEFT JOIN tlu_Units ON tbl_Locatio"
@@ -317,7 +317,7 @@ Begin Form
                     FontSize =11
                     TabIndex =2
                     ColumnInfo ="\"\";\"\";\"10\";\"0\""
-                    Name ="cboPanelFilter"
+                    Name ="cbxPanelFilter"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT DISTINCT nz(Panel,\"[Null]\") FROM qfrm_Data_Gateway ORDER BY nz(Panel,\""
                         "[Null]\"); "
@@ -363,7 +363,7 @@ Begin Form
                     FontSize =11
                     TabIndex =4
                     ColumnInfo ="\"\";\"\";\"10\";\"0\""
-                    Name ="cboYearFilter"
+                    Name ="cbxYearFilter"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT DISTINCT nz([Event_Year],\"[Null]\") FROM qfrm_Data_Gateway ORDER BY nz(["
                         "Event_Year],\"[Null]\");"
@@ -421,7 +421,7 @@ Begin Form
                     Width =990
                     Height =300
                     FontSize =12
-                    Name ="lblUnit_Group"
+                    Name ="lblUnitGroup"
                     Caption ="Unit Grp*"
                     FontName ="Calibri"
                     OnDblClick ="[Event Procedure]"
@@ -439,7 +439,7 @@ Begin Form
                     Width =960
                     Height =300
                     FontSize =12
-                    Name ="lblSubunit_Code"
+                    Name ="lblSubunitCode"
                     Caption ="Subunit*"
                     FontName ="Calibri"
                     OnDblClick ="[Event Procedure]"
@@ -461,7 +461,7 @@ Begin Form
                     FontSize =11
                     TabIndex =3
                     ColumnInfo ="\"\";\"\";\"10\";\"0\""
-                    Name ="cboFrameFilter"
+                    Name ="cbxFrameFilter"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT DISTINCT nz([Frame],\"[Null]\") AS Expr1 FROM qfrm_Data_Gateway ORDER BY "
                         "nz([Frame],\"[Null]\"); "
@@ -510,7 +510,7 @@ Begin Form
                     FontSize =11
                     TabIndex =1
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"0\""
-                    Name ="cboUnitGroupFilter"
+                    Name ="cbxUnitGroupFilter"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT DISTINCT Nz([tbl_Locations]![Unit_Group],\"[Null]\") AS Expr1, Nz([Descri"
                         "ption],\"[Null]\") AS Expr2, tlu_Unit_Group.Sort_Order FROM tbl_Locations LEFT J"
@@ -535,7 +535,7 @@ Begin Form
                             Height =285
                             FontSize =11
                             ForeColor =0
-                            Name ="Label46"
+                            Name ="lblUnitGroupFilter"
                             Caption ="Unit Grp:"
                             FontName ="Calibri"
                             LayoutCachedLeft =1500
@@ -582,7 +582,7 @@ Begin Form
                     Width =1500
                     Height =300
                     FontSize =12
-                    Name ="lblLocation_Status"
+                    Name ="lblLocationStatus"
                     Caption ="Status"
                     FontName ="Calibri"
                     Tag ="DetachedLabel"
@@ -604,7 +604,7 @@ Begin Form
                     FontSize =11
                     TabIndex =5
                     ColumnInfo ="\"\";\"\";\"10\";\"0\""
-                    Name ="cboStatusFilter"
+                    Name ="cbxStatusFilter"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT DISTINCT Nz([Location_Status],\"[Null]\") AS Expr1 FROM qfrm_Data_Gateway"
                         " ORDER BY Nz([Location_Status],\"[Null]\");"
@@ -626,7 +626,7 @@ Begin Form
                             Height =285
                             FontSize =11
                             ForeColor =0
-                            Name ="lblStatus_Filter"
+                            Name ="lblStatusFilter"
                             Caption ="Status:"
                             FontName ="Calibri"
                             LayoutCachedLeft =8040
@@ -875,7 +875,7 @@ Begin Form
                     FontSize =13
                     TabIndex =1
                     ForeColor =16711680
-                    Name ="txtEvent_Date"
+                    Name ="tbxEventDate"
                     ControlSource ="Event_Date"
                     Format ="dd-mmm-yyyy"
                     StatusBarText ="Start date of the sampling event"
@@ -899,7 +899,7 @@ Begin Form
                     ColumnWidth =600
                     FontSize =13
                     TabIndex =6
-                    Name ="txtEvent_Year"
+                    Name ="tbxEventYear"
                     ControlSource ="Event_Year"
                     FontName ="Calibri"
 
@@ -919,7 +919,7 @@ Begin Form
                     ColumnWidth =2310
                     FontSize =13
                     TabIndex =2
-                    Name ="txtUnit_Code"
+                    Name ="tbxUnitCode"
                     ControlSource ="Unit_Code"
                     StatusBarText ="Unit code"
                     FontName ="Calibri"
@@ -941,7 +941,7 @@ Begin Form
                     FontSize =13
                     TabIndex =5
                     ForeColor =0
-                    Name ="txtPanel"
+                    Name ="tbxPanel"
                     ControlSource ="Panel"
                     StatusBarText ="Sample location"
                     FontName ="Calibri"
@@ -980,7 +980,7 @@ Begin Form
                     Height =300
                     FontSize =13
                     ForeColor =16711680
-                    Name ="txtPlot_Name"
+                    Name ="tbxPlotName"
                     ControlSource ="Plot_Name"
                     StatusBarText ="Name of the location"
                     FontName ="Calibri"
@@ -1001,7 +1001,7 @@ Begin Form
                     Height =300
                     FontSize =13
                     TabIndex =9
-                    Name ="txtFrame"
+                    Name ="tbxFrame"
                     ControlSource ="Frame"
                     StatusBarText ="The name or code of the protocol governing the event"
                     FontName ="Calibri"
@@ -1021,7 +1021,7 @@ Begin Form
                     Height =300
                     FontSize =13
                     TabIndex =3
-                    Name ="txtUnit_Group"
+                    Name ="tbxUnitGroup"
                     ControlSource ="Unit_Group"
                     StatusBarText ="The name or code of the protocol governing the event"
                     FontName ="Calibri"
@@ -1041,7 +1041,7 @@ Begin Form
                     Height =300
                     FontSize =13
                     TabIndex =4
-                    Name ="txtSubunit_Code"
+                    Name ="tbxSubunitCode"
                     ControlSource ="Subunit_Code"
                     StatusBarText ="The name or code of the protocol governing the event"
                     FontName ="Calibri"
@@ -1061,7 +1061,7 @@ Begin Form
                     Height =300
                     FontSize =13
                     TabIndex =10
-                    Name ="txtLocation_Status"
+                    Name ="tbxLocationStatus"
                     ControlSource ="Location_Status"
                     StatusBarText ="The name or code of the protocol governing the event"
                     FontName ="Calibri"
@@ -1086,7 +1086,7 @@ Begin Form
                     FontSize =12
                     FontWeight =700
                     TabIndex =1
-                    Name ="cmdClose"
+                    Name ="btnClose"
                     Caption ="Close"
                     OnClick ="[Event Procedure]"
                     FontName ="Calibri"
@@ -1130,7 +1130,7 @@ Begin Form
                     Height =600
                     FontSize =12
                     FontWeight =700
-                    Name ="cmdGoto_Plants"
+                    Name ="btnGoToPlants"
                     Caption ="Browse PLANTS"
                     OnClick ="[Event Procedure]"
                     FontName ="Calibri"
@@ -1176,7 +1176,7 @@ Begin Form
                     FontSize =12
                     FontWeight =700
                     TabIndex =2
-                    Name ="cmdGoto_Tags"
+                    Name ="btnGoToTags"
                     Caption ="Browse TAGS"
                     OnClick ="[Event Procedure]"
                     FontName ="Calibri"
@@ -1252,7 +1252,7 @@ Begin Form
                     FontSize =14
                     FontWeight =700
                     TabIndex =3
-                    Name ="txtFilteredRecordCount"
+                    Name ="tbxFilteredRecordCount"
                     ControlSource ="=nz(Count([Plot_Name]),0)"
                     FontName ="Calibri"
 
@@ -1269,7 +1269,7 @@ Begin Form
                             Top =420
                             Width =900
                             Height =420
-                            Name ="Label44"
+                            Name ="lblRecordsSelected"
                             Caption ="records selected"
                             FontName ="Calibri"
                             LayoutCachedLeft =9060
@@ -1303,24 +1303,47 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' FORM NAME:    frm_Data_Gateway
-' Description:
+' FORM:    frm_Data_Gateway
+' Level:        Application module
+' Version:      1.04
+'
+' Description:  form related functions & procedures
+'
 ' Data source:  qfrm_Data_Gateway
 ' Data access:  view and delete records (delete by cmdDeleteRec)
 ' Pages:        none
 ' Functions:    fxnSortRecords, FilterGateway, FilterString, WriteRecordCriteria
 ' References:   fxnSwitchboardIsOpen
+'
 ' Source/date:  John R. Boetsch, June 7, 2006
-' Revisions:    Simon Kingston, Sept. 2006 - added CorrectText calls where strings were being used in criteria
-'                                          - updated cmdDeleteRec_Click() event to use appropriate criteria depending on primary key
-'               Simon Kingston, Dec. - Jan., 2006 - added filters to the top of the form and changed toggle button to text caption
+' Revisions:    JRB - 6/7/2006 - 1.00 - initial version
+'               Simon Kingston, 9/2006 - 1.01 -  added CorrectText calls where strings were being used in criteria
+'                                             - updated cmdDeleteRec_Click() event to use appropriate criteria depending on primary key
+'               Simon Kingston, 12/2006-1/2007 - 1.02 - added filters to the top of the form and changed toggle button to text caption
+'               MEL/GS - unknown - 1.03 - adapted for NCRN
+'               BLC - 5/23/2018 - 1.04 - added documentation/error handling
 ' =================================
 
+' ---------------------------------
+'  Declarations
+' ---------------------------------
 Dim strSortField As String    ' Keeps track of current sort settings
 Dim strSortOrder As String
 Dim strSortFieldLabel As String
 Dim strCurrentRecordCriteria As String
 
+' ---------------------------------
+'  Properties
+' ---------------------------------
+
+
+' ----------------
+'  Events
+' ----------------
+
+' ----------------
+'  Form
+' ----------------
 ' ---------------------------------
 ' SUB:          Form_Open
 ' Description:  form open actions
@@ -1332,7 +1355,7 @@ Dim strCurrentRecordCriteria As String
 ' Source/date:  Mark Lehman/Geoff Sanders, unknown
 ' Adapted:      -
 ' Revisions:
-'   MEL/GS - unknonwn - initial version
+'   MEL/GS - unknown - initial version
 '   BLC - 5/23/2018 - update documentation, error handling
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
@@ -1366,14 +1389,14 @@ End Sub
 ' SUB:          Form_GotFocus
 ' Description:  form open actions
 ' Assumptions:  -
-' Parameters:   Cancel - whether open action(s) should be cancelled (boolean)
+' Parameters:   -
 ' Returns:      -
 ' Throws:       none
 ' References:   -
 ' Source/date:  Mark Lehman/Geoff Sanders, unknown
 ' Adapted:      -
 ' Revisions:
-'   MEL/GS - unknonwn - initial version
+'   MEL/GS - unknown - initial version
 '   BLC - 5/23/2018 - update documentation, error handling
 ' ---------------------------------
 Private Sub Form_GotFocus()
@@ -1401,6 +1424,10 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+' ----------------
+'  Click Events
+' ----------------
+
 ' ---------------------------------
 ' SUB:          btnViewPhotos_Click
 ' Description:  button click actions
@@ -1412,7 +1439,7 @@ End Sub
 ' Source/date:  Mark Lehman/Geoff Sanders, unknown
 ' Adapted:      -
 ' Revisions:
-'   MEL/GS - unknonwn - initial version
+'   MEL/GS - unknown - initial version
 '   BLC - 5/23/2018 - update documentation, error handling
 ' ---------------------------------
 Private Sub btnViewPhotos_Click()
@@ -1439,17 +1466,6 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-Private Sub cmd_View_Photos_Click()
-    On Error GoTo Err_Handler
-
-    
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
-
 ' ---------------------------------
 ' SUB:          btnViewReport_Click
 ' Description:  button click actions
@@ -1461,7 +1477,7 @@ End Sub
 ' Source/date:  Mark Lehman/Geoff Sanders, unknown
 ' Adapted:      -
 ' Revisions:
-'   MEL/GS - unknonwn - initial version
+'   MEL/GS - unknown - initial version
 '   BLC - 5/23/2018 - update documentation, error handling,
 '                     revise to open rpt_Event_Summary_Unfiltered vs.
 '                     Copy of rpt_Event_Summary_Unfiltered
@@ -1498,17 +1514,44 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-Private Sub cmd_View_Report_Click()
-On Error GoTo Err_Handler
-    
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox Err.Description
-    Resume Exit_Procedure
-End Sub
+' ----------------
+'  Filters
+' ----------------
 
 'CODE TO UPDATE FILTER WHEN ON-SCREEN SELECTIONS CHANGE
+
+' ---------------------------------
+' SUB:          cbxParkFilter_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub cbxParkFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If Me!tglFilter Then
+        Me.FilterGateway (True)
+    End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxParkFilter_AfterUpdate[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
 Private Sub cboParkFilter_AfterUpdate()
     On Error GoTo Err_Handler
@@ -1522,6 +1565,39 @@ Exit_Procedure:
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
+End Sub
+
+' ---------------------------------
+' SUB:          cbxUnitGroupFilter_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub cbxUnitGroupFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If Me!tglFilter Then
+        Me.FilterGateway (True)
+    End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxUnitGroupFilter_AfterUpdate[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 Private Sub cboUnitGroupFilter_AfterUpdate()
@@ -1538,6 +1614,39 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
+' ---------------------------------
+' SUB:          cbxPanelFilter_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub cbxPanelFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If Me!tglFilter Then
+        Me.FilterGateway (True)
+    End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxPanelFilter_AfterUpdate[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 Private Sub cboPanelFilter_AfterUpdate()
     On Error GoTo Err_Handler
 
@@ -1550,6 +1659,39 @@ Exit_Procedure:
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
+End Sub
+
+' ---------------------------------
+' SUB:          cbxFrameFilter_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub cbxFrameFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If Me!tglFilter Then
+        Me.FilterGateway (True)
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxFrameFilter_AfterUpdate[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 Private Sub cboFrameFilter_AfterUpdate()
@@ -1566,6 +1708,39 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
+' ---------------------------------
+' SUB:          cbxYearFilter_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub cbxYearFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If Me!tglFilter Then
+        Me.FilterGateway (True)
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxYearFilter_AfterUpdate[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 Private Sub cboYearFilter_AfterUpdate()
     On Error GoTo Err_Handler
 
@@ -1580,6 +1755,38 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
+' ---------------------------------
+' SUB:          cbxStatusFilter_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub cbxStatusFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If Me!tglFilter Then
+        Me.FilterGateway (True)
+    End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxStatusFilter_AfterUpdate[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
 Private Sub cboStatusFilter_AfterUpdate()
     On Error GoTo Err_Handler
@@ -1595,6 +1802,37 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
+' ---------------------------------
+' SUB:          lblPlotName_DblClick
+' Description:  label double click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub lblPlotName_DblClick(Cancel As Integer)
+On Error GoTo Err_Handler
+    
+    SortRecords ("Plot_Name")
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblPlot_Name_DblClick[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 'CODE TO RESORT RECORDS WHEN HEADING IS CLICKED
 
 Private Sub lblPlot_Name_DblClick(Cancel As Integer)
@@ -1608,6 +1846,38 @@ Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
 End Sub
+
+' ---------------------------------
+' SUB:          lblUnitGroup_DblClick
+' Description:  label double click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub lblUnitGroup_DblClick(Cancel As Integer)
+On Error GoTo Err_Handler
+    
+    SortRecords ("Unit_Group")
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblUnitGroup_DblClick[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 Private Sub lblUnit_Group_DblClick(Cancel As Integer)
     On Error GoTo Err_Handler
 
@@ -1618,6 +1888,37 @@ Exit_Procedure:
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
+End Sub
+
+' ---------------------------------
+' SUB:          lblSubunitCode_DblClick
+' Description:  label double click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub lblSubunitCode_DblClick(Cancel As Integer)
+On Error GoTo Err_Handler
+    
+    SortRecords ("Subunit_Code")
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblSubunitCode_DblClick[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 Private Sub lblSubunit_Code_DblClick(Cancel As Integer)
@@ -1632,6 +1933,37 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
+' ---------------------------------
+' SUB:          lblEventYear_DblClick
+' Description:  label double click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub lblEventYear_DblClick(Cancel As Integer)
+On Error GoTo Err_Handler
+    
+    SortRecords ("Event_Year")
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblEventYear_DblClick[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 Private Sub lblEvent_Year_DblClick(Cancel As Integer)
     On Error GoTo Err_Handler
 
@@ -1642,6 +1974,37 @@ Exit_Procedure:
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
+End Sub
+
+' ---------------------------------
+' SUB:          lblEventDate_DblClick
+' Description:  label double click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub lblEventDate_DblClick(Cancel As Integer)
+On Error GoTo Err_Handler
+    
+    SortRecords ("Event_Date")
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblEventDate_DblClick[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 Private Sub lblEvent_Date_DblClick(Cancel As Integer)
@@ -1655,7 +2018,42 @@ Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     Resume Exit_Procedure
 End Sub
+' ---------------------------------
+' SUB:          btnClearFilter_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub btnClearFilter_Click()
+On Error GoTo Err_Handler
 
+    Me!cboParkFilter = Null
+    Me!cboUnitGroupFilter = Null
+    Me!cboPanelFilter = Null
+    Me!cboFrameFilter = Null
+    Me!cboYearFilter = Null
+    Me!cboStatusFilter = Null
+    Me.Filter = ""
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnClearFilter_Click[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
 Private Sub cmdClearFilter_Click()
     On Error GoTo Err_Handler
    
@@ -1674,8 +2072,73 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
+' ---------------------------------
+' SUB:          btnAddLocation_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub btnAddLocation_Click()
+On Error GoTo Err_Handler
+    
+    MsgBox "This function is being developed"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnAddLocation_Click[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 Private Sub cmdNewLocation_Click()
     MsgBox "This function is being developed"
+End Sub
+
+' ---------------------------------
+' SUB:          btnAddEvent_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub btnAddEvent_Click()
+On Error GoTo Err_Handler
+    
+    'record what the current record is so we can go back to that record on return
+    WriteRecordCriteria
+    DoCmd.Close acForm, "frm_Data_Gateway"
+    DoCmd.OpenForm "frm_Event_Add"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnAddEvent_Click[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 Private Sub cmdNewEvent_Click()
@@ -1693,6 +2156,37 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
+' ---------------------------------
+' SUB:          btnClose_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub btnClose_Click()
+On Error GoTo Err_Handler
+
+    DoCmd.Close , , acSaveNo
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnClose_Click[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 Private Sub cmdClose_Click()
     On Error GoTo Err_Handler
 
@@ -1705,8 +2199,93 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
+' ---------------------------------
+' SUB:          tglFilter_AfterUpdate
+' Description:  toggle after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub tglFilter_AfterUpdate()
+On Error GoTo Err_Handler
+    
     Me.FilterGateway (Me!tglFilter)
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglFilter_AfterUpdate[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+Private Sub xtglFilter_AfterUpdate()
+    Me.FilterGateway (Me!tglFilter)
+End Sub
+
+' ---------------------------------
+' SUB:          tbxEventDate_Click
+' Description:  textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub tbxEventDate_Click()
+On Error GoTo Err_Handler
+    
+    Dim strCriteriaLoc As String
+    Dim strCriteriaEvent As String
+
+    'Record what the current record is so we can go back to that record on return
+    WriteRecordCriteria
+    
+    'NCRN NOTE: For this database, we will not create new events through this mechanism.
+    'It is unclear to me how to use this mechanism to create a second event for a location (mel).
+    
+    'If there is not an event id, add a new data entry record
+    'If IsNull(Me!txtEvent_ID) Then
+    '            DoCmd.OpenForm "frm_Events", , , , acFormAdd, , "New record"
+    '    If Not IsNull(Me!txtLocation_ID) Then
+    '        ' Fill in Location
+    '        Forms!frm_Events!cboLocation_ID = Me!txtLocation_ID
+    '        Forms!frm_Events.Update_Loc_Info
+    '    End If
+    'if there is an event id, bring up the selected data entry record
+    'Else
+        'strCriteriaLoc = GetCriteriaString("[Location_ID]=", "tbl_Locations", "Location_ID", Me.Name, "txtLocation_ID")
+        strCriteriaEvent = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
+        ' Filter by location and event
+        DoCmd.OpenForm "frm_Events", , , strCriteriaEvent, , , "(Browsing)"
+    'End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxEventDate_Click[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 Private Sub txtEvent_Date_Click()
@@ -1744,6 +2323,44 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
+' ---------------------------------
+' SUB:          tbxPlotName_Click
+' Description:  textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub tbxPlotName_Click()
+On Error GoTo Err_Handler
+    
+    Dim strCriteria As String
+
+    'record what the current record is so we can go back to that record on return
+    If Not IsNothing(Me!Location_ID) Then
+        WriteRecordCriteria
+        strCriteria = GetCriteriaString("[Location_ID]=", "tbl_Locations", "Location_ID", Me.Name, "txtLocation_ID")
+        DoCmd.OpenForm "frm_Locations", , , strCriteria, , , "Filter by location"
+    End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxPlotName_Click[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 Private Sub txtPlot_Name_Click()
     On Error GoTo Err_Handler
     Dim strCriteria As String
@@ -1762,54 +2379,414 @@ Err_Handler:
     Resume Exit_Procedure
 End Sub
 
-' =================================
-' FUNCTION:     fxnSortRecords
-' Description:  Sorts the records by the indicated field
-' Parameters:   strFieldName
-' Returns:      none
+' ---------------------------------
+' SUB:          tbxReportTrigger_Click
+' Description:  textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub tbxReportTrigger_Click()
+On Error GoTo Err_Handler
+    
+    Dim strDocName As String
+    Dim strCriteria As String
+    
+    If IsNothing(Me!Event_ID) Then
+        'Trap records that do not contain an event.
+        MsgBox ("This Record is not linked to an Event.  Please choose another Record.")
+        GoTo Exit_Handler
+    Else
+        'Record what the current record is so we can go back to that record on return
+        WriteRecordCriteria
+        strDocName = "rpt_Event_Summary_Unfiltered"
+        strCriteria = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
+        'DoCmd.OpenReport stDocName, acPreview, "qRpt_Event_Summary_Unfiltered", stCriteria
+        DoCmd.OpenReport strDocName, acPreview, , strCriteria
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxReportTrigger_Click[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+Private Sub txtReportTrigger_Click()
+On Error GoTo Err_Handler
+    Dim strDocName As String
+    Dim strCriteria As String
+    
+    If IsNothing(Me!Event_ID) Then
+        'Trap records that do not contain an event.
+        MsgBox ("This Record is not linked to an Event.  Please choose another Record.")
+        GoTo Exit_Procedure
+    Else
+        'Record what the current record is so we can go back to that record on return
+        WriteRecordCriteria
+        strDocName = "rpt_Event_Summary_Unfiltered"
+        strCriteria = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
+        'DoCmd.OpenReport stDocName, acPreview, "qRpt_Event_Summary_Unfiltered", stCriteria
+        DoCmd.OpenReport strDocName, acPreview, , strCriteria
+    End If
+    
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox Err.Description
+    Resume Exit_Procedure
+End Sub
+
+' ---------------------------------
+' SUB:          tbxViewPhotos_Click
+' Description:  textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub tbxViewPhotos_Click()
+On Error GoTo Err_Handler
+    
+    Dim RetVal As Double
+    Dim RootFolder As String
+    Dim PhotoFolder As String
+    
+    RootFolder = "T:\I&M"
+    PhotoFolder = "T:\I&M\Monitoring\Forest_Vegetation\Photos\"
+    If FolderExists(PhotoFolder & Me!txtPlot_Name) Then
+        RetVal = Shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
+        GoTo Exit_Handler
+    Else
+        If FolderExists(RootFolder) Then
+            MsgBox ("Folder for this plot not found....Opening the root of the Photos folder.")
+            RetVal = Shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
+            GoTo Exit_Handler
+        Else
+            MsgBox ("The network appears to be unavailable. Network access is required to view photos.")
+        End If
+    End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxViewPhotos_Click[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+Private Sub txtViewPhotos_Click()
+On Error GoTo Err_Handler
+
+    Dim RetVal As Double
+    Dim RootFolder As String
+    Dim PhotoFolder As String
+    
+    RootFolder = "T:\I&M"
+    PhotoFolder = "T:\I&M\Monitoring\Forest_Vegetation\Photos\"
+    If FolderExists(PhotoFolder & Me!txtPlot_Name) Then
+        RetVal = Shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
+        GoTo Exit_Procedure
+    Else
+        If FolderExists(RootFolder) Then
+            MsgBox ("Folder for this plot not found....Opening the root of the Photos folder.")
+            RetVal = Shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
+            GoTo Exit_Procedure
+        Else
+            MsgBox ("The network appears to be unavailable. Network access is required to view photos.")
+        End If
+    End If
+
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox Err.Description
+    Resume Exit_Procedure
+End Sub
+
+' ---------------------------------
+' SUB:          btnGoToTags_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub btnGoToTags_Click()
+On Error GoTo Err_Handler
+    
+'    'record what the current record is so we can go back to that record on return
+'    WriteRecordCriteria
+'    DoCmd.OpenForm "frm_Tags"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnGoToTags_Click[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+Private Sub cmdGoto_Tags_Click()
+    On Error GoTo Err_Handler
+
+    'record what the current record is so we can go back to that record on return
+    WriteRecordCriteria
+    DoCmd.OpenForm "frm_Tags"
+        
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
+
+' ---------------------------------
+' SUB:          btnGoToPlants
+' Description:  Open the plants form
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub btnGoToPlants_Click()
+On Error GoTo Err_Handler
+    
+'    'record what the current record is so we can go back to that record on return
+'    WriteRecordCriteria
+'    DoCmd.OpenForm "frm_Plants"
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnGoToPlants[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+Private Sub cmdGoto_Plants_Click()
+    On Error GoTo Err_Handler
+
+    'record what the current record is so we can go back to that record on return
+    WriteRecordCriteria
+    DoCmd.OpenForm "frm_Plants"
+        
+Exit_Procedure:
+    Exit Sub
+Err_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Resume Exit_Procedure
+End Sub
+
+' ---------------------------------
+'  Methods
+' ---------------------------------
+
+' ---------------------------------
+' SUB:          FilterString
+' Description:  Builds filter string for the Data Gateway form
+' Assumptions:  -
+' Parameters:   Val - filter control value (variant)
+'               FieldName - field being filtered (string)
+'               CurrentFilter - current filter value (string)
+' Returns:      Filter string or null if no filter built yet
+' Throws:       none
+' References:   -
+' Source/date:  Simon Kingston, 1/17/2007
+'               Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   SK - 1/17/2007 - initial version
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Function FilterString(Val As Variant, FieldName As String, CurrentFilter As Variant) As Variant
+On Error GoTo Err_Handler
+
+    Const cstrNull As String = "[Null]"
+    Dim Filter As Variant
+
+    If IsNull(Val) Then
+        Filter = CurrentFilter
+    Else
+        Filter = (CurrentFilter + " AND ") & FieldName
+        If Val = cstrNull Then
+            Filter = Filter & " Is Null"
+        Else
+        If IsNumeric(Val) Then
+            Filter = Filter & "=" & Val & ""
+            Else
+            If IsDate(Val) Then
+                Filter = Filter & "=#" & Val & "#"
+                Else
+                    Filter = Filter & "=" & CorrectText(CStr(Val))
+                End If
+            End If
+        End If
+    End If
+    
+    FilterString = Filter
+
+    
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - FilterString[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+Private Function xFilterString(varValue As Variant, strFieldName As String, varCurrentFilter As Variant) As Variant
+' Description:  Builds a filter string for the Data Gateway form
+' Parameters:   varValue = the value of the filter control
+'               strFieldName = the field that is being filtered
+'               varCurrentFilter = the current filter value as it is being built up
+' Returns:      Filter string or null if no filter built yet
+' Throws:       none
+' References:   none
+' Source/date:  Simon Kingston, 1/17/2007
+' Revisions:    <name, date, desc - add lines as you go>
+
+Const cstrNull As String = "[Null]"
+Dim varFilter As Variant
+
+On Error GoTo Error_Handler
+
+If IsNull(varValue) Then
+    varFilter = varCurrentFilter
+Else
+    varFilter = (varCurrentFilter + " AND ") & strFieldName
+    If varValue = cstrNull Then
+        varFilter = varFilter & " Is Null"
+    Else
+    If IsNumeric(varValue) Then
+        varFilter = varFilter & "=" & varValue & ""
+        Else
+        If IsDate(varValue) Then
+            varFilter = varFilter & "=#" & varValue & "#"
+            Else
+                varFilter = varFilter & "=" & CorrectText(CStr(varValue))
+            End If
+        End If
+    End If
+End If
+
+xFilterString = varFilter
+
+Exit_Handler:
+    Exit Function
+Error_Handler:
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+        "Error encountered (FilterString)"
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' SUB:          FilterGateway
+' Description:  filters gateway form
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
 ' Throws:       none
 ' References:   strFieldName, strSortOrder, strSortFieldLabel
 '               (form-level variables)
-' Source/date:  John R. Boetsch, May 5, 2006
-' Revisions:    <name, date, desc - add lines as you go>
-' =================================
+' Source/date:  Simon Kingston, 1/17/2007
+'               Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   SK - 1/17/2007 - initial version
+'   MEL/GS - unknown - NCRN version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Public Sub FilterGateway(FilterOn As Boolean)
+On Error GoTo Err_Handler
+    
+    Dim Filter As Variant
 
-Private Function fxnSortRecords(ByVal strFieldName As String, _
-    Optional ByVal strField2Name As String)
-    On Error GoTo Err_Handler
-
-    Dim strOrderBy As String
-
-    ' If already sorting in ascending order by this field, sort descending
-    If strFieldName = strSortField And strSortOrder = "" Then
-        strSortOrder = " DESC"
-    Else: strSortOrder = ""
+    Filter = Null
+    
+    Me!tglFilter = FilterOn
+    
+    If FilterOn Then
+        Me!tglFilter.Caption = "Filter Is On"
+    
+        'add park filter to filter string
+        Filter = FilterString(Me!cbxParkFilter, "Unit_Code", Filter)
+        'add unit filter to filter string
+        Filter = FilterString(Me!cbxUnitGroupFilter, "Unit_Group", Filter)
+        'add panel filter to filter string
+        Filter = FilterString(Me!cbxPanelFilter, "Panel", Filter)
+        'add frame filter to filter string
+        Filter = FilterString(Me!cbxFrameFilter, "Frame", Filter)
+        'add year filter to filter string
+        Filter = FilterString(Me!cbxYearFilter, "Event_Year", Filter)
+        'add status filter to filter string
+        Filter = FilterString(Me!cbxStatusFilter, "Location_Status", Filter)
+        Me.Filter = Nz(Filter)
+    Else
+        Me!tglFilter.Caption = "Filter Is Off"
     End If
-    ' Create the order by string and activate the filter
-    strOrderBy = strFieldName & strSortOrder
-    If strField2Name <> "" Then
-        strOrderBy = strField2Name & " DESC, " & strOrderBy
-    End If
-    strSortField = strFieldName
-    Me.Form.OrderBy = strOrderBy
-    Me.Form.OrderByOn = True
-
-    ' Change the label format to indicate the sorted field
-    Me.Controls.Item(strSortFieldLabel).FontItalic = False
-    Me.Controls.Item(strSortFieldLabel).FontBold = False
-    strSortFieldLabel = "lbl" & strFieldName
-    Me.Controls.Item(strSortFieldLabel).FontItalic = True
-    Me.Controls.Item(strSortFieldLabel).FontBold = True
-
-Exit_Procedure:
-    Exit Function
+    Me.FilterOn = FilterOn
+    
+Exit_Handler:
+    Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-        "Error encountered (fxnSortRecords)"
-    Resume Exit_Procedure
-End Function
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - FilterGateway[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
-Public Sub FilterGateway(booFilterOn As Boolean)
+Public Sub xFilterGateway(booFilterOn As Boolean)
 ' Description:  Filters the Data Gateway form
 ' Parameters:   booFilterOn = true if filter is to be applied, false if filter is to be removed
 ' Returns:      none
@@ -1855,52 +2832,48 @@ Error_Handler:
     Resume Exit_Handler
 End Sub
 
-Private Function FilterString(varValue As Variant, strFieldName As String, varCurrentFilter As Variant) As Variant
-' Description:  Builds a filter string for the Data Gateway form
-' Parameters:   varValue = the value of the filter control
-'               strFieldName = the field that is being filtered
-'               varCurrentFilter = the current filter value as it is being built up
-' Returns:      Filter string or null if no filter built yet
+' ---------------------------------
+' SUB:          WriteRecordCriteria
+' Description:  Records Location & Event IDs of the current record so that it can be made the current record when coming
+'               back to the form from another form (=bookmark).
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
 ' Throws:       none
-' References:   none
+' References:   GetCriteriaString
 ' Source/date:  Simon Kingston, 1/17/2007
-' Revisions:    <name, date, desc - add lines as you go>
+'               Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   SK - 1/17/2007 - initial version
+'   MEL/GS - unknown - initial NCRN version
+'   BLC - 5/24/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub WriteRecordCriteria()
+On Error GoTo Err_Handler
 
-Const cstrNull As String = "[Null]"
-Dim varFilter As Variant
-
-On Error GoTo Error_Handler
-
-If IsNull(varValue) Then
-    varFilter = varCurrentFilter
-Else
-    varFilter = (varCurrentFilter + " AND ") & strFieldName
-    If varValue = cstrNull Then
-        varFilter = varFilter & " Is Null"
-    Else
-    If IsNumeric(varValue) Then
-        varFilter = varFilter & "=" & varValue & ""
+    If Not IsNothing(Me!Location_ID) Then
+        strCurrentRecordCriteria = GetCriteriaString("[Location_ID]=", "tbl_Locations", "Location_ID", Me.Name, "txtLocation_ID")
+        If IsNothing(Me!Event_ID) Then
+            strCurrentRecordCriteria = strCurrentRecordCriteria & " AND Event_ID Is Null"
         Else
-        If IsDate(varValue) Then
-            varFilter = varFilter & "=#" & varValue & "#"
-            Else
-                varFilter = varFilter & "=" & CorrectText(CStr(varValue))
-            End If
+            strCurrentRecordCriteria = strCurrentRecordCriteria & " AND " & GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
         End If
     End If
-End If
-
-FilterString = varFilter
-
+    
 Exit_Handler:
-    Exit Function
-Error_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-        "Error encountered (FilterString)"
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - WriteRecordCriteria[frm_Data_Gateway])"
+    End Select
     Resume Exit_Handler
-End Function
+End Sub
 
-Private Sub WriteRecordCriteria()
+Private Sub xWriteRecordCriteria()
 ' Description:  Records the Location ID and Event ID of the current record so that it can be made the current record when coming
 '               back to the form from another form (=bookmark).
 ' Parameters:   none
@@ -1931,84 +2904,130 @@ Error_Handler:
 
 End Sub
 
-Private Sub txtReportTrigger_Click()
+' ---------------------------------
+' FUNCTION:     SortRecords
+' Description:  sorts records by desired field
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   strFieldName, strSortOrder, strSortFieldLabel
+'               (form-level variables)
+' Source/date:  John R. Boetsch, May 5, 2006
+'               Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/24/2018 - update documentation, error handling,
+'                     renamed from fxnSortRecords
+' ---------------------------------
+Private Function SortRecords(ByVal strFieldName As String, _
+    Optional ByVal strField2Name As String)
 On Error GoTo Err_Handler
-    Dim strDocName As String
-    Dim strCriteria As String
     
-    If IsNothing(Me!Event_ID) Then
-        'Trap records that do not contain an event.
-        MsgBox ("This Record is not linked to an Event.  Please choose another Record.")
-        GoTo Exit_Procedure
-    Else
-        'Record what the current record is so we can go back to that record on return
-        WriteRecordCriteria
-        strDocName = "rpt_Event_Summary_Unfiltered"
-        strCriteria = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
-        'DoCmd.OpenReport stDocName, acPreview, "qRpt_Event_Summary_Unfiltered", stCriteria
-        DoCmd.OpenReport strDocName, acPreview, , strCriteria
+    Dim strOrderBy As String
+
+    ' If already sorting in ascending order by this field, sort descending
+    If strFieldName = strSortField And strSortOrder = "" Then
+        strSortOrder = " DESC"
+    Else: strSortOrder = ""
     End If
     
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox Err.Description
-    Resume Exit_Procedure
-End Sub
-
-Private Sub txtViewPhotos_Click()
-On Error GoTo Err_Handler
-
-    Dim RetVal As Double
-    Dim RootFolder As String
-    Dim PhotoFolder As String
-    
-    RootFolder = "T:\I&M"
-    PhotoFolder = "T:\I&M\Monitoring\Forest_Vegetation\Photos\"
-    If FolderExists(PhotoFolder & Me!txtPlot_Name) Then
-        RetVal = Shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
-        GoTo Exit_Procedure
-    Else
-        If FolderExists(RootFolder) Then
-            MsgBox ("Folder for this plot not found....Opening the root of the Photos folder.")
-            RetVal = Shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
-            GoTo Exit_Procedure
-        Else
-            MsgBox ("The network appears to be unavailable. Network access is required to view photos.")
-        End If
+    ' Create the order by string and activate the filter
+    strOrderBy = strFieldName & strSortOrder
+    If strField2Name <> "" Then
+        strOrderBy = strField2Name & " DESC, " & strOrderBy
     End If
+    strSortField = strFieldName
+    Me.Form.OrderBy = strOrderBy
+    Me.Form.OrderByOn = True
 
-Exit_Procedure:
-    Exit Sub
+    ' Change the label format to indicate the sorted field
+    With Me.Controls.Item(strSortFieldLabel)
+        .FontItalic = False
+        .FontBold = False
+    strSortFieldLabel = "lbl" & strFieldName
+        .FontItalic = True
+        .FontBold = True
+    End With
+    
+Exit_Handler:
+    Exit Function
+    
 Err_Handler:
-    MsgBox Err.Description
-    Resume Exit_Procedure
-End Sub
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SortRecords[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Function
 
-Private Sub cmdGoto_Tags_Click()
+
+Private Function fxnSortRecords(ByVal strFieldName As String, _
+    Optional ByVal strField2Name As String)
     On Error GoTo Err_Handler
 
-    'record what the current record is so we can go back to that record on return
-    WriteRecordCriteria
-    DoCmd.OpenForm "frm_Tags"
-        
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
+    Dim strOrderBy As String
 
-Private Sub cmdGoto_Plants_Click()
-    On Error GoTo Err_Handler
+    ' If already sorting in ascending order by this field, sort descending
+    If strFieldName = strSortField And strSortOrder = "" Then
+        strSortOrder = " DESC"
+    Else: strSortOrder = ""
+    End If
+    ' Create the order by string and activate the filter
+    strOrderBy = strFieldName & strSortOrder
+    If strField2Name <> "" Then
+        strOrderBy = strField2Name & " DESC, " & strOrderBy
+    End If
+    strSortField = strFieldName
+    Me.Form.OrderBy = strOrderBy
+    Me.Form.OrderByOn = True
 
-    'record what the current record is so we can go back to that record on return
-    WriteRecordCriteria
-    DoCmd.OpenForm "frm_Plants"
-        
+    ' Change the label format to indicate the sorted field
+    Me.Controls.Item(strSortFieldLabel).FontItalic = False
+    Me.Controls.Item(strSortFieldLabel).FontBold = False
+    strSortFieldLabel = "lbl" & strFieldName
+    Me.Controls.Item(strSortFieldLabel).FontItalic = True
+    Me.Controls.Item(strSortFieldLabel).FontBold = True
+
 Exit_Procedure:
-    Exit Sub
+    Exit Function
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+        "Error encountered (fxnSortRecords)"
     Resume Exit_Procedure
-End Sub
+End Function
+
+' ---------------------------------
+' SUB:          GoToForm
+' Description:  open desired form
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 24, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 5/24/2018 - initial version
+' ---------------------------------
+Public Function GoToForm(frm As String)
+On Error GoTo Err_Handler
+    
+    WriteRecordCriteria
+    
+    If Exists(frm) Then _
+        DoCmd.OpenForm frm, acNormal
+        
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnGoToTags_Click[frm_Data_Gateway])"
+    End Select
+    Resume Exit_Handler
+End Function
