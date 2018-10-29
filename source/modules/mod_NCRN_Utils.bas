@@ -55,7 +55,7 @@ On Error GoTo TableInfoErr
    ' Argument:  Name of a table in the current database.
    Dim db As DAO.Database
    Dim tdf As DAO.TableDef
-   Dim fld As DAO.Field
+   Dim fld As DAO.field
    
    Set db = CurrentDb()
    Set tdf = db.TableDefs(strTableName)
@@ -100,7 +100,7 @@ Function GetQueryDescription(strQryName As String) As String
 End Function
 
 
-Function FieldTypeName(fld As DAO.Field) As String
+Function FieldTypeName(fld As DAO.field) As String
     'Purpose: Converts the numeric results of DAO Field.Type to text.
     Dim strReturn As String    'Name to return
 

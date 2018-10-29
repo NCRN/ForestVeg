@@ -10,6 +10,7 @@ Begin Form
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
+    FilterOn = NotDefault
     OrderByOn = NotDefault
     ScrollBars =2
     TabularFamily =0
@@ -21,10 +22,10 @@ Begin Form
     Width =11340
     DatasheetFontHeight =10
     ItemSuffix =60
-    Left =225
-    Top =1815
-    Right =11565
-    Bottom =9360
+    Left =1860
+    Top =180
+    Right =13200
+    Bottom =7725
     DatasheetGridlinesColor =12632256
     Filter ="Admin_Unit_Code='CHOH'"
     OrderBy ="Plot_Name"
@@ -1132,7 +1133,7 @@ Begin Form
                     FontWeight =700
                     Name ="btnGoToPlants"
                     Caption ="Browse PLANTS"
-                    OnClick ="[Event Procedure]"
+                    OnClick ="=GoToForm(\"frm_Plants\")"
                     FontName ="Calibri"
                     ControlTipText ="Add a new location record"
                     LeftPadding =60
@@ -1178,7 +1179,7 @@ Begin Form
                     TabIndex =2
                     Name ="btnGoToTags"
                     Caption ="Browse TAGS"
-                    OnClick ="[Event Procedure]"
+                    OnClick ="=GoToForm(\"frm_Tags\")"
                     FontName ="Calibri"
                     ControlTipText ="Add a new location record"
                     LeftPadding =60
@@ -1495,6 +1496,11 @@ On Error GoTo Err_Handler
     Else
         'Record what the current record is so we can go back to that record on return
         WriteRecordCriteria
+        
+        '10/23/2018 BLC
+        'set TempVar for qry_Status_Sapling_Current_Event/qry_Status_Tree_Current_Event
+        SetTempVar "EventID", CStr(Me.txtEvent_ID)
+        
         strDocName = "rpt_Event_Summary_Unfiltered"
         'strDocName = "Copy of rpt_Event_Summary_Unfiltered"
         strCriteria = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
@@ -2007,17 +2013,17 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-Private Sub lblEvent_Date_DblClick(Cancel As Integer)
-    On Error GoTo Err_Handler
-
-    fxnSortRecords ("Event_Date")
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
+'Private Sub lblEvent_Date_DblClick(Cancel As Integer)
+'    On Error GoTo Err_Handler
+'
+'    fxnSortRecords ("Event_Date")
+'
+'Exit_Procedure:
+'    Exit Sub
+'Err_Handler:
+'    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+'    Resume Exit_Procedure
+'End Sub
 ' ---------------------------------
 ' SUB:          btnClearFilter_Click
 ' Description:  button click actions
@@ -2642,26 +2648,26 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 5/24/2018 - update documentation, error handling
 ' ---------------------------------
-Private Function FilterString(Val As Variant, FieldName As String, CurrentFilter As Variant) As Variant
+Private Function FilterString(val As Variant, FieldName As String, CurrentFilter As Variant) As Variant
 On Error GoTo Err_Handler
 
     Const cstrNull As String = "[Null]"
     Dim Filter As Variant
 
-    If IsNull(Val) Then
+    If IsNull(val) Then
         Filter = CurrentFilter
     Else
         Filter = (CurrentFilter + " AND ") & FieldName
-        If Val = cstrNull Then
+        If val = cstrNull Then
             Filter = Filter & " Is Null"
         Else
-        If IsNumeric(Val) Then
-            Filter = Filter & "=" & Val & ""
+        If IsNumeric(val) Then
+            Filter = Filter & "=" & val & ""
             Else
-            If IsDate(Val) Then
-                Filter = Filter & "=#" & Val & "#"
+            If IsDate(val) Then
+                Filter = Filter & "=#" & val & "#"
                 Else
-                    Filter = Filter & "=" & CorrectText(CStr(Val))
+                    Filter = Filter & "=" & CorrectText(CStr(val))
                 End If
             End If
         End If
@@ -2943,12 +2949,16 @@ On Error GoTo Err_Handler
     Me.Form.OrderByOn = True
 
     ' Change the label format to indicate the sorted field
+    strSortFieldLabel = "lbl" & Replace(strFieldName, "_", "")
     With Me.Controls.Item(strSortFieldLabel)
-        .FontItalic = False
-        .FontBold = False
-    strSortFieldLabel = "lbl" & strFieldName
-        .FontItalic = True
-        .FontBold = True
+        .FontItalic = IIf(.FontItalic = False, True, False)
+        .FontBold = IIf(.FontBold = False, True, False)
+    
+'        .FontItalic = False
+'        .fontBold = False
+
+'        .FontItalic = True
+'        .fontBold = True
     End With
     
 Exit_Handler:
@@ -2963,7 +2973,20 @@ Err_Handler:
     Resume Exit_Handler
 End Function
 
-
+' ---------------------------------
+' SUB:          fxnSortRecords
+' Description:  record sorting actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling, add stripping _ from label
+' ---------------------------------
 Private Function fxnSortRecords(ByVal strFieldName As String, _
     Optional ByVal strField2Name As String)
     On Error GoTo Err_Handler
@@ -2984,10 +3007,13 @@ Private Function fxnSortRecords(ByVal strFieldName As String, _
     Me.Form.OrderBy = strOrderBy
     Me.Form.OrderByOn = True
 
+    'adjust for label name
+    strSortFieldLabel = Replace(strSortFieldLabel, "_", "")
+
     ' Change the label format to indicate the sorted field
     Me.Controls.Item(strSortFieldLabel).FontItalic = False
     Me.Controls.Item(strSortFieldLabel).FontBold = False
-    strSortFieldLabel = "lbl" & strFieldName
+    'strSortFieldLabel = "lbl" & strFieldName
     Me.Controls.Item(strSortFieldLabel).FontItalic = True
     Me.Controls.Item(strSortFieldLabel).FontBold = True
 
@@ -3000,7 +3026,7 @@ Err_Handler:
 End Function
 
 ' ---------------------------------
-' SUB:          GoToForm
+' FUNCTION:     GoToForm
 ' Description:  open desired form
 ' Assumptions:  -
 ' Parameters:   -
@@ -3017,7 +3043,7 @@ On Error GoTo Err_Handler
     
     WriteRecordCriteria
     
-    If Exists(frm) Then _
+    If DbObjectExists(frm, "frm") Then _
         DoCmd.OpenForm frm, acNormal
         
 Exit_Handler:

@@ -10,7 +10,6 @@ Begin Form
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
-    FilterOn = NotDefault
     DefaultView =0
     ScrollBars =0
     ViewsAllowed =1
@@ -2038,9 +2037,14 @@ On Error GoTo Err_Handler
     Dim strDocName As String
     Dim strCriteria As String
     
+    '10/23/2018 BLC
+    'set TempVar for qry_Status_Sapling_Current_Event/qry_Status_Tree_Current_Event
+    SetTempVar "EventID", CStr(Me.txtEvent_ID)
+    
     strDocName = "rpt_Event_Summary_Unfiltered"
     strCriteria = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
     DoCmd.OpenReport strDocName, acPreview, , strCriteria
+    
     
 Exit_Procedure:
     Exit Sub
@@ -2271,10 +2275,10 @@ Me!tglBrowse_Edit = booEditOn
 
 If booEditOn Then
     Me!tglBrowse_Edit.Caption = "Editing ON"
-    Me!lblEvent_Form_Header.BackColor = RGB(128, 0, 0)
+    Me!lblEvent_Form_Header.backcolor = RGB(128, 0, 0)
 Else
     Me!tglBrowse_Edit.Caption = "Editing OFF"
-    Me!lblEvent_Form_Header.BackColor = vbBlack
+    Me!lblEvent_Form_Header.backcolor = vbBlack
 End If
 
 'Me.FilterOn = booEditOn

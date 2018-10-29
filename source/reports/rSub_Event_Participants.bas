@@ -15,11 +15,11 @@ Begin Report
     Width =5325
     DatasheetFontHeight =10
     ItemSuffix =26
-    Left =3300
-    Top =1935
+    Left =5850
+    Top =1425
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
-        0x4a97af314fe1e340
+        0x2aea6abea030e540
     End
     RecordSource ="qRpt_sRpt_Participants"
     Caption ="srpt_Metadata"
@@ -29,8 +29,6 @@ Begin Report
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
-    DatasheetBackColor12 =16777215
-    DisplayOnSharePointSite =0
     DatasheetGridlinesColor12 =12632256
     Begin
         Begin Label
@@ -42,150 +40,50 @@ Begin Report
             FontWeight =700
             ForeColor =8388608
             FontName ="Times New Roman"
-            LeftPadding =30
-            TopPadding =30
-            RightPadding =30
-            BottomPadding =30
-            GridlineStyleLeft =0
-            GridlineStyleTop =0
-            GridlineStyleRight =0
-            GridlineStyleBottom =0
-            GridlineWidthLeft =1
-            GridlineWidthTop =1
-            GridlineWidthRight =1
-            GridlineWidthBottom =1
         End
         Begin Rectangle
             BackStyle =0
             BorderWidth =1
+            BorderLineStyle =0
             BorderColor =8388608
-            LeftPadding =30
-            TopPadding =30
-            RightPadding =30
-            BottomPadding =30
-            GridlineStyleLeft =0
-            GridlineStyleTop =0
-            GridlineStyleRight =0
-            GridlineStyleBottom =0
-            GridlineWidthLeft =1
-            GridlineWidthTop =1
-            GridlineWidthRight =1
-            GridlineWidthBottom =1
         End
         Begin Line
+            BorderLineStyle =0
             BorderColor =8388608
-            LeftPadding =30
-            TopPadding =30
-            RightPadding =30
-            BottomPadding =30
-            GridlineStyleLeft =0
-            GridlineStyleTop =0
-            GridlineStyleRight =0
-            GridlineStyleBottom =0
-            GridlineWidthLeft =1
-            GridlineWidthTop =1
-            GridlineWidthRight =1
-            GridlineWidthBottom =1
         End
         Begin Image
             OldBorderStyle =0
+            BorderLineStyle =0
             PictureAlignment =2
-            LeftPadding =30
-            TopPadding =30
-            RightPadding =30
-            BottomPadding =30
-            GridlineStyleLeft =0
-            GridlineStyleTop =0
-            GridlineStyleRight =0
-            GridlineStyleBottom =0
-            GridlineWidthLeft =1
-            GridlineWidthTop =1
-            GridlineWidthRight =1
-            GridlineWidthBottom =1
         End
         Begin CheckBox
+            BorderLineStyle =0
             LabelX =230
             LabelY =-30
-            LeftPadding =30
-            TopPadding =30
-            RightPadding =30
-            BottomPadding =30
-            GridlineStyleLeft =0
-            GridlineStyleTop =0
-            GridlineStyleRight =0
-            GridlineStyleBottom =0
-            GridlineWidthLeft =1
-            GridlineWidthTop =1
-            GridlineWidthRight =1
-            GridlineWidthBottom =1
         End
         Begin TextBox
             FELineBreak = NotDefault
             OldBorderStyle =0
+            BorderLineStyle =0
             BackStyle =0
             FontName ="Arial"
             AsianLineBreak =255
-            LeftPadding =30
-            TopPadding =30
-            RightPadding =30
-            BottomPadding =30
-            GridlineStyleLeft =0
-            GridlineStyleTop =0
-            GridlineStyleRight =0
-            GridlineStyleBottom =0
-            GridlineWidthLeft =1
-            GridlineWidthTop =1
-            GridlineWidthRight =1
-            GridlineWidthBottom =1
             ShowDatePicker =0
         End
         Begin ListBox
             OldBorderStyle =0
+            BorderLineStyle =0
             FontName ="Arial"
-            LeftPadding =30
-            TopPadding =30
-            RightPadding =30
-            BottomPadding =30
-            GridlineStyleLeft =0
-            GridlineStyleTop =0
-            GridlineStyleRight =0
-            GridlineStyleBottom =0
-            GridlineWidthLeft =1
-            GridlineWidthTop =1
-            GridlineWidthRight =1
-            GridlineWidthBottom =1
         End
         Begin ComboBox
             OldBorderStyle =0
+            BorderLineStyle =0
             BackStyle =0
             FontName ="Arial"
-            LeftPadding =30
-            TopPadding =30
-            RightPadding =30
-            BottomPadding =30
-            GridlineStyleLeft =0
-            GridlineStyleTop =0
-            GridlineStyleRight =0
-            GridlineStyleBottom =0
-            GridlineWidthLeft =1
-            GridlineWidthTop =1
-            GridlineWidthRight =1
-            GridlineWidthBottom =1
         End
         Begin Subform
             OldBorderStyle =0
-            LeftPadding =30
-            TopPadding =30
-            RightPadding =30
-            BottomPadding =30
-            GridlineStyleLeft =0
-            GridlineStyleTop =0
-            GridlineStyleRight =0
-            GridlineStyleBottom =0
-            GridlineWidthLeft =1
-            GridlineWidthTop =1
-            GridlineWidthRight =1
-            GridlineWidthBottom =1
+            BorderLineStyle =0
         End
         Begin FormHeader
             KeepTogether = NotDefault

@@ -2621,7 +2621,7 @@ Private Sub CheckDBH()
 On Error GoTo Err_Handler
     
     'set default comment bgd color
-    tbxComments.BackColor = lngWhite
+    tbxComments.backcolor = lngWhite
     
     'fetch DBH_Check value from db (convert 1 -> -1 for Access logic)
     chkDBHCheck = IIf(Me!DBH_Check = 1, -1, 0)

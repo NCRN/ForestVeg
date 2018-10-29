@@ -49,7 +49,7 @@ Public Function fxnGUIDGen() As String
     ' use the API to format as string
     RetVal = StringFromGUID2(uGUID, VarPtr(bGUID(0)), lLen)
     sGUID = bGUID
-    If (Asc(Mid$(sGUID, RetVal, 1)) = 0) Then RetVal = RetVal - 1
+    If (Asc(mid$(sGUID, RetVal, 1)) = 0) Then RetVal = RetVal - 1
     ' truncate the string
     fxnGUIDGen = Left$(sGUID, RetVal)
 

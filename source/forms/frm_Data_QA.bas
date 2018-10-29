@@ -1481,7 +1481,7 @@ Private Sub optgMode_AfterUpdate()
         Me.txtQueryDesc.Locked = True
         Me.txtRemedy.Locked = True
         Me.subDataTables.Locked = True
-        Me.Detail.BackColor = 13025979 ' steel blue (default)
+        Me.Detail.backcolor = 13025979 ' steel blue (default)
     Else
     ' Edit mode
         ' Unlock the subform if an editable query
@@ -1491,7 +1491,7 @@ Private Sub optgMode_AfterUpdate()
         Me.txtQueryDesc.Locked = False
         Me.txtRemedy.Locked = False
         Me.subDataTables.Locked = False
-        Me.Detail.BackColor = 12574431 ' haystack
+        Me.Detail.backcolor = 12574431 ' haystack
     End If
 
 Exit_Procedure:
@@ -1755,7 +1755,7 @@ Private Sub selObject_AfterUpdate()
         DoCmd.GoToRecord , , acNewRec
         Me.txtEditQuery = ""
         Me.txtEditQuery.ForeColor = 0          'black
-        Me.txtEditQuery.BackColor = 8454143    'yellow
+        Me.txtEditQuery.backcolor = 8454143    'yellow
         GoTo Exit_Procedure
     End If
     
@@ -2309,7 +2309,7 @@ Private Function fxnUpdateQAResults(Optional blnUpdateAll As Boolean = True, _
             frm.Repaint
             ' Create the record if all queries are being updated
             If blnUpdateAll Or (blnCreateNew And strQName = strSingleQName) Then
-                strQType = Mid(strQName, 5, 1)
+                strQType = mid(strQName, 5, 1)
                 If strQType = "" Then strQType = "0"
                 ' Create the statement to insert new records
                 strSQL = "INSERT INTO tbl_QA_Results " & _
@@ -2505,14 +2505,14 @@ Private Function fxnSetQueryFlag()
     If Right(Me.selObject.Value, 2) = "_X" Then
         Me.txtEditQuery = "OK"
         Me.txtEditQuery.ForeColor = 16777215   'white
-        Me.txtEditQuery.BackColor = 4227072    'green
+        Me.txtEditQuery.backcolor = 4227072    'green
         ' Unlock the subform if in edit mode
         If Me.optgMode = 1 Then Me.subQueryResults.Locked = False _
             Else Me.subQueryResults.Locked = True
     Else
         Me.txtEditQuery = "No"
         Me.txtEditQuery.ForeColor = 16777215   'white
-        Me.txtEditQuery.BackColor = 255        'red
+        Me.txtEditQuery.backcolor = 255        'red
         ' Lock the subform
         Me.subQueryResults.Locked = True
     End If

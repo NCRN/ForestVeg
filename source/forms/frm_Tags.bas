@@ -2,7 +2,6 @@
 VersionRequired =20
 Begin Form
     DividingLines = NotDefault
-    AllowDesignChanges = NotDefault
     DefaultView =0
     TabularCharSet =204
     PictureAlignment =2
@@ -12,9 +11,9 @@ Begin Form
     Width =14280
     DatasheetFontHeight =9
     ItemSuffix =58
-    Left =1515
-    Right =16080
-    Bottom =6450
+    Top =765
+    Right =14565
+    Bottom =7785
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0x9807af787caee340
@@ -27,9 +26,6 @@ Begin Form
         0x010000006801000000000000a10700000100000001000000
     End
     AllowDatasheetView =0
-    AllowPivotTableView =0
-    AllowPivotChartView =0
-    AllowPivotChartView =0
     FilterOnLoad =0
     SplitFormDatasheet =1
     SplitFormSize =3255
@@ -39,6 +35,7 @@ Begin Form
     SplitFormPrinting =1
     ShowPageMargins =0
     DisplayOnSharePointSite =1
+    AllowLayoutView =0
     DatasheetAlternateBackColor =16053492
     DatasheetGridlinesColor12 =15062992
     FitToScreen =1
@@ -146,6 +143,17 @@ Begin Form
                     Name ="txtTag"
                     ControlSource ="Tag"
                     StatusBarText ="Number of physical tag attached to tree"
+                    ConditionalFormat = Begin
+                        0x010000001a010000030000000100000000000000000000002300000001010000 ,
+                        0xff000000ffffff00010000000000000024000000470000000101000072727200 ,
+                        0xffffff000100000000000000480000005c000000010100000000cc00ffffff00 ,
+                        0x5b005400610067005f005300740061007400750073005d003d00220049006e00 ,
+                        0x6100630074006900760065002000280049006e0020004600690065006c006400 ,
+                        0x29002200000000005b005400610067005f005300740061007400750073005d00 ,
+                        0x3d00220052006500740069007200650064002000280049006e0020004f006600 ,
+                        0x660069006300650029002200000000005b005400610067005f00530074006100 ,
+                        0x7400750073005d003d0022005400720065006500220000000000
+                    End
                     GroupTable =14
                     RightPadding =38
                     BottomPadding =38
@@ -157,6 +165,21 @@ Begin Form
                     ColumnStart =1
                     ColumnEnd =1
                     LayoutGroup =1
+                    ConditionalFormat14 = Begin
+                        0x010004000000010000000000000001010000ff000000ffffff00220000005b00 ,
+                        0x5400610067005f005300740061007400750073005d003d00220049006e006100 ,
+                        0x630074006900760065002000280049006e0020004600690065006c0064002900 ,
+                        0x2200000000000000000000000000000000000000000000010000000000000001 ,
+                        0x01000072727200ffffff00220000005b005400610067005f0053007400610074 ,
+                        0x00750073005d003d00220052006500740069007200650064002000280049006e ,
+                        0x0020004f00660066006900630065002900220000000000000000000000000000 ,
+                        0x00000000000000000100000000000000010100000000cc00ffffff0013000000 ,
+                        0x5b005400610067005f005300740061007400750073005d003d00220054007200 ,
+                        0x6500650022000000000000000000000000000000000000000000000100000000 ,
+                        0x000000010100000000cc00ffffff00160000005b005400610067005f00530074 ,
+                        0x0061007400750073005d003d0022005300610070006c0069006e006700220000 ,
+                        0x0000000000000000000000000000000000000000
+                    End
                     GroupTable =14
                     Begin
                         Begin Label
@@ -570,21 +593,23 @@ Begin Form
                     LayoutCachedHeight =555
                 End
                 Begin ComboBox
+                    ColumnHeads = NotDefault
                     OverlapFlags =85
                     IMESentenceMode =3
-                    ColumnCount =7
+                    ColumnCount =9
                     ListWidth =5850
                     Left =1590
                     Top =105
                     Height =315
                     TabIndex =11
-                    ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"4\";\"4\""
+                    ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";"
+                        "\"\";\"\";\"4\";\"4\""
                     Name ="cboTagFinder"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT qfrm_Tags.Tag_ID, qfrm_Tags.Tag, qfrm_Tags.Plot_Name, qfrm_Tags.Tag_Statu"
                         "s, qfrm_Tags.Distance, qfrm_Tags.Azimuth, qfrm_Tags.Microplot_Number FROM qfrm_T"
-                        "ags ORDER BY qfrm_Tags.Tag; "
-                    ColumnWidths ="0;810;1185;960;795;750;1350"
+                        "ags ORDER BY qfrm_Tags.Tag;"
+                    ColumnWidths ="0;720;1296;1800;720;720;1296"
                     AfterUpdate ="[Event Procedure]"
 
                     LayoutCachedLeft =1590
@@ -684,6 +709,15 @@ Begin Form
                     FontSize =10
                     TabIndex =6
                     ColumnInfo ="\"\";\"\";\"10\";\"100\""
+                    ConditionalFormat = Begin
+                        0x01000000cc000000030000000000000002000000000000001600000001010000 ,
+                        0xff000000ffffff000000000002000000170000002d0000000101000059595900 ,
+                        0xffffff0000000000020000002e00000035000000010100000000cc00ffffff00 ,
+                        0x220049006e006100630074006900760065002000280049006e00200046006900 ,
+                        0x65006c0064002900220000000000220052006500740069007200650064002000 ,
+                        0x280049006e0020004f0066006600690063006500290022000000000022005400 ,
+                        0x720065006500220000000000
+                    End
                     Name ="cboTag_Status"
                     ControlSource ="Tag_Status"
                     RowSourceType ="Table/Query"
@@ -700,6 +734,18 @@ Begin Form
                     LayoutCachedTop =1620
                     LayoutCachedWidth =4019
                     LayoutCachedHeight =1934
+                    ConditionalFormat14 = Begin
+                        0x010004000000000000000200000001010000ff000000ffffff00150000002200 ,
+                        0x49006e006100630074006900760065002000280049006e002000460069006500 ,
+                        0x6c00640029002200000000000000000000000000000000000000000000000000 ,
+                        0x00020000000101000059595900ffffff00150000002200520065007400690072 ,
+                        0x00650064002000280049006e0020004f00660066006900630065002900220000 ,
+                        0x0000000000000000000000000000000000000000000000000200000001010000 ,
+                        0x0000cc00ffffff00060000002200540072006500650022000000000000000000 ,
+                        0x000000000000000000000000000000000002000000010100000000cc00ffffff ,
+                        0x000900000022005300610070006c0069006e0067002200000000000000000000 ,
+                        0x000000000000000000000000
+                    End
                     Begin
                         Begin Label
                             OverlapFlags =85

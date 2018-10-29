@@ -14,11 +14,11 @@ Begin Report
     Width =2940
     DatasheetFontHeight =9
     ItemSuffix =3
-    Left =735
-    Top =300
+    Left =-60
+    Top =420
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
-        0xdf74df119491e440
+        0x2d716d07a130e540
     End
     RecordSource ="SELECT tbl_Sapling_Conditions.Sapling_Data_ID, tbl_Sapling_Conditions.Condition,"
         " StringFromGUID([Sapling_Data_ID]) AS Sapling_Data_txt FROM tbl_Sapling_Conditio"

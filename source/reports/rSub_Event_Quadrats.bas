@@ -18,12 +18,12 @@ Begin Report
     Top =1515
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
-        0xd62d8ba872b2e340
+        0x87dc0cffa030e540
     End
     RecordSource ="SELECT tlu_Enumerations.Sort_Order, tbl_Quadrat_Data.* FROM tbl_Quadrat_Data INN"
-        "ER JOIN tlu_Enumerations ON tbl_Quadrat_Data.Quadrat_Number=tlu_Enumerations.Enu"
-        "m_Code WHERE (((tlu_Enumerations.Enum_Group)=\"Quadrat Number\")) ORDER BY tlu_E"
-        "numerations.Sort_Order; "
+        "ER JOIN tlu_Enumerations ON tbl_Quadrat_Data.Quadrat_Number = tlu_Enumerations.E"
+        "num_Code WHERE (((tlu_Enumerations.Enum_Group)=\"Quadrat Number\")) ORDER BY tlu"
+        "_Enumerations.Sort_Order;"
     Caption ="sfrm_Quadrats subreport"
     DatasheetFontName ="Arial"
     PrtMip = Begin

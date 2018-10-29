@@ -1,6 +1,6 @@
 ﻿Operation =1
 Option =0
-Where ="(((tbl_Events.Event_ID)=[Forms]![frm_Events]![Event_ID]))"
+Where ="(((tbl_Events.Event_ID)=[TempVars]![EventID]))"
 Begin InputTables
     Name ="tbl_Events"
     Name ="tbl_Sapling_Data"
@@ -13,7 +13,7 @@ End
 Begin Joins
     LeftTable ="tbl_Events"
     RightTable ="tbl_Sapling_Data"
-    Expression ="tbl_Events.Event_ID=tbl_Sapling_Data.Event_ID"
+    Expression ="tbl_Events.Event_ID = tbl_Sapling_Data.Event_ID"
     Flag =2
 End
 dbBoolean "ReturnsRecords" ="-1"
@@ -47,8 +47,8 @@ Begin
     Bottom =700
     Left =-1
     Top =-1
-    Right =1065
-    Bottom =363
+    Right =1071
+    Bottom =346
     Left =0
     Top =0
     ColumnsShown =539

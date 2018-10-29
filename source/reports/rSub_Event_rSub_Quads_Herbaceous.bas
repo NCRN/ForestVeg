@@ -18,7 +18,7 @@ Begin Report
     Top =2325
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
-        0xae3757a21093e440
+        0xa14d2202a130e540
     End
     RecordSource ="SELECT tbl_Quadrat_Herbaceous_Data.Quadrat_Data_ID, StringFromGUID([Quadrat_Data"
         "_ID]) AS Quadrat_Data_txt, tbl_Quadrat_Herbaceous_Data.TSN, tbl_Quadrat_Herbaceo"
@@ -54,6 +54,7 @@ Begin Report
         Begin Section
             KeepTogether = NotDefault
             Height =300
+            OnFormat ="[Event Procedure]"
             Name ="Detail"
             Begin
                 Begin TextBox
@@ -62,21 +63,16 @@ Begin Report
                     IMESentenceMode =3
                     Left =120
                     Width =2820
-                    Name ="txtLatin_Name"
+                    Name ="tbxLatinName"
                     ControlSource ="Latin_Name"
                     ConditionalFormat = Begin
-                        0x0100000092000000010000000100000000000000000000001800000001000000 ,
-                        0x00000000ed1c2400000000000000000000000000000000000000000000000000 ,
+                        0x0100000060000000000000000000000000000000000000000000000000000000 ,
                         0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x490073004e0075006c006c0028005b007400780074004c006100740069006e00 ,
-                        0x5f004e0061006d0065005d00290000000000
+                        0x0000000000000000000000000000000000000000000000000000000000000000
                     End
 
                     ConditionalFormat14 = Begin
-                        0x01000100000001000000000000000100000000000000ed1c2400170000004900 ,
-                        0x73004e0075006c006c0028005b007400780074004c006100740069006e005f00 ,
-                        0x4e0061006d0065005d0029000000000000000000000000000000000000000000 ,
-                        0x00
+                        0x010000000000
                     End
                 End
                 Begin TextBox
@@ -126,6 +122,22 @@ Begin Report
                         0x5d002900000000000000000000000000000000000000000000
                     End
                 End
+                Begin Label
+                    BackStyle =1
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =300
+                    Width =1680
+                    Height =225
+                    FontWeight =700
+                    BackColor =721136
+                    ForeColor =16777215
+                    Name ="lblMissingID"
+                    Caption ="M I S S I N G  I D"
+                    LayoutCachedLeft =300
+                    LayoutCachedWidth =1980
+                    LayoutCachedHeight =225
+                End
             End
         End
         Begin PageFooter
@@ -134,3 +146,55 @@ Begin Report
         End
     End
 End
+CodeBehindForm
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Compare Database
+Option Explicit
+
+' =================================
+' REPORT:       rSub_Event_rSub_Quads_Herbaceous
+' Level:        Application report
+' Version:      1.01
+'
+' Description:  Report related functions & procedures for application
+'
+' Source/date:  Bonnie Campbell, October 24, 2018
+' Revisions:    BLC - 10/24/2018 - 1.00 - initial version
+' =================================
+
+' ---------------------------------
+' SUB:          Detail_Format
+' Description:  report format actions
+' Assumptions:  -
+' Parameters:   Cancel - whether format action should be cancelled (boolean)
+'               FormatCount - number of times a section (in this case the detail section)
+'                             is formatted (integer)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, October 24, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 10/24/2018 - initial version
+' ---------------------------------
+Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
+On Error GoTo Err_Handler
+
+    'turn on label if missing sapling ID (tbxLatinName)
+    'visible IF there is no data (if no latin name = False, returns True & displays)
+    lblMissingID.Visible = IIf(Len(tbxLatinName) > 0, False, True)
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Detail_Format[rpt_rSub_Event_rSub_Quads_Herbaceous])"
+    End Select
+    Resume Exit_Handler
+End Sub

@@ -23,10 +23,9 @@ Begin Form
     Width =10140
     DatasheetFontHeight =10
     ItemSuffix =88
-    Left =270
-    Top =405
-    Right =10410
-    Bottom =5685
+    Left =75
+    Right =10215
+    Bottom =5280
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x3b82f36a92b1e340
@@ -4141,7 +4140,7 @@ Option Explicit
 ' =================================
 ' FORM:         frm_Switchboard
 ' Level:        Application form
-' Version:      1.02
+' Version:      1.04
 '
 ' Description:  Standard module - main screen of the user interface, viewed at startup
 ' Data source:  tsys_App_Defaults
@@ -4158,6 +4157,8 @@ Option Explicit
 ' Revisions:    Simon Kingston, Sept. 2006 - 1.00 - added lookup for release information to look at tsys_App_Releases
 '               ML/GS - unknown   - 1.01 - initial version updates
 '               BLC   - 4/22/2018 - 1.02 - added documentation, error handling
+'               BLC   - 10/22/2018 - 1.03 - updated Exit_Procedure > Exit_Handler, revised Browse functionality
+'               BLC   - 10/23/2018 - 1.04 - updated to display BE version
 ' =================================
 
 ' ---------------------------------
@@ -4172,6 +4173,7 @@ Option Explicit
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/22/2018 - initial version
+'   BLC - 10/23/2018 - revised to display BE version
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -4188,13 +4190,21 @@ On Error GoTo Err_Handler
         & Me!Release_ID & "'"), "")
     Me.Caption = strCaption
 
+    'set Db BE Version
+    Dim beDb As DAO.Database
+    Set beDb = OpenDatabase(TempVars("BEfilepath"))
+    'Debug.Print beDb.Properties("Db Version")
+    SetTempVar "Db BE Version", CStr(beDb.Properties("Db Version"))
+
     'get front & back-end versions
     tbxVersionFE = Nz(CurrDb.Properties("Db Version"), "-")
-    tbxVersionBE = Nz(CurrDb.Properties("Db Version BE"), "-")
+    'tbxVersionBE = Nz(CurrDb.Properties("Db BE Version"), "-")
+    tbxVersionBE = Nz(TempVars("Db BE Version"), "-")
     
     'hide BE label for now
-    lblVersionBE.Visible = False
+    lblVersionBE.Visible = IIf(Len(tbxVersionBE) > 0, True, False)
 
+    Debug.Print "lp=" & TempVars("BEfilepath")
     
 Exit_Handler:
     Exit Sub
@@ -4223,6 +4233,20 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          Form_Load
+' Description:  form loading actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub Form_Load()
     On Error GoTo Err_Handler
 
@@ -4243,6 +4267,9 @@ Private Sub Form_Load()
     'strLinkPath = "Using.... " & Nz(DLookup("[Link_file_path]", "tsys_Link_Files", "[Link_type] = 'Back-end data'"), "")
     strLinkPath = Nz(DLookup("[Link_file_path]", "tsys_Link_Files", "[Link_type] = 'Back-end data'"), "")
     Me!txtLinkPath = strLinkPath
+
+    '10/23/2018 update
+    SetTempVar "BEfilepath", strLinkPath
 
     'get application release information and fill in the appropriate text boxes
     strSQL = "SELECT TOP 1 * FROM tsys_App_Releases"
@@ -4292,7 +4319,7 @@ Private Sub Form_Load()
     Me!txtAuthorPhone = varAuthorPhone
     Me!lblAuthorEmail.Caption = varAuthorEmail
 
-Exit_Procedure:
+Exit_Handler:
     On Error Resume Next
     rstReleaseInfo.Close
     Set rstReleaseInfo = Nothing
@@ -4315,10 +4342,24 @@ Err_Handler:
         Case Else
             MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
     End Select
-    Resume Exit_Procedure
+    Resume Exit_Handler
 
 End Sub
 
+' ---------------------------------
+' SUB:          lblNPS_DblClick
+' Description:  label double click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub lblNPS_DblClick(Cancel As Integer)
     On Error GoTo Err_Handler
 
@@ -4326,14 +4367,28 @@ Private Sub lblNPS_DblClick(Cancel As Integer)
     DoCmd.Hourglass True
     Application.FollowHyperlink "http://www.nps.gov", , True
 
-Exit_Procedure:
+Exit_Handler:
     DoCmd.Hourglass False
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          imgNPS_DblClick
+' Description:  image double click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub imgNPS_DblClick(Cancel As Integer)
     On Error GoTo Err_Handler
 
@@ -4341,14 +4396,28 @@ Private Sub imgNPS_DblClick(Cancel As Integer)
     DoCmd.Hourglass True
     Application.FollowHyperlink "http://www.nps.gov", , True
 
-Exit_Procedure:
+Exit_Handler:
     DoCmd.Hourglass False
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          lblNetwork_DblClick
+' Description:  label double click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub lblNetwork_DblClick(Cancel As Integer)
     On Error GoTo Err_Handler
 
@@ -4371,45 +4440,87 @@ Private Sub lblNetwork_DblClick(Cancel As Integer)
         End If
     End If
 
-Exit_Procedure:
+Exit_Handler:
     DoCmd.Hourglass False
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          tbxLinkPath_DblClick
+' Description:  textbox double click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub txtLinkPath_DblClick(Cancel As Integer)
     On Error GoTo Err_Handler
 
     ' Upon clicking the current link path, reconnect back end tables
     DoCmd.OpenForm "frm_Connect_Tables"
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          btnEvents_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling, revise frm_Event_Add > EventAdd
+' ---------------------------------
 Private Sub cmdEvents_Add_Open_Form_Click()
     On Error GoTo Err_Handler
     
     ' Proceed to add event if the database is connected
     If fxnVerifyLinks() Then
         Me!Activity = "enter"
-        DoCmd.OpenForm "frm_Event_Add"
+        DoCmd.OpenForm "EventAdd" '"frm_Event_Add"
     Else
         MsgBox "The database must be connected first", vbOKOnly, "Data Tables Not Connected"
     End If
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          btnGateway_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdGateway_Click()
     On Error GoTo Err_Handler
 
@@ -4423,13 +4534,27 @@ Private Sub cmdGateway_Click()
         MsgBox "The database must be connected first", vbOKOnly, "Data Tables Not Connected"
     End If
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          btnViewMetadata_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdViewMetadata_Click()
     If Not (Not IsNothing(fxnGetLocalMetadataFileName) Or fxnNPSDataStoreMetadataExists Or fxnDBPurposeExists) Then
         MsgBox "No metadata or purpose was entered for this database."
@@ -4438,6 +4563,20 @@ Private Sub cmdViewMetadata_Click()
     End If
 End Sub
 
+' ---------------------------------
+' SUB:          btnExit_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdExit_Click()
 
 'Updated: Simon Kingston, 2/26/2007 - Set up to compact multiple back-end files
@@ -4501,7 +4640,7 @@ End If
 ' Close the application
 DoCmd.Quit acQuitSaveNone
 
-Exit_Procedure:
+Exit_Handler:
     On Error Resume Next
     rstLinkedFiles.Close
     Set rstLinkedFiles = Nothing
@@ -4516,10 +4655,24 @@ Err_Handler:
         Case Else
             MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
                 "Error encountered exiting the main menu"
-            Resume Exit_Procedure
+            Resume Exit_Handler
     End Select
 End Sub
 
+' ---------------------------------
+' SUB:          btnReview_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdReview_Click()
     On Error GoTo Err_Handler
 
@@ -4532,13 +4685,27 @@ Private Sub cmdReview_Click()
         MsgBox "The database must be connected first", vbOKOnly, "Data Tables Not Connected"
     End If
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          btnQA_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdQA_Click()
     On Error GoTo Err_Handler
 
@@ -4562,13 +4729,27 @@ Private Sub cmdQA_Click()
         End If
     End If
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          btnLookups_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdLookups_Click()
     On Error GoTo Err_Handler
 
@@ -4580,26 +4761,54 @@ Private Sub cmdLookups_Click()
         DoCmd.OpenForm "frm_Lookups"
     End If
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          btnDbWindow_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdDbWindow_Click()
     On Error GoTo Err_Handler
 
     ' Show the database window.  To re-hide: DoCmd.RunCommand acCmdWindowHide
     DoCmd.SelectObject acForm, "", True
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          btnBackup_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdBackup_Click()
     On Error GoTo Err_Handler
 
@@ -4611,24 +4820,38 @@ Private Sub cmdBackup_Click()
             vbExclamation, "Data Tables Not Connected"
     End If
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          btnReconnect_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdReconnect_Click()
     On Error GoTo Err_Handler
 
     ' Reconnect back end tables
     DoCmd.OpenForm "frm_Connect_Tables"
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Sub
 
 ' =================================
@@ -4638,7 +4861,20 @@ End Sub
 ' Unbound ctls: cmdChangeDefaults - opens a popup for changing default values
 ' Subforms:     none
 ' =================================
-
+' ---------------------------------
+' SUB:          btnChangeDefaults_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdChangeDefaults_Click()
     On Error GoTo Err_Handler
 
@@ -4653,11 +4889,11 @@ Private Sub cmdChangeDefaults_Click()
         DoCmd.OpenForm "frm_Set_Defaults", , , , , , 4
     End If
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Sub
 
 ' =================================
@@ -4666,20 +4902,47 @@ End Sub
 ' Unbound ctls: cmdReleaseHistory, cmdReportBug
 ' Subforms:     none
 ' =================================
-
+' ---------------------------------
+' SUB:          btnReleaseHistory_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdReleaseHistory_Click()
     On Error GoTo Err_Handler
 
     ' View the release history form
     DoCmd.OpenForm "frm_App_Releases", , , , acFormReadOnly
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          btnReportBug_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdReportBug_Click()
     On Error GoTo Err_Handler
 
@@ -4700,12 +4963,27 @@ Private Sub cmdReportBug_Click()
     'strMessage = strMessage & vbTab & "- screen capture of any error messages"
     'MsgBox strMessage, , "Report a bug"
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
 Err_Handler:
     MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' SUB:          btnPlants_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdPlants_Open_Form_Click()
 On Error GoTo Err_cmdPlants_Open_Form_Click
 
@@ -4722,6 +5000,20 @@ Err_cmdPlants_Open_Form_Click:
     Resume Exit_cmdPlants_Open_Form_Click
 End Sub
 
+' ---------------------------------
+' SUB:          btnTags_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdTags_Open_Form_Click()
 On Error GoTo Err_cmdTags_Open_Form_Click
 
@@ -4738,6 +5030,20 @@ Err_cmdTags_Open_Form_Click:
     Resume Exit_cmdTags_Open_Form_Click
 End Sub
 
+' ---------------------------------
+' SUB:          btnAppend_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdAppend_Click()
 On Error GoTo Err_cmdAppend_Click
 
@@ -4754,6 +5060,20 @@ Err_cmdAppend_Click:
     Resume Exit_cmdAppend_Click
 End Sub
 
+' ---------------------------------
+' SUB:          btnDataSummary_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdData_Summary_Click()
 On Error GoTo Err_cmdData_Summary_Click
 
@@ -4770,6 +5090,20 @@ Err_cmdData_Summary_Click:
     Resume Exit_cmdData_Summary_Click
 End Sub
 
+' ---------------------------------
+' SUB:          btnDataQA_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdData_QA_Click()
 On Error GoTo Err_Handler
 
@@ -4779,13 +5113,27 @@ On Error GoTo Err_Handler
     stDocName = "frm_Data_QA"
     DoCmd.OpenForm stDocName, , , stLinkCriteria
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
 Err_Handler:
     MsgBox Err.Description
-    Resume Exit_Procedure
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          btnXX_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub Command85_Click()
 On Error GoTo Err_Command85_Click
 
@@ -4804,7 +5152,20 @@ Err_Command85_Click:
     
 End Sub
 
-
+' ---------------------------------
+' SUB:          btnUtilities_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdUtilities_Click()
 On Error GoTo Err_cmdUtilities_Click
 
@@ -4822,7 +5183,20 @@ Err_cmdUtilities_Click:
     Resume Exit_cmdUtilities_Click
 End Sub
 
-
+' ---------------------------------
+' SUB:          btnDashboard_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 10/22/2018 - update documentation, error handling
+' ---------------------------------
 Private Sub cmdDashboard_Click()
 On Error GoTo Err_cmdDashboard_Click
 

@@ -591,6 +591,10 @@ Private Sub cmdUpdateLinks_Click()
         If fxnSwitchboardIsOpen And strLinkName = "Back-end data" And bHasError = False Then
             Forms![frm_Switchboard]![txtLinkPath] = strFilePath
             Forms!frm_Switchboard.Refresh
+            
+            '10/23/2018 update
+            SetTempVar "BEfilepath", strFilePath
+
         End If
 
 NextBackEnd:

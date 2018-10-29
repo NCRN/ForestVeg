@@ -14,57 +14,37 @@ Option Explicit
 '               BLC - 4/19/2018 - 1.02 - add CurrDb property (normally resides in framework)
 '                                        added colors
 '               BLC - 4/21/2018  - 1.03 - revised VaidateDBH condense logic
+'               BLC - 5/24/2018 - 1.04 - removed CurrDb property (added framework
+'                                        mod_Db module where it normally resides)
+'                                        added DB_SYS_TABLES, APP_SYS_TABLES (normally in framework)
 ' =================================
 
 ' ---------------------------------
 '  Declarations
 ' ---------------------------------
-Public Const lngWhite As Long = 16777215    '?RGB(255,255,255) #FFFFFF
-Public Const lngYellow As Long = 65535      '?RGB(255,255,0) #FFFF00
+'Public Const lngWhite As Long = 16777215    '?RGB(255,255,255) #FFFFFF
+'Public Const lngYellow As Long = 65535      '?RGB(255,255,0) #FFFF00
 Public Const lngLtYellow As Long = 14745599 '?RGB(255,255,224) #FFFFE0
-Public Const lngGray As Long = 8224125      '?RGB(125, 125, 125)
-Public Const lngLtGray As Long = 13882323   '?RGB(211, 211, 211)
+'Public Const lngGray As Long = 8224125      '?RGB(125, 125, 125)
+'Public Const lngLtGray As Long = 13882323   '?RGB(211, 211, 211)
 Public Const lngGray50 As Long = 8355711    '?RGB(127,127,127) Text 1, Lighter 50% #7F7F7F Gray50
-Public Const lngLime As Long = 6750105      '?RGB(153, 255, 102) #99FF66
-Public Const lngBlue As Long = 16711680     '?RGB(0, 0, 255) #0000FF
-Public Const lngBlack As Long = 0           '?RGB(0,0,0) #000000
-Public Const lngRed As Long = 255           '?RGB(255,0,0) #FF0000
+'Public Const lngLime As Long = 6750105      '?RGB(153, 255, 102) #99FF66
+'Public Const lngBlue As Long = 16711680     '?RGB(0, 0, 255) #0000FF
+'Public Const lngBlack As Long = 0           '?RGB(0,0,0) #000000
+'Public Const lngRed As Long = 255           '?RGB(255,0,0) #FF0000
 Public Const lngGreen As Long = 65280       '?RGB(0,255,0) #00FF00
 
 Public Const pi As Single = 3.1415            'pi value
 
+'normally in framework
+Public DB_SYS_TABLES As Variant
+Public APP_SYS_TABLES As Variant
+
+Public SWITCHBOARD As Form
+
 ' ---------------------------------
 '  Database-wide Properties
 ' ---------------------------------
-
-' ---------------------------------
-' PROPERTY:     CurrDb
-' Description:  Gets a single instance of the current db to avoid multiple calls
-'               to CurrentDb which can yield to Error 3048 "Cannot open any more databases" errors
-'               due to multiple open db
-' Parameters:   -
-' Returns:      current database object
-' Throws:       -
-' References:   -
-' Source/date:  Dirk Goldgar, MS Access MVP - May 22, 2013
-'   http://social.msdn.microsoft.com/Forums/office/en-US/9993d229-8a00-4a59-a796-dfa2dad505bc/cannot-open-any-more-databases?forum=accessdev
-'   Michael Kaplan via Darrel H. Burns, February 8, 2011
-'   https://social.msdn.microsoft.com/Forums/office/en-US/7ea9506f-5e91-4896-80b9-6712762388ea/currentdbtabledefs-vs-dbtabledefs-object-invalid-or-not-set-error?forum=accessdev
-' Adapted:      Bonnie Campbell, July, 2014 for NCPN Riparian tools
-' Revisions:    BLC, 7/23/2014 - initial version
-'               BLC, 10/5/2017 - combined with DbCurrent from mod_SQL
-' ---------------------------------
-Private m_db As DAO.Database
-
-Public Property Get CurrDb() As DAO.Database
-
-    If (m_db Is Nothing) Then
-        Set m_db = CurrentDb
-    End If
-
-    Set CurrDb = m_db
-
-End Property
 
 ' ----------------
 '  Methods
@@ -110,7 +90,7 @@ On Error GoTo Err_Handler
     Set cbx = frm.Controls(cbxName)
     
     'default
-    frmTag.Controls("cbxTagStatus").BackColor = lngWhite
+    frmTag.Controls("cbxTagStatus").backcolor = lngWhite
     
     'dead statuses only
     If Left(cbx, 4) = "Dead" Then
@@ -125,7 +105,7 @@ On Error GoTo Err_Handler
                 'do nothing
             Case Else
                 'highlight
-                frmTag.Controls("cbxTagStatus").BackColor = lngYellow
+                frmTag.Controls("cbxTagStatus").backcolor = lngYellow
         End Select
             
     End If
@@ -331,8 +311,8 @@ Debug.Print "DBH_mod_App_Data: " & strSQL
                 '.Controls("chkDBHCheck").Visible = True
                 .Controls("tbxHighlightChk").Visible = True
                 .Controls("lblDBHCheck").ForeColor = lngRed
-                .Controls("tbxHighlightChk").BackColor = lngLtYellow
-                .Controls("tbxComments").BackColor = lngYellow
+                .Controls("tbxHighlightChk").backcolor = lngLtYellow
+                .Controls("tbxComments").backcolor = lngYellow
             
                 'set focus
                 .Controls(frmDBHName).Form.Controls("tbxDBH").SetFocus
@@ -650,8 +630,8 @@ On Error GoTo Err_Handler
         rs.MoveNext
     Loop
 
-    strStemListLive = Mid(strStemListLive, 3)
-    strStemListDead = Mid(strStemListDead, 3)
+    strStemListLive = mid(strStemListLive, 3)
+    strStemListDead = mid(strStemListDead, 3)
     strStemList = "L: " & strStemListLive & " D: " & strStemListDead
     
     MakeTreeStemList = strStemList
@@ -710,8 +690,8 @@ On Error GoTo Err_Handler
         rs.MoveNext
     Loop
 
-    strStemListLive = Mid(strStemListLive, 3)
-    strStemListDead = Mid(strStemListDead, 3)
+    strStemListLive = mid(strStemListLive, 3)
+    strStemListDead = mid(strStemListDead, 3)
     strStemList = "L: " & strStemListLive & " D: " & strStemListDead
     
     MakeSaplingStemList = strStemList
@@ -783,8 +763,8 @@ On Error GoTo Err_Handler
         rs.MoveNext
     Loop
 
-    strStemListLive = Mid(strStemListLive, 3)
-    strStemListDead = Mid(strStemListDead, 3)
+    strStemListLive = mid(strStemListLive, 3)
+    strStemListDead = mid(strStemListDead, 3)
     strStemList = "L: " & strStemListLive & " D: " & strStemListDead
     
     MakeStemList = strStemList

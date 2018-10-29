@@ -1944,7 +1944,7 @@ On Error GoTo Err_Handler
     If IsNull(Me.cbxSelectQuery) Then
         Me.tbxUnfilteredFlag = ""
         Me.tbxUnfilteredFlag.ForeColor = 0          'black
-        Me.tbxUnfilteredFlag.BackColor = 8454143    'yellow
+        Me.tbxUnfilteredFlag.backcolor = 8454143    'yellow
         Me.subResults.SourceObject = ""
         GoTo Exit_Handler
     End If
@@ -1972,11 +1972,11 @@ On Error GoTo Err_Handler
     If Right(Me.cbxSelectQuery.Value, 2) = "_X" Then
         Me.tbxUnfilteredFlag = "No"
         Me.tbxUnfilteredFlag.ForeColor = 16777215   'white
-        Me.tbxUnfilteredFlag.BackColor = 255        'red
+        Me.tbxUnfilteredFlag.backcolor = 255        'red
     Else
         Me.tbxUnfilteredFlag = "Yes"
         Me.tbxUnfilteredFlag.ForeColor = 16777215   'white
-        Me.tbxUnfilteredFlag.BackColor = 4227072    'green
+        Me.tbxUnfilteredFlag.backcolor = 4227072    'green
     End If
 
     ' Set focus to the subform to allow scrolling, etc.

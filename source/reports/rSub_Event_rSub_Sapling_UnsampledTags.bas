@@ -14,11 +14,11 @@ Begin Report
     Width =4320
     DatasheetFontHeight =9
     ItemSuffix =9
-    Left =2325
-    Top =3165
+    Left =210
+    Top =615
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
-        0x1a37490b4d19e540
+        0x83f4ec0aa130e540
     End
     RecordSource ="SELECT t.Tag_ID, t.Tag, t.Tag_Status AS Class, t.Microplot_Number AS MP, IIf(IsN"
         "ull([azimuth]),\"\",[Azimuth] & \" / \" & [distance] & \"m\") AS Azi_Dist, td.Tr"

@@ -14,11 +14,11 @@ Begin Report
     Width =10800
     DatasheetFontHeight =10
     ItemSuffix =24
-    Left =2130
-    Top =4350
+    Left =915
+    Top =1080
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
-        0x92fab1cccd93e440
+        0xe7ecd9faa030e540
     End
     RecordSource ="SELECT tbl_Plot_Floor_Condition_Data.Event_ID, tbl_Plot_Floor_Condition_Data.Roc"
         "k_Cover, tbl_Plot_Floor_Condition_Data.Bare_Soil_Cover, tbl_Plot_Floor_Condition"

@@ -14,10 +14,10 @@ Begin Report
     DatasheetFontHeight =10
     ItemSuffix =70
     Left =15
-    Top =-2280
     DatasheetGridlinesColor =12632256
+    Filter ="[Event_ID]='{36E9ED9C-0E7F-4F40-B190-FD1BF91E8CEE}'"
     RecSrcDt = Begin
-        0x1e595cfd0c18e540
+        0xf58c6abea030e540
     End
     RecordSource ="qRpt_Event_Summary_Unfiltered"
     OnOpen ="[Event Procedure]"
@@ -290,8 +290,6 @@ Begin Report
                     LayoutCachedHeight =1005
                 End
                 Begin TextBox
-                    Visible = NotDefault
-                    TextFontCharSet =238
                     TextAlign =3
                     TextFontFamily =34
                     IMESentenceMode =3
@@ -300,6 +298,7 @@ Begin Report
                     Width =1065
                     Height =225
                     ColumnWidth =1245
+                    FontSize =6
                     TabIndex =12
                     Name ="txtEvent_ID"
                     ControlSource ="Event_ID"
@@ -797,7 +796,6 @@ Begin Report
                     FontItalic = NotDefault
                     FontUnderline = NotDefault
                     BackStyle =1
-                    OverlapFlags =12
                     TextAlign =1
                     TextFontFamily =34
                     Top =5100
@@ -833,7 +831,6 @@ Begin Report
                     FontItalic = NotDefault
                     FontUnderline = NotDefault
                     BackStyle =1
-                    OverlapFlags =12
                     TextAlign =1
                     TextFontFamily =34
                     Top =6180
@@ -1070,6 +1067,11 @@ Option Explicit
 ' ---------------------------------
 Private Sub Report_Open(Cancel As Integer)
 On Error GoTo Err_Handler
+
+    'Forms!frm_Events!Event_ID
+    'If IsError(Forms!frm_Events!Event_ID) Then Debug.Print "error"
+    
+    'Debug.Print Me.OpenArgs
 
 Exit_Handler:
     Exit Sub

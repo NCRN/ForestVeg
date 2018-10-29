@@ -4,6 +4,7 @@ Begin Form
     RecordSelectors = NotDefault
     NavigationButtons = NotDefault
     AllowAdditions = NotDefault
+    FilterOn = NotDefault
     OrderByOn = NotDefault
     AllowDesignChanges = NotDefault
     DefaultView =2
@@ -17,9 +18,10 @@ Begin Form
     ItemSuffix =4
     Left =1050
     Top =3390
-    Right =14445
-    Bottom =5835
+    Right =18660
+    Bottom =8730
     DatasheetGridlinesColor =12632256
+    Filter ="([tsys_Append_Log].[Append_Date]=#6/26/2018#)"
     OrderBy ="[tsys_Append_Log].[Append_Date] DESC, [tsys_Append_Log].[Table_Name], [tsys_Appe"
         "nd_Log].[Append_Table_Name] DESC"
     RecSrcDt = Begin

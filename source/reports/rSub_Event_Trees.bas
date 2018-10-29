@@ -13,12 +13,12 @@ Begin Report
     GridY =24
     Width =10800
     DatasheetFontHeight =10
-    ItemSuffix =43
-    Left =30
-    Top =-7441
+    ItemSuffix =44
+    Left =465
+    Top =6360
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
-        0x159b418f4c1ce540
+        0xbe907106b030e540
     End
     RecordSource ="SELECT t.Tag, p.Latin_Name,  q.Stems, q.Equiv_DBH_cm, [Crown_Class] & \" \" & [C"
         "rownClass] AS CC,  [TreeVigor] & \" \" & [TreeVigorClass] AS Vig,  td.Vines_Chec"
@@ -33,7 +33,7 @@ Begin Report
     Caption ="srpt_Trees"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0x0000000000000000000000000000000000000000302a00001c02000001000000 ,
+        0xf0000000f0000000f0000000f000000000000000302a00001c02000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
@@ -398,20 +398,16 @@ Begin Report
                     StatusBarText ="Genus of specimen"
                     FontName ="Calibri"
                     ConditionalFormat = Begin
-                        0x0100000090000000010000000100000000000000000000001700000001000000 ,
-                        0x00000000ed1c2400000000000000000000000000000000000000000000000000 ,
+                        0x0100000060000000000000000000000000000000000000000000000000000000 ,
                         0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x490073004e0075006c006c0028005b007400620078004c006100740069006e00 ,
-                        0x4e0061006d0065005d00290000000000
+                        0x0000000000000000000000000000000000000000000000000000000000000000
                     End
 
                     LayoutCachedLeft =2160
                     LayoutCachedWidth =3600
                     LayoutCachedHeight =270
                     ConditionalFormat14 = Begin
-                        0x01000100000001000000000000000100000000000000ed1c2400160000004900 ,
-                        0x73004e0075006c006c0028005b007400620078004c006100740069006e004e00 ,
-                        0x61006d0065005d002900000000000000000000000000000000000000000000
+                        0x010000000000
                     End
                 End
                 Begin TextBox
@@ -740,6 +736,26 @@ Begin Report
                     LayoutCachedWidth =7365
                     LayoutCachedHeight =525
                 End
+                Begin Label
+                    FontItalic = NotDefault
+                    BackStyle =1
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =2040
+                    Top =15
+                    Width =1680
+                    Height =270
+                    FontSize =8
+                    BackColor =721136
+                    ForeColor =16777215
+                    Name ="lblMissingID"
+                    Caption ="M I S S I N G  I D"
+                    FontName ="Arial"
+                    LayoutCachedLeft =2040
+                    LayoutCachedTop =15
+                    LayoutCachedWidth =3720
+                    LayoutCachedHeight =285
+                End
             End
         End
         Begin PageFooter
@@ -778,7 +794,8 @@ Option Explicit
 '
 ' Source/date:  Bonnie Campbell, April 3, 2018
 ' Revisions:    BLC - 4/3/2018 - 1.00 - initial version
-'               BLC - 5/21/2018 1.01 - revise to only show in red if trees are not dead/non-sampled (w/o EAB-infection)
+'               BLC - 5/21/2018 - 1.01 - revise to only show in red if trees are not dead/non-sampled (w/o EAB-infection)
+'               BLC - 10/24/2018 - 1.02 - fix so living trees w/ V-C-F checked aren't red
 ' =================================
 
 ' ---------------------------------
@@ -800,6 +817,8 @@ Option Explicit
 ' Revisions:
 '   BLC - 4/3/2018 - initial version
 '   BLC - 5/21/2018 - revise to only show in red if trees are not dead/non-sampled (w/o EAB-infection)
+'   BLC - 10/24/2018 - revise to show red for living trees if no conditions OR not all checked (VCF),
+'                      added missing ID highlight
 ' ---------------------------------
 Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
 On Error GoTo Err_Handler
@@ -811,12 +830,23 @@ On Error GoTo Err_Handler
                 
             'visible IF there is no data (if HasData = False, returns True & displays)
             lblNoTreeConditions.Visible = Not rSub_rSub_Tree_Conditions.Report.HasData
-        
+            
+            'doesn't appear for living trees w/ V-C-F checkboxes complete
+            'rSub_Event_Trees > chkVines_Checked, chkConditions_Checked, chkFoliage_Conditions_Checked
+            'qry < Vines_Checked, Conditions_Checked, Foliage_Conditions_Checked
+            If Me!Vines_Checked + Me!Conditions_Checked + Me!Foliage_Conditions_Checked = -3 Then
+                lblNoTreeConditions.Visible = False
+                'Debug.Print "NO RED"
+            End If
+            
     Else
         'hide it
         lblNoTreeConditions.Visible = False
     End If
 
+    'turn on label if missing sapling ID (tbxLatinName)
+    'visible IF there is no data (if no latin name = False, returns True & displays)
+    lblMissingID.Visible = IIf(Len(tbxLatinName) > 0, False, True)
     
 Exit_Handler:
     Exit Sub

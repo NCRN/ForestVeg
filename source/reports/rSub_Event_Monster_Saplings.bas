@@ -13,25 +13,25 @@ Begin Report
     Width =8640
     DatasheetFontHeight =10
     ItemSuffix =61
-    Left =1320
-    Top =2190
+    Left =300
+    Top =585
     DatasheetGridlinesColor =12632256
     OnNoData ="[Event Procedure]"
     RecSrcDt = Begin
-        0x13ebb6604c19e540
+        0xc3658bf0a030e540
     End
     RecordSource ="SELECT DISTINCT l.Plot_Name, e.Event_Date, l.Panel, t.Tag, t.Microplot_Number, q"
         "Calc_Basal_Area_per_Sapling.Stems, qCalc_Basal_Area_per_Sapling.SumBasalArea_cm2"
         ", qCalc_Basal_Area_per_Sapling.Equiv_DBH_cm, sd.Sapling_Status, d.DBH, sd.Saplin"
         "g_Data_ID, sd.Status, t.Tag_Status, sd.Habit, t.Azimuth, t.Distance, t.Azimuth/t"
-        ".Distance AS Azi_Dist, t.Tag_Notes, p.Latin_Name, e.Event_ID,l.Location_ID FROM "
-        "(tbl_Locations AS l INNER JOIN (((tbl_Events AS e INNER JOIN qCalc_Basal_Area_pe"
-        "r_Sapling ON e.Event_ID = qCalc_Basal_Area_per_Sapling.Event_ID) INNER JOIN (tbl"
-        "_Tags AS t INNER JOIN tbl_Sapling_Data AS sd ON t.Tag_ID = sd.Tag_ID) ON qCalc_B"
-        "asal_Area_per_Sapling.FirstOfTag_ID = t.Tag_ID) LEFT JOIN tlu_Plants AS p ON t.T"
-        "SN = p.TSN) ON l.Location_ID = e.Location_ID) LEFT JOIN tbl_Sapling_DBH AS d ON "
-        "sd.Sapling_Data_ID = d.Sapling_Data_ID WHERE (((qCalc_Basal_Area_per_Sapling.Equ"
-        "iv_DBH_cm)>=10)) ORDER BY l.Plot_Name, e.Event_Date, t.Tag;"
+        ".Distance AS Azi_Dist, t.Tag_Notes, p.Latin_Name, e.Event_ID, l.Location_ID FROM"
+        " (tbl_Locations AS l INNER JOIN (((tbl_Events AS e INNER JOIN qCalc_Basal_Area_p"
+        "er_Sapling ON e.Event_ID = qCalc_Basal_Area_per_Sapling.Event_ID) INNER JOIN (tb"
+        "l_Tags AS t INNER JOIN tbl_Sapling_Data AS sd ON t.Tag_ID = sd.Tag_ID) ON qCalc_"
+        "Basal_Area_per_Sapling.FirstOfTag_ID = t.Tag_ID) LEFT JOIN tlu_Plants AS p ON t."
+        "TSN = p.TSN) ON l.Location_ID = e.Location_ID) LEFT JOIN tbl_Sapling_DBH AS d ON"
+        " sd.Sapling_Data_ID = d.Sapling_Data_ID WHERE (((qCalc_Basal_Area_per_Sapling.Eq"
+        "uiv_DBH_cm)>=10)) ORDER BY l.Plot_Name, e.Event_Date, t.Tag;"
     Caption ="rSub_Event_Monster_Saplings"
     OnOpen ="[Event Procedure]"
     DatasheetFontName ="Arial"

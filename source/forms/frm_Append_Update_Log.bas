@@ -12,10 +12,10 @@ Begin Form
     Width =9300
     DatasheetFontHeight =10
     ItemSuffix =4
-    Left =735
-    Top =1080
-    Right =10320
-    Bottom =6315
+    Left =-480
+    Top =1575
+    Right =12795
+    Bottom =13155
     DatasheetGridlinesColor =12632256
     OrderBy ="[tsys_Update_Log].[Update_Date] DESC, [tsys_Update_Log].[Update_Table] DESC"
     RecSrcDt = Begin
@@ -119,7 +119,7 @@ Begin Form
                     IMESentenceMode =3
                     Left =3960
                     Top =2220
-                    ColumnWidth =2685
+                    ColumnWidth =3525
                     TabIndex =3
                     Name ="Update_Records"
                     ControlSource ="Update_Records"

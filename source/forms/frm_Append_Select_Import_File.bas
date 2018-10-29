@@ -284,8 +284,8 @@ Dim intRC As Integer
 
 'Pull the filename to be imported from a text box on the form
 strPath = Me!txt_Import_File.Value
-strImportFileRole = Mid(strPath, InStrAtPos(strPath, "_", 0) + 1, InStrAtPos(strPath, ".", 0) - InStrAtPos(strPath, "_", 0) - 1)
-strImportFileDate = Mid(strPath, InStrAtPos(strPath, "_", CharacterCount(strPath, "_") - 2) + 1, 8)
+strImportFileRole = mid(strPath, InStrAtPos(strPath, "_", 0) + 1, InStrAtPos(strPath, ".", 0) - InStrAtPos(strPath, "_", 0) - 1)
+strImportFileDate = mid(strPath, InStrAtPos(strPath, "_", CharacterCount(strPath, "_") - 2) + 1, 8)
 
 'Open the database that contains the objects for import
 Set dbImport = DBEngine.Workspaces(0).OpenDatabase(strPath, True)
@@ -316,7 +316,7 @@ Do Until rsImportTablesList.EOF
 StartOver:
                             'Loop through the main data set to see if the new import table name is already taken.
                             For Each tdefMain In dbMain.TableDefs
-                                Dim counter As Integer
+                                Dim Counter As Integer
                                
                                 If strTableToImport_NewName = tdefMain.Name Then
                                     'If the name has already been taken then:
@@ -325,11 +325,11 @@ StartOver:
                                         Dim iLength As Integer
                                         iLength = Len(strTableToImport_NewName)
                                         Dim strTdefTemp As String
-                                        counter = Right(tdefMain.Name, 1)
+                                        Counter = Right(tdefMain.Name, 1)
                                                                                                                             
                                         strTdefTemp = Left(strTableToImport_NewName, (iLength - 2))
                                         '
-                                        strTableToImport_NewName = strTdefTemp & "_" & counter + 1
+                                        strTableToImport_NewName = strTdefTemp & "_" & Counter + 1
                                         'counter2 = counter2 + 1
                                         dbMain.TableDefs.Refresh
                                     Else

@@ -11,10 +11,11 @@ Begin Report
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =10800
+    Width =11220
     DatasheetFontHeight =10
-    ItemSuffix =40
-    Top =600
+    ItemSuffix =42
+    Left =1035
+    Top =345
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x1a8ba6632e17e540
@@ -37,7 +38,7 @@ Begin Report
     Caption ="srpt_Microplots"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0xe0010000e0010000680100006801000000000000f42900001c02000001000000 ,
+        0xe0010000e0010000680100006801000000000000302a0000a005000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
@@ -328,7 +329,8 @@ Begin Report
         Begin Section
             KeepTogether = NotDefault
             CanGrow = NotDefault
-            Height =600
+            Height =540
+            OnFormat ="[Event Procedure]"
             Name ="Detail"
             Begin
                 Begin TextBox
@@ -355,26 +357,21 @@ Begin Report
                     Width =1695
                     FontSize =9
                     TabIndex =1
-                    Name ="txtLatin_Name"
+                    Name ="tbxLatinName"
                     ControlSource ="Latin_Name"
                     StatusBarText ="Genus of specimen"
                     FontName ="Calibri"
                     ConditionalFormat = Begin
-                        0x0100000092000000010000000100000000000000000000001800000001000000 ,
-                        0x00000000ed1c2400000000000000000000000000000000000000000000000000 ,
+                        0x0100000060000000000000000000000000000000000000000000000000000000 ,
                         0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x490073004e0075006c006c0028005b007400780074004c006100740069006e00 ,
-                        0x5f004e0061006d0065005d00290000000000
+                        0x0000000000000000000000000000000000000000000000000000000000000000
                     End
 
                     LayoutCachedLeft =1125
                     LayoutCachedWidth =2820
                     LayoutCachedHeight =240
                     ConditionalFormat14 = Begin
-                        0x01000100000001000000000000000100000000000000ed1c2400170000004900 ,
-                        0x73004e0075006c006c0028005b007400780074004c006100740069006e005f00 ,
-                        0x4e0061006d0065005d0029000000000000000000000000000000000000000000 ,
-                        0x00
+                        0x010000000000
                     End
                 End
                 Begin TextBox
@@ -433,14 +430,18 @@ Begin Report
                 Begin TextBox
                     CanGrow = NotDefault
                     IMESentenceMode =3
-                    Left =2400
+                    Left =1440
                     Top =300
-                    Width =7380
+                    Width =8820
                     Height =0
                     TabIndex =4
                     Name ="txtSapling_Notes"
                     ControlSource ="Sapling_Notes"
 
+                    LayoutCachedLeft =1440
+                    LayoutCachedTop =300
+                    LayoutCachedWidth =10260
+                    LayoutCachedHeight =300
                 End
                 Begin TextBox
                     CanGrow = NotDefault
@@ -559,7 +560,7 @@ Begin Report
                     End
                 End
                 Begin Subform
-                    Left =5760
+                    Left =3720
                     Top =360
                     Width =2956
                     Height =120
@@ -569,13 +570,13 @@ Begin Report
                     LinkChildFields ="Sapling_Data_ID"
                     LinkMasterFields ="Sapling_Data_ID"
 
-                    LayoutCachedLeft =5760
+                    LayoutCachedLeft =3720
                     LayoutCachedTop =360
-                    LayoutCachedWidth =8716
+                    LayoutCachedWidth =6676
                     LayoutCachedHeight =480
                 End
                 Begin Subform
-                    Left =1320
+                    Left =480
                     Top =360
                     Width =2956
                     Height =180
@@ -585,9 +586,9 @@ Begin Report
                     LinkChildFields ="Sapling_Data_ID"
                     LinkMasterFields ="Sapling_Data_ID"
 
-                    LayoutCachedLeft =1320
+                    LayoutCachedLeft =480
                     LayoutCachedTop =360
-                    LayoutCachedWidth =4276
+                    LayoutCachedWidth =3436
                     LayoutCachedHeight =540
                 End
                 Begin TextBox
@@ -630,6 +631,40 @@ Begin Report
                         0x00000000000000000000000000
                     End
                 End
+                Begin Subform
+                    Left =6960
+                    Top =360
+                    Width =2956
+                    Height =60
+                    TabIndex =11
+                    Name ="rSub_rSub_Sapling_Foliage"
+                    SourceObject ="Report.rSub_Event_rSub_Sapling_Foliage"
+                    LinkChildFields ="Sapling_Data_ID"
+                    LinkMasterFields ="Sapling_Data_ID"
+
+                    LayoutCachedLeft =6960
+                    LayoutCachedTop =360
+                    LayoutCachedWidth =9916
+                    LayoutCachedHeight =420
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    BackStyle =1
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =1020
+                    Width =1680
+                    Height =270
+                    FontSize =8
+                    BackColor =721136
+                    ForeColor =16777215
+                    Name ="lblMissingID"
+                    Caption ="M I S S I N G  I D"
+                    FontName ="Arial"
+                    LayoutCachedLeft =1020
+                    LayoutCachedWidth =2700
+                    LayoutCachedHeight =270
+                End
             End
         End
         Begin PageFooter
@@ -651,3 +686,55 @@ Begin Report
         End
     End
 End
+CodeBehindForm
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Compare Database
+Option Explicit
+
+' =================================
+' REPORT:       rSub_Event_Saplings
+' Level:        Application report
+' Version:      1.01
+'
+' Description:  Report related functions & procedures for application
+'
+' Source/date:  Bonnie Campbell, October 24, 2018
+' Revisions:    BLC - 10/24/2018 - 1.00 - initial version
+' =================================
+
+' ---------------------------------
+' SUB:          Detail_Format
+' Description:  report format actions
+' Assumptions:  -
+' Parameters:   Cancel - whether format action should be cancelled (boolean)
+'               FormatCount - number of times a section (in this case the detail section)
+'                             is formatted (integer)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, October 24, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 10/24/2018 - initial version
+' ---------------------------------
+Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
+On Error GoTo Err_Handler
+
+    'turn on label if missing sapling ID (tbxLatinName)
+    'visible IF there is no data (if no latin name = False, returns True & displays)
+    lblMissingID.Visible = IIf(Len(tbxLatinName) > 0, False, True)
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Detail_Format[rpt_rSub_Event_Saplings])"
+    End Select
+    Resume Exit_Handler
+End Sub

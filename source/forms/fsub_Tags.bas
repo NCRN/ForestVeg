@@ -2,9 +2,9 @@
 VersionRequired =20
 Begin Form
     AutoCenter = NotDefault
+    AllowDeletions = NotDefault
     DividingLines = NotDefault
     OrderByOn = NotDefault
-    AllowDesignChanges = NotDefault
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridX =24
@@ -12,10 +12,10 @@ Begin Form
     Width =6960
     DatasheetFontHeight =9
     ItemSuffix =36
-    Left =2565
-    Top =1605
-    Right =9675
-    Bottom =6315
+    Left =510
+    Top =1875
+    Right =7620
+    Bottom =6585
     DatasheetGridlinesColor =15062992
     OrderBy ="[tbl_Tags].[Tag]"
     RecSrcDt = Begin
@@ -29,12 +29,10 @@ Begin Form
         0x010000006801000000000000a10700000100000001000000
     End
     AllowDatasheetView =0
-    AllowPivotTableView =0
-    AllowPivotChartView =0
-    AllowPivotChartView =0
     FilterOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
+    AllowLayoutView =0
     DatasheetAlternateBackColor =16053492
     DatasheetGridlinesColor12 =15062992
     FitToScreen =1

@@ -1500,7 +1500,7 @@ Private Sub cmbo_PickAPlant_AfterUpdate()
  ' Find the record that matches the control.
     Dim rs As Object
     Set rs = Me.Recordset.Clone
-    rs.FindFirst "[ID] = " & Str(Nz(Me![cmbo_PickAPlant], 0))
+    rs.FindFirst "[ID] = " & str(Nz(Me![cmbo_PickAPlant], 0))
     If Not rs.EOF Then Me.Bookmark = rs.Bookmark
     
     If Me!txt_TSN = "" Or IsNull(Me!txt_TSN) Then
@@ -1546,11 +1546,11 @@ Private Sub cmd_Unlock_Attributes_Click()
     If cmd_Unlock_Attributes.Caption = "Unlock Attributes" Then
         LockStatus = False
         cmd_Unlock_Attributes.Caption = "Lock Attributes"
-        Box_Attributes.BorderColor = vbRed
+        Box_Attributes.borderColor = vbRed
      Else
         LockStatus = True
         cmd_Unlock_Attributes.Caption = "Unlock Attributes"
-        Box_Attributes.BorderColor = vbBlack
+        Box_Attributes.borderColor = vbBlack
     End If
     Me!txt_Common_Preferred.Locked = LockStatus
     Me!txt_Order.Locked = LockStatus
