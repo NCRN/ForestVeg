@@ -22,13 +22,12 @@ Begin Form
     GridY =24
     Width =14400
     DatasheetFontHeight =10
-    ItemSuffix =154
+    ItemSuffix =156
     Left =510
     Top =615
     Right =14910
     Bottom =9810
     DatasheetGridlinesColor =12632256
-    Filter ="[Event_ID]='{7A2453B5-B719-41D4-8AF4-EB31F12DF43E}'"
     RecSrcDt = Begin
         0x58c05212730ae440
     End
@@ -219,7 +218,7 @@ Begin Form
                     Locked = NotDefault
                     SpecialEffect =0
                     OldBorderStyle =0
-                    OverlapFlags =215
+                    OverlapFlags =223
                     TextAlign =3
                     BackStyle =0
                     IMESentenceMode =3
@@ -1697,7 +1696,7 @@ Begin Form
                     TabStop = NotDefault
                     SpecialEffect =0
                     OldBorderStyle =0
-                    OverlapFlags =215
+                    OverlapFlags =223
                     TextAlign =1
                     BackStyle =0
                     IMESentenceMode =3
@@ -1926,6 +1925,33 @@ Begin Form
                     LayoutCachedWidth =11280
                     LayoutCachedHeight =1200
                 End
+                Begin TextBox
+                    Enabled = NotDefault
+                    Locked = NotDefault
+                    TabStop = NotDefault
+                    SpecialEffect =0
+                    OldBorderStyle =0
+                    OverlapFlags =247
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =2460
+                    Top =540
+                    Width =483
+                    Height =360
+                    FontSize =18
+                    FontWeight =700
+                    TabIndex =13
+                    Name ="tbxPseudoEvent"
+                    ControlSource ="PseudoEvent"
+                    StatusBarText ="Unique identifier for each sample location"
+                    FontName ="Calibri"
+
+                    LayoutCachedLeft =2460
+                    LayoutCachedTop =540
+                    LayoutCachedWidth =2943
+                    LayoutCachedHeight =900
+                End
             End
         End
     End
@@ -1940,8 +1966,8 @@ Option Explicit
 
 ' =================================
 ' FORM:         frm_Events
-' Level:        Application module
-' Version:      1.01
+' Level:        Form module
+' Version:      1.02
 '
 ' Description:  add event related functions & procedures
 '
@@ -1949,6 +1975,7 @@ Option Explicit
 ' Adapted:      Bonnie Campbell, May 24, 2018
 ' Revisions:    ML/GS - unknown  - 1.00 - initial version
 '               BLC   - 5/24/2018 - 1.01 - added documentation, error handling
+'               BLC   - 11/9/2018 - 1.02 - added pseudoevent functionality
 ' =================================
 
 ' ---------------------------------
@@ -1991,68 +2018,6 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-Private Sub chkPictures_Taken_AfterUpdate()
-    lblPictures_Taken.Requery
-End Sub
-
-Private Sub chkTransectChecked_120_AfterUpdate()
-    lblTransectChecked_120.Requery
-End Sub
-
-Private Sub chkTransectChecked_240_AfterUpdate()
-    lblTransectChecked_240.Requery
-End Sub
-
-Private Sub chkTransectChecked_360_AfterUpdate()
-    lblTransectChecked_360.Requery
-End Sub
-
-Private Sub cmdOpen_Form_Deer_Impact_Click()
-    Dim stDocName As String
-    Dim stLinkCriteria As String
-
-    stDocName = "frm_Popup_Deer_Impact"
-    DoCmd.OpenForm stDocName, , , stLinkCriteria
-
-Exit_cmdOpen_Popup_Click:
-    Exit Sub
-Err_cmdOpen_Popup_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdOpen_Popup_Click
-End Sub
-
-Private Sub cmdPlot_Chart_Click()
-Dim strOpenargs As String
-Dim strCriteria As String
-    If Not IsNothing(Me!txtLocation_ID) Then
-        strOpenargs = XML_Tag("FormFrom", Me.Name)
-        strOpenargs = strOpenargs & XML_Tag("ControlFrom", "txtLocation_ID")
-        strCriteria = GetCriteriaString("Location_ID=", "tbl_Locations", "Location_ID", Me.Name, "txtLocation_ID")
-        DoCmd.OpenForm "frm_Plot_Chart", , , strCriteria, acFormEdit, acWindowNormal, strOpenargs
-    End If
-End Sub
-
-Private Sub cmdTriggerReport_Click()
-On Error GoTo Err_Handler
-    Dim strDocName As String
-    Dim strCriteria As String
-    
-    '10/23/2018 BLC
-    'set TempVar for qry_Status_Sapling_Current_Event/qry_Status_Tree_Current_Event
-    SetTempVar "EventID", CStr(Me.txtEvent_ID)
-    
-    strDocName = "rpt_Event_Summary_Unfiltered"
-    strCriteria = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
-    DoCmd.OpenReport strDocName, acPreview, , strCriteria
-    
-    
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox Err.Description
-    Resume Exit_Procedure
-End Sub
-
 ' =================================
 ' FORM NAME:    frm_Data_Entry
 ' Description:  Primary field data entry form
@@ -2066,8 +2031,22 @@ End Sub
 '                   - extensive updates, adding GUID generation code, new controls
 ' =================================
 
+' ---------------------------------
+' SUB:          Form_Open
+' Description:  form open actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
-    On Error GoTo Err_Handler
+On Error GoTo Err_Handler
 
     Dim strCaptionSuffix As String
     Dim booEditOn As Boolean
@@ -2090,24 +2069,70 @@ Private Sub Form_Open(Cancel As Integer)
     Me.Caption = Me.Caption & strCaptionSuffix
     SetEditMode (booEditOn)
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Current[frm_Events])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub Form_Current()
+' ---------------------------------
+' SUB:          Form_Current
+' Description:  form current actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
+Private Sub Form_Current(Cancel As Integer)
+On Error GoTo Err_Handler
+   
     'Update fields in header from Locations table
     Update_Loc_Info
     'Enable edit location function if there is an active location
     Me!cmdEditLocation.Enabled = Not IsNull(Me!txtLocation_ID)
     'Event groups not implemented in this database
     'Me!cmdEditEventGroup.Enabled = Not IsNull(Me!cboEvent_Group_ID)
+   
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Current[frm_Events])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          Form_BeforeInsert
+' Description:  form before insert actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
 Private Sub Form_BeforeInsert(Cancel As Integer)
-    On Error GoTo Err_Handler
+On Error GoTo Err_Handler
 
     ' Create the GUID primary key value if needed for a string GUID
     If IsNull(Me!Event_ID) Then
@@ -2116,39 +2141,345 @@ Private Sub Form_BeforeInsert(Cancel As Integer)
         End If
     End If
 
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeInsert[frm_Events])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+
+
+' ---------------------------------
+' SUB:          chkPicturesTaken_AfterUpdate
+' Description:  checkbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
+Private Sub chkPictures_Taken_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    lblPictures_Taken.Requery
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - chkPicturesTaken_AfterUpdate[frm_Events])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          chkTransect120Check_AfterUpdate
+' Description:  checkbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
+Private Sub chkTransectChecked_120_AfterUpdate()
+On Error GoTo Err_Handler
+
+    lblTransectChecked_120.Requery
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - chkTransect120Check_AfterUpdate[frm_Events])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+
+' ---------------------------------
+' SUB:          chkTransect240Check_AfterUpdate
+' Description:  checkbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
+Private Sub chkTransectChecked_240_AfterUpdate()
+On Error GoTo Err_Handler
+
+    lblTransectChecked_240.Requery
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - chkTransect240Check_AfterUpdate[frm_Events])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          chkTransect360Check_AfterUpdate
+' Description:  checkbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
+Private Sub chkTransectChecked_360_AfterUpdate()
+On Error GoTo Err_Handler
+
+    lblTransectChecked_360.Requery
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - chkTransect360Check_AfterUpdate[frm_Events])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnOpenDeerImpactForm_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
+Private Sub cmdOpen_Form_Deer_Impact_Click()
+On Error GoTo Err_Handler
+    
+    Dim stDocName As String
+    Dim stLinkCriteria As String
+
+    stDocName = "frm_Popup_Deer_Impact"
+    DoCmd.OpenForm stDocName, , , stLinkCriteria
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnOpenDeerImpactForm_Click[frm_Events])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnPlotChart_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
+Private Sub cmdPlot_Chart_Click()
+On Error GoTo Err_Handler
+    
+    Dim strOpenargs As String
+    Dim strCriteria As String
+    If Not IsNothing(Me!txtLocation_ID) Then
+        strOpenargs = XML_Tag("FormFrom", Me.Name)
+        strOpenargs = strOpenargs & XML_Tag("ControlFrom", "txtLocation_ID")
+        strCriteria = GetCriteriaString("Location_ID=", "tbl_Locations", "Location_ID", Me.Name, "txtLocation_ID")
+        DoCmd.OpenForm "frm_Plot_Chart", , , strCriteria, acFormEdit, acWindowNormal, strOpenargs
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnPlotChart_Click[frm_Events])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnReport_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
+Private Sub cmdTriggerReport_Click()
+On Error GoTo Err_Handler
+    Dim strDocName As String
+    Dim strCriteria As String
+    
+    '10/23/2018 BLC
+    'set TempVar for qry_Status_Sapling_Current_Event/qry_Status_Tree_Current_Event
+    SetTempVar "EventID", CStr(Me.txtEvent_ID)
+    
+    strDocName = "rpt_Event_Summary_Unfiltered"
+    strCriteria = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
+    DoCmd.OpenReport strDocName, acPreview, , strCriteria
+    
+    
 Exit_Procedure:
     Exit Sub
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    MsgBox Err.Description
     Resume Exit_Procedure
 End Sub
 
-Private Sub ValidateForm()
-' Description:  Confirms that a Location and Start Date are entered
-' References:   none
-' Source/date:  Simon Kingston, Dec. 2006
-' Revisions:    <name, date, desc - add lines as you go>
 
-If IsNull(Me!txtLocation_ID) Then
-    MsgBox "You must select a location before you can enter record details!", vbExclamation, "Enter Location First"
-    'Me!cboLocation_ID.SetFocus
-Else
-    If IsNull(Me!txtStart_date) Then
-        MsgBox "You must enter a start date before you can enter record details!", vbExclamation, "Enter Start Date"
-        'Me!txtStart_date.SetFocus
+' ---------------------------------
+' SUB:          ValidateForm
+' Description:  form validation actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Simon Kingston, Dec. 2006
+' Adapted:  Mark Lehman/Geoffrey Sanders, unknown
+' Revisions:
+'   SK      - 12/2006 - initial version
+'   MEL/GS  - unknown - adapted version
+'   BLC     - 11/9/2018 - add documentation, error handling
+' ---------------------------------
+Private Sub ValidateForm()
+On Error GoTo Err_Handler
+
+    If IsNull(Me!txtLocation_ID) Then
+        MsgBox "You must select a location before you can enter record details!", vbExclamation, "Enter Location First"
+        'Me!cboLocation_ID.SetFocus
+    Else
+        If IsNull(Me!txtStart_date) Then
+            MsgBox "You must enter a start date before you can enter record details!", vbExclamation, "Enter Start Date"
+            'Me!txtStart_date.SetFocus
+        End If
     End If
-End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ValidateForm[frm_Events])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          grpTransectSelection_AfterUpdate
+' Description:  group after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
 Private Sub grpTransect_Selection_AfterUpdate()
-Dim strTransect As String
+On Error GoTo Err_Handler
+    
+    Dim strTransect As String
+    
     strTransect = Me!grpTransect_Selection.Value
     Me.txtTransect_Selection.Value = "'" & strTransect & "'"
     Forms![frm_Events]![fsub_Transects]!txtTransect_Azimuth.DefaultValue = "'" & strTransect & "'"
     Forms![frm_Events]![fsub_Transects].Form.Filter = "[Transect_Azimuth] = """ & strTransect & """ "
     Forms![frm_Events]![fsub_Transects].Form.FilterOn = True
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - grpTransectSelection_AfterUpdate[frm_Events])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          lblPhotosLink_Click
+' Description:  label click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
 Private Sub lblLink_To_Plot_Photos_Click()
 On Error GoTo Err_Handler
 
@@ -2171,94 +2502,321 @@ On Error GoTo Err_Handler
         End If
     End If
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox Err.Description
-    Resume Exit_Procedure
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblPhotosLink_Click[frm_Events])"
+    End Select
+    Resume Exit_Handler
+
 End Sub
 
+' ---------------------------------
+' SUB:          subObservers_Enter
+' Description:  subform enter actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
 Private Sub subObservers_Enter()
+On Error GoTo Err_Handler
+
     ValidateForm
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - subObservers_Enter[frm_Events])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          cbxEventGroupID_AfterUpdate
+' Description:  combobox after udpate actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
 Private Sub cboEvent_Group_ID_AfterUpdate()
+On Error GoTo Err_Handler
+
     Me!cmdEditEventGroup.Enabled = Not IsNothing(Me!cboEvent_Group_ID)
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxEventGroupID_AfterUpdate[frm_Events])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          btnEditLocation_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
 Private Sub cmdEditLocation_Click()
-Dim strOpenargs As String
-Dim strCriteria As String
+On Error GoTo Err_Handler
 
+    Dim strOpenargs As String
+    Dim strCriteria As String
+    
     If Not IsNothing(Me!txtLocation_ID) Then
         strOpenargs = XML_Tag("FormFrom", Me.Name)
         strOpenargs = strOpenargs & XML_Tag("ControlFrom", "txtLocation_ID")
         strCriteria = GetCriteriaString("Location_ID=", "tbl_Locations", "Location_ID", Me.Name, "txtLocation_ID")
         DoCmd.OpenForm "frm_Locations", , , strCriteria, acFormEdit, acWindowNormal, strOpenargs
     End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnEditLocation_Click[frm_Events])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          btnNewUser_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
 Private Sub cmdNewUser_Click()
+On Error GoTo Err_Handler
+
     DoCmd.OpenForm "frm_Contacts", , , , acFormAdd, , "new"
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnNewUser_Click[frm_Events])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          UpdateLocInfo
+' Description:  Updates associates location information when Location_ID is updated
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
 Public Sub Update_Loc_Info()
 ' Description:  Updates associated location information when Location_ID is updated
 ' References:   GetCriteriaString
 ' Source/date:  Simon Kingston, Sept. 2006
 ' Revisions:    <name, date, desc - add lines as you go>
+On Error GoTo Err_Handler
 
-Dim strXY As Variant
-Dim strSlopeAspect As String
-
-Dim strCriteria As String
-
-If IsNull(Me!txtLocation_ID) Then
-    Me!txtXY = Null
-    Me!txtUnit_Code = Null
-    Me!txtSlope_Aspect = Null
+    Dim strXY As Variant
+    Dim strSlopeAspect As String
     
-    lblLink_to_Google_Maps.HyperlinkAddress = "http://maps.google.com"
-    'lblLink_To_Plot_Photos.Tag = "T:\I&M\Monitoring\Forest_Vegetation\Photos"
-Else
-    strCriteria = GetCriteriaString("Location_ID=", "tbl_Locations", "Location_ID", Me.Name, "txtLocation_ID")
-    strXY = "UTM 18N NAD83 E: " & Nz(DLookup("X_Coord", "tbl_Locations", strCriteria), "")
-    strXY = strXY & "  N: " & Nz(DLookup("Y_Coord", "tbl_Locations", strCriteria), "")
-    Me!txtXY = strXY
-    strSlopeAspect = "Slope: " & Nz(DLookup("Slope", "tbl_Locations", strCriteria), "")
-    strSlopeAspect = strSlopeAspect & "; Aspect: " & Nz(DLookup("Aspect", "tbl_Locations", strCriteria), "")
-    Me!txtSlope_Aspect = strSlopeAspect
+    Dim strCriteria As String
     
-    Me!txtPlot_Name = DLookup("Plot_Name", "tbl_Locations", strCriteria)
-    lblLink_to_Google_Maps.HyperlinkAddress = "http://maps.google.com/maps?q=" & Me!txtPlot_Name & "@" & DLookup("Lat_WGS84", "tbl_Locations", strCriteria) & "," & DLookup("Lon_WGS84", "tbl_Locations", strCriteria) & "&iwloc=A&t=h"
-    'lblLink_To_Plot_Photos.Tag = "T:\I&M\Monitoring\Forest_Vegetation\Photos\" & Me!txtPlot_Name
-End If
+    If IsNull(Me!txtLocation_ID) Then
+        Me!txtXY = Null
+        Me!txtUnit_Code = Null
+        Me!txtSlope_Aspect = Null
+        
+        lblLink_to_Google_Maps.HyperlinkAddress = "http://maps.google.com"
+        'lblLink_To_Plot_Photos.Tag = "T:\I&M\Monitoring\Forest_Vegetation\Photos"
+    Else
+        strCriteria = GetCriteriaString("Location_ID=", "tbl_Locations", "Location_ID", Me.Name, "txtLocation_ID")
+        strXY = "UTM 18N NAD83 E: " & Nz(DLookup("X_Coord", "tbl_Locations", strCriteria), "")
+        strXY = strXY & "  N: " & Nz(DLookup("Y_Coord", "tbl_Locations", strCriteria), "")
+        Me!txtXY = strXY
+        strSlopeAspect = "Slope: " & Nz(DLookup("Slope", "tbl_Locations", strCriteria), "")
+        strSlopeAspect = strSlopeAspect & "; Aspect: " & Nz(DLookup("Aspect", "tbl_Locations", strCriteria), "")
+        Me!txtSlope_Aspect = strSlopeAspect
+        
+        Me!txtPlot_Name = DLookup("Plot_Name", "tbl_Locations", strCriteria)
+        lblLink_to_Google_Maps.HyperlinkAddress = "http://maps.google.com/maps?q=" & Me!txtPlot_Name & "@" & DLookup("Lat_WGS84", "tbl_Locations", strCriteria) & "," & DLookup("Lon_WGS84", "tbl_Locations", strCriteria) & "&iwloc=A&t=h"
+        'lblLink_To_Plot_Photos.Tag = "T:\I&M\Monitoring\Forest_Vegetation\Photos\" & Me!txtPlot_Name
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - UpdateLocInfo[frm_Events])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          btnClose_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
 Private Sub cmdClose_Click()
-    On Error GoTo Err_Handler
+On Error GoTo Err_Handler
 
     DoCmd.RunCommand acCmdSaveRecord
     DoCmd.Close , , acSaveNo
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnClose_Click[frm_Events])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          Form_Close
+' Description:  form close actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
 Private Sub Form_Close()
-If IsLoaded("frm_Data_Gateway") Then
-    Forms("frm_Data_Gateway").Requery
-End If
+On Error GoTo Err_Handler
+
+    If IsLoaded("frm_Data_Gateway") Then
+        Forms("frm_Data_Gateway").Requery
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Close[frm_Events])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          tglBrowseEdit_Click
+' Description:  toggle click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
 Private Sub tglBrowse_Edit_Click()
+On Error GoTo Err_Handler
+
     'Call the SetEditMode subroutine with the current status of the Browse/Edit toggle
     Me.SetEditMode (Me!tglBrowse_Edit)
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglBrowseEdit_Click[frm_Events])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          SetEditMode
+' Description:  sets form edit mode
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
 Public Sub SetEditMode(booEditOn As Boolean)
 ' Description:  Toggles the form between browse and edit mode
 ' Parameters:   booFilterOn = true if edit mode, false if browse mode
@@ -2271,27 +2829,46 @@ Public Sub SetEditMode(booEditOn As Boolean)
 
 On Error GoTo Error_Handler
 
-Me!tglBrowse_Edit = booEditOn
-
-If booEditOn Then
-    Me!tglBrowse_Edit.Caption = "Editing ON"
-    Me!lblEvent_Form_Header.backcolor = RGB(128, 0, 0)
-Else
-    Me!tglBrowse_Edit.Caption = "Editing OFF"
-    Me!lblEvent_Form_Header.backcolor = vbBlack
-End If
-
-'Me.FilterOn = booEditOn
+    Me!tglBrowse_Edit = booEditOn
+    
+    If booEditOn Then
+        Me!tglBrowse_Edit.Caption = "Editing ON"
+        Me!lblEvent_Form_Header.backcolor = RGB(128, 0, 0)
+    Else
+        Me!tglBrowse_Edit.Caption = "Editing OFF"
+        Me!lblEvent_Form_Header.backcolor = vbBlack
+    End If
+    
+    'Me.FilterOn = booEditOn
 
 Exit_Handler:
     Exit Sub
-Error_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-        "Error encountered (SetEditMode)"
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SetEditMode[frm_Events])"
+    End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' SUB:          btnAddEditEventNote_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
 Private Sub cmdAdd_Edit_Event_Note_Click()
-On Error GoTo Err_cmdAdd_Edit_Event_Note_Click
+On Error GoTo Err_Handler
 
     Dim stDocName As String
     Dim stLinkCriteria As String
@@ -2301,19 +2878,36 @@ On Error GoTo Err_cmdAdd_Edit_Event_Note_Click
     stLinkCriteria = "[Event_ID]=" & "'" & Me![txtEvent_ID] & "'"
     DoCmd.OpenForm stDocName, , , stLinkCriteria
 
-Exit_cmdAdd_Edit_Event_Note_Click:
+Exit_Handler:
     Exit Sub
-
-Err_cmdAdd_Edit_Event_Note_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdAdd_Edit_Event_Note_Click
     
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnAddEditEventNote_Click[frm_Events])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          btnAddEventNote_Click
+' Description:   click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 11/9/2018 - add documentation, error handling
+' ---------------------------------
 Private Sub cmdAdd_Event_Note_Click()
-On Error GoTo Err_cmdAdd_Event_Note_Click
+On Error GoTo Err_Handler
 
-Me.Requery
+    Me.Requery
     Dim stDocName As String
     Dim stLinkCriteria As String
 
@@ -2322,10 +2916,14 @@ Me.Requery
     stLinkCriteria = "[Event_ID]=" & "'" & Me![txtEvent_ID] & "'"
     DoCmd.OpenForm stDocName, , , stLinkCriteria
 
-Exit_cmdAdd_Event_Note_Click:
+Exit_Handler:
     Exit Sub
-
-Err_cmdAdd_Event_Note_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdAdd_Event_Note_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnAddEventNote[frm_Events])"
+    End Select
+    Resume Exit_Handler
 End Sub

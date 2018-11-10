@@ -1,54 +1,16 @@
-﻿Operation =1
-Option =0
-Begin InputTables
-    Name ="tbl_Tree_DBH"
-    Name ="tbl_Tree_Data"
-    Name ="qEnumCrownClass"
-End
-Begin OutputColumns
-    Expression ="tbl_Tree_Data.Tree_Data_ID"
-    Expression ="tbl_Tree_Data.Event_ID"
-    Alias ="CrownClass"
-    Expression ="qEnumCrownClass.Enum_Description"
-    Alias ="Stems"
-    Expression ="Count(tbl_Tree_DBH.DBH)"
-    Alias ="StemsLive"
-    Expression ="Sum(IIf([Live]=True,1,0))"
-    Alias ="StemsDead"
-    Expression ="Sum(IIf([Live]=False,1,0))"
-    Alias ="SumBasalArea_cm2"
-    Expression ="Round(Sum(3.1415926*(([DBH]/2)^2)),1)"
-    Alias ="FirstOfTag_ID"
-    Expression ="First(tbl_Tree_Data.Tag_ID)"
-    Alias ="Equiv_DBH_cm"
-    Expression ="Round((([SumBasalArea_cm2]/3.1415)^0.5)*2,1)"
-    Alias ="SumLiveBasalArea_cm2"
-    Expression ="Round(Sum(3.1415926*(((IIf([Live]=True,[DBH],0))/2)^2)),1)"
-    Alias ="SumDeadBasalArea_cm2"
-    Expression ="Round(Sum(3.1415926*(((IIf([Live]=False,[DBH],0))/2)^2)),1)"
-    Alias ="Equiv_Live_DBH_cm"
-    Expression ="Round((([SumLiveBasalArea_cm2]/3.1415)^0.5)*2,1)"
-    Alias ="Equiv_Dead_DBH_cm"
-    Expression ="Round((([SumDeadBasalArea_cm2]/3.1415)^0.5)*2,1)"
-End
-Begin Joins
-    LeftTable ="tbl_Tree_Data"
-    RightTable ="tbl_Tree_DBH"
-    Expression ="tbl_Tree_Data.Tree_Data_ID = tbl_Tree_DBH.Tree_Data_ID"
-    Flag =1
-    LeftTable ="tbl_Tree_Data"
-    RightTable ="qEnumCrownClass"
-    Expression ="tbl_Tree_Data.Crown_Class = qEnumCrownClass.CrownClassCode"
-    Flag =1
-End
-Begin Groups
-    Expression ="tbl_Tree_Data.Tree_Data_ID"
-    GroupLevel =0
-    Expression ="tbl_Tree_Data.Event_ID"
-    GroupLevel =0
-    Expression ="qEnumCrownClass.Enum_Description"
-    GroupLevel =0
-End
+﻿dbMemo "SQL" ="SELECT td.Tree_Data_ID, td.Event_ID, cc.Enum_Description AS CrownClass, Count(db"
+    "h.DBH) AS Stems, Sum(IIf([Live]=True,1,0)) AS StemsLive, Sum(IIf([Live]=False,1,"
+    "0)) AS StemsDead, Round(Sum(3.1415926*(([DBH]/2)^2)),1) AS SumBasalArea_cm2, Fir"
+    "st(td.Tag_ID) AS FirstOfTag_ID, Round((([SumBasalArea_cm2]/3.1415)^0.5)*2,1) AS "
+    "Equiv_DBH_cm, Round(Sum(3.1415926*(((IIf([Live]=True,[DBH],0))/2)^2)),1) AS SumL"
+    "iveBasalArea_cm2, Round(Sum(3.1415926*(((IIf([Live]=False,[DBH],0))/2)^2)),1) AS"
+    " SumDeadBasalArea_cm2, Round((([SumLiveBasalArea_cm2]/3.1415)^0.5)*2,1) AS Equiv"
+    "_Live_DBH_cm, Round((([SumDeadBasalArea_cm2]/3.1415)^0.5)*2,1) AS Equiv_Dead_DBH"
+    "_cm\015\012FROM (tbl_Tree_Data AS td INNER JOIN tbl_Tree_DBH AS dbh ON td.Tree_D"
+    "ata_ID = dbh.Tree_Data_ID) INNER JOIN qEnumCrownClass AS cc ON td.Crown_Class = "
+    "cc.CrownClassCode\015\012GROUP BY td.Tree_Data_ID, td.Event_ID, cc.Enum_Descript"
+    "ion;\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -76,7 +38,7 @@ Begin
     Begin
         dbText "Name" ="FirstOfTag_ID"
         dbLong "AggregateType" ="-1"
-        dbInteger "ColumnWidth" ="1245"
+        dbInteger "ColumnWidth" ="4185"
         dbInteger "ColumnOrder" ="3"
         dbBoolean "ColumnHidden" ="0"
     End
@@ -111,18 +73,6 @@ Begin
         dbBoolean "ColumnHidden" ="0"
     End
     Begin
-        dbText "Name" ="tbl_Tree_Data.Event_ID"
-        dbInteger "ColumnOrder" ="2"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tree_Data.Tree_Data_ID"
-        dbInteger "ColumnOrder" ="1"
-        dbLong "AggregateType" ="-1"
-        dbInteger "ColumnWidth" ="1140"
-        dbBoolean "ColumnHidden" ="0"
-    End
-    Begin
         dbText "Name" ="StemsDead"
         dbLong "AggregateType" ="-1"
         dbInteger "ColumnOrder" ="7"
@@ -137,45 +87,12 @@ Begin
         dbInteger "ColumnOrder" ="4"
         dbLong "AggregateType" ="-1"
     End
-End
-Begin
-    State =0
-    Left =41
-    Top =154
-    Right =1360
-    Bottom =918
-    Left =-1
-    Top =-1
-    Right =1287
-    Bottom =301
-    Left =0
-    Top =0
-    ColumnsShown =543
     Begin
-        Left =375
-        Top =21
-        Right =519
-        Bottom =165
-        Top =0
-        Name ="tbl_Tree_DBH"
-        Name =""
+        dbText "Name" ="td.Tree_Data_ID"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =24
-        Top =16
-        Right =309
-        Bottom =228
-        Top =0
-        Name ="tbl_Tree_Data"
-        Name =""
-    End
-    Begin
-        Left =610
-        Top =12
-        Right =754
-        Bottom =156
-        Top =0
-        Name ="qEnumCrownClass"
-        Name =""
+        dbText "Name" ="td.Event_ID"
+        dbLong "AggregateType" ="-1"
     End
 End

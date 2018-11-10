@@ -21,10 +21,10 @@ Begin Form
     Width =14400
     DatasheetFontHeight =9
     ItemSuffix =66
-    Left =555
-    Top =765
-    Right =14955
-    Bottom =10650
+    Left =1920
+    Top =885
+    Right =16320
+    Bottom =10770
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x2680758ff389e340
@@ -1217,7 +1217,7 @@ Begin Form
                     Top =7140
                     FontSize =10
                     TabIndex =26
-                    ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"10\";\"200\""
+                    ColumnInfo ="\"Event ID\";\"\";\"\";\"\";\"\";\"\";\"10\";\"200\""
                     Name ="cbxEventSelection"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT qFiltered_Events.Event_ID, qFiltered_Locations.Plot_Name, Format([tbl_Eve"
@@ -1912,16 +1912,6 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-Private Sub cboSelect_Query_NotInList(NewData As String, Response As Integer)
-    On Error GoTo Err_Handler
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
-
 ' ---------------------------------
 ' SUB:          cbxSelectQuery_AfterUpdate
 ' Description:  combobox after update actions
@@ -1983,6 +1973,7 @@ On Error GoTo Err_Handler
     Me.subResults.SetFocus
     
 Exit_Handler:
+'   On Error Resume Next
     Set qdfs = Nothing
     Exit Sub
     
@@ -1996,24 +1987,6 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - cbxSelectQuery_AfterUpdate[frm_Data_Summary_Advanced])"
     End Select
     Resume Exit_Handler
-End Sub
-Private Sub cboSelect_Query_AfterUpdate()
-    On Error GoTo Err_Handler
-
-
-Exit_Procedure:
-'    On Error Resume Next
-'    Set qdfs = Nothing
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-'      Case 3011, 7874   ' Object not found
-'        MsgBox "This query is not found in the application:" & _
-'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    End Select
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -2053,22 +2026,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub cmdOpenBrowser_Click()
-    On Error GoTo Err_Handler
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case 3011, 7874   ' Object not found
-        MsgBox "The table, query or form is no longer available in the application.", , _
-            "Object not found"
-      Case Else
-        MsgBox Err.Number & ": " & Err.Description
-    End Select
-    Resume Exit_Procedure
-End Sub
 
 ' ---------------------------------
 ' SUB:          btnRequery_Click
@@ -2105,17 +2062,6 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - btnRequery_Click[frm_Data_Summary_Advanced])"
     End Select
     Resume Exit_Handler
-End Sub
-Private Sub cmdRequery_Click()
-    On Error GoTo Err_Handler
-
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
 End Sub
 
 ' ----------------
@@ -2170,17 +2116,6 @@ End Sub
 ' =================================
 ' The next set of procedures filters the recordset depending on user input
 
-Private Sub cmdFiltersOff_Click()
-    On Error GoTo Err_Handler
-
-    
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
-
 ' ---------------------------------
 ' SUB:          btnFiltersClear_Click
 ' Description:  button click actions
@@ -2227,17 +2162,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub cmdClear_Filters_Click()
-    On Error GoTo Err_Handler
-
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
 
 ' ---------------------------------
 ' SUB:          cbxParkFilter_AfterUpdate
@@ -2277,17 +2201,6 @@ End Sub
 ' =================================
 ' Location filter controls
 
-Private Sub cboParkFilter_AfterUpdate()
-    On Error GoTo Err_Handler
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
-
 ' ---------------------------------
 ' SUB:          tglFilterByPark_AfterUpdate
 ' Description:  toggle after update actions
@@ -2319,17 +2232,6 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - tglFilterByPark_AfterUpdate[frm_Data_Summary_Advanced])"
     End Select
     Resume Exit_Handler
-End Sub
-Private Sub togFilterByPark_AfterUpdate()
-    On Error GoTo Err_Handler
-
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -2367,18 +2269,6 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-Private Sub cboAdminParkFilter_AfterUpdate()
-    On Error GoTo Err_Handler
-
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
-
 ' ---------------------------------
 ' SUB:          tglFilterByAdminPark_AfterUpdate
 ' Description:  toggle after update actions
@@ -2410,17 +2300,6 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - tglFilterByAdminPark_AfterUpdate[frm_Data_Summary_Advanced])"
     End Select
     Resume Exit_Handler
-End Sub
-Private Sub togFilterByAdminPark_AfterUpdate()
-    On Error GoTo Err_Handler
-
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -2458,17 +2337,6 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
-Private Sub cboSubunitFilter_AfterUpdate()
-    On Error GoTo Err_Handler
-
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          tglFilterBySubunit_AfterUpdate
 ' Description:  toggle after update actions
@@ -2499,17 +2367,6 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - tglFilterBySubunit_AfterUpdate[frm_Data_Summary_Advanced])"
     End Select
     Resume Exit_Handler
-End Sub
-Private Sub togFilterBySubunit_AfterUpdate()
-    On Error GoTo Err_Handler
-
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -2547,17 +2404,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub cboFrameFilter_AfterUpdate()
-    On Error GoTo Err_Handler
 
-
-    
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          tglFilterByFrame_AfterUpdate
 ' Description:  toggle after update actions
@@ -2590,17 +2437,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub togFilterByFrame_AfterUpdate()
-    On Error GoTo Err_Handler
 
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          cbxPanelFilter_AfterUpdate
 ' Description:  combobox after update actions
@@ -2636,16 +2473,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub cboPanelFilter_AfterUpdate()
-    On Error GoTo Err_Handler
 
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          tglFilterByPanel_AfterUpdate
 ' Description:  toggle after update actions
@@ -2677,17 +2505,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub togFilterByPanel_AfterUpdate()
-    On Error GoTo Err_Handler
 
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          cbxStatusFilter_AfterUpdate
 ' Description:  combobox after update actions
@@ -2723,17 +2541,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub cboStatusFilter_AfterUpdate()
-    On Error GoTo Err_Handler
 
-
-    
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          tglFilterByStatus_AfterUpdate
 ' Description:  toggle after update actions
@@ -2765,17 +2573,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub togFilterByStatus_AfterUpdate()
-    On Error GoTo Err_Handler
 
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          cbxLocationFilter_AfterUpdate
 ' Description:  combobox after update actions
@@ -2808,17 +2606,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub cboLocationFilter_AfterUpdate()
-    On Error GoTo Err_Handler
 
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          tglFilterByLocation_AfterUpdate
 ' Description:  toggle after update actions
@@ -2849,17 +2637,6 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - tglFilterByLocation_AfterUpdate[frm_Data_Summary_Advanced])"
     End Select
     Resume Exit_Handler
-End Sub
-Private Sub togFilterByLocation_AfterUpdate()
-    On Error GoTo Err_Handler
-
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -2897,20 +2674,10 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
 ' =================================
 ' Event filter controls
 
-Private Sub cboYearFilter_AfterUpdate()
-    On Error GoTo Err_Handler
-
-
-    
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          tglFilterByYear_AfterUpdate
 ' Description:  toggle after update actions
@@ -2943,17 +2710,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub togFilterByYear_AfterUpdate()
-    On Error GoTo Err_Handler
 
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          tbxStartDateFilter_AfterUpdate
 ' Description:  textbox after update actions
@@ -2989,9 +2746,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub txtStartDateFilter_AfterUpdate()
 
-End Sub
 ' ---------------------------------
 ' SUB:          tbxEndDateFilter_AfterUpdate
 ' Description:  textbox after update actions
@@ -3028,9 +2783,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub txtEndDateFilter_AfterUpdate()
 
-End Sub
 ' ---------------------------------
 ' SUB:          tglFilterByRange_AfterUpdate
 ' Description:  toggle after update actions
@@ -3064,17 +2817,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub togFilterByRange_AfterUpdate()
-    On Error GoTo Err_Handler
 
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          optgScope_AfterUpdate
 ' Description:  option group after update actions
@@ -3172,15 +2915,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub xoptgScope_AfterUpdate()
-    On Error GoTo Err_Handler
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
 
 'Private Sub optgExcluded_AfterUpdate()
 '    On Error GoTo Err_Handler
@@ -3247,23 +2981,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub cmdViewExcluded_Click()
-    On Error GoTo Err_Handler
 
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-'      Case 3011, 7874   ' Object not found
-'        MsgBox "This query is not found in the application:" & _
-'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    End Select
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          btnChart_Click
 ' Description:  button click actions
@@ -3304,23 +3022,6 @@ End Sub
 ' =================================
 ' The next set of procedures relate to manipulating the selected query/results
 
-Private Sub cmdChart_Click()
-    On Error GoTo Err_Handler
-
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-'      Case 3011, 7874   ' Object not found
-'        MsgBox "This query is not found in the application:" & _
-'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    End Select
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          btnPivotTable_Click
 ' Description:  button click actions
@@ -3358,23 +3059,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub cmdPivotTable_Click()
-    On Error GoTo Err_Handler
 
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-'      Case 3011, 7874   ' Object not found
-'        MsgBox "This query is not found in the application:" & _
-'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    End Select
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          btnCloseup_Click
 ' Description:  button click actions
@@ -3403,29 +3088,16 @@ Exit_Handler:
     
 Err_Handler:
     Select Case Err.Number
+'      Case 3011, 7874   ' Object not found
+'        MsgBox "This query is not found in the application:" & _
+'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnCloseup_Click[frm_Data_Summary_Advanced])"
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub cmdCloseup_Click()
-    On Error GoTo Err_Handler
 
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-'      Case 3011, 7874   ' Object not found
-'        MsgBox "This query is not found in the application:" & _
-'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    End Select
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          btnExportExcel_Click
 ' Description:  button click actions
@@ -3474,24 +3146,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub cmdExportExcel_Click()
-    On Error GoTo Err_Handler
 
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case 94, 2001
-        ' User canceled dialog box - do nothing
-      Case 2501
-        ' Canceled open report action - do nothing
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    End Select
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          btnExportText_Click
 ' Description:  button click actions
@@ -3540,24 +3195,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub cmdExportText_Click()
-    On Error GoTo Err_Handler
 
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case 94, 2001
-        ' User canceled dialog box - do nothing
-      Case 2501
-        ' Canceled open report action - do nothing
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    End Select
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          btnDesign_Click
 ' Description:  button click actions
@@ -3592,23 +3230,6 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - btnDesign_Click[frm_Data_Summary_Advanced])"
     End Select
     Resume Exit_Handler
-End Sub
-Private Sub cmdDesign_Click()
-    On Error GoTo Err_Handler
-
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-'      Case 3011, 7874   ' Object not found
-'        MsgBox "This query is not found in the application:" & _
-'            vbCrLf & """" & Me.cboSelect_Query & """", , "Object not found"
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    End Select
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -3672,6 +3293,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Function
+
 ' =================================
 ' FUNCTION:     fxnFilterRecords
 ' Description:  Filter the records by the indicated field
@@ -3682,7 +3304,6 @@ End Function
 ' Source/date:  John R. Boetsch, May 5, 2006
 ' Revisions:    JRB, 1/5/2010 - adapted to summarization tool, mainly for formatting filters
 ' =================================
-
 Private Function fxnFilterRecords()
     On Error GoTo Err_Handler
 
@@ -3728,17 +3349,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub cmdEvent_Summary_Click()
-On Error GoTo Err_cmdEvent_Summary_Click
-    
 
-
-Exit_cmdEvent_Summary_Click:
-    Exit Sub
-Err_cmdEvent_Summary_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdEvent_Summary_Click
-End Sub
 ' ---------------------------------
 ' SUB:          btnRptTagHistory_Click
 ' Description:  button click actions
@@ -3771,19 +3382,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub cmd_Rpt_Tag_History_Click()
-On Error GoTo Err_cmd_Rpt_Tag_History_Click
 
-
-
-Exit_cmd_Rpt_Tag_History_Click:
-    Exit Sub
-
-Err_cmd_Rpt_Tag_History_Click:
-    MsgBox Err.Description
-    Resume Exit_cmd_Rpt_Tag_History_Click
-    
-End Sub
 ' ---------------------------------
 ' SUB:          btnExportProducts_Click
 ' Description:  button click actions
@@ -3870,30 +3469,17 @@ Exit_Handler:
     
 Err_Handler:
     Select Case Err.Number
+      Case 94, 2001
+        ' User canceled dialog box - do nothing
+      Case 2501
+        ' Canceled open report action - do nothing
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnExportProducts_Click[frm_Data_Summary_Advanced])"
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub cmdExport_Products_Click()
-    On Error GoTo Err_Handler
 
-
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    Select Case Err.Number
-      Case 94, 2001
-        ' User canceled dialog box - do nothing
-      Case 2501
-        ' Canceled open report action - do nothing
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    End Select
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          btnExportAll_Click
 ' Description:  button click actions
@@ -3985,15 +3571,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-Private Sub cmdExport_All_Click()
-On Error GoTo Err_Handler
 
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox Err.Description
-    Resume Exit_Procedure
-End Sub
 ' ---------------------------------
 ' SUB:          btnOpenBasicSummaryForm_Click
 ' Description:  button click actions
@@ -4026,15 +3604,4 @@ Err_Handler:
             "Error encountered (#" & Err.Number & " - btnOpenBasicSummaryForm_Click[frm_Data_Summary_Advanced])"
     End Select
     Resume Exit_Handler
-End Sub
-Private Sub cmdOpen_Basic_Summary_Form_Click()
-On Error GoTo Err_Handler
-
-
-        
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
 End Sub

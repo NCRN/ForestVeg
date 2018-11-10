@@ -22,10 +22,10 @@ Begin Form
     Width =12660
     DatasheetFontHeight =9
     ItemSuffix =23
-    Left =7785
-    Top =3990
-    Right =20700
-    Bottom =8475
+    Left =-31471
+    Top =9855
+    Right =-18556
+    Bottom =14340
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0xde59bba555ace340
@@ -39,9 +39,6 @@ Begin Form
         0x010000006801000000000000a10700000100000001000000
     End
     AllowDatasheetView =0
-    AllowPivotTableView =0
-    AllowPivotChartView =0
-    AllowPivotChartView =0
     FilterOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
@@ -114,7 +111,7 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    Name ="txtTag_History_ID"
+                    Name ="tbxTagHistoryID"
                     ControlSource ="Tags_History_ID"
                     StatusBarText ="MA. Field data table row identifier (Data_ID)"
 
@@ -135,7 +132,7 @@ Begin Form
                             TopMargin =22
                             RightMargin =22
                             BottomMargin =22
-                            Name ="lblTag_Species_History"
+                            Name ="lblTagHistory"
                             Caption ="Tag_History_ID:"
                             LayoutCachedLeft =1095
                             LayoutCachedTop =4050
@@ -161,7 +158,7 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    Name ="txtHistory_Notes"
+                    Name ="tbxHistoryNotes"
                     ControlSource ="Value_History_Notes"
                     StatusBarText ="Comments about this identification change"
                     ConditionalFormat = Begin
@@ -194,7 +191,7 @@ Begin Form
                             TopMargin =22
                             RightMargin =22
                             BottomMargin =22
-                            Name ="lblSpecies_History_Notes"
+                            Name ="lblNotesDescription"
                             Caption ="Please describe why you made this change"
                             LayoutCachedTop =1920
                             LayoutCachedWidth =2219
@@ -220,7 +217,7 @@ Begin Form
                     RightMargin =22
                     BottomMargin =22
                     BackColor =11056034
-                    Name ="txtNetwork_User_Name"
+                    Name ="tbxNetworkUserName"
                     ControlSource ="Network_User_Name"
                     StatusBarText ="The network user name of the person making the change"
 
@@ -241,7 +238,7 @@ Begin Form
                             TopMargin =22
                             RightMargin =22
                             BottomMargin =22
-                            Name ="lblNetwork_User_Name"
+                            Name ="lblNetworkUserName"
                             Caption ="Network User Name"
                             LayoutCachedLeft =7440
                             LayoutCachedTop =3210
@@ -264,7 +261,7 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    Name ="txtChange_Date"
+                    Name ="tbxChangeDate"
                     ControlSource ="Change_Date"
                     Format ="Short Date"
                     StatusBarText ="Date that species identification was changed for this specimen"
@@ -287,7 +284,7 @@ Begin Form
                             TopMargin =22
                             RightMargin =22
                             BottomMargin =22
-                            Name ="lblChange_Date"
+                            Name ="lblChangeDate"
                             Caption ="Date of Change"
                             LayoutCachedLeft =75
                             LayoutCachedTop =3630
@@ -315,7 +312,7 @@ Begin Form
                         0x490073004e0075006c006c0028005b00630062006f0043006f006e0074006100 ,
                         0x630074005f00490044005d00290000000000
                     End
-                    Name ="cboContact_ID"
+                    Name ="cbxContactID"
                     ControlSource ="Contact_ID"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tlu_Contacts.Contact_ID, [Last_Name] & (\", \"+[First_Name]) AS FullName "
@@ -351,7 +348,7 @@ Begin Form
                             TopMargin =22
                             RightMargin =22
                             BottomMargin =22
-                            Name ="lblContact_ID"
+                            Name ="lblContact"
                             Caption ="Changed By"
                             LayoutCachedLeft =60
                             LayoutCachedTop =3195
@@ -370,7 +367,7 @@ Begin Form
                     FontWeight =700
                     TabIndex =6
                     ForeColor =4754549
-                    Name ="cmdAccept_Value_Change"
+                    Name ="btnAccept"
                     Caption ="Accept Change"
                     OnClick ="[Event Procedure]"
 
@@ -392,7 +389,7 @@ Begin Form
                     FontSize =12
                     TabIndex =5
                     ForeColor =3751056
-                    Name ="cmdCancel_Value_Change"
+                    Name ="btnCancel"
                     Caption ="Cancel Change"
                     OnClick ="[Event Procedure]"
                     ImageData = Begin
@@ -428,7 +425,7 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    Name ="txtValue_New"
+                    Name ="tbxValueNew"
                     ControlSource ="Value_New"
                     StatusBarText ="New TSN of Specimen"
 
@@ -449,7 +446,7 @@ Begin Form
                             TopMargin =22
                             RightMargin =22
                             BottomMargin =22
-                            Name ="lblValue_New"
+                            Name ="lblValueNew"
                             Caption ="New Value"
                             LayoutCachedLeft =600
                             LayoutCachedTop =975
@@ -479,7 +476,7 @@ Begin Form
                     RightMargin =22
                     BottomMargin =22
                     BackColor =11056034
-                    Name ="txtValue_Old"
+                    Name ="tbxValueOld"
                     ControlSource ="Value_Old"
                     StatusBarText ="Previous TSN of Specimen"
 
@@ -500,7 +497,7 @@ Begin Form
                             TopMargin =22
                             RightMargin =22
                             BottomMargin =22
-                            Name ="lblValue_Old"
+                            Name ="lblValueOld"
                             Caption ="Old Value"
                             LayoutCachedLeft =6705
                             LayoutCachedTop =960
@@ -529,7 +526,7 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    Name ="txtNew_Description"
+                    Name ="tbxDescriptionNew"
                     StatusBarText ="New TSN of Specimen"
 
                     LayoutCachedLeft =2294
@@ -549,7 +546,7 @@ Begin Form
                             TopMargin =22
                             RightMargin =22
                             BottomMargin =22
-                            Name ="Label20"
+                            Name ="lblDescriptionNew"
                             Caption ="Description"
                             LayoutCachedLeft =600
                             LayoutCachedTop =1425
@@ -579,7 +576,7 @@ Begin Form
                     RightMargin =22
                     BottomMargin =22
                     BackColor =11056034
-                    Name ="txtOld_Description"
+                    Name ="tbxDescriptionOld"
                     StatusBarText ="Previous TSN of Specimen"
 
                     LayoutCachedLeft =8249
@@ -599,7 +596,7 @@ Begin Form
                             TopMargin =22
                             RightMargin =22
                             BottomMargin =22
-                            Name ="Label22"
+                            Name ="lblDescriptionOld"
                             Caption ="Description"
                             LayoutCachedLeft =6705
                             LayoutCachedTop =1410
@@ -621,7 +618,7 @@ Begin Form
                     RightMargin =22
                     BottomMargin =22
                     ForeColor =3751056
-                    Name ="lblTag_Species_History_Header"
+                    Name ="lblTitle"
                     Caption ="Change Log"
                     GridlineColor =-2147483616
                     HorizontalAnchor =2
@@ -638,7 +635,7 @@ Begin Form
                     Height =315
                     FontSize =13
                     ForeColor =3751056
-                    Name ="lblChange_Description"
+                    Name ="lblDescription"
                     Caption ="Please confirm the revised SPECIES ID below"
                     LayoutCachedLeft =120
                     LayoutCachedTop =525
@@ -666,7 +663,7 @@ Begin Form
                     BackColor =11056034
                     ForeColor =8355711
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"4\";\"4\""
-                    Name ="cboTag_ID"
+                    Name ="cbxTag_ID"
                     ControlSource ="Record_ID"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tbl_Tags.Tag_ID, tbl_Tags.Tag FROM tbl_Tags ORDER BY tbl_Tags.Tag; "
@@ -719,7 +716,7 @@ Begin Form
                     FontSize =12
                     TabIndex =2
                     ColumnInfo ="\"\";\"\";\"10\";\"100\""
-                    Name ="cboQuick_Comment"
+                    Name ="cbxQuickComment"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tlu_Enumerations.Enum_Code FROM tlu_Enumerations WHERE (((tlu_Enumeration"
                         "s.Enum_Group)=\"Quick Comments\")) ORDER BY tlu_Enumerations.Sort_Order;"
@@ -738,7 +735,7 @@ Begin Form
                             Top =2640
                             Width =1860
                             Height =320
-                            Name ="cboQuick_Comment_Label"
+                            Name ="lblQuickComment"
                             Caption ="Quick Comment ->"
                             LayoutCachedLeft =60
                             LayoutCachedTop =2640
@@ -762,33 +759,197 @@ Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Compare Database
+Option Explicit
 
+' =================================
+' MODULE:       frm_Tags_History_Confirm
+' Level:        Form module
+' Version:      1.01
+'
+' Description:  tag history confirmation related functions & procedures
+'
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 5, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC   - 11/5/2018 - 1.01 - added documentation, error handling
+' =================================
+
+' ---------------------------------
+'  Declarations
+' ---------------------------------
+
+' ----------------
+'  Properties
+' ----------------
 Public ctlToReset As Control
 Public frmReferrer As Form
 
-Private Sub cboQuick_Comment_AfterUpdate()
-    Me.txtHistory_Notes = LTrim(Me.txtHistory_Notes & " " & Me.cboQuick_Comment)
-    Me.txtHistory_Notes.Requery
+' ----------------
+'  Events
+' ----------------
+
+' ---------------------------------
+' SUB:          Form_BeforeUpdate
+' Description:  form before update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub Form_BeforeUpdate(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    'Generate string GUID for Tag_History_ID
+    If Me.NewRecord Then
+        If GetDataType("tbl_Tags_History", "Tag_History_ID") = dbText Then
+            Me!Tag_History_ID = fxnGUIDGen
+        End If
+    End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[frm_Tags_History_Confirm])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub cmdAccept_Value_Change_Click()
-On Error GoTo Err_cmdAccept_Value_Change_Click
+' ---------------------------------
+' SUB:          btnNewValueKeypad_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub btnNewValueKeypad_Click()
+On Error GoTo Err_Handler
+
+  'This routine requires the presence of the Keypad_Utils module.
+  Dim strKeypadFormName As String
+  Dim strControlToUpdate As String
+  Dim frmFormToUpdate As Form
+    
+  'The two lines below should be changed to reflect the name of the keypad to open
+  '    and the name of the control to be updated.
+  strKeypadFormName = "frm_Pad_Num"
+  strControlToUpdate = "txtValue_New"
+  'The lines below should not usually be edited.
+  Set frmFormToUpdate = Me
+  Call OpenKeypad(strKeypadFormName, frmFormToUpdate, strControlToUpdate)
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxQuickComment_AfterUpdate[frm_Tags_History_Confirm])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxQuickComment_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub cbxQuickComment_AfterUpdate()
+On Error GoTo Err_Handler
+
+    Me.tbxHistoryNotes = LTrim(Me.tbxHistoryNotes & " " & Me.cbxQuickComment)
+    Me.tbxHistoryNotes.Requery
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxQuickComment_AfterUpdate[frm_Tags_History_Confirm])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnAccept_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+'                                   conditionally refresh form events tag history (if open only)
+' ---------------------------------
+Private Sub btnAccept_Click()
+On Error GoTo Err_Handler
 
     If Me.Dirty Then Me.Dirty = False
     ctlToReset.Value = Me!Value_New
     DoCmd.Close acForm, Me.Name, acSaveNo
+    
     frmReferrer.SaveRecord
-    Forms![frm_Events]![fsub_Tree_Data]![fsub_Tags_History_Summary].Requery
+    
+    'refresh tag history on event form (if open)
+    If FormIsOpen("frm_Events") Then _
+        Forms![frm_Events]![fsub_Tree_Data]![fsub_Tags_History_Summary].Requery
 
-Exit_cmdAccept_Value_Change_Click:
+    
+Exit_Handler:
     Exit Sub
-Err_cmdAccept_Value_Change_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdAccept_Value_Change_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnAccept_Click[frm_Tags_History_Confirm])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub cmdCancel_Value_Change_Click()
-On Error GoTo Err_cmdCancel_Value_Change_Click
+' ---------------------------------
+' SUB:          btnCancel_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub btnCancel_Click()
+On Error GoTo Err_Handler
         
     'Command below is not needed when for is called from button instead of BeforeUpdate
     ctlToReset.Value = ctlToReset.OldValue
@@ -798,19 +959,15 @@ On Error GoTo Err_cmdCancel_Value_Change_Click
     MsgBox "Value was NOT changed", vbInformation, "Change cancelled"
     DoCmd.Close , , acSaveNo
 
-Exit_cmdCancel_Value_Change_Click:
+Exit_Handler:
     Exit Sub
-Err_cmdCancel_Value_Change_Click:
+    
+Err_Handler:
     DoCmd.SetWarnings True
-    MsgBox Err.Description
-    Resume Exit_cmdCancel_Value_Change_Click
-End Sub
-
-Private Sub Form_BeforeUpdate(Cancel As Integer)
-'Generate string GUID for Tag_History_ID
-    If Me.NewRecord Then
-        If GetDataType("tbl_Tags_History", "Tag_History_ID") = dbText Then
-            Me!Tag_History_ID = fxnGUIDGen
-        End If
-    End If
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnCancel_Click[frm_Tags_History_Confirm])"
+    End Select
+    Resume Exit_Handler
 End Sub

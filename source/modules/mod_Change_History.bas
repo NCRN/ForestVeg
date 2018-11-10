@@ -1,104 +1,215 @@
 Option Compare Database
+Option Explicit
 
+' =================================
+' MODULE:       mod_Change_History
+' Level:        Form module
+' Version:      1.01
+'
+' Description:  change history related functions & procedures
+'
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC   - 11/5/2018 - 1.01 - added documentation, error handling
+'                                          improved code efficiency
+' =================================
+
+' ---------------------------------
+'  Declarations
+' ---------------------------------
+
+' ----------------
+'  Methods
+' ----------------
+
+' ---------------------------------
+' SUB:          OpenChangeHistory
+' Description:  opens change history for various forms
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+' ---------------------------------
 Public Sub OpenChangeHistory(frmFormToSave As Form, ctlControlToReset As Control, strTableName As String, strFieldName As String, strRecordIDFieldName As String, strRecordID As String, strOldValue As String, strNewValue As String, strDisplayTableName As String, strDisplayFieldName As String, strDisplayKeyFieldName As String, DisplayKeyFieldDataType As DAO.DataTypeEnum)
-Dim frm As Form
-Dim varNew As Variant
-Dim varOld As Variant
-
-'Dim strOpenargs As String
-'strOpenargs = XML_Tag("Form", strFormToSave) & XML_Tag("Control", strControlToReset)
-
-DoCmd.OpenForm "frm_Tags_History", acNormal, , , acFormAdd ', , strOpenargs
-'Set frm = Forms("frm_Tags_History")
-
-Forms("frm_Tags_History").cboTag_ID = strRecordID
-Forms("frm_Tags_History")!Table_Name = strTableName
-Forms("frm_Tags_History")!Field_Name = strFieldName
-Forms("frm_Tags_History")!Record_ID_Field_Name = strRecordIDFieldName
-Forms("frm_Tags_History")!Display_Table_Name = strDisplayTableName
-Forms("frm_Tags_History")!Display_Field_Name = strDisplayFieldName
-Forms("frm_Tags_History")!Display_Key_Field_Name = strDisplayKeyFieldName
-
-If IsNothing(strDisplayTableName) Then
-    Forms("frm_Tags_History").txtValue_Old = strOldValue
-    Forms("frm_Tags_History").txtValue_New = strNewValue
-Else
-    Select Case DisplayKeyFieldDataType
-        Case DAO.DataTypeEnum.dbText
-            varOld = DLookup(strDisplayFieldName, strDisplayTableName, strDisplayKeyFieldName & "=" & CorrectText(strOldValue))
-            varNew = DLookup(strDisplayFieldName, strDisplayTableName, strDisplayKeyFieldName & "=" & CorrectText(strNewValue))
-            Forms("frm_Tags_History").txtValue_Old = varOld
-            Forms("frm_Tags_History").txtValue_New = varNew
-        Case DAO.DataTypeEnum.dbLong, DAO.DataTypeEnum.dbBigInt, DAO.DataTypeEnum.dbByte, DAO.DataTypeEnum.dbInteger, DAO.DataTypeEnum.dbDouble
-            varNew = DLookup(strDisplayFieldName, strDisplayTableName, strDisplayKeyFieldName & "=" & strNewValue)
-            varOld = DLookup(strDisplayFieldName, strDisplayTableName, strDisplayKeyFieldName & "=" & strOldValue)
-            Forms("frm_Tags_History").txtValue_Old = varOld
-            Forms("frm_Tags_History").txtValue_New = varNew
+On Error GoTo Err_Handler
+    Dim frm As Form
+    Dim varNew As Variant
+    Dim varOld As Variant
+    
+    'Dim strOpenargs As String
+    'strOpenargs = XML_Tag("Form", strFormToSave) & XML_Tag("Control", strControlToReset)
+    
+    DoCmd.OpenForm "frm_Tags_History", acNormal, , , acFormAdd ', , strOpenargs
+    Set frm = Forms("frm_Tags_History")
+    
+    With frm
+        .cbxTag_ID = strRecordID
+        !Table_Name = strTableName
+        !Field_Name = strFieldName
+        !Record_ID_Field_Name = strRecordIDFieldName
+        !Display_Table_Name = strDisplayTableName
+        !Display_Field_Name = strDisplayFieldName
+        !Display_Key_Field_Name = strDisplayKeyFieldName
+    
+        If IsNothing(strDisplayTableName) Then
+            .tbxValueOld = strOldValue
+            .tbxValueNew = strNewValue
+        Else
+            Select Case DisplayKeyFieldDataType
+                Case DAO.DataTypeEnum.dbText
+                    varOld = DLookup(strDisplayFieldName, strDisplayTableName, strDisplayKeyFieldName & "=" & CorrectText(strOldValue))
+                    varNew = DLookup(strDisplayFieldName, strDisplayTableName, strDisplayKeyFieldName & "=" & CorrectText(strNewValue))
+                    .tbxValueOld = varOld
+                    .tbxValueNew = varNew
+                Case DAO.DataTypeEnum.dbLong, DAO.DataTypeEnum.dbBigInt, DAO.DataTypeEnum.dbByte, DAO.DataTypeEnum.dbInteger, DAO.DataTypeEnum.dbDouble
+                    varNew = DLookup(strDisplayFieldName, strDisplayTableName, strDisplayKeyFieldName & "=" & strNewValue)
+                    varOld = DLookup(strDisplayFieldName, strDisplayTableName, strDisplayKeyFieldName & "=" & strOldValue)
+                    .tbxValueOld = varOld
+                    .tbxValueNew = varNew
+            End Select
+        End If
+        
+        .tbxNetworkUserName = NetworkUserName()
+        .tbxHistory_Notes.SetFocus
+        
+        Set frm.ctlToReset = ctlControlToReset
+        Set frm.frmReferrer = frmFormToSave
+    
+    End With
+    
+Exit_Handler:
+    Set frm = Nothing
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - OpenChangeHistory[mod_Change_History])"
     End Select
-End If
-
-Forms("frm_Tags_History").txtNetwork_User_Name = NetworkUserName()
-Forms("frm_Tags_History").txtHistory_Notes.SetFocus
-Set Forms("frm_Tags_History").ctlToReset = ctlControlToReset
-Set Forms("frm_Tags_History").frmReferrer = frmFormToSave
-
-'Set frm = Nothing
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          OpenChangeValueAndLog
+' Description:  opens form for tag value logging for various forms
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+' ---------------------------------
 Public Sub OpenChangeValueAndLog(strChangeDescription As String, strChangeFieldType As String, frmFormToSave As Form, ctlControlToReset As Control, strTableName As String, strFieldName As String, strRecordIDFieldName As String, strRecordID As String, strOldValue As String)
-Dim frm As Form
-Dim varNew As Variant
-Dim varOld As Variant
+On Error GoTo Err_Handler
+    
+    Dim frm As Form
+    Dim varNew As Variant
+    Dim varOld As Variant
+    
+    'Dim strOpenargs As String
+    'strOpenargs = XML_Tag("Form", strFormToSave) & XML_Tag("Control", strControlToReset)
+    
+    DoCmd.OpenForm "frm_Tags_History_Update", acNormal, , , acFormAdd ', , strOpenargs
+    
+    Set frm = Forms("frm_Tags_History_Update")
+    
+    With frm
+        .lblChange_Description.Caption = strChangeDescription
+        .cbxTag_ID = strRecordID
+        !Table_Name = strTableName
+        !Field_Name = strFieldName
+        !Record_ID_Field_Name = strRecordIDFieldName
+    
+        .tbxValueOld = strOldValue
+        .tbxNetworkUserName = NetworkUserName()
+        .tbxValueNew.SetFocus
+        
+        Set .ctlToReset = ctlControlToReset
+        Set .frmReferrer = frmFormToSave
+    End With
 
-'Dim strOpenargs As String
-'strOpenargs = XML_Tag("Form", strFormToSave) & XML_Tag("Control", strControlToReset)
-
-DoCmd.OpenForm "frm_Tags_History_Update", acNormal, , , acFormAdd ', , strOpenargs
-
-Forms("frm_Tags_History_Update").lblChange_Description.Caption = strChangeDescription
-Forms("frm_Tags_History_Update").cboTag_ID = strRecordID
-Forms("frm_Tags_History_Update")!Table_Name = strTableName
-Forms("frm_Tags_History_Update")!Field_Name = strFieldName
-Forms("frm_Tags_History_Update")!Record_ID_Field_Name = strRecordIDFieldName
-
-Forms("frm_Tags_History_Update").txtValue_Old = strOldValue
-
-Forms("frm_Tags_History_Update").txtNetwork_User_Name = NetworkUserName()
-Forms("frm_Tags_History_Update").txtValue_New.SetFocus
-Set Forms("frm_Tags_History_Update").ctlToReset = ctlControlToReset
-Set Forms("frm_Tags_History_Update").frmReferrer = frmFormToSave
-
+Exit_Handler:
+    Set frm = Nothing
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - OpenChangeValueAndLog[mod_Change_History])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          OpenConfirmValueAndLog
+' Description:  opens form for confirming tag value logging for various forms
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+' ---------------------------------
 Public Sub OpenConfirmValueAndLog(strChangeDescription As String, strChangeFieldType As String, frmFormToSave As Form, ctlControlToReset As Control, strTableName As String, strFieldName As String, strRecordIDFieldName As String, strRecordID As String, strOldValue As String, strNewValue As String, strDisplayTableName As String, strDisplayFieldName As String, strDisplayKeyFieldName As String)
-Dim frm As Form
-Dim varNew As Variant
-Dim varOld As Variant
+On Error GoTo Err_Handler
+    Dim frm As Form
+    Dim varNew As Variant
+    Dim varOld As Variant
+    
+    'Dim strOpenargs As String
+    'strOpenargs = XML_Tag("Form", strFormToSave) & XML_Tag("Control", strControlToReset)
+    
+    DoCmd.OpenForm "frm_Tags_History_Confirm", acNormal, , , acFormAdd ', , strOpenargs
+    
+    Set frm = Forms("frm_Tags_History_Confirm")
+    
+    With frm
+    
+        .lblDescription.Caption = strChangeDescription
+        .cbxTag_ID = strRecordID
+        !Table_Name = strTableName
+        !Field_Name = strFieldName
+        !Record_ID_Field_Name = strRecordIDFieldName
+       
+        If strFieldName = "TSN" Then
+                    varOld = DLookup(strDisplayFieldName, strDisplayTableName, strDisplayKeyFieldName & "=" & strOldValue)
+                    varNew = DLookup(strDisplayFieldName, strDisplayTableName, strDisplayKeyFieldName & "=" & strNewValue)
+                    .tbxDescriptionOld = varOld
+                    .tbxDescriptionNew = varNew
+        End If
+        
+        .tbxValueOld = strOldValue
+        .tbxValueNew = strNewValue
+        .tbxNetworkUserName = NetworkUserName()
+        .tbxHistoryNotes.SetFocus
+        
+        Set .ctlToReset = ctlControlToReset
+        Set .frmReferrer = frmFormToSave
+    End With
 
-'Dim strOpenargs As String
-'strOpenargs = XML_Tag("Form", strFormToSave) & XML_Tag("Control", strControlToReset)
-
-DoCmd.OpenForm "frm_Tags_History_Confirm", acNormal, , , acFormAdd ', , strOpenargs
-'Set frm = Forms("frm_Tags_History")
-
-Forms("frm_Tags_History_Confirm").lblChange_Description.Caption = strChangeDescription
-Forms("frm_Tags_History_Confirm").cboTag_ID = strRecordID
-Forms("frm_Tags_History_Confirm")!Table_Name = strTableName
-Forms("frm_Tags_History_Confirm")!Field_Name = strFieldName
-Forms("frm_Tags_History_Confirm")!Record_ID_Field_Name = strRecordIDFieldName
-
-If strFieldName = "TSN" Then
-            varOld = DLookup(strDisplayFieldName, strDisplayTableName, strDisplayKeyFieldName & "=" & strOldValue)
-            varNew = DLookup(strDisplayFieldName, strDisplayTableName, strDisplayKeyFieldName & "=" & strNewValue)
-            Forms("frm_Tags_History_Confirm").txtOld_Description = varOld
-            Forms("frm_Tags_History_Confirm").txtNew_Description = varNew
-End If
-
-Forms("frm_Tags_History_Confirm").txtValue_Old = strOldValue
-Forms("frm_Tags_History_Confirm").txtValue_New = strNewValue
-Forms("frm_Tags_History_Confirm").txtNetwork_User_Name = NetworkUserName()
-Forms("frm_Tags_History_Confirm").txtHistory_Notes.SetFocus
-Set Forms("frm_Tags_History_Confirm").ctlToReset = ctlControlToReset
-Set Forms("frm_Tags_History_Confirm").frmReferrer = frmFormToSave
-
+Exit_Handler:
+    Set frm = Nothing
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - OpenConfirmValueAndLog[mod_Change_History])"
+    End Select
+    Resume Exit_Handler
 End Sub

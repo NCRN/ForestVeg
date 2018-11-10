@@ -1,9 +1,9 @@
-﻿dbMemo "SQL" ="SELECT Plot_Name, Unit_Code, Unit_Group, Subunit_Code, Cycle, Panel, Frame, Samp"
-    "le_Year, Date, Tag, Tag_Status, TSN, Latin_Name, Status, Condition, Pest, Notes\015"
-    "\012FROM qActive_Tree_Conditions\015\012UNION ALL SELECT Plot_Name, Unit_Code, U"
-    "nit_Group, Subunit_Code, Cycle, Panel, Frame, Sample_Year, Date, Tag, Tag_Status"
-    ", TSN, Latin_Name, Status, Condition, Pest, Notes\015\012FROM qActive_Sapling_Co"
-    "nditions;\015\012"
+﻿dbMemo "SQL" ="SELECT l.Location_ID, e.Event_ID, l.Unit_Code, l.Unit_Group, l.Subunit_Code, l.A"
+    "dmin_Unit_Code, l.Plot_Name, l.GRTS_Order, l.Install_Date, l.Panel, l.Frame, l.L"
+    "ocation_Status, Year([Event_Date]) AS Event_Year, e.Event_Date, e.Protocol_Name,"
+    " l.Updated_Date, e.PseudoEvent\015\012FROM tbl_Locations AS l LEFT JOIN tbl_Even"
+    "ts AS e ON l.Location_ID = e.Location_ID\015\012WHERE e.PseudoEvent = 1\015\012A"
+    "ND Year(e.Event_Date) > Year(Now)-2;\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -14,71 +14,71 @@ dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 Begin
     Begin
-        dbText "Name" ="Unit_Group"
+        dbText "Name" ="l.Admin_Unit_Code"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="Subunit_Code"
+        dbText "Name" ="l.Location_ID"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="Cycle"
+        dbText "Name" ="l.Plot_Name"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="Panel"
+        dbText "Name" ="e.Event_ID"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="Frame"
+        dbText "Name" ="l.GRTS_Order"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="Sample_Year"
+        dbText "Name" ="l.Unit_Code"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="Date"
+        dbText "Name" ="l.Install_Date"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="Tag"
+        dbText "Name" ="l.Unit_Group"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="TSN"
+        dbText "Name" ="l.Subunit_Code"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="Plot_Name"
+        dbText "Name" ="l.Panel"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="Unit_Code"
+        dbText "Name" ="l.Frame"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="Latin_Name"
+        dbText "Name" ="l.Location_Status"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="Status"
+        dbText "Name" ="Event_Year"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="Condition"
+        dbText "Name" ="e.Event_Date"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="Pest"
+        dbText "Name" ="e.Protocol_Name"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="Tag_Status"
+        dbText "Name" ="l.Updated_Date"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="Notes"
+        dbText "Name" ="e.PseudoEvent"
         dbLong "AggregateType" ="-1"
     End
 End

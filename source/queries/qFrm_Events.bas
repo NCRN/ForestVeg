@@ -1,20 +1,6 @@
-﻿Operation =1
-Option =0
-Begin InputTables
-    Name ="tbl_Events"
-    Name ="tbl_Locations"
-End
-Begin OutputColumns
-    Expression ="tbl_Events.*"
-    Expression ="tbl_Locations.ShowLocMsg"
-    Expression ="tbl_Locations.LocMessage"
-End
-Begin Joins
-    LeftTable ="tbl_Locations"
-    RightTable ="tbl_Events"
-    Expression ="tbl_Locations.Location_ID = tbl_Events.Location_ID"
-    Flag =1
-End
+﻿dbMemo "SQL" ="SELECT e.*, l.ShowLocMsg, l.LocMessage\015\012FROM tbl_Locations AS l INNER JOIN"
+    " tbl_Events AS e ON l.Location_ID = e.Location_ID;\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -74,36 +60,196 @@ Begin
         dbText "Name" ="tbl_Locations.ShowLocMsg"
         dbLong "AggregateType" ="-1"
     End
-End
-Begin
-    State =0
-    Left =73
-    Top =73
-    Right =1201
-    Bottom =854
-    Left =-1
-    Top =-1
-    Right =1096
-    Bottom =481
-    Left =0
-    Top =0
-    ColumnsShown =539
     Begin
-        Left =38
-        Top =6
-        Right =210
-        Bottom =128
-        Top =0
-        Name ="tbl_Events"
-        Name =""
+        dbText "Name" ="tbl_Events.Entered_By"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =258
-        Top =12
-        Right =528
-        Bottom =482
-        Top =0
-        Name ="tbl_Locations"
-        Name =""
+        dbText "Name" ="e.Updated_By"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Protocol_Name"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Plot_Maint"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tbl_Events.PseudoEvent"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tbl_Events.Pictures_Taken"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Certified"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Event_Group_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tbl_Events.Deer_Impact"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Is_Excluded"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tbl_Events.Verified_By"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tbl_Events.Is_Excluded"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tbl_Events.Verified_Date"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tbl_Events.Early_Detect"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.LocMessage"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tbl_Events.Certified"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tbl_Events.Rare_Spp"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tbl_Events.Certified_By"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tbl_Events.Plot_Maint"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Deer_Impact"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tbl_Events.Certified_Date"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tbl_Events.Entered_On_Tablet"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tbl_Events.Entered_Date"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tbl_Events.Updated_By"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Location_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tbl_Events.Updated_Date"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Pictures_Taken"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tbl_Events.Verified"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Early_Detect"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Event_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Updated_Date"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.PseudoEvent"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Event_Date"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Event_Time"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Event_Notes"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Certified_By"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.CWD_Check_360"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.CWD_Check_120"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.ShowLocMsg"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.CWD_Check_240"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Rare_Spp"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Entered_On_Tablet"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Entered_By"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Entered_Date"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Verified"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Verified_By"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Verified_Date"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Certified_Date"
+        dbLong "AggregateType" ="-1"
     End
 End

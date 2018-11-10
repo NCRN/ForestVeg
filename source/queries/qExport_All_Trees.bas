@@ -1,77 +1,17 @@
-﻿Operation =1
-Option =0
-Begin InputTables
-    Name ="tbl_Locations"
-    Name ="tbl_Tags"
-    Name ="qSum_Trees_with_Vines_in_Crown"
-    Name ="qCalc_Basal_Area_Per_Tree"
-    Name ="tlu_Plants"
-    Name ="tbl_Events"
-    Name ="qList_Crown_Class_Descriptions"
-    Name ="tbl_Tree_Data"
-End
-Begin OutputColumns
-    Expression ="tbl_Locations.Plot_Name"
-    Expression ="tbl_Locations.Unit_Code"
-    Expression ="tbl_Locations.Unit_Group"
-    Expression ="tbl_Locations.Subunit_Code"
-    Alias ="Cycle"
-    Expression ="1+Int((Year([Event_Date])-2006)/4)"
-    Expression ="tbl_Locations.Panel"
-    Expression ="tbl_Locations.Frame"
-    Alias ="Sample_Year"
-    Expression ="Year([Event_Date])"
-    Alias ="Date"
-    Expression ="CLng(Format([tbl_Events].[Event_Date],\"yyyymmdd\"))"
-    Expression ="tbl_Tags.Tag"
-    Expression ="tbl_Tags.TSN"
-    Expression ="tlu_Plants.TaxonCode"
-    Expression ="tlu_Plants.Latin_Name"
-    Expression ="qCalc_Basal_Area_Per_Tree.Stems"
-    Expression ="qCalc_Basal_Area_Per_Tree.SumLiveBasalArea_cm2"
-    Expression ="qCalc_Basal_Area_Per_Tree.SumDeadBasalArea_cm2"
-    Expression ="qCalc_Basal_Area_Per_Tree.Equiv_Live_DBH_cm"
-    Expression ="qCalc_Basal_Area_Per_Tree.Equiv_Dead_DBH_cm"
-    Expression ="qSum_Trees_with_Vines_in_Crown.Condition"
-    Alias ="Status"
-    Expression ="tbl_Tree_Data.Tree_Status"
-    Expression ="tbl_Tree_Data.Crown_Class"
-    Expression ="qList_Crown_Class_Descriptions.Crown_Description"
-End
-Begin Joins
-    LeftTable ="tbl_Tags"
-    RightTable ="tbl_Tree_Data"
-    Expression ="tbl_Tags.Tag_ID = tbl_Tree_Data.Tag_ID"
-    Flag =1
-    LeftTable ="tbl_Tree_Data"
-    RightTable ="qList_Crown_Class_Descriptions"
-    Expression ="tbl_Tree_Data.Crown_Class = qList_Crown_Class_Descriptions.Crown_Class"
-    Flag =2
-    LeftTable ="tbl_Tree_Data"
-    RightTable ="qCalc_Basal_Area_Per_Tree"
-    Expression ="tbl_Tree_Data.Tree_Data_ID = qCalc_Basal_Area_Per_Tree.Tree_Data_ID"
-    Flag =2
-    LeftTable ="tbl_Tree_Data"
-    RightTable ="qSum_Trees_with_Vines_in_Crown"
-    Expression ="tbl_Tree_Data.Tree_Data_ID = qSum_Trees_with_Vines_in_Crown.Tree_Data_ID"
-    Flag =2
-    LeftTable ="tbl_Tags"
-    RightTable ="tlu_Plants"
-    Expression ="tbl_Tags.TSN = tlu_Plants.TSN"
-    Flag =2
-    LeftTable ="tbl_Locations"
-    RightTable ="tbl_Events"
-    Expression ="tbl_Locations.Location_ID = tbl_Events.Location_ID"
-    Flag =3
-    LeftTable ="tbl_Events"
-    RightTable ="tbl_Tree_Data"
-    Expression ="tbl_Events.Event_ID = tbl_Tree_Data.Event_ID"
-    Flag =1
-End
-Begin OrderBy
-    Expression ="tbl_Tags.Tag"
-    Flag =0
-End
+﻿dbMemo "SQL" ="SELECT l.Plot_Name, l.Unit_Code, l.Unit_Group, l.Subunit_Code, 1+Int((Year([Even"
+    "t_Date])-2006)/4) AS Cycle, l.Panel, l.Frame, Year([Event_Date]) AS Sample_Year,"
+    " CLng(Format(e.Event_Date,\"yyyymmdd\")) AS [Date], t.Tag, t.TSN, p.TaxonCode, p"
+    ".Latin_Name, ba.Stems, ba.SumLiveBasalArea_cm2, ba.SumDeadBasalArea_cm2, ba.Equi"
+    "v_Live_DBH_cm, ba.Equiv_Dead_DBH_cm, td.DBH_Check, v.Condition, td.Tree_Status A"
+    "S Status, td.Crown_Class, cc.Crown_Description\015\012FROM ((((((tbl_Locations A"
+    "S l RIGHT JOIN tbl_Events AS e ON l.Location_ID = e.Location_ID) INNER JOIN tbl_"
+    "Tree_Data AS td ON e.Event_ID = td.Event_ID) INNER JOIN tbl_Tags AS t ON t.Tag_I"
+    "D = td.Tag_ID) LEFT JOIN qList_Crown_Class_Descriptions AS cc ON td.Crown_Class "
+    "= cc.Crown_Class) LEFT JOIN qCalc_Basal_Area_Per_Tree AS ba ON td.Tree_Data_ID ="
+    " ba.Tree_Data_ID) LEFT JOIN qSum_Trees_with_Vines_in_Crown AS v ON td.Tree_Data_"
+    "ID = v.Tree_Data_ID) LEFT JOIN tlu_Plants AS p ON t.TSN = p.TSN\015\012ORDER BY "
+    "t.Tag;\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -83,60 +23,8 @@ dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
 Begin
     Begin
-        dbText "Name" ="tlu_Plants.Latin_Name"
-        dbLong "AggregateType" ="-1"
-        dbInteger "ColumnWidth" ="2055"
-        dbBoolean "ColumnHidden" ="0"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Plot_Name"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Unit_Code"
-        dbLong "AggregateType" ="-1"
-        dbInteger "ColumnWidth" ="990"
-        dbBoolean "ColumnHidden" ="0"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Panel"
-        dbLong "AggregateType" ="-1"
-        dbInteger "ColumnWidth" ="705"
-        dbBoolean "ColumnHidden" ="0"
-    End
-    Begin
-        dbText "Name" ="qCalc_Basal_Area_Per_Tree.Stems"
-        dbLong "AggregateType" ="-1"
-        dbInteger "ColumnWidth" ="960"
-        dbBoolean "ColumnHidden" ="0"
-    End
-    Begin
-        dbText "Name" ="qSum_Trees_with_Vines_in_Crown.Condition"
-        dbLong "AggregateType" ="-1"
-        dbInteger "ColumnWidth" ="1680"
-        dbBoolean "ColumnHidden" ="0"
-    End
-    Begin
-        dbText "Name" ="tbl_Tags.Tag"
-        dbLong "AggregateType" ="-1"
-        dbInteger "ColumnWidth" ="735"
-        dbBoolean "ColumnHidden" ="0"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Frame"
-        dbInteger "ColumnWidth" ="990"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="Date"
         dbInteger "ColumnWidth" ="1365"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="qList_Crown_Class_Descriptions.Crown_Description"
-        dbInteger "ColumnWidth" ="1815"
         dbBoolean "ColumnHidden" ="0"
         dbLong "AggregateType" ="-1"
     End
@@ -147,23 +35,7 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Tags.TSN"
-        dbInteger "ColumnWidth" ="780"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tree_Data.Crown_Class"
-        dbInteger "ColumnWidth" ="1560"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="Cycle"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Subunit_Code"
         dbLong "AggregateType" ="-1"
     End
     Begin
@@ -173,115 +45,79 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Unit_Group"
-        dbInteger "ColumnWidth" ="1140"
-        dbBoolean "ColumnHidden" ="0"
+        dbText "Name" ="l.Unit_Group"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="qCalc_Basal_Area_Per_Tree.SumLiveBasalArea_cm2"
+        dbText "Name" ="l.Subunit_Code"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="qCalc_Basal_Area_Per_Tree.SumDeadBasalArea_cm2"
+        dbText "Name" ="td.DBH_Check"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="qCalc_Basal_Area_Per_Tree.Equiv_Live_DBH_cm"
+        dbText "Name" ="ba.Equiv_Dead_DBH_cm"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="qCalc_Basal_Area_Per_Tree.Equiv_Dead_DBH_cm"
+        dbText "Name" ="l.Panel"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tlu_Plants.TaxonCode"
+        dbText "Name" ="v.Condition"
         dbLong "AggregateType" ="-1"
     End
-End
-Begin
-    State =0
-    Left =11
-    Top =8
-    Right =1495
-    Bottom =819
-    Left =-1
-    Top =-1
-    Right =1452
-    Bottom =462
-    Left =0
-    Top =0
-    ColumnsShown =539
     Begin
-        Left =7
-        Top =31
-        Right =151
-        Bottom =175
-        Top =0
-        Name ="tbl_Locations"
-        Name =""
+        dbText "Name" ="l.Unit_Code"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =701
-        Top =362
-        Right =845
-        Bottom =527
-        Top =0
-        Name ="tbl_Tags"
-        Name =""
+        dbText "Name" ="l.Plot_Name"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =701
-        Top =190
-        Right =959
-        Bottom =343
-        Top =0
-        Name ="qSum_Trees_with_Vines_in_Crown"
-        Name =""
+        dbText "Name" ="td.Crown_Class"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =809
-        Top =5
-        Right =1048
-        Bottom =185
-        Top =0
-        Name ="qCalc_Basal_Area_Per_Tree"
-        Name =""
+        dbText "Name" ="l.Frame"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =1176
-        Top =23
-        Right =1377
-        Bottom =463
-        Top =0
-        Name ="tlu_Plants"
-        Name =""
+        dbText "Name" ="t.Tag"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =181
-        Top =32
-        Right =325
-        Bottom =176
-        Top =0
-        Name ="tbl_Events"
-        Name =""
+        dbText "Name" ="t.TSN"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =184
-        Top =235
-        Right =328
-        Bottom =379
-        Top =0
-        Name ="qList_Crown_Class_Descriptions"
-        Name =""
+        dbText "Name" ="cc.Crown_Description"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =432
-        Top =95
-        Right =576
-        Bottom =239
-        Top =0
-        Name ="tbl_Tree_Data"
-        Name =""
+        dbText "Name" ="p.TaxonCode"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Latin_Name"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="ba.Stems"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="ba.SumLiveBasalArea_cm2"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="ba.SumDeadBasalArea_cm2"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="ba.Equiv_Live_DBH_cm"
+        dbLong "AggregateType" ="-1"
     End
 End

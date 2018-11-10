@@ -11,9 +11,10 @@ Begin Form
     Width =14280
     DatasheetFontHeight =9
     ItemSuffix =58
-    Top =765
-    Right =14565
-    Bottom =7785
+    Left =1380
+    Top =315
+    Right =15945
+    Bottom =6765
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0x9807af787caee340
@@ -140,7 +141,7 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    Name ="txtTag"
+                    Name ="tbxTag"
                     ControlSource ="Tag"
                     StatusBarText ="Number of physical tag attached to tree"
                     ConditionalFormat = Begin
@@ -221,9 +222,10 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    Name ="txtAzimuth"
+                    Name ="tbxAzimuth"
                     ControlSource ="Azimuth"
                     StatusBarText ="Azimuth from plot center to specimen (true north)"
+                    OnClick ="[Event Procedure]"
 
                     LayoutCachedLeft =7424
                     LayoutCachedTop =870
@@ -265,9 +267,10 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    Name ="txtDistance"
+                    Name ="tbxDistance"
                     ControlSource ="Distance"
                     StatusBarText ="Distance (m) from plot center to near EDGE of tree"
+                    OnClick ="[Event Procedure]"
 
                     LayoutCachedLeft =10364
                     LayoutCachedTop =840
@@ -309,9 +312,10 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    Name ="txtMicroplot_Number"
+                    Name ="tbxMicroplotNumber"
                     ControlSource ="Microplot_Number"
                     StatusBarText ="The Microplot location of specimen"
+                    OnClick ="[Event Procedure]"
 
                     LayoutCachedLeft =4649
                     LayoutCachedTop =870
@@ -355,7 +359,7 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    Name ="txtTag_Notes"
+                    Name ="tbxTagNotes"
                     ControlSource ="Tag_Notes"
                     StatusBarText ="Comments about this specimen"
 
@@ -376,7 +380,7 @@ Begin Form
                             TopMargin =22
                             RightMargin =22
                             BottomMargin =22
-                            Name ="lblTag_Notes"
+                            Name ="lblTagNotes"
                             Caption ="Tag Notes"
                             LayoutCachedLeft =300
                             LayoutCachedTop =1980
@@ -400,7 +404,7 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    Name ="txtStart_Date"
+                    Name ="tbxStartDate"
                     ControlSource ="Start_Date"
                     Format ="Short Date"
                     StatusBarText ="Date that tracking began on this specimen"
@@ -423,7 +427,7 @@ Begin Form
                             TopMargin =22
                             RightMargin =22
                             BottomMargin =22
-                            Name ="Label21lblStart_Date"
+                            Name ="lblStartDate"
                             Caption ="Start Date"
                             LayoutCachedLeft =9120
                             LayoutCachedTop =1260
@@ -446,7 +450,7 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    Name ="txtStop_Date"
+                    Name ="tbxStopDate"
                     ControlSource ="Stop_Date"
                     Format ="Short Date"
                     StatusBarText ="Date that tracking ended for this specimen"
@@ -469,7 +473,7 @@ Begin Form
                             TopMargin =22
                             RightMargin =22
                             BottomMargin =22
-                            Name ="lblStop_Date"
+                            Name ="lblStopDate"
                             Caption ="Stop Date"
                             LayoutCachedLeft =9120
                             LayoutCachedTop =1620
@@ -491,7 +495,7 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    Name ="txtPlot_Name"
+                    Name ="tbxPlotName"
                     ControlSource ="Plot_Name"
                     StatusBarText ="M. Name of the location (Plot_Name)"
                     GroupTable =14
@@ -521,7 +525,7 @@ Begin Form
                             TopMargin =22
                             RightMargin =22
                             BottomMargin =22
-                            Name ="lblPlot_Name"
+                            Name ="lblPlotName"
                             Caption ="Plot_Name"
                             GroupTable =14
                             BottomPadding =38
@@ -550,7 +554,7 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    Name ="txtFrame"
+                    Name ="tbxFrame"
                     ControlSource ="Frame"
                     StatusBarText ="Sampling Frame (Regional or Park)"
 
@@ -586,7 +590,7 @@ Begin Form
                     Left =330
                     Top =555
                     Width =11640
-                    Name ="Line38"
+                    Name ="lnSeparator"
                     LayoutCachedLeft =330
                     LayoutCachedTop =555
                     LayoutCachedWidth =11970
@@ -604,7 +608,7 @@ Begin Form
                     TabIndex =11
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";"
                         "\"\";\"\";\"4\";\"4\""
-                    Name ="cboTagFinder"
+                    Name ="cbxTagFinder"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT qfrm_Tags.Tag_ID, qfrm_Tags.Tag, qfrm_Tags.Plot_Name, qfrm_Tags.Tag_Statu"
                         "s, qfrm_Tags.Distance, qfrm_Tags.Azimuth, qfrm_Tags.Microplot_Number FROM qfrm_T"
@@ -647,7 +651,7 @@ Begin Form
                     FontSize =10
                     TabIndex =7
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"10\";\"200\""
-                    Name ="cboTSN"
+                    Name ="cbxTSN"
                     ControlSource ="TSN"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tlu_Plants.TSN_Accepted, tlu_Plants.TSN, tlu_Plants.Latin_Name, tlu_Plant"
@@ -718,12 +722,13 @@ Begin Form
                         0x280049006e0020004f0066006600690063006500290022000000000022005400 ,
                         0x720065006500220000000000
                     End
-                    Name ="cboTag_Status"
+                    Name ="cbxTagStatus"
                     ControlSource ="Tag_Status"
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tlu_Enumerations.Enum_Code FROM tlu_Enumerations WHERE (((tlu_Enumeration"
                         "s.Enum_Group)=\"Tag Status\")) ORDER BY tlu_Enumerations.Sort_Order; "
                     StatusBarText ="Last sampled as tree or sapling?"
+                    BeforeUpdate ="[Event Procedure]"
                     AllowValueListEdits =0
                     LeftMargin =22
                     TopMargin =22
@@ -759,7 +764,7 @@ Begin Form
                             TopMargin =22
                             RightMargin =22
                             BottomMargin =22
-                            Name ="lblTag_Status"
+                            Name ="lblTagStatus"
                             Caption ="Tag Status"
                             LayoutCachedLeft =300
                             LayoutCachedTop =1620
@@ -815,7 +820,7 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    Name ="Text53"
+                    Name ="tbxPanel"
                     ControlSource ="Panel"
                     StatusBarText ="Sampling Frame (Regional or Park)"
 
@@ -836,7 +841,7 @@ Begin Form
                             TopMargin =22
                             RightMargin =22
                             BottomMargin =22
-                            Name ="Label54"
+                            Name ="lblPanel"
                             Caption ="Panel"
                             LayoutCachedLeft =3420
                             LayoutCachedTop =1260
@@ -859,7 +864,7 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    Name ="txtUpdate"
+                    Name ="tbxUpdate"
                     ControlSource ="Updated_Date"
                     Format ="Short Date"
                     StatusBarText ="Date that tracking ended for this specimen"
@@ -882,7 +887,7 @@ Begin Form
                             TopMargin =22
                             RightMargin =22
                             BottomMargin =22
-                            Name ="Label56"
+                            Name ="lblLastUpdate"
                             Caption ="Last Update"
                             LayoutCachedLeft =11400
                             LayoutCachedTop =3000
@@ -913,7 +918,7 @@ Begin Form
                             Top =1620
                             Width =405
                             Height =315
-                            Name ="Label57"
+                            Name ="lblRFS"
                             Caption ="RFS"
                             LayoutCachedLeft =4670
                             LayoutCachedTop =1620
@@ -937,29 +942,423 @@ Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Compare Database
+Option Explicit
 
-Private Sub cboTagFinder_AfterUpdate()
+' =================================
+' MODULE:       frm_Tags
+' Level:        Form module
+' Version:      1.01
+'
+' Description:  add event related functions & procedures
+'
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, April 5, 2018
+' Revisions:    ML/GS - unknown  - 1.00 - initial version
+'               BLC   - 11/5/2018 - 1.01 - added documentation, error handling (borrowed from fsub_Tag_Tree)
+' =================================
+
+' ---------------------------------
+'  Declarations
+' ---------------------------------
+
+' ----------------
+'  Events
+' ----------------
+
+' ---------------------------------
+' SUB:          Form_BeforeUpdate
+' Description:  form before update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub Form_BeforeUpdate(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    Me!Updated_Date = Now()
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_BeforeUpdate[frm_Tags])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxTagStatus_BeforeUpdate
+' Description:  combobox before update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub cbxTagStatus_BeforeUpdate(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    Dim frm As Form
+    Dim ctl As Control
+    Dim ChangeDescription As String
+    Dim ChangeFieldType As String
+    
+    Set frm = Me
+    Set ctl = Me!cbxTagStatus
+    ChangeDescription = "Please confirm the revised TAG STATUS below"
+    ChangeFieldType = "Combo_Box"
+    
+    'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
+    OpenConfirmValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, _
+       "tbl_Tags", "Tag_Status", "Tag_ID", _
+       Me!Tag_ID, Nz(Me!cbxTagStatus.OldValue, "Null"), _
+       Me!cbxTagStatus, "", "", ""
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxTagStatus_BeforeUpdate[frm_Tags])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxTSN_BeforeUpdate
+' Description:  combobox before update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub cbxTSN_BeforeUpdate(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    Dim frm As Form
+    Dim ctl As Control
+    Dim ChangeDescription As String
+    Dim ChangeFieldType As String
+    
+    Set frm = Me
+    Set ctl = Me!cbxTSN
+    ChangeDescription = "Please confirm the revised SPECIES ID below"
+    ChangeFieldType = "Combo_Box"
+    
+    'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
+    OpenConfirmValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, _
+        "tbl_Tags", "TSN", "Tag_ID", Me!Tag_ID, _
+        Nz(Me!cbxTSN.OldValue, "Null"), _
+        Me!cbxTSN, "tlu_Plants", "Latin_Name", "TSN"
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxTSN_BeforeUpdate[frm_Tags])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnReplaceTag_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub btnReplaceTag_Click()
+On Error GoTo Err_Handler
+
+    Dim frm As Form
+    Dim ctl As Control
+    Dim ChangeDescription As String
+    Dim ChangeFieldType As String
+    
+    Set frm = Me
+    Set ctl = Me!tbxTag
+    ChangeDescription = "Please enter the new TAG NUMBER below"
+    ChangeFieldType = "Text_Box"
+    
+    'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
+    OpenChangeValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, _
+        "tbl_Tags", "Tag", "Tag_ID", Me!Tag_ID, Me!Tag.Value
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnReplaceTag_Click[frm_Tags])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          tbxMicroplotNumber_Click
+' Description:  textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub tbxMicroplotNumber_Click()
+On Error GoTo Err_Handler
+
+    Dim frm As Form
+    Dim ctl As Control
+    Dim ChangeDescription As String
+    Dim ChangeFieldType As String
+    
+    Set frm = Me
+    Set ctl = Me!tbxMicroplotNumber
+    ChangeDescription = "Please enter the revised MICROPLOT NUMBER below"
+    ChangeFieldType = "Text_Box"
+    
+    'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
+    OpenChangeValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, _
+        "tbl_Tags", "Microplot_Number", "Tag_ID", Me!Tag_ID, _
+        Nz(Me!Microplot_Number.Value, "Null")
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxMicroplotNumber_Click[frm_Tags])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          tbxAzimuth_Click
+' Description:  textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub tbxAzimuth_Click()
+On Error GoTo Err_Handler
+
+    Dim frm As Form
+    Dim ctl As Control
+    Dim ChangeDescription As String
+    Dim ChangeFieldType As String
+    
+    Set frm = Me
+    Set ctl = Me!tbxAzimuth
+    ChangeDescription = "Please enter the revised AZIMUTH below"
+    ChangeFieldType = "Text_Box"
+    
+    'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
+    OpenChangeValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, _
+        "tbl_Tags", "Azimuth", "Tag_ID", Me!Tag_ID, _
+        Nz(Me!Azimuth.Value, "Null")
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxAzimuth_Click[frm_Tags])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          tbxDistance_Click
+' Description:  textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub tbxDistance_Click()
+On Error GoTo Err_Handler
+
+    Dim frm As Form
+    Dim ctl As Control
+    Dim ChangeDescription As String
+    Dim ChangeFieldType As String
+    
+    Set frm = Me
+    Set ctl = Me!tbxDistance
+    ChangeDescription = "Please enter the revised DISTANCE below"
+    ChangeFieldType = "Text_Box"
+    
+    'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
+    OpenChangeValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, _
+        "tbl_Tags", "Distance", "Tag_ID", Me!Tag_ID, _
+        Nz(Me!Distance.Value, "Null")
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxDistance_Click[frm_Tags])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxTSN_Enter
+' Description:  combobox enter actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' Requires:     Keypad_Utils module
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub cbxTSN_Enter()
+On Error GoTo Err_Handler
+
+    Dim strKeypadFormName As String
+    Dim strControlToUpdate As String
+    Dim frmFormToUpdate As Form
+    Dim strSpeciesType As String
+        
+    'set keypad to open, control to be updated
+    strKeypadFormName = "frm_Pad_Species"
+    strControlToUpdate = "cbxTSN"
+    strSpeciesType = "Tree"
+    
+    'open keypad
+    Set frmFormToUpdate = Me
+    Call OpenSpeciespad(strKeypadFormName, frmFormToUpdate, strControlToUpdate, strSpeciesType)
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxTSN_Enter[frm_Tags])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          SaveRecord
+' Description:  save record actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+' ---------------------------------
+Public Sub SaveRecord()
+On Error GoTo Err_Handler
+
+    DoCmd.RunCommand acCmdSaveRecord
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SaveRecord[frm_Tags])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          Form_BeforeUpdate
+' Description:  combobox before update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, November 5, 2018
+' Revisions:    ML/GS - unknown  - initial version
+'               BLC   - 11/5/2018 - added documentation, error handling
+' ---------------------------------
+Private Sub cbxTagFinder_AfterUpdate()
+On Error GoTo Err_Handler
+
     ' Find the record that matches the control.
     Dim rs As Object
 
     Set rs = Me.Recordset.Clone
-    rs.FindFirst "[Tag_ID] = '" & Me![cboTagFinder] & "'"
+    rs.FindFirst "[Tag_ID] = '" & Me![cbxTagFinder] & "'"
     If Not rs.EOF Then Me.Bookmark = rs.Bookmark
-    cboTagFinder = ""
-End Sub
-
-'Private Sub Form_AfterUpdate()
-'    Me!Updated_Date = Now()
-'End Sub
-
-'Private Sub Form_BeforeUpdate()
-'    Me!Updated_Date = Now()
-'End Sub
-'Change the Updated Date to the current time
-'
-'           Me!Updated_Date.Value = Now()
+    cbxTagFinder = ""
     
-'End Sub
-Private Sub Form_BeforeUpdate(Cancel As Integer)
-    Me!Updated_Date = Now()
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxTagFinder_AfterUpdate[frm_Tags])"
+    End Select
+    Resume Exit_Handler
 End Sub

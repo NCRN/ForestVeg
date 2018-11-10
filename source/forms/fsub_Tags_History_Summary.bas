@@ -31,9 +31,6 @@ Begin Form
         0x010000006801000000000000a10700000100000001000000
     End
     AllowDatasheetView =0
-    AllowPivotTableView =0
-    AllowPivotChartView =0
-    AllowPivotChartView =0
     FilterOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
@@ -113,8 +110,8 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    Name ="txtChange_Date"
-                    ControlSource ="Change_Date"
+                    Name ="tbxChangeDate"
+                    ControlSource ="TagChangeDate"
                     Format ="Short Date"
                     StatusBarText ="Date that species identification was changed for this specimen"
                     InputMask ="99/99/0000;0;_"
@@ -151,7 +148,7 @@ Begin Form
                     Height =285
                     FontSize =10
                     TabIndex =1
-                    Name ="txtTag_History_Description"
+                    Name ="tbxTagHistoryDescription"
                     ControlSource ="=[Change_Desc]"
 
                     LayoutCachedLeft =2505

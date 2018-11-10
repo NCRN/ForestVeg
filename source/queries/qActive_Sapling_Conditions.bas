@@ -1,77 +1,16 @@
-﻿Operation =1
-Option =0
-Begin InputTables
-    Name ="tbl_Locations"
-    Name ="tbl_Events"
-    Name ="tbl_Tags"
-    Name ="tlu_Plants"
-    Name ="tlu_Tree_Condition"
-    Name ="tbl_Sapling_Conditions"
-    Name ="tbl_Sapling_Data"
-End
-Begin OutputColumns
-    Expression ="tbl_Locations.Unit_Code"
-    Expression ="tbl_Locations.Unit_Group"
-    Expression ="tbl_Locations.Subunit_Code"
-    Alias ="Cycle"
-    Expression ="1+Int((Year([Event_Date])-2006)/4)"
-    Expression ="tbl_Locations.Panel"
-    Expression ="tbl_Locations.Frame"
-    Alias ="Sample_Year"
-    Expression ="Year([Event_Date])"
-    Expression ="tbl_Events.Event_Date"
-    Alias ="Date"
-    Expression ="CLng(Format([Event_Date],\"yyyymmdd\"))"
-    Expression ="tbl_Locations.Plot_Name"
-    Expression ="tbl_Tags.Tag"
-    Expression ="tbl_Tags.Tag_Status"
-    Expression ="tbl_Tags.TSN"
-    Expression ="tlu_Plants.Latin_Name"
-    Alias ="Status"
-    Expression ="tbl_Sapling_Data.Sapling_Status"
-    Expression ="tbl_Sapling_Conditions.Condition"
-    Expression ="tlu_Tree_Condition.Pest"
-    Expression ="tbl_Events.Event_ID"
-    Expression ="tbl_Locations.Location_ID"
-    Expression ="tbl_Tags.Tag_ID"
-    Expression ="tbl_Sapling_Data.Sapling_Data_ID"
-    Expression ="tbl_Sapling_Conditions.Sapling_Condition_ID"
-    Expression ="tbl_Locations.Admin_Unit_Code"
-End
-Begin Joins
-    LeftTable ="tbl_Tags"
-    RightTable ="tlu_Plants"
-    Expression ="tbl_Tags.TSN = tlu_Plants.TSN"
-    Flag =1
-    LeftTable ="tbl_Tags"
-    RightTable ="tbl_Sapling_Data"
-    Expression ="tbl_Tags.Tag_ID = tbl_Sapling_Data.Tag_ID"
-    Flag =1
-    LeftTable ="tbl_Sapling_Conditions"
-    RightTable ="tlu_Tree_Condition"
-    Expression ="tbl_Sapling_Conditions.Condition = tlu_Tree_Condition.Description"
-    Flag =2
-    LeftTable ="tbl_Events"
-    RightTable ="tbl_Sapling_Data"
-    Expression ="tbl_Events.Event_ID = tbl_Sapling_Data.Event_ID"
-    Flag =1
-    LeftTable ="tbl_Locations"
-    RightTable ="tbl_Tags"
-    Expression ="tbl_Locations.Location_ID = tbl_Tags.Location_ID"
-    Flag =1
-    LeftTable ="tbl_Sapling_Data"
-    RightTable ="tbl_Sapling_Conditions"
-    Expression ="tbl_Sapling_Data.Sapling_Data_ID = tbl_Sapling_Conditions.Sapling_Data_ID"
-    Flag =1
-End
-Begin OrderBy
-    Expression ="tbl_Locations.Plot_Name"
-    Flag =0
-    Expression ="tbl_Tags.Tag"
-    Flag =0
-    Expression ="tlu_Plants.Latin_Name"
-    Flag =0
-End
+﻿dbMemo "SQL" ="SELECT l.Unit_Code, l.Unit_Group, l.Subunit_Code, 1+Int((Year([Event_Date])-2006"
+    ")/4) AS Cycle, l.Panel, l.Frame, Year([Event_Date]) AS Sample_Year, e.Event_Date"
+    ", CLng(Format([Event_Date],\"yyyymmdd\")) AS [Date], l.Plot_Name, t.Tag, t.Tag_S"
+    "tatus, t.TSN, p.Latin_Name, sd.Sapling_Status AS Status, sc.Condition, tc.Pest, "
+    "sd.Sapling_Notes AS Notes, e.Event_ID, l.Location_ID, t.Tag_ID, sd.Sapling_Data_"
+    "ID, sc.Sapling_Condition_ID, l.Admin_Unit_Code\015\012FROM (((((tbl_Locations AS"
+    " l INNER JOIN tbl_Tags AS t ON l.Location_ID = t.Location_ID) INNER JOIN tbl_Sap"
+    "ling_Data AS sd ON t.Tag_ID = sd.Tag_ID) INNER JOIN tbl_Events AS e ON e.Event_I"
+    "D = sd.Event_ID) INNER JOIN tbl_Sapling_Conditions AS sc ON sd.Sapling_Data_ID ="
+    " sc.Sapling_Data_ID) INNER JOIN tlu_Plants AS p ON t.TSN = p.TSN) LEFT JOIN tlu_"
+    "Tree_Condition AS tc ON sc.Condition = tc.Description\015\012ORDER BY l.Plot_Nam"
+    "e, t.Tag, p.Latin_Name;\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -188,81 +127,88 @@ Begin
         dbText "Name" ="tbl_Tags.Tag_Status"
         dbLong "AggregateType" ="-1"
     End
-End
-Begin
-    State =0
-    Left =80
-    Top =4
-    Right =1554
-    Bottom =669
-    Left =-1
-    Top =-1
-    Right =1442
-    Bottom =367
-    Left =0
-    Top =0
-    ColumnsShown =539
     Begin
-        Left =763
-        Top =17
-        Right =907
-        Bottom =229
-        Top =0
-        Name ="tbl_Locations"
-        Name =""
+        dbText "Name" ="t.Tag"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =479
-        Top =7
-        Right =623
-        Bottom =151
-        Top =0
-        Name ="tbl_Events"
-        Name =""
+        dbText "Name" ="t.Tag_Status"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =461
-        Top =160
-        Right =609
-        Bottom =424
-        Top =0
-        Name ="tbl_Tags"
-        Name =""
+        dbText "Name" ="t.TSN"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =971
-        Top =95
-        Right =1115
-        Bottom =520
-        Top =0
-        Name ="tlu_Plants"
-        Name =""
+        dbText "Name" ="t.Tag_ID"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =230
-        Top =226
-        Right =390
-        Bottom =370
-        Top =0
-        Name ="tlu_Tree_Condition"
-        Name =""
+        dbText "Name" ="l.Subunit_Code"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =9
-        Top =14
-        Right =197
-        Bottom =172
-        Top =0
-        Name ="tbl_Sapling_Conditions"
-        Name =""
+        dbText "Name" ="l.Unit_Code"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =253
-        Top =35
-        Right =397
-        Bottom =179
-        Top =0
-        Name ="tbl_Sapling_Data"
-        Name =""
+        dbText "Name" ="sd.Sapling_Notes"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.Frame"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Event_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.Unit_Group"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.Panel"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Event_Date"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.Plot_Name"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Latin_Name"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="sc.Condition"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tc.Pest"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.Location_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="sd.Sapling_Data_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="sc.Sapling_Condition_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.Admin_Unit_Code"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="Notes"
+        dbLong "AggregateType" ="-1"
     End
 End

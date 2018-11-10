@@ -18,21 +18,20 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =11580
+    Width =11355
     DatasheetFontHeight =10
     ItemSuffix =64
-    Left =855
-    Top =450
-    Right =12195
-    Bottom =6075
+    Left =285
+    Top =495
+    Right =13020
+    Bottom =5880
     DatasheetGridlinesColor =12632256
-    Filter ="Admin_Unit_Code='CHOH'"
     OrderBy ="Plot_Name"
     RecSrcDt = Begin
-        0x0f463b98b308e440
+        0xd3905458b532e540
     End
-    RecordSource ="qfrm_Data_Gateway"
-    Caption ="Location and Event Data Gateway"
+    RecordSource ="qFrm_PseudoEvents"
+    Caption ="Pseudo Events"
     OnOpen ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
@@ -143,7 +142,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     TextAlign =2
-                    Left =4245
+                    Left =3525
                     Top =1260
                     Width =630
                     Height =300
@@ -152,15 +151,15 @@ Begin Form
                     Caption ="Unit"
                     FontName ="Calibri"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =4245
+                    LayoutCachedLeft =3525
                     LayoutCachedTop =1260
-                    LayoutCachedWidth =4875
+                    LayoutCachedWidth =4155
                     LayoutCachedHeight =1560
                 End
                 Begin Label
                     OverlapFlags =85
                     TextAlign =2
-                    Left =7035
+                    Left =6315
                     Top =1260
                     Width =630
                     Height =300
@@ -169,15 +168,15 @@ Begin Form
                     Caption ="Panel"
                     FontName ="Calibri"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =7035
+                    LayoutCachedLeft =6315
                     LayoutCachedTop =1260
-                    LayoutCachedWidth =7665
+                    LayoutCachedWidth =6945
                     LayoutCachedHeight =1560
                 End
                 Begin Label
                     OverlapFlags =85
                     TextAlign =2
-                    Left =2040
+                    Left =1680
                     Top =1260
                     Width =1665
                     Height =300
@@ -187,15 +186,15 @@ Begin Form
                     FontName ="Calibri"
                     OnDblClick ="[Event Procedure]"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =2040
+                    LayoutCachedLeft =1680
                     LayoutCachedTop =1260
-                    LayoutCachedWidth =3705
+                    LayoutCachedWidth =3345
                     LayoutCachedHeight =1560
                 End
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =93
                     TextAlign =2
-                    Left =8820
+                    Left =8100
                     Top =1260
                     Width =780
                     Height =300
@@ -205,9 +204,9 @@ Begin Form
                     FontName ="Calibri"
                     OnDblClick ="[Event Procedure]"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =8820
+                    LayoutCachedLeft =8100
                     LayoutCachedTop =1260
-                    LayoutCachedWidth =9600
+                    LayoutCachedWidth =8880
                     LayoutCachedHeight =1560
                 End
                 Begin Label
@@ -397,9 +396,9 @@ Begin Form
                     End
                 End
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =93
                     TextAlign =2
-                    Left =7733
+                    Left =7013
                     Top =1260
                     Width =960
                     Height =300
@@ -408,15 +407,15 @@ Begin Form
                     Caption ="Frame"
                     FontName ="Calibri"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =7733
+                    LayoutCachedLeft =7013
                     LayoutCachedTop =1260
-                    LayoutCachedWidth =8693
+                    LayoutCachedWidth =7973
                     LayoutCachedHeight =1560
                 End
                 Begin Label
                     OverlapFlags =85
                     TextAlign =2
-                    Left =5040
+                    Left =4320
                     Top =1260
                     Width =990
                     Height =300
@@ -426,15 +425,15 @@ Begin Form
                     FontName ="Calibri"
                     OnDblClick ="[Event Procedure]"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =5040
+                    LayoutCachedLeft =4320
                     LayoutCachedTop =1260
-                    LayoutCachedWidth =6030
+                    LayoutCachedWidth =5310
                     LayoutCachedHeight =1560
                 End
                 Begin Label
                     OverlapFlags =85
                     TextAlign =2
-                    Left =6060
+                    Left =5340
                     Top =1260
                     Width =960
                     Height =300
@@ -443,9 +442,9 @@ Begin Form
                     Caption ="Subunit*"
                     FontName ="Calibri"
                     OnDblClick ="[Event Procedure]"
-                    LayoutCachedLeft =6060
+                    LayoutCachedLeft =5340
                     LayoutCachedTop =1260
-                    LayoutCachedWidth =7020
+                    LayoutCachedWidth =6300
                     LayoutCachedHeight =1560
                 End
                 Begin ComboBox
@@ -575,9 +574,10 @@ Begin Form
                     Overlaps =1
                 End
                 Begin Label
-                    OverlapFlags =85
+                    Visible = NotDefault
+                    OverlapFlags =215
                     TextAlign =2
-                    Left =9720
+                    Left =7620
                     Top =1260
                     Width =1500
                     Height =300
@@ -586,9 +586,9 @@ Begin Form
                     Caption ="Status"
                     FontName ="Calibri"
                     Tag ="DetachedLabel"
-                    LayoutCachedLeft =9720
+                    LayoutCachedLeft =7620
                     LayoutCachedTop =1260
-                    LayoutCachedWidth =11220
+                    LayoutCachedWidth =9120
                     LayoutCachedHeight =1560
                 End
                 Begin ComboBox
@@ -639,20 +639,20 @@ Begin Form
                 End
                 Begin Label
                     BackStyle =1
-                    OverlapFlags =85
+                    OverlapFlags =93
                     TextAlign =2
-                    Left =-15
-                    Width =11355
+                    Left =-30
+                    Width =11385
                     Height =540
                     FontSize =20
                     FontWeight =700
                     BackColor =0
                     ForeColor =16777215
-                    Name ="lblEvent_Form_Header"
-                    Caption ="Data Gateway"
+                    Name ="lblTitle"
+                    Caption ="Pseudo Events"
                     FontName ="Calibri"
-                    LayoutCachedLeft =-15
-                    LayoutCachedWidth =11340
+                    LayoutCachedLeft =-30
+                    LayoutCachedWidth =11355
                     LayoutCachedHeight =540
                 End
                 Begin Line
@@ -665,6 +665,146 @@ Begin Form
                     LayoutCachedTop =1200
                     LayoutCachedWidth =11340
                     LayoutCachedHeight =1200
+                End
+                Begin CommandButton
+                    OverlapFlags =215
+                    Left =120
+                    Top =30
+                    Width =2220
+                    Height =480
+                    FontSize =12
+                    FontWeight =700
+                    TabIndex =8
+                    Name ="btnAddEvent"
+                    Caption ="Create New Event"
+                    OnClick ="[Event Procedure]"
+                    FontName ="Calibri"
+                    ControlTipText ="Create a new event..."
+                    LeftPadding =60
+                    RightPadding =75
+                    BottomPadding =120
+                    ImageData = Begin
+                        0x00000000
+                    End
+
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =30
+                    LayoutCachedWidth =2340
+                    LayoutCachedHeight =510
+                    ForeThemeColorIndex =0
+                    UseTheme =255
+                    Shape =2
+                    Gradient =12
+                    BackColor =8289145
+                    BackThemeColorIndex =4
+                    BorderColor =8289145
+                    BorderThemeColorIndex =4
+                    HoverColor =9226162
+                    HoverThemeColorIndex =7
+                    HoverTint =60.0
+                    PressedColor =6644321
+                    PressedThemeColorIndex =4
+                    PressedShade =80.0
+                    HoverForeColor =0
+                    HoverForeThemeColorIndex =0
+                    PressedForeColor =0
+                    PressedForeThemeColorIndex =0
+                    Shadow =-1
+                    QuickStyle =23
+                    QuickStyleMask =-1
+                    WebImagePaddingTop =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =247
+                    Left =10140
+                    Top =30
+                    Width =1140
+                    Height =480
+                    FontSize =12
+                    FontWeight =700
+                    TabIndex =9
+                    Name ="btnClose"
+                    Caption ="Close"
+                    OnClick ="[Event Procedure]"
+                    FontName ="Calibri"
+                    ControlTipText ="Close the data entry form"
+                    LeftPadding =60
+                    RightPadding =75
+                    BottomPadding =120
+
+                    LayoutCachedLeft =10140
+                    LayoutCachedTop =30
+                    LayoutCachedWidth =11280
+                    LayoutCachedHeight =510
+                    ForeThemeColorIndex =0
+                    UseTheme =255
+                    Shape =2
+                    Gradient =12
+                    BackColor =8289145
+                    BackThemeColorIndex =4
+                    BorderColor =8289145
+                    BorderThemeColorIndex =4
+                    HoverColor =7775995
+                    HoverThemeColorIndex =5
+                    HoverTint =60.0
+                    PressedColor =6644321
+                    PressedThemeColorIndex =4
+                    PressedShade =80.0
+                    HoverForeColor =0
+                    HoverForeThemeColorIndex =0
+                    PressedForeColor =0
+                    PressedForeThemeColorIndex =0
+                    Shadow =-1
+                    QuickStyle =23
+                    QuickStyleMask =-1
+                    WebImagePaddingTop =1
+                    Overlaps =1
+                End
+                Begin TextBox
+                    Locked = NotDefault
+                    SpecialEffect =0
+                    OldBorderStyle =0
+                    OverlapFlags =215
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =7200
+                    Top =60
+                    Width =900
+                    Height =420
+                    FontSize =14
+                    FontWeight =700
+                    TabIndex =10
+                    ForeColor =13421823
+                    Name ="tbxFilteredRecordCount"
+                    ControlSource ="=Nz(Count([Plot_Name]),0)"
+                    FontName ="Calibri"
+
+                    LayoutCachedLeft =7200
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =8100
+                    LayoutCachedHeight =480
+                    Begin
+                        Begin Label
+                            FontItalic = NotDefault
+                            OverlapFlags =215
+                            TextAlign =2
+                            Left =8160
+                            Top =180
+                            Width =900
+                            Height =300
+                            FontSize =10
+                            ForeColor =13421823
+                            Name ="lblRecordsSelected"
+                            Caption ="events"
+                            FontName ="Calibri"
+                            LayoutCachedLeft =8160
+                            LayoutCachedTop =180
+                            LayoutCachedWidth =9060
+                            LayoutCachedHeight =480
+                        End
+                    End
                 End
             End
         End
@@ -681,10 +821,10 @@ Begin Form
                     OverlapFlags =93
                     TextAlign =3
                     IMESentenceMode =3
-                    Width =11220
+                    Width =10740
                     Height =360
                     FontSize =13
-                    TabIndex =14
+                    TabIndex =12
                     Name ="tbxPseudoEvent"
                     ControlSource ="PseudoEvent"
                     StatusBarText ="The name or code of the protocol governing the event"
@@ -696,7 +836,7 @@ Begin Form
                         0x310000000000300000000000
                     End
 
-                    LayoutCachedWidth =11220
+                    LayoutCachedWidth =10740
                     LayoutCachedHeight =360
                     ConditionalFormat14 = Begin
                         0x01000200000000000000020000000100000000000000ffcdcd00010000003100 ,
@@ -704,172 +844,6 @@ Begin Form
                         0x0000000000ffffff000100000030000000000000000000000000000000000000 ,
                         0x00000000
                     End
-                End
-                Begin CommandButton
-                    OverlapFlags =255
-                    Left =3840
-                    Width =300
-                    Height =300
-                    FontSize =12
-                    FontWeight =700
-                    TabIndex =12
-                    Name ="btnViewReport"
-                    Caption ="Browse PLANTS"
-                    OnClick ="[Event Procedure]"
-                    PictureData = Begin
-                        0x2800000010000000100000000100040000000000800000000000000000000000 ,
-                        0x0000000000000000000000000000800000800000008080008000000080008000 ,
-                        0x8080000080808000c0c0c0000000ff00c0c0c00000ffff00ff000000c0c0c000 ,
-                        0xffff0000ffffff00ddddddddddddddddddddddddddddddddddd0000000007ddd ,
-                        0xdd0f066666660dddddd7066666660ddddd0f066666660dddddd7066666660ddd ,
-                        0xdd0f066666660dddddd7060000060ddddd0f060fff060dddddd7060000060ddd ,
-                        0xdd0f066666660dddddd0000000007ddddddddddddddddddddddddddddddddddd ,
-                        0xdddddddddddddddd000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000
-                    End
-                    FontName ="Calibri"
-                    ObjectPalette = Begin
-                        0x000301000000000000000000
-                    End
-                    ControlTipText ="View the Summary Report for this Event"
-                    LeftPadding =60
-                    RightPadding =75
-                    BottomPadding =120
-
-                    LayoutCachedLeft =3840
-                    LayoutCachedWidth =4140
-                    LayoutCachedHeight =300
-                    ForeThemeColorIndex =0
-                    UseTheme =255
-                    Shape =2
-                    Gradient =12
-                    BackColor =8289145
-                    BackThemeColorIndex =4
-                    BorderColor =8289145
-                    BorderThemeColorIndex =4
-                    HoverColor =9226162
-                    HoverThemeColorIndex =7
-                    HoverTint =60.0
-                    PressedColor =6644321
-                    PressedThemeColorIndex =4
-                    PressedShade =80.0
-                    HoverForeColor =0
-                    HoverForeThemeColorIndex =0
-                    PressedForeColor =0
-                    PressedForeThemeColorIndex =0
-                    Shadow =-1
-                    QuickStyle =23
-                    QuickStyleMask =-1
-                    WebImagePaddingTop =1
-                    Overlaps =1
-                End
-                Begin CommandButton
-                    OverlapFlags =255
-                    Left =1680
-                    Width =300
-                    Height =300
-                    FontSize =12
-                    FontWeight =700
-                    TabIndex =11
-                    Name ="btnViewPhotos"
-                    Caption ="Browse PLANTS"
-                    OnClick ="[Event Procedure]"
-                    PictureData = Begin
-                        0x2800000010000000100000000100040000000000800000000000000000000000 ,
-                        0x0000000000000000000000000000800000800000008080008000000080008000 ,
-                        0x8080000080808000c0c0c0000000ff00c0c0c00000ffff00ff000000c0c0c000 ,
-                        0xffff0000ffffff00dddddddddddddddddddddddddddddddddddddddddddddddd ,
-                        0xdddddd7007ddddddd70000000000007dd07700777700770dd07707777770770d ,
-                        0xd07707877770770dd07707e87770770dd0ff00777700ff0dd0fff000000fff0d ,
-                        0xd00000000000000ddd00d70ff07d00dddddddd7007dddddddddddddddddddddd ,
-                        0xdddddddddddddddd000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000
-                    End
-                    FontName ="Calibri"
-                    ObjectPalette = Begin
-                        0x000301000000000000000000
-                    End
-                    ControlTipText ="Preview the plot photos"
-                    LeftPadding =60
-                    RightPadding =75
-                    BottomPadding =120
-
-                    LayoutCachedLeft =1680
-                    LayoutCachedWidth =1980
-                    LayoutCachedHeight =300
-                    ForeThemeColorIndex =0
-                    UseTheme =255
-                    Shape =2
-                    Gradient =12
-                    BackColor =8289145
-                    BackThemeColorIndex =4
-                    BorderColor =8289145
-                    BorderThemeColorIndex =4
-                    HoverColor =9226162
-                    HoverThemeColorIndex =7
-                    HoverTint =60.0
-                    PressedColor =6644321
-                    PressedThemeColorIndex =4
-                    PressedShade =80.0
-                    HoverForeColor =0
-                    HoverForeThemeColorIndex =0
-                    PressedForeColor =0
-                    PressedForeThemeColorIndex =0
-                    Shadow =-1
-                    QuickStyle =23
-                    QuickStyleMask =-1
-                    WebImagePaddingTop =1
-                    Overlaps =1
                 End
                 Begin TextBox
                     Visible = NotDefault
@@ -901,7 +875,7 @@ Begin Form
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =2040
+                    Left =1680
                     Width =1740
                     Height =300
                     ColumnWidth =1710
@@ -916,8 +890,8 @@ Begin Form
                     OnClick ="[Event Procedure]"
                     ShowDatePicker =0
 
-                    LayoutCachedLeft =2040
-                    LayoutCachedWidth =3780
+                    LayoutCachedLeft =1680
+                    LayoutCachedWidth =3420
                     LayoutCachedHeight =300
                 End
                 Begin TextBox
@@ -925,11 +899,11 @@ Begin Form
                     TabStop = NotDefault
                     SpecialEffect =0
                     OldBorderStyle =0
-                    OverlapFlags =247
+                    OverlapFlags =255
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =8820
+                    Left =8100
                     Width =780
                     Height =300
                     ColumnWidth =600
@@ -939,8 +913,8 @@ Begin Form
                     ControlSource ="Event_Year"
                     FontName ="Calibri"
 
-                    LayoutCachedLeft =8820
-                    LayoutCachedWidth =9600
+                    LayoutCachedLeft =8100
+                    LayoutCachedWidth =8880
                     LayoutCachedHeight =300
                 End
                 Begin TextBox
@@ -952,7 +926,7 @@ Begin Form
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =4200
+                    Left =3480
                     Width =840
                     Height =300
                     ColumnWidth =2310
@@ -963,8 +937,8 @@ Begin Form
                     StatusBarText ="Unit code"
                     FontName ="Calibri"
 
-                    LayoutCachedLeft =4200
-                    LayoutCachedWidth =5040
+                    LayoutCachedLeft =3480
+                    LayoutCachedWidth =4320
                     LayoutCachedHeight =300
                 End
                 Begin TextBox
@@ -976,7 +950,7 @@ Begin Form
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =7020
+                    Left =6300
                     Width =660
                     Height =300
                     ColumnWidth =2310
@@ -988,8 +962,8 @@ Begin Form
                     StatusBarText ="Sample location"
                     FontName ="Calibri"
 
-                    LayoutCachedLeft =7020
-                    LayoutCachedWidth =7680
+                    LayoutCachedLeft =6300
+                    LayoutCachedWidth =6960
                     LayoutCachedHeight =300
                 End
                 Begin TextBox
@@ -1040,11 +1014,11 @@ Begin Form
                     TabStop = NotDefault
                     SpecialEffect =0
                     OldBorderStyle =0
-                    OverlapFlags =247
+                    OverlapFlags =255
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =7740
+                    Left =7020
                     Width =1020
                     Height =300
                     FontSize =13
@@ -1054,8 +1028,8 @@ Begin Form
                     StatusBarText ="The name or code of the protocol governing the event"
                     FontName ="Calibri"
 
-                    LayoutCachedLeft =7740
-                    LayoutCachedWidth =8760
+                    LayoutCachedLeft =7020
+                    LayoutCachedWidth =8040
                     LayoutCachedHeight =300
                 End
                 Begin TextBox
@@ -1067,7 +1041,7 @@ Begin Form
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =5100
+                    Left =4380
                     Width =900
                     Height =300
                     FontSize =13
@@ -1077,8 +1051,8 @@ Begin Form
                     StatusBarText ="The name or code of the protocol governing the event"
                     FontName ="Calibri"
 
-                    LayoutCachedLeft =5100
-                    LayoutCachedWidth =6000
+                    LayoutCachedLeft =4380
+                    LayoutCachedWidth =5280
                     LayoutCachedHeight =300
                 End
                 Begin TextBox
@@ -1090,7 +1064,7 @@ Begin Form
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =6060
+                    Left =5340
                     Width =900
                     Height =300
                     FontSize =13
@@ -1100,20 +1074,21 @@ Begin Form
                     StatusBarText ="The name or code of the protocol governing the event"
                     FontName ="Calibri"
 
-                    LayoutCachedLeft =6060
-                    LayoutCachedWidth =6960
+                    LayoutCachedLeft =5340
+                    LayoutCachedWidth =6240
                     LayoutCachedHeight =300
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     Locked = NotDefault
                     TabStop = NotDefault
                     SpecialEffect =0
                     OldBorderStyle =0
-                    OverlapFlags =255
+                    OverlapFlags =247
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =9660
+                    Left =7560
                     Width =1560
                     Height =300
                     FontSize =13
@@ -1123,17 +1098,17 @@ Begin Form
                     StatusBarText ="The name or code of the protocol governing the event"
                     FontName ="Calibri"
 
-                    LayoutCachedLeft =9660
-                    LayoutCachedWidth =11220
+                    LayoutCachedLeft =7560
+                    LayoutCachedWidth =9120
                     LayoutCachedHeight =300
                 End
                 Begin ToggleButton
-                    OverlapFlags =119
-                    Left =11280
-                    Top =45
+                    OverlapFlags =85
+                    Left =10860
+                    Top =60
                     Width =240
                     Height =240
-                    TabIndex =13
+                    TabIndex =11
                     Name ="tglPseudoEvent"
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Toggle pseudoevent"
@@ -1141,10 +1116,10 @@ Begin Form
                     RightPadding =75
                     BottomPadding =120
 
-                    LayoutCachedLeft =11280
-                    LayoutCachedTop =45
-                    LayoutCachedWidth =11520
-                    LayoutCachedHeight =285
+                    LayoutCachedLeft =10860
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =11100
+                    LayoutCachedHeight =300
                     ForeThemeColorIndex =0
                     UseTheme =1
                     Shape =2
@@ -1172,149 +1147,10 @@ Begin Form
             End
         End
         Begin FormFooter
-            Height =960
+            Height =708
             BackColor =-2147483633
             Name ="FormFooter"
             Begin
-                Begin CommandButton
-                    OverlapFlags =85
-                    Left =10080
-                    Top =180
-                    Width =1140
-                    Height =600
-                    FontSize =12
-                    FontWeight =700
-                    TabIndex =1
-                    Name ="btnClose"
-                    Caption ="Close"
-                    OnClick ="[Event Procedure]"
-                    FontName ="Calibri"
-                    ControlTipText ="Close the data entry form"
-                    LeftPadding =60
-                    RightPadding =75
-                    BottomPadding =120
-
-                    LayoutCachedLeft =10080
-                    LayoutCachedTop =180
-                    LayoutCachedWidth =11220
-                    LayoutCachedHeight =780
-                    ForeThemeColorIndex =0
-                    UseTheme =255
-                    Shape =2
-                    Gradient =12
-                    BackColor =8289145
-                    BackThemeColorIndex =4
-                    BorderColor =8289145
-                    BorderThemeColorIndex =4
-                    HoverColor =7775995
-                    HoverThemeColorIndex =5
-                    HoverTint =60.0
-                    PressedColor =6644321
-                    PressedThemeColorIndex =4
-                    PressedShade =80.0
-                    HoverForeColor =0
-                    HoverForeThemeColorIndex =0
-                    PressedForeColor =0
-                    PressedForeThemeColorIndex =0
-                    Shadow =-1
-                    QuickStyle =23
-                    QuickStyleMask =-1
-                    WebImagePaddingTop =1
-                End
-                Begin CommandButton
-                    OverlapFlags =93
-                    Left =1260
-                    Top =180
-                    Width =1140
-                    Height =600
-                    FontSize =12
-                    FontWeight =700
-                    Name ="btnGoToPlants"
-                    Caption ="Browse PLANTS"
-                    OnClick ="=GoToForm(\"frm_Plants\")"
-                    FontName ="Calibri"
-                    ControlTipText ="Add a new location record"
-                    LeftPadding =60
-                    RightPadding =75
-                    BottomPadding =120
-
-                    LayoutCachedLeft =1260
-                    LayoutCachedTop =180
-                    LayoutCachedWidth =2400
-                    LayoutCachedHeight =780
-                    ForeThemeColorIndex =0
-                    UseTheme =255
-                    Shape =2
-                    Gradient =12
-                    BackColor =8289145
-                    BackThemeColorIndex =4
-                    BorderColor =8289145
-                    BorderThemeColorIndex =4
-                    HoverColor =9226162
-                    HoverThemeColorIndex =7
-                    HoverTint =60.0
-                    PressedColor =6644321
-                    PressedThemeColorIndex =4
-                    PressedShade =80.0
-                    HoverForeColor =0
-                    HoverForeThemeColorIndex =0
-                    PressedForeColor =0
-                    PressedForeThemeColorIndex =0
-                    Shadow =-1
-                    QuickStyle =23
-                    QuickStyleMask =-1
-                    WebImagePaddingTop =1
-                    Overlaps =1
-                End
-                Begin CommandButton
-                    OverlapFlags =87
-                    Left =60
-                    Top =180
-                    Width =1140
-                    Height =600
-                    FontSize =12
-                    FontWeight =700
-                    TabIndex =2
-                    Name ="btnGoToTags"
-                    Caption ="Browse TAGS"
-                    OnClick ="=GoToForm(\"frm_Tags\")"
-                    FontName ="Calibri"
-                    ControlTipText ="Add a new location record"
-                    LeftPadding =60
-                    RightPadding =75
-                    BottomPadding =120
-                    ImageData = Begin
-                        0x00000000
-                    End
-
-                    LayoutCachedLeft =60
-                    LayoutCachedTop =180
-                    LayoutCachedWidth =1200
-                    LayoutCachedHeight =780
-                    ForeThemeColorIndex =0
-                    UseTheme =255
-                    Shape =2
-                    Gradient =12
-                    BackColor =8289145
-                    BackThemeColorIndex =4
-                    BorderColor =8289145
-                    BorderThemeColorIndex =4
-                    HoverColor =9226162
-                    HoverThemeColorIndex =7
-                    HoverTint =60.0
-                    PressedColor =6644321
-                    PressedThemeColorIndex =4
-                    PressedShade =80.0
-                    HoverForeColor =0
-                    HoverForeThemeColorIndex =0
-                    PressedForeColor =0
-                    PressedForeThemeColorIndex =0
-                    Shadow =-1
-                    QuickStyle =23
-                    QuickStyleMask =-1
-                    WebImagePaddingTop =1
-                    Overlaps =1
-                End
                 Begin Label
                     OverlapFlags =85
                     TextAlign =2
@@ -1334,49 +1170,6 @@ Begin Form
                     LayoutCachedTop =180
                     LayoutCachedWidth =8760
                     LayoutCachedHeight =708
-                End
-                Begin TextBox
-                    Locked = NotDefault
-                    SpecialEffect =0
-                    OldBorderStyle =0
-                    OverlapFlags =215
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =9060
-                    Top =120
-                    Width =900
-                    Height =420
-                    ColumnOrder =4
-                    FontSize =14
-                    FontWeight =700
-                    TabIndex =3
-                    Name ="tbxFilteredRecordCount"
-                    ControlSource ="=nz(Count([Plot_Name]),0)"
-                    FontName ="Calibri"
-
-                    LayoutCachedLeft =9060
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =9960
-                    LayoutCachedHeight =540
-                    Begin
-                        Begin Label
-                            FontItalic = NotDefault
-                            OverlapFlags =93
-                            TextAlign =2
-                            Left =9060
-                            Top =420
-                            Width =900
-                            Height =420
-                            Name ="lblRecordsSelected"
-                            Caption ="records selected"
-                            FontName ="Calibri"
-                            LayoutCachedLeft =9060
-                            LayoutCachedTop =420
-                            LayoutCachedWidth =9960
-                            LayoutCachedHeight =840
-                        End
-                    End
                 End
                 Begin Line
                     BorderWidth =1
@@ -1402,13 +1195,13 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' FORM:    frm_Data_Gateway
+' FORM:    PseudoEventList form
 ' Level:        Application module
 ' Version:      1.05
 '
 ' Description:  form related functions & procedures
 '
-' Data source:  qfrm_Data_Gateway
+' Data source:  qPseudoEventList form
 ' Data access:  view and delete records (delete by cmdDeleteRec)
 ' Pages:        none
 ' Functions:    fxnSortRecords, FilterGateway, FilterString, WriteRecordCriteria
@@ -1465,7 +1258,7 @@ On Error GoTo Err_Handler
 
     ' On opening the form, set the initial sort order
     strSortFieldLabel = "lblPlot_Name"
-    varReturn = fxnSortRecords("Plot_Name")
+    varReturn = SortRecords("Plot_Name")
     ' Set the filter
     If fxnSwitchboardIsOpen Then
         'Not currently choosing to select default filter
@@ -1480,7 +1273,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Open[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - Form_Open[PseudoEventList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1519,7 +1312,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_GotFocus[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - Form_GotFocus[PseudoEventList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -1527,97 +1320,6 @@ End Sub
 ' ----------------
 '  Click Events
 ' ----------------
-
-' ---------------------------------
-' SUB:          btnViewPhotos_Click
-' Description:  button click actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Mark Lehman/Geoff Sanders, unknown
-' Adapted:      -
-' Revisions:
-'   MEL/GS - unknown - initial version
-'   BLC - 5/23/2018 - update documentation, error handling
-' ---------------------------------
-Private Sub btnViewPhotos_Click()
-On Error GoTo Err_Handler
-
-    Dim strCriteria As String
-
-    'record what the current record is so we can go back to that record on return
-    If Not IsNothing(Me!Location_ID) Then
-        WriteRecordCriteria
-        strCriteria = GetCriteriaString("[Location_ID]=", "tbl_Locations", "Location_ID", Me.Name, "txtLocation_ID")
-        DoCmd.OpenForm "frm_Photos", , , strCriteria, , , "Filter by location"
-    End If
-
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnViewPhotos_Click[frm_Data_Gateway])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-' ---------------------------------
-' SUB:          btnViewReport_Click
-' Description:  button click actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Mark Lehman/Geoff Sanders, unknown
-' Adapted:      -
-' Revisions:
-'   MEL/GS - unknown - initial version
-'   BLC - 5/23/2018 - update documentation, error handling,
-'                     revise to open rpt_Event_Summary_Unfiltered vs.
-'                     Copy of rpt_Event_Summary_Unfiltered
-' ---------------------------------
-Private Sub btnViewReport_Click()
-On Error GoTo Err_Handler
-
-    Dim strDocName As String
-    Dim strCriteria As String
-    
-    If IsNothing(Me!Event_ID) Then
-        'Trap records that do not contain an event.
-        MsgBox ("This Record is not linked to an Event.  Please choose another Record.")
-        GoTo Exit_Handler
-    Else
-        'Record what the current record is so we can go back to that record on return
-        WriteRecordCriteria
-        
-        '10/23/2018 BLC
-        'set TempVar for qry_Status_Sapling_Current_Event/qry_Status_Tree_Current_Event
-        SetTempVar "EventID", CStr(Me.txtEvent_ID)
-        
-        strDocName = "rpt_Event_Summary_Unfiltered"
-        'strDocName = "Copy of rpt_Event_Summary_Unfiltered"
-        strCriteria = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
-        'DoCmd.OpenReport stDocName, acPreview, "qRpt_Event_Summary_Unfiltered", stCriteria
-        DoCmd.OpenReport strDocName, acPreview, , strCriteria
-    End If
-
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnViewReport_Click[frm_Data_Gateway])"
-    End Select
-    Resume Exit_Handler
-End Sub
 
 ' ----------------
 '  Filters
@@ -1653,23 +1355,9 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxParkFilter_AfterUpdate[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - cbxParkFilter_AfterUpdate[PseudoEventList form])"
     End Select
     Resume Exit_Handler
-End Sub
-
-Private Sub cboParkFilter_AfterUpdate()
-    On Error GoTo Err_Handler
-
-    If Me!tglFilter Then
-        Me.FilterGateway (True)
-    End If
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -1700,23 +1388,9 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxUnitGroupFilter_AfterUpdate[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - cbxUnitGroupFilter_AfterUpdate[PseudoEventList form])"
     End Select
     Resume Exit_Handler
-End Sub
-
-Private Sub cboUnitGroupFilter_AfterUpdate()
-    On Error GoTo Err_Handler
-
-    If Me!tglFilter Then
-        Me.FilterGateway (True)
-    End If
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -1747,23 +1421,9 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxPanelFilter_AfterUpdate[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - cbxPanelFilter_AfterUpdate[PseudoEventList form])"
     End Select
     Resume Exit_Handler
-End Sub
-
-Private Sub cboPanelFilter_AfterUpdate()
-    On Error GoTo Err_Handler
-
-    If Me!tglFilter Then
-        Me.FilterGateway (True)
-    End If
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -1794,23 +1454,9 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxFrameFilter_AfterUpdate[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - cbxFrameFilter_AfterUpdate[PseudoEventList form])"
     End Select
     Resume Exit_Handler
-End Sub
-
-Private Sub cboFrameFilter_AfterUpdate()
-    On Error GoTo Err_Handler
-
-    If Me!tglFilter Then
-        Me.FilterGateway (True)
-    End If
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -1841,23 +1487,9 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxYearFilter_AfterUpdate[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - cbxYearFilter_AfterUpdate[PseudoEventList form])"
     End Select
     Resume Exit_Handler
-End Sub
-
-Private Sub cboYearFilter_AfterUpdate()
-    On Error GoTo Err_Handler
-
-    If Me!tglFilter Then
-        Me.FilterGateway (True)
-    End If
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -1888,23 +1520,9 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - cbxStatusFilter_AfterUpdate[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - cbxStatusFilter_AfterUpdate[PseudoEventList form])"
     End Select
     Resume Exit_Handler
-End Sub
-
-Private Sub cboStatusFilter_AfterUpdate()
-    On Error GoTo Err_Handler
-
-    If Me!tglFilter Then
-        Me.FilterGateway (True)
-    End If
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -1935,11 +1553,10 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tglPseudoEvent_AfterUpdate[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - tglPseudoEvent_AfterUpdate[PseudoEventList form])"
     End Select
     Resume Exit_Handler
 End Sub
-
 
 ' ---------------------------------
 ' SUB:          lblPlotName_DblClick
@@ -1967,7 +1584,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - lblPlot_Name_DblClick[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - lblPlot_Name_DblClick[PseudoEventList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -2012,7 +1629,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - lblUnitGroup_DblClick[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - lblUnitGroup_DblClick[PseudoEventList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -2055,7 +1672,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - lblSubunitCode_DblClick[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - lblSubunitCode_DblClick[PseudoEventList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -2098,7 +1715,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - lblEventYear_DblClick[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - lblEventYear_DblClick[PseudoEventList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -2141,7 +1758,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - lblEventDate_DblClick[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - lblEventDate_DblClick[PseudoEventList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -2189,7 +1806,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnClearFilter_Click[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - btnClearFilter_Click[PseudoEventList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -2238,7 +1855,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnAddLocation_Click[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - btnAddLocation_Click[PseudoEventList form])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -2255,19 +1872,18 @@ End Sub
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Source/date:  Bonnie Campbell, November 9, 2018
 ' Adapted:      -
 ' Revisions:
-'   MEL/GS - unknown - initial version
-'   BLC - 5/24/2018 - update documentation, error handling
+'   BLC - 11/9/2018 - initial version
 ' ---------------------------------
 Private Sub btnAddEvent_Click()
 On Error GoTo Err_Handler
     
     'record what the current record is so we can go back to that record on return
     WriteRecordCriteria
-    DoCmd.Close acForm, "frm_Data_Gateway"
-    DoCmd.OpenForm "frm_Event_Add"
+    DoCmd.Close acForm, "PseudoEventList form"
+    DoCmd.OpenForm "EventAdd"
     
 Exit_Handler:
     Exit Sub
@@ -2276,24 +1892,9 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnAddEvent_Click[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - btnAddEvent_Click[PseudoEventList form])"
     End Select
     Resume Exit_Handler
-End Sub
-
-Private Sub cmdNewEvent_Click()
-    On Error GoTo Err_Handler
-
-    'record what the current record is so we can go back to that record on return
-    WriteRecordCriteria
-    DoCmd.Close acForm, "frm_Data_Gateway"
-    DoCmd.OpenForm "frm_Event_Add"
-        
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -2304,11 +1905,10 @@ End Sub
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Source/date:  Bonnie Campbell, November 9, 2018
 ' Adapted:      -
 ' Revisions:
-'   MEL/GS - unknown - initial version
-'   BLC - 5/24/2018 - update documentation, error handling
+'   BLC - 11/9/2018 - initial version
 ' ---------------------------------
 Private Sub btnClose_Click()
 On Error GoTo Err_Handler
@@ -2322,21 +1922,9 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnClose_Click[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - btnClose_Click[PseudoEventList form])"
     End Select
     Resume Exit_Handler
-End Sub
-
-Private Sub cmdClose_Click()
-    On Error GoTo Err_Handler
-
-    DoCmd.Close , , acSaveNo
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -2347,11 +1935,10 @@ End Sub
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Source/date:  Bonnie Campbell, November 9, 2018
 ' Adapted:      -
 ' Revisions:
-'   MEL/GS - unknown - initial version
-'   BLC - 5/24/2018 - update documentation, error handling
+'   BLC - 11/9/2018 - initial version
 ' ---------------------------------
 Private Sub tglFilter_AfterUpdate()
 On Error GoTo Err_Handler
@@ -2365,13 +1952,9 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tglFilter_AfterUpdate[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - tglFilter_AfterUpdate[PseudoEventList form])"
     End Select
     Resume Exit_Handler
-End Sub
-
-Private Sub xtglFilter_AfterUpdate()
-    Me.FilterGateway (Me!tglFilter)
 End Sub
 
 ' ---------------------------------
@@ -2382,11 +1965,10 @@ End Sub
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Source/date:  Bonnie Campbell, November 9, 2018
 ' Adapted:      -
 ' Revisions:
-'   MEL/GS - unknown - initial version
-'   BLC - 5/24/2018 - update documentation, error handling
+'   BLC - 11/9/2018 - initial version
 ' ---------------------------------
 Private Sub tbxEventDate_Click()
 On Error GoTo Err_Handler
@@ -2423,44 +2005,9 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxEventDate_Click[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - tbxEventDate_Click[PseudoEventList form])"
     End Select
     Resume Exit_Handler
-End Sub
-
-Private Sub txtEvent_Date_Click()
-On Error GoTo Err_Handler
-
-    Dim strCriteriaLoc As String
-    Dim strCriteriaEvent As String
-
-    'Record what the current record is so we can go back to that record on return
-    WriteRecordCriteria
-    
-    'NCRN NOTE: For this database, we will not create new events through this mechanism.
-    'It is unclear to me how to use this mechanism to create a second event for a location (mel).
-    
-    'If there is not an event id, add a new data entry record
-    'If IsNull(Me!txtEvent_ID) Then
-    '            DoCmd.OpenForm "frm_Events", , , , acFormAdd, , "New record"
-    '    If Not IsNull(Me!txtLocation_ID) Then
-    '        ' Fill in Location
-    '        Forms!frm_Events!cboLocation_ID = Me!txtLocation_ID
-    '        Forms!frm_Events.Update_Loc_Info
-    '    End If
-    'if there is an event id, bring up the selected data entry record
-    'Else
-        'strCriteriaLoc = GetCriteriaString("[Location_ID]=", "tbl_Locations", "Location_ID", Me.Name, "txtLocation_ID")
-        strCriteriaEvent = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
-        ' Filter by location and event
-        DoCmd.OpenForm "frm_Events", , , strCriteriaEvent, , , "(Browsing)"
-    'End If
-    
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -2471,11 +2018,10 @@ End Sub
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Source/date:  Bonnie Campbell, November 9, 2018
 ' Adapted:      -
 ' Revisions:
-'   MEL/GS - unknown - initial version
-'   BLC - 5/24/2018 - update documentation, error handling
+'   BLC - 11/9/2018 - initial version
 ' ---------------------------------
 Private Sub tbxPlotName_Click()
 On Error GoTo Err_Handler
@@ -2496,27 +2042,9 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxPlotName_Click[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - tbxPlotName_Click[PseudoEventList form])"
     End Select
     Resume Exit_Handler
-End Sub
-
-Private Sub txtPlot_Name_Click()
-    On Error GoTo Err_Handler
-    Dim strCriteria As String
-
-    'record what the current record is so we can go back to that record on return
-    If Not IsNothing(Me!Location_ID) Then
-        WriteRecordCriteria
-        strCriteria = GetCriteriaString("[Location_ID]=", "tbl_Locations", "Location_ID", Me.Name, "txtLocation_ID")
-        DoCmd.OpenForm "frm_Locations", , , strCriteria, , , "Filter by location"
-    End If
-    
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -2527,11 +2055,10 @@ End Sub
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Source/date:  Bonnie Campbell, November 9, 2018
 ' Adapted:      -
 ' Revisions:
-'   MEL/GS - unknown - initial version
-'   BLC - 5/24/2018 - update documentation, error handling
+'   BLC - 11/9/2018 - initial version
 ' ---------------------------------
 Private Sub tbxReportTrigger_Click()
 On Error GoTo Err_Handler
@@ -2559,34 +2086,9 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxReportTrigger_Click[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - tbxReportTrigger_Click[PseudoEventList form])"
     End Select
     Resume Exit_Handler
-End Sub
-
-Private Sub txtReportTrigger_Click()
-On Error GoTo Err_Handler
-    Dim strDocName As String
-    Dim strCriteria As String
-    
-    If IsNothing(Me!Event_ID) Then
-        'Trap records that do not contain an event.
-        MsgBox ("This Record is not linked to an Event.  Please choose another Record.")
-        GoTo Exit_Procedure
-    Else
-        'Record what the current record is so we can go back to that record on return
-        WriteRecordCriteria
-        strDocName = "rpt_Event_Summary_Unfiltered"
-        strCriteria = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
-        'DoCmd.OpenReport stDocName, acPreview, "qRpt_Event_Summary_Unfiltered", stCriteria
-        DoCmd.OpenReport strDocName, acPreview, , strCriteria
-    End If
-    
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox Err.Description
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -2597,11 +2099,10 @@ End Sub
 ' Returns:      -
 ' Throws:       none
 ' References:   -
-' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Source/date:  Bonnie Campbell, November 9, 2018
 ' Adapted:      -
 ' Revisions:
-'   MEL/GS - unknown - initial version
-'   BLC - 5/24/2018 - update documentation, error handling
+'   BLC - 11/9/2018 - initial version
 ' ---------------------------------
 Private Sub tbxViewPhotos_Click()
 On Error GoTo Err_Handler
@@ -2632,132 +2133,9 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - tbxViewPhotos_Click[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - tbxViewPhotos_Click[PseudoEventList form])"
     End Select
     Resume Exit_Handler
-End Sub
-
-Private Sub txtViewPhotos_Click()
-On Error GoTo Err_Handler
-
-    Dim RetVal As Double
-    Dim RootFolder As String
-    Dim PhotoFolder As String
-    
-    RootFolder = "T:\I&M"
-    PhotoFolder = "T:\I&M\Monitoring\Forest_Vegetation\Photos\"
-    If FolderExists(PhotoFolder & Me!txtPlot_Name) Then
-        RetVal = Shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
-        GoTo Exit_Procedure
-    Else
-        If FolderExists(RootFolder) Then
-            MsgBox ("Folder for this plot not found....Opening the root of the Photos folder.")
-            RetVal = Shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
-            GoTo Exit_Procedure
-        Else
-            MsgBox ("The network appears to be unavailable. Network access is required to view photos.")
-        End If
-    End If
-
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox Err.Description
-    Resume Exit_Procedure
-End Sub
-
-' ---------------------------------
-' SUB:          btnGoToTags_Click
-' Description:  button click actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Mark Lehman/Geoff Sanders, unknown
-' Adapted:      -
-' Revisions:
-'   MEL/GS - unknown - initial version
-'   BLC - 5/24/2018 - update documentation, error handling
-' ---------------------------------
-Private Sub btnGoToTags_Click()
-On Error GoTo Err_Handler
-    
-'    'record what the current record is so we can go back to that record on return
-'    WriteRecordCriteria
-'    DoCmd.OpenForm "frm_Tags"
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnGoToTags_Click[frm_Data_Gateway])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-Private Sub cmdGoto_Tags_Click()
-    On Error GoTo Err_Handler
-
-    'record what the current record is so we can go back to that record on return
-    WriteRecordCriteria
-    DoCmd.OpenForm "frm_Tags"
-        
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-End Sub
-
-' ---------------------------------
-' SUB:          btnGoToPlants
-' Description:  Open the plants form
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Mark Lehman/Geoff Sanders, unknown
-' Adapted:      -
-' Revisions:
-'   MEL/GS - unknown - initial version
-'   BLC - 5/24/2018 - update documentation, error handling
-' ---------------------------------
-Private Sub btnGoToPlants_Click()
-On Error GoTo Err_Handler
-    
-'    'record what the current record is so we can go back to that record on return
-'    WriteRecordCriteria
-'    DoCmd.OpenForm "frm_Plants"
-    
-Exit_Handler:
-    Exit Sub
-    
-Err_Handler:
-    Select Case Err.Number
-      Case Else
-        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnGoToPlants[frm_Data_Gateway])"
-    End Select
-    Resume Exit_Handler
-End Sub
-
-Private Sub cmdGoto_Plants_Click()
-    On Error GoTo Err_Handler
-
-    'record what the current record is so we can go back to that record on return
-    WriteRecordCriteria
-    DoCmd.OpenForm "frm_Plants"
-        
-Exit_Procedure:
-    Exit Sub
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
 End Sub
 
 ' ---------------------------------
@@ -2817,53 +2195,8 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - FilterString[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - FilterString[PseudoEventList form])"
     End Select
-    Resume Exit_Handler
-End Function
-
-Private Function xFilterString(varValue As Variant, strFieldName As String, varCurrentFilter As Variant) As Variant
-' Description:  Builds a filter string for the Data Gateway form
-' Parameters:   varValue = the value of the filter control
-'               strFieldName = the field that is being filtered
-'               varCurrentFilter = the current filter value as it is being built up
-' Returns:      Filter string or null if no filter built yet
-' Throws:       none
-' References:   none
-' Source/date:  Simon Kingston, 1/17/2007
-' Revisions:    <name, date, desc - add lines as you go>
-
-Const cstrNull As String = "[Null]"
-Dim varFilter As Variant
-
-On Error GoTo Error_Handler
-
-If IsNull(varValue) Then
-    varFilter = varCurrentFilter
-Else
-    varFilter = (varCurrentFilter + " AND ") & strFieldName
-    If varValue = cstrNull Then
-        varFilter = varFilter & " Is Null"
-    Else
-    If IsNumeric(varValue) Then
-        varFilter = varFilter & "=" & varValue & ""
-        Else
-        If IsDate(varValue) Then
-            varFilter = varFilter & "=#" & varValue & "#"
-            Else
-                varFilter = varFilter & "=" & CorrectText(CStr(varValue))
-            End If
-        End If
-    End If
-End If
-
-xFilterString = varFilter
-
-Exit_Handler:
-    Exit Function
-Error_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-        "Error encountered (FilterString)"
     Resume Exit_Handler
 End Function
 
@@ -2921,54 +2254,8 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - FilterGateway[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - FilterGateway[PseudoEventList form])"
     End Select
-    Resume Exit_Handler
-End Sub
-
-Public Sub xFilterGateway(booFilterOn As Boolean)
-' Description:  Filters the Data Gateway form
-' Parameters:   booFilterOn = true if filter is to be applied, false if filter is to be removed
-' Returns:      none
-' Throws:       none
-' References:   strFieldName, strSortOrder, strSortFieldLabel
-'               (form-level variables)
-' Source/date:  Simon Kingston, 1/17/2007
-' Revisions:    <name, date, desc - add lines as you go>
-Dim varFilter As Variant
-
-On Error GoTo Error_Handler
-
-varFilter = Null
-
-Me!tglFilter = booFilterOn
-
-If booFilterOn Then
-    Me!tglFilter.Caption = "Filter Is On"
-
-    'add park filter to filter string
-    varFilter = FilterString(Me!cboParkFilter, "Unit_Code", varFilter)
-    'add park filter to filter string
-    varFilter = FilterString(Me!cboUnitGroupFilter, "Unit_Group", varFilter)
-    'add panel filter to filter string
-    varFilter = FilterString(Me!cboPanelFilter, "Panel", varFilter)
-    'add frame filter to filter string
-    varFilter = FilterString(Me!cboFrameFilter, "Frame", varFilter)
-    'add year filter to filter string
-    varFilter = FilterString(Me!cboYearFilter, "Event_Year", varFilter)
-    'add status filter to filter string
-    varFilter = FilterString(Me!cboStatusFilter, "Location_Status", varFilter)
-    Me.Filter = Nz(varFilter)
-Else
-    Me!tglFilter.Caption = "Filter Is Off"
-End If
-Me.FilterOn = booFilterOn
-
-Exit_Handler:
-    Exit Sub
-Error_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-        "Error encountered (FilterGateway)"
     Resume Exit_Handler
 End Sub
 
@@ -3008,40 +2295,9 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - WriteRecordCriteria[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - WriteRecordCriteria[PseudoEventList form])"
     End Select
     Resume Exit_Handler
-End Sub
-
-Private Sub xWriteRecordCriteria()
-' Description:  Records the Location ID and Event ID of the current record so that it can be made the current record when coming
-'               back to the form from another form (=bookmark).
-' Parameters:   none
-' Returns:      none
-' Throws:       none
-' References:   GetCriteriaString
-' Source/date:  Simon Kingston, 1/17/2007
-' Revisions:    <name, date, desc - add lines as you go>
-
-On Error GoTo Error_Handler
-
-If Not IsNothing(Me!Location_ID) Then
-    strCurrentRecordCriteria = GetCriteriaString("[Location_ID]=", "tbl_Locations", "Location_ID", Me.Name, "txtLocation_ID")
-    If IsNothing(Me!Event_ID) Then
-        strCurrentRecordCriteria = strCurrentRecordCriteria & " AND Event_ID Is Null"
-    Else
-        strCurrentRecordCriteria = strCurrentRecordCriteria & " AND " & GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
-    End If
-End If
-
-Exit_Handler:
-    Exit Sub
-
-Error_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-        "Error encountered (FilterGateway)"
-    Resume Exit_Handler
-
 End Sub
 
 ' ---------------------------------
@@ -3102,61 +2358,9 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - SortRecords[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - SortRecords[PseudoEventList form])"
     End Select
     Resume Exit_Handler
-End Function
-
-' ---------------------------------
-' SUB:          fxnSortRecords
-' Description:  record sorting actions
-' Assumptions:  -
-' Parameters:   -
-' Returns:      -
-' Throws:       none
-' References:   -
-' Source/date:  Mark Lehman/Geoff Sanders, unknown
-' Adapted:      -
-' Revisions:
-'   MEL/GS - unknown - initial version
-'   BLC - 10/22/2018 - update documentation, error handling, add stripping _ from label
-' ---------------------------------
-Private Function fxnSortRecords(ByVal strFieldName As String, _
-    Optional ByVal strField2Name As String)
-    On Error GoTo Err_Handler
-
-    Dim strOrderBy As String
-
-    ' If already sorting in ascending order by this field, sort descending
-    If strFieldName = strSortField And strSortOrder = "" Then
-        strSortOrder = " DESC"
-    Else: strSortOrder = ""
-    End If
-    ' Create the order by string and activate the filter
-    strOrderBy = strFieldName & strSortOrder
-    If strField2Name <> "" Then
-        strOrderBy = strField2Name & " DESC, " & strOrderBy
-    End If
-    strSortField = strFieldName
-    Me.Form.OrderBy = strOrderBy
-    Me.Form.OrderByOn = True
-
-    'adjust for label name
-    strSortFieldLabel = Replace(strSortFieldLabel, "_", "")
-
-    ' Change the label format to indicate the sorted field
-    Me.Controls.Item(strSortFieldLabel).FontItalic = False
-    Me.Controls.Item(strSortFieldLabel).FontBold = False
-    'strSortFieldLabel = "lbl" & strFieldName
-    Me.Controls.Item(strSortFieldLabel).FontItalic = True
-    Me.Controls.Item(strSortFieldLabel).FontBold = True
-
-Exit_Procedure:
-    Exit Function
-Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-        "Error encountered (fxnSortRecords)"
-    Resume Exit_Procedure
 End Function
 
 ' ---------------------------------
@@ -3187,7 +2391,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnGoToTags_Click[frm_Data_Gateway])"
+            "Error encountered (#" & Err.Number & " - btnGoToTags_Click[PseudoEventList form])"
     End Select
     Resume Exit_Handler
 End Function

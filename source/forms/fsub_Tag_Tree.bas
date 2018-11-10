@@ -16,10 +16,10 @@ Begin Form
     Width =13500
     DatasheetFontHeight =9
     ItemSuffix =31
-    Left =1110
-    Top =2640
-    Right =14925
-    Bottom =3540
+    Left =1290
+    Top =4800
+    Right =14850
+    Bottom =5445
     DatasheetGridlinesColor =15062992
     OrderBy ="[tbl_Tags].[Tag]"
     RecSrcDt = Begin
@@ -536,7 +536,7 @@ Option Explicit
 
 ' =================================
 ' MODULE:       fsub_Tag_Tree
-' Level:        Application module
+' Level:        Form module
 ' Version:      1.02
 '
 ' Description:  add event related functions & procedures

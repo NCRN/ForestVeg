@@ -197,7 +197,7 @@ Begin Form
                                     FontSize =15
                                     FontWeight =700
                                     ForeColor =0
-                                    Name ="cmdGateway"
+                                    Name ="btnGateway"
                                     Caption ="Browse"
                                     OnClick ="[Event Procedure]"
                                     FontName ="Calibri"
@@ -243,7 +243,7 @@ Begin Form
                                     FontWeight =700
                                     TabIndex =1
                                     ForeColor =0
-                                    Name ="cmdEvents_Add_Open_Form"
+                                    Name ="btnAddEvent"
                                     Caption ="Create"
                                     OnClick ="[Event Procedure]"
                                     FontName ="Calibri"
@@ -289,7 +289,7 @@ Begin Form
                                     FontWeight =700
                                     TabIndex =2
                                     ForeColor =0
-                                    Name ="cmdData_Summary"
+                                    Name ="btnDataSummary"
                                     Caption ="Summarize"
                                     OnClick ="[Event Procedure]"
                                     FontName ="Calibri"
@@ -335,7 +335,7 @@ Begin Form
                                     FontWeight =700
                                     TabIndex =3
                                     ForeColor =0
-                                    Name ="cmdUtilities"
+                                    Name ="btnUtilities"
                                     Caption ="Setup"
                                     OnClick ="[Event Procedure]"
                                     PictureData = Begin
@@ -486,7 +486,7 @@ Begin Form
                                     FontWeight =700
                                     TabIndex =4
                                     ForeColor =0
-                                    Name ="cmdExit"
+                                    Name ="btnExit"
                                     Caption ="Exit"
                                     OnClick ="[Event Procedure]"
                                     PictureData = Begin
@@ -766,9 +766,8 @@ Begin Form
                                     Height =234
                                     TabIndex =5
                                     ForeColor =9870754
-                                    Name ="txtLinkPath"
+                                    Name ="tbxLinkPath"
                                     StatusBarText ="Currently linked back-end database file"
-                                    OnDblClick ="[Event Procedure]"
                                     FontName ="Calibri"
 
                                     LayoutCachedLeft =1140
@@ -803,7 +802,7 @@ Begin Form
                                     FontWeight =700
                                     TabIndex =6
                                     ForeColor =0
-                                    Name ="cmdDashboard"
+                                    Name ="btnDashboard"
                                     Caption ="Setup"
                                     OnClick ="[Event Procedure]"
                                     PictureData = Begin
@@ -1057,7 +1056,7 @@ Begin Form
                                     FontSize =9
                                     FontWeight =700
                                     ForeColor =0
-                                    Name ="cmdChangeDefaults"
+                                    Name ="btnChangeDefaults"
                                     Caption ="Change"
                                     OnClick ="[Event Procedure]"
                                     FontName ="Arial"
@@ -1433,7 +1432,7 @@ Begin Form
                                     Height =324
                                     FontSize =9
                                     FontWeight =700
-                                    Name ="cmdReleaseHistory"
+                                    Name ="btnReleaseHistory"
                                     Caption ="View release history"
                                     OnClick ="[Event Procedure]"
                                     FontName ="Arial"
@@ -1456,7 +1455,7 @@ Begin Form
                                     FontSize =9
                                     FontWeight =700
                                     TabIndex =1
-                                    Name ="cmdReportBug"
+                                    Name ="btnReportBug"
                                     Caption ="Report a bug"
                                     OnClick ="[Event Procedure]"
                                     FontName ="Arial"
@@ -1479,7 +1478,7 @@ Begin Form
                                     FontSize =9
                                     FontWeight =700
                                     TabIndex =2
-                                    Name ="cmdViewMetadata"
+                                    Name ="btnViewMetadata"
                                     Caption ="View DB Metadata/Purpose"
                                     OnClick ="[Event Procedure]"
                                     FontName ="Arial"
@@ -1508,7 +1507,7 @@ Begin Form
                                     FontSize =9
                                     FontWeight =700
                                     TabIndex =3
-                                    Name ="txtVersion"
+                                    Name ="tbxVersion"
                                     ControlSource ="Release_ID"
                                     FontName ="Arial"
 
@@ -1532,7 +1531,7 @@ Begin Form
                                     FontWeight =700
                                     TabIndex =4
                                     BackColor =11056034
-                                    Name ="txtAuthorName"
+                                    Name ="tbxAuthorName"
                                     FontName ="Arial"
 
                                     LayoutCachedLeft =735
@@ -1555,7 +1554,7 @@ Begin Form
                                     FontWeight =700
                                     TabIndex =5
                                     BackColor =11056034
-                                    Name ="txtAuthorOrg"
+                                    Name ="tbxAuthorOrg"
                                     FontName ="Arial"
 
                                     LayoutCachedLeft =735
@@ -1578,7 +1577,7 @@ Begin Form
                                     FontWeight =700
                                     TabIndex =6
                                     BackColor =11056034
-                                    Name ="txtAuthorPhone"
+                                    Name ="tbxAuthorPhone"
                                     FontName ="Arial"
 
                                     LayoutCachedLeft =735
@@ -4139,7 +4138,7 @@ Option Explicit
 
 ' =================================
 ' FORM:         frm_Switchboard
-' Level:        Application form
+' Level:        Form module
 ' Version:      1.04
 '
 ' Description:  Standard module - main screen of the user interface, viewed at startup
@@ -4266,7 +4265,7 @@ Private Sub Form_Load()
     ' Set the current back-end database path control according to the system table
     'strLinkPath = "Using.... " & Nz(DLookup("[Link_file_path]", "tsys_Link_Files", "[Link_type] = 'Back-end data'"), "")
     strLinkPath = Nz(DLookup("[Link_file_path]", "tsys_Link_Files", "[Link_type] = 'Back-end data'"), "")
-    Me!txtLinkPath = strLinkPath
+    Me!tbxLinkPath = strLinkPath
 
     '10/23/2018 update
     SetTempVar "BEfilepath", strLinkPath
@@ -4313,10 +4312,10 @@ Private Sub Form_Load()
         Me!lblAuthorEmail.HyperlinkAddress = "mailto:" + varAuthorEmail
     End If
         
-    Me!txtVersion = varVersion
-    Me!txtAuthorName = varAuthor
-    Me!txtAuthorOrg = varAuthorOrg
-    Me!txtAuthorPhone = varAuthorPhone
+    Me!tbxVersion = varVersion
+    Me!tbxAuthorName = varAuthor
+    Me!tbxAuthorOrg = varAuthorOrg
+    Me!tbxAuthorPhone = varAuthorPhone
     Me!lblAuthorEmail.Caption = varAuthorEmail
 
 Exit_Handler:
@@ -4390,7 +4389,7 @@ End Sub
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
 Private Sub imgNPS_DblClick(Cancel As Integer)
-    On Error GoTo Err_Handler
+On Error GoTo Err_Handler
 
     ' Upon clicking the NPS arrowhead, open the website
     DoCmd.Hourglass True
@@ -4399,8 +4398,13 @@ Private Sub imgNPS_DblClick(Cancel As Integer)
 Exit_Handler:
     DoCmd.Hourglass False
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - imgNPS_DblClick[frm_Switchboard])"
+    End Select
     Resume Exit_Handler
 End Sub
 
@@ -4419,7 +4423,7 @@ End Sub
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
 Private Sub lblNetwork_DblClick(Cancel As Integer)
-    On Error GoTo Err_Handler
+On Error GoTo Err_Handler
 
     Dim varAuthorUnitCode As Variant
     Dim varLastReleaseDate As Variant
@@ -4443,8 +4447,13 @@ Private Sub lblNetwork_DblClick(Cancel As Integer)
 Exit_Handler:
     DoCmd.Hourglass False
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - lblNetwork_DblClick[frm_Switchboard])"
+    End Select
     Resume Exit_Handler
 End Sub
 
@@ -4462,16 +4471,22 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub txtLinkPath_DblClick(Cancel As Integer)
-    On Error GoTo Err_Handler
+Private Sub tbxLinkPath_DblClick(Cancel As Integer)
+On Error GoTo Err_Handler
 
     ' Upon clicking the current link path, reconnect back end tables
     DoCmd.OpenForm "frm_Connect_Tables"
 
 Exit_Handler:
+    DoCmd.Hourglass False
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxLinkPath_DblClick[frm_Switchboard])"
+    End Select
     Resume Exit_Handler
 End Sub
 
@@ -4488,22 +4503,42 @@ End Sub
 ' Revisions:
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling, revise frm_Event_Add > EventAdd
+'   BLC - 11/9/2018  - add pseudoevent check
 ' ---------------------------------
-Private Sub cmdEvents_Add_Open_Form_Click()
-    On Error GoTo Err_Handler
+Private Sub btnAddEvent_Click()
+On Error GoTo Err_Handler
     
     ' Proceed to add event if the database is connected
     If fxnVerifyLinks() Then
         Me!Activity = "enter"
-        DoCmd.OpenForm "EventAdd" '"frm_Event_Add"
+        
+        'check if there are pseudoevents first
+        Dim db As DAO.Database
+        Dim rs As DAO.Recordset
+        Set db = CurrDb
+        
+        Set rs = db.OpenRecordset("qFrm_PseudoEvents", dbOpenDynaset)
+        rs.MoveLast
+        rs.MoveFirst
+        If rs.RecordCount > 0 Then
+            DoCmd.OpenForm "PseudoEventList"
+        Else
+            DoCmd.OpenForm "EventAdd" '"frm_Event_Add"
+        End If
     Else
         MsgBox "The database must be connected first", vbOKOnly, "Data Tables Not Connected"
     End If
 
 Exit_Handler:
+    DoCmd.Hourglass False
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnAddEvent_DblClick[frm_Switchboard])"
+    End Select
     Resume Exit_Handler
 End Sub
 
@@ -4521,8 +4556,8 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdGateway_Click()
-    On Error GoTo Err_Handler
+Private Sub btnGateway_Click()
+On Error GoTo Err_Handler
 
     ' Proceed to gateway if the database is connected
     If fxnVerifyLinks() Then
@@ -4536,8 +4571,13 @@ Private Sub cmdGateway_Click()
 
 Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnGateway_Click[frm_Switchboard])"
+    End Select
     Resume Exit_Handler
 End Sub
 
@@ -4555,12 +4595,25 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdViewMetadata_Click()
+Private Sub btnViewMetadata_Click()
+On Error GoTo Err_Handler
+    
     If Not (Not IsNothing(fxnGetLocalMetadataFileName) Or fxnNPSDataStoreMetadataExists Or fxnDBPurposeExists) Then
         MsgBox "No metadata or purpose was entered for this database."
     Else
         DoCmd.OpenForm "frm_Metadata_display", , , , acFormReadOnly, acDialog
     End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnViewMetadata_Click[frm_Switchboard])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -4577,7 +4630,7 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdExit_Click()
+Private Sub btnExit_Click()
 
 'Updated: Simon Kingston, 2/26/2007 - Set up to compact multiple back-end files
 Dim booLinked As Boolean
@@ -4590,73 +4643,77 @@ Dim booSuccess As Boolean
 
 On Error GoTo Err_Handler
 
-booLinked = fxnVerifyLinks()
-
-' Prompt for backups, depending on system default settings
-If booLinked And Me!chkBackupOnExit Then fxnMakeBackup
-Me!Activity = Null
-
-' Compact and repair back-end databases prior to exit, depending on
-'   default settings and on whether there is a valid link to the database
-If booLinked And Me!chkCompactBEOnExit And IsNull(Me!txtLinkPath) = False Then
+    booLinked = fxnVerifyLinks()
     
-    Set rstLinkedFiles = CurrentDb.OpenRecordset("SELECT Link_file_path FROM tsys_Link_Files WHERE Backup;", dbOpenForwardOnly)
-
-    Do Until rstLinkedFiles.EOF
-        strOrigDbName = rstLinkedFiles!Link_file_path
-        ' Don't do anything if the link path string is empty or isn't an mdb file
-        If Right(strOrigDbName, 4) = ".mdb" Then
-            intCount = 0
-            ' If needed, loop through alternate temporary names until an unused name is found
-            Do
-                intCount = intCount + 1
-                strSuffix = "_" & CStr(intCount) & ".mdb"
-                strNewDbName = Left(strOrigDbName, Len(strOrigDbName) - 4) & strSuffix
-            Loop Until fxnFileExists(strNewDbName) = False
-            
-            booSuccess = True 'initialize the success flag
-            DBEngine.CompactDatabase strOrigDbName, strNewDbName
-            'if compaction was successful, then attempt to delete original
-            If booSuccess Then
-                ' If successful deleting the original, uncompacted file the rename the compacted file
-                '   to the original name
-                If fxnDeleteFile(strOrigDbName) Then Name strNewDbName As strOrigDbName
-            End If
-        End If
+    ' Prompt for backups, depending on system default settings
+    If booLinked And Me!chkBackupOnExit Then fxnMakeBackup
+    Me!Activity = Null
+    
+    ' Compact and repair back-end databases prior to exit, depending on
+    '   default settings and on whether there is a valid link to the database
+    If booLinked And Me!chkCompactBEOnExit And IsNull(Me!tbxLinkPath) = False Then
         
-        rstLinkedFiles.MoveNext
-    Loop
-End If
+        Set rstLinkedFiles = CurrentDb.OpenRecordset("SELECT Link_file_path FROM tsys_Link_Files WHERE Backup;", dbOpenForwardOnly)
+    
+        Do Until rstLinkedFiles.EOF
+            strOrigDbName = rstLinkedFiles!Link_file_path
+            ' Don't do anything if the link path string is empty or isn't an mdb file
+            If Right(strOrigDbName, 4) = ".mdb" Then
+                intCount = 0
+                ' If needed, loop through alternate temporary names until an unused name is found
+                Do
+                    intCount = intCount + 1
+                    strSuffix = "_" & CStr(intCount) & ".mdb"
+                    strNewDbName = Left(strOrigDbName, Len(strOrigDbName) - 4) & strSuffix
+                Loop Until fxnFileExists(strNewDbName) = False
+                
+                booSuccess = True 'initialize the success flag
+                DBEngine.CompactDatabase strOrigDbName, strNewDbName
+                'if compaction was successful, then attempt to delete original
+                If booSuccess Then
+                    ' If successful deleting the original, uncompacted file the rename the compacted file
+                    '   to the original name
+                    If fxnDeleteFile(strOrigDbName) Then Name strNewDbName As strOrigDbName
+                End If
+            End If
+            
+            rstLinkedFiles.MoveNext
+        Loop
+    End If
 
-' Compact the front-end db upon closing if the database is connected and
-'   if the verify tables on startup is not set (otherwise slower performance)
-' Does not work with Access 2007
-If booLinked And Me!chkVerifyOnStartup = False Then
-    CommandBars("Menu Bar").Controls("Tools"). _
-        Controls("Database utilities"). _
-        Controls("Compact and repair database...").accDoDefaultAction
-End If
-
-' Close the application
-DoCmd.Quit acQuitSaveNone
+    ' Compact the front-end db upon closing if the database is connected and
+    '   if the verify tables on startup is not set (otherwise slower performance)
+    ' Does not work with Access 2007
+    If booLinked And Me!chkVerifyOnStartup = False Then
+        CommandBars("Menu Bar").Controls("Tools"). _
+            Controls("Database utilities"). _
+            Controls("Compact and repair database...").accDoDefaultAction
+    End If
+    
+    ' Close the application
+    DoCmd.Quit acQuitSaveNone
 
 Exit_Handler:
     On Error Resume Next
     rstLinkedFiles.Close
     Set rstLinkedFiles = Nothing
     Exit Sub
+    
 Err_Handler:
     booSuccess = False
     Select Case Err.Number
-        Case 3356, 70
+      Case 3356, 70
             ' The back-end database is already open when trying to compact ...
             DoCmd.Quit acQuitSaveNone
             Resume Next
-        Case Else
-            MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-                "Error encountered exiting the main menu"
-            Resume Exit_Handler
+      
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnExit_Click[frm_Switchboard])" & _
+            "Exiting main menu..."
     End Select
+    Resume Exit_Handler
+
 End Sub
 
 ' ---------------------------------
@@ -4674,7 +4731,7 @@ End Sub
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
 Private Sub cmdReview_Click()
-    On Error GoTo Err_Handler
+On Error GoTo Err_Handler
 
     ' Proceed to review and edit data if the database is connected
     If fxnVerifyLinks() Then
@@ -4687,8 +4744,13 @@ Private Sub cmdReview_Click()
 
 Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnReview_Click[frm_Switchboard])"
+    End Select
     Resume Exit_Handler
 End Sub
 
@@ -4706,8 +4768,8 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdQA_Click()
-    On Error GoTo Err_Handler
+Private Sub btnQA_Click()
+On Error GoTo Err_Handler
 
     ' Perform data validation if the database is connected
     If fxnVerifyLinks() = False Then
@@ -4731,8 +4793,13 @@ Private Sub cmdQA_Click()
 
 Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnViewMetadata_Click[frm_Switchboard])"
+    End Select
     Resume Exit_Handler
 End Sub
 
@@ -4750,8 +4817,8 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdLookups_Click()
-    On Error GoTo Err_Handler
+Private Sub btnLookups_Click()
+On Error GoTo Err_Handler
 
     ' Review and edit lookup tables if the database is connected
     If fxnVerifyLinks() = False Then
@@ -4763,8 +4830,13 @@ Private Sub cmdLookups_Click()
 
 Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnLookups_Click[frm_Switchboard])"
+    End Select
     Resume Exit_Handler
 End Sub
 
@@ -4782,16 +4854,21 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdDbWindow_Click()
-    On Error GoTo Err_Handler
+Private Sub btnDbWindow_Click()
+On Error GoTo Err_Handler
 
     ' Show the database window.  To re-hide: DoCmd.RunCommand acCmdWindowHide
     DoCmd.SelectObject acForm, "", True
 
 Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnDbWindow_Click[frm_Switchboard])"
+    End Select
     Resume Exit_Handler
 End Sub
 
@@ -4809,8 +4886,8 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdBackup_Click()
-    On Error GoTo Err_Handler
+Private Sub btnBackup_Click()
+On Error GoTo Err_Handler
 
     ' Start the database backup function
     If fxnVerifyLinks() Then
@@ -4822,8 +4899,13 @@ Private Sub cmdBackup_Click()
 
 Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnBackup_Click[frm_Switchboard])"
+    End Select
     Resume Exit_Handler
 End Sub
 
@@ -4841,16 +4923,21 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdReconnect_Click()
-    On Error GoTo Err_Handler
+Private Sub btnReconnect_Click()
+On Error GoTo Err_Handler
 
     ' Reconnect back end tables
     DoCmd.OpenForm "frm_Connect_Tables"
 
 Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnReconnect_Click[frm_Switchboard])"
+    End Select
     Resume Exit_Handler
 End Sub
 
@@ -4875,8 +4962,8 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdChangeDefaults_Click()
-    On Error GoTo Err_Handler
+Private Sub btnChangeDefaults_Click()
+On Error GoTo Err_Handler
 
     ' Perform data validation if the database is connected
     If fxnVerifyLinks() = False Then
@@ -4891,8 +4978,13 @@ Private Sub cmdChangeDefaults_Click()
 
 Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnChangeDefaults_Click[frm_Switchboard])"
+    End Select
     Resume Exit_Handler
 End Sub
 
@@ -4916,16 +5008,21 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdReleaseHistory_Click()
-    On Error GoTo Err_Handler
+Private Sub btnReleaseHistory_Click()
+On Error GoTo Err_Handler
 
     ' View the release history form
     DoCmd.OpenForm "frm_App_Releases", , , , acFormReadOnly
 
 Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnReleaseHistory_Click[frm_Switchboard])"
+    End Select
     Resume Exit_Handler
 End Sub
 
@@ -4943,7 +5040,7 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdReportBug_Click()
+Private Sub btnReportBug_Click()
     On Error GoTo Err_Handler
 
     ' View the release history form
@@ -4965,8 +5062,13 @@ Private Sub cmdReportBug_Click()
 
 Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnReportBug_Click[frm_Switchboard])"
+    End Select
     Resume Exit_Handler
 End Sub
 
@@ -4984,8 +5086,8 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdPlants_Open_Form_Click()
-On Error GoTo Err_cmdPlants_Open_Form_Click
+Private Sub btnPlants_Click()
+On Error GoTo Err_Handler
 
     Dim stDocName As String
     Dim stLinkCriteria As String
@@ -4993,11 +5095,16 @@ On Error GoTo Err_cmdPlants_Open_Form_Click
     stDocName = "frm_Plants"
     DoCmd.OpenForm stDocName, , , stLinkCriteria
 
-Exit_cmdPlants_Open_Form_Click:
+Exit_Handler:
     Exit Sub
-Err_cmdPlants_Open_Form_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdPlants_Open_Form_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnPlants_Click[frm_Switchboard])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -5014,8 +5121,8 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdTags_Open_Form_Click()
-On Error GoTo Err_cmdTags_Open_Form_Click
+Private Sub btnTags_Click()
+On Error GoTo Err_Handler
 
     Dim stDocName As String
     Dim stLinkCriteria As String
@@ -5023,11 +5130,16 @@ On Error GoTo Err_cmdTags_Open_Form_Click
     stDocName = "frm_Tags"
     DoCmd.OpenForm stDocName, , , stLinkCriteria
 
-Exit_cmdTags_Open_Form_Click:
+Exit_Handler:
     Exit Sub
-Err_cmdTags_Open_Form_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdTags_Open_Form_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnTags_Click[frm_Switchboard])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -5044,8 +5156,8 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdAppend_Click()
-On Error GoTo Err_cmdAppend_Click
+Private Sub btnAppend_Click()
+On Error GoTo Err_Handler
 
     Dim stDocName As String
     Dim stLinkCriteria As String
@@ -5053,11 +5165,16 @@ On Error GoTo Err_cmdAppend_Click
     stDocName = "frm_Append_Switchboard"
     DoCmd.OpenForm stDocName, , , stLinkCriteria
 
-Exit_cmdAppend_Click:
+Exit_Handler:
     Exit Sub
-Err_cmdAppend_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdAppend_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnAppend_Click[frm_Switchboard])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -5074,8 +5191,8 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdData_Summary_Click()
-On Error GoTo Err_cmdData_Summary_Click
+Private Sub btnDataSummary_Click()
+On Error GoTo Err_Handler
 
     Dim stDocName As String
     Dim stLinkCriteria As String
@@ -5083,11 +5200,17 @@ On Error GoTo Err_cmdData_Summary_Click
     stDocName = "frm_Data_Summary_Basic"
     DoCmd.OpenForm stDocName, , , stLinkCriteria
 
-Exit_cmdData_Summary_Click:
+Exit_Handler:
     Exit Sub
-Err_cmdData_Summary_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdData_Summary_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnDataSummary_Click[frm_Switchboard])"
+    End Select
+    Resume Exit_Handler
+
 End Sub
 
 ' ---------------------------------
@@ -5104,7 +5227,7 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdData_QA_Click()
+Private Sub btnDataQA_Click()
 On Error GoTo Err_Handler
 
     Dim stDocName As String
@@ -5115,8 +5238,13 @@ On Error GoTo Err_Handler
 
 Exit_Handler:
     Exit Sub
+    
 Err_Handler:
-    MsgBox Err.Description
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnDataQA_Click[frm_Switchboard])"
+    End Select
     Resume Exit_Handler
 End Sub
 
@@ -5166,8 +5294,8 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdUtilities_Click()
-On Error GoTo Err_cmdUtilities_Click
+Private Sub btnUtilities_Click()
+On Error GoTo Err_Handler
 
     Dim stDocName As String
     Dim stLinkCriteria As String
@@ -5175,12 +5303,16 @@ On Error GoTo Err_cmdUtilities_Click
     stDocName = "frm_Utilities"
     DoCmd.OpenForm stDocName, , , stLinkCriteria
 
-Exit_cmdUtilities_Click:
+Exit_Handler:
     Exit Sub
-
-Err_cmdUtilities_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdUtilities_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnUtilities_Click[frm_Switchboard])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
 ' ---------------------------------
@@ -5197,8 +5329,8 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
 ' ---------------------------------
-Private Sub cmdDashboard_Click()
-On Error GoTo Err_cmdDashboard_Click
+Private Sub btnDashboard_Click()
+On Error GoTo Err_Handler
 
     Dim stDocName As String
     Dim stLinkCriteria As String
@@ -5206,10 +5338,14 @@ On Error GoTo Err_cmdDashboard_Click
     stDocName = "frm_Dashboard"
     DoCmd.OpenForm stDocName, , , stLinkCriteria
 
-Exit_cmdDashboard_Click:
+Exit_Handler:
     Exit Sub
-
-Err_cmdDashboard_Click:
-    MsgBox Err.Description
-    Resume Exit_cmdDashboard_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnDashboard_Click[frm_Switchboard])"
+    End Select
+    Resume Exit_Handler
 End Sub

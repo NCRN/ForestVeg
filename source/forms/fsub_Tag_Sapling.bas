@@ -19,7 +19,7 @@ Begin Form
     Left =1170
     Top =2640
     Right =14925
-    Bottom =3540
+    Bottom =6495
     DatasheetGridlinesColor =15062992
     OrderBy ="[tbl_Tags].[Tag]"
     RecSrcDt = Begin
@@ -462,7 +462,6 @@ Begin Form
                     Overlaps =1
                 End
                 Begin ComboBox
-                    Locked = NotDefault
                     TabStop = NotDefault
                     OverlapFlags =85
                     TextAlign =1
@@ -559,7 +558,7 @@ Option Explicit
 ' =================================
 ' MODULE:       fsub_Tag_Sapling
 ' Level:        Application module
-' Version:      1.02
+' Version:      1.03
 '
 ' Description:  Sapling tag related functions & procedures for version control
 '
@@ -568,6 +567,8 @@ Option Explicit
 ' Revisions:    ML/GS - unknown  - 1.00 - initial version
 '               BLC   - 3/26/2018 - 1.01 - added documentation, error handling
 '               BLC   - 4/9/2018  - 1.02 - renamed cbo's > cbx, txt > tbx
+'               BLC   - 11/5/2018 - 1.03 - fix cbxTag_Status reference to cbxTagStatus,
+'                                          set cbxTagStatus.Locked = No vs. Yes (tag properties)
 ' =================================
 
 ' ---------------------------------
@@ -583,6 +584,7 @@ Option Explicit
 ' Revisions:
 '   BLC - 3/26/2018 - initial version (w/ documentation)
 '   BLC - 4/9/2018 - rename cboTag_Status > cbxTagStatus
+'   BLC - 11/5/2018 - fix cbxTag_Status reference to cbxTagStatus, set cbxTagStatus.Locked = No vs. Yes (tag properties)
 ' ---------------------------------
 Public Sub cbxTagStatus_BeforeUpdate(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -593,7 +595,7 @@ On Error GoTo Err_Handler
     Dim ChangeFieldType As String
     
     Set frm = Me
-    Set ctl = Me!cboTag_Status
+    Set ctl = Me!cbxTagStatus
     ChangeDescription = "Please confirm the revised TAG STATUS below"
     ChangeFieldType = "Combo_Box"
     
