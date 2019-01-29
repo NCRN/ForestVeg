@@ -1,3 +1,4 @@
+Attribute VB_Name = "mod_CommonFile"
 ' =================================
 ' MODULE:       basCommonFile
 ' Description:  Standard module of common file manipulation functions from Access97

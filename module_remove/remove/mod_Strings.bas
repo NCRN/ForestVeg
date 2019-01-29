@@ -1,3 +1,4 @@
+Attribute VB_Name = "mod_Strings"
 Option Compare Database
 Option Explicit
 
@@ -1240,3 +1241,4 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Function
+

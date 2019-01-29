@@ -13,12 +13,11 @@ Begin Form
     Width =9780
     DatasheetFontHeight =10
     ItemSuffix =9
-    Left =3555
-    Top =2370
-    Right =13590
-    Bottom =8775
+    Left =3480
+    Top =3600
+    Right =13260
+    Bottom =10005
     DatasheetGridlinesColor =12632256
-    Filter ="[Transect_Azimuth] = \"360\" "
     RecSrcDt = Begin
         0xe883dba6cff2e240
     End
@@ -740,8 +739,10 @@ Private Sub Form_Load()
 Dim strTransect As String
     strTransect = "360"
     Me.txtTransect_Azimuth.DefaultValue = strTransect
-    Forms![frm_Events]![fsub_Transects].Form.Filter = "[Transect_Azimuth] = """ & strTransect & """ "
-    Forms![frm_Events]![fsub_Transects].Form.FilterOn = True
+    
+    'FIX!! 2018/12/10 - Error 40036 on next 2 lines
+    'Forms![frm_Events]![fsub_Transects].Form.Filter = "[Transect_Azimuth] = """ & strTransect & """ "
+    'Forms![frm_Events]![fsub_Transects].Form.FilterOn = True
 End Sub
 Private Sub cmdOpen_Form_Decay_Class_Click()
 On Error GoTo Err_cmdOpen_Form_Decay_Class_Click

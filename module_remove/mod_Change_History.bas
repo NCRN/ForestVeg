@@ -1,3 +1,4 @@
+Attribute VB_Name = "mod_Change_History"
 Option Compare Database
 Option Explicit
 

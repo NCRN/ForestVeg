@@ -20,16 +20,17 @@ Begin Form
     GridY =24
     Width =14400
     DatasheetFontHeight =9
-    ItemSuffix =66
-    Left =1920
-    Top =885
-    Right =16320
-    Bottom =10770
+    ItemSuffix =85
+    Left =2625
+    Top =-2040
+    Right =17025
+    Bottom =8670
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x2680758ff389e340
     End
     Caption =" Data Summary Tool"
+    OnCurrent ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
@@ -63,6 +64,15 @@ Begin Form
             LabelX =230
             LabelY =-30
         End
+        Begin CheckBox
+            BorderLineStyle =0
+            LabelX =230
+            LabelY =-30
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
         Begin OptionGroup
             SpecialEffect =3
             BorderLineStyle =0
@@ -93,10 +103,24 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =9900
+            Height =10723
             BackColor =12574431
             Name ="Detail"
             Begin
+                Begin Rectangle
+                    BackStyle =1
+                    OverlapFlags =93
+                    Left =60
+                    Top =8940
+                    Width =3300
+                    Height =300
+                    BackColor =13828050
+                    Name ="rctAnnualData"
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =8940
+                    LayoutCachedWidth =3360
+                    LayoutCachedHeight =9240
+                End
                 Begin ComboBox
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =85
@@ -148,14 +172,14 @@ Begin Form
                     Left =3465
                     Top =1440
                     Width =10860
-                    Height =8460
+                    Height =9180
                     TabIndex =8
                     Name ="subResults"
 
                     LayoutCachedLeft =3465
                     LayoutCachedTop =1440
                     LayoutCachedWidth =14325
-                    LayoutCachedHeight =9900
+                    LayoutCachedHeight =10620
                 End
                 Begin CommandButton
                     OverlapFlags =85
@@ -1804,6 +1828,230 @@ Begin Form
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
                 End
+                Begin Label
+                    OverlapFlags =215
+                    TextAlign =2
+                    Left =60
+                    Top =8940
+                    Width =3315
+                    Height =300
+                    FontSize =12
+                    FontWeight =700
+                    BackColor =15527148
+                    Name ="lblAnnualData"
+                    Caption ="A N N U A L   D A T A"
+                    FontName ="Calibri"
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =8940
+                    LayoutCachedWidth =3375
+                    LayoutCachedHeight =9240
+                End
+                Begin ComboBox
+                    LimitToList = NotDefault
+                    AllowAutoCorrect = NotDefault
+                    OverlapFlags =85
+                    TextAlign =2
+                    IMESentenceMode =3
+                    ListRows =20
+                    Left =720
+                    Top =9300
+                    Width =1224
+                    Height =270
+                    FontSize =10
+                    TabIndex =39
+                    BackColor =-2147483643
+                    ForeColor =-2147483640
+                    ColumnInfo ="\"\";\"\";\"3\";\"2\""
+                    Name ="cbxAnnualYear"
+                    RowSourceType ="Table/Query"
+                    RowSource ="SELECT qfrm_Data_Gateway.Event_Year FROM qfrm_Data_Gateway WHERE (((qfrm_Data_Ga"
+                        "teway.Event_Year) Is Not Null)) GROUP BY qfrm_Data_Gateway.Event_Year ORDER BY q"
+                        "frm_Data_Gateway.Event_Year DESC;"
+                    ColumnWidths ="1224"
+                    StatusBarText ="Select year for export"
+                    AfterUpdate ="[Event Procedure]"
+                    FontName ="Calibri"
+                    ControlTipText ="Select year for export"
+
+                    LayoutCachedLeft =720
+                    LayoutCachedTop =9300
+                    LayoutCachedWidth =1944
+                    LayoutCachedHeight =9570
+                    Begin
+                        Begin Label
+                            OverlapFlags =85
+                            TextAlign =3
+                            Left =60
+                            Top =9300
+                            Width =600
+                            Height =255
+                            FontSize =10
+                            BackColor =-2147483633
+                            ForeColor =-2147483630
+                            Name ="lblAnnualYr"
+                            Caption ="Year:"
+                            FontName ="Calibri"
+                            ControlTipText ="Select year for export"
+                            LayoutCachedLeft =60
+                            LayoutCachedTop =9300
+                            LayoutCachedWidth =660
+                            LayoutCachedHeight =9555
+                        End
+                    End
+                End
+                Begin CheckBox
+                    OverlapFlags =85
+                    Left =2100
+                    Top =9330
+                    Width =240
+                    Height =300
+                    TabIndex =40
+                    BorderColor =10921638
+                    Name ="chkZip"
+                    DefaultValue ="0"
+                    ControlTipText ="Create zip file"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2100
+                    LayoutCachedTop =9330
+                    LayoutCachedWidth =2340
+                    LayoutCachedHeight =9630
+                    Begin
+                        Begin Label
+                            OverlapFlags =119
+                            Left =2330
+                            Top =9300
+                            Width =690
+                            Height =240
+                            Name ="lblZip"
+                            Caption ="Zip File"
+                            ControlTipText ="Create zip file"
+                            LayoutCachedLeft =2330
+                            LayoutCachedTop =9300
+                            LayoutCachedWidth =3020
+                            LayoutCachedHeight =9540
+                        End
+                    End
+                End
+                Begin OptionGroup
+                    SpecialEffect =0
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    Left =1740
+                    Top =9645
+                    Width =1566
+                    Height =283
+                    TabIndex =41
+                    Name ="optgFileType"
+                    AfterUpdate ="[Event Procedure]"
+                    ControlTipText ="Choose the file type for the annual data export"
+
+                    LayoutCachedLeft =1740
+                    LayoutCachedTop =9645
+                    LayoutCachedWidth =3306
+                    LayoutCachedHeight =9928
+                    Begin
+                        Begin Label
+                            OverlapFlags =85
+                            TextAlign =3
+                            Left =285
+                            Top =9660
+                            Width =1245
+                            Height =240
+                            BackColor =12574431
+                            Name ="lblFileType"
+                            Caption ="Export File Type:"
+                            ControlTipText ="Choose the file type for the annual data export"
+                            LayoutCachedLeft =285
+                            LayoutCachedTop =9660
+                            LayoutCachedWidth =1530
+                            LayoutCachedHeight =9900
+                        End
+                        Begin OptionButton
+                            OverlapFlags =87
+                            Left =1875
+                            Top =9688
+                            OptionValue =1
+                            Name ="optCSV"
+                            ControlTipText ="Export CSV files (*.csv)"
+
+                            LayoutCachedLeft =1875
+                            LayoutCachedTop =9688
+                            LayoutCachedWidth =2135
+                            LayoutCachedHeight =9928
+                            Begin
+                                Begin Label
+                                    OverlapFlags =247
+                                    Left =2105
+                                    Top =9660
+                                    Width =360
+                                    Height =240
+                                    Name ="Label80"
+                                    Caption ="CSV"
+                                    ControlTipText ="Export CSV files (*.csv)"
+                                    LayoutCachedLeft =2105
+                                    LayoutCachedTop =9660
+                                    LayoutCachedWidth =2465
+                                    LayoutCachedHeight =9900
+                                End
+                            End
+                        End
+                        Begin OptionButton
+                            OverlapFlags =87
+                            Left =2625
+                            Top =9688
+                            TabIndex =1
+                            OptionValue =2
+                            Name ="optXLS"
+                            ControlTipText ="Export an Excel file (*.xlsx)"
+
+                            LayoutCachedLeft =2625
+                            LayoutCachedTop =9688
+                            LayoutCachedWidth =2885
+                            LayoutCachedHeight =9928
+                            Begin
+                                Begin Label
+                                    OverlapFlags =247
+                                    Left =2855
+                                    Top =9660
+                                    Width =330
+                                    Height =240
+                                    Name ="Label82"
+                                    Caption ="XLS"
+                                    ControlTipText ="Export an Excel file (*.xlsx)"
+                                    LayoutCachedLeft =2855
+                                    LayoutCachedTop =9660
+                                    LayoutCachedWidth =3185
+                                    LayoutCachedHeight =9900
+                                End
+                            End
+                        End
+                    End
+                End
+                Begin CommandButton
+                    Enabled = NotDefault
+                    OverlapFlags =85
+                    Left =600
+                    Top =10080
+                    Width =2115
+                    Height =330
+                    FontWeight =600
+                    TabIndex =42
+                    Name ="btnAnnualExport"
+                    Caption ="Prepare Annual Export"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Prepare the annual data export"
+
+                    LayoutCachedLeft =600
+                    LayoutCachedTop =10080
+                    LayoutCachedWidth =2715
+                    LayoutCachedHeight =10410
+                    WebImagePaddingLeft =2
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
+                    Overlaps =1
+                End
             End
         End
     End
@@ -1819,7 +2067,7 @@ Option Explicit
 ' =================================
 ' MODULE:       frm_Data_Summary_Advanced
 ' Level:        Application module
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  Standard form for summarizing/exploring project data
 ' Source/date:  John Boetsch, Jan 2010
@@ -1827,6 +2075,7 @@ Option Explicit
 ' Adapted:      Bonnie Campbell, May 14, 2018
 ' Revisions:    JB/ML/GS - 1/2010+  - 1.00 - initial version
 '               BLC   - 5/14/2018 - 1.01 - added documentation, error handling
+'               BLC   - 1/xx/2019 - 1.02 - added annual data exports
 ' =================================
 
 ' ---------------------------------
@@ -1854,6 +2103,7 @@ Option Explicit
 ' Revisions:
 '   JB/ML/GS - 1/2010+ - initial version
 '   BLC - 5/14/2018 - documentation, error handling
+'   BLC - 1/xx/2019 - add btnAnnualExport defaults
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1867,6 +2117,12 @@ On Error GoTo Err_Handler
     End If
     fxnFilterRecords
     
+    'defaults
+    btnAnnualExport.ForeColor = lngBlack
+    btnAnnualExport.HoverForeColor = lngBlue
+    btnAnnualExport.HoverColor = lngGreen
+    btnAnnualExport.Enabled = False
+        
 Exit_Handler:
     Exit Sub
     
@@ -1879,6 +2135,41 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          Form_Current
+' Description:  form current actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  B. Campbell, January 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 1/xx/2019 - initial version
+' ---------------------------------
+Private Sub Form_Current()
+On Error GoTo Err_Handler
+
+    'enable btnAnnualExport?
+    If cbxAnnualYear > 1970 And _
+      (optgFileType = 1 Or optgFileType = 2) Then
+      btnAnnualExport.Enabled = True
+    Else
+      btnAnnualExport.Enabled = False
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Current[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
 ' ---------------------------------
 ' SUB:          cbxSelectQuery_NotInList
@@ -2947,6 +3238,97 @@ End Sub
 '    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
 '    Resume Exit_Procedure
 'End Sub
+
+' ---------------------------------
+' SUB:          cbxYear_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  B. Campbell, January 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 1/xx/2019 - initial version
+' ---------------------------------
+Private Sub cbxAnnualYear_AfterUpdate()
+On Error GoTo Err_Handler
+
+    EnableAnnualExport
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxAnnualYear_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          chkZipFile_AfterUpdate
+' Description:  checkbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  B. Campbell, January 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 1/xx/2019 - initial version
+' ---------------------------------
+Private Sub chkZipFile_AfterUpdate()
+On Error GoTo Err_Handler
+
+    EnableAnnualExport
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - chkZipFile_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          optgFileType_AfterUpdate
+' Description:  option group after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  B. Campbell, January 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 1/xx/2019 - initial version
+' ---------------------------------
+Private Sub optgFileType_AfterUpdate()
+On Error GoTo Err_Handler
+
+    EnableAnnualExport
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - optgFileType_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 ' ---------------------------------
 ' SUB:          btnViewExcluded_Click
 ' Description:  button click actions
@@ -3585,7 +3967,6 @@ End Sub
 ' Revisions:
 '   ML/GS - unknown - initial version
 '   BLC - 5/14/2018 - documentation, error handling
-
 ' ---------------------------------
 Private Sub btnOpenBasicSummaryForm_Click()
 On Error GoTo Err_Handler
@@ -3602,6 +3983,169 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnOpenBasicSummaryForm_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnAnnualExport_Click
+' Description:  button click actions
+'               Prepares a set annual data files for the year chosen
+'               User selects if the file(s) should be CSVs or an XLSX file
+'               and if the data should be placed into a zip file
+'               User is prompted for the file save location
+'               After the file(s) are saved, the save location opens as well
+'               as the location of the datastore record
+' Assumptions:  The annual data tables are properly identified in the AnnualDataTables table
+'               of the application (front-end, not the back-end database)
+'               Assumes the user has already performed QA/QC on the data being prepared
+'               for the annual IMD DataStore upload
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  B. Campbell, January 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 1/xx/2019 - initial version
+' ---------------------------------
+Private Sub btnAnnualExport_Click()
+On Error GoTo Err_Handler
+
+    Dim SaveLocation As String
+    Dim uri As String
+    
+    'data store URL
+    uri = "https://irma.nps.gov/Content/DataStore/"
+    
+    'start work
+    DoCmd.Hourglass True
+    
+    'prompt for save location
+    'zip the file(s)
+    
+    'filter the data based on the year chosen
+    PrepareExports cbxAnnualYear, IIf(Me.optgFileType = 1, "CSV", "XLS"), Me.chkZip
+    
+    
+    'open DataStore location
+    Application.FollowHyperlink uri, , True, False
+    
+    'open save location
+
+    'end work
+    DoCmd.Hourglass False
+
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnAnnualExport_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          PrepareExports
+' Description:  Generates and saves files based on desired export information
+' Assumptions:  -
+' Parameters:
+'   FileType - type of file(s) to create (optional, string, "CSV" or "XLS", "CSV" - default)
+'   ZipFile - whether the file(s) should be bundled into a zip file (optional, boolean, True - default)
+'
+'   Running PrepareExports(yyyy) using the 4-digit year and defaults will prepare a zipped file of CSVs from the
+'   data tables listed in the AnnualDataTables table filtered by the DataYear entered that
+'   can be uploaded to the DataStore for a protocol's annual data
+'
+' Returns:      -
+' Throws:       none
+' References:
+'   frm_Data_Summary_Advanced.btnExportAll_Click event
+'   Mark Lehman/Geoffrey Sanders, unknown
+' Source/date:
+' Adapted:      -
+' Revisions:
+'   BLC - 1/xx/2019 - initial version
+' ---------------------------------
+Public Sub PrepareExports(DataYear, Optional FileType As String = "CSV", Optional ZipFile As Boolean = True)
+On Error GoTo Err_Handler
+        
+    Dim qryName As String
+    Dim strInitFile As String
+    Dim strSaveFile As String
+    Dim strSaveFolder As String
+
+    'Generate the default output file name and allow user to edit it
+    strInitFile = Application.CurrentProject.Path & "\Exports\NCRN_ForestVeg_All_Data_" & CStr(Format(Now(), "yyyymmdd")) & ".xlsx"
+    strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.xls*)", "*.xls*")
+    strSaveFolder = fPathParsing(strSaveFile, "D")
+
+    Dim rs As DAO.Recordset
+    Set rs = GetRecords("s_annual_data_export")
+
+    Do While Not (rs.BOF = True And rs.EOF = True)
+        
+        qryName = IIf(rs("TableName") <> "Tag_History", "qExport_All_" & rs("TableName"), "qExport_Tag_Status_by_Cycle_x")
+        
+        Select Case FileType
+            Case "XLSX"
+                DoCmd.TransferSpreadsheet acExport, 10, qryName, strSaveFile, True
+            Case "CSV"
+                DoCmd.TransferText acExportDelim, , qryName, strSaveFolder & "\" & rs("TableName") & "_" & CStr(Format(Now(), "yyyymmdd")) & ".csv", True
+        End Select
+        
+    Loop
+        
+    MsgBox "File saved to:" & vbCrLf & vbCrLf & strSaveFile
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnExportAll_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          EnableAnnualExport
+' Description:  check if annual export button should be enabled
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  B. Campbell, January 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 1/xx/2019 - initial version
+' ---------------------------------
+Private Sub EnableAnnualExport()
+On Error GoTo Err_Handler
+
+    'enable btnAnnualExport?
+    If cbxAnnualYear > 1970 And _
+      (optgFileType = 1 Or optgFileType = 2) Then
+      btnAnnualExport.Enabled = True
+    Else
+      btnAnnualExport.Enabled = False
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - EnableAnnualExport[frm_Data_Summary_Advanced])"
     End Select
     Resume Exit_Handler
 End Sub

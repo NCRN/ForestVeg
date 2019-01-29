@@ -13,58 +13,6 @@ dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
 Begin
     Begin
-        dbText "Name" ="tbl_Events.Event_ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Location_ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Event_Group_ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Protocol_Name"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Event_Notes"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.CWD_Check_360"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.CWD_Check_120"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.CWD_Check_240"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Event_Date"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Event_Time"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.LocMessage"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.ShowLocMsg"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Entered_By"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="e.Updated_By"
         dbLong "AggregateType" ="-1"
     End
@@ -77,14 +25,6 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.PseudoEvent"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Pictures_Taken"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="e.Certified"
         dbLong "AggregateType" ="-1"
     End
@@ -93,27 +33,7 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Deer_Impact"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="e.Is_Excluded"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Verified_By"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Is_Excluded"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Verified_Date"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Early_Detect"
         dbLong "AggregateType" ="-1"
     End
     Begin
@@ -121,39 +41,7 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Certified"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Rare_Spp"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Certified_By"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Plot_Maint"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="e.Deer_Impact"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Certified_Date"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Entered_On_Tablet"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Entered_Date"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Updated_By"
         dbLong "AggregateType" ="-1"
     End
     Begin
@@ -161,15 +49,7 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Updated_Date"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="e.Pictures_Taken"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Verified"
         dbLong "AggregateType" ="-1"
     End
     Begin

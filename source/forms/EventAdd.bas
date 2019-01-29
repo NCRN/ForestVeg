@@ -823,7 +823,7 @@ On Error GoTo Err_Handler
     lblHintPseudoEvent.Visible = True
     
     'set hover
-    tglPseudoEvent.hoverColor = lngGreen
+    tglPseudoEvent.HoverColor = lngGreen
        
     'initialize values
     ClearForm Me

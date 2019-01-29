@@ -10,6 +10,7 @@ Begin Form
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
+    FilterOn = NotDefault
     DefaultView =0
     ScrollBars =0
     ViewsAllowed =1
@@ -23,11 +24,12 @@ Begin Form
     Width =14400
     DatasheetFontHeight =10
     ItemSuffix =156
-    Left =510
-    Top =615
-    Right =14910
-    Bottom =9810
+    Left =945
+    Top =1230
+    Right =15345
+    Bottom =10425
     DatasheetGridlinesColor =12632256
+    Filter ="[Event_ID]='{022397BF-62C2-4E8D-B7E1-8F865805AA1B}'"
     RecSrcDt = Begin
         0x58c05212730ae440
     End
@@ -2095,7 +2097,7 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 11/9/2018 - add documentation, error handling
 ' ---------------------------------
-Private Sub Form_Current(Cancel As Integer)
+Private Sub Form_Current() 'Cancel As Integer)
 On Error GoTo Err_Handler
    
     'Update fields in header from Locations table
@@ -2479,6 +2481,7 @@ End Sub
 ' Revisions:
 '   MEL/GS - unknown - initial version
 '   BLC - 11/9/2018 - add documentation, error handling
+'   BLC - 12/10/2018 - revised error handling
 ' ---------------------------------
 Private Sub lblLink_To_Plot_Photos_Click()
 On Error GoTo Err_Handler
@@ -2491,12 +2494,12 @@ On Error GoTo Err_Handler
     PhotoFolder = "T:\I&M\Monitoring\Forest_Vegetation\Photos\"
     If FolderExists(PhotoFolder & Me!txtPlot_Name) Then
         RetVal = Shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
-        GoTo Exit_Procedure
+        GoTo Exit_Handler
     Else
         If FolderExists(RootFolder) Then
             MsgBox ("Folder for this plot not found....Opening the root of the Photos folder.")
             RetVal = Shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
-            GoTo Exit_Procedure
+            GoTo Exit_Handler
         Else
             MsgBox ("The network appears to be unavailable. Network access is required to view photos.")
         End If
@@ -2816,6 +2819,7 @@ End Sub
 ' Revisions:
 '   MEL/GS - unknown - initial version
 '   BLC - 11/9/2018 - add documentation, error handling
+'   BLC - 12/10/2018 - revised error handling
 ' ---------------------------------
 Public Sub SetEditMode(booEditOn As Boolean)
 ' Description:  Toggles the form between browse and edit mode
@@ -2827,7 +2831,7 @@ Public Sub SetEditMode(booEditOn As Boolean)
 ' Source/date:  Simon Kingston, 1/17/2007
 ' Revisions:    Mark Lehman 3/15/2010 Repurposed version of FilterGateway by Kingston
 
-On Error GoTo Error_Handler
+On Error GoTo Err_Handler
 
     Me!tglBrowse_Edit = booEditOn
     

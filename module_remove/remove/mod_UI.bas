@@ -1,3 +1,4 @@
+Attribute VB_Name = "mod_UI"
 Option Compare Database
 Option Explicit
 
@@ -814,9 +815,9 @@ End Sub
 ' ---------------------------------
 Public Function EnableControl(ctrl As Control, backcolor As Long, ForeColor As Long, _
                                 Optional borderColor As Long, _
-                                Optional hoverColor As Long, _
+                                Optional HoverColor As Long, _
                                 Optional pressColor As Long, _
-                                Optional hoverForeColor As Long, _
+                                Optional HoverForeColor As Long, _
                                 Optional pressedForeColor As Long)
 On Error GoTo Err_Handler
     
@@ -825,9 +826,9 @@ On Error GoTo Err_Handler
     
     If ctrl.ControlType = acCommandButton Then
         ctrl.borderColor = borderColor
-        ctrl.hoverColor = hoverColor
+        ctrl.HoverColor = HoverColor
         ctrl.pressedColor = pressColor
-        ctrl.hoverForeColor = hoverForeColor
+        ctrl.HoverForeColor = HoverForeColor
         ctrl.pressedForeColor = pressedForeColor
     End If
 
@@ -1320,3 +1321,4 @@ Err_Handler:
     End Select
     Resume Exit_Sub
 End Sub
+

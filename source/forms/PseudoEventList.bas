@@ -1594,7 +1594,8 @@ End Sub
 Private Sub lblPlot_Name_DblClick(Cancel As Integer)
     On Error GoTo Err_Handler
 
-    fxnSortRecords ("Plot_Name")
+    'fxnSortRecords ("Plot_Name")
+    SortRecords ("Plot_Name")
 
 Exit_Procedure:
     Exit Sub
@@ -1637,7 +1638,8 @@ End Sub
 Private Sub lblUnit_Group_DblClick(Cancel As Integer)
     On Error GoTo Err_Handler
 
-    fxnSortRecords ("Unit_Group")
+    'fxnSortRecords ("Unit_Group")
+    SortRecords ("Unit_Group")
 
 Exit_Procedure:
     Exit Sub
@@ -1680,7 +1682,8 @@ End Sub
 Private Sub lblSubunit_Code_DblClick(Cancel As Integer)
     On Error GoTo Err_Handler
 
-    fxnSortRecords ("Subunit_Code")
+    'fxnSortRecords ("Subunit_Code")
+    SortRecords ("Subunit_Code")
 
 Exit_Procedure:
     Exit Sub
@@ -1723,7 +1726,8 @@ End Sub
 Private Sub lblEvent_Year_DblClick(Cancel As Integer)
     On Error GoTo Err_Handler
 
-    fxnSortRecords ("Event_Year")
+    'fxnSortRecords ("Event_Year")
+    SortRecords ("Event_Year")
 
 Exit_Procedure:
     Exit Sub

@@ -1,3 +1,4 @@
+Attribute VB_Name = "mod_Validation"
 Option Compare Database
 Option Explicit
 
@@ -1119,3 +1120,4 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Function
+

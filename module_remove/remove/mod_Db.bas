@@ -1,3 +1,4 @@
+Attribute VB_Name = "mod_Db"
 Option Compare Database
 Option Explicit
 
