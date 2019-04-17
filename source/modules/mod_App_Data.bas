@@ -90,7 +90,7 @@ On Error GoTo Err_Handler
     Set cbx = frm.Controls(cbxName)
     
     'default
-    frmTag.Controls("cbxTagStatus").backcolor = lngWhite
+    frmTag.Controls("cbxTagStatus").BackColor = lngWhite
     
     'dead statuses only
     If Left(cbx, 4) = "Dead" Then
@@ -105,7 +105,7 @@ On Error GoTo Err_Handler
                 'do nothing
             Case Else
                 'highlight
-                frmTag.Controls("cbxTagStatus").backcolor = lngYellow
+                frmTag.Controls("cbxTagStatus").BackColor = lngYellow
         End Select
             
     End If
@@ -311,8 +311,8 @@ Debug.Print "DBH_mod_App_Data: " & strSQL
                 '.Controls("chkDBHCheck").Visible = True
                 .Controls("tbxHighlightChk").Visible = True
                 .Controls("lblDBHCheck").ForeColor = lngRed
-                .Controls("tbxHighlightChk").backcolor = lngLtYellow
-                .Controls("tbxComments").backcolor = lngYellow
+                .Controls("tbxHighlightChk").BackColor = lngLtYellow
+                .Controls("tbxComments").BackColor = lngYellow
             
                 'set focus
                 .Controls(frmDBHName).Form.Controls("tbxDBH").SetFocus

@@ -346,7 +346,7 @@ Public Function fxnSaveFile(strFileName As String, strFileType As String, _
         Filter:=strFilter, _
         Flags:=lngFlags, _
         DialogTitle:="Save As", _
-        FileName:=strFileName)
+        fileName:=strFileName)
 
 Exit_Procedure:
     Exit Function

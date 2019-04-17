@@ -4139,7 +4139,7 @@ Option Explicit
 ' =================================
 ' FORM:         frm_Switchboard
 ' Level:        Form module
-' Version:      1.04
+' Version:      1.05
 '
 ' Description:  Standard module - main screen of the user interface, viewed at startup
 ' Data source:  tsys_App_Defaults
@@ -4158,6 +4158,7 @@ Option Explicit
 '               BLC   - 4/22/2018 - 1.02 - added documentation, error handling
 '               BLC   - 10/22/2018 - 1.03 - updated Exit_Procedure > Exit_Handler, revised Browse functionality
 '               BLC   - 10/23/2018 - 1.04 - updated to display BE version
+'               BLC   - 1/30/2019  - 1.05 - added SetDbVersions
 ' =================================
 
 ' ---------------------------------
@@ -4173,6 +4174,7 @@ Option Explicit
 ' Revisions:
 '   BLC - 4/22/2018 - initial version
 '   BLC - 10/23/2018 - revised to display BE version
+'   BLC - 1/30/2019 - set db versions via SetDbVersions in Form_Load (if used here SetDbVersions returns NULL error)
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -4188,22 +4190,8 @@ On Error GoTo Err_Handler
     strCaption = Nz(DLookup("[Database_title]", "tsys_App_Releases", "[Release_ID] = '" _
         & Me!Release_ID & "'"), "")
     Me.Caption = strCaption
-
-    'set Db BE Version
-    Dim beDb As DAO.Database
-    Set beDb = OpenDatabase(TempVars("BEfilepath"))
-    'Debug.Print beDb.Properties("Db Version")
-    SetTempVar "Db BE Version", CStr(beDb.Properties("Db Version"))
-
-    'get front & back-end versions
-    tbxVersionFE = Nz(CurrDb.Properties("Db Version"), "-")
-    'tbxVersionBE = Nz(CurrDb.Properties("Db BE Version"), "-")
-    tbxVersionBE = Nz(TempVars("Db BE Version"), "-")
     
-    'hide BE label for now
-    lblVersionBE.Visible = IIf(Len(tbxVersionBE) > 0, True, False)
-
-    Debug.Print "lp=" & TempVars("BEfilepath")
+'    SetDbVersions
     
 Exit_Handler:
     Exit Sub
@@ -4245,6 +4233,7 @@ End Sub
 ' Revisions:
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling
+'   BLC - 1/30/2019 - set db version labels via SetDbVersions
 ' ---------------------------------
 Private Sub Form_Load()
     On Error GoTo Err_Handler
@@ -4317,6 +4306,9 @@ Private Sub Form_Load()
     Me!tbxAuthorOrg = varAuthorOrg
     Me!tbxAuthorPhone = varAuthorPhone
     Me!lblAuthorEmail.Caption = varAuthorEmail
+
+    'set FE/BE db version textboxes
+    SetDbVersions
 
 Exit_Handler:
     On Error Resume Next
@@ -4518,8 +4510,10 @@ On Error GoTo Err_Handler
         Set db = CurrDb
         
         Set rs = db.OpenRecordset("qFrm_PseudoEvents", dbOpenDynaset)
-        rs.MoveLast
-        rs.MoveFirst
+'        If Not (rs.BOF And rs.EOF) Then
+'            rs.MoveLast
+'            rs.MoveFirst
+'        End If
         If rs.RecordCount > 0 Then
             DoCmd.OpenForm "PseudoEventList"
         Else
@@ -5346,6 +5340,52 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnDashboard_Click[frm_Switchboard])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          SetDbVersions
+' Description:  sets database version displays
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  B. Campbell, January 30, 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 1/30/2019  - initial version
+' ---------------------------------
+Public Sub SetDbVersions()
+On Error GoTo Err_Handler
+
+    'set Db BE Version
+    Dim beDb As DAO.Database
+    Set beDb = OpenDatabase(TempVars("BEfilepath"))
+    'Debug.Print beDb.Properties("Db Version")
+    SetTempVar "Db BE Version", CStr(beDb.Properties("Db Version"))
+
+    'get front & back-end versions
+    tbxVersionFE = Nz(CurrDb.Properties("Db Version"), "-")
+    'tbxVersionBE = Nz(CurrDb.Properties("Db BE Version"), "-")
+    tbxVersionBE = Nz(TempVars("Db BE Version"), "-")
+    
+    'hide BE label for now
+    lblVersionBE.Visible = IIf(Len(tbxVersionBE) > 0, True, False)
+
+'    Debug.Print "lp=" & TempVars("BEfilepath")
+
+'    Debug.Print "Db BE: " & Me.tbxVersionBE & " FE: " & Me.tbxVersionFE
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SetDbVersions[frm_Switchboard])"
     End Select
     Resume Exit_Handler
 End Sub

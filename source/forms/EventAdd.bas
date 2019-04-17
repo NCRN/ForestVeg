@@ -1,17 +1,9 @@
 ﻿Version =20
 VersionRequired =20
 Begin Form
-    PopUp = NotDefault
-    Modal = NotDefault
-    RecordSelectors = NotDefault
-    ControlBox = NotDefault
     AutoCenter = NotDefault
-    NavigationButtons = NotDefault
     DividingLines = NotDefault
-    OrderByOn = NotDefault
-    DataEntry = NotDefault
     DefaultView =0
-    ScrollBars =0
     ViewsAllowed =1
     TabularCharSet =204
     BorderStyle =1
@@ -21,15 +13,14 @@ Begin Form
     GridY =24
     Width =4320
     DatasheetFontHeight =9
-    ItemSuffix =21
-    Left =7965
-    Top =2310
-    Right =12285
-    Bottom =7695
+    ItemSuffix =29
+    Left =5745
+    Top =165
+    Right =10065
+    Bottom =5550
     DatasheetGridlinesColor =15062992
-    OrderBy ="[tbl_Events].[Event_Date] DESC"
     RecSrcDt = Begin
-        0xba0a500d9b30e540
+        0xbfc854d06f46e540
     End
     RecordSource ="tbl_Events"
     OnCurrent ="[Event Procedure]"
@@ -173,8 +164,8 @@ Begin Form
                     RowSourceType ="Table/Query"
                     RowSource ="SELECT tbl_Locations.Location_ID, tbl_Locations.Plot_Name, tbl_Locations.Panel, "
                         "tbl_Locations.Frame, tbl_Locations.Unit_Code FROM tbl_Locations WHERE (((tbl_Loc"
-                        "ations.Panel) = [Forms]![frm_Switchboard]![Panel]) AND ((tbl_Locations.Unit_Code"
-                        ") = 'MANA')) ORDER BY tbl_Locations.Plot_Name;"
+                        "ations.Panel)=[Forms]![frm_Switchboard]![Panel])) ORDER BY tbl_Locations.Plot_Na"
+                        "me;"
                     ColumnWidths ="0;2160"
                     AfterUpdate ="[Event Procedure]"
                     AllowValueListEdits =0
@@ -285,15 +276,15 @@ Begin Form
                             OverlapFlags =93
                             Left =240
                             Top =600
-                            Width =975
-                            Height =210
+                            Width =690
+                            Height =240
                             FontSize =8
                             Name ="lblEventID"
                             Caption ="Event ID:"
                             LayoutCachedLeft =240
                             LayoutCachedTop =600
-                            LayoutCachedWidth =1215
-                            LayoutCachedHeight =810
+                            LayoutCachedWidth =930
+                            LayoutCachedHeight =840
                         End
                     End
                 End
@@ -344,7 +335,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
-                    OverlapFlags =87
+                    OverlapFlags =95
                     TextFontCharSet =204
                     Left =2820
                     Top =4200
@@ -638,6 +629,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =255
                     Name ="tbxPseudoEvent"
+                    DefaultValue ="0"
                     FontName ="Franklin Gothic Book"
                     GridlineColor =10921638
 
@@ -668,6 +660,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =255
                     Name ="tbxEID"
+                    ControlSource ="Event_ID"
                     FontName ="Franklin Gothic Book"
                     GridlineColor =10921638
 
@@ -682,6 +675,147 @@ Begin Form
                     ForeTint =50.0
                     GridlineThemeColorIndex =1
                     GridlineShade =65.0
+                End
+                Begin TextBox
+                    TabStop = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =215
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =3180
+                    Top =3960
+                    Width =720
+                    Height =300
+                    FontSize =9
+                    TabIndex =11
+                    BorderColor =8355711
+                    ForeColor =255
+                    Name ="tbxRecordPseudoEvent"
+                    ControlSource ="PseudoEvent"
+                    FontName ="Franklin Gothic Book"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =3180
+                    LayoutCachedTop =3960
+                    LayoutCachedWidth =3900
+                    LayoutCachedHeight =4260
+                    BackThemeColorIndex =1
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    ThemeFontIndex =1
+                    ForeTint =50.0
+                    GridlineThemeColorIndex =1
+                    GridlineShade =65.0
+                End
+                Begin TextBox
+                    TabStop = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =215
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =180
+                    Top =4440
+                    Width =720
+                    Height =300
+                    FontSize =9
+                    TabIndex =12
+                    BorderColor =8355711
+                    ForeColor =255
+                    Name ="tbxRecordLocationID"
+                    ControlSource ="Location_ID"
+                    FontName ="Franklin Gothic Book"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =4440
+                    LayoutCachedWidth =900
+                    LayoutCachedHeight =4740
+                    BackThemeColorIndex =1
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    ThemeFontIndex =1
+                    ForeTint =50.0
+                    GridlineThemeColorIndex =1
+                    GridlineShade =65.0
+                End
+                Begin TextBox
+                    TabStop = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =215
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =180
+                    Top =4860
+                    Width =720
+                    Height =300
+                    FontSize =9
+                    TabIndex =13
+                    BorderColor =8355711
+                    ForeColor =255
+                    Name ="tbxRecordEventDate"
+                    ControlSource ="Event_Date"
+                    FontName ="Franklin Gothic Book"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =4860
+                    LayoutCachedWidth =900
+                    LayoutCachedHeight =5160
+                    BackThemeColorIndex =1
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    ThemeFontIndex =1
+                    ForeTint =50.0
+                    GridlineThemeColorIndex =1
+                    GridlineShade =65.0
+                End
+                Begin TextBox
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    Left =60
+                    Top =1140
+                    Width =420
+                    Height =315
+                    TabIndex =14
+                    Name ="tbxPark"
+                    ControlSource ="Location_ID"
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =1140
+                    LayoutCachedWidth =480
+                    LayoutCachedHeight =1455
+                End
+                Begin TextBox
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    Left =60
+                    Top =1740
+                    Width =420
+                    Height =315
+                    TabIndex =15
+                    Name ="tbxPlot"
+                    ControlSource ="Location_ID"
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =1740
+                    LayoutCachedWidth =480
+                    LayoutCachedHeight =2055
+                End
+                Begin TextBox
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    Left =60
+                    Top =2175
+                    Width =420
+                    Height =315
+                    TabIndex =16
+                    Name ="tbxDate"
+                    ControlSource ="Event_Date"
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =2175
+                    LayoutCachedWidth =480
+                    LayoutCachedHeight =2490
                 End
             End
         End
@@ -698,7 +832,7 @@ Option Explicit
 ' =================================
 ' MODULE:       EventAdd
 ' Level:        Application module
-' Version:      1.02
+' Version:      1.03
 '
 ' Description:  add event related functions & procedures
 '
@@ -707,6 +841,7 @@ Option Explicit
 ' Revisions:    ML/GS - unknown  - 1.00 - initial version
 '               BLC   - 4/5/2018 - 1.01 - added documentation, error handling
 '               BLC   - 10/23/2018 - 1.02 - added Form_Open event, PseudoEvent handling
+'               BLC   - 3/18/2019 - 1.03 - accommodate calling form park code
 ' =================================
 
 '---------------------
@@ -783,6 +918,7 @@ End Property
 ' Adapted:      -
 ' Revisions:
 '   BLC - 10/23/2018 - initial version
+'   BLC - 3/18/2019  - accommodate passing park code from calling form
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -797,14 +933,13 @@ On Error GoTo Err_Handler
     
     'dev mode
     tbxDevMode = DEV_MODE
-
                 
     Title = "Create New Event"
     'lblTitle.Caption = "" 'clear header title
     Directions = "dirs"
     
     'defaults
-    rctPseudoEvent.backcolor = lngLtTan
+    rctPseudoEvent.BackColor = lngLtTan
     
     'disable until data allows
     cbxLocationID.Enabled = False
@@ -834,7 +969,17 @@ On Error GoTo Err_Handler
         DoCmd.GoToRecord acDataForm, Me.Name, acNewRec
         Debug.Print "eid=" & Me.tbxEID
     End If
-
+    
+    'set park code
+    If IsEmpty(Me.OpenArgs) = False And Me.OpenArgs <> "Choose Park" Then
+        Me.cbxParkCode = Me.OpenArgs
+        Me.cbxLocationID.Enabled = True
+        SetPlots Nz(Me.OpenArgs, "")
+    Else
+        Me.cbxParkCode = Me.OpenArgs
+        Me.cbxLocationID.Enabled = False
+    End If
+    
 Exit_Handler:
     Exit Sub
 Err_Handler:
@@ -861,6 +1006,11 @@ End Sub
 ' ---------------------------------
 Private Sub Form_Load()
 On Error GoTo Err_Handler
+
+    'go to a new record
+'    DoCmd.GoToRecord , , acNewRec
+
+    DoCmd.GoToRecord Record:=acNewRec
 
     'Generate string GUID for Event_ID
     If Me.NewRecord = True Then
@@ -898,6 +1048,16 @@ Private Sub Form_Current()
 On Error GoTo Err_Handler
 
     NewRecordMark Me.Form
+
+    'am i dirty?
+    If Me.Dirty Then
+        MsgBox "DIRTY!", vbOKCancel, "Dirt!"
+    Else
+        MsgBox "NO DIRT", vbOKCancel, "No Dirt :O("
+    End If
+
+Debug.Print "Dirty = " & Me.Dirty
+Debug.Print "NewRec = " & Me.NewRecord
 
 Exit_Handler:
     Exit Sub
@@ -964,20 +1124,21 @@ End Sub
 Private Sub cbxParkCode_AfterUpdate()
 On Error GoTo Err_Handler
 
-    Me.cbxLocationID.RowSource = "SELECT tbl_Locations.Location_ID, tbl_Locations.Plot_Name, " _
-            & "tbl_Locations.Panel, tbl_Locations.Frame, tbl_Locations.Unit_Code " _
-            & "FROM tbl_Locations " _
-            & "WHERE (((tbl_Locations.Panel) = [Forms]![frm_Switchboard]![Panel]) " _
-            & "AND ((tbl_Locations.Unit_Code) = '" & Me.cbxParkCode & "')) " _
-            & "ORDER BY tbl_Locations.Plot_Name;"
-
-    'enable plot
-    cbxLocationID.Enabled = True
-    
-    'set focus on next field
-    cbxLocationID.SetFocus
-    
-    'Me.cbxLocationID = Me.cbxLocationID.ItemData(0) #Error 2448 - can't assign value to this object
+    SetPlots cbxParkCode
+'    Me.cbxLocationID.RowSource = "SELECT tbl_Locations.Location_ID, tbl_Locations.Plot_Name, " _
+'            & "tbl_Locations.Panel, tbl_Locations.Frame, tbl_Locations.Unit_Code " _
+'            & "FROM tbl_Locations " _
+'            & "WHERE (((tbl_Locations.Panel) = [Forms]![frm_Switchboard]![Panel]) " _
+'            & "AND ((tbl_Locations.Unit_Code) = '" & Me.cbxParkCode & "')) " _
+'            & "ORDER BY tbl_Locations.Plot_Name;"
+'
+'    'enable plot
+'    cbxLocationID.Enabled = True
+'
+'    'set focus on next field
+'    cbxLocationID.SetFocus
+'
+'    'Me.cbxLocationID = Me.cbxLocationID.ItemData(0) #Error 2448 - can't assign value to this object
 
 Exit_Handler:
     Exit Sub
@@ -1005,6 +1166,12 @@ End Sub
 ' ---------------------------------
 Private Sub cbxLocationID_AfterUpdate()
 On Error GoTo Err_Handler
+
+    'set record value
+    tbxRecordLocationID = cbxLocationID
+    
+    'set the location
+    tbxPlot = tbxRecordLocationID
 
     'check
     ReadyForSave
@@ -1039,6 +1206,12 @@ End Sub
 ' ---------------------------------
 Private Sub tbxEventDate_AfterUpdate()
 On Error GoTo Err_Handler
+    
+    'set record value
+    tbxRecordEventDate = tbxEventDate
+    
+    'set the event date
+    tbxDate = tbxRecordEventDate
     
     'check
     ReadyForSave
@@ -1080,6 +1253,9 @@ On Error GoTo Err_Handler
     Debug.Print "pse=" & tglPseudoEvent.Value
     tbxPseudoEvent.Value = CByte(Abs(tglPseudoEvent.Value))
     Debug.Print "tbxpse=" & tbxPseudoEvent.Value
+    
+    'set database value
+    tbxRecordPseudoEvent.Value = CByte(Abs(tglPseudoEvent.Value))
     
     'check
     ReadyForSave
@@ -1128,15 +1304,39 @@ On Error GoTo Err_Handler
                 vbExclamation, "Enter Start Date"
             Me!tbxEventDate.SetFocus
         Else
-            DoCmd.RunCommand acCmdSaveRecord
             
+    'Generate string GUID for Event_ID
+    'If Me.NewRecord = True Then
+        If GetDataType("tbl_Events", "Event_ID") = dbText Then
+'            Me!Event_ID = fxnGUIDGen
+'            Me.tbxEID = Me!Event_ID
+            Me.tbxEID = fxnGUIDGen
+            Me.tbxEventID = Me.tbxEID
+        End If
+    'End If
+            
+Debug.Print "Dirty = " & Me.Dirty
+Debug.Print "NewRec = " & Me.NewRecord
+            
+    If Me.Dirty = True Then
+        DoCmd.RunCommand acCmdSaveRecord
+    Else
+        MsgBox "nothing to save"
+    End If
+'            DoCmd.RunCommand acCmdSaveRecord
+        DoCmd.RunCommand acCmdSaveRecord
+        
             'retrieve the EventID
 Debug.Print "eid = " & Me.tbxEID 'tbxEventID
             
             strDocName = "frm_Events"
             strLinkCriteria = "[Event_ID]=" & "'" & Me![tbxEventID] & "'"
-'            DoCmd.OpenForm strDocName, , , strLinkCriteria, , , "(Creating)"
-'            DoCmd.Close acForm, "frm_Event_Add"
+Debug.Print strLinkCriteria
+ '           DoCmd.OpenForm strDocName, , , strLinkCriteria, , , " (Creating)," & Me.tbxEID
+            DoCmd.OpenForm strDocName, , , strLinkCriteria, , , "(Browsing)"
+            
+            DoCmd.Close acForm, "EventAdd", acSavePrompt
+            'DoCmd.Close acForm, "frm_Event_Add"
         End If
     End If
 
@@ -1304,3 +1504,46 @@ Sub NewRecordMark(frm As Form)
         & "@If not, move to an existing record."
     End If
 End Sub
+
+' ---------------------------------
+' FUNCTION:     SetPlots
+' Description:  filter plots by park code
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, March 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 3/18/2019 - initial version
+' ---------------------------------
+Public Function SetPlots(ParkCode As String)
+On Error GoTo Err_Handler
+    
+    Me.cbxLocationID.RowSource = "SELECT tbl_Locations.Location_ID, tbl_Locations.Plot_Name, " _
+            & "tbl_Locations.Panel, tbl_Locations.Frame, tbl_Locations.Unit_Code " _
+            & "FROM tbl_Locations " _
+            & "WHERE (((tbl_Locations.Panel) = [Forms]![frm_Switchboard]![Panel]) " _
+            & "AND ((tbl_Locations.Unit_Code) = '" & ParkCode & "')) " _
+            & "ORDER BY tbl_Locations.Plot_Name;"
+
+    'enable plot
+    cbxLocationID.Enabled = True
+    
+    'set focus on next field
+    cbxLocationID.SetFocus
+    
+    'Me.cbxLocationID = Me.cbxLocationID.ItemData(0) #Error 2448 - can't assign value to this object
+    
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SetPlots[EventAdd])"
+    End Select
+    Resume Exit_Handler
+End Function

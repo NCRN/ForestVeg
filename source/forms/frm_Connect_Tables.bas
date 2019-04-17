@@ -23,16 +23,17 @@ Begin Form
     Width =10254
     DatasheetFontHeight =10
     ItemSuffix =96
-    Left =9090
-    Top =4365
-    Right =19350
-    Bottom =8130
+    Left =4665
+    Top =3195
+    Right =14925
+    Bottom =6960
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xb46db5e5f0f8e240
     End
     RecordSource ="tsys_Link_Files"
     Caption =" Update Data Table Connections"
+    OnOpen ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
         0xa0050000a0050000a0050000a005000000000000201c0000e010000001000000 ,
@@ -125,7 +126,7 @@ Begin Form
                     FontSize =9
                     FontWeight =700
                     ForeColor =0
-                    Name ="cmdBrowse"
+                    Name ="btnBrowse"
                     Caption ="Browse"
                     OnClick ="[Event Procedure]"
                     FontName ="Arial"
@@ -180,7 +181,7 @@ Begin Form
                     FontSize =12
                     FontWeight =700
                     TabIndex =1
-                    Name ="txtLinkDescription"
+                    Name ="tbxLinkDescription"
                     ControlSource ="Link_description"
                     StatusBarText ="Describes the types of data tables included in the link"
                     FontName ="Calibri"
@@ -206,7 +207,7 @@ Begin Form
                     ColumnWidth =2520
                     FontSize =12
                     TabIndex =2
-                    Name ="txtCurrentName"
+                    Name ="tbxCurrentName"
                     ControlSource ="Link_file_name"
                     FontName ="Calibri"
 
@@ -250,7 +251,7 @@ Begin Form
                     ColumnWidth =2205
                     FontSize =9
                     TabIndex =3
-                    Name ="txtCurrentPath"
+                    Name ="tbxCurrentPath"
                     ControlSource ="Link_file_path"
                     StatusBarText ="Current linked file path"
                     FontName ="Calibri"
@@ -273,7 +274,7 @@ Begin Form
                     Height =312
                     FontSize =9
                     TabIndex =5
-                    Name ="txtNewPath"
+                    Name ="tbxNewPath"
                     ControlSource ="New_file_path"
                     StatusBarText ="New linked file path"
                     FontName ="Calibri"
@@ -296,7 +297,7 @@ Begin Form
                     Height =312
                     FontSize =12
                     TabIndex =4
-                    Name ="txtNewName"
+                    Name ="tbxNewName"
                     ControlSource ="New_file_name"
                     FontName ="Calibri"
 
@@ -342,7 +343,7 @@ Begin Form
                     FontSize =9
                     FontWeight =700
                     ForeColor =0
-                    Name ="cmdUpdateLinks"
+                    Name ="btnUpdateLinks"
                     Caption ="Update links"
                     OnClick ="[Event Procedure]"
                     FontName ="Arial"
@@ -387,7 +388,7 @@ Begin Form
                     FontWeight =700
                     TabIndex =1
                     ForeColor =0
-                    Name ="cmdClose"
+                    Name ="btnClose"
                     Caption ="Cancel"
                     OnClick ="[Event Procedure]"
                     FontName ="Arial"
@@ -436,57 +437,157 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' FORM NAME:    frm_Connect_Tables
-' Description:  Standard module to update back-end db connections
+' FORM:         frm_Connect_Tables form
+' Level:        Application form module
+' Version:      1.03
+'
+' Description:  updates back-end db connections, related functions & procedures
+'
 ' Data source:  tsys_Link_Files
-' Data access:  edit only, no additions, moving between records, or deletions
+' Data access:  edit only, no additions, moving between records or deletions
 ' Pages:        none
-' Functions:    none
-' References:   fxnGetLinkFile, fxnRefreshLinks, fxnSwitchboardIsOpen
-' Source/date:  Susan Huse, MonitoringSM.mdb v 7/28/2004
-' Revisions:    John R. Boetsch, May 2005 - minor edits
-' Revisions:    JRB, May 24, 2006 - documentation, added error trapping, fixed specification
-'               of initial directory to current directory, simplified a little
+' Functions:    fxnGetLinkFile, fxnRefreshLinks, fxnSwitchboardIsOpen
+' References:   -
+' Source/date:  Susan Huse, MonitoringSM.mdb v July 28, 2004
+' Revisions:    SH  - 5/xx/2005 - 1.00 - initial version
+'               JRB - 5/xx/2005 - 1.01 - minor edits
+'               JRB - 5/24/2006 - 1.02 - documentation, added error trapping,
+'                                        fixed specification of initial directory
+'                                        to current directory, simplified a little
+'               BLC - 1/30/2019 - 1.03 - added documenation, error handling
 ' =================================
 
-Private Sub txtCurrentPath_Click()
-    On Error GoTo Err_Handler
+' ---------------------------------
+'  Declarations
+' ---------------------------------
+
+' ---------------------------------
+'  Properties
+' ---------------------------------
+
+' ----------------
+'  Events
+' ----------------
+
+' ----------------
+'  Form
+' ----------------
+' ---------------------------------
+' SUB:          Form_Open
+' Description:  form open actions
+' Assumptions:  -
+' Parameters:   Cancel - whether open action(s) should be cancelled (boolean)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 5/23/2018 - update documentation, error handling
+' ---------------------------------
+Private Sub Form_Open(Cancel As Integer)
+On Error GoTo Err_Handler
+
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[frm_Connect_Tables form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          tbxCurrentPath_Click
+' Description:  textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 1/30/2019 - update documentation, error handling
+' ---------------------------------
+Private Sub tbxCurrentPath_Click()
+On Error GoTo Err_Handler
 
     SendKeys "+{F2}"
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
-
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxCurrentPath_Click[frm_Connect_Tables form])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub txtNewPath_Click()
-    On Error GoTo Err_Handler
+' ---------------------------------
+' SUB:          tbxNewPath
+' Description:  textbox click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 1/30/2019 - update documentation, error handling
+' ---------------------------------
+Private Sub tbxNewPath_Click()
+On Error GoTo Err_Handler
 
     SendKeys "+{F2}"
 
-Exit_Procedure:
+Exit_Handler:
     Exit Sub
-
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxNewPath_Click[frm_Connect_Tables form])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub cmdBrowse_Click()
-    On Error GoTo Err_Handler
+' ---------------------------------
+' SUB:          btnBrowse_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 1/30/2019 - update documentation, error handling
+' ---------------------------------
+Private Sub btnBrowse_Click()
+On Error GoTo Err_Handler
 
     Dim strCurrentFile As String
     Dim strCurrentDir As String
     Dim varFilePath As Variant
     Dim arrFile() As String
 
-    strCurrentFile = Me!txtCurrentName
-    strCurrentDir = Me!txtCurrentPath
+    strCurrentFile = Me!tbxCurrentName
+    strCurrentDir = Me!tbxCurrentPath
 
     ' Clip to indicate just the folder of the current back-end
     strCurrentDir = Left(strCurrentDir, Len(strCurrentDir) - Len(strCurrentFile) - 1)
@@ -495,44 +596,60 @@ Private Sub cmdBrowse_Click()
     varFilePath = fxnGetLinkFile(strCurrentDir)
 
     ' Exit if the user didn't specify a file
-    If IsNull(varFilePath) Then GoTo Exit_Procedure
+    If IsNull(varFilePath) Then GoTo Exit_Handler
 
     ' Update the new path and file name controls
-    Me!txtNewPath = varFilePath
+    Me!tbxNewPath = varFilePath
     ' Update the new file name after first storing the path components in an array
     arrFile = Split(varFilePath, "\")
-    Me!txtNewName = arrFile(UBound(arrFile))
-    Me!cmdUpdateLinks.Enabled = True
+    Me!tbxNewName = arrFile(UBound(arrFile))
+    Me!btnUpdateLinks.Enabled = True
 
-Exit_Procedure:
+
+Exit_Handler:
     Exit Sub
-
+    
 Err_Handler:
     Select Case Err.Number
         Case 3078   ' Can't find the system table
             MsgBox "Error #" & Err.Number & ":  Missing a system table. Please notify" & _
                 vbCrLf & "the database administrator before using this application.", _
                 vbCritical, "System table error (tsys_Link_Files)"
-            Resume Exit_Procedure
+            Resume Exit_Handler
         Case 2001   ' Field name in DLookup improperly specified
             MsgBox "Error #" & Err.Number & ":  System table field not found." & _
                 vbCrLf & "Please notify the database administrator before using " & _
                 "this application.", vbCritical, "System table error (tsys_Link_Files)"
-            Resume Exit_Procedure
+            Resume Exit_Handler
         Case 94    ' Missing information in the systems table
             MsgBox "Error #" & Err.Number & ":  Missing system table info. Please notify" & _
                 vbCrLf & "the database administrator before using this application.", _
                 vbCritical, "System table error (tsys_Link_Files)"
-            Resume Exit_Procedure
-        Case Else
-            MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-            Resume Exit_Procedure
+            Resume Exit_Handler
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnBrowse_Click[frm_Connect_Tables form])"
     End Select
-    
+    Resume Exit_Handler
 End Sub
 
-Private Sub cmdUpdateLinks_Click()
-    On Error GoTo Err_Handler
+' ---------------------------------
+' SUB:          btnUpdateLinks_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 1/30/2019 - update documentation, error handling,
+'                     update txtLinkPath to tbxLinkPath
+' ---------------------------------
+Private Sub btnUpdateLinks_Click()
+On Error GoTo Err_Handler
 
     Dim rst As DAO.Recordset
     Dim strSysTable As String       ' Name of the system table listing linked tables
@@ -589,7 +706,7 @@ Private Sub cmdUpdateLinks_Click()
         ' If the switchboard is open and the current file is the primary back-end, then update
         '   the switchboard control for the current file link
         If fxnSwitchboardIsOpen And strLinkName = "Back-end data" And bHasError = False Then
-            Forms![frm_Switchboard]![txtLinkPath] = strFilePath
+            Forms![frm_Switchboard]![tbxLinkPath] = strFilePath
             Forms!frm_Switchboard.Refresh
             
             '10/23/2018 update
@@ -615,12 +732,12 @@ NextBackEnd:
         DoCmd.Close , , acSaveNo
     End If
 
-Exit_Procedure:
+Exit_Handler:
     On Error Resume Next
     rst.Close
     Set rst = Nothing
     Exit Sub
-
+    
 Err_Handler:
     Select Case Err.Number
         Case 3078   ' Can't find the system table
@@ -635,27 +752,42 @@ Err_Handler:
             MsgBox "Error #" & Err.Number & ":  Missing system table info. Please notify" & _
                 vbCrLf & "the database administrator before using this application.", _
                 vbCritical, "System table error (tsys_Link_Tables)"
-        Case Else
-            MsgBox "Error #" & Err.Number & ": " & Err.Description, _
-                vbCritical, "Error encountered while updating database links"
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered when updating database links (#" & Err.Number & " - btnUpdateLinks_Click[frm_Connect_Tables form])"
     End Select
-    Resume Exit_Procedure
-    
+    Resume Exit_Handler
 End Sub
 
-Private Sub cmdClose_Click()
-    On Error GoTo Err_Handler
+' ---------------------------------
+' SUB:          btnClose_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoff Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC - 1/30/2019 - update documentation, error handling
+' ---------------------------------
+Private Sub btnClose_Click()
+On Error GoTo Err_Handler
 
-DoCmd.Close acForm, Me.Name, acSaveNo
-'clear new file name, new file path
-CurrentDb.Execute "UPDATE tsys_Link_Files SET New_file_name=null, New_file_path=null;"
+    DoCmd.Close acForm, Me.Name, acSaveNo
+    'clear new file name, new file path
+    CurrentDb.Execute "UPDATE tsys_Link_Files SET New_file_name=null, New_file_path=null;"
 
-Exit_Procedure:
-    On Error Resume Next
+Exit_Handler:
     Exit Sub
-
+    
 Err_Handler:
-    MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical
-    Resume Exit_Procedure
-
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnClose_Click[frm_Connect_Tables form])"
+    End Select
+    Resume Exit_Handler
 End Sub

@@ -10,7 +10,6 @@ Begin Form
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
-    FilterOn = NotDefault
     DefaultView =0
     ScrollBars =0
     ViewsAllowed =1
@@ -23,20 +22,16 @@ Begin Form
     GridY =24
     Width =14400
     DatasheetFontHeight =10
-    ItemSuffix =156
-    Left =945
-    Top =1230
-    Right =15345
-    Bottom =10425
+    ItemSuffix =161
+    Left =2145
+    Right =16545
+    Bottom =9195
     DatasheetGridlinesColor =12632256
-    Filter ="[Event_ID]='{022397BF-62C2-4E8D-B7E1-8F865805AA1B}'"
     RecSrcDt = Begin
-        0x58c05212730ae440
+        0xf1a2883a853fe540
     End
     RecordSource ="qfrm_Events"
-    Caption ="NCRN Sampling Event - (Browsing) - (Browsing) - (Browsing) - (Browsing) - (Brows"
-        "ing) - (Browsing) - (Browsing) - (Browsing) - (Browsing) - (Browsing) - (Browsin"
-        "g)"
+    Caption ="NCRN Sampling Event"
     OnCurrent ="[Event Procedure]"
     BeforeInsert ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -152,9 +147,22 @@ Begin Form
             BackColor =15527148
             Name ="Detail"
             Begin
+                Begin Rectangle
+                    SpecialEffect =0
+                    BackStyle =1
+                    OldBorderStyle =0
+                    OverlapFlags =93
+                    Top =540
+                    Width =14400
+                    Height =1080
+                    Name ="rctPseudoEvent"
+                    LayoutCachedTop =540
+                    LayoutCachedWidth =14400
+                    LayoutCachedHeight =1620
+                End
                 Begin Label
                     BackStyle =1
-                    OverlapFlags =93
+                    OverlapFlags =95
                     TextAlign =2
                     Width =14400
                     Height =540
@@ -248,7 +256,7 @@ Begin Form
                     TabStop = NotDefault
                     SpecialEffect =0
                     OldBorderStyle =0
-                    OverlapFlags =93
+                    OverlapFlags =223
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
@@ -268,7 +276,7 @@ Begin Form
                 End
                 Begin Tab
                     MultiRow = NotDefault
-                    OverlapFlags =85
+                    OverlapFlags =215
                     Top =1200
                     Width =14250
                     Height =8010
@@ -1742,7 +1750,7 @@ Begin Form
                     Locked = NotDefault
                     SpecialEffect =0
                     OldBorderStyle =0
-                    OverlapFlags =85
+                    OverlapFlags =215
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
@@ -1763,7 +1771,7 @@ Begin Form
                 End
                 Begin TextBox
                     Locked = NotDefault
-                    OverlapFlags =87
+                    OverlapFlags =215
                     IMESentenceMode =3
                     Left =3000
                     Top =960
@@ -1954,6 +1962,110 @@ Begin Form
                     LayoutCachedWidth =2943
                     LayoutCachedHeight =900
                 End
+                Begin CommandButton
+                    OverlapFlags =215
+                    Left =10395
+                    Top =105
+                    Width =2766
+                    Height =366
+                    FontWeight =600
+                    TabIndex =14
+                    Name ="btnConvertPseudoEvent"
+                    Caption ="  Convert to Regular Event"
+                    OnClick ="[Event Procedure]"
+                    PictureData = Begin
+                        0x2800000010000000100000000100040000000000800000000000000000000000 ,
+                        0x0000000000000000000000000000800000800000008080008000000080008000 ,
+                        0x8080000080808000c0c0c0000000ff00c0c0c00000ffff00ff000000c0c0c000 ,
+                        0xffff0000ffffff00dddddddddddddddd00d00d00dddddddd00d00d00dddddddd ,
+                        0xdddddddddddddddddddddddddddddddddddddddddddddd00ddddd7ddddddd000 ,
+                        0xd7dd7c7ddddd000d7c7dd7ddddd000ddd7dddddddd000dddddddddddd000dddd ,
+                        0xddd7dddd000ddddddd7c7dd000ddddddddd7dd0b0dddddddddddd0b0dddddddd ,
+                        0xddddd70ddddddddd000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000
+                    End
+                    ObjectPalette = Begin
+                        0x000301000000000000000000
+                    End
+                    ControlTipText ="Convert pseudoevent to normal event (NOTE - you cannot convert it back so make s"
+                        "ure!)"
+                    LeftPadding =60
+                    RightPadding =75
+                    BottomPadding =120
+
+                    LayoutCachedLeft =10395
+                    LayoutCachedTop =105
+                    LayoutCachedWidth =13161
+                    LayoutCachedHeight =471
+                    PictureCaptionArrangement =5
+                    ForeThemeColorIndex =0
+                    UseTheme =1
+                    Shape =1
+                    Gradient =12
+                    BackColor =1796857
+                    BackThemeColorIndex =5
+                    BorderColor =1796857
+                    BorderThemeColorIndex =5
+                    HoverColor =4819194
+                    HoverThemeColorIndex =5
+                    HoverTint =80.0
+                    PressedColor =413911
+                    PressedThemeColorIndex =5
+                    PressedShade =80.0
+                    HoverForeColor =0
+                    HoverForeThemeColorIndex =0
+                    PressedForeColor =0
+                    PressedForeThemeColorIndex =0
+                    Shadow =-1
+                    QuickStyle =24
+                    QuickStyleMask =-1
+                    WebImagePaddingTop =1
+                    Overlaps =1
+                End
+                Begin Label
+                    OverlapFlags =247
+                    TextAlign =2
+                    Left =1500
+                    Top =60
+                    Width =3120
+                    Height =450
+                    FontSize =18
+                    FontWeight =700
+                    BackColor =-2147483643
+                    ForeColor =16777215
+                    Name ="lblPseudoEventFlag"
+                    Caption ="* PSEUDO EVENT *"
+                    FontName ="Berlin Sans FB Demi"
+                    LayoutCachedLeft =1500
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =4620
+                    LayoutCachedHeight =510
+                End
             End
         End
     End
@@ -2023,6 +2135,7 @@ End Sub
 ' =================================
 ' FORM NAME:    frm_Data_Entry
 ' Description:  Primary field data entry form
+' Version:      1.03
 ' Data source:  tbl_Locations
 ' Data access:  edit; allow additions off except for new records
 ' Pages:        none
@@ -2031,6 +2144,7 @@ End Sub
 ' Source/date:  John R. Boetsch, June 2006
 ' Revisions:    Simon Kingston, October - January 2006
 '                   - extensive updates, adding GUID generation code, new controls
+'               BLC - 4/2/2019 - 1.03 - added psuedoevent handling
 ' =================================
 
 ' ---------------------------------
@@ -2046,6 +2160,7 @@ End Sub
 ' Revisions:
 '   MEL/GS - unknown - initial version
 '   BLC - 11/9/2018 - add documentation, error handling
+'   BLC - 4/2/2019 - added pseudoevent handling
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -2053,24 +2168,82 @@ On Error GoTo Err_Handler
     Dim strCaptionSuffix As String
     Dim booEditOn As Boolean
 
-    ' Set the opening parameters depending on the arguments passed from the previous form
-    If Me.OpenArgs = "(Browsing)" Then
-        strCaptionSuffix = " - " & Me.OpenArgs
-        booEditOn = False
-    ElseIf Me.OpenArgs = "(Creating)" Then
-        strCaptionSuffix = " - " & Me.OpenArgs
-        booEditOn = True
-    ElseIf Me.OpenArgs <> "" Then
-        strCaptionSuffix = " - " & "No arguments"
-        booEditOn = False
-    End If
+'    ' Set the opening parameters depending on the arguments passed from the previous form
+'    If Me.OpenArgs = "(Browsing)" Then
+'        strCaptionSuffix = " - " & Me.OpenArgs
+'        booEditOn = False
+'    ElseIf Me.OpenArgs = "(Creating)" Then
+'        strCaptionSuffix = " - " & Me.OpenArgs
+'        booEditOn = True
+'    ElseIf Me.OpenArgs <> "" Then
+'        strCaptionSuffix = " - " & "No arguments"
+'        booEditOn = False
+'    End If
+    
+    'split out Caption, EventID
+    Dim ary() As String
+    ary = IIf(Len(Me.OpenArgs) > 0, Split(Me.OpenArgs, ","), "")
+    
+    'default
+    
+    'cleanup caption (prevents (Browsing)-(Browsing)-(Browsing)...)
+    Me.Caption = IIf(CountInString(Me.Caption, "-") > 1, _
+                      Replace(Replace(Me.Caption, ary(0), ""), "-", ""), _
+                      Me.Caption)
+                      
+    booEditOn = False
+    strCaptionSuffix = " - "
+    
+    Select Case ary(0)
+        Case "(Browsing)"
+            Add2Self strCaptionSuffix, ary(0)
+        Case "(Creating)"
+            booEditOn = True
+            Add2Self strCaptionSuffix, ary(0)
+        Case ""
+            Add2Self strCaptionSuffix, "No arguments"
+        Case Else
+    End Select
+    
+    'update form title
+    Me.Caption = Add2Self(Trim(Me.Caption), strCaptionSuffix)
     
     'TO DO
     'Insert code here to update Plot Status in the Location table if this is the first sampling of this plot.
-        
-    Me.Caption = Me.Caption & strCaptionSuffix
+    
     SetEditMode (booEditOn)
 
+    'check for PseudoEvents
+    SetTempVar "IsPseudoEvent", Nz(Me.tbxPseudoEvent.Value, 0) 'tbxPseudoEvent.Value
+    Dim bgdColor As Long, txtColor As Long
+'
+'    'defaults
+'    txtColor = lngWhite
+'    bgdColor = HTMLConvert("#ECECEC")
+'    btnConvertPseudoEvent.HoverColor = lngGreen
+'    btnConvertPseudoEvent.Visible = False
+'    lblPseudoEventFlag.Visible = False
+'    rctPseudoEvent.Visible = False
+'
+    If TempVars("IsPseudoEvent") = 1 Then
+        'bgdColor = lngLtPink
+        txtColor = lngLtPink
+        lblPseudoEventFlag.ForeColor = txtColor
+        lblPseudoEventFlag.Visible = True
+        rctPseudoEvent.BackColor = txtColor
+        rctPseudoEvent.Visible = True
+
+        'expose conversion button ONLY in edit mode
+        If Not Right(Me.tglBrowse_Edit.Caption, 4) = "EDIT" Then
+            btnConvertPseudoEvent.Visible = True
+        End If
+    End If
+    
+    'Me.Detail.BackColor = bgdColor
+    'lblEvent_Form_Header.ForeColor = txtColor
+    'lblPseudoEventFlag.ForeColor = lngBlack
+    'lblPseudoEventFlag.BackColor = txtColor
+    
 Exit_Handler:
     Exit Sub
     
@@ -2078,7 +2251,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - Form_Current[frm_Events])"
+            "Error encountered (#" & Err.Number & " - Form_Open[frm_Events])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -2155,7 +2328,36 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          btnConvertPseudoEvent_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, February, 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 2/20/2019 - initial version
+' ---------------------------------
+Private Sub btnConvertPseudoEvent_Click()
+On Error GoTo Err_Handler
 
+    lblPseudoEventFlag.Visible = False
+    btnConvertPseudoEvent.Enabled = False
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnConvertPseudoEvent_Click[frm_Events])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
 ' ---------------------------------
 ' SUB:          chkPicturesTaken_AfterUpdate
@@ -2218,7 +2420,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
 
 ' ---------------------------------
 ' SUB:          chkTransect240Check_AfterUpdate
@@ -2389,7 +2590,6 @@ Err_Handler:
     MsgBox Err.Description
     Resume Exit_Procedure
 End Sub
-
 
 ' ---------------------------------
 ' SUB:          ValidateForm
@@ -2837,10 +3037,10 @@ On Error GoTo Err_Handler
     
     If booEditOn Then
         Me!tglBrowse_Edit.Caption = "Editing ON"
-        Me!lblEvent_Form_Header.backcolor = RGB(128, 0, 0)
+        Me!lblEvent_Form_Header.BackColor = RGB(128, 0, 0)
     Else
         Me!tglBrowse_Edit.Caption = "Editing OFF"
-        Me!lblEvent_Form_Header.backcolor = vbBlack
+        Me!lblEvent_Form_Header.BackColor = vbBlack
     End If
     
     'Me.FilterOn = booEditOn

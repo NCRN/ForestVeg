@@ -21,10 +21,10 @@ Begin Form
     Width =11580
     DatasheetFontHeight =10
     ItemSuffix =64
-    Left =855
-    Top =450
-    Right =12195
-    Bottom =6075
+    Left =4455
+    Top =-15
+    Right =15795
+    Bottom =5610
     DatasheetGridlinesColor =12632256
     Filter ="Admin_Unit_Code='CHOH'"
     OrderBy ="Plot_Name"
@@ -1939,7 +1939,6 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
-
 
 ' ---------------------------------
 ' SUB:          lblPlotName_DblClick

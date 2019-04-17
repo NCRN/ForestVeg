@@ -3,7 +3,7 @@
     "ocation_Status, Year([Event_Date]) AS Event_Year, e.Event_Date, e.Protocol_Name,"
     " l.Updated_Date, e.PseudoEvent\015\012FROM tbl_Locations AS l LEFT JOIN tbl_Even"
     "ts AS e ON l.Location_ID = e.Location_ID\015\012WHERE e.PseudoEvent = 1\015\012A"
-    "ND Year(e.Event_Date) > Year(Now)-2;\015\012"
+    "ND Year(e.Event_Date) > (Year(Now)-2);\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"

@@ -156,7 +156,7 @@ SetCustom_Err:
     End If
 End Function
 
-Public Function AddAppProperty(strName As String, varType As Variant, varValue As Variant) As Integer
+Public Function AddAppProperty(strName As String, VarType As Variant, varValue As Variant) As Integer
 ' Description:  Subroutine for adding/editing some GUI aspects of an Access application
 ' Source/date:  Unknown
 ' Revisions:    Alan Williams, Oct 5, 2005 - documentation
@@ -181,7 +181,7 @@ AddProp_Bye:
 
 AddProp_Err:
     If Err = conPropNotFoundError Then
-        Set prp = dbs.CreateProperty(strName, varType, varValue)
+        Set prp = dbs.CreateProperty(strName, VarType, varValue)
         dbs.Properties.Append prp
         Resume
     Else

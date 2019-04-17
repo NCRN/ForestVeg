@@ -21,10 +21,10 @@ Begin Form
     Width =14400
     DatasheetFontHeight =9
     ItemSuffix =85
-    Left =2625
-    Top =-2040
-    Right =17025
-    Bottom =8670
+    Left =885
+    Top =-2280
+    Right =15285
+    Bottom =8430
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x2680758ff389e340
@@ -964,22 +964,23 @@ Begin Form
                     End
                 End
                 Begin Label
+                    BackStyle =1
                     OverlapFlags =85
                     TextFontCharSet =204
                     TextAlign =2
                     Left =60
                     Top =90
-                    Width =3240
+                    Width =3315
                     Height =300
                     FontSize =12
                     FontWeight =700
-                    BackColor =15527148
+                    BackColor =9566461
                     Name ="lblLocFilters"
                     Caption ="F I L T E R S"
                     FontName ="Calibri"
                     LayoutCachedLeft =60
                     LayoutCachedTop =90
-                    LayoutCachedWidth =3300
+                    LayoutCachedWidth =3375
                     LayoutCachedHeight =390
                 End
                 Begin ToggleButton
@@ -1213,22 +1214,23 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin Label
+                    BackStyle =1
                     OverlapFlags =85
                     TextFontCharSet =204
                     TextAlign =2
-                    Left =30
+                    Left =60
                     Top =6600
-                    Width =3285
+                    Width =3315
                     Height =300
                     FontSize =12
                     FontWeight =700
-                    BackColor =15527148
+                    BackColor =11992291
                     Name ="lblReportsExports"
                     Caption ="R E P O R T S   &&   E X P O R T S"
                     FontName ="Calibri"
-                    LayoutCachedLeft =30
+                    LayoutCachedLeft =60
                     LayoutCachedTop =6600
-                    LayoutCachedWidth =3315
+                    LayoutCachedWidth =3375
                     LayoutCachedHeight =6900
                 End
                 Begin ComboBox
@@ -1626,15 +1628,17 @@ Begin Form
                     Begin
                         Begin Label
                             FontItalic = NotDefault
+                            BackStyle =1
                             OverlapFlags =247
                             TextFontCharSet =238
+                            TextAlign =2
                             Left =255
                             Top =4680
                             Width =2850
                             Height =255
                             FontSize =10
                             FontWeight =700
-                            BackColor =13025979
+                            BackColor =16514485
                             Name ="lblIncludeCertified"
                             Caption ="D a t a    s c o p e"
                             FontName ="Calibri"
@@ -1841,6 +1845,8 @@ Begin Form
                     Name ="lblAnnualData"
                     Caption ="A N N U A L   D A T A"
                     FontName ="Calibri"
+                    ControlTipText ="Annual data prepares exports based on the set of tables required for annual uplo"
+                        "ad to the DataStore on IRMA"
                     LayoutCachedLeft =60
                     LayoutCachedTop =8940
                     LayoutCachedWidth =3375
@@ -2225,7 +2231,7 @@ On Error GoTo Err_Handler
     If IsNull(Me.cbxSelectQuery) Then
         Me.tbxUnfilteredFlag = ""
         Me.tbxUnfilteredFlag.ForeColor = 0          'black
-        Me.tbxUnfilteredFlag.backcolor = 8454143    'yellow
+        Me.tbxUnfilteredFlag.BackColor = 8454143    'yellow
         Me.subResults.SourceObject = ""
         GoTo Exit_Handler
     End If
@@ -2253,11 +2259,11 @@ On Error GoTo Err_Handler
     If Right(Me.cbxSelectQuery.Value, 2) = "_X" Then
         Me.tbxUnfilteredFlag = "No"
         Me.tbxUnfilteredFlag.ForeColor = 16777215   'white
-        Me.tbxUnfilteredFlag.backcolor = 255        'red
+        Me.tbxUnfilteredFlag.BackColor = 255        'red
     Else
         Me.tbxUnfilteredFlag = "Yes"
         Me.tbxUnfilteredFlag.ForeColor = 16777215   'white
-        Me.tbxUnfilteredFlag.backcolor = 4227072    'green
+        Me.tbxUnfilteredFlag.BackColor = 4227072    'green
     End If
 
     ' Set focus to the subform to allow scrolling, etc.
@@ -4003,11 +4009,15 @@ End Sub
 ' Parameters:   -
 ' Returns:      -
 ' Throws:       none
-' References:   -
+' References:
+'   Chuck, June 4, 2013
+'   https://stackoverflow.com/questions/16917122/defaulting-a-folder-for-filedialog-in-vba
+'   VBwhatnow, June 6, 2012
+'   https://stackoverflow.com/questions/11205719/how-to-open-a-folder-in-windows-explorer-from-vba
 ' Source/date:  B. Campbell, January 2019
 ' Adapted:      -
 ' Revisions:
-'   BLC - 1/xx/2019 - initial version
+'   BLC - 1/31/2019 - initial version
 ' ---------------------------------
 Private Sub btnAnnualExport_Click()
 On Error GoTo Err_Handler
@@ -4016,28 +4026,30 @@ On Error GoTo Err_Handler
     Dim uri As String
     
     'data store URL
-    uri = "https://irma.nps.gov/Content/DataStore/"
+    uri = "https://irma.nps.gov/DataStore/"
     
     'start work
     DoCmd.Hourglass True
     
     'prompt for save location
+    Dim SavePath As Variant
+    SavePath = BrowseFolder("Select the location to save the annual export files", Environ("USERPROFILE") & "\")
+    
     'zip the file(s)
     
     'filter the data based on the year chosen
-    PrepareExports cbxAnnualYear, IIf(Me.optgFileType = 1, "CSV", "XLS"), Me.chkZip
-    
+    PrepareExports CStr(SavePath), cbxAnnualYear, Me.optgFileType, Me.chkZip
     
     'open DataStore location
     Application.FollowHyperlink uri, , True, False
     
     'open save location
-
+    Shell "C:\WINDOWS\explorer.exe """ & SavePath & "", vbNormalFocus
+    
+Exit_Handler:
     'end work
     DoCmd.Hourglass False
-
-
-Exit_Handler:
+    
     Exit Sub
     
 Err_Handler:
@@ -4052,9 +4064,12 @@ End Sub
 ' ---------------------------------
 ' SUB:          PrepareExports
 ' Description:  Generates and saves files based on desired export information
-' Assumptions:  -
+' Assumptions:
+'   Export file type values are:  1=CSV, 2=XLS
 ' Parameters:
-'   FileType - type of file(s) to create (optional, string, "CSV" or "XLS", "CSV" - default)
+'   SavePath - location for files (string)
+'   DataYear - year to export (integer)
+'   iFileType - type of file(s) to create (optional, integer, 1="CSV" or 2="XLS", 1 - default (CSV))
 '   ZipFile - whether the file(s) should be bundled into a zip file (optional, boolean, True - default)
 '
 '   Running PrepareExports(yyyy) using the 4-digit year and defaults will prepare a zipped file of CSVs from the
@@ -4066,12 +4081,16 @@ End Sub
 ' References:
 '   frm_Data_Summary_Advanced.btnExportAll_Click event
 '   Mark Lehman/Geoffrey Sanders, unknown
+'   Guus2005,  October 20, 2010
+'   https://access-programmers.co.uk/forums/showthread.php?t=158653
+'   Eldar Agalarov, August 20, 2014
+'   https://stackoverflow.com/questions/25401789/remove-directory-and-its-contents-files-subdirectories-without-using-filesys
 ' Source/date:
 ' Adapted:      -
 ' Revisions:
-'   BLC - 1/xx/2019 - initial version
+'   BLC - 1/31/2019 - initial version
 ' ---------------------------------
-Public Sub PrepareExports(DataYear, Optional FileType As String = "CSV", Optional ZipFile As Boolean = True)
+Public Sub PrepareExports(SavePath As String, DataYear As Integer, Optional iFileType As Integer = 1, Optional ZipFile As Boolean = True)
 On Error GoTo Err_Handler
         
     Dim qryName As String
@@ -4079,30 +4098,133 @@ On Error GoTo Err_Handler
     Dim strSaveFile As String
     Dim strSaveFolder As String
 
-    'Generate the default output file name and allow user to edit it
-    strInitFile = Application.CurrentProject.Path & "\Exports\NCRN_ForestVeg_All_Data_" & CStr(Format(Now(), "yyyymmdd")) & ".xlsx"
-    strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.xls*)", "*.xls*")
-    strSaveFolder = fPathParsing(strSaveFile, "D")
+    Dim i As Integer
+    Dim tpl As String
+    Dim FileType As String
+    Dim fileName As String
+    Dim filePath As String
+    Dim fileFullPath As String
+    Dim NewDir As String
+    Dim NewFile As String
+    
+'    'Generate the default output file name and allow user to edit it
+'    strInitFile = Application.CurrentProject.Path & "\Exports\NCRN_ForestVeg_All_Data_" & CStr(Format(Now(), "yyyymmdd")) & ".xlsx"
+'    strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.xls*)", "*.xls*")
+'    strSaveFolder = fPathParsing(strSaveFile, "D")
+    
+    'prep export year
+    SetTempVar "ExportYear", CInt(DataYear)
 
+    'prep filename
+    FileType = IIf(iFileType = 1, "CSV", "XLS")
+    fileName = Format(Now(), "YYYYMMDD") & "_" & DataYear & "_AnnualData." & LCase(FileType) & FileType
+    filePath = IIf(Len(SavePath) > 0, SavePath, Application.CurrentProject.Path)
+    fileFullPath = filePath & "\" & fileName
+    
+    'create new directory
+    NewDir = SavePath & "\NCRN_" & DataYear & "_ForestVeg"
+    CreateFolder NewDir
+    
     Dim rs As DAO.Recordset
-    Set rs = GetRecords("s_annual_data_export")
+    Set rs = GetRecords("s_annual_data_tables") '"s_annual_data_export")
+    
+    i = 0
+    
+        If ZipFile = True Then
+        
+            Dim ZipPath As String
+'            Dim AppendTo As Boolean
+            
+            ZipPath = filePath & "\NCRN_" & DataYear & "_ForestVeg.zip"
+            
+'            If FileExists(ZipPath) = False Then
+'                AppendTo = True
+'            Else
+'                AppendTo = False
+'                NewZip ZipPath
+'            End If
+            
+        End If
 
-    Do While Not (rs.BOF = True And rs.EOF = True)
+
+    Do Until rs.EOF '(rs.BOF = True And rs.EOF = True)
         
-        qryName = IIf(rs("TableName") <> "Tag_History", "qExport_All_" & rs("TableName"), "qExport_Tag_Status_by_Cycle_x")
+'        qryName = IIf(rs("TableName") <> "Tag_History", "qExport_All_" & rs("TableName"), "qExport_Tag_Status_by_Cycle_x")
+        tpl = rs("RelatedTemplate")
+Debug.Print tpl
+'        Dim rs2 As DAO.Recordset
+'        Set rs2 = GetRecords(tpl)
         
-        Select Case FileType
-            Case "XLSX"
-                DoCmd.TransferSpreadsheet acExport, 10, qryName, strSaveFile, True
-            Case "CSV"
-                DoCmd.TransferText acExportDelim, , qryName, strSaveFolder & "\" & rs("TableName") & "_" & CStr(Format(Now(), "yyyymmdd")) & ".csv", True
-        End Select
+        'set temp query SQL
+        Dim qdf As DAO.QueryDef
+        Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
         
+        SysCmd acSysCmdInitMeter, "Exporting...", rs.RecordCount
+        
+        With qdf
+        
+            SysCmd acSysCmdUpdateMeter, i
+            SysCmd acSysCmdSetStatus, "Exporting " & rs("AnnualData") & "..."
+            
+            Debug.Print vbCrLf & rs("AnnualData") & ": " & vbCrLf & .SQL & vbCrLf
+            .SQL = Replace(GetTemplate(tpl), "Parameters yr integer;", "")
+'            .Parameters("yr") = DataYear >> DoCmd.TransferText retriggers params
+            .SQL = Replace(.SQL, "[yr]", DataYear)
+            
+            Select Case FileType
+                Case "XLS"
+                    'DoCmd.TransferSpreadsheet acExport, 10, qryName, strSaveFile, True
+                    'DoCmd.TransferSpreadsheet acExport, 10, rs2, strSaveFile, True
+                    
+'                    RecordsetToExcel rs2, fileFullPath, rs("AnnualData")
+                    
+                Case "CSV"
+                
+                    NewFile = NewDir & "\" & rs("AnnualData") & "_" & CStr(Format(Now(), "yyyymmdd")) & ".csv"
+                    DoCmd.TransferText acExportDelim, , qdf.Name, NewFile, True
+                    
+        '                DoCmd.TransferText acExportDelim, , rs2, filePath & "\" & rs("AnnualData") & "_" & CStr(Format(Now(), "yyyymmdd")) & ".csv", True
+        '                DoCmd.TransferText acExportDelim, , qryName, strSaveFolder & "\" & rs("TableName") & "_" & CStr(Format(Now(), "yyyymmdd")) & ".csv", True
+            End Select
+        End With
+    
+'        If rs.EOF = True Then Exit Do
+        
+        If ZipFile = True Then
+            'ZipFiles NewFile, ZipPath, True
+            
+            'close the zip file to avoid
+            
+            'remove the dupe
+'            DeleteFile NewFile
+        End If
+        
+        SysCmd acSysCmdClearStatus
+        
+        rs.MoveNext
+        i = i + 1
     Loop
         
-    MsgBox "File saved to:" & vbCrLf & vbCrLf & strSaveFile
+    If ZipFile = True Then
+        SysCmd acSysCmdSetStatus, "Zipping..."
+        CreateZip NewDir, ZipPath
+        
+        SysCmd acSysCmdSetStatus, "Deleting..."
+ '       DeleteFile NewDir << fails since NewDir is a directory
+        Dim fso As New FileSystemObject
+        If fso.FolderExists(NewDir) Then Call fso.DeleteFolder(NewDir, True)
+        
+    End If
+       
+        
+    MsgBox "File saved to:" & vbCrLf & vbCrLf & filePath 'strSaveFile
+    
     
 Exit_Handler:
+    'Remove progress meter
+    SysCmd acSysCmdRemoveMeter
+    SysCmd acSysCmdClearStatus
+    
     Exit Sub
     
 Err_Handler:
@@ -4146,6 +4268,256 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - EnableAnnualExport[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          RecordsetToExcel
+' Description:  check if annual export button should be enabled
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   Tanmay Nehete, April 6, 2015
+'   https://stackoverflow.com/questions/16336025/exporting-recordset-to-spreadsheet
+'   Rock, April 5, 2018
+'   https://social.msdn.microsoft.com/Forums/en-US/612747cc-830e-4d7c-89d1-8ed0f79a48e8/vba-call-to-open-excel-from-access-and-to-open-and-autorun-macro?forum=isvvba
+'   Barranka, September 4, 2012
+'   https://stackoverflow.com/questions/12267849/excel-vba-usingvba-to-create-a-new-formatted-workbook
+' Source/date:  B. Campbell, January 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 1/xx/2019 - initial version
+' ---------------------------------
+Public Function RecordsetToExcel(rs As DAO.Recordset, xlFilename As String, tabName As String)
+On Error GoTo Err_Handler
+
+    Dim xl As Excel.Application 'Object
+    Dim xlApp As Excel.Application 'object
+    Dim wkbk As Excel.Workbook 'object
+    Dim wksht As Excel.Worksheet 'Object
+    Dim xlOpen As Boolean
+    Dim iCols As Integer
+    Dim i As Integer
+    Const xlCenter = -4108
+    
+    'start Excel (bind to existing instance)
+    Set xl = Excel.Application         'GetObject(, "Excel.Application")
+    
+    'Couldn't get an instance of Excel, so create a new one
+    If Err.Number = 0 Then
+        Err.Clear
+        On Error GoTo Err_Handler
+        xlOpen = False
+    
+    'Use existing Excel instance
+    Else
+        xlOpen = True
+    End If
+
+    'attempt to open file
+    If FileExists(xlFilename) Then
+        Set wkbk = xl.Workbooks(xlFilename)
+    Else
+        Set wkbk = xl.Workbooks.Add
+        wkbk.Activate
+        Set wksht = wkbk.ActiveSheet
+    End If
+
+    With rs
+        If .RecordCount <> 0 Then
+        
+            'build header
+            For iCols = 0 To rs.Fields.Count - 1
+                wksht.Cells(1, iCols + 1).Value = rs.Fields(iCols).Name
+            Next
+            
+            With wksht.Range(wksht.Cells(i + 1, 1), _
+                wksht.Cells(1, rs.Fields.Count))
+                .Font.Bold = True
+                .Font.ColorIndex = 1
+                .Interior.ColorIndex = 1
+                .HorizontalAlignment = xlCenter
+            End With
+            
+            'resize columns based on headings
+            wksht.Range(wksht.Cells(1, 1), _
+                    wksht.Cells(1, rs.Fields.Count)).Columns.AutoFit
+        
+            'copy data to Excel
+            wksht.Range("A2").CopyFromRecordset rs
+            
+            'return to top of page
+            wksht.Range("A1").Select
+            
+            'name tab
+            wksht.Name = tabName
+            
+        Else
+            MsgBox "No records were returned for " & tabName & " recordset."
+            GoTo Exit_Handler
+        End If
+        
+        'save & close generated workbook
+        wkbk.Close True, xlFilename
+        
+        'close excel if it wasn't already running
+        If xlOpen = False Then _
+            xl.Quit
+    
+    End With
+
+Exit_Handler:
+    On Error Resume Next
+    xl.Visible = True 'make Excel visible to the user
+    rs.Close
+    Set rs = Nothing
+    Set wksht = Nothing
+    Set wkbk = Nothing
+    xl.ScreenUpdating = True
+    Set xl = Nothing
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - RecordsetToExcel[mod_Db])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     BrowseFolder
+' Description:  browse to a directory, select it & return path as a string
+' Assumptions:
+'   Microsoft Office 11.0 Object Library
+' Parameters:
+'       DialogTitle - title of the dialog (string)
+'       InitialFolder - starting folder (string)
+'       InitialView - initial view of the dialog (string)
+' Returns:
+'       Path of the selected directory (string) or NULL if none were selected
+' Throws:       none
+' References:
+'   ChE Junkie, September 3, 2014
+'   https://stackoverflow.com/questions/19372319/vba-folder-picker-set-where-to-start
+' Source/date:  B. Campbell, February 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 2/1/2019 - initial version
+' ---------------------------------
+Public Function BrowseFolder(DialogTitle As String, _
+    Optional InitialFolder As String = vbNullString, _
+    Optional InitialView As Office.MsoFileDialogView = msoFileDialogViewList) As String
+On Error GoTo Err_Handler
+
+    Dim V As Variant
+    Dim InitFolder As String
+    
+    With Application.FileDialog(msoFileDialogFolderPicker)
+        .Title = DialogTitle
+        .InitialView = InitialView
+        
+        If Len(InitialFolder) > 0 Then
+            If Dir(InitialFolder, vbDirectory) <> vbNullString Then
+                InitFolder = InitialFolder
+                If Right(InitFolder, 1) <> "\" Then
+                    InitFolder = InitFolder & "\"
+                End If
+                .InitialFileName = InitFolder
+            End If
+        End If
+        
+        .Show
+        
+        On Error Resume Next
+        Err.Clear
+        
+        V = .SelectedItems(1)
+        
+        If Err.Number <> 0 Then
+            V = vbNullString
+        End If
+        
+    End With
+    
+    BrowseFolder = CStr(V)
+
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - BrowseFolder[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' SUB:          CreateZip
+' Description:  zip files in the provided directory to a zip file
+' Assumptions:
+'   All files in the ZipFilesPath are zipped into the OutputZip
+' Parameters:
+'   ZipFilesPath - path of files to be zipped (stsring)
+'   OutputZip - name of the resulting zip file (string)
+' Returns:      -
+' Throws:       none
+' References:
+'   omgang, July 8, 2014
+'   https://www.experts-exchange.com/questions/28471645/access-vba-zip-files.html
+' Source/date:  B. Campbell, February 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 2/1/2019 - initial version
+' ---------------------------------
+Private Sub CreateZip(ZipFilesPath As String, OutputZip As String)
+On Error GoTo Err_Handler
+
+    'Declarations
+    Dim objFSO As Object, objZip As Object, objShell As Object
+    Dim objFolder As Object, objFile As Object
+    Dim sngStart As Single
+    
+    Set objFSO = CreateObject("Scripting.FileSystemObject")
+    Set objZip = objFSO.CreateTextFile(OutputZip)
+    objZip.WriteLine Chr(80) & Chr(75) & Chr(5) & Chr(6) & String(18, 0)
+    objZip.Close
+ 
+    Set objShell = CreateObject("Shell.Application")
+    Set objFolder = objFSO.GetFolder(ZipFilesPath)
+ 
+    'loop through files - adding them to the zip
+    For Each objFile In objFolder.Files
+        
+        objShell.Namespace("" & OutputZip).CopyHere objFile.Path
+        
+        sngStart = Timer
+        Do While Timer < sngStart + 2
+            DoEvents
+        Loop
+
+    Next
+
+Exit_Handler:
+    'destroy object variables
+    Set objFile = Nothing
+    Set objFolder = Nothing
+    Set objShell = Nothing
+    Set objZip = Nothing
+    Set objFSO = Nothing
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - CreateZip[frm_Data_Summary_Advanced])"
     End Select
     Resume Exit_Handler
 End Sub
