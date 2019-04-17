@@ -21,13 +21,13 @@ Begin Form
     Width =11580
     DatasheetFontHeight =10
     ItemSuffix =64
-    Left =4455
-    Top =-15
-    Right =15795
-    Bottom =5610
+    Left =2505
+    Top =1215
+    Right =14085
+    Bottom =6600
     DatasheetGridlinesColor =12632256
-    Filter ="Admin_Unit_Code='CHOH'"
-    OrderBy ="Plot_Name"
+    Filter ="Unit_Code='ANTI'"
+    OrderBy ="Event_Year DESC"
     RecSrcDt = Begin
         0x0f463b98b308e440
     End
@@ -1404,7 +1404,7 @@ Option Explicit
 ' =================================
 ' FORM:    frm_Data_Gateway
 ' Level:        Application module
-' Version:      1.05
+' Version:      1.06
 '
 ' Description:  form related functions & procedures
 '
@@ -1422,6 +1422,7 @@ Option Explicit
 '               MEL/GS - unknown - 1.03 - adapted for NCRN
 '               BLC - 5/23/2018  - 1.04 - added documentation/error handling
 '               BLC - 11/9/2018  - 1.05 - update to handle Pseudoevents
+'               BLC - 4/17/2019  - 1.06 - update PseudoEvent handling
 ' =================================
 
 ' ---------------------------------
@@ -1457,6 +1458,7 @@ Dim strCurrentRecordCriteria As String
 ' Revisions:
 '   MEL/GS - unknown - initial version
 '   BLC - 5/23/2018 - update documentation, error handling
+'   BLC - 4/17/2019 - hide PseudoEvent toggle IF not DEV_MODE
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1472,7 +1474,13 @@ On Error GoTo Err_Handler
         'Me!cboPanelFilter = Forms!frm_Switchboard!cPanel
         Me.FilterGateway (True)
     End If
-
+    
+    'hide PseudoEvent toggle when not in DEV_MODE
+    Me.tglPseudoEvent.Visible = IIf(TempVars("DEV_MODE") = True, False, True)
+    
+    'temporarily hide toggle
+    Me.tglPseudoEvent.Visible = False
+    
 Exit_Handler:
     Exit Sub
     
@@ -2605,19 +2613,19 @@ End Sub
 Private Sub tbxViewPhotos_Click()
 On Error GoTo Err_Handler
     
-    Dim RetVal As Double
+    Dim retVal As Double
     Dim RootFolder As String
     Dim PhotoFolder As String
     
     RootFolder = "T:\I&M"
     PhotoFolder = "T:\I&M\Monitoring\Forest_Vegetation\Photos\"
     If FolderExists(PhotoFolder & Me!txtPlot_Name) Then
-        RetVal = Shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
+        retVal = Shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
         GoTo Exit_Handler
     Else
         If FolderExists(RootFolder) Then
             MsgBox ("Folder for this plot not found....Opening the root of the Photos folder.")
-            RetVal = Shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
+            retVal = Shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
             GoTo Exit_Handler
         Else
             MsgBox ("The network appears to be unavailable. Network access is required to view photos.")
@@ -2639,19 +2647,19 @@ End Sub
 Private Sub txtViewPhotos_Click()
 On Error GoTo Err_Handler
 
-    Dim RetVal As Double
+    Dim retVal As Double
     Dim RootFolder As String
     Dim PhotoFolder As String
     
     RootFolder = "T:\I&M"
     PhotoFolder = "T:\I&M\Monitoring\Forest_Vegetation\Photos\"
     If FolderExists(PhotoFolder & Me!txtPlot_Name) Then
-        RetVal = Shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
+        retVal = Shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
         GoTo Exit_Procedure
     Else
         If FolderExists(RootFolder) Then
             MsgBox ("Folder for this plot not found....Opening the root of the Photos folder.")
-            RetVal = Shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
+            retVal = Shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
             GoTo Exit_Procedure
         Else
             MsgBox ("The network appears to be unavailable. Network access is required to view photos.")

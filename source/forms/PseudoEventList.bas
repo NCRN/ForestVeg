@@ -24,10 +24,10 @@ Begin Form
     Width =4440
     DatasheetFontHeight =9
     ItemSuffix =24
-    Left =9240
-    Top =1290
-    Right =13680
-    Bottom =8115
+    Left =7905
+    Top =1170
+    Right =12345
+    Bottom =7995
     DatasheetGridlinesColor =15062992
     Filter ="[Unit_Code]='ANTI' AND Year([Event_Date]) > 2017"
     OrderBy ="Plot_Name"
@@ -545,13 +545,14 @@ Option Explicit
 ' =================================
 ' MODULE:       PseudoEventList
 ' Level:        Application module
-' Version:      1.00
+' Version:      1.01
 '
 ' Description:  add event related functions & procedures
 '
 ' Source/date:  Bonnie Campbell, February, 2019
 ' Adapted:      -
-' Revisions:    BLC   - 2/20/2019 - 1.00 - initial version
+' Revisions:    BLC - 2/20/2019 - 1.00 - initial version
+'               BLC - 4/17/2019 - 1.01 - update open pseudo event
 ' =================================
 
 '---------------------
@@ -1234,15 +1235,16 @@ On Error GoTo Err_Handler
     ConvertIt = MsgBox("Click OK to confirm you would like to convert this PseudoEvent (rehab) to " _
       & "a regular event with today's date.", vbOKCancel, "Confirm PseudoEvent Conversion")
         
+    Dim strCriteria As String
+    strCriteria = "[Event_ID]='" & tbxEventID & "'"
+            
     Select Case ConvertIt
         
         Case vbOK '1
             'manage conversion
-            Dim strCriteria As String
+           
             Dim varReturn As Variant
             Dim strSQL As String
-               
-            strCriteria = "[Event_ID]='" & tbxEventID & "'"
             
             'status
             DoCmd.Hourglass True
@@ -1266,21 +1268,19 @@ On Error GoTo Err_Handler
             varReturn = SysCmd(acSysCmdSetStatus, "Pseudoevent converted...")
             varReturn = SysCmd(acSysCmdSetStatus, "Opening event...")
             varReturn = SysCmd(acSysCmdClearStatus)
-            
-            DoCmd.OpenForm "frm_Events", , , strCriteria, , , "Filter by event"
         
         Case vbCancel '2
             
             'status
             varReturn = SysCmd(acSysCmdSetStatus, "Opening event...")
             varReturn = SysCmd(acSysCmdClearStatus)
-            
-            'open the pseudoevent and close PseudoEventList form
-            DoCmd.OpenForm "frm_Events", , , strCriteria, , , "Filter by event"
-            DoCmd.Close acForm, "PseudoEventList", acSaveNo
-            
+
     End Select
-    
+            
+    'open the pseudoevent and close PseudoEventList form
+    DoCmd.OpenForm "frm_Events", , , strCriteria, , , "Filter by event"
+    DoCmd.Close acForm, "PseudoEventList", acSaveNo
+
 Exit_Handler:
     Exit Function
     

@@ -2351,19 +2351,19 @@ End Sub
 Private Sub lblLink_To_Plot_Photos_Click()
 On Error GoTo Err_Handler
 
-    Dim RetVal As Double
+    Dim retVal As Double
     Dim RootFolder As String
     Dim PhotoFolder As String
     
     RootFolder = "T:\I&M"
     PhotoFolder = "T:\I&M\Monitoring\Forest_Vegetation\Photos\"
     If FolderExists(PhotoFolder & Me!txtPlot_Name) Then
-        RetVal = Shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
+        retVal = Shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
         GoTo Exit_Procedure
     Else
         If FolderExists(RootFolder) Then
             MsgBox ("Folder for this plot not found....Opening the root of the Photos folder.")
-            RetVal = Shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
+            retVal = Shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
             GoTo Exit_Procedure
         Else
             MsgBox ("The network appears to be unavailable. Network access is required to view photos.")

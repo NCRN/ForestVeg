@@ -10,6 +10,7 @@ Begin Form
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
+    FilterOn = NotDefault
     DefaultView =0
     ScrollBars =0
     ViewsAllowed =1
@@ -23,10 +24,11 @@ Begin Form
     Width =14400
     DatasheetFontHeight =10
     ItemSuffix =161
-    Left =2145
-    Right =16545
+    Left =1230
+    Right =15630
     Bottom =9195
     DatasheetGridlinesColor =12632256
+    Filter ="[Event_ID]='{6F09EE99-0177-4F3D-9F81-A875214BBAE1}'"
     RecSrcDt = Begin
         0xf1a2883a853fe540
     End
@@ -2081,7 +2083,7 @@ Option Explicit
 ' =================================
 ' FORM:         frm_Events
 ' Level:        Form module
-' Version:      1.02
+' Version:      1.03
 '
 ' Description:  add event related functions & procedures
 '
@@ -2090,6 +2092,7 @@ Option Explicit
 ' Revisions:    ML/GS - unknown  - 1.00 - initial version
 '               BLC   - 5/24/2018 - 1.01 - added documentation, error handling
 '               BLC   - 11/9/2018 - 1.02 - added pseudoevent functionality
+'               BLC   - 4/17/2018 - 1.03 - updated convert pseudoevent to regular event
 ' =================================
 
 ' ---------------------------------
@@ -2216,15 +2219,15 @@ On Error GoTo Err_Handler
     'check for PseudoEvents
     SetTempVar "IsPseudoEvent", Nz(Me.tbxPseudoEvent.Value, 0) 'tbxPseudoEvent.Value
     Dim bgdColor As Long, txtColor As Long
-'
-'    'defaults
-'    txtColor = lngWhite
-'    bgdColor = HTMLConvert("#ECECEC")
-'    btnConvertPseudoEvent.HoverColor = lngGreen
-'    btnConvertPseudoEvent.Visible = False
-'    lblPseudoEventFlag.Visible = False
-'    rctPseudoEvent.Visible = False
-'
+
+    'defaults
+    txtColor = lngWhite
+    bgdColor = HTMLConvert("#ECECEC")
+    btnConvertPseudoEvent.HoverColor = lngGreen
+    btnConvertPseudoEvent.Visible = False
+    lblPseudoEventFlag.Visible = False
+    rctPseudoEvent.Visible = False
+
     If TempVars("IsPseudoEvent") = 1 Then
         'bgdColor = lngLtPink
         txtColor = lngLtPink
@@ -2340,13 +2343,33 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 2/20/2019 - initial version
+'   BLC - 4/17/2019 - add conversion code
 ' ---------------------------------
 Private Sub btnConvertPseudoEvent_Click()
 On Error GoTo Err_Handler
 
-    lblPseudoEventFlag.Visible = False
-    btnConvertPseudoEvent.Enabled = False
+    Dim retVal As Boolean
+    
+    retVal = MsgBox("Click OK to confirm you want to convert this event to a regular event." _
+                    & vbCrLf & vbCrLf & "NOTE:" & vbCrLf & vbCrLf _
+                    & "You cannot revert back to a pseudoevent, so be sure you want to do this!", _
+                     vbOKCancel, "Confirm Convert from PseudoEvent to Regular Event")
+    
+    'convert if desired
+    If retVal = True Then
+        lblPseudoEventFlag.Visible = False
+        btnConvertPseudoEvent.Enabled = False
+        btnConvertPseudoEvent.Visible = False
+        rctPseudoEvent.Visible = False
 
+        'convert to regular event
+        Me.PseudoEvent = 0
+
+    Else
+        lblPseudoEventFlag.Visible = True
+        btnConvertPseudoEvent.Enabled = True
+    End If
+    
 Exit_Handler:
     Exit Sub
     
@@ -2686,19 +2709,19 @@ End Sub
 Private Sub lblLink_To_Plot_Photos_Click()
 On Error GoTo Err_Handler
 
-    Dim RetVal As Double
+    Dim retVal As Double
     Dim RootFolder As String
     Dim PhotoFolder As String
     
     RootFolder = "T:\I&M"
     PhotoFolder = "T:\I&M\Monitoring\Forest_Vegetation\Photos\"
     If FolderExists(PhotoFolder & Me!txtPlot_Name) Then
-        RetVal = Shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
+        retVal = Shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
         GoTo Exit_Handler
     Else
         If FolderExists(RootFolder) Then
             MsgBox ("Folder for this plot not found....Opening the root of the Photos folder.")
-            RetVal = Shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
+            retVal = Shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
             GoTo Exit_Handler
         Else
             MsgBox ("The network appears to be unavailable. Network access is required to view photos.")
@@ -3020,6 +3043,7 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 11/9/2018 - add documentation, error handling
 '   BLC - 12/10/2018 - revised error handling
+'   BLC - 4/17/2019 - added PseudoEvent effects (hide conversion button)
 ' ---------------------------------
 Public Sub SetEditMode(booEditOn As Boolean)
 ' Description:  Toggles the form between browse and edit mode
@@ -3038,9 +3062,11 @@ On Error GoTo Err_Handler
     If booEditOn Then
         Me!tglBrowse_Edit.Caption = "Editing ON"
         Me!lblEvent_Form_Header.BackColor = RGB(128, 0, 0)
+        Me.btnConvertPseudoEvent.Visible = False
     Else
         Me!tglBrowse_Edit.Caption = "Editing OFF"
         Me!lblEvent_Form_Header.BackColor = vbBlack
+        Me.btnConvertPseudoEvent.Visible = True
     End If
     
     'Me.FilterOn = booEditOn

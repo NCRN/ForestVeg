@@ -4139,7 +4139,7 @@ Option Explicit
 ' =================================
 ' FORM:         frm_Switchboard
 ' Level:        Form module
-' Version:      1.05
+' Version:      1.06
 '
 ' Description:  Standard module - main screen of the user interface, viewed at startup
 ' Data source:  tsys_App_Defaults
@@ -4159,6 +4159,7 @@ Option Explicit
 '               BLC   - 10/22/2018 - 1.03 - updated Exit_Procedure > Exit_Handler, revised Browse functionality
 '               BLC   - 10/23/2018 - 1.04 - updated to display BE version
 '               BLC   - 1/30/2019  - 1.05 - added SetDbVersions
+'               BLC   - 4/17/2019  - 1.06 - updated create to open PseudoEventList and EventAdd2 for event creation
 ' =================================
 
 ' ---------------------------------
@@ -4496,6 +4497,7 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 10/22/2018 - update documentation, error handling, revise frm_Event_Add > EventAdd
 '   BLC - 11/9/2018  - add pseudoevent check
+'   BLC - 4/17/2019  - revise to open EventAdd2 for event creation
 ' ---------------------------------
 Private Sub btnAddEvent_Click()
 On Error GoTo Err_Handler
@@ -4517,7 +4519,7 @@ On Error GoTo Err_Handler
         If rs.RecordCount > 0 Then
             DoCmd.OpenForm "PseudoEventList"
         Else
-            DoCmd.OpenForm "EventAdd" '"frm_Event_Add"
+            DoCmd.OpenForm "EventAdd2" '"frm_Event_Add"
         End If
     Else
         MsgBox "The database must be connected first", vbOKOnly, "Data Tables Not Connected"

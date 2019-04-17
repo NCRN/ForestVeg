@@ -39,7 +39,7 @@ Public Function fxnGUIDGen() As String
     Dim sGUID As String     ' for storing the results
     Dim bGUID() As Byte     ' the formatted string
     Dim lLen As Long
-    Dim RetVal As Long
+    Dim retVal As Long
     lLen = 40
     bGUID = String(lLen, 0)
 
@@ -47,11 +47,11 @@ Public Function fxnGUIDGen() As String
     CoCreateGuid uGUID
 
     ' use the API to format as string
-    RetVal = StringFromGUID2(uGUID, VarPtr(bGUID(0)), lLen)
+    retVal = StringFromGUID2(uGUID, VarPtr(bGUID(0)), lLen)
     sGUID = bGUID
-    If (Asc(mid$(sGUID, RetVal, 1)) = 0) Then RetVal = RetVal - 1
+    If (Asc(mid$(sGUID, retVal, 1)) = 0) Then retVal = retVal - 1
     ' truncate the string
-    fxnGUIDGen = Left$(sGUID, RetVal)
+    fxnGUIDGen = Left$(sGUID, retVal)
 
 Exit_Procedure:
     Exit Function
