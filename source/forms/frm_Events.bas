@@ -10,7 +10,6 @@ Begin Form
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
-    FilterOn = NotDefault
     DefaultView =0
     ScrollBars =0
     ViewsAllowed =1
@@ -24,11 +23,12 @@ Begin Form
     Width =14400
     DatasheetFontHeight =10
     ItemSuffix =161
-    Left =1230
-    Right =15630
-    Bottom =9195
+    Left =960
+    Top =-735
+    Right =15360
+    Bottom =8460
     DatasheetGridlinesColor =12632256
-    Filter ="[Event_ID]='{6F09EE99-0177-4F3D-9F81-A875214BBAE1}'"
+    Filter ="[Event_ID]='20190429140857-533424019.813538'"
     RecSrcDt = Begin
         0xf1a2883a853fe540
     End
@@ -437,9 +437,7 @@ Begin Form
                                     BackThemeColorIndex =4
                                     BorderColor =8289145
                                     BorderThemeColorIndex =4
-                                    HoverColor =9226162
-                                    HoverThemeColorIndex =7
-                                    HoverTint =60.0
+                                    HoverColor =65280
                                     PressedColor =6644321
                                     PressedThemeColorIndex =4
                                     PressedShade =80.0
@@ -1129,9 +1127,7 @@ Begin Form
                                             BackThemeColorIndex =4
                                             BorderColor =8289145
                                             BorderThemeColorIndex =4
-                                            HoverColor =16236067
-                                            HoverThemeColorIndex =6
-                                            HoverTint =80.0
+                                            HoverColor =65280
                                             PressedColor =6644321
                                             PressedThemeColorIndex =4
                                             PressedShade =80.0
@@ -1178,9 +1174,7 @@ Begin Form
                                             BackThemeColorIndex =4
                                             BorderColor =8289145
                                             BorderThemeColorIndex =4
-                                            HoverColor =16236067
-                                            HoverThemeColorIndex =6
-                                            HoverTint =80.0
+                                            HoverColor =65280
                                             PressedColor =6644321
                                             PressedThemeColorIndex =4
                                             PressedShade =80.0
@@ -1227,9 +1221,7 @@ Begin Form
                                             BackThemeColorIndex =4
                                             BorderColor =8289145
                                             BorderThemeColorIndex =4
-                                            HoverColor =16236067
-                                            HoverThemeColorIndex =6
-                                            HoverTint =80.0
+                                            HoverColor =65280
                                             PressedColor =6644321
                                             PressedThemeColorIndex =4
                                             PressedShade =80.0
@@ -1637,9 +1629,7 @@ Begin Form
                     BackThemeColorIndex =4
                     BorderColor =8289145
                     BorderThemeColorIndex =4
-                    HoverColor =9226162
-                    HoverThemeColorIndex =7
-                    HoverTint =60.0
+                    HoverColor =65280
                     PressedColor =6644321
                     PressedThemeColorIndex =4
                     PressedShade =80.0
@@ -1852,9 +1842,7 @@ Begin Form
                     BackThemeColorIndex =4
                     BorderColor =8289145
                     BorderThemeColorIndex =4
-                    HoverColor =9226162
-                    HoverThemeColorIndex =7
-                    HoverTint =60.0
+                    HoverColor =65280
                     PressedColor =6644321
                     PressedThemeColorIndex =4
                     PressedShade =80.0
@@ -1897,9 +1885,7 @@ Begin Form
                     BackThemeColorIndex =4
                     BorderColor =8289145
                     BorderThemeColorIndex =4
-                    HoverColor =9226162
-                    HoverThemeColorIndex =7
-                    HoverTint =60.0
+                    HoverColor =65280
                     PressedColor =6644321
                     PressedThemeColorIndex =4
                     PressedShade =80.0
@@ -2083,16 +2069,17 @@ Option Explicit
 ' =================================
 ' FORM:         frm_Events
 ' Level:        Form module
-' Version:      1.03
+' Version:      1.04
 '
 ' Description:  add event related functions & procedures
 '
 ' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
 ' Adapted:      Bonnie Campbell, May 24, 2018
-' Revisions:    ML/GS - unknown  - 1.00 - initial version
+' Revisions:    ML/GS - unknown   - 1.00 - initial version
 '               BLC   - 5/24/2018 - 1.01 - added documentation, error handling
 '               BLC   - 11/9/2018 - 1.02 - added pseudoevent functionality
 '               BLC   - 4/17/2018 - 1.03 - updated convert pseudoevent to regular event
+'               BLC   - 5/3/2019  - 1.04 - set plot & event ID temp vars
 ' =================================
 
 ' ---------------------------------
@@ -2164,6 +2151,7 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 11/9/2018 - add documentation, error handling
 '   BLC - 4/2/2019 - added pseudoevent handling
+'   BLC - 5/3/2019 - set plot & event ID temp vars
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -2247,6 +2235,10 @@ On Error GoTo Err_Handler
     'lblPseudoEventFlag.ForeColor = lngBlack
     'lblPseudoEventFlag.BackColor = txtColor
     
+    'set globals
+    SetTempVar "plot", Me.Location_ID.Value
+    SetTempVar "eventID", Me.Event_ID.Value
+
 Exit_Handler:
     Exit Sub
     

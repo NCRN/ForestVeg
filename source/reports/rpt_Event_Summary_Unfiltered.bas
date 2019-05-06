@@ -2,6 +2,7 @@
 VersionRequired =20
 Begin Report
     LayoutForPrint = NotDefault
+    FilterOn = NotDefault
     DefaultView =0
     TabularFamily =0
     DateGrouping =1
@@ -13,9 +14,9 @@ Begin Report
     Width =11160
     DatasheetFontHeight =10
     ItemSuffix =70
-    Left =15
+    Left =-1305
     DatasheetGridlinesColor =12632256
-    Filter ="[Event_ID]='{36E9ED9C-0E7F-4F40-B190-FD1BF91E8CEE}'"
+    Filter ="[Event_ID]='20190503204533-289562463.760376'"
     RecSrcDt = Begin
         0xf58c6abea030e540
     End
@@ -26,7 +27,7 @@ Begin Report
         0xf801000038040000f80100003804000000000000982b00007c1a000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
-    FilterOnLoad =0
+    FilterOnLoad =255
     AllowLayoutView =0
     DatasheetGridlinesColor12 =12632256
     Begin
@@ -295,7 +296,7 @@ Begin Report
                     IMESentenceMode =3
                     Left =3480
                     Top =1080
-                    Width =1065
+                    Width =2880
                     Height =225
                     ColumnWidth =1245
                     FontSize =6
@@ -307,7 +308,7 @@ Begin Report
 
                     LayoutCachedLeft =3480
                     LayoutCachedTop =1080
-                    LayoutCachedWidth =4545
+                    LayoutCachedWidth =6360
                     LayoutCachedHeight =1305
                 End
                 Begin TextBox
@@ -1071,7 +1072,7 @@ On Error GoTo Err_Handler
     'Forms!frm_Events!Event_ID
     'If IsError(Forms!frm_Events!Event_ID) Then Debug.Print "error"
     
-    'Debug.Print Me.OpenArgs
+    Debug.Print "oa= " & Me.OpenArgs
 
 Exit_Handler:
     Exit Sub
@@ -1108,6 +1109,7 @@ On Error GoTo Err_Handler
     Me.lblNoDataUnsampled.Visible = Not Me.Report.Controls("rSub_UnsampledTags").Report.HasData
     Me.lblNoDataUnsampledQuadrats.Visible = Not Me.Report.Controls("rSub_Unsampled_Quadrats").Report.HasData
     Me.lblNoDataMonster.Visible = Not Me.Report.Controls("rSub_Monster_Saplings").Report.HasData
+    
     
 Exit_Handler:
     Exit Sub

@@ -4,7 +4,6 @@ Begin Form
     RecordSelectors = NotDefault
     NavigationButtons = NotDefault
     DividingLines = NotDefault
-    FilterOn = NotDefault
     AllowDesignChanges = NotDefault
     DefaultView =0
     TabularCharSet =204
@@ -12,13 +11,13 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =13920
+    Width =13944
     DatasheetFontHeight =9
-    ItemSuffix =75
-    Left =2040
-    Top =3000
-    Right =15810
-    Bottom =9315
+    ItemSuffix =76
+    Left =1380
+    Top =2115
+    Right =15150
+    Bottom =8430
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0xd0ed4c4b94aee340
@@ -86,6 +85,35 @@ Begin Form
         Begin Subform
             BorderLineStyle =0
             BorderColor =12632256
+        End
+        Begin ToggleButton
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+            UseTheme =1
+            Shape =2
+            Bevel =1
+            BackColor =-1
+            BackThemeColorIndex =4
+            BackTint =60.0
+            OldBorderStyle =0
+            BorderLineStyle =0
+            BorderColor =-1
+            BorderThemeColorIndex =4
+            BorderTint =60.0
+            ThemeFontIndex =1
+            HoverColor =0
+            HoverThemeColorIndex =4
+            HoverTint =40.0
+            PressedColor =0
+            PressedThemeColorIndex =4
+            PressedShade =75.0
+            HoverForeColor =0
+            HoverForeThemeColorIndex =0
+            HoverForeTint =75.0
+            PressedForeColor =0
+            PressedForeThemeColorIndex =1
         End
         Begin FormHeader
             Height =0
@@ -182,7 +210,7 @@ Begin Form
                     End
                 End
                 Begin Subform
-                    OverlapFlags =85
+                    OverlapFlags =215
                     BorderWidth =2
                     Left =60
                     Top =435
@@ -207,10 +235,10 @@ Begin Form
                     ColumnCount =5
                     ListRows =20
                     ListWidth =5760
-                    Left =2881
+                    Left =3181
                     Top =60
                     Width =240
-                    Height =315
+                    Height =330
                     FontSize =14
                     TabIndex =4
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"4\";\"4\""
@@ -228,27 +256,27 @@ Begin Form
                     AfterUpdate ="[Event Procedure]"
                     OnEnter ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
-                    LayoutCachedLeft =2881
+                    LayoutCachedLeft =3181
                     LayoutCachedTop =60
-                    LayoutCachedWidth =3121
-                    LayoutCachedHeight =375
+                    LayoutCachedWidth =3421
+                    LayoutCachedHeight =390
                     Begin
                         Begin Label
                             FontItalic = NotDefault
                             OverlapFlags =85
                             TextAlign =3
-                            Left =60
+                            Left =360
                             Top =60
                             Width =2805
-                            Height =315
+                            Height =330
                             FontSize =12
                             FontWeight =700
                             Name ="lblSelectTag"
                             Caption ="Select an unsampled tag ->"
-                            LayoutCachedLeft =60
+                            LayoutCachedLeft =360
                             LayoutCachedTop =60
-                            LayoutCachedWidth =2865
-                            LayoutCachedHeight =375
+                            LayoutCachedWidth =3165
+                            LayoutCachedHeight =390
                         End
                     End
                 End
@@ -303,11 +331,12 @@ Begin Form
                     BorderColor =0
                     ColumnInfo ="\"\";\"\";\"10\";\"100\""
                     ConditionalFormat = Begin
-                        0x010000009c000000010000000100000000000000000000001d00000001000000 ,
+                        0x01000000a2000000010000000100000000000000000000002000000001000000 ,
                         0x00000000dfa7a500000000000000000000000000000000000000000000000000 ,
                         0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x490073004e0075006c006c0028005b0063006200780054007200650065005300 ,
-                        0x740061007400750073005d0029003d00540072007500650000000000
+                        0x490073004e0075006c006c0028005b006300620078005300610070006c006900 ,
+                        0x6e0067005300740061007400750073005d0029003d0054007200750065000000 ,
+                        0x0000
                     End
                     Name ="cbxSaplingStatus"
                     ControlSource ="Sapling_Status"
@@ -330,10 +359,10 @@ Begin Form
                     LayoutCachedWidth =4137
                     LayoutCachedHeight =1918
                     ConditionalFormat14 = Begin
-                        0x01000100000001000000000000000100000000000000dfa7a5001c0000004900 ,
-                        0x73004e0075006c006c0028005b00630062007800540072006500650053007400 ,
-                        0x61007400750073005d0029003d00540072007500650000000000000000000000 ,
-                        0x0000000000000000000000
+                        0x01000100000001000000000000000100000000000000dfa7a5001f0000004900 ,
+                        0x73004e0075006c006c0028005b006300620078005300610070006c0069006e00 ,
+                        0x67005300740061007400750073005d0029003d00540072007500650000000000 ,
+                        0x0000000000000000000000000000000000
                     End
                     Begin
                         Begin Label
@@ -395,24 +424,25 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =7319
-                    Top =60
-                    Width =2399
-                    Height =300
+                    Left =7620
+                    Top =30
+                    Width =2016
+                    Height =375
                     FontSize =12
                     TabIndex =7
                     ForeColor =0
                     Name ="btnTagNewSpecimen"
                     Caption ="Tag New Specimen"
                     OnClick ="[Event Procedure]"
+                    ControlTipText ="Add a new tag"
                     LeftPadding =60
                     RightPadding =75
                     BottomPadding =120
 
-                    LayoutCachedLeft =7319
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =9718
-                    LayoutCachedHeight =360
+                    LayoutCachedLeft =7620
+                    LayoutCachedTop =30
+                    LayoutCachedWidth =9636
+                    LayoutCachedHeight =405
                     ForeThemeColorIndex =0
                     UseTheme =1
                     Shape =1
@@ -421,9 +451,7 @@ Begin Form
                     BackThemeColorIndex =4
                     BorderColor =8289145
                     BorderThemeColorIndex =4
-                    HoverColor =16236067
-                    HoverThemeColorIndex =6
-                    HoverTint =80.0
+                    HoverColor =65280
                     PressedColor =6644321
                     PressedThemeColorIndex =4
                     PressedShade =80.0
@@ -441,18 +469,18 @@ Begin Form
                 Begin Label
                     FontItalic = NotDefault
                     OverlapFlags =85
-                    Left =6900
+                    Left =7200
                     Top =60
                     Width =270
-                    Height =285
+                    Height =300
                     FontWeight =700
                     ForeColor =3751056
                     Name ="lblOr2"
                     Caption ="or"
-                    LayoutCachedLeft =6900
+                    LayoutCachedLeft =7200
                     LayoutCachedTop =60
-                    LayoutCachedWidth =7170
-                    LayoutCachedHeight =345
+                    LayoutCachedWidth =7470
+                    LayoutCachedHeight =360
                 End
                 Begin ComboBox
                     OverlapFlags =85
@@ -540,10 +568,10 @@ Begin Form
                     ColumnCount =5
                     ListRows =20
                     ListWidth =6840
-                    Left =6570
+                    Left =6870
                     Top =60
                     Width =240
-                    Height =315
+                    Height =330
                     FontSize =14
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"4\";\"4\""
                     Name ="cbxSelectSampledTag"
@@ -558,45 +586,45 @@ Begin Form
                     AfterUpdate ="[Event Procedure]"
                     OnEnter ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
-                    LayoutCachedLeft =6570
+                    LayoutCachedLeft =6870
                     LayoutCachedTop =60
-                    LayoutCachedWidth =6810
-                    LayoutCachedHeight =375
+                    LayoutCachedWidth =7110
+                    LayoutCachedHeight =390
                     Begin
                         Begin Label
                             FontItalic = NotDefault
                             OverlapFlags =85
                             TextAlign =3
-                            Left =3600
+                            Left =3900
                             Top =60
                             Width =2940
-                            Height =315
+                            Height =330
                             FontSize =12
                             FontWeight =700
                             Name ="lblSelectSample"
                             Caption ="Select an existing sample ->"
-                            LayoutCachedLeft =3600
+                            LayoutCachedLeft =3900
                             LayoutCachedTop =60
-                            LayoutCachedWidth =6540
-                            LayoutCachedHeight =375
+                            LayoutCachedWidth =6840
+                            LayoutCachedHeight =390
                         End
                     End
                 End
                 Begin Label
                     FontItalic = NotDefault
                     OverlapFlags =85
-                    Left =3240
+                    Left =3540
                     Top =60
                     Width =270
-                    Height =285
+                    Height =300
                     FontWeight =700
                     ForeColor =3751056
                     Name ="lblOr1"
                     Caption ="or"
-                    LayoutCachedLeft =3240
+                    LayoutCachedLeft =3540
                     LayoutCachedTop =60
-                    LayoutCachedWidth =3510
-                    LayoutCachedHeight =345
+                    LayoutCachedWidth =3810
+                    LayoutCachedHeight =360
                 End
                 Begin CommandButton
                     OverlapFlags =85
@@ -659,10 +687,10 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =10259
+                    Left =10139
                     Top =60
                     Width =360
-                    Height =300
+                    Height =315
                     FontSize =12
                     FontWeight =700
                     TabIndex =12
@@ -674,10 +702,10 @@ Begin Form
                     RightPadding =75
                     BottomPadding =120
 
-                    LayoutCachedLeft =10259
+                    LayoutCachedLeft =10139
                     LayoutCachedTop =60
-                    LayoutCachedWidth =10619
-                    LayoutCachedHeight =360
+                    LayoutCachedWidth =10499
+                    LayoutCachedHeight =375
                     ForeThemeColorIndex =0
                     UseTheme =1
                     Shape =1
@@ -686,9 +714,7 @@ Begin Form
                     BackThemeColorIndex =4
                     BorderColor =8289145
                     BorderThemeColorIndex =4
-                    HoverColor =16236067
-                    HoverThemeColorIndex =6
-                    HoverTint =80.0
+                    HoverColor =65280
                     PressedColor =6644321
                     PressedThemeColorIndex =4
                     PressedShade =80.0
@@ -706,18 +732,18 @@ Begin Form
                 Begin Label
                     FontItalic = NotDefault
                     OverlapFlags =85
-                    Left =9840
+                    Left =9720
                     Top =60
                     Width =270
-                    Height =285
+                    Height =300
                     FontWeight =700
                     ForeColor =3751056
                     Name ="lblOr3"
                     Caption ="or"
-                    LayoutCachedLeft =9840
+                    LayoutCachedLeft =9720
                     LayoutCachedTop =60
-                    LayoutCachedWidth =10110
-                    LayoutCachedHeight =345
+                    LayoutCachedWidth =9990
+                    LayoutCachedHeight =360
                 End
                 Begin ComboBox
                     TabStop = NotDefault
@@ -1144,9 +1170,7 @@ Begin Form
                     BackThemeColorIndex =4
                     BorderColor =8289145
                     BorderThemeColorIndex =4
-                    HoverColor =16236067
-                    HoverThemeColorIndex =6
-                    HoverTint =80.0
+                    HoverColor =65280
                     PressedColor =6644321
                     PressedThemeColorIndex =4
                     PressedShade =80.0
@@ -1223,9 +1247,7 @@ Begin Form
                     BackThemeColorIndex =4
                     BorderColor =8289145
                     BorderThemeColorIndex =4
-                    HoverColor =16236067
-                    HoverThemeColorIndex =6
-                    HoverTint =80.0
+                    HoverColor =65280
                     PressedColor =6644321
                     PressedThemeColorIndex =4
                     PressedShade =80.0
@@ -1303,9 +1325,7 @@ Begin Form
                     BackThemeColorIndex =4
                     BorderColor =8289145
                     BorderThemeColorIndex =4
-                    HoverColor =16236067
-                    HoverThemeColorIndex =6
-                    HoverTint =80.0
+                    HoverColor =65280
                     PressedColor =6644321
                     PressedThemeColorIndex =4
                     PressedShade =80.0
@@ -1357,11 +1377,11 @@ Begin Form
                     TabIndex =30
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"3\";\"2\""
                     ConditionalFormat = Begin
-                        0x0100000092000000010000000100000000000000000000001800000001000000 ,
+                        0x0100000098000000010000000100000000000000000000001b00000001000000 ,
                         0x00000000dfa7a500000000000000000000000000000000000000000000000000 ,
                         0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x490073004e0075006c006c0028005b0063006200780048006100620069007400 ,
-                        0x5d0029003d00540072007500650000000000
+                        0x490073004e0075006c006c0028005b0063006200780053006100700056006900 ,
+                        0x67006f0072005d0029003d00540072007500650000000000
                     End
                     Name ="cbxSapVigor"
                     ControlSource ="SaplingVigor"
@@ -1377,10 +1397,10 @@ Begin Form
                     LayoutCachedWidth =4138
                     LayoutCachedHeight =2759
                     ConditionalFormat14 = Begin
-                        0x01000100000001000000000000000100000000000000dfa7a500170000004900 ,
-                        0x73004e0075006c006c0028005b00630062007800480061006200690074005d00 ,
-                        0x29003d0054007200750065000000000000000000000000000000000000000000 ,
-                        0x00
+                        0x01000100000001000000000000000100000000000000dfa7a5001a0000004900 ,
+                        0x73004e0075006c006c0028005b00630062007800530061007000560069006700 ,
+                        0x6f0072005d0029003d0054007200750065000000000000000000000000000000 ,
+                        0x00000000000000
                     End
                     Begin
                         Begin Label
@@ -1447,6 +1467,139 @@ Begin Form
                     LayoutCachedWidth =1035
                     LayoutCachedHeight =4140
                 End
+                Begin CommandButton
+                    OverlapFlags =93
+                    Left =12660
+                    Top =30
+                    Width =1224
+                    FontSize =8
+                    FontWeight =700
+                    TabIndex =33
+                    ForeColor =0
+                    Name ="btnGoToPlants"
+                    Caption ="Browse PLANTS"
+                    OnClick ="=GoToForm(\"frm_Plants\")"
+                    ControlTipText ="Browse PLANT species"
+                    LeftPadding =60
+                    RightPadding =75
+                    BottomPadding =120
+
+                    LayoutCachedLeft =12660
+                    LayoutCachedTop =30
+                    LayoutCachedWidth =13884
+                    LayoutCachedHeight =390
+                    ForeThemeColorIndex =0
+                    UseTheme =255
+                    Shape =2
+                    Gradient =12
+                    BackColor =8289145
+                    BackThemeColorIndex =4
+                    BorderColor =8289145
+                    BorderThemeColorIndex =4
+                    HoverColor =65280
+                    PressedColor =6644321
+                    PressedThemeColorIndex =4
+                    PressedShade =80.0
+                    HoverForeColor =0
+                    HoverForeThemeColorIndex =0
+                    PressedForeColor =0
+                    PressedForeThemeColorIndex =0
+                    Shadow =-1
+                    QuickStyle =23
+                    QuickStyleMask =-1
+                    WebImagePaddingTop =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    OverlapFlags =95
+                    Left =11460
+                    Top =30
+                    Width =1080
+                    FontSize =8
+                    FontWeight =700
+                    TabIndex =34
+                    ForeColor =0
+                    Name ="btnGoToTags"
+                    Caption ="Browse TAGS"
+                    OnClick ="=GoToForm(\"frm_Tags\")"
+                    ControlTipText ="Browse TAGs"
+                    LeftPadding =60
+                    RightPadding =75
+                    BottomPadding =120
+                    ImageData = Begin
+                        0x00000000
+                    End
+
+                    LayoutCachedLeft =11460
+                    LayoutCachedTop =30
+                    LayoutCachedWidth =12540
+                    LayoutCachedHeight =390
+                    ForeThemeColorIndex =0
+                    UseTheme =255
+                    Shape =2
+                    Gradient =12
+                    BackColor =8289145
+                    BackThemeColorIndex =4
+                    BorderColor =8289145
+                    BorderThemeColorIndex =4
+                    HoverColor =65280
+                    PressedColor =6644321
+                    PressedThemeColorIndex =4
+                    PressedShade =80.0
+                    HoverForeColor =0
+                    HoverForeThemeColorIndex =0
+                    PressedForeColor =0
+                    PressedForeThemeColorIndex =0
+                    Shadow =-1
+                    QuickStyle =23
+                    QuickStyleMask =-1
+                    WebImagePaddingTop =1
+                    Overlaps =1
+                End
+                Begin ToggleButton
+                    Visible = NotDefault
+                    OverlapFlags =85
+                    Left =120
+                    Top =135
+                    Width =144
+                    Height =144
+                    TabIndex =35
+                    Name ="tglExtendTagList"
+                    DefaultValue ="0"
+                    FontName ="Franklin Gothic Book"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Extend tag list"
+                    LeftPadding =60
+                    RightPadding =75
+                    BottomPadding =120
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =135
+                    LayoutCachedWidth =264
+                    LayoutCachedHeight =279
+                    ForeTint =100.0
+                    Shape =7
+                    Bevel =0
+                    Gradient =12
+                    BackColor =8289145
+                    BackTint =100.0
+                    OldBorderStyle =1
+                    BorderColor =8289145
+                    BorderTint =100.0
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    HoverTint =100.0
+                    PressedColor =255
+                    PressedThemeColorIndex =-1
+                    PressedShade =100.0
+                    HoverForeTint =100.0
+                    PressedForeThemeColorIndex =0
+                    Shadow =-1
+                    QuickStyle =23
+                    QuickStyleMask =-1
+                    WebImagePaddingTop =1
+                End
             End
         End
         Begin FormFooter
@@ -1466,7 +1619,7 @@ Option Explicit
 ' =================================
 ' FORM:         fsub_Sapling_Data
 ' Level:        Application report
-' Version:      1.05
+' Version:      1.07
 '
 ' Description:  Form related functions & procedures for application
 ' Requires:     Keypad Utils module
@@ -1484,6 +1637,7 @@ Option Explicit
 '               BLC - 4/22/2018   - 1.05 - added change events for tags (sampled/unsampled),
 '                                          CheckDBH
 '               BLC - 4/24/2018   - 1.06 - fixed cboBrowsePick > cbxBrowsePick, txtBrowsable/txtBrowsed > tbxBrowsable/tbxBrowsed
+'               BLC - 5/3/2019    - 1.07 - added RefreshTagDropDowns, tglExtendTagList
 ' =================================
 
 ' ---------------------------------
@@ -1509,6 +1663,7 @@ Public SaplingStatus As String
 '   BLC - 4/19/2018 - initial version
 '   BLC - 4/21/2018 - set DBH check from db
 '   BLC - 4/22/2018 - revised to use CheckDBH
+'   BLC - 5/3/2019  - added RefreshTagDropDowns
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1537,6 +1692,8 @@ On Error GoTo Err_Handler
 
     CheckDBH
 
+    RefreshTagDropDowns
+    
 Exit_Handler:
     Exit Sub
     
@@ -2904,3 +3061,33 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Function
+
+' ---------------------------------
+' SUB:          RefreshTagDropDowns
+' Description:  refresh sampled & unsampled tags dropdowns
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 3, 2019
+' Adapted:
+' Revisions:    BLC - 5/3/2019  - initial version
+' ---------------------------------
+Private Sub RefreshTagDropDowns()
+On Error GoTo Err_Handler
+
+    Me!cbxSelectUnsampledTag.Requery
+    Me!cbxSelectSampledTag.Requery
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - RefreshTagDropDowns[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub

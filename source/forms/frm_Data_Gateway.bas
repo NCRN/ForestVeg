@@ -21,9 +21,9 @@ Begin Form
     Width =11580
     DatasheetFontHeight =10
     ItemSuffix =64
-    Left =2505
+    Left =-975
     Top =1215
-    Right =14085
+    Right =10605
     Bottom =6600
     DatasheetGridlinesColor =12632256
     Filter ="Unit_Code='ANTI'"
@@ -772,9 +772,7 @@ Begin Form
                     BackThemeColorIndex =4
                     BorderColor =8289145
                     BorderThemeColorIndex =4
-                    HoverColor =9226162
-                    HoverThemeColorIndex =7
-                    HoverTint =60.0
+                    HoverColor =65280
                     PressedColor =6644321
                     PressedThemeColorIndex =4
                     PressedShade =80.0
@@ -855,9 +853,7 @@ Begin Form
                     BackThemeColorIndex =4
                     BorderColor =8289145
                     BorderThemeColorIndex =4
-                    HoverColor =9226162
-                    HoverThemeColorIndex =7
-                    HoverTint =60.0
+                    HoverColor =65280
                     PressedColor =6644321
                     PressedThemeColorIndex =4
                     PressedShade =80.0
@@ -1233,7 +1229,7 @@ Begin Form
                     Caption ="Browse PLANTS"
                     OnClick ="=GoToForm(\"frm_Plants\")"
                     FontName ="Calibri"
-                    ControlTipText ="Add a new location record"
+                    ControlTipText ="Browse PLANT species"
                     LeftPadding =60
                     RightPadding =75
                     BottomPadding =120
@@ -1250,9 +1246,7 @@ Begin Form
                     BackThemeColorIndex =4
                     BorderColor =8289145
                     BorderThemeColorIndex =4
-                    HoverColor =9226162
-                    HoverThemeColorIndex =7
-                    HoverTint =60.0
+                    HoverColor =65280
                     PressedColor =6644321
                     PressedThemeColorIndex =4
                     PressedShade =80.0
@@ -1279,7 +1273,7 @@ Begin Form
                     Caption ="Browse TAGS"
                     OnClick ="=GoToForm(\"frm_Tags\")"
                     FontName ="Calibri"
-                    ControlTipText ="Add a new location record"
+                    ControlTipText ="Browse TAGs"
                     LeftPadding =60
                     RightPadding =75
                     BottomPadding =120
@@ -1299,9 +1293,7 @@ Begin Form
                     BackThemeColorIndex =4
                     BorderColor =8289145
                     BorderThemeColorIndex =4
-                    HoverColor =9226162
-                    HoverThemeColorIndex =7
-                    HoverTint =60.0
+                    HoverColor =65280
                     PressedColor =6644321
                     PressedThemeColorIndex =4
                     PressedShade =80.0
@@ -1611,6 +1603,7 @@ On Error GoTo Err_Handler
         strDocName = "rpt_Event_Summary_Unfiltered"
         'strDocName = "Copy of rpt_Event_Summary_Unfiltered"
         strCriteria = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
+Debug.Print strCriteria
         'DoCmd.OpenReport stDocName, acPreview, "qRpt_Event_Summary_Unfiltered", stCriteria
         DoCmd.OpenReport strDocName, acPreview, , strCriteria
     End If
@@ -3007,7 +3000,7 @@ On Error GoTo Err_Handler
             strCurrentRecordCriteria = strCurrentRecordCriteria & " AND " & GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
         End If
     End If
-    
+Debug.Print strCurrentRecordCriteria
 Exit_Handler:
     Exit Sub
     

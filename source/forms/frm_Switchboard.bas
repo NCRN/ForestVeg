@@ -23,9 +23,10 @@ Begin Form
     Width =10140
     DatasheetFontHeight =10
     ItemSuffix =88
-    Left =75
-    Right =10215
-    Bottom =5280
+    Left =45
+    Top =615
+    Right =10185
+    Bottom =5895
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x3b82f36a92b1e340
@@ -218,9 +219,7 @@ Begin Form
                                     BackThemeColorIndex =4
                                     BorderColor =8289145
                                     BorderThemeColorIndex =4
-                                    HoverColor =6731160
-                                    HoverThemeColorIndex =7
-                                    HoverTint =80.0
+                                    HoverColor =65280
                                     PressedColor =6644321
                                     PressedThemeColorIndex =4
                                     PressedShade =80.0
@@ -264,9 +263,7 @@ Begin Form
                                     BackThemeColorIndex =4
                                     BorderColor =8289145
                                     BorderThemeColorIndex =4
-                                    HoverColor =6731160
-                                    HoverThemeColorIndex =7
-                                    HoverTint =80.0
+                                    HoverColor =65280
                                     PressedColor =6644321
                                     PressedThemeColorIndex =4
                                     PressedShade =80.0
@@ -310,9 +307,7 @@ Begin Form
                                     BackThemeColorIndex =4
                                     BorderColor =8289145
                                     BorderThemeColorIndex =4
-                                    HoverColor =6731160
-                                    HoverThemeColorIndex =7
-                                    HoverTint =80.0
+                                    HoverColor =65280
                                     PressedColor =6644321
                                     PressedThemeColorIndex =4
                                     PressedShade =80.0
@@ -460,9 +455,7 @@ Begin Form
                                     BackThemeColorIndex =4
                                     BorderColor =8289145
                                     BorderThemeColorIndex =4
-                                    HoverColor =6731160
-                                    HoverThemeColorIndex =7
-                                    HoverTint =80.0
+                                    HoverColor =65280
                                     PressedColor =6644321
                                     PressedThemeColorIndex =4
                                     PressedShade =80.0
@@ -895,9 +888,7 @@ Begin Form
                                     BackThemeColorIndex =4
                                     BorderColor =8289145
                                     BorderThemeColorIndex =4
-                                    HoverColor =6731160
-                                    HoverThemeColorIndex =7
-                                    HoverTint =80.0
+                                    HoverColor =65280
                                     PressedColor =6644321
                                     PressedThemeColorIndex =4
                                     PressedShade =80.0

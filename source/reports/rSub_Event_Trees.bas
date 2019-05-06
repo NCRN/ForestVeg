@@ -14,29 +14,28 @@ Begin Report
     Width =10800
     DatasheetFontHeight =10
     ItemSuffix =44
-    Left =465
-    Top =6360
+    Left =795
+    Top =1755
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
-        0xbe907106b030e540
+        0x44e573aedc48e540
     End
-    RecordSource ="SELECT t.Tag, p.Latin_Name,  q.Stems, q.Equiv_DBH_cm, [Crown_Class] & \" \" & [C"
-        "rownClass] AS CC,  [TreeVigor] & \" \" & [TreeVigorClass] AS Vig,  td.Vines_Chec"
-        "ked, td.Conditions_Checked, td.Foliage_Conditions_Checked, td.Tree_Status, t.Azi"
-        "muth, t.Distance, td.Tree_Notes, td.Tree_Data_ID, td.Event_ID, MakeStemList('Tre"
-        "e',[tbl_tree_data]![Event_ID],[tbl_tree_data]![Tree_Data_Id]) AS StemList, MakeL"
-        "iveFlag('Tree',[tbl_tree_data]![Event_ID],[tbl_tree_data]![Tree_Data_Id]) AS Liv"
-        "eFlag FROM (((tbl_Tree_Data td LEFT JOIN qCalc_Basal_Area_per_Tree q ON td.Tree_"
-        "Data_ID = q.Tree_Data_ID)  LEFT JOIN tbl_Tags t ON td.Tag_ID = t.Tag_ID)  LEFT J"
-        "OIN tlu_Plants p ON t.TSN = p.TSN)  LEFT JOIN tluTreeVigor tv ON td.TreeVigor = "
-        "tv.TreeVigorCode ORDER BY t.Tag;"
+    RecordSource ="SELECT t.Tag, p.Latin_Name,  q.Stems, q.Equiv_DBH_cm, td.Crown_Class & \" \" & q"
+        ".CrownClass AS CC,   td.TreeVigor & \" \" & tv.TreeVigorClass AS Vig,  td.Vines_"
+        "Checked, td.Conditions_Checked, td.Foliage_Conditions_Checked, td.Tree_Status, t"
+        ".Azimuth, t.Distance, td.Tree_Notes,  td.Tree_Data_ID, td.Event_ID,  MakeStemLis"
+        "t('Tree', td.Event_ID,td.Tree_Data_Id) AS StemList,  MakeLiveFlag('Tree',td.Even"
+        "t_ID,td.Tree_Data_Id) AS LiveFlag  FROM (((tbl_Tree_Data td  LEFT JOIN qCalc_Bas"
+        "al_Area_per_Tree q ON td.Tree_Data_ID = q.Tree_Data_ID)   LEFT JOIN tbl_Tags t O"
+        "N td.Tag_ID = t.Tag_ID)   LEFT JOIN tlu_Plants p ON t.TSN = p.TSN)   LEFT JOIN t"
+        "luTreeVigor tv ON td.TreeVigor = tv.TreeVigorCode  ORDER BY t.Tag;"
     Caption ="srpt_Trees"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0xf0000000f0000000f0000000f000000000000000302a00001c02000001000000 ,
+        0xf0000000f0000000190100000301000000000000302a00001c02000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
-    FilterOnLoad =0
+    FilterOnLoad =255
     DatasheetGridlinesColor12 =12632256
     Begin
         Begin Label
@@ -397,18 +396,10 @@ Begin Report
                     ControlSource ="Latin_Name"
                     StatusBarText ="Genus of specimen"
                     FontName ="Calibri"
-                    ConditionalFormat = Begin
-                        0x0100000060000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000
-                    End
 
                     LayoutCachedLeft =2160
                     LayoutCachedWidth =3600
                     LayoutCachedHeight =270
-                    ConditionalFormat14 = Begin
-                        0x010000000000
-                    End
                 End
                 Begin TextBox
                     TextFontCharSet =238

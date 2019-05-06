@@ -1,7 +1,5 @@
-﻿dbMemo "SQL" ="UPDATE tbl_Events AS e SET e.PseudoEvent = 0, e.Updated_Date = Now(), e.Updated_"
-    "By = 12345, e.Event_Notes = e.Event_Notes & CHR(13) & CHR(10) & CHR(13) & CHR(10"
-    ") & 'Converted ' & e.Event_Date & ' rehab (pseudoevent)'\015\012WHERE e.Event_ID"
-    " = '{A67F44B9-F32E-48AF-B0E2-B46395871093}'\015\012AND e.PseudoEvent = 1;\015\012"
+﻿dbMemo "SQL" ="UPDATE tlu_Tree_Condition AS tc SET tc.Code = 34\015\012WHERE tc.Description = '"
+    "Spotted Lanternfly';\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -359,6 +357,10 @@ Begin
     End
     Begin
         dbText "Name" ="CrownClass"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tc.Code"
         dbLong "AggregateType" ="-1"
     End
 End
