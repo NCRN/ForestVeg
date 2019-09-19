@@ -155,7 +155,7 @@ Else
             'add table link
             Set tdf = CurrentDb.CreateTableDef(strTableName)
             tdf.SourceTableName = strTableName
-            tdf.connect = ";DATABASE=" & strFileName
+            tdf.Connect = ";DATABASE=" & strFileName
             CurrentDb.TableDefs.Append tdf
             
             'add table link record to link table

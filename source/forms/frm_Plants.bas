@@ -1500,7 +1500,7 @@ Private Sub cmbo_PickAPlant_AfterUpdate()
  ' Find the record that matches the control.
     Dim rs As Object
     Set rs = Me.Recordset.Clone
-    rs.FindFirst "[ID] = " & str(Nz(Me![cmbo_PickAPlant], 0))
+    rs.FindFirst "[ID] = " & Str(Nz(Me![cmbo_PickAPlant], 0))
     If Not rs.EOF Then Me.Bookmark = rs.Bookmark
     
     If Me!txt_TSN = "" Or IsNull(Me!txt_TSN) Then

@@ -4151,6 +4151,7 @@ Option Explicit
 '               BLC   - 10/23/2018 - 1.04 - updated to display BE version
 '               BLC   - 1/30/2019  - 1.05 - added SetDbVersions
 '               BLC   - 4/17/2019  - 1.06 - updated create to open PseudoEventList and EventAdd2 for event creation
+'               BLC   - 8/16/2019  - 1.07 - add ADMIN
 ' =================================
 
 ' ---------------------------------

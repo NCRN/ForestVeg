@@ -12,10 +12,10 @@ Begin Form
     Width =9300
     DatasheetFontHeight =10
     ItemSuffix =4
-    Left =-480
+    Left =-3120
     Top =1575
-    Right =12795
-    Bottom =13155
+    Right =9675
+    Bottom =10740
     DatasheetGridlinesColor =12632256
     OrderBy ="[tsys_Update_Log].[Update_Date] DESC, [tsys_Update_Log].[Update_Table] DESC"
     RecSrcDt = Begin

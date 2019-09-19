@@ -1,17 +1,7 @@
-﻿Operation =1
-Option =0
-Where ="(((tsys_Import_Tables.[Table_Name])=\"tbl_Quadrat_Data\" Or (tsys_Import_Tables."
-    "[Table_Name])=\"tbl_Quadrat_Seedlings_Data\" Or (tsys_Import_Tables.[Table_Name]"
-    ")=\"tbl_Quadrat_Herbaceous_Data\" Or (tsys_Import_Tables.[Table_Name])=\"tbl_CWD"
-    "_Data\"))"
-Begin InputTables
-    Name ="tsys_Import_Tables"
-End
-Begin OutputColumns
-    Expression ="tsys_Import_Tables.ID"
-    Expression ="tsys_Import_Tables.Table_Name"
-    Expression ="tsys_Import_Tables.Import"
-End
+﻿dbMemo "SQL" ="SELECT t.ID, t.Table_Name, t.Import\015\012FROM tsys_Import_Tables AS t\015\012W"
+    "HERE t.[Table_Name] IN (\"tbl_Quadrat_Data\",\"tbl_Quadrat_Seedlings_Data\",\"tb"
+    "l_Quadrat_Herbaceous_Data\",\"tbl_CWD_Data\");\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -50,27 +40,16 @@ Begin
         dbText "Name" ="tsys_Import_Tables.[Table_Name]"
         dbLong "AggregateType" ="-1"
     End
-End
-Begin
-    State =0
-    Left =105
-    Top =49
-    Right =973
-    Bottom =369
-    Left =-1
-    Top =-1
-    Right =844
-    Bottom =76
-    Left =0
-    Top =0
-    ColumnsShown =539
     Begin
-        Left =48
-        Top =12
-        Right =192
-        Bottom =156
-        Top =0
-        Name ="tsys_Import_Tables"
-        Name =""
+        dbText "Name" ="t.ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.Table_Name"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.Import"
+        dbLong "AggregateType" ="-1"
     End
 End

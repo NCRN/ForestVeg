@@ -569,7 +569,7 @@ Err_Handler:
 
 End Sub
 
-Private Sub cmbQuery_NotInList(NewData As String, Response As Integer)
+Private Sub cmbQuery_NotInList(NewData As String, response As Integer)
     On Error GoTo Err_Handler
 
     Me.ActiveControl.Undo

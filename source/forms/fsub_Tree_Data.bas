@@ -13,11 +13,11 @@ Begin Form
     GridY =24
     Width =14040
     DatasheetFontHeight =9
-    ItemSuffix =79
-    Left =1380
-    Top =2115
-    Right =15150
-    Bottom =8925
+    ItemSuffix =80
+    Left =4830
+    Top =4305
+    Right =18855
+    Bottom =11370
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0x015274d28119e540
@@ -384,47 +384,46 @@ Begin Form
                     ColumnCount =5
                     ListRows =20
                     ListWidth =5760
-                    Left =3150
+                    Left =4395
                     Top =60
-                    Width =240
+                    Width =239
                     Height =315
                     FontSize =14
                     TabIndex =8
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"4\";\"4\""
                     Name ="cbxSelectUnsampledTag"
                     RowSourceType ="Table/Query"
-                    RowSource ="SELECT tbl_Tags.Tag_ID, tbl_Tags.Tag, tbl_Tags.Tag_Status AS Class, IIf(IsNull(["
-                        "azimuth]),\"\",[Azimuth] & \" / \" & [distance] & \"m\") AS Azi_Dist, tbl_Tags.M"
-                        "icroplot_Number AS MP FROM (tbl_Tags LEFT JOIN qry_Status_Tree_Current_Event ON "
-                        "tbl_Tags.Tag_ID = qry_Status_Tree_Current_Event.Tag_ID) LEFT JOIN qry_Status_Sap"
-                        "ling_Current_Event ON tbl_Tags.Tag_ID = qry_Status_Sapling_Current_Event.Tag_ID "
-                        "WHERE (((qry_Status_Sapling_Current_Event.Event_ID) Is Null) AND ((qry_Status_Tr"
-                        "ee_Current_Event.Event_ID) Is Null) AND ((tbl_Tags.Location_ID)=[Forms]![frm_Eve"
-                        "nts]![Location_ID])) ORDER BY tbl_Tags.Tag_Status DESC , tbl_Tags.Tag;"
-                    ColumnWidths ="0;1080;2520;1440;720"
+                    RowSource ="SELECT t.Tag_ID, t.Tag, t.Tag_Status AS Class, IIf(IsNull([azimuth]),'',[Azimuth"
+                        "] & ' / ' & [distance] & 'm') AS Azi_Dist, t.Microplot_Number AS MP FROM ((tbl_T"
+                        "ags t LEFT JOIN qry_Status_Sapling_Current_Event sce ON t.Tag_ID = sce.Tag_ID) L"
+                        "EFT JOIN qry_Status_Tree_Current_Event tce ON t.Tag_ID = tce.Tag_ID) WHERE t.Loc"
+                        "ation_ID='{581B0E04-42B6-4AA3-9DB1-8B7F34ED0DFC}' AND sce.Event_ID Is Null AND t"
+                        "ce.Event_ID Is Null AND t.Tag_Status IN ('Sapling','Tree')  ORDER BY t.Tag_Statu"
+                        "s DESC , t.Tag;"
+                    ColumnWidths ="0;1080;2160;1440;1440"
                     AfterUpdate ="[Event Procedure]"
                     OnEnter ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
-                    LayoutCachedLeft =3150
+                    LayoutCachedLeft =4395
                     LayoutCachedTop =60
-                    LayoutCachedWidth =3390
+                    LayoutCachedWidth =4634
                     LayoutCachedHeight =375
                     Begin
                         Begin Label
                             FontItalic = NotDefault
                             OverlapFlags =85
                             TextAlign =3
-                            Left =330
+                            Left =1950
                             Top =60
-                            Width =2805
+                            Width =2415
                             Height =315
                             FontSize =12
                             FontWeight =700
                             Name ="lblSelect_Tag"
-                            Caption ="Select an unsampled tag ->"
-                            LayoutCachedLeft =330
+                            Caption ="Select unsampled tag ->"
+                            LayoutCachedLeft =1950
                             LayoutCachedTop =60
-                            LayoutCachedWidth =3135
+                            LayoutCachedWidth =4365
                             LayoutCachedHeight =375
                         End
                     End
@@ -593,6 +592,8 @@ Begin Form
                     ColumnWidths ="3168"
                     StatusBarText ="Health status of this specimen"
                     OnEnter ="[Event Procedure]"
+                    OnLostFocus ="[Event Procedure]"
+                    OnClick ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
                     LeftMargin =22
                     TopMargin =22
@@ -819,17 +820,17 @@ Begin Form
                     Begin
                         Begin Label
                             FontItalic = NotDefault
-                            OverlapFlags =85
+                            OverlapFlags =93
                             TextAlign =3
-                            Left =3870
+                            Left =4980
                             Top =60
-                            Width =2940
+                            Width =1830
                             Height =315
                             FontSize =12
                             FontWeight =700
                             Name ="lblSelect_Sample"
-                            Caption ="Select an existing sample ->"
-                            LayoutCachedLeft =3870
+                            Caption ="Existing sample ->"
+                            LayoutCachedLeft =4980
                             LayoutCachedTop =60
                             LayoutCachedWidth =6810
                             LayoutCachedHeight =375
@@ -838,8 +839,8 @@ Begin Form
                 End
                 Begin Label
                     FontItalic = NotDefault
-                    OverlapFlags =85
-                    Left =3510
+                    OverlapFlags =87
+                    Left =4710
                     Top =60
                     Width =270
                     Height =285
@@ -847,9 +848,9 @@ Begin Form
                     ForeColor =3751056
                     Name ="lblOr1"
                     Caption ="or"
-                    LayoutCachedLeft =3510
+                    LayoutCachedLeft =4710
                     LayoutCachedTop =60
-                    LayoutCachedWidth =3780
+                    LayoutCachedWidth =4980
                     LayoutCachedHeight =345
                 End
                 Begin Subform
@@ -1469,15 +1470,16 @@ Begin Form
                     Overlaps =1
                 End
                 Begin ToggleButton
-                    Visible = NotDefault
-                    OverlapFlags =85
+                    OverlapFlags =93
                     Left =60
-                    Top =135
-                    Width =144
-                    Height =144
+                    Top =60
+                    Width =1794
+                    Height =294
+                    FontWeight =500
                     TabIndex =34
                     Name ="tglExtendTagList"
                     DefaultValue ="0"
+                    Caption ="Swap Tag List"
                     FontName ="Franklin Gothic Book"
                     OnClick ="[Event Procedure]"
                     ControlTipText ="Extend tag list"
@@ -1487,11 +1489,10 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =60
-                    LayoutCachedTop =135
-                    LayoutCachedWidth =204
-                    LayoutCachedHeight =279
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =1854
+                    LayoutCachedHeight =354
                     ForeTint =100.0
-                    Shape =7
                     Bevel =0
                     Gradient =12
                     BackColor =8289145
@@ -1511,6 +1512,7 @@ Begin Form
                     QuickStyle =23
                     QuickStyleMask =-1
                     WebImagePaddingTop =1
+                    Overlaps =1
                 End
             End
         End
@@ -1532,7 +1534,7 @@ Option Explicit
 ' =================================
 ' MODULE:       fsub_Tree_Data
 ' Level:        Application module
-' Version:      1.07
+' Version:      1.08
 '
 ' Description:  add event related functions & procedures
 '
@@ -1548,11 +1550,13 @@ Option Explicit
 '                                          CheckDBH
 '               BLC - 4/30/2018   - 1.06 - add DBH validation on exit (shift from DBH subform events)
 '               BLC - 5/3/2019    - 1.07 - added RefreshTagDropDowns, tglExtendTagList
+'               BLC - 5/20/2019   - 1.08 - added SwapTagDropDowns
 ' =================================
 
 ' ---------------------------------
 '  Declarations
 ' ---------------------------------
+Public TagNumber As Integer
 
 ' ----------------
 '  Events
@@ -1576,6 +1580,7 @@ Option Explicit
 '   BLC - 4/21/2018 - set DBH check from db, check DBH
 '   BLC - 4/22/2018 - revised to use CheckDBH
 '   BLC - 5/3/2019  - added RefreshTagDropDowns
+'   BLC - 5/23/2019 - add
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1599,7 +1604,11 @@ On Error GoTo Err_Handler
     
     CheckDBH
     
-    RefreshTagDropDowns
+    SwapTagDropDowns
+    'RefreshTagDropDowns
+    
+    'set tag property
+    TagNumber = Nz(fsub_Tag_Tree.Controls("tbxTag"), 0)
     
 Exit_Handler:
     Exit Sub
@@ -1809,6 +1818,37 @@ End Sub
 ' ----------------
 '  Click
 ' ----------------
+
+' ---------------------------------
+' SUB:          cbxTreeStatus_Click
+' Description:  combobox lost focus actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 20, 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 5/20/2019 - initial version
+' ---------------------------------
+Private Sub cbxTreeStatus_Click()
+On Error GoTo Err_Handler
+   
+    'refresh the sampled tree status
+    cbxSelectSampledTag.Requery
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxTreeStatus_Click[fsub_Tree_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
 ' ---------------------------------
 ' SUB:          cbxCrownClass_Enter
@@ -2290,11 +2330,15 @@ End Sub
 ' Adapted:      Bonnie Campbell, April 9, 2018
 ' Revisions:    ML/GS - unknown  - initial version
 '               BLC   - 4/9/2018 - added documentation, error handling
+'               BLC - 5/20/2019 - updated to refresh Sampled Tag tree status
 ' ---------------------------------
 Private Sub cbxTreeStatus_Enter()
 On Error GoTo Err_Handler
 
     ValidateTreeSubform
+    
+    'refresh the sampled tree status
+    cbxSelectSampledTag.Requery
 
 Exit_Handler:
     Exit Sub
@@ -2420,11 +2464,15 @@ End Sub
 ' Revisions:
 '   BLC - 4/9/2018 - initial version
 '   BLC - 4/21/2018 - code cleanup
+'   BLC - 5/20/2019 - updated to refresh Sampled Tag tree status
 ' ---------------------------------
 Private Sub cbxTreeStatus_Change()
 On Error GoTo Err_Handler
 
     CheckTagStatus "Tree"
+    
+    'refresh the sampled tree status
+    cbxSelectSampledTag.Requery
 
 Exit_Handler:
     Exit Sub
@@ -2697,6 +2745,40 @@ Err_Handler:
 End Sub
 
 ' ----------------
+'  Lost Focus
+' ----------------
+' ---------------------------------
+' SUB:          cbxTreeStatus_LostFocus
+' Description:  combobox lost focus actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 20, 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 5/20/2019 - initial version
+' ---------------------------------
+Private Sub cbxTreeStatus_LostFocus()
+On Error GoTo Err_Handler
+   
+    'refresh the sampled tree status
+    cbxSelectSampledTag.Requery
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxTreeStatus_LostFocus[fsub_Tree_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ----------------
 '  Methods
 ' ----------------
 ' ---------------------------------
@@ -2821,16 +2903,20 @@ End Sub
 ' Source/date:  Bonnie Campbell, May 3, 2019
 ' Adapted:
 ' Revisions:    BLC - 5/3/2019  - initial version
+'               BLC - 5/20/2019 - update to toggle list data & button color
 ' ---------------------------------
 Private Sub tglExtendTagList_Click()
 On Error GoTo Err_Handler
 
     Select Case tglExtendTagList '.Value
         Case True
-            MsgBox "up"
-            cbxSelectUnsampledTag.ControlSource = ""
+            Me.SwapTagDropDowns "extend"
+'            MsgBox "up"
+'            cbxSelectUnsampledTag.ControlSource = ""
+
         Case False
-            MsgBox "down"
+'            MsgBox "down"
+            Me.SwapTagDropDowns
     End Select
 
 Exit_Handler:
@@ -2841,6 +2927,72 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - tglExtendTagList_Click[fsub_Tree_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          SwapTagDropDowns
+' Description:  swap sampled & unsampled tags dropdowns
+' Assumptions:  differs from sapling swap version - lists trees first, saplings next (normal view)
+' Parameters:   ddl - type of list to display (string, optional)
+'                     extend = tags other than tree, sapling
+'                     normal = tree, sapling tags (default)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 20, 2019
+' Adapted:
+' Revisions:    BLC - 5/20/2019  - initial version
+' ---------------------------------
+Public Sub SwapTagDropDowns(Optional ddl As String = "normal")
+On Error GoTo Err_Handler
+
+    Dim rowSQL As String, includedStatus As String, statusOrder As String
+    
+    'defaults
+    includedStatus = "IN ('Sapling','Tree') "
+    statusOrder = "t.Tag_Status DESC "
+    cbxSelectUnsampledTag.ColumnWidths = "0 in;0.75 in;1.5 in;1 in;1 in"
+    
+    rowSQL = "SELECT t.Tag_ID, t.Tag, t.Tag_Status AS Class, " & _
+                "IIf(IsNull([azimuth]),'',[Azimuth] & ' / ' & [distance] & 'm') AS Azi_Dist, " & _
+                "t.Microplot_Number AS MP " & _
+                "FROM ((tbl_Tags t " & _
+                "LEFT JOIN qry_Status_Sapling_Current_Event sce ON t.Tag_ID = sce.Tag_ID) " & _
+                "LEFT JOIN qry_Status_Tree_Current_Event tce ON t.Tag_ID = tce.Tag_ID) " & _
+                "WHERE " & _
+                "t.Location_ID='" & [Forms]![frm_Events]![Location_ID] & "' " & _
+                "AND sce.Event_ID Is Null " & _
+                "AND tce.Event_ID Is Null " & _
+                "AND t.Tag_Status TAG_STATUSES " & _
+                "ORDER BY TAG_ORDER, t.Tag;"
+    
+    Select Case ddl
+        Case "extend"
+            includedStatus = "NOT IN ('Sapling','Tree') "
+            statusOrder = "t.Tag_Status"
+            cbxSelectUnsampledTag.ColumnWidths = "0 in;0.75 in;1.75 in;1 in;0.5 in"
+        Case "normal"
+        Case Else
+    End Select
+    
+    rowSQL = Replace(Replace(rowSQL, "TAG_STATUSES", includedStatus), "TAG_ORDER", statusOrder)
+    
+Debug.Print rowSQL
+    
+    Me.cbxSelectUnsampledTag.RowSource = rowSQL
+    
+    RefreshTagDropDowns
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SwapTagDropDowns[fsub_Sapling_Data])"
     End Select
     Resume Exit_Handler
 End Sub

@@ -15,17 +15,18 @@ Begin Form
     GridY =24
     Width =13650
     DatasheetFontHeight =9
-    ItemSuffix =30
-    Left =1170
-    Top =2640
-    Right =14925
-    Bottom =6495
+    ItemSuffix =32
+    Left =3540
+    Top =4755
+    Right =17295
+    Bottom =5655
     DatasheetGridlinesColor =15062992
     OrderBy ="[tbl_Tags].[Tag]"
     RecSrcDt = Begin
         0xbb20843c6eaee340
     End
     RecordSource ="tbl_Tags"
+    OnCurrent ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
         0x6801000068010000680100006801000000000000201c0000e010000001000000 ,
@@ -362,6 +363,7 @@ Begin Form
                     ColumnWidths ="0;0;3600;1440"
                     StatusBarText ="TSN of Specimen"
                     BeforeUpdate ="[Event Procedure]"
+                    AfterUpdate ="[Event Procedure]"
                     AllowValueListEdits =0
                     LeftMargin =22
                     TopMargin =22
@@ -538,6 +540,23 @@ Begin Form
                         End
                     End
                 End
+                Begin TextBox
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    Left =5460
+                    Top =480
+                    Width =660
+                    Height =300
+                    TabIndex =9
+                    Name ="tbxRFS"
+                    ControlSource ="RFS"
+                    Format ="True/False"
+
+                    LayoutCachedLeft =5460
+                    LayoutCachedTop =480
+                    LayoutCachedWidth =6120
+                    LayoutCachedHeight =780
+                End
             End
         End
         Begin FormFooter
@@ -558,7 +577,7 @@ Option Explicit
 ' =================================
 ' MODULE:       fsub_Tag_Sapling
 ' Level:        Application module
-' Version:      1.03
+' Version:      1.05
 '
 ' Description:  Sapling tag related functions & procedures for version control
 '
@@ -569,8 +588,54 @@ Option Explicit
 '               BLC   - 4/9/2018  - 1.02 - renamed cbo's > cbx, txt > tbx
 '               BLC   - 11/5/2018 - 1.03 - fix cbxTag_Status reference to cbxTagStatus,
 '                                          set cbxTagStatus.Locked = No vs. Yes (tag properties)
+'               BLC - 5/20/2019   - 1.04 - updated fsub_Tree_Data.tbxHabit based on species
+'               BLC - 5/23/2019   - 1.05 - add detail color based on if RFS set
 ' =================================
 
+' ---------------------------------
+'  Properties
+' ---------------------------------
+Public SaplingHabit As String
+
+' ---------------------------------
+'  Events
+' ---------------------------------
+' ---------------------------------
+' SUB:          Form_Current
+' Description:  form current actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 20, 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 5/20/2019 - initial version
+'   BLC - 5/23/2019 - update detail background based on RFS value
+' ---------------------------------
+Private Sub Form_Current()
+On Error GoTo Err_Handler
+    
+    If IsLoaded("fsub_Tag_Sapling") Then Me.Parent.Form!cbxHabit = Nz(Me.SaplingHabit, "")
+
+    Me.Detail.BackColor = IIf(tbxRFS, lngLtRose, lngWhite)
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Current[fsub_Tag_Sapling])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ----------------
+'  BeforeUpdate Events
+' ----------------
 ' ---------------------------------
 ' SUB:          cbxTagStatus_BeforeUpdate
 ' Description:  Tag status actions for before record update
@@ -670,6 +735,9 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+' ----------------
+'  Click Events
+' ----------------
 ' ---------------------------------
 ' SUB:          btnReplaceTag_Click
 ' Description:  Replace tag button actions
@@ -844,6 +912,46 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ----------------
+'  AfterUpdate Events
+' ----------------
+' ---------------------------------
+' SUB:          cbxTSN_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 20, 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 5/20/2019 - initial version
+' ---------------------------------
+Private Sub cbxTSN_AfterUpdate()
+On Error GoTo Err_Handler
+   
+    'update the habit field
+    Me.SaplingHabit = cbxTSN.Column(3)
+    'MsgBox cbxTSN & " habit is " & cbxTSN.Column(3) & " " & Me.SaplingHabit
+    Me.Parent.Form!cbxHabit = Me.SaplingHabit
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxTSN_AfterUpdate[fsub_Tag_Sapling])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+'  Methods
+' ---------------------------------
 
 ' ---------------------------------
 ' SUB:          SaveRecord

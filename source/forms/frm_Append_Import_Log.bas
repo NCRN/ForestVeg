@@ -15,10 +15,9 @@ Begin Form
     Width =11100
     DatasheetFontHeight =10
     ItemSuffix =5
-    Left =-90
     Top =2550
     Right =9675
-    Bottom =7920
+    Bottom =7710
     DatasheetGridlinesColor =12632256
     OrderBy ="[tsys_Import_Log].[Import_Date] DESC"
     RecSrcDt = Begin
@@ -59,7 +58,7 @@ Begin Form
                     IMESentenceMode =3
                     Left =1200
                     Top =300
-                    ColumnWidth =4815
+                    ColumnWidth =5670
                     Name ="Table_Name"
                     ControlSource ="Table_Name"
 

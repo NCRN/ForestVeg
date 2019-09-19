@@ -7,5 +7,6 @@ CREATE TABLE [tsys_Link_Tables] (
   [Allow_edits_lookup] BIT ,
   [Browser_view] BIT ,
   [Sort_order] BYTE ,
+  [AnnualDbPurge] BYTE ,
    CONSTRAINT [PrimaryKey] PRIMARY KEY ([Link_type], [Link_table])
 )

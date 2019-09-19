@@ -23,17 +23,16 @@ Begin Form
     Width =14400
     DatasheetFontHeight =10
     ItemSuffix =161
-    Left =960
-    Top =-735
-    Right =15360
-    Bottom =8460
+    Left =1035
+    Top =2415
+    Right =15435
+    Bottom =11610
     DatasheetGridlinesColor =12632256
-    Filter ="[Event_ID]='20190429140857-533424019.813538'"
     RecSrcDt = Begin
-        0xf1a2883a853fe540
+        0x47be11900a4be540
     End
     RecordSource ="qfrm_Events"
-    Caption ="NCRN Sampling Event"
+    Caption ="NCRN Sampling Event - (Browsing)"
     OnCurrent ="[Event Procedure]"
     BeforeInsert ="[Event Procedure]"
     OnOpen ="[Event Procedure]"
@@ -150,6 +149,7 @@ Begin Form
             Name ="Detail"
             Begin
                 Begin Rectangle
+                    Visible = NotDefault
                     SpecialEffect =0
                     BackStyle =1
                     OldBorderStyle =0
@@ -1789,7 +1789,7 @@ Begin Form
                     Name ="lblLink_to_Google_Maps"
                     Caption ="Show on Google Maps"
                     FontName ="Calibri"
-                    HyperlinkAddress ="http://maps.google.com/maps?q=ANTI-0045@39.483246,-77.743994&iwloc=A&t=h"
+                    HyperlinkAddress ="http://maps.google.com/maps?q=ANTI-0092@39.4746557,-77.7262205&iwloc=A&t=h"
                     LayoutCachedLeft =7080
                     LayoutCachedTop =1260
                     LayoutCachedWidth =9060
@@ -1924,6 +1924,7 @@ Begin Form
                     LayoutCachedHeight =1200
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     Enabled = NotDefault
                     Locked = NotDefault
                     TabStop = NotDefault
@@ -1951,6 +1952,7 @@ Begin Form
                     LayoutCachedHeight =900
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =215
                     Left =10395
                     Top =105
@@ -2019,8 +2021,7 @@ Begin Form
                     BackThemeColorIndex =5
                     BorderColor =1796857
                     BorderThemeColorIndex =5
-                    HoverColor =4819194
-                    HoverThemeColorIndex =5
+                    HoverColor =65280
                     HoverTint =80.0
                     PressedColor =413911
                     PressedThemeColorIndex =5
@@ -2036,6 +2037,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin Label
+                    Visible = NotDefault
                     OverlapFlags =247
                     TextAlign =2
                     Left =1500

@@ -1,18 +1,7 @@
-﻿Operation =1
-Option =0
-Where ="(((tsys_Append_Tables.Table_Name)<>\"tbl_Quadrat_Data\" And (tsys_Append_Tables."
-    "Table_Name)<>\"tbl_Quadrat_Seedlings_Data\" And (tsys_Append_Tables.Table_Name)<"
-    ">\"tbl_Quadrat_Herbaceous_Data\" And (tsys_Append_Tables.Table_Name)<>\"tbl_CWD_"
-    "Data\"))"
-Begin InputTables
-    Name ="tsys_Append_Tables"
-End
-Begin OutputColumns
-    Expression ="tsys_Append_Tables.Append_Order"
-    Expression ="tsys_Append_Tables.Table_Name"
-    Expression ="tsys_Append_Tables.Append"
-    Expression ="tsys_Append_Tables.Append_Table"
-End
+﻿dbMemo "SQL" ="SELECT t.Append_Order, t.Table_Name, t.Append, t.Append_Table\015\012FROM tsys_A"
+    "ppend_Tables AS t\015\012WHERE t.Table_Name NOT IN (\"tbl_Quadrat_Data\",\"tbl_Q"
+    "uadrat_Seedlings_Data\",\"tbl_Quadrat_Herbaceous_Data\",\"tbl_CWD_Data\");\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -24,58 +13,7 @@ dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
 Begin
     Begin
-        dbText "Name" ="[tsys_Append_Tables].Append_Table"
-        dbInteger "ColumnWidth" ="4275"
-        dbBoolean "ColumnHidden" ="0"
+        dbText "Name" ="t.Table_Name"
         dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="[tsys_Append_Tables].Table_Name"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="[tsys_Append_Tables].Append"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tsys_Append_Tables.Table_Name"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tsys_Append_Tables.Append"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tsys_Append_Tables.Append_Table"
-        dbLong "AggregateType" ="-1"
-        dbInteger "ColumnWidth" ="5280"
-        dbBoolean "ColumnHidden" ="0"
-    End
-    Begin
-        dbText "Name" ="tsys_Append_Tables.Append_Order"
-        dbLong "AggregateType" ="-1"
-    End
-End
-Begin
-    State =0
-    Left =46
-    Top =29
-    Right =1167
-    Bottom =449
-    Left =-1
-    Top =-1
-    Right =1089
-    Bottom =159
-    Left =0
-    Top =0
-    ColumnsShown =539
-    Begin
-        Left =48
-        Top =12
-        Right =192
-        Bottom =156
-        Top =0
-        Name ="tsys_Append_Tables"
-        Name =""
     End
 End

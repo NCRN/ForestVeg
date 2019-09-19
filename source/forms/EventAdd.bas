@@ -1423,7 +1423,7 @@ On Error GoTo Err_Handler
     If IsDate(tbxEventDate.Value) Then tglPseudoEvent.Enabled = True
 
     If Len(Nz(cbxParkCode.Value, "")) > 0 _
-        And IsGUID(cbxLocationID.Value) = True _
+        And isGUID(cbxLocationID.Value) = True _
         And IsDate(tbxEventDate.Value) = True Then '_
         
         isOK = True
@@ -1473,7 +1473,7 @@ End Sub
 ' Revisions:
 '   BLC - 10/23/2018 - initial version
 ' ---------------------------------
-Public Function IsGUID(strInspect As String) As Boolean
+Public Function isGUID(strInspect As String) As Boolean
 On Error GoTo Err_Handler
 
     Dim strPattern As String
@@ -1481,7 +1481,7 @@ On Error GoTo Err_Handler
                  "[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-" & _
                  "[0-9a-fA-F]{12}(\}){0,1}$"
 
-    IsGUID = IsRegExpMatch(strInspect, strPattern)
+    isGUID = IsRegExpMatch(strInspect, strPattern)
    
 Exit_Handler:
     Exit Function

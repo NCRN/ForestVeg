@@ -14,10 +14,10 @@ Begin Form
     Width =13944
     DatasheetFontHeight =9
     ItemSuffix =76
-    Left =1380
-    Top =2115
-    Right =15150
-    Bottom =8430
+    Left =3465
+    Top =4305
+    Right =17235
+    Bottom =10620
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0xd0ed4c4b94aee340
@@ -127,6 +127,7 @@ Begin Form
             Name ="Detail"
             Begin
                 Begin TextBox
+                    Visible = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =93
                     IMESentenceMode =3
@@ -161,7 +162,6 @@ Begin Form
                     TopMargin =22
                     RightMargin =22
                     BottomMargin =22
-                    BackColor =65535
                     BorderColor =0
                     Name ="tbxComments"
                     ControlSource ="Sapling_Notes"
@@ -235,7 +235,7 @@ Begin Form
                     ColumnCount =5
                     ListRows =20
                     ListWidth =5760
-                    Left =3181
+                    Left =4381
                     Top =60
                     Width =240
                     Height =330
@@ -244,38 +244,37 @@ Begin Form
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"4\";\"4\""
                     Name ="cbxSelectUnsampledTag"
                     RowSourceType ="Table/Query"
-                    RowSource ="SELECT tbl_Tags.Tag_ID, tbl_Tags.Tag, tbl_Tags.Tag_Status AS Class,  IIf(IsNull("
-                        "[azimuth]),\"\",[Azimuth] & \" / \" & [distance] & \"m\") AS Azi_Dist, tbl_Tags."
-                        "Microplot_Number AS MP  FROM (tbl_Tags  LEFT JOIN qry_Status_Sapling_Current_Eve"
-                        "nt  ON tbl_Tags.Tag_ID = qry_Status_Sapling_Current_Event.Tag_ID)  LEFT JOIN qry"
-                        "_Status_Tree_Current_Event  ON tbl_Tags.Tag_ID = qry_Status_Tree_Current_Event.T"
-                        "ag_ID WHERE (((qry_Status_Sapling_Current_Event.Event_ID) Is Null)  AND ((tbl_Ta"
-                        "gs.Location_ID)=[Forms]![frm_Events]![Location_ID])  AND ((qry_Status_Tree_Curre"
-                        "nt_Event.Event_ID) Is Null)) ORDER BY tbl_Tags.Tag_Status, tbl_Tags.Tag;"
-                    ColumnWidths ="0;1080;2520;1440;720"
+                    RowSource ="SELECT t.Tag_ID, t.Tag, t.Tag_Status AS Class, IIf(IsNull([azimuth]),'',[Azimuth"
+                        "] & ' / ' & [distance] & 'm') AS Azi_Dist, t.Microplot_Number AS MP FROM ((tbl_T"
+                        "ags t LEFT JOIN qry_Status_Sapling_Current_Event sce ON t.Tag_ID = sce.Tag_ID) L"
+                        "EFT JOIN qry_Status_Tree_Current_Event tce ON t.Tag_ID = tce.Tag_ID) WHERE t.Loc"
+                        "ation_ID='{581B0E04-42B6-4AA3-9DB1-8B7F34ED0DFC}' AND sce.Event_ID Is Null AND t"
+                        "ce.Event_ID Is Null AND t.Tag_Status IN ('Sapling','Tree')  ORDER BY t.Tag_Statu"
+                        "s ASC , t.Tag;"
+                    ColumnWidths ="0;1080;2160;1440;1440"
                     AfterUpdate ="[Event Procedure]"
                     OnEnter ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
-                    LayoutCachedLeft =3181
+                    LayoutCachedLeft =4381
                     LayoutCachedTop =60
-                    LayoutCachedWidth =3421
+                    LayoutCachedWidth =4621
                     LayoutCachedHeight =390
                     Begin
                         Begin Label
                             FontItalic = NotDefault
-                            OverlapFlags =85
+                            OverlapFlags =93
                             TextAlign =3
-                            Left =360
+                            Left =1920
                             Top =60
-                            Width =2805
+                            Width =2445
                             Height =330
                             FontSize =12
                             FontWeight =700
                             Name ="lblSelectTag"
-                            Caption ="Select an unsampled tag ->"
-                            LayoutCachedLeft =360
+                            Caption ="Select unsampled tag ->"
+                            LayoutCachedLeft =1920
                             LayoutCachedTop =60
-                            LayoutCachedWidth =3165
+                            LayoutCachedWidth =4365
                             LayoutCachedHeight =390
                         End
                     End
@@ -348,6 +347,8 @@ Begin Form
                     StatusBarText ="Health status of this specimen"
                     AfterUpdate ="[Event Procedure]"
                     OnEnter ="[Event Procedure]"
+                    OnLostFocus ="[Event Procedure]"
+                    OnClick ="[Event Procedure]"
                     OnChange ="[Event Procedure]"
                     LeftMargin =22
                     TopMargin =22
@@ -595,15 +596,15 @@ Begin Form
                             FontItalic = NotDefault
                             OverlapFlags =85
                             TextAlign =3
-                            Left =3900
+                            Left =4980
                             Top =60
-                            Width =2940
+                            Width =1860
                             Height =330
                             FontSize =12
                             FontWeight =700
                             Name ="lblSelectSample"
-                            Caption ="Select an existing sample ->"
-                            LayoutCachedLeft =3900
+                            Caption ="Existing sample ->"
+                            LayoutCachedLeft =4980
                             LayoutCachedTop =60
                             LayoutCachedWidth =6840
                             LayoutCachedHeight =390
@@ -613,7 +614,7 @@ Begin Form
                 Begin Label
                     FontItalic = NotDefault
                     OverlapFlags =85
-                    Left =3540
+                    Left =4680
                     Top =60
                     Width =270
                     Height =300
@@ -621,9 +622,9 @@ Begin Form
                     ForeColor =3751056
                     Name ="lblOr1"
                     Caption ="or"
-                    LayoutCachedLeft =3540
+                    LayoutCachedLeft =4680
                     LayoutCachedTop =60
-                    LayoutCachedWidth =3810
+                    LayoutCachedWidth =4950
                     LayoutCachedHeight =360
                 End
                 Begin CommandButton
@@ -1557,15 +1558,17 @@ Begin Form
                     Overlaps =1
                 End
                 Begin ToggleButton
-                    Visible = NotDefault
-                    OverlapFlags =85
-                    Left =120
-                    Top =135
-                    Width =144
-                    Height =144
+                    OverlapFlags =95
+                    Left =60
+                    Top =60
+                    Width =1794
+                    Height =294
+                    FontSize =9
+                    FontWeight =500
                     TabIndex =35
                     Name ="tglExtendTagList"
                     DefaultValue ="0"
+                    Caption ="Swap Tag List"
                     FontName ="Franklin Gothic Book"
                     OnClick ="[Event Procedure]"
                     ControlTipText ="Extend tag list"
@@ -1574,12 +1577,11 @@ Begin Form
                     BottomPadding =120
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =120
-                    LayoutCachedTop =135
-                    LayoutCachedWidth =264
-                    LayoutCachedHeight =279
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =1854
+                    LayoutCachedHeight =354
                     ForeTint =100.0
-                    Shape =7
                     Bevel =0
                     Gradient =12
                     BackColor =8289145
@@ -1599,6 +1601,7 @@ Begin Form
                     QuickStyle =23
                     QuickStyleMask =-1
                     WebImagePaddingTop =1
+                    Overlaps =1
                 End
             End
         End
@@ -1619,7 +1622,7 @@ Option Explicit
 ' =================================
 ' FORM:         fsub_Sapling_Data
 ' Level:        Application report
-' Version:      1.07
+' Version:      1.09
 '
 ' Description:  Form related functions & procedures for application
 ' Requires:     Keypad Utils module
@@ -1638,12 +1641,15 @@ Option Explicit
 '                                          CheckDBH
 '               BLC - 4/24/2018   - 1.06 - fixed cboBrowsePick > cbxBrowsePick, txtBrowsable/txtBrowsed > tbxBrowsable/tbxBrowsed
 '               BLC - 5/3/2019    - 1.07 - added RefreshTagDropDowns, tglExtendTagList
+'               BLC - 5/20/2019   - 1.08 - added SwapTagDropDowns
+'               BLC - 5/23/2019   - 1.09 - added SetTagRFS, Tag property
 ' =================================
 
 ' ---------------------------------
 '  Properties
 ' ---------------------------------
 Public SaplingStatus As String
+Public TagNumber As Integer
 
 ' ---------------------------------
 '  Events
@@ -1692,7 +1698,11 @@ On Error GoTo Err_Handler
 
     CheckDBH
 
-    RefreshTagDropDowns
+'    RefreshTagDropDowns
+    SwapTagDropDowns
+    
+    'set tag property
+    TagNumber = Nz(fsub_Tag_Sapling.Controls("tbxTag"), 0)
     
 Exit_Handler:
     Exit Sub
@@ -1788,6 +1798,37 @@ End Sub
 ' ----------------
 '  Click Events
 ' ----------------
+
+' ---------------------------------
+' SUB:          cbxSaplingStatus_Click
+' Description:  combobox lost focus actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 20, 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 5/20/2019 - initial version
+' ---------------------------------
+Private Sub cbxSaplingStatus_Click()
+On Error GoTo Err_Handler
+   
+    'refresh the sampled sapling status
+    cbxSelectSampledTag.Requery
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxSaplingStatus_Click[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
 ' ---------------------------------
 ' SUB:          chkDBHCheck_Click
@@ -2171,6 +2212,7 @@ End Sub
 '   BLC - 4/3/2018 - added error handling, documentation
 '                    renamed cboTree_Status > cbxTreeStatus
 '   BLC - 4/9/2018 - renamed SaplingStatus vs. TreeStatus
+'   BLC - 5/20/2019 - updated to refresh Sampled Tag sapling status
 ' ---------------------------------
 Private Sub cbxSaplingStatus_Enter()
 On Error GoTo Err_Handler
@@ -2178,6 +2220,9 @@ On Error GoTo Err_Handler
     ValidateSaplingSubform
     
     SaplingStatus = Me!cbxSaplingStatus
+    
+    'refresh the sampled sapling status
+    cbxSelectSampledTag.Requery
     
 Exit_Handler:
     Exit Sub
@@ -2417,6 +2462,45 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          tglExtendTagList_Click
+' Description:  toggle enter actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 20, 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 5/10/2019 - initial
+' ---------------------------------
+Private Sub tglExtendTagList_Click()
+On Error GoTo Err_Handler
+
+    Select Case tglExtendTagList
+        Case Null
+'            tglExtendTagList.Caption = " NULL "
+        Case True
+            'tglExtendTagList.Caption = " TRUE "
+            SwapTagDropDowns "extend"
+        Case False
+            'tglExtendTagList.Caption = " FALSE "
+            SwapTagDropDowns
+    End Select
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglExtendTagList_Click[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 ' ----------------
 '  Change Events
 ' ----------------
@@ -2499,11 +2583,15 @@ End Sub
 ' Revisions:
 '   BLC - 4/9/2018 - initial version
 '   BLC - 4/21/2018 - code cleanup
+'   BLC - 5/20/2019 - updated to refresh Sampled Tag tree status
 ' ---------------------------------
 Private Sub cbxSaplingStatus_Change()
 On Error GoTo Err_Handler
 
     CheckTagStatus "Sapling"
+    
+    'refresh the sampled sapling status
+    cbxSelectSampledTag.Requery
 
 Exit_Handler:
     Exit Sub
@@ -2612,15 +2700,16 @@ End Sub
 '   BLC - 4/3/2018 - added error handling, documentation
 '                    renamed cboTree_Status > cbxTreeStatus
 '   BLC - 4/9/2018 - renamed SaplingStatus vs. TreeStatus
+'   BLC - 5/23/2019 - added setting Tag.RFS flag for "Remove from Study" flags
 ' ---------------------------------
 Private Sub cbxSaplingStatus_AfterUpdate()
 On Error GoTo Err_Handler
     
-    Dim Response As String
+    Dim response As String
     
     If Left(SaplingStatus, 4) = "Dead" And Left(Me!cbxSaplingStatus, 5) = "Alive" Then
-        Response = MsgBox("You have changed the status of this sapling from dead to alive", vbOKCancel, "NCRN Forest Vegetation Monitoring")
-            If Response = vbOK Then
+        response = MsgBox("You have changed the status of this sapling from dead to alive", vbOKCancel, "NCRN Forest Vegetation Monitoring")
+            If response = vbOK Then
                 MsgBox "Changes approved"
             Else
                 MsgBox "Changes rejected"
@@ -2629,6 +2718,14 @@ On Error GoTo Err_Handler
             End If
                
     End If
+    
+    'set tag RFS flagging (True, False, vbTrue, vbFalse trigger error!)
+    Select Case SaplingStatus
+        Case "Removed from study"
+            SetTagRFS vbTrue, TagNumber
+        Case Else
+            SetTagRFS vbFalse, TagNumber
+    End Select
     
 Exit_Handler:
     Exit Sub
@@ -2936,6 +3033,40 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+' ----------------
+'  Lost Focus
+' ----------------
+' ---------------------------------
+' SUB:          cbxSaplingStatus_LostFocus
+' Description:  combobox lost focus actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 20, 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 5/20/2019 - initial version
+' ---------------------------------
+Private Sub cbxSaplingStatus_LostFocus()
+On Error GoTo Err_Handler
+   
+    'refresh the sampled sapling status
+    cbxSelectSampledTag.Requery
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxSaplingStatus_LostFocus[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
 ' ---------------------------------
 '  Methods
 ' ---------------------------------
@@ -3091,3 +3222,112 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ---------------------------------
+' SUB:          SwapTagDropDowns
+' Description:  swap sampled & unsampled tags dropdowns
+' Assumptions:  differs from tree swap version - lists saplings first, trees next (normal view)
+' Parameters:   ddl - type of list to display (string, optional)
+'                     extend = tags other than tree, sapling
+'                     normal = tree, sapling tags (default)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 20, 2019
+' Adapted:
+' Revisions:    BLC - 5/20/2019  - initial version
+' ---------------------------------
+Public Sub SwapTagDropDowns(Optional ddl As String = "normal")
+On Error GoTo Err_Handler
+
+    Dim rowSQL As String, includedStatus As String, statusOrder As String
+    
+    'defaults
+    includedStatus = "IN ('Sapling','Tree') "
+    statusOrder = "t.Tag_Status ASC "
+    cbxSelectUnsampledTag.ColumnWidths = "0 in;0.75 in;1.5 in;1 in;1 in"
+    
+    rowSQL = "SELECT t.Tag_ID, t.Tag, t.Tag_Status AS Class, " & _
+                "IIf(IsNull([azimuth]),'',[Azimuth] & ' / ' & [distance] & 'm') AS Azi_Dist, " & _
+                "t.Microplot_Number AS MP " & _
+                "FROM ((tbl_Tags t " & _
+                "LEFT JOIN qry_Status_Sapling_Current_Event sce ON t.Tag_ID = sce.Tag_ID) " & _
+                "LEFT JOIN qry_Status_Tree_Current_Event tce ON t.Tag_ID = tce.Tag_ID) " & _
+                "WHERE " & _
+                "t.Location_ID='" & [Forms]![frm_Events]![Location_ID] & "' " & _
+                "AND sce.Event_ID Is Null " & _
+                "AND tce.Event_ID Is Null " & _
+                "AND t.Tag_Status TAG_STATUSES " & _
+                "ORDER BY TAG_ORDER, t.Tag;"
+    
+    Select Case ddl
+        Case "extend"
+            includedStatus = "NOT IN ('Sapling','Tree') "
+            statusOrder = "t.Tag_Status"
+            cbxSelectUnsampledTag.ColumnWidths = "0 in;0.75 in;1.75 in;1 in;0.5 in"
+        Case "normal"
+        Case Else
+    End Select
+    
+    rowSQL = Replace(Replace(rowSQL, "TAG_STATUSES", includedStatus), "TAG_ORDER", statusOrder)
+    
+Debug.Print rowSQL
+    
+    Me.cbxSelectUnsampledTag.RowSource = rowSQL
+    
+    RefreshTagDropDowns
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SwapTagDropDowns[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          SetTagRFS
+' Description:  set the tag RFS flag based on the tree/sapling status
+' Assumptions:  tags are never reused and if the tree/sapling is removed from study
+'               the tag flag should be set
+' Parameters:   status - whether the flag should be set (True) or not (False) (boolean)
+'               tag - number of the tag (integer)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 23, 2019
+' Adapted:
+' Revisions:    BLC - 5/23/2019  - initial version
+' ---------------------------------
+Public Function SetTagRFS(Status As Boolean, Tag As Integer)
+On Error GoTo Err_Handler
+
+    Dim updateSQL As String
+    
+    'defaults
+    
+    updateSQL = "UPDATE tbl_Tags t " & _
+                " SET t.RFS = " & Status & _
+                " WHERE t.Tag = " & Tag & ";"
+    
+Debug.Print updateSQL
+    
+    DoCmd.RunSQL updateSQL
+    
+    Me.fsub_Tag_Sapling.Requery
+
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SetTagRFS[fsub_Sapling_Data])"
+    End Select
+    Resume Exit_Handler
+End Function

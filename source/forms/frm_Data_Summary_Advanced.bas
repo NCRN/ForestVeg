@@ -2192,7 +2192,7 @@ End Sub
 '   BLC - 5/14/2018 - documentation, error handling
 
 ' ---------------------------------
-Private Sub cbxSelectQuery_NotInList(NewData As String, Response As Integer)
+Private Sub cbxSelectQuery_NotInList(NewData As String, response As Integer)
 On Error GoTo Err_Handler
     
     Me.ActiveControl.Undo
@@ -3842,7 +3842,7 @@ On Error GoTo Err_Handler
     strSaveFolder = fPathParsing(strSaveFile, "D")
     'Cycle through queries and create an worksheet tab for each one
     For qNum = 0 To 6
-        Set qDef = db.CreateQueryDef(strQryName(qNum, 1), CurrentDb.QueryDefs(strQryName(qNum, 0)).SQL)
+        Set qDef = db.CreateQueryDef(strQryName(qNum, 1), CurrentDb.QueryDefs(strQryName(qNum, 0)).sql)
         'Export each parameter to a seperate worksheet in an XLSX workbook (SpreadsheetType = '10' for .XLSX)
         DoCmd.TransferSpreadsheet acExport, 10, strQryName(qNum, 1), strSaveFile, True
         'Export each parameter to a seperate CSV file.
@@ -3938,7 +3938,7 @@ On Error GoTo Err_Handler
     strSaveFolder = fPathParsing(strSaveFile, "D")
     'Cycle through queries and create an worksheet tab for each one
     For qNum = 0 To 15
-        Set qDef = db.CreateQueryDef(strQryName(qNum, 1), CurrentDb.QueryDefs(strQryName(qNum, 0)).SQL)
+        Set qDef = db.CreateQueryDef(strQryName(qNum, 1), CurrentDb.QueryDefs(strQryName(qNum, 0)).sql)
         'Export each parameter to a seperate worksheet in an XLSX workbook (SpreadsheetType = '10' for .XLSX)
         DoCmd.TransferSpreadsheet acExport, 10, strQryName(qNum, 1), strSaveFile, True
         'Export each parameter to a seperate CSV file.
@@ -4166,10 +4166,10 @@ Debug.Print tpl
             SysCmd acSysCmdUpdateMeter, i
             SysCmd acSysCmdSetStatus, "Exporting " & rs("AnnualData") & "..."
             
-            Debug.Print vbCrLf & rs("AnnualData") & ": " & vbCrLf & .SQL & vbCrLf
-            .SQL = Replace(GetTemplate(tpl), "Parameters yr integer;", "")
+            Debug.Print vbCrLf & rs("AnnualData") & ": " & vbCrLf & .sql & vbCrLf
+            .sql = Replace(GetTemplate(tpl), "Parameters yr integer;", "")
 '            .Parameters("yr") = DataYear >> DoCmd.TransferText retriggers params
-            .SQL = Replace(.SQL, "[yr]", DataYear)
+            .sql = Replace(.sql, "[yr]", DataYear)
             
             Select Case FileType
                 Case "XLS"

@@ -512,12 +512,12 @@ Option Explicit
 ' Revisions:    <name, date, desc - add lines as you go>
 ' =================================
 
-Private Sub cboUser_NotInList(NewData As String, Response As Integer)
+Private Sub cboUser_NotInList(NewData As String, response As Integer)
     On Error GoTo Err_Handler
 
     MsgBox "User not found.  To add this user, click the New user button.", vbOKOnly, "User Not In List"
     Me.ActiveControl.Undo
-    Response = acDataErrContinue
+    response = acDataErrContinue
     Me!cmdNewUser.SetFocus
 
 Exit_Procedure:

@@ -271,7 +271,7 @@ Public Function fxnRefreshLinks(strSQL As String, varFileName As Variant) As Boo
         varReturn = SysCmd(acSysCmdUpdateMeter, intI)
         strLinkTableName = rst![Link_table]
         Set tdf = db.TableDefs(strLinkTableName)
-        tdf.connect = ";DATABASE=" & varFileName
+        tdf.Connect = ";DATABASE=" & varFileName
         tdf.RefreshLink
         rst.MoveNext
     Loop

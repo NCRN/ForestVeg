@@ -7,14 +7,14 @@
 Option Compare Database
 Option Explicit
 
-Private Type GUID
+Private Type guid
     Data1 As Long
     Data2 As Long
     Data3 As Long
     Data4(8) As Byte
 End Type
 
-Private Declare PtrSafe Function CoCreateGuid Lib "ole32.dll" (pguid As GUID) As Long
+Private Declare PtrSafe Function CoCreateGuid Lib "ole32.dll" (pguid As guid) As Long
 
 Private Declare PtrSafe Function StringFromGUID2 Lib "ole32.dll" _
     (rguid As Any, ByVal lpstrClsId As Long, ByVal cbMax As Long) As Long
@@ -35,7 +35,7 @@ Private Declare PtrSafe Function StringFromGUID2 Lib "ole32.dll" _
 Public Function fxnGUIDGen() As String
     On Error GoTo Err_Handler
 
-    Dim uGUID As GUID       ' the structured guid
+    Dim uGUID As guid       ' the structured guid
     Dim sGUID As String     ' for storing the results
     Dim bGUID() As Byte     ' the formatted string
     Dim lLen As Long
@@ -49,7 +49,7 @@ Public Function fxnGUIDGen() As String
     ' use the API to format as string
     retVal = StringFromGUID2(uGUID, VarPtr(bGUID(0)), lLen)
     sGUID = bGUID
-    If (Asc(mid$(sGUID, retVal, 1)) = 0) Then retVal = retVal - 1
+    If (Asc(Mid$(sGUID, retVal, 1)) = 0) Then retVal = retVal - 1
     ' truncate the string
     fxnGUIDGen = Left$(sGUID, retVal)
 

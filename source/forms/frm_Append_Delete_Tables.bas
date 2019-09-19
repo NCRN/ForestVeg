@@ -8,15 +8,15 @@ Begin Form
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =7731
+    Width =7800
     DatasheetFontHeight =10
-    ItemSuffix =15
-    Left =4545
-    Top =810
-    Right =12555
-    Bottom =10965
+    ItemSuffix =18
+    Left =1170
+    Top =15
+    Right =9510
+    Bottom =5520
     DatasheetGridlinesColor =12632256
-    Filter =" [Delete_Table] =  False"
+    Filter =" [Delete_Date] IS NULL"
     RecSrcDt = Begin
         0xa4ccdf1a0fb2e340
     End
@@ -76,7 +76,7 @@ Begin Form
                     FontSize =20
                     FontWeight =700
                     ForeColor =16777215
-                    Name ="Label2"
+                    Name ="lblTitle"
                     Caption ="Delete Imported Tables"
                     LayoutCachedLeft =60
                     LayoutCachedTop =60
@@ -91,7 +91,7 @@ Begin Form
                     Width =2886
                     Height =478
                     ColumnOrder =0
-                    Name ="optframe_SelectDelete"
+                    Name ="optgSelectDelete"
                     AfterUpdate ="[Event Procedure]"
 
                     Begin
@@ -104,7 +104,7 @@ Begin Form
                             Height =240
                             BackColor =0
                             ForeColor =16777215
-                            Name ="Label8"
+                            Name ="lblSelect"
                             Caption ="Select....."
                         End
                         Begin CheckBox
@@ -112,7 +112,7 @@ Begin Form
                             Left =426
                             Top =1138
                             OptionValue =1
-                            Name ="Check10"
+                            Name ="chkALL"
 
                             Begin
                                 Begin Label
@@ -122,7 +122,7 @@ Begin Form
                                     Width =720
                                     Height =240
                                     ForeColor =16777215
-                                    Name ="Label11"
+                                    Name ="lblALL"
                                     Caption ="Select All"
                                 End
                             End
@@ -131,8 +131,9 @@ Begin Form
                             OverlapFlags =87
                             Left =1560
                             Top =1138
+                            TabIndex =1
                             OptionValue =2
-                            Name ="Check12"
+                            Name ="chkNone"
 
                             Begin
                                 Begin Label
@@ -142,7 +143,7 @@ Begin Form
                                     Width =930
                                     Height =240
                                     ForeColor =16777215
-                                    Name ="Label13"
+                                    Name ="lblNone"
                                     Caption ="Select None"
                                 End
                             End
@@ -163,7 +164,7 @@ Begin Form
                     Top =60
                     Width =4980
                     ColumnWidth =5535
-                    Name ="txt_Table_Name"
+                    Name ="tbxTableName"
                     ControlSource ="Table_Name"
 
                     LayoutCachedLeft =1080
@@ -178,7 +179,7 @@ Begin Form
                             Top =60
                             Width =960
                             Height =240
-                            Name ="Label0"
+                            Name ="lblTableName"
                             Caption ="Table Name:"
                             LayoutCachedLeft =60
                             LayoutCachedTop =60
@@ -193,7 +194,7 @@ Begin Form
                     Top =60
                     ColumnWidth =2070
                     TabIndex =1
-                    Name ="chk_Delete_Table"
+                    Name ="chkDeleteTable"
                     ControlSource ="Delete_Table"
                     AfterUpdate ="[Event Procedure]"
 
@@ -209,7 +210,7 @@ Begin Form
                             Top =60
                             Width =1080
                             Height =240
-                            Name ="Label1"
+                            Name ="lblDeleteTable"
                             Caption ="Delete Table?"
                             LayoutCachedLeft =6120
                             LayoutCachedTop =60
@@ -232,7 +233,7 @@ Begin Form
                     Top =120
                     Width =2580
                     FontWeight =700
-                    Name ="cmd_Delete"
+                    Name ="btnDelete"
                     Caption ="Delete Selected Tables"
                     OnClick ="[Event Procedure]"
 
@@ -252,7 +253,7 @@ Begin Form
                     Width =840
                     FontWeight =700
                     TabIndex =1
-                    Name ="cmd_Close"
+                    Name ="btnClose"
                     Caption ="Close"
                     OnClick ="[Event Procedure]"
 
@@ -273,7 +274,7 @@ Begin Form
                     Width =2925
                     FontWeight =700
                     TabIndex =2
-                    Name ="cmd_Delete_and_Compact"
+                    Name ="btnDeleteAndCompact"
                     Caption ="Delete Selected and Compact"
                     OnClick ="[Event Procedure]"
                     ImageData = Begin
@@ -289,6 +290,40 @@ Begin Form
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
                 End
+                Begin TextBox
+                    SpecialEffect =0
+                    OverlapFlags =85
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =6960
+                    Top =180
+                    Width =420
+                    Height =255
+                    TabIndex =3
+                    Name ="tbxRecordCount"
+
+                    LayoutCachedLeft =6960
+                    LayoutCachedTop =180
+                    LayoutCachedWidth =7380
+                    LayoutCachedHeight =435
+                End
+                Begin TextBox
+                    SpecialEffect =0
+                    OverlapFlags =85
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =7440
+                    Top =180
+                    Width =360
+                    Height =255
+                    TabIndex =4
+                    Name ="tbxDeleteCount"
+
+                    LayoutCachedLeft =7440
+                    LayoutCachedTop =180
+                    LayoutCachedWidth =7800
+                    LayoutCachedHeight =435
+                End
             End
         End
     End
@@ -299,177 +334,583 @@ Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Compare Database
+Option Explicit
 
-Private Sub chk_Delete_Table_AfterUpdate()
-If Me.chk_Delete_Table = True Then
-    Me.cmd_Delete.Enabled = True
-    Me.cmd_Delete_and_Compact.Enabled = True
-Else
-    Me.cmd_Delete.Enabled = False
-    Me.cmd_Delete_and_Compact.Enabled = False
-End If
+' =================================
+' FORM:         frm_Append_Delete_Tables
+' Level:        Form module
+' Version:      1.01
+'
+' Description:  delete append tables related functions & procedures
+'
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, May 24, 2018
+' Revisions:    ML/GS - unknown   - 1.00 - initial version
+'               BLC   - 8/18/2018 - 1.01 - added documentation, error handling,
+'                                          check for table existance before delete
+' =================================
 
-End Sub
+' ---------------------------------
+'  Declarations
+' ---------------------------------
 
-Private Sub cmd_Delete_and_Compact_Click()
-Dim rs As DAO.Recordset
-Set rs = Me.RecordsetClone
+' ----------------
+'  Events
+' ----------------
 
-Dim strTable As String
-
-'Populate the recordset
-rs.MoveLast
-rs.MoveFirst
-
-'Cycle through the recordset
-Do While Not rs.EOF
-
-    strTable = rs![Table_Name]
-       
-'Check to see if the delete table check box is checked if not go to the next record.
-    If rs![Delete_Table] = False Then
-        
-        GoTo NextRecord:
-            
-    ElseIf rs![Delete_Table] = True Then
-'If the check box is checked then check to see if the table was deleted already by checking
-'the delete date.
-        If Not IsNull(rs![Delete_Date]) Then
-            GoTo NextRecord:
-'If a delete date exists then that table has already been removed.
-
-'If a delete date does not exist and the delete check is checked then delete the table.
-        
-    ElseIf rs![Delete_Table] = True Then
-        
-        If IsNull(rs![Delete_Date]) Then
-'Delete the table
-
-            DoCmd.DeleteObject acTable, strTable
-            
-'Update the import log table with the delete date
-            With rs
-                .Edit
-                rs![Delete_Date] = Date
-                .Update
-            End With
-        End If
-        End If
-    End If
-    
-NextRecord:
-    rs.MoveNext
-Loop
-
-Me.Requery
-
-End Sub
-
-Private Sub cmd_Delete_Click()
-
-Dim rs As DAO.Recordset
-Set rs = Me.RecordsetClone
-Dim strTable As String
-
-'Populate the recordset
-rs.MoveLast
-rs.MoveFirst
-
-'Cycle through the recordset
-Do While Not rs.EOF
-
-    strTable = rs![Table_Name]
-       
-'Check to see if the delete table check box is checked if not go to the next record.
-    If rs![Delete_Table] = False Then
-        
-        GoTo NextRecord:
-            
-    ElseIf rs![Delete_Table] = True Then
-'If the check box is checked then check to see if the table was deleted already by checking
-'the delete date.
-        If Not IsNull(rs![Delete_Date]) Then
-            GoTo NextRecord:
-'If a delete date exists then that table has already been removed.
-
-'If a delete date does not exist and the delete check is checked then delete the table.
-        
-    ElseIf rs![Delete_Table] = True Then
-        
-        If IsNull(rs![Delete_Date]) Then
-'Delete the table
-
-            DoCmd.DeleteObject acTable, strTable
-            
-'Update the import log table with the delete date
-            With rs
-                .Edit
-                rs![Delete_Date] = Date
-                .Update
-            End With
-        End If
-        End If
-    End If
-    
-NextRecord:
-    rs.MoveNext
-Loop
-
-Me.Requery
-'Need to find better code for compacting
-'DBEngine.CompactDatabase
-
-End Sub
-
+' ----------------
+'  Form
+' ----------------
+' ---------------------------------
+' SUB:          Form_Open
+' Description:  form open actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC    - 8/18/2018 - added documentation & error handling,
+'                        adjusted filter to include all non-deleted tables
+'                        selected for deletion but not yet deleted
+' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
-
-Me.Filter = " [Delete_Table] =  " & False
-
-Me.FilterOn = True
-
-End Sub
-
-Private Sub cmd_Close_Click()
-On Error GoTo Err_cmd_Close_Click
-     
-        DoCmd.Close
-
-Exit_cmd_Close_Click:
+On Error GoTo Err_Handler
+   
+   'use NULL Delete_Date vs. Delete_Table = False since tables could have been
+   'selected for deletion, but no deletion completed
+    Me.Filter = " [Delete_Date] IS NULL"   '" [Delete_Table] =  " & False
+    
+    Me.FilterOn = True
+    
+    'defaults
+    btnDelete.Enabled = False   'check for table records first
+    btnDeleteAndCompact.Enabled = False
+    
+   'populate the count
+   Dim rs As DAO.Recordset
+   Set rs = Me.RecordsetClone
+   If Not (rs.BOF And rs.EOF) Then
+        rs.MoveLast
+        tbxRecordCount = rs.RecordCount
+   
+        'clear all Delete checkboxes
+        rs.MoveFirst
+        Do Until rs.EOF
+            If rs!Delete_Table = True And IsNull(rs!Delete_Date) = True Then
+                rs.Edit
+                rs!Delete_Table = False
+                rs.Update
+            End If
+            
+            rs.MoveNext
+        Loop
+   Else
+        tbxRecordCount = 0
+   End If
+      
+Exit_Handler:
     Exit Sub
-Err_cmd_Close_Click:
-    MsgBox Err.Description
-    Resume Exit_cmd_Close_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[frm_Append_Delete_Tables])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub optframe_SelectDelete_AfterUpdate()
+' ---------------------------------
+' SUB:          btnDeleteAndCompact_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC    - 8/18/2018 - added documentation & error handling
+' ---------------------------------
+Private Sub btnDeleteAndCompact_Click()
+On Error GoTo Err_Handler
 
-Dim rsDelete As DAO.Recordset
-Set rsDelete = Me.RecordsetClone
+    DeleteTables
+'    Dim rs As DAO.Recordset
+'    Set rs = Me.RecordsetClone
+'
+'    Dim strTable As String
+'
+'    'Populate the recordset
+'    rs.MoveLast
+'    rs.MoveFirst
+'
+'    'Cycle through the recordset
+'    Do While Not rs.EOF
+'
+'        strTable = rs![Table_Name]
+'
+'    'Check to see if the delete table check box is checked if not go to the next record.
+'        If rs![Delete_Table] = False Then
+'
+'            GoTo NextRecord:
+'
+'        ElseIf rs![Delete_Table] = True Then
+'    'If check box checked check if table deleted already by checking delete date
+'            If Not IsNull(rs![Delete_Date]) Then
+'                GoTo NextRecord:
+'    'If delete date exists then that table has already been removed.
+'
+'    'If a delete date does not exist and the delete check is checked then delete the table.
+'
+'        ElseIf rs![Delete_Table] = True Then
+'
+'            If IsNull(rs![Delete_Date]) Then
+'    'Delete the table
+'
+'                DoCmd.DeleteObject acTable, strTable
+'
+'    'Update the import log table with the delete date
+'                With rs
+'                    .Edit
+'                    rs![Delete_Date] = Date
+'                    .Update
+'                End With
+'            End If
+'            End If
+'        End If
+'
+'NextRecord:
+'        rs.MoveNext
+'    Loop
+'
+'    Me.Requery
 
-rsDelete.MoveFirst
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnDeleteAndCompact_Click[frm_Append_Delete_Tables])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
-Do Until rsDelete.EOF
+' ---------------------------------
+' SUB:          btnDelete_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC    - 8/18/2018 - added documentation & error handling
+' ---------------------------------
+Private Sub btnDelete_Click()
+On Error GoTo Err_Handler
 
-If Me!optframe_SelectDelete.Value = 1 Then
+    DeleteTables
+'    Dim rs As DAO.Recordset
+'    Set rs = Me.RecordsetClone
+'    Dim strTable As String
+'
+'    'Populate the recordset
+'    rs.MoveLast
+'    rs.MoveFirst
+'
+'    'Cycle through the recordset
+'    Do While Not rs.EOF
+'
+'        strTable = rs![Table_Name]
+'
+'        'Check if delete table check box is checked if not go to next record
+'        If rs![Delete_Table] = False Then
+'
+'            GoTo NextRecord:
+'
+'        ElseIf rs![Delete_Table] = True Then
+'        'If check box checked then check if table was deleted already by checking
+'        'delete date
+'            If Not IsNull(rs![Delete_Date]) Then
+'                GoTo NextRecord:
+'                'If delete date exists --> table already removed
+'
+'                'If delete date does not exist & delete check checked --> delete table
+'
+'            ElseIf rs![Delete_Table] = True Then
+'
+'                If IsNull(rs![Delete_Date]) Then
+'                    'Delete table if it exists
+'                    If TableExists(strTable) Then _
+'                        DoCmd.DeleteObject acTable, strTable
+'
+'                    'Update import log table with delete date
+'                    '***************************************************************************
+'                    ' NOTE: This flags all tables set as deleted including
+'                    '       those deleted through the UI (outside this procedure)
+'                    '       For tables deleted through the UI, delete date will not be accurate
+'                    '***************************************************************************
+'                    With rs
+'                        .Edit
+'                        rs![Delete_Date] = Date
+'                        .Update
+'                    End With
+'                End If
+'            End If
+'        End If
+'
+'NextRecord:
+'        rs.MoveNext
+'    Loop
+'
+'    Me.Requery
+'
+'    'Need to find better code for compacting
+'    'DBEngine.CompactDatabase
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnDelete_Click[frm_Append_Delete_Tables])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnClose_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC    - 8/18/2018 - added documentation & error handling
+' ---------------------------------
+Private Sub btnClose_Click()
+On Error GoTo Err_Handler
      
-    rsDelete.Edit
-    rsDelete![Delete_Table] = True
-    rsDelete.Update
-    
-ElseIf Me!optframe_SelectDelete.Value = 2 Then
-    rsDelete.Edit
-    rsDelete![Delete_Table] = False
-    rsDelete.Update
-    
-Else: GoTo NextRecord:
+    DoCmd.Close
 
-End If
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnClose_Click[frm_Append_Delete_Tables])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
+' ---------------------------------
+' SUB:          chkDeleteTable_AfterUpdate
+' Description:  checkbox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC    - 8/18/2018 - added documentation & error handling
+' ---------------------------------
+Private Sub chkDeleteTable_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If Me.chkDeleteTable = True Then
+        Me.btnDelete.Enabled = True
+        'Me.btnDeleteAndCompact.Enabled = True
+        Me.tbxDeleteCount = Nz(Me.tbxDeleteCount, 0) + 1
+    Else
+        Me.btnDelete.Enabled = False
+        Me.btnDeleteAndCompact.Enabled = False
+        Me.tbxDeleteCount = Nz(Me.tbxDeleteCount, 0) - 1
+    End If
+
+    Me.Repaint
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - chkDeleteTable_AfterUpdate[frm_Append_Delete_Tables])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          optgSeleteDelete_AfterUpdate
+' Description:  option group after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC    - 8/18/2018 - added documentation & error handling,
+'                        check for EOF & BOF (no records)
+' ---------------------------------
+Private Sub optgSelectDelete_AfterUpdate()
+On Error GoTo Err_Handler
+
+    Dim rsDelete As DAO.Recordset
+    Set rsDelete = Me.RecordsetClone
+    
+    'ensure there are records
+    If Not (rsDelete.EOF And rsDelete.BOF) Then
+    
+        rsDelete.MoveFirst
+        
+        Do Until rsDelete.EOF
+        
+        If Me!optgSelectDelete.Value = 1 Then
+             
+            rsDelete.Edit
+            rsDelete![Delete_Table] = True
+            rsDelete.Update
+            
+        ElseIf Me!optgSelectDelete.Value = 2 Then
+            rsDelete.Edit
+            rsDelete![Delete_Table] = False
+            rsDelete.Update
+            
+        Else: GoTo NextRecord:
+        
+        End If
+        
 NextRecord:
-rsDelete.MoveNext
+        rsDelete.MoveNext
+        
+        Loop
+        
+        Me.btnDelete.Enabled = True
+        
+    Else
+        'no records to delete
+        Me.btnDelete.Enabled = False
 
-Loop
+    End If
 
-  Me.cmd_Delete.Enabled = True
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - optgSelectDelete_AfterUpdate[frm_Append_Delete_Tables])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
+' ---------------------------------
+' SUB:          DeleteTables
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, 8/18/2019
+' Adapted:      -
+' Revisions:
+'   BLC    - 8/18/2018 - initial version, shifted from btnDelete & btnDeleteAndCompact click events
+' ---------------------------------
+Private Sub DeleteTables()
+On Error GoTo Err_Handler
+
+    Dim rs As DAO.Recordset
+    Set rs = Me.RecordsetClone
+    Dim strTable As String
+    Dim i As Integer
+    
+    'Populate the recordset
+    rs.MoveLast
+    rs.MoveFirst
+        
+    'initialize i
+    i = 0
+
+'    SetProgress i, Me.tbxDeleteCount, "Deleting Append Tables..." 'rs.RecordCount, "Deleting Append Tables..."
+    
+    'Cycle through the recordset
+    Do Until rs.EOF
+    
+    Debug.Print rs![Table_Name]
+        
+            i = i + 1
+ Debug.Print "i=" & i
+        
+        strTable = rs![Table_Name]
+        
+        'Check if delete table check box is checked
+        '   --> if not go to next record
+        '   --> if so, check if table was deleted by checking delete date
+        
+        If rs![Delete_Table] = True Then
+            
+            'Check if table was deleted by checking delete date
+            'If delete date exists         --> table already removed
+            'If delete date does not exist --> delete table (if delete table checked)
+            
+            If IsNull(rs![Delete_Date]) Then
+            
+                'If delete date does not exist & delete check checked
+                '  --> delete table
+
+'                SetProgress i - 1, tbxDeleteCount, "Deleting Append Tables..."
+                    
+                'Delete table if it exists
+                If TableExists(strTable) Then
+                    DoCmd.DeleteObject acTable, strTable
+                
+                    Debug.Print "deleted"
+                End If
+                
+                'Update import log table with delete date
+                '***************************************************************************
+                ' NOTE: This flags all tables set as deleted including
+                '       those deleted through the UI (outside this procedure)
+                '       For tables deleted through the UI, delete date will not be accurate
+                '***************************************************************************
+                With rs
+                    .Edit
+                    rs![Delete_Date] = Date
+                    .Update
+                    Me.Requery
+                End With
+                
+            End If
+        
+        End If
+        
+        'go to next record
+        rs.MoveNext
+        
+        'Me.Requery
+        Debug.Print i
+    Loop
+    
+'    SetProgress Me.tbxDeleteCount, Me.tbxDeleteCount, "Deleting Append Tables COMPLETE!"
+    'update counts
+    Me.tbxDeleteCount = 0
+    Me.tbxRecordCount = Me.RecordsetClone.RecordCount
+    
+    Me.Requery
+    
+'    FormRefresh
+    
+    'Need to find better code for compacting
+    'DBEngine.CompactDatabase
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - DeleteTables[frm_Append_Delete_Tables])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          SetProgress
+' Description:  Set & update progress bar display
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, 8/18/2019
+' Adapted:      -
+' Revisions:
+'   BLC    - 8/18/2018 - initial version
+' ---------------------------------
+Public Sub SetProgress(CurrentStep As Integer, TotalSteps As Integer, Msg As String)
+On Error GoTo Err_Handler
+
+    'initialize steps if step is 0 or 1
+    If CurrentStep = 0 Then _
+        SysCmd acSysCmdInitMeter, Msg, TotalSteps
+    
+    'update meter
+    SysCmd acSysCmdUpdateMeter, CurrentStep
+    DoEvents
+    
+    If CurrentStep = TotalSteps Then
+        'Report finished & remove meter
+        SysCmd acSysCmdRemoveMeter
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SetProgress[frm_Append_Delete_Tables])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          FormRefresh
+' Description:  Refreshes & recalculates form display
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, 8/18/2019
+' Adapted:      -
+' Revisions:
+'   BLC    - 8/18/2018 - initial version
+' ---------------------------------
+Public Sub FormRefresh()
+On Error GoTo Err_Handler
+
+    Me.Requery
+    Me.tbxDeleteCount = 0
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - FormRefresh[frm_Append_Delete_Tables])"
+    End Select
+    Resume Exit_Handler
 End Sub

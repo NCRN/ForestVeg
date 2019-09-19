@@ -17,6 +17,7 @@ Option Explicit
 '               BLC - 5/24/2018 - 1.04 - removed CurrDb property (added framework
 '                                        mod_Db module where it normally resides)
 '                                        added DB_SYS_TABLES, APP_SYS_TABLES (normally in framework)
+'               BLC - 8/27/2019 - 1.05 - added lngLtBlue, enabled lngLtGray
 ' =================================
 
 ' ---------------------------------
@@ -26,13 +27,15 @@ Option Explicit
 'Public Const lngYellow As Long = 65535      '?RGB(255,255,0) #FFFF00
 Public Const lngLtYellow As Long = 14745599 '?RGB(255,255,224) #FFFFE0
 'Public Const lngGray As Long = 8224125      '?RGB(125, 125, 125)
-'Public Const lngLtGray As Long = 13882323   '?RGB(211, 211, 211)
+Public Const lngLtGray As Long = 13882323   '?RGB(211, 211, 211)
 Public Const lngGray50 As Long = 8355711    '?RGB(127,127,127) Text 1, Lighter 50% #7F7F7F Gray50
 'Public Const lngLime As Long = 6750105      '?RGB(153, 255, 102) #99FF66
 'Public Const lngBlue As Long = 16711680     '?RGB(0, 0, 255) #0000FF
 'Public Const lngBlack As Long = 0           '?RGB(0,0,0) #000000
 'Public Const lngRed As Long = 255           '?RGB(255,0,0) #FF0000
 Public Const lngGreen As Long = 65280       '?RGB(0,255,0) #00FF00
+Public Const lngLtBlue As Long = 16777164   '?RGB(204,255,255) #CCFFFF
+
 
 Public Const pi As Single = 3.1415            'pi value
 
@@ -250,7 +253,7 @@ Debug.Print "DBH_mod_App_Data: " & strSQL
     
     'use usys_temp_qdf
     Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
-    qdf.SQL = strSQL
+    qdf.sql = strSQL
     
     Set rs = db.OpenRecordset("usys_temp_qdf")
     
@@ -417,7 +420,7 @@ On Error GoTo Err_Handler
     
     'use usys_temp_qdf
     Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
-    qdf.SQL = strSQL
+    qdf.sql = strSQL
     
     Set rs = CurrDb.OpenRecordset("usys_temp_qdf")
     
@@ -482,7 +485,7 @@ On Error GoTo Err_Handler
     
     'use usys_temp_qdf
     Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
-    qdf.SQL = strSQL
+    qdf.sql = strSQL
     
     Set rs = CurrDb.OpenRecordset("usys_temp_qdf")
     
@@ -548,7 +551,7 @@ On Error GoTo Err_Handler
     
     'use usys_temp_qdf
     Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
-    qdf.SQL = strSQL
+    qdf.sql = strSQL
     
     Set rs = CurrDb.OpenRecordset("usys_temp_qdf")
     
@@ -630,8 +633,8 @@ On Error GoTo Err_Handler
         rs.MoveNext
     Loop
 
-    strStemListLive = mid(strStemListLive, 3)
-    strStemListDead = mid(strStemListDead, 3)
+    strStemListLive = Mid(strStemListLive, 3)
+    strStemListDead = Mid(strStemListDead, 3)
     strStemList = "L: " & strStemListLive & " D: " & strStemListDead
     
     MakeTreeStemList = strStemList
@@ -690,8 +693,8 @@ On Error GoTo Err_Handler
         rs.MoveNext
     Loop
 
-    strStemListLive = mid(strStemListLive, 3)
-    strStemListDead = mid(strStemListDead, 3)
+    strStemListLive = Mid(strStemListLive, 3)
+    strStemListDead = Mid(strStemListDead, 3)
     strStemList = "L: " & strStemListLive & " D: " & strStemListDead
     
     MakeSaplingStemList = strStemList
@@ -763,8 +766,8 @@ On Error GoTo Err_Handler
         rs.MoveNext
     Loop
 
-    strStemListLive = mid(strStemListLive, 3)
-    strStemListDead = mid(strStemListDead, 3)
+    strStemListLive = Mid(strStemListLive, 3)
+    strStemListDead = Mid(strStemListDead, 3)
     strStemList = "L: " & strStemListLive & " D: " & strStemListDead
     
     MakeStemList = strStemList

@@ -15,17 +15,18 @@ Begin Form
     GridY =24
     Width =13500
     DatasheetFontHeight =9
-    ItemSuffix =31
-    Left =1290
-    Top =4800
-    Right =14850
-    Bottom =5445
+    ItemSuffix =33
+    Left =735
+    Top =2985
+    Right =10980
+    Bottom =5295
     DatasheetGridlinesColor =15062992
     OrderBy ="[tbl_Tags].[Tag]"
     RecSrcDt = Begin
         0xbb20843c6eaee340
     End
     RecordSource ="tbl_Tags"
+    OnCurrent ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
         0x6801000068010000680100006801000000000000201c0000e010000001000000 ,
@@ -112,6 +113,7 @@ Begin Form
                     ColumnWidths ="0;0;3600"
                     StatusBarText ="TSN of Specimen"
                     BeforeUpdate ="[Event Procedure]"
+                    AfterUpdate ="[Event Procedure]"
                     OnEnter ="[Event Procedure]"
                     AllowValueListEdits =0
                     LeftMargin =22
@@ -183,7 +185,7 @@ Begin Form
                     End
                     Begin
                         Begin Label
-                            OverlapFlags =85
+                            OverlapFlags =93
                             TextAlign =3
                             Left =7260
                             Top =480
@@ -518,6 +520,40 @@ Begin Form
                         End
                     End
                 End
+                Begin TextBox
+                    OverlapFlags =93
+                    IMESentenceMode =3
+                    Left =5460
+                    Top =495
+                    Width =660
+                    Height =300
+                    TabIndex =9
+                    Name ="tbxRFS"
+                    ControlSource ="RFS"
+                    Format ="True/False"
+
+                    LayoutCachedLeft =5460
+                    LayoutCachedTop =495
+                    LayoutCachedWidth =6120
+                    LayoutCachedHeight =795
+                End
+                Begin Label
+                    Visible = NotDefault
+                    OverlapFlags =247
+                    Left =5340
+                    Top =540
+                    Width =2115
+                    Height =285
+                    FontSize =10
+                    FontWeight =500
+                    ForeColor =1643706
+                    Name ="lblRFS"
+                    Caption ="-- Removed from Study --"
+                    LayoutCachedLeft =5340
+                    LayoutCachedTop =540
+                    LayoutCachedWidth =7455
+                    LayoutCachedHeight =825
+                End
             End
         End
         Begin FormFooter
@@ -537,7 +573,7 @@ Option Explicit
 ' =================================
 ' MODULE:       fsub_Tag_Tree
 ' Level:        Form module
-' Version:      1.02
+' Version:      1.05
 '
 ' Description:  add event related functions & procedures
 '
@@ -548,16 +584,64 @@ Option Explicit
 '               BLC   - 4/16/2018 - 1.02 - renamed cboTag_Status > cbxTagStatus,
 '                                          txtMicroplot_Number > tbxMicroplotNumber,
 '                                          txtDistance > tbxDistance
+'               BLC - 5/20/2019   - 1.03 - updated fsub_Tree_Data.tbxHabit based on species
+'               BLC - 5/23/2019   - 1.04 - add detail color based on if RFS set
+'               BLC - 9/15/2019   - 1.05 - updated to display RFS label when tag is removed from study
 ' =================================
 
 ' ---------------------------------
 '  Declarations
 ' ---------------------------------
 
-' ----------------
-'  Events
-' ----------------
+' ---------------------------------
+'  Properties
+' ---------------------------------
 
+' ---------------------------------
+'  Events
+' ---------------------------------
+' ---------------------------------
+' SUB:          Form_Current
+' Description:  form current actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 20, 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 5/20/2019 - initial version
+'   BLC - 5/23/2019 - update detail background based on RFS value
+'   BLC - 9/15/2019 - display lblRFS if tbxRFS = True
+' ---------------------------------
+Private Sub Form_Current()
+On Error GoTo Err_Handler
+    
+    Me.Detail.BackColor = IIf(tbxRFS, lngLtRose, lngWhite)
+    
+    'default
+    Me.tbxRFS.Visible = False
+    Me.lblRFS.Visible = False
+    
+    'display RFS only if it *is* removed from study (tbxRFS = true)
+    If Me.tbxRFS = True Then Me.lblRFS.Visible = True
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Current[fsub_Tag_Tree])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ----------------
+'  BeforeUpdate Events
+' ----------------
 ' ---------------------------------
 ' SUB:          cbxTagStatus_BeforeUpdate
 ' Description:  combobox before update actions
@@ -647,6 +731,9 @@ Err_Handler:
     Resume Exit_Handler
 End Sub
 
+' ----------------
+'  Click Events
+' ----------------
 ' ---------------------------------
 ' SUB:          btnReplaceTag_Click
 ' Description:  button click actions
@@ -862,6 +949,41 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
+' ----------------
+'  AfterUpdate Events
+' ----------------
+' ---------------------------------
+' SUB:          cbxTSN_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, May 20, 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 5/20/2019 - initial version
+' ---------------------------------
+Private Sub cbxTSN_AfterUpdate()
+On Error GoTo Err_Handler
+   
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxTSN_AfterUpdate[fsub_Tag_Tree])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+'  Methods
+' ---------------------------------
 
 ' ---------------------------------
 ' SUB:          SaveRecord

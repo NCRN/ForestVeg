@@ -1,17 +1,8 @@
-﻿Operation =1
-Option =0
-Where ="(((tsys_Import_Tables.[Table_Name])<>\"tbl_Quadrat_Data\" And (tsys_Import_Table"
-    "s.[Table_Name])<>\"tbl_Quadrat_Seedlings_Data\" And (tsys_Import_Tables.[Table_N"
-    "ame])<>\"tbl_Quadrat_Herbaceous_Data\" And (tsys_Import_Tables.[Table_Name])<>\""
-    "tbl_CWD_Data\"))"
-Begin InputTables
-    Name ="tsys_Import_Tables"
-End
-Begin OutputColumns
-    Expression ="tsys_Import_Tables.ID"
-    Expression ="tsys_Import_Tables.Table_Name"
-    Expression ="tsys_Import_Tables.Import"
-End
+﻿dbMemo "SQL" ="SELECT tsys_Import_Tables.ID, tsys_Import_Tables.Table_Name, tsys_Import_Tables."
+    "Import\015\012FROM tsys_Import_Tables\015\012WHERE tsys_Import_Tables.[Table_Nam"
+    "e] NOT IN (\"tbl_Quadrat_Data\",\"tbl_Quadrat_Seedlings_Data\",\"tbl_Quadrat_Her"
+    "baceous_Data\",\"tbl_CWD_Data\");\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -37,28 +28,5 @@ Begin
     Begin
         dbText "Name" ="tsys_Import_Tables.[Table_Name]"
         dbLong "AggregateType" ="-1"
-    End
-End
-Begin
-    State =0
-    Left =133
-    Top =482
-    Right =1001
-    Bottom =813
-    Left =-1
-    Top =-1
-    Right =844
-    Bottom =76
-    Left =0
-    Top =0
-    ColumnsShown =539
-    Begin
-        Left =48
-        Top =12
-        Right =192
-        Bottom =156
-        Top =0
-        Name ="tsys_Import_Tables"
-        Name =""
     End
 End
