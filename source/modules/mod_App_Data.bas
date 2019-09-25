@@ -30,11 +30,13 @@ Public Const lngLtYellow As Long = 14745599 '?RGB(255,255,224) #FFFFE0
 Public Const lngLtGray As Long = 13882323   '?RGB(211, 211, 211)
 Public Const lngGray50 As Long = 8355711    '?RGB(127,127,127) Text 1, Lighter 50% #7F7F7F Gray50
 'Public Const lngLime As Long = 6750105      '?RGB(153, 255, 102) #99FF66
-'Public Const lngBlue As Long = 16711680     '?RGB(0, 0, 255) #0000FF
-'Public Const lngBlack As Long = 0           '?RGB(0,0,0) #000000
-'Public Const lngRed As Long = 255           '?RGB(255,0,0) #FF0000
+Public Const lngBlue As Long = 16711680     '?RGB(0, 0, 255) #0000FF
+Public Const lngBlack As Long = 0           '?RGB(0,0,0) #000000
+Public Const lngRed As Long = 255           '?RGB(255,0,0) #FF0000
 Public Const lngGreen As Long = 65280       '?RGB(0,255,0) #00FF00
 Public Const lngLtBlue As Long = 16777164   '?RGB(204,255,255) #CCFFFF
+Public Const lngPink As Long = 10582263     '?RGB(247,120,161) #F778A1 carnation red
+
 
 
 Public Const pi As Single = 3.1415            'pi value

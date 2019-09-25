@@ -356,7 +356,7 @@ On Error GoTo Err_Handler
     
         Dim strSQLFindTreesSap
         
-        strSQLFindTreesSap = "SELECT [" & strAppend & "].*" _
+        strSQLFindTreesSap = "SELECT [" & strAppend & "].* " _
                             & "FROM ([" & strEvents & "] LEFT JOIN tbl_Locations ON [" & strEvents & "].Location_ID = " _
                             & "tbl_Locations.Location_ID) LEFT JOIN [" & strAppend & "] ON tbl_Locations.Location_ID = " _
                             & "[" & strAppend & "].Location_ID " _
@@ -418,7 +418,7 @@ On Error GoTo Err_Handler
     'populate the recordset
     rsSelectUpdated.MoveLast
     
-    Dim iUpdateCount As Integer
+    Dim iUpdateCount As Long 'Integer
     iUpdateCount = rsSelectUpdated.RecordCount
     Dim strResponse As String
     

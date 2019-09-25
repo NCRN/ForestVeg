@@ -4,13 +4,14 @@ Option Explicit
 ' =================================
 ' MODULE:       db_Module
 ' Level:        Development module
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  Debugging related functions & procedures for database documentation
 '
 ' Source/date:  Bonnie Campbell, June 19, 2019
 ' Revisions:    BLC - 6/19/2019 - 1.00 - initial version
 '               BLC - 8/15/2019 - 1.01 - added SUB_PROTOCOL, GetSubProtocol()
+'               BLC - 9/19/2019 - 1.02 - added ConvertLinkedToLocal()
 ' =================================
 ' ---------------------------------
 '  Declarations
@@ -682,6 +683,55 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - CopySchemaAndData_DAO[db_Module])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:     ConvertLinkedToLocal
+' Description:  Copies an existing table to a new local table
+'               Linked tables are converted to local & indexes are retained
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   ADezii, September 12, 2019
+'   https://bytes.com/topic/access/answers/973098-how-copy-linked-table-another-table
+' Source/date:  Bonnie Campbell, August 19, 2019
+' Adapted:
+' Revisions:
+'   BLC - 9/19/2019 - initial version
+' ---------------------------------
+Public Sub ConvertLinkedToLocal(strLinkedTbl As String)
+On Error GoTo Err_Handler
+
+    Dim strConnect As String
+    Dim strPath As String
+    Dim strSourceTable As String
+     
+    strConnect = CurrentDb.TableDefs(strLinkedTbl).Connect      'Connect String
+     
+    If InStr(strConnect, "=") = 0 Then
+      MsgBox strLinkedTbl & " is not a Linked Table!", vbCritical, "Linked Table Error"
+        Exit Sub
+    Else
+      strPath = Mid$(strConnect, InStr(strConnect, "=") + 1)        'Actual DB Path
+      strSourceTable = CurrentDb.TableDefs(strLinkedTbl).SourceTableName
+     
+      DoCmd.DeleteObject acTable, strLinkedTbl
+      DoCmd.TransferDatabase acImport, "Microsoft Access", strPath, acTable, _
+                             strSourceTable, strLinkedTbl, False
+    End If
+    
+Exit_Handler:
+   Exit Sub
+   
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - ConvertLinkedToLocal[db_Module])"
     End Select
     Resume Exit_Handler
 End Sub

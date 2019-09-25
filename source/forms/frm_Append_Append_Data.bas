@@ -5,7 +5,6 @@ Begin Form
     NavigationButtons = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
-    OrderByOn = NotDefault
     AllowDesignChanges = NotDefault
     ScrollBars =2
     TabularFamily =0
@@ -15,15 +14,15 @@ Begin Form
     GridY =24
     Width =10080
     DatasheetFontHeight =10
-    ItemSuffix =46
-    Left =360
-    Top =435
-    Right =10440
-    Bottom =7140
+    ItemSuffix =56
+    Left =4680
+    Top =990
+    Right =15015
+    Bottom =11850
     DatasheetGridlinesColor =12632256
     OrderBy ="Append_Order"
     RecSrcDt = Begin
-        0x3a742bf20a57e540
+        0x117d3d3a0f5ae540
     End
     RecordSource ="tsys_Append_Tables"
     Caption ="Append Data"
@@ -97,10 +96,31 @@ Begin Form
             BorderLineStyle =0
         End
         Begin FormHeader
-            Height =3960
+            Height =4515
             BackColor =5394044
             Name ="FormHeader"
             Begin
+                Begin Label
+                    Visible = NotDefault
+                    BackStyle =1
+                    OverlapFlags =93
+                    TextAlign =2
+                    Left =4800
+                    Top =3960
+                    Width =4815
+                    Height =480
+                    LeftMargin =36
+                    TopMargin =36
+                    RightMargin =36
+                    ForeColor =16711680
+                    Name ="lblPseudoEventsDeleted"
+                    Caption ="** PseudoEvents WILL be DELETED from import tables && won't be included in data "
+                        "appends/updates **"
+                    LayoutCachedLeft =4800
+                    LayoutCachedTop =3960
+                    LayoutCachedWidth =9615
+                    LayoutCachedHeight =4440
+                End
                 Begin Label
                     OverlapFlags =93
                     Left =60
@@ -163,9 +183,9 @@ Begin Form
                     ListRows =20
                     ListWidth =2880
                     Left =5715
-                    Top =2880
+                    Top =3300
                     Width =3360
-                    ColumnOrder =4
+                    ColumnOrder =5
                     TabIndex =3
                     BackColor =13434879
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"10\";\"0\""
@@ -185,9 +205,9 @@ Begin Form
                     AfterUpdate ="[Event Procedure]"
                     OnGotFocus ="[Event Procedure]"
                     LayoutCachedLeft =5715
-                    LayoutCachedTop =2880
+                    LayoutCachedTop =3300
                     LayoutCachedWidth =9075
-                    LayoutCachedHeight =3120
+                    LayoutCachedHeight =3540
                     ConditionalFormat14 = Begin
                         0x01000100000000000000030000000100000000000000ffffff00020000002200 ,
                         0x2200000000000000000000000000000000000000000000
@@ -197,7 +217,7 @@ Begin Form
                             OverlapFlags =93
                             TextAlign =1
                             Left =660
-                            Top =2880
+                            Top =3300
                             Width =4980
                             Height =240
                             FontWeight =700
@@ -207,9 +227,9 @@ Begin Form
                             ControlTipText ="Select the Event from the main data set that you wish to append the secondary ta"
                                 "blet  data to"
                             LayoutCachedLeft =660
-                            LayoutCachedTop =2880
+                            LayoutCachedTop =3300
                             LayoutCachedWidth =5640
-                            LayoutCachedHeight =3120
+                            LayoutCachedHeight =3540
                         End
                     End
                 End
@@ -218,9 +238,9 @@ Begin Form
                     OverlapFlags =93
                     IMESentenceMode =3
                     Left =5715
-                    Top =2280
+                    Top =2700
                     Width =3360
-                    ColumnOrder =2
+                    ColumnOrder =3
                     TabIndex =1
                     BackColor =13434879
                     ConditionalFormat = Begin
@@ -235,9 +255,9 @@ Begin Form
                     OnGotFocus ="[Event Procedure]"
 
                     LayoutCachedLeft =5715
-                    LayoutCachedTop =2280
+                    LayoutCachedTop =2700
                     LayoutCachedWidth =9075
-                    LayoutCachedHeight =2520
+                    LayoutCachedHeight =2940
                     ConditionalFormat14 = Begin
                         0x01000100000000000000030000000100000000000000ffffff00020000002200 ,
                         0x2200000000000000000000000000000000000000000000
@@ -247,7 +267,7 @@ Begin Form
                             OverlapFlags =93
                             TextAlign =1
                             Left =660
-                            Top =2280
+                            Top =2700
                             Width =4980
                             Height =240
                             FontWeight =700
@@ -255,9 +275,9 @@ Begin Form
                             Name ="lblEventsSecondaryImport"
                             Caption ="Select Events Table to import from Secondary Tablet -->"
                             LayoutCachedLeft =660
-                            LayoutCachedTop =2280
+                            LayoutCachedTop =2700
                             LayoutCachedWidth =5640
-                            LayoutCachedHeight =2520
+                            LayoutCachedHeight =2940
                         End
                     End
                 End
@@ -266,9 +286,9 @@ Begin Form
                     IMESentenceMode =3
                     ColumnCount =3
                     Left =5715
-                    Top =2580
+                    Top =3000
                     Width =3360
-                    ColumnOrder =3
+                    ColumnOrder =4
                     TabIndex =2
                     BackColor =13434879
                     ConditionalFormat = Begin
@@ -284,9 +304,9 @@ Begin Form
                     OnGotFocus ="[Event Procedure]"
 
                     LayoutCachedLeft =5715
-                    LayoutCachedTop =2580
+                    LayoutCachedTop =3000
                     LayoutCachedWidth =9075
-                    LayoutCachedHeight =2820
+                    LayoutCachedHeight =3240
                     ConditionalFormat14 = Begin
                         0x01000100000000000000030000000100000000000000ffffff00020000002200 ,
                         0x2200000000000000000000000000000000000000000000
@@ -296,7 +316,7 @@ Begin Form
                             OverlapFlags =93
                             TextAlign =1
                             Left =660
-                            Top =2580
+                            Top =3000
                             Width =4980
                             Height =240
                             FontWeight =700
@@ -304,9 +324,9 @@ Begin Form
                             Name ="lblEventSecondary"
                             Caption ="Select the Event to Append from Secondary Tablet -->"
                             LayoutCachedLeft =660
-                            LayoutCachedTop =2580
+                            LayoutCachedTop =3000
                             LayoutCachedWidth =5640
-                            LayoutCachedHeight =2820
+                            LayoutCachedHeight =3240
                         End
                     End
                 End
@@ -355,17 +375,17 @@ Begin Form
                     OverlapFlags =93
                     Left =540
                     Top =600
-                    Width =6420
-                    Height =750
-                    ColumnOrder =5
+                    Width =6660
+                    Height =1140
+                    ColumnOrder =6
                     TabIndex =5
                     Name ="optframe_Step1Append"
                     AfterUpdate ="[Event Procedure]"
 
                     LayoutCachedLeft =540
                     LayoutCachedTop =600
-                    LayoutCachedWidth =6960
-                    LayoutCachedHeight =1350
+                    LayoutCachedWidth =7200
+                    LayoutCachedHeight =1740
                     Begin
                         Begin Label
                             FontItalic = NotDefault
@@ -381,6 +401,10 @@ Begin Form
                             ForeColor =8454143
                             Name ="lblStepOne"
                             Caption ="Step 1"
+                            LayoutCachedLeft =660
+                            LayoutCachedTop =480
+                            LayoutCachedWidth =2100
+                            LayoutCachedHeight =900
                         End
                         Begin ToggleButton
                             OverlapFlags =95
@@ -455,6 +479,7 @@ Begin Form
                             QuickStyle =23
                             QuickStyleMask =-1
                             WebImagePaddingTop =1
+                            Overlaps =1
                         End
                     End
                 End
@@ -468,29 +493,34 @@ Begin Form
                     ForeColor =8454143
                     Name ="lblNumberOfTablets"
                     Caption ="How many tablets were the data collected on?"
+                    LayoutCachedLeft =600
+                    LayoutCachedTop =960
+                    LayoutCachedWidth =4560
+                    LayoutCachedHeight =1200
                 End
                 Begin OptionGroup
+                    Enabled = NotDefault
                     OverlapFlags =255
                     Left =540
-                    Top =1560
+                    Top =1980
                     Width =8817
                     Height =1920
-                    ColumnOrder =6
+                    ColumnOrder =7
                     TabIndex =6
                     Name ="optframe_Step2Append"
                     AfterUpdate ="[Event Procedure]"
 
                     LayoutCachedLeft =540
-                    LayoutCachedTop =1560
+                    LayoutCachedTop =1980
                     LayoutCachedWidth =9357
-                    LayoutCachedHeight =3480
+                    LayoutCachedHeight =3900
                     Begin
                         Begin Label
                             FontItalic = NotDefault
                             BackStyle =1
                             OverlapFlags =247
                             Left =660
-                            Top =1440
+                            Top =1860
                             Width =1500
                             Height =360
                             FontSize =16
@@ -499,11 +529,15 @@ Begin Form
                             ForeColor =8454143
                             Name ="lblStepTwo"
                             Caption ="Step 2"
+                            LayoutCachedLeft =660
+                            LayoutCachedTop =1860
+                            LayoutCachedWidth =2160
+                            LayoutCachedHeight =2220
                         End
                         Begin ToggleButton
                             OverlapFlags =127
                             Left =4620
-                            Top =1740
+                            Top =2160
                             Width =1140
                             Height =390
                             FontWeight =700
@@ -516,9 +550,9 @@ Begin Form
                             BottomPadding =120
 
                             LayoutCachedLeft =4620
-                            LayoutCachedTop =1740
+                            LayoutCachedTop =2160
                             LayoutCachedWidth =5760
-                            LayoutCachedHeight =2130
+                            LayoutCachedHeight =2550
                             ForeThemeColorIndex =0
                             UseTheme =1
                             Gradient =12
@@ -540,7 +574,7 @@ Begin Form
                         Begin ToggleButton
                             OverlapFlags =247
                             Left =5760
-                            Top =1740
+                            Top =2160
                             Width =1140
                             Height =390
                             FontWeight =700
@@ -554,9 +588,9 @@ Begin Form
                             BottomPadding =120
 
                             LayoutCachedLeft =5760
-                            LayoutCachedTop =1740
+                            LayoutCachedTop =2160
                             LayoutCachedWidth =6900
-                            LayoutCachedHeight =2130
+                            LayoutCachedHeight =2550
                             ForeThemeColorIndex =0
                             UseTheme =1
                             Gradient =12
@@ -580,7 +614,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =247
                     Left =600
-                    Top =1860
+                    Top =2280
                     Width =3720
                     Height =240
                     FontWeight =700
@@ -588,15 +622,15 @@ Begin Form
                     Name ="lblTablet"
                     Caption ="On which tablet was this data collected?"
                     LayoutCachedLeft =600
-                    LayoutCachedTop =1860
+                    LayoutCachedTop =2280
                     LayoutCachedWidth =4320
-                    LayoutCachedHeight =2100
+                    LayoutCachedHeight =2520
                 End
                 Begin Label
                     OverlapFlags =247
                     TextAlign =1
                     Left =660
-                    Top =3180
+                    Top =3600
                     Width =7020
                     Height =240
                     FontWeight =700
@@ -606,9 +640,9 @@ Begin Form
                     ControlTipText ="Select the Event from the main data set that you wish to append the secondary ta"
                         "blet  data to"
                     LayoutCachedLeft =660
-                    LayoutCachedTop =3180
+                    LayoutCachedTop =3600
                     LayoutCachedWidth =7680
-                    LayoutCachedHeight =3420
+                    LayoutCachedHeight =3840
                 End
                 Begin TextBox
                     OverlapFlags =85
@@ -618,7 +652,7 @@ Begin Form
                     Top =120
                     Width =4140
                     Height =255
-                    ColumnOrder =1
+                    ColumnOrder =2
                     TabIndex =7
                     ForeColor =16777215
                     Name ="tbxImportFile"
@@ -632,24 +666,24 @@ Begin Form
                     SpecialEffect =0
                     OverlapFlags =85
                     Left =1860
-                    Top =3540
+                    Top =4020
                     Width =2646
                     Height =373
-                    ColumnOrder =0
+                    ColumnOrder =1
                     TabIndex =8
                     Name ="optgSelectTables"
                     AfterUpdate ="[Event Procedure]"
 
                     LayoutCachedLeft =1860
-                    LayoutCachedTop =3540
+                    LayoutCachedTop =4020
                     LayoutCachedWidth =4506
-                    LayoutCachedHeight =3913
+                    LayoutCachedHeight =4393
                     Begin
                         Begin Label
                             BackStyle =1
                             OverlapFlags =85
                             Left =600
-                            Top =3600
+                            Top =4080
                             Width =1245
                             Height =240
                             BackColor =0
@@ -657,68 +691,151 @@ Begin Form
                             Name ="lblSelect"
                             Caption ="Select Tables ..."
                             LayoutCachedLeft =600
-                            LayoutCachedTop =3600
+                            LayoutCachedTop =4080
                             LayoutCachedWidth =1845
-                            LayoutCachedHeight =3840
+                            LayoutCachedHeight =4320
                         End
                         Begin CheckBox
                             OverlapFlags =87
                             Left =2040
-                            Top =3643
+                            Top =4123
                             OptionValue =1
                             Name ="chkALL"
 
                             LayoutCachedLeft =2040
-                            LayoutCachedTop =3643
+                            LayoutCachedTop =4123
                             LayoutCachedWidth =2300
-                            LayoutCachedHeight =3883
+                            LayoutCachedHeight =4363
                             Begin
                                 Begin Label
                                     OverlapFlags =247
                                     Left =2270
-                                    Top =3615
+                                    Top =4095
                                     Width =720
                                     Height =240
                                     ForeColor =16777215
                                     Name ="lblALL"
                                     Caption ="Select All"
                                     LayoutCachedLeft =2270
-                                    LayoutCachedTop =3615
+                                    LayoutCachedTop =4095
                                     LayoutCachedWidth =2990
-                                    LayoutCachedHeight =3855
+                                    LayoutCachedHeight =4335
                                 End
                             End
                         End
                         Begin CheckBox
                             OverlapFlags =87
                             Left =3174
-                            Top =3643
+                            Top =4123
                             TabIndex =1
                             OptionValue =2
                             Name ="chkNone"
 
                             LayoutCachedLeft =3174
-                            LayoutCachedTop =3643
+                            LayoutCachedTop =4123
                             LayoutCachedWidth =3434
-                            LayoutCachedHeight =3883
+                            LayoutCachedHeight =4363
                             Begin
                                 Begin Label
                                     OverlapFlags =247
                                     Left =3404
-                                    Top =3615
+                                    Top =4095
                                     Width =930
                                     Height =240
                                     ForeColor =16777215
                                     Name ="lblNone"
                                     Caption ="Select None"
                                     LayoutCachedLeft =3404
-                                    LayoutCachedTop =3615
+                                    LayoutCachedTop =4095
                                     LayoutCachedWidth =4334
-                                    LayoutCachedHeight =3855
+                                    LayoutCachedHeight =4335
                                 End
                             End
                         End
                     End
+                End
+                Begin ToggleButton
+                    Enabled = NotDefault
+                    OverlapFlags =215
+                    Left =5460
+                    Top =1320
+                    Width =1380
+                    Height =360
+                    ColumnOrder =0
+                    FontWeight =600
+                    TabIndex =9
+                    ForeColor =0
+                    Name ="tglImportPseudoEvents"
+                    AfterUpdate ="[Event Procedure]"
+                    DefaultValue ="1"
+                    Caption ="??"
+                    FontName ="Segoe UI"
+                    ControlTipText ="Click to toggle to INCLUDE or EXCLUDE pseudoevents"
+                    LeftPadding =60
+                    RightPadding =75
+                    BottomPadding =120
+
+                    LayoutCachedLeft =5460
+                    LayoutCachedTop =1320
+                    LayoutCachedWidth =6840
+                    LayoutCachedHeight =1680
+                    ForeThemeColorIndex =0
+                    UseTheme =1
+                    OldBorderStyle =0
+                    BorderColor =1796857
+                    BorderThemeColorIndex =5
+                    HoverColor =10092492
+                    PressedColor =10092492
+                    HoverForeColor =0
+                    HoverForeThemeColorIndex =0
+                    PressedForeColor =16724787
+                    QuickStyle =3
+                    QuickStyleMask =-369
+                    WebImagePaddingLeft =4
+                    WebImagePaddingTop =2
+                    WebImagePaddingRight =5
+                    WebImagePaddingBottom =8
+                    Overlaps =1
+                    Begin
+                        Begin Label
+                            OverlapFlags =215
+                            TextAlign =1
+                            Left =2280
+                            Top =1380
+                            Width =3120
+                            Height =285
+                            FontSize =10
+                            FontWeight =600
+                            ForeColor =10092543
+                            Name ="lblPseudoEvents"
+                            Caption ="Append/Update PseudoEvents?"
+                            LayoutCachedLeft =2280
+                            LayoutCachedTop =1380
+                            LayoutCachedWidth =5400
+                            LayoutCachedHeight =1665
+                        End
+                    End
+                End
+                Begin Label
+                    Visible = NotDefault
+                    BackStyle =1
+                    OverlapFlags =215
+                    TextAlign =2
+                    Left =4800
+                    Top =4080
+                    Width =4815
+                    Height =240
+                    LeftMargin =36
+                    TopMargin =36
+                    RightMargin =36
+                    BackColor =10092543
+                    ForeColor =255
+                    Name ="lblPseudoEventsIncluded"
+                    Caption ="** PseudoEvents WILL be INCLUDED in data appends/updates **"
+                    LayoutCachedLeft =4800
+                    LayoutCachedTop =4080
+                    LayoutCachedWidth =9615
+                    LayoutCachedHeight =4320
                 End
             End
         End
@@ -787,6 +904,7 @@ Begin Form
                     Name ="cmbo_Append_Table"
                     ControlSource ="Append_Table"
                     RowSourceType ="Value List"
+                    RowSource =" "
                     OnGotFocus ="[Event Procedure]"
 
                     LayoutCachedLeft =5580
@@ -854,6 +972,7 @@ Begin Form
                     QuickStyle =23
                     QuickStyleMask =-1
                     WebImagePaddingTop =1
+                    Overlaps =1
                 End
                 Begin CommandButton
                     OverlapFlags =85
@@ -893,6 +1012,7 @@ Begin Form
                     QuickStyle =23
                     QuickStyleMask =-1
                     WebImagePaddingTop =1
+                    Overlaps =1
                 End
                 Begin CommandButton
                     Visible = NotDefault
@@ -934,6 +1054,7 @@ Begin Form
                     QuickStyle =23
                     QuickStyleMask =-1
                     WebImagePaddingTop =1
+                    Overlaps =1
                 End
             End
         End
@@ -950,7 +1071,7 @@ Option Explicit
 ' =================================
 ' MODULE:       frm_Append_Append_Data
 ' Level:        Application module
-' Version:      1.05
+' Version:      1.07
 '
 ' Description:  field data import related functions & procedures
 '
@@ -966,6 +1087,8 @@ Option Explicit
 '                                          (primary or secondary)
 '               BLC   - 9/15/2019 - 1.05 - populated rsAppend to get accurate recordcount, updated strAppendSQL
 '                                          to use single quotes to find Event_ID
+'               BLC   - 9/20/2019 - 1.06 - add import pseudoevents toggle
+'               BLC   - 9/24/2019 - 1.07 - added PseudoEvents deleted warning notice
 ' =================================
 
 '---------------------
@@ -1061,6 +1184,11 @@ On Error GoTo Err_Handler
     
     'defaults
     Me.btnSelectFile.Visible = False
+    Me.cmbo_Select_Import_Event_Table.Enabled = False
+    Me.cmbo_Select_Import_Events.Enabled = False
+    Me.cmbo_Select_Event.Enabled = False
+    Me.lblPseudoEventsIncluded.Visible = False
+    Me.lblPseudoEventsDeleted.Visible = False
     
     'fetch import filename & determine if secondary or primary
     ImportFile = Nz(Me.OpenArgs, "")
@@ -1879,7 +2007,7 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
-' SUB:          optgSeleteTables_AfterUpdate
+' SUB:          optgSelectTables_AfterUpdate
 ' Description:  option group after update actions
 ' Assumptions:  -
 ' Parameters:   -
@@ -2130,6 +2258,8 @@ On Error GoTo Err_Handler
              Me!optframe_Step2Append.Value = 0
              optframe_Step2Append.Enabled = False
              
+             Me.tglImportPseudoEvents.Enabled = True
+             
              Me!cmbo_Select_Event.Enabled = False
              Me!cmbo_Select_Import_Event_Table.Enabled = False
              Me!cmbo_Select_Import_Events.Enabled = False
@@ -2151,6 +2281,8 @@ On Error GoTo Err_Handler
         '-----------------------
          Case 2
         
+            Me.tglImportPseudoEvents.Enabled = True
+            
             optframe_Step2Append.Enabled = True
             Me!optframe_Step2Append.Value = 0
             Me!optframe_Step2Append.SetFocus
@@ -2159,6 +2291,8 @@ On Error GoTo Err_Handler
             Me!cmd_Append_Event_Data.Enabled = False
             
         Case Else
+        
+            Me.tglImportPseudoEvents.Enabled = False
             'optframe_Step2Import.Enabled = False
             optframe_Step2Append.Enabled = False
             Me!cmd_Append_Event_Data.Enabled = False
@@ -2249,6 +2383,67 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' Sub:          tglImportPseudoEvents_AfterUpdate
+' Description:  toggle after update actions
+' Assumptions:  True = IMPORT pseudo events from the import tables
+'               False = EXCLUDE pseudo events from import tables
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, September 20, 2019
+' Adapted:      -
+' Revisions:
+'   BLC - 9/20/2019 - initial version
+'   BLC - 9/24/2019 - added PseudoEvents deleted warning notice
+' ---------------------------------
+Private Sub tglImportPseudoEvents_AfterUpdate()
+On Error GoTo Err_Handler
+
+    'Debug.Print Abs(tglImportPseudoEvents.Value)
+    
+    'default
+    Me.lblPseudoEventsIncluded.Visible = False
+    Me.lblPseudoEventsDeleted.Visible = False
+    
+    SetTempVar "ImportPseudoEvents", tglImportPseudoEvents.Value
+    
+    With tglImportPseudoEvents
+        Select Case .Value
+            Case True
+                .Caption = "YES, INCLUDE"
+                .BackColor = lngLtLime
+                .ForeColor = lngBlue
+                Me.lblPseudoEventsIncluded.Visible = True
+            Case False
+                .Caption = "NO, EXCLUDE"
+                .BackColor = lngWhite
+                .ForeColor = lngRed
+                Me.lblPseudoEventsDeleted.Visible = True
+            Case Else
+                .Caption = "??"
+        End Select
+    End With
+    
+    'trigger the after update event if the table has been selected to refresh the import events combobox
+    If Len(Me.cmbo_Select_Import_Event_Table.Value) > 0 Then
+        cmbo_Select_Import_Event_Table_AfterUpdate
+        Me.cmbo_Select_Import_Events.Requery
+    End If
+    
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglImportPseudoEvents_AfterUpdate[frm_Append_Append_Data form])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' Sub:          cbxSelectImportEventTable_AfterUpdate
 ' Description:  combobox after update actions
 ' Assumptions:
@@ -2262,6 +2457,7 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC  - 5/21/2019 - added documentation, error handling
 '   BLC  - 8/27/2019 - added fore color change to guide workflow
+'   BLC  - 9/20/2019 - adjust for include/exclude pseudoevents
 ' ---------------------------------
 Private Sub cmbo_Select_Import_Event_Table_AfterUpdate()
 On Error GoTo Err_Handler
@@ -2276,10 +2472,14 @@ On Error GoTo Err_Handler
     Me.lblStepTwoFinish.ForeColor = lngLtGray
     
     If Me!cmbo_Select_Import_Event_Table = "" Or IsNull(Me!cmbo_Select_Import_Event_Table) Then
+        
         Exit Sub
     
     Else
         strTableName = Me!cmbo_Select_Import_Event_Table.Value
+        
+        Dim strExclude As String
+        strExclude = IIf(Me.tglImportPseudoEvents = True, "", " WHERE PseudoEvent = 0 ")
         
         EventSQL = "SELECT [" & strTableName & "].Event_ID, [" & strTableName & "].Location_ID, " _
             & "[tbl_Locations].[Plot_Name] &" & """  """ & "& [" & strTableName & "].[Event_Date] " _
@@ -2287,7 +2487,10 @@ On Error GoTo Err_Handler
             & "FROM [" & strTableName & "] " _
             & "LEFT JOIN tbl_Locations " _
             & "ON [" & strTableName & "].Location_ID = tbl_Locations.Location_ID " _
+            & strExclude _
             & "ORDER BY Event_Date DESC;"
+            
+Debug.Print "toggle pseudos = " & Me.tglImportPseudoEvents
 Debug.Print "Import EventTable - select import events - EventSQL = " & EventSQL
            'MsgBox EventSQL
           
@@ -2466,6 +2669,15 @@ On Error GoTo Err_Handler
 '    Dim iLength2 As Long
     Dim strAppTableName As String
     
+    'handle pseudoevents
+    Dim strExcludePseudos As String
+    
+    strExcludePseudos = ""
+    If Me.tglImportPseudoEvents = False Then
+        strExcludePseudos = " AND PseudoEvent = 0 "
+    
+    End If
+    
     'This is required
     DoCmd.RunCommand acCmdSaveRecord
     
@@ -2488,8 +2700,25 @@ Debug.Print "strMain = " & strMain
         strAppTableName = CompareTables(rsForm)
     
         If rsForm![Table_Name] = "tbl_Events" Then
+                        
             Dim AppTableName As String
             strAppend = rsForm![Append_Table]
+            
+            '---------------
+            ' pseudoevents?
+            '---------------
+            ' Excluded? --> delete from import table BEFORE appending data
+            ' Included? --> do nothing
+            If Me.tglImportPseudoEvents = False Then
+                'delete pseudoevents from import event table
+                DeletePseudoEvents strAppend
+                
+                Debug.Print "pseudoevents deleted from " & strAppend
+                
+                'remove pseudo-event related records from other tables
+                DeleteRelatedPseudoEventRecords strAppend
+            
+            End If
             
             Set rsEvents = db.OpenRecordset(strAppend)
             
