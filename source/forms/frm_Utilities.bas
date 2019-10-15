@@ -16,7 +16,7 @@ Begin Form
     GridY =24
     Width =6060
     DatasheetFontHeight =11
-    ItemSuffix =8
+    ItemSuffix =9
     Left =1125
     Top =2700
     Right =7185
@@ -296,7 +296,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
-                    OverlapFlags =85
+                    OverlapFlags =93
                     Left =4560
                     Top =2040
                     Width =1260
@@ -344,6 +344,7 @@ Begin Form
                     QuickStyle =23
                     QuickStyleMask =-1
                     WebImagePaddingTop =1
+                    Overlaps =1
                 End
                 Begin CommandButton
                     OverlapFlags =87
@@ -508,6 +509,59 @@ Begin Form
                     WebImagePaddingTop =1
                     Overlaps =1
                 End
+                Begin CommandButton
+                    TabStop = NotDefault
+                    OverlapFlags =87
+                    AccessKey =79
+                    Left =4560
+                    Top =660
+                    Width =1260
+                    Height =1260
+                    FontSize =14
+                    FontWeight =700
+                    TabIndex =7
+                    Name ="btnPostSeasonChecks"
+                    Caption ="P&ost-Season Checks"
+                    OnClick ="[Event Procedure]"
+                    FontName ="Franklin Gothic Book"
+                    ControlTipText ="Open a form to check that RIO tags are actually in the office"
+                    UnicodeAccessKey =111
+                    LeftPadding =60
+                    RightPadding =75
+                    BottomPadding =120
+                    ImageData = Begin
+                        0x00000000
+                    End
+
+                    LayoutCachedLeft =4560
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =5820
+                    LayoutCachedHeight =1920
+                    ForeTint =100.0
+                    GridlineThemeColorIndex =-1
+                    GridlineShade =100.0
+                    Shape =0
+                    BackColor =0
+                    BackThemeColorIndex =0
+                    BackTint =100.0
+                    BorderColor =0
+                    BorderThemeColorIndex =0
+                    BorderTint =100.0
+                    HoverColor =65280
+                    HoverThemeColorIndex =-1
+                    HoverTint =100.0
+                    PressedColor =6644321
+                    PressedShade =80.0
+                    HoverForeColor =0
+                    HoverForeTint =100.0
+                    PressedForeColor =0
+                    PressedForeTint =100.0
+                    Shadow =-1
+                    QuickStyle =22
+                    QuickStyleMask =-1
+                    WebImagePaddingTop =1
+                    Overlaps =1
+                End
             End
         End
     End
@@ -523,7 +577,7 @@ Option Explicit
 ' =================================
 ' MODULE:       frm_Utilities
 ' Level:        Application form module
-' Version:      1.01
+' Version:      1.02
 ' Description:  Standard module - main form for various database functions
 ' Data source:  -
 ' Data access:  -
@@ -537,6 +591,7 @@ Option Explicit
 '               BLC   - 8/16/2019 - 1.01 - documentation, error handling,
 '                                          added Pre-Season Prep for purging db field data tables
 '                                          renamed cmdXX to btnXX
+'               BLC   - 9/26/2019 - 1.02 - added Post-Season Prep for RIO tag check
 ' =================================
 
 ' ---------------------------------
@@ -729,6 +784,35 @@ Err_Handler:
         Case Else
           MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
               "Error encountered (#" & Err.Number & " - btnPreSeasonPrep_Click[frm_Switchboard])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnPostSeasonChecks_Click
+' Description:  button click actions
+' Assumptions:  -
+' Notes:        -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, September 26, 2019
+' Revisions:
+'   BLC   - 9/26/2019 - initial version
+' ---------------------------------
+Private Sub btnPostSeasonChecks_Click()
+On Error GoTo Err_Handler
+
+    DoCmd.OpenForm "RIOCheck", acNormal, , , acFormAdd, acDialog
+
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+        Case Else
+          MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+              "Error encountered (#" & Err.Number & " - btnPostSeasonChecks_Click[frm_Switchboard])"
     End Select
     Resume Exit_Handler
 End Sub

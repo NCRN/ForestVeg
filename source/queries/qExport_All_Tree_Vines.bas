@@ -1,74 +1,16 @@
-﻿Operation =1
-Option =0
-Begin InputTables
-    Name ="tbl_Locations"
-    Name ="tbl_Events"
-    Name ="tbl_Tree_Data"
-    Name ="tbl_Tree_Vines"
-    Name ="tbl_Tags"
-    Name ="tlu_Plants"
-    Alias ="tlu_Plants_1"
-    Name ="tlu_Plants"
-    Name ="qCalc_Trees_with_Vines_in_Crown"
-End
-Begin OutputColumns
-    Expression ="tbl_Locations.Plot_Name"
-    Expression ="tbl_Locations.Unit_Code"
-    Expression ="tbl_Locations.Unit_Group"
-    Expression ="tbl_Locations.Subunit_Code"
-    Alias ="Cycle"
-    Expression ="1+Int((Year([tbl_Events]![Event_Date])-2006)/4)"
-    Expression ="tbl_Locations.Panel"
-    Expression ="tbl_Locations.Frame"
-    Alias ="Sample_Year"
-    Expression ="Year([tbl_Events].[Event_Date])"
-    Alias ="Date"
-    Expression ="CLng(Format([tbl_Events]![Event_Date],\"yyyymmdd\"))"
-    Expression ="tbl_Tags.Tag_Status"
-    Expression ="tbl_Tree_Vines.TSN"
-    Expression ="tlu_Plants.TaxonCode"
-    Expression ="tlu_Plants.Latin_Name"
-    Alias ="Host_Tag"
-    Expression ="tbl_Tags.Tag"
-    Alias ="Host_TSN"
-    Expression ="tbl_Tags.TSN"
-    Alias ="Host_Latin_Name"
-    Expression ="tlu_Plants_1.Latin_Name"
-    Alias ="Host_Status"
-    Expression ="tbl_Tree_Data.Tree_Status"
-    Expression ="qCalc_Trees_with_Vines_in_Crown.Condition"
-    Expression ="tlu_Plants.Exotic"
-End
-Begin Joins
-    LeftTable ="tbl_Tree_Data"
-    RightTable ="tbl_Tags"
-    Expression ="tbl_Tree_Data.Tag_ID = tbl_Tags.Tag_ID"
-    Flag =1
-    LeftTable ="tbl_Tags"
-    RightTable ="tlu_Plants_1"
-    Expression ="tbl_Tags.TSN = tlu_Plants_1.TSN"
-    Flag =1
-    LeftTable ="tbl_Tree_Vines"
-    RightTable ="tlu_Plants"
-    Expression ="tbl_Tree_Vines.TSN = tlu_Plants.TSN"
-    Flag =1
-    LeftTable ="tbl_Tree_Data"
-    RightTable ="qCalc_Trees_with_Vines_in_Crown"
-    Expression ="tbl_Tree_Data.Tree_Data_ID = qCalc_Trees_with_Vines_in_Crown.Tree_Data_ID"
-    Flag =2
-    LeftTable ="tbl_Locations"
-    RightTable ="tbl_Events"
-    Expression ="tbl_Locations.Location_ID = tbl_Events.Location_ID"
-    Flag =1
-    LeftTable ="tbl_Events"
-    RightTable ="tbl_Tree_Data"
-    Expression ="tbl_Events.Event_ID = tbl_Tree_Data.Event_ID"
-    Flag =1
-    LeftTable ="tbl_Tree_Data"
-    RightTable ="tbl_Tree_Vines"
-    Expression ="tbl_Tree_Data.Tree_Data_ID = tbl_Tree_Vines.Tree_Data_ID"
-    Flag =1
-End
+﻿dbMemo "SQL" ="SELECT l.Plot_Name, l.Unit_Code, l.Unit_Group, l.Subunit_Code, 1+Int((Year(e.Eve"
+    "nt_Date)-2006)/4) AS Cycle, l.Panel, l.Frame, Year(e.Event_Date) AS Sample_Year,"
+    " CLng(Format(e.Event_Date,\"yyyymmdd\")) AS [Date], t.Tag_Status, tv.TSN, pe.Tax"
+    "onCode, pe.Latin_Name, t.Tag AS Host_Tag, t.TSN AS Host_TSN, ph.Latin_Name AS Ho"
+    "st_Latin_Name, td.Tree_Status AS Host_Status, vic.Condition, pe.Exotic\015\012FR"
+    "OM ((((((tbl_Tree_Data AS td INNER JOIN tbl_Events AS e ON e.Event_ID = td.Event"
+    "_ID) INNER JOIN tbl_Tree_Vines AS tv ON td.Tree_Data_ID = tv.Tree_Data_ID) INNER"
+    " JOIN tbl_Locations AS l ON l.Location_ID = e.Location_ID) INNER JOIN tbl_Tags A"
+    "S t ON td.Tag_ID = t.Tag_ID) INNER JOIN tlu_Plants AS ph ON t.TSN = ph.TSN) LEFT"
+    " JOIN qCalc_Trees_with_Vines_in_Crown AS vic ON td.Tree_Data_ID = vic.Tree_Data_"
+    "ID) INNER JOIN tlu_Plants AS pe ON tv.TSN = pe.TSN\015\012WHERE td.Tree_Status <"
+    "> 'Removed from study';\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -162,12 +104,6 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="Host_Tree_Tag"
-        dbInteger "ColumnWidth" ="2340"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="tlu_Plants.TaxonCode"
         dbLong "AggregateType" ="-1"
     End
@@ -181,90 +117,52 @@ Begin
         dbBoolean "ColumnHidden" ="0"
         dbLong "AggregateType" ="-1"
     End
-End
-Begin
-    State =0
-    Left =207
-    Top =10
-    Right =1502
-    Bottom =803
-    Left =-1
-    Top =-1
-    Right =1263
-    Bottom =436
-    Left =0
-    Top =0
-    ColumnsShown =539
     Begin
-        Left =624
-        Top =12
-        Right =768
-        Bottom =156
-        Top =0
-        Name ="tbl_Locations"
-        Name =""
+        dbText "Name" ="l.Frame"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =429
-        Top =17
-        Right =573
-        Bottom =161
-        Top =0
-        Name ="tbl_Events"
-        Name =""
+        dbText "Name" ="tv.TSN"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =240
-        Top =12
-        Right =384
-        Bottom =156
-        Top =0
-        Name ="tbl_Tree_Data"
-        Name =""
+        dbText "Name" ="pe.Exotic"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =48
-        Top =12
-        Right =192
-        Bottom =156
-        Top =0
-        Name ="tbl_Tree_Vines"
-        Name =""
+        dbText "Name" ="l.Plot_Name"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =431
-        Top =181
-        Right =608
-        Bottom =441
-        Top =0
-        Name ="tbl_Tags"
-        Name =""
+        dbText "Name" ="l.Unit_Code"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =627
-        Top =181
-        Right =771
-        Bottom =325
-        Top =0
-        Name ="tlu_Plants_1"
-        Name =""
+        dbText "Name" ="l.Unit_Group"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =51
-        Top =189
-        Right =195
-        Bottom =333
-        Top =0
-        Name ="tlu_Plants"
-        Name =""
+        dbText "Name" ="l.Subunit_Code"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =230
-        Top =187
-        Right =387
-        Bottom =339
-        Top =0
-        Name ="qCalc_Trees_with_Vines_in_Crown"
-        Name =""
+        dbText "Name" ="l.Panel"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.Tag_Status"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="pe.TaxonCode"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="pe.Latin_Name"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="vic.Condition"
+        dbLong "AggregateType" ="-1"
     End
 End

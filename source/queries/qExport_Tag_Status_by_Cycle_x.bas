@@ -1,59 +1,19 @@
-﻿Operation =6
-Option =0
-Begin InputTables
-    Name ="qSum_Tree_and_Sapling_Cycles"
-    Name ="tbl_Tags"
-    Name ="tbl_Locations"
-End
-Begin OutputColumns
-    Expression ="qSum_Tree_and_Sapling_Cycles.Tag_ID"
-    GroupLevel =2
-    Expression ="tbl_Locations.Plot_Name"
-    GroupLevel =2
-    Expression ="tbl_Locations.Location_Status"
-    GroupLevel =2
-    Expression ="tbl_Tags.Tag"
-    GroupLevel =2
-    Expression ="qSum_Tree_and_Sapling_Cycles.Cycle"
-    GroupLevel =1
-    Alias ="Earliest_Event"
-    Expression ="Min(qSum_Tree_and_Sapling_Cycles.Event_Year)"
-    GroupLevel =2
-    Alias ="Latest_Event"
-    Expression ="Max(qSum_Tree_and_Sapling_Cycles.Event_Year)"
-    GroupLevel =2
-    Alias ="FirstOfClass_Status"
-    Expression ="First(qSum_Tree_and_Sapling_Cycles.Class_Status)"
-End
-Begin Joins
-    LeftTable ="qSum_Tree_and_Sapling_Cycles"
-    RightTable ="tbl_Tags"
-    Expression ="qSum_Tree_and_Sapling_Cycles.Tag_ID = tbl_Tags.Tag_ID"
-    Flag =1
-    LeftTable ="tbl_Locations"
-    RightTable ="tbl_Tags"
-    Expression ="tbl_Locations.Location_ID = tbl_Tags.Location_ID"
-    Flag =3
-End
-Begin Groups
-    Expression ="qSum_Tree_and_Sapling_Cycles.Tag_ID"
-    GroupLevel =2
-    Expression ="tbl_Locations.Plot_Name"
-    GroupLevel =2
-    Expression ="tbl_Locations.Location_Status"
-    GroupLevel =2
-    Expression ="tbl_Tags.Tag"
-    GroupLevel =2
-    Expression ="tbl_Tags.Tag_Status"
-    GroupLevel =2
-    Expression ="qSum_Tree_and_Sapling_Cycles.Cycle"
-    GroupLevel =1
-End
+﻿dbMemo "SQL" ="TRANSFORM First(tsc.Class_Status) AS FirstOfClass_Status\015\012SELECT tsc.Tag_I"
+    "D, l.Plot_Name, l.Location_Status, t.Tag, Min(tsc.Event_Year) AS Earliest_Event,"
+    " Max(tsc.Event_Year) AS Latest_Event\015\012FROM (qSum_Tree_and_Sapling_Cycles A"
+    "S tsc LEFT JOIN tbl_Tags AS t ON tsc.Tag_ID = t.Tag_ID) LEFT JOIN tbl_Locations "
+    "AS l ON l.Location_ID = t.Location_ID\015\012WHERE t.Tag_ID IS NOT NULL\015\012G"
+    "ROUP BY tsc.Tag_ID, l.Plot_Name, l.Location_Status, t.Tag, t.Tag_Status\015\012O"
+    "RDER BY t.Tag\015\012PIVOT tsc.Cycle;\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
 dbByte "Orientation" ="0"
 dbByte "DefaultView" ="2"
+dbBoolean "OrderByOn" ="0"
+dbBoolean "FilterOnLoad" ="0"
+dbBoolean "OrderByOnLoad" ="-1"
 Begin
     Begin
         dbText "Name" ="qSum_Tree_and_Sapling_Cycles.Cycle"
@@ -75,7 +35,7 @@ Begin
     End
     Begin
         dbText "Name" ="2"
-        dbInteger "ColumnWidth" ="4290"
+        dbInteger "ColumnWidth" ="3120"
         dbBoolean "ColumnHidden" ="0"
         dbLong "AggregateType" ="-1"
     End
@@ -129,45 +89,32 @@ Begin
         dbText "Name" ="tbl_Locations.Location_Status"
         dbLong "AggregateType" ="-1"
     End
-End
-Begin
-    State =0
-    Left =0
-    Top =40
-    Right =1518
-    Bottom =965
-    Left =-1
-    Top =-1
-    Right =1486
-    Bottom =557
-    Left =0
-    Top =0
-    ColumnsShown =559
     Begin
-        Left =78
-        Top =12
-        Right =275
-        Bottom =205
-        Top =0
-        Name ="qSum_Tree_and_Sapling_Cycles"
-        Name =""
+        dbText "Name" ="tsc.Tag_ID"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =323
-        Top =12
-        Right =489
-        Bottom =296
-        Top =0
-        Name ="tbl_Tags"
-        Name =""
+        dbText "Name" ="l.Plot_Name"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =537
-        Top =12
-        Right =681
-        Bottom =156
-        Top =0
-        Name ="tbl_Locations"
-        Name =""
+        dbText "Name" ="3"
+        dbLong "AggregateType" ="-1"
+        dbInteger "ColumnWidth" ="2115"
+        dbBoolean "ColumnHidden" ="0"
+    End
+    Begin
+        dbText "Name" ="4"
+        dbLong "AggregateType" ="-1"
+        dbInteger "ColumnWidth" ="2190"
+        dbBoolean "ColumnHidden" ="0"
+    End
+    Begin
+        dbText "Name" ="l.Location_Status"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.Tag"
+        dbLong "AggregateType" ="-1"
     End
 End

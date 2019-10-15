@@ -1082,7 +1082,7 @@ Public Function fPathParsing(fullPath As String, PathFormat As String) As String
             '? fPathParsing("C:\work\Seasonals.xls", "E")
             '.xls
 Dim i As Integer, f As String, Found As Integer
-Dim DirName As String, FName As String, Ext As String
+Dim DirName As String, FNAME As String, Ext As String
   
   fullPath = Trim$(fullPath)
 '
@@ -1105,29 +1105,29 @@ Dim DirName As String, FName As String, Ext As String
 ' Get File name and extension
 '
   If f = "." Or f = ".." Then
-    FName = f
+    FNAME = f
   Else
     i = InStr(f, ".")
     If i > 0 Then
-      FName = Left$(f, i - 1)
+      FNAME = Left$(f, i - 1)
       Ext = Mid$(f, i)
     Else
-      FName = f
+      FNAME = f
     End If
   End If
 Select Case PathFormat
     Case "D"
         fPathParsing = DirName
     Case "N"
-        fPathParsing = FName
+        fPathParsing = FNAME
     Case "E"
         fPathParsing = Ext
     Case "DN"
-        fPathParsing = DirName & FName
+        fPathParsing = DirName & FNAME
     Case "NE"
-        fPathParsing = FName & Ext
+        fPathParsing = FNAME & Ext
     Case "DNE"
-        fPathParsing = DirName & FName & Ext
+        fPathParsing = DirName & FNAME & Ext
     Case Else
         fPathParsing = fullPath
 

@@ -5,6 +5,7 @@ Begin Form
     NavigationButtons = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
+    OrderByOn = NotDefault
     AllowDesignChanges = NotDefault
     ScrollBars =2
     TabularFamily =0
@@ -17,7 +18,7 @@ Begin Form
     ItemSuffix =56
     Left =4680
     Top =990
-    Right =15015
+    Right =14760
     Bottom =11850
     DatasheetGridlinesColor =12632256
     OrderBy ="Append_Order"

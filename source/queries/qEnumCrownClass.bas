@@ -1,16 +1,7 @@
-﻿Operation =1
-Option =0
-Where ="(((tlu_Enumerations.Enum_Group)=\"Crown Class\"))"
-Begin InputTables
-    Name ="tlu_Enumerations"
-End
-Begin OutputColumns
-    Alias ="CrownClassCode"
-    Expression ="Val([Enum_Code])"
-    Expression ="tlu_Enumerations.Enum_Description"
-    Expression ="tlu_Enumerations.Enum_Group"
-    Expression ="tlu_Enumerations.Sort_Order"
-End
+﻿dbMemo "SQL" ="SELECT Val([Enum_Code]) AS CrownClassCode, e.Enum_Description, e.Enum_Group, e.S"
+    "ort_Order\015\012FROM tlu_Enumerations AS e\015\012WHERE e.Enum_Group=\"Crown Cl"
+    "ass\";\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -30,10 +21,6 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tlu_Enumerations.Enum_Code"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="tlu_Enumerations.Enum_Description"
         dbLong "AggregateType" ="-1"
     End
@@ -41,27 +28,20 @@ Begin
         dbText "Name" ="CrownClassCode"
         dbLong "AggregateType" ="-1"
     End
-End
-Begin
-    State =0
-    Left =86
-    Top =142
-    Right =1488
-    Bottom =1030
-    Left =-1
-    Top =-1
-    Right =1370
-    Bottom =571
-    Left =0
-    Top =0
-    ColumnsShown =539
     Begin
-        Left =279
-        Top =126
-        Right =580
-        Bottom =259
-        Top =0
-        Name ="tlu_Enumerations"
-        Name =""
+        dbText "Name" ="e.Enum_Description"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Enum_Group"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="tlu_Enumerations.Enum_Code"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Sort_Order"
+        dbLong "AggregateType" ="-1"
     End
 End

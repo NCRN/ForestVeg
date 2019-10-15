@@ -1,75 +1,16 @@
-﻿Operation =1
-Option =0
-Begin InputTables
-    Name ="tbl_Locations"
-    Name ="tbl_Events"
-    Name ="tbl_Tags"
-    Name ="tlu_Plants"
-    Alias ="tlu_Plants_1"
-    Name ="tlu_Plants"
-    Name ="tbl_Sapling_Data"
-    Name ="tbl_Sapling_Vines"
-    Name ="qCalc_Saplings_with_Vines_in_Crown"
-End
-Begin OutputColumns
-    Expression ="tbl_Locations.Plot_Name"
-    Expression ="tbl_Locations.Unit_Code"
-    Expression ="tbl_Locations.Unit_Group"
-    Expression ="tbl_Locations.Subunit_Code"
-    Alias ="Cycle"
-    Expression ="1+Int((Year([tbl_Events]![Event_Date])-2006)/4)"
-    Expression ="tbl_Locations.Panel"
-    Expression ="tbl_Locations.Frame"
-    Alias ="Sample_Year"
-    Expression ="Year([tbl_Events].[Event_Date])"
-    Alias ="Date"
-    Expression ="CLng(Format([tbl_Events]![Event_Date],\"yyyymmdd\"))"
-    Expression ="tbl_Sapling_Vines.TSN"
-    Expression ="tlu_Plants.TaxonCode"
-    Expression ="tlu_Plants.Latin_Name"
-    Expression ="tbl_Tags.Tag_Status"
-    Alias ="Host_Tag"
-    Expression ="tbl_Tags.Tag"
-    Alias ="Host_TSN"
-    Expression ="tbl_Tags.TSN"
-    Alias ="Host_Latin_Name"
-    Expression ="tlu_Plants_1.Latin_Name"
-    Alias ="Host_Status"
-    Expression ="tbl_Sapling_Data.Sapling_Status"
-    Expression ="qCalc_Saplings_with_Vines_in_Crown.Condition"
-    Expression ="tlu_Plants.Exotic"
-End
-Begin Joins
-    LeftTable ="tbl_Tags"
-    RightTable ="tlu_Plants_1"
-    Expression ="tbl_Tags.TSN = tlu_Plants_1.TSN"
-    Flag =1
-    LeftTable ="tbl_Tags"
-    RightTable ="tbl_Sapling_Data"
-    Expression ="tbl_Tags.Tag_ID = tbl_Sapling_Data.Tag_ID"
-    Flag =1
-    LeftTable ="tbl_Sapling_Data"
-    RightTable ="qCalc_Saplings_with_Vines_in_Crown"
-    Expression ="tbl_Sapling_Data.Sapling_Data_ID = qCalc_Saplings_with_Vines_in_Crown.Sapling_Da"
-        "ta_ID"
-    Flag =2
-    LeftTable ="tbl_Sapling_Vines"
-    RightTable ="tlu_Plants"
-    Expression ="tbl_Sapling_Vines.TSN = tlu_Plants.TSN"
-    Flag =1
-    LeftTable ="tbl_Locations"
-    RightTable ="tbl_Events"
-    Expression ="tbl_Locations.Location_ID = tbl_Events.Location_ID"
-    Flag =1
-    LeftTable ="tbl_Events"
-    RightTable ="tbl_Sapling_Data"
-    Expression ="tbl_Events.Event_ID = tbl_Sapling_Data.Event_ID"
-    Flag =1
-    LeftTable ="tbl_Sapling_Data"
-    RightTable ="tbl_Sapling_Vines"
-    Expression ="tbl_Sapling_Data.Sapling_Data_ID = tbl_Sapling_Vines.Sapling_Data_ID"
-    Flag =1
-End
+﻿dbMemo "SQL" ="SELECT l.Plot_Name, l.Unit_Code, l.Unit_Group, l.Subunit_Code, 1+Int((Year(e.Eve"
+    "nt_Date)-2006)/4) AS Cycle, l.Panel, l.Frame, Year(e.Event_Date) AS Sample_Year,"
+    " CLng(Format(e.Event_Date,\"yyyymmdd\")) AS [Date], sv.TSN, pe.TaxonCode, pe.Lat"
+    "in_Name, t.Tag_Status, t.Tag AS Host_Tag, t.TSN AS Host_TSN, ph.Latin_Name AS Ho"
+    "st_Latin_Name, sd.Sapling_Status AS Host_Status, vic.Condition, pe.Exotic\015\012"
+    "FROM ((((((tbl_Sapling_Data AS sd INNER JOIN tbl_Events AS e ON e.Event_ID = sd."
+    "Event_ID) INNER JOIN tbl_Tags AS t ON t.Tag_ID = sd.Tag_ID) INNER JOIN tlu_Plant"
+    "s AS ph ON t.TSN = ph.TSN) INNER JOIN tbl_Locations AS l ON l.Location_ID = e.Lo"
+    "cation_ID) LEFT JOIN qCalc_Saplings_with_Vines_in_Crown AS vic ON sd.Sapling_Dat"
+    "a_ID = vic.Sapling_Data_ID) INNER JOIN tbl_Sapling_Vines AS sv ON sd.Sapling_Dat"
+    "a_ID = sv.Sapling_Data_ID) INNER JOIN tlu_Plants AS pe ON sv.TSN = pe.TSN\015\012"
+    "WHERE sd.Sapling_Status <> 'Removed from study';\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -174,90 +115,52 @@ Begin
         dbBoolean "ColumnHidden" ="0"
         dbLong "AggregateType" ="-1"
     End
-End
-Begin
-    State =0
-    Left =70
-    Top =-1
-    Right =1365
-    Bottom =547
-    Left =-1
-    Top =-1
-    Right =1263
-    Bottom =373
-    Left =0
-    Top =0
-    ColumnsShown =539
     Begin
-        Left =624
-        Top =12
-        Right =768
-        Bottom =156
-        Top =0
-        Name ="tbl_Locations"
-        Name =""
+        dbText "Name" ="pe.Latin_Name"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =429
-        Top =17
-        Right =573
-        Bottom =161
-        Top =0
-        Name ="tbl_Events"
-        Name =""
+        dbText "Name" ="l.Frame"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =497
-        Top =178
-        Right =725
-        Bottom =451
-        Top =0
-        Name ="tbl_Tags"
-        Name =""
+        dbText "Name" ="vic.Condition"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =860
-        Top =144
-        Right =1004
-        Bottom =288
-        Top =0
-        Name ="tlu_Plants_1"
-        Name =""
+        dbText "Name" ="l.Panel"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =51
-        Top =178
-        Right =195
-        Bottom =333
-        Top =0
-        Name ="tlu_Plants"
-        Name =""
+        dbText "Name" ="l.Unit_Code"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =214
-        Top =28
-        Right =358
-        Bottom =172
-        Top =0
-        Name ="tbl_Sapling_Data"
-        Name =""
+        dbText "Name" ="sv.TSN"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =52
-        Top =24
-        Right =196
-        Bottom =168
-        Top =0
-        Name ="tbl_Sapling_Vines"
-        Name =""
+        dbText "Name" ="l.Plot_Name"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =258
-        Top =133
-        Right =402
-        Bottom =394
-        Top =0
-        Name ="qCalc_Saplings_with_Vines_in_Crown"
-        Name =""
+        dbText "Name" ="l.Unit_Group"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.Subunit_Code"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="pe.TaxonCode"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.Tag_Status"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="pe.Exotic"
+        dbLong "AggregateType" ="-1"
     End
 End

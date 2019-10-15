@@ -1,61 +1,23 @@
-﻿Operation =1
-Option =0
-Where ="(((tbl_Tags_History.Change_Date)>=Nz(IIf(Abs(Forms!frm_Data_Summary!togFilterByR"
-    "ange)=1,Forms!frm_Data_Summary!txtStartDateFilter,#1/1/1800#)) And (tbl_Tags_His"
-    "tory.Change_Date)<=Nz(IIf(Abs(Forms!frm_Data_Summary!togFilterByRange)=1,Forms!f"
-    "rm_Data_Summary!txtEndDateFilter,#12/31/2200#))) And ((Year([Change_Date])) Like"
-    " Nz(IIf(Abs(Forms!frm_Data_Summary!togFilterByYear)=1,Forms!frm_Data_Summary!cbo"
-    "YearFilter,Null),\"*\")))"
-Begin InputTables
-    Name ="tbl_Tags_History"
-    Name ="tlu_Contacts"
-    Name ="tbl_Tags"
-    Name ="qFiltered_Locations"
-End
-Begin OutputColumns
-    Expression ="qFiltered_Locations.Plot_Name"
-    Expression ="tbl_Tags.Tag"
-    Alias ="Change_Desc"
-    Expression ="IIf([Field_Name]=\"TSN\",[Field_Name] & \" was changed by \" & [First_Name] & \""
-        " \" & [Last_Name] & \" from \" & [Value_Old] & \" (\" & DLookUp(\"[Latin_Name]\""
-        ",\"tlu_Plants\",\"[TSN] =\" & [Value_Old]) & \")\" & \" to \" & [Value_New] & \""
-        " (\" & DLookUp(\"[Latin_Name]\",\"tlu_Plants\",\"[TSN] =\" & [Value_New]) & \")\""
-        ",[Field_Name] & \" was changed by \" & [First_Name] & \" \" & [Last_Name] & \" f"
-        "rom \" & [Value_Old] & \" to \" & [Value_New])"
-    Expression ="tbl_Tags_History.Change_Date"
-    Alias ="Change_Year"
-    Expression ="Year([Change_Date])"
-    Expression ="tbl_Tags.Azimuth"
-    Expression ="tbl_Tags.Distance"
-    Expression ="tbl_Tags.Microplot_Number"
-    Expression ="tbl_Tags.TSN"
-    Expression ="tbl_Tags.Tag_Notes"
-    Expression ="tbl_Tags.Tag_Status"
-    Expression ="tbl_Tags.Updated_Date"
-    Alias ="Tag_ID"
-    Expression ="tbl_Tags_History.Record_ID"
-    Expression ="tbl_Tags.Location_ID"
-End
-Begin Joins
-    LeftTable ="tbl_Tags_History"
-    RightTable ="tlu_Contacts"
-    Expression ="tbl_Tags_History.Contact_ID=tlu_Contacts.Contact_ID"
-    Flag =2
-    LeftTable ="tbl_Tags_History"
-    RightTable ="tbl_Tags"
-    Expression ="tbl_Tags_History.Record_ID=tbl_Tags.Tag_ID"
-    Flag =1
-    LeftTable ="tbl_Tags"
-    RightTable ="qFiltered_Locations"
-    Expression ="tbl_Tags.Location_ID=qFiltered_Locations.Location_ID"
-    Flag =1
-End
-Begin OrderBy
-    Expression ="qFiltered_Locations.Plot_Name"
-    Flag =0
-    Expression ="tbl_Tags.Tag"
-    Flag =0
-End
+﻿dbMemo "SQL" ="SELECT fl.Plot_Name, t.Tag, IIf([Field_Name]=\"TSN\",[Field_Name] & \" was chang"
+    "ed by \" & [First_Name] & \" \" & [Last_Name] & \" from \" & [Value_Old] & \" (\""
+    " & DLookUp(\"[Latin_Name]\",\"tlu_Plants\",\"[TSN] =\" & [Value_Old]) & \")\" & "
+    "\" to \" & [Value_New] & \" (\" & DLookUp(\"[Latin_Name]\",\"tlu_Plants\",\"[TSN"
+    "] =\" & [Value_New]) & \")\",[Field_Name] & \" was changed by \" & [First_Name] "
+    "& \" \" & [Last_Name] & \" from \" & [Value_Old] & \" to \" & [Value_New]) AS Ch"
+    "ange_Desc, th.Change_Date, Year([Change_Date]) AS Change_Year, t.Azimuth, t.Dist"
+    "ance, t.Microplot_Number, t.TSN, t.Tag_Notes, t.Tag_Status, t.Updated_Date, th.R"
+    "ecord_ID AS Tag_ID, t.Location_ID\015\012FROM ((tbl_Tags_History AS th LEFT JOIN"
+    " tbl_Tags AS t ON th.Record_ID = t.Tag_ID) LEFT JOIN tlu_Contacts AS c ON th.Con"
+    "tact_ID = c.Contact_ID) LEFT JOIN qFiltered_Locations AS fl ON t.Location_ID = f"
+    "l.Location_ID\015\012WHERE (((th.Change_Date)>=Nz(IIf(Abs([Forms]![frm_Data_Summ"
+    "ary_Advanced]![tglFilterByRange])=1,[Forms]![frm_Data_Summary_Advanced]![tbxStar"
+    "tDateFilter],#1/1/1800#)) \015\012AND (th.Change_Date)<=Nz(IIf(Abs([Forms]![frm_"
+    "Data_Summary_Advanced]![tglFilterByRange])=1,[Forms]![frm_Data_Summary_Advanced]"
+    "![tbxEndDateFilter],#12/31/2200#))) \015\012AND ((Year([Change_Date])) LIKE Nz(I"
+    "If(Abs([Forms]![frm_Data_Summary_Advanced]![tglFilterByYear])=1,[Forms]![frm_Dat"
+    "a_Summary_Advanced]![cbxYearFilter],Null),\"*\")))\015\012AND t.Tag_Status <> 'R"
+    "emoved from study'\015\012ORDER BY fl.Plot_Name, t.Tag;\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -71,109 +33,57 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Tags_History.Change_Date"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="Change_Desc"
         dbInteger "ColumnWidth" ="8430"
         dbBoolean "ColumnHidden" ="0"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Tags.Tag"
-        dbInteger "ColumnWidth" ="825"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tags.Azimuth"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tags.Distance"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tags.Microplot_Number"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tags.TSN"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tags.Tag_Notes"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tags.Tag_Status"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tags.Updated_Date"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tags.Location_ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="qFiltered_Locations.Plot_Name"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="Change_Year"
         dbLong "AggregateType" ="-1"
     End
-End
-Begin
-    State =0
-    Left =-19
-    Top =148
-    Right =1344
-    Bottom =765
-    Left =-1
-    Top =-1
-    Right =1331
-    Bottom =291
-    Left =0
-    Top =0
-    ColumnsShown =539
     Begin
-        Left =7
-        Top =7
-        Right =189
-        Bottom =327
-        Top =0
-        Name ="tbl_Tags_History"
-        Name =""
+        dbText "Name" ="t.Location_ID"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =256
-        Top =190
-        Right =400
-        Bottom =328
-        Top =0
-        Name ="tlu_Contacts"
-        Name =""
+        dbText "Name" ="fl.Plot_Name"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =445
-        Top =55
-        Right =589
-        Bottom =321
-        Top =0
-        Name ="tbl_Tags"
-        Name =""
+        dbText "Name" ="t.Tag"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =633
-        Top =8
-        Right =777
-        Bottom =152
-        Top =0
-        Name ="qFiltered_Locations"
-        Name =""
+        dbText "Name" ="th.Change_Date"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.Azimuth"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.Distance"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.Microplot_Number"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.TSN"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.Tag_Notes"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.Tag_Status"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.Updated_Date"
+        dbLong "AggregateType" ="-1"
     End
 End

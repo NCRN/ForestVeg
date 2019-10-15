@@ -1,49 +1,17 @@
-﻿Operation =1
-Option =0
-Begin InputTables
-    Name ="tbl_Sapling_Data"
-    Name ="tbl_Sapling_DBH"
-End
-Begin OutputColumns
-    Expression ="tbl_Sapling_Data.Sapling_Data_ID"
-    Expression ="tbl_Sapling_Data.Event_ID"
-    Alias ="CrownClass"
-    Expression ="\"\""
-    Alias ="Stems"
-    Expression ="Count(tbl_Sapling_DBH.DBH)"
-    Alias ="StemsLive"
-    Expression ="Sum(IIf([Live]=True,1,0))"
-    Alias ="StemsDead"
-    Expression ="Sum(IIf([Live]=False,1,0))"
-    Alias ="SumBasalArea_cm2"
-    Expression ="Round(Sum(3.1415926*(([DBH]/2)^2)),1)"
-    Alias ="FirstOfTag_ID"
-    Expression ="First(tbl_Sapling_Data.Tag_ID)"
-    Alias ="Equiv_DBH_cm"
-    Expression ="Round((([SumBasalArea_cm2]/3.1415)^0.5)*2,1)"
-    Alias ="SumLiveBasalArea_cm2"
-    Expression ="Round(Sum(3.1415926*(((IIf([Live]=True,[DBH],0))/2)^2)),1)"
-    Alias ="SumDeadBasalArea_cm2"
-    Expression ="Round(Sum(3.1415926*(((IIf([Live]=False,[DBH],0))/2)^2)),1)"
-    Alias ="Equiv_Live_DBH_cm"
-    Expression ="Round((([SumLiveBasalArea_cm2]/3.1415)^0.5)*2,1)"
-    Alias ="Equiv_Dead_DBH_cm"
-    Expression ="Round((([SumDeadBasalArea_cm2]/3.1415)^0.5)*2,1)"
-End
-Begin Joins
-    LeftTable ="tbl_Sapling_Data"
-    RightTable ="tbl_Sapling_DBH"
-    Expression ="tbl_Sapling_Data.Sapling_Data_ID = tbl_Sapling_DBH.Sapling_Data_ID"
-    Flag =1
-End
-Begin Groups
-    Expression ="tbl_Sapling_Data.Sapling_Data_ID"
-    GroupLevel =0
-    Expression ="tbl_Sapling_Data.Event_ID"
-    GroupLevel =0
-    Expression ="\"\""
-    GroupLevel =0
-End
+﻿dbMemo "SQL" ="SELECT sd.Sapling_Data_ID, sd.Event_ID, \"\" AS CrownClass, Count(dbh.DBH) AS St"
+    "ems, Sum(IIf([Live]=True,1,0)) AS StemsLive, Sum(IIf([Live]=False,1,0)) AS Stems"
+    "Dead, Round(Sum(3.1415926*(([DBH]/2)^2)),1) AS SumBasalArea_cm2, First(sd.Tag_ID"
+    ") AS FirstOfTag_ID, Round((([SumBasalArea_cm2]/3.1415)^0.5)*2,1) AS Equiv_DBH_cm"
+    ", Round(Sum(3.1415926*(((IIf([Live]=True,[DBH],0))/2)^2)),1) AS SumLiveBasalArea"
+    "_cm2, Round(Sum(3.1415926*(((IIf([Live]=False,[DBH],0))/2)^2)),1) AS SumDeadBasa"
+    "lArea_cm2, Round((([SumLiveBasalArea_cm2]/3.1415)^0.5)*2,1) AS Equiv_Live_DBH_cm"
+    ", Round((([SumDeadBasalArea_cm2]/3.1415)^0.5)*2,1) AS Equiv_Dead_DBH_cm, sd.Sapl"
+    "ing_Status, e.Event_Date, l.Plot_Name\015\012FROM ((tbl_Sapling_Data AS sd LEFT "
+    "JOIN tbl_Sapling_DBH AS dbh ON sd.Sapling_Data_ID = dbh.Sapling_Data_ID) LEFT JO"
+    "IN tbl_Events AS e ON e.Event_ID = sd.Event_ID) LEFT JOIN tbl_Locations AS l ON "
+    "l.Location_ID = e.Location_ID\015\012GROUP BY sd.Sapling_Data_ID, sd.Event_ID, \""
+    "\", sd.Sapling_Status, e.Event_Date, l.Plot_Name;\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -53,6 +21,9 @@ dbByte "DefaultView" ="2"
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
+dbMemo "Filter" ="([qCalc_Basal_Area_per_Sapling].[Stems]=0)"
+dbMemo "OrderBy" ="[qCalc_Basal_Area_per_Sapling].[Event_Date] DESC, [qCalc_Basal_Area_per_Sapling]"
+    ".[Sapling_Status]"
 Begin
     Begin
         dbText "Name" ="Stems"
@@ -106,20 +77,6 @@ Begin
         dbBoolean "ColumnHidden" ="0"
     End
     Begin
-        dbText "Name" ="tbl_Sapling_Data.Sapling_Data_ID"
-        dbInteger "ColumnOrder" ="1"
-        dbLong "AggregateType" ="-1"
-        dbInteger "ColumnWidth" ="2100"
-        dbBoolean "ColumnHidden" ="0"
-    End
-    Begin
-        dbText "Name" ="tbl_Sapling_Data.Event_ID"
-        dbInteger "ColumnOrder" ="2"
-        dbLong "AggregateType" ="-1"
-        dbInteger "ColumnWidth" ="2280"
-        dbBoolean "ColumnHidden" ="0"
-    End
-    Begin
         dbText "Name" ="StemsDead"
         dbLong "AggregateType" ="-1"
     End
@@ -132,36 +89,24 @@ Begin
         dbInteger "ColumnOrder" ="4"
         dbLong "AggregateType" ="-1"
     End
-End
-Begin
-    State =0
-    Left =-94
-    Top =174
-    Right =1225
-    Bottom =938
-    Left =-1
-    Top =-1
-    Right =1301
-    Bottom =189
-    Left =0
-    Top =0
-    ColumnsShown =543
     Begin
-        Left =60
-        Top =21
-        Right =243
-        Bottom =224
-        Top =0
-        Name ="tbl_Sapling_Data"
-        Name =""
+        dbText "Name" ="sd.Event_ID"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =280
-        Top =18
-        Right =424
-        Bottom =162
-        Top =0
-        Name ="tbl_Sapling_DBH"
-        Name =""
+        dbText "Name" ="sd.Sapling_Data_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="sd.Sapling_Status"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Event_Date"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.Plot_Name"
+        dbLong "AggregateType" ="-1"
     End
 End

@@ -1,0 +1,17 @@
+﻿dbMemo "SQL" ="SELECT l.Plot_Name, l.Unit_Code, l.Unit_Group, l.Subunit_Code, 1+Int((Year([Even"
+    "t_Date])-2006)/4) AS Cycle, l.Panel, l.Frame, Year(e.Event_Date) AS Sample_Year,"
+    " Format(e.Event_Date,\"yyyymmdd\") AS [Date], t.Tag, t.TSN, p.TaxonCode, p.Latin"
+    "_Name, ba.StemsLive, ba.SumLiveBasalArea_cm2, ba.Equiv_Live_DBH_cm, sd.DBH_Check"
+    ", sd.Sapling_Status AS Status, sd.Habit, sd.Browsable, sd.Browsed, sd.SaplingVig"
+    "or, tv.TreeVigorClass AS VigorClass\015\012FROM (((((tbl_Locations AS l INNER JO"
+    "IN tbl_Events AS e ON l.Location_ID = e.Location_ID) INNER JOIN tbl_Sapling_Data"
+    " AS sd ON e.Event_ID = sd.Event_ID) LEFT JOIN qCalc_Basal_Area_per_Sapling AS ba"
+    " ON sd.Sapling_Data_ID = ba.Sapling_Data_ID) INNER JOIN tbl_Tags AS t ON sd.Tag_"
+    "ID = t.Tag_ID) LEFT JOIN tlu_Plants AS p ON t.TSN = p.TSN) LEFT JOIN tluTreeVigo"
+    "r AS tv ON tv.TreeVigorCode = sd.SaplingVigor\015\012WHERE sd.Sapling_Status<>\""
+    "Removed from study\" AND sd.Habit<>\"Shrub\"\015\012ORDER BY l.Plot_Name;\015\012"
+dbMemo "Connect" =""
+dbBoolean "ReturnsRecords" ="-1"
+dbInteger "ODBCTimeout" ="60"
+Begin
+End

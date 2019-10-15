@@ -60,7 +60,7 @@ On Error GoTo Err_Handler
 
     regex.Pattern = "^\{\d{14}-\d{9}.\d{6}\}$"
     
-    FormatIsGUID = regex.Test(strGUID)
+    FormatIsGUID = regex.test(strGUID)
     
 Exit_Handler:
     Exit Function

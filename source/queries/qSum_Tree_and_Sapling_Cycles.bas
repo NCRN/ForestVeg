@@ -1,16 +1,17 @@
-﻿dbMemo "SQL" ="SELECT tbl_Tree_Data.Tag_ID, tbl_Events.Event_Date, Year(tbl_Events.Event_Date) "
-    "AS Event_Year, 1+Int((Year([Event_Date])-2006)/4) AS Cycle, tbl_Locations.Panel,"
-    " \"Tree\" AS Class, tbl_Tree_Data.[Tree_Status] AS Status, \"Tree - \" & [Tree_S"
-    "tatus] AS Class_Status, tbl_Tree_Data.[Tree_Notes] AS Notes\015\012FROM tbl_Loca"
-    "tions INNER JOIN (tbl_Events INNER JOIN tbl_Tree_Data ON tbl_Events.Event_ID = t"
-    "bl_Tree_Data.Event_ID) ON tbl_Locations.Location_ID = tbl_Events.Location_ID\015"
-    "\012\015\012UNION ALL SELECT tbl_Sapling_Data.Tag_ID, tbl_Events.Event_Date, Yea"
-    "r(tbl_Events.Event_Date), 1+Int((Year([Event_Date])-2006)/4) AS Cycle, tbl_Locat"
-    "ions.Panel, \"Sapling\" AS Class, tbl_Sapling_Data.[Sapling_Status] AS Status, \""
-    "Sapling - \" & [Sapling_Status] AS Class_Status, tbl_Sapling_Data.[Sapling_Notes"
-    "] AS Notes\015\012FROM tbl_Locations INNER JOIN (tbl_Events INNER JOIN tbl_Sapli"
-    "ng_Data ON tbl_Events.Event_ID = tbl_Sapling_Data.Event_ID) ON tbl_Locations.Loc"
-    "ation_ID = tbl_Events.Location_ID;\015\012"
+﻿dbMemo "SQL" ="SELECT td.Tag_ID, e.Event_Date, Year(e.Event_Date) AS Event_Year, 1+Int((Year(e."
+    "Event_Date)-2006)/4) AS Cycle, \015\012l.Panel, \"Tree\" AS Class, td.[Tree_Stat"
+    "us] AS Status, \015\012\"Tree - \" & [Tree_Status] AS Class_Status, td.[Tree_Not"
+    "es] AS Notes\015\012FROM ((tbl_Locations l \015\012LEFT JOIN tbl_Events e ON l.L"
+    "ocation_ID = e.Location_ID)\015\012LEFT JOIN tbl_Tree_Data td ON e.Event_ID = td"
+    ".Event_ID) \015\012WHERE e.Event_ID IS NOT NULL\015\012AND td.Tree_Status <> 'Re"
+    "moved from study'\015\012\015\012UNION ALL SELECT sd.Tag_ID, e.Event_Date, Year("
+    "e.Event_Date),\015\012 1+Int((Year(e.Event_Date)-2006)/4) AS Cycle, \015\012 l.P"
+    "anel, \"Sapling\" AS Class, sd.[Sapling_Status] AS Status, \015\012 \"Sapling - "
+    "\" & [Sapling_Status] AS Class_Status, sd.[Sapling_Notes] AS Notes\015\012FROM ("
+    "(tbl_Locations l\015\012LEFT JOIN tbl_Events e ON l.Location_ID = e.Location_ID)"
+    "\015\012LEFT JOIN tbl_Sapling_Data sd ON e.Event_ID = sd.Event_ID)\015\012WHERE "
+    "e.Event_ID IS NOT NULL\015\012AND sd.Sapling_Status <> 'Removed from study';\015"
+    "\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -21,23 +22,7 @@ dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 Begin
     Begin
-        dbText "Name" ="tbl_Tree_Data.Tag_ID"
-        dbInteger "ColumnWidth" ="4230"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Event_Date"
-        dbInteger "ColumnWidth" ="2070"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="Cycle"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Panel"
         dbLong "AggregateType" ="-1"
     End
     Begin
@@ -64,6 +49,20 @@ Begin
     End
     Begin
         dbText "Name" ="Notes"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="td.Tag_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="e.Event_Date"
+        dbLong "AggregateType" ="-1"
+        dbInteger "ColumnWidth" ="1950"
+        dbBoolean "ColumnHidden" ="0"
+    End
+    Begin
+        dbText "Name" ="l.Panel"
         dbLong "AggregateType" ="-1"
     End
 End

@@ -36,8 +36,8 @@ Public Const lngRed As Long = 255           '?RGB(255,0,0) #FF0000
 Public Const lngGreen As Long = 65280       '?RGB(0,255,0) #00FF00
 Public Const lngLtBlue As Long = 16777164   '?RGB(204,255,255) #CCFFFF
 Public Const lngPink As Long = 10582263     '?RGB(247,120,161) #F778A1 carnation red
-
-
+Public Const lngLime As Long = 6750105      '?RGB(153, 255, 102) #99FF66
+Public Const lngLtLime As Long = 6750156    '?RGB(204,255,102) #CCFF66
 
 Public Const pi As Single = 3.1415            'pi value
 

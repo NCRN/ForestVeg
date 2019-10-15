@@ -1,6 +1,6 @@
 ﻿dbMemo "SQL" ="SELECT l.Unit_Code, l.Unit_Group, l.Subunit_Code, 1+Int((Year([Event_Date])-2006"
-    ")/4) AS Cycle, l.Panel, l.Frame, Year([Event_Date]) AS Sample_Year, e.Event_Date"
-    ", CLng(Format([Event_Date],\"yyyymmdd\")) AS [Date], l.Plot_Name, t.Tag, t.Tag_S"
+    ")/4) AS Cycle, l.Panel, l.Frame, Year(e.Event_Date) AS Sample_Year, e.Event_Date"
+    ", CLng(Format(e.Event_Date,\"yyyymmdd\")) AS [Date], l.Plot_Name, t.Tag, t.Tag_S"
     "tatus, t.TSN, p.Latin_Name, sd.Sapling_Status AS Status, sc.Condition, tc.Pest, "
     "sd.Sapling_Notes AS Notes, e.Event_ID, l.Location_ID, t.Tag_ID, sd.Sapling_Data_"
     "ID, sc.Sapling_Condition_ID, l.Admin_Unit_Code\015\012FROM (((((tbl_Locations AS"
@@ -8,8 +8,9 @@
     "ling_Data AS sd ON t.Tag_ID = sd.Tag_ID) INNER JOIN tbl_Events AS e ON e.Event_I"
     "D = sd.Event_ID) INNER JOIN tbl_Sapling_Conditions AS sc ON sd.Sapling_Data_ID ="
     " sc.Sapling_Data_ID) INNER JOIN tlu_Plants AS p ON t.TSN = p.TSN) LEFT JOIN tlu_"
-    "Tree_Condition AS tc ON sc.Condition = tc.Description\015\012ORDER BY l.Plot_Nam"
-    "e, t.Tag, p.Latin_Name;\015\012"
+    "Tree_Condition AS tc ON sc.Condition = tc.Description\015\012WHERE sd.Sapling_St"
+    "atus <> 'Removed from study'\015\012ORDER BY l.Plot_Name, t.Tag, p.Latin_Name;\015"
+    "\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -22,73 +23,7 @@ dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
 Begin
     Begin
-        dbText "Name" ="tlu_Plants.Latin_Name"
-        dbInteger "ColumnWidth" ="2700"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tlu_Tree_Condition.Pest"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Panel"
-        dbInteger "ColumnWidth" ="900"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tags.Tag_ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Admin_Unit_Code"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Plot_Name"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Frame"
-        dbInteger "ColumnWidth" ="960"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Unit_Code"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Unit_Group"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tags.Tag"
-        dbInteger "ColumnWidth" ="735"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Event_ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="Sample_Year"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Subunit_Code"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tags.TSN"
-        dbInteger "ColumnWidth" ="780"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Location_ID"
         dbLong "AggregateType" ="-1"
     End
     Begin
@@ -96,35 +31,13 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Sapling_Data.Sapling_Data_ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="Status"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Sapling_Conditions.Condition"
-        dbInteger "ColumnWidth" ="1875"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Sapling_Conditions.Sapling_Condition_ID"
         dbLong "AggregateType" ="-1"
     End
     Begin
         dbText "Name" ="Date"
         dbInteger "ColumnWidth" ="1365"
         dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Events.Event_Date"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tags.Tag_Status"
         dbLong "AggregateType" ="-1"
     End
     Begin
@@ -149,10 +62,6 @@ Begin
     End
     Begin
         dbText "Name" ="l.Unit_Code"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="sd.Sapling_Notes"
         dbLong "AggregateType" ="-1"
     End
     Begin

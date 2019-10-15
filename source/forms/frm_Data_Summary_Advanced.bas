@@ -21,10 +21,10 @@ Begin Form
     Width =14400
     DatasheetFontHeight =9
     ItemSuffix =85
-    Left =885
-    Top =-2280
-    Right =15285
-    Bottom =8430
+    Left =4725
+    Top =1170
+    Right =19125
+    Bottom =11880
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x2680758ff389e340
@@ -2073,7 +2073,7 @@ Option Explicit
 ' =================================
 ' MODULE:       frm_Data_Summary_Advanced
 ' Level:        Application module
-' Version:      1.02
+' Version:      1.03
 '
 ' Description:  Standard form for summarizing/exploring project data
 ' Source/date:  John Boetsch, Jan 2010
@@ -2082,6 +2082,7 @@ Option Explicit
 ' Revisions:    JB/ML/GS - 1/2010+  - 1.00 - initial version
 '               BLC   - 5/14/2018 - 1.01 - added documentation, error handling
 '               BLC   - 1/xx/2019 - 1.02 - added annual data exports
+'               BLC   - 10/9/2019 - 1.03 - added status messaging for progress
 ' =================================
 
 ' ---------------------------------
@@ -3881,6 +3882,7 @@ End Sub
 ' Revisions:
 '   ML/GS - unknown - initial version
 '   BLC - 5/14/2018 - documentation, error handling
+'   BLC - 10/9/2019 - added status messaging for progress
 ' ---------------------------------
 Private Sub btnExportAll_Click()
 On Error GoTo Err_Handler
@@ -3936,8 +3938,20 @@ On Error GoTo Err_Handler
     strInitFile = Application.CurrentProject.Path & "\Exports\NCRN_ForestVeg_All_Data_" & CStr(Format(Now(), "yyyymmdd")) & ".xlsx"
     strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.xls*)", "*.xls*")
     strSaveFolder = fPathParsing(strSaveFile, "D")
+    
+    'status messaging & progress
+    Dim msg As String
+    msg = "Exporting..."
+    'Application.SysCmd acSysCmdInitMeter, msg, 15
+    
     'Cycle through queries and create an worksheet tab for each one
     For qNum = 0 To 15
+    
+        'status messaging & progress
+        Application.SysCmd acSysCmdInitMeter, msg, 15 'must re-establish it @ time since status message wipes it out
+        Application.SysCmd acSysCmdUpdateMeter, qNum
+        Application.SysCmd acSysCmdSetStatus, "Exporting " & strQryName(qNum, 1) & "..."
+        
         Set qDef = db.CreateQueryDef(strQryName(qNum, 1), CurrentDb.QueryDefs(strQryName(qNum, 0)).sql)
         'Export each parameter to a seperate worksheet in an XLSX workbook (SpreadsheetType = '10' for .XLSX)
         DoCmd.TransferSpreadsheet acExport, 10, strQryName(qNum, 1), strSaveFile, True
@@ -3946,9 +3960,17 @@ On Error GoTo Err_Handler
         DoCmd.DeleteObject acQuery, strQryName(qNum, 1)
     Next
     
+    'complete!
+    'Application.SysCmd acSysCmdUpdateMeter, 15
+    Application.SysCmd acSysCmdSetStatus, "Export complete!"
+    
     MsgBox "File saved to:" & vbCrLf & vbCrLf & strSaveFile
     
 Exit_Handler:
+    'cleanup
+    Application.SysCmd acSysCmdRemoveMeter
+    Application.SysCmd acSysCmdClearStatus
+    
     Exit Sub
     
 Err_Handler:

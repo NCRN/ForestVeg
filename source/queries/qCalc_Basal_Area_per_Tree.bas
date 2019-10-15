@@ -6,24 +6,28 @@
     "iveBasalArea_cm2, Round(Sum(3.1415926*(((IIf([Live]=False,[DBH],0))/2)^2)),1) AS"
     " SumDeadBasalArea_cm2, Round((([SumLiveBasalArea_cm2]/3.1415)^0.5)*2,1) AS Equiv"
     "_Live_DBH_cm, Round((([SumDeadBasalArea_cm2]/3.1415)^0.5)*2,1) AS Equiv_Dead_DBH"
-    "_cm, td.DBH_Check, td.Crown_Class, td.Tree_Status, td.Tag_ID\015\012FROM (tbl_Tr"
-    "ee_Data AS td LEFT JOIN tbl_Tree_DBH AS dbh ON td.Tree_Data_ID = dbh.Tree_Data_I"
-    "D) LEFT JOIN qEnumCrownClass AS cc ON td.Crown_Class = cc.CrownClassCode\015\012"
-    "GROUP BY td.Tree_Data_ID, td.Event_ID, cc.Enum_Description, td.DBH_Check, td.Cro"
-    "wn_Class, td.Tree_Status, td.Tag_ID;\015\012"
+    "_cm, td.DBH_Check, td.Crown_Class, td.Tree_Status, td.Tag_ID, td.TreeVigor, tv.T"
+    "reeVigorClass AS VigorClass\015\012FROM ((tbl_Tree_Data AS td LEFT JOIN tbl_Tree"
+    "_DBH AS dbh ON td.Tree_Data_ID = dbh.Tree_Data_ID) LEFT JOIN qEnumCrownClass AS "
+    "cc ON td.Crown_Class = cc.CrownClassCode) LEFT JOIN tluTreeVigor AS tv ON tv.Tre"
+    "eVigorCode = td.TreeVigor\015\012GROUP BY td.Tree_Data_ID, td.Event_ID, cc.Enum_"
+    "Description, td.DBH_Check, td.Crown_Class, td.Tree_Status, td.Tag_ID, td.TreeVig"
+    "or, tv.TreeVigorClass;\015\012"
 dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
-dbBoolean "OrderByOn" ="-1"
+dbBoolean "OrderByOn" ="0"
 dbByte "Orientation" ="0"
 dbByte "DefaultView" ="2"
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
-dbMemo "Filter" ="([qCalc_Basal_Area_per_Tree].[Tag_ID]=\"\")"
-dbMemo "OrderBy" ="[qCalc_Basal_Area_per_Tree].[Event_ID], [qCalc_Basal_Area_per_Tree].[Tree_Data_I"
-    "D]"
+dbMemo "Filter" ="([qCalc_Basal_Area_per_Tree].[Tree_Status] In (\"Dead\",\"Dead - Human Action\","
+    "\"Dead - Too Small\",\"Dead Fallen\",\"Dead Leaning\",\"Dead Missing\",\"Dead St"
+    "anding\"))"
+dbMemo "OrderBy" ="[qCalc_Basal_Area_per_Tree].[Tree_Status] DESC, [qCalc_Basal_Area_per_Tree].[Eve"
+    "nt_ID], [qCalc_Basal_Area_per_Tree].[Tree_Data_ID]"
 Begin
     Begin
         dbText "Name" ="Stems"
@@ -115,6 +119,14 @@ Begin
     End
     Begin
         dbText "Name" ="td.Tag_ID"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="td.TreeVigor"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="VigorClass"
         dbLong "AggregateType" ="-1"
     End
 End

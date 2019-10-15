@@ -1,56 +1,13 @@
-﻿Operation =1
-Option =0
-Begin InputTables
-    Name ="tbl_Locations"
-    Name ="tbl_Events"
-    Name ="tbl_Quadrat_Data"
-    Name ="tlu_Plants"
-    Name ="tbl_Quadrat_Herbaceous_Data"
-End
-Begin OutputColumns
-    Expression ="tbl_Locations.Plot_Name"
-    Expression ="tbl_Locations.Unit_Code"
-    Expression ="tbl_Locations.Unit_Group"
-    Expression ="tbl_Locations.Subunit_Code"
-    Alias ="Cycle"
-    Expression ="1+Int((Year([Event_Date])-2006)/4)"
-    Expression ="tbl_Locations.Panel"
-    Expression ="tbl_Locations.Frame"
-    Alias ="Sample_Year"
-    Expression ="Year([Event_Date])"
-    Alias ="Date"
-    Expression ="CLng(Format([tbl_events].[Event_Date],\"yyyymmdd\"))"
-    Expression ="tbl_Quadrat_Data.Quadrat_Number"
-    Expression ="tbl_Quadrat_Herbaceous_Data.TSN"
-    Expression ="tlu_Plants.Latin_Name"
-    Expression ="tlu_Plants.Exotic"
-    Expression ="tbl_Quadrat_Herbaceous_Data.Percent_Cover"
-    Expression ="tlu_Plants.TaxonCode"
-End
-Begin Joins
-    LeftTable ="tbl_Quadrat_Herbaceous_Data"
-    RightTable ="tlu_Plants"
-    Expression ="tbl_Quadrat_Herbaceous_Data.TSN = tlu_Plants.TSN"
-    Flag =2
-    LeftTable ="tbl_Locations"
-    RightTable ="tbl_Events"
-    Expression ="tbl_Locations.Location_ID = tbl_Events.Location_ID"
-    Flag =3
-    LeftTable ="tbl_Events"
-    RightTable ="tbl_Quadrat_Data"
-    Expression ="tbl_Events.Event_ID = tbl_Quadrat_Data.Event_ID"
-    Flag =1
-    LeftTable ="tbl_Quadrat_Data"
-    RightTable ="tbl_Quadrat_Herbaceous_Data"
-    Expression ="tbl_Quadrat_Data.Quadrat_Data_ID = tbl_Quadrat_Herbaceous_Data.Quadrat_Data_ID"
-    Flag =1
-End
-Begin OrderBy
-    Expression ="tbl_Locations.Plot_Name"
-    Flag =0
-    Expression ="tbl_Quadrat_Data.Quadrat_Number"
-    Flag =0
-End
+﻿dbMemo "SQL" ="SELECT l.Plot_Name, l.Unit_Code, l.Unit_Group, l.Subunit_Code, 1+Int((Year(e.Eve"
+    "nt_Date)-2006)/4) AS Cycle, l.Panel, l.Frame, Year(e.Event_Date) AS Sample_Year,"
+    " CLng(Format(e.Event_Date,\"yyyymmdd\")) AS [Date], qd.Quadrat_Number, qhd.TSN, "
+    "p.Latin_Name, p.Exotic, qhd.Percent_Cover, p.TaxonCode\015\012FROM (((tbl_Locati"
+    "ons AS l RIGHT JOIN tbl_Events AS e ON l.Location_ID = e.Location_ID) INNER JOIN"
+    " tbl_Quadrat_Data AS qd ON e.Event_ID = qd.Event_ID) INNER JOIN tbl_Quadrat_Herb"
+    "aceous_Data AS qhd ON qd.Quadrat_Data_ID = qhd.Quadrat_Data_ID) LEFT JOIN tlu_Pl"
+    "ants AS p ON qhd.TSN = p.TSN\015\012ORDER BY l.Plot_Name, qd.Quadrat_Number;\015"
+    "\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -121,63 +78,52 @@ Begin
         dbText "Name" ="tlu_Plants.TaxonCode"
         dbLong "AggregateType" ="-1"
     End
-End
-Begin
-    State =0
-    Left =15
-    Top =159
-    Right =1179
-    Bottom =758
-    Left =-1
-    Top =-1
-    Right =1132
-    Bottom =320
-    Left =0
-    Top =0
-    ColumnsShown =539
     Begin
-        Left =890
-        Top =5
-        Right =986
-        Bottom =119
-        Top =0
-        Name ="tbl_Locations"
-        Name =""
+        dbText "Name" ="l.Plot_Name"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =704
-        Top =5
-        Right =862
-        Bottom =205
-        Top =0
-        Name ="tbl_Events"
-        Name =""
+        dbText "Name" ="l.Unit_Code"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =410
-        Top =-2
-        Right =674
-        Bottom =290
-        Top =0
-        Name ="tbl_Quadrat_Data"
-        Name =""
+        dbText "Name" ="l.Unit_Group"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =254
-        Top =114
-        Right =401
-        Bottom =258
-        Top =0
-        Name ="tlu_Plants"
-        Name =""
+        dbText "Name" ="l.Subunit_Code"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =22
-        Top =6
-        Right =221
-        Bottom =150
-        Top =0
-        Name ="tbl_Quadrat_Herbaceous_Data"
-        Name =""
+        dbText "Name" ="l.Panel"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.Frame"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qd.Quadrat_Number"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qhd.TSN"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Latin_Name"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Exotic"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qhd.Percent_Cover"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.TaxonCode"
+        dbLong "AggregateType" ="-1"
     End
 End

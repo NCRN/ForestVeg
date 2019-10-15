@@ -1,72 +1,16 @@
-﻿Operation =1
-Option =0
-Where ="(((tlu_Enumerations.Enum_Group)=\"Foliage Condition\"))"
-Begin InputTables
-    Name ="tbl_Locations"
-    Name ="tbl_Events"
-    Name ="tbl_Tags"
-    Name ="tlu_Plants"
-    Name ="tlu_Enumerations"
-    Name ="tbl_Sapling_Data"
-    Name ="tbl_Sapling_Foliage_Conditions"
-End
-Begin OutputColumns
-    Expression ="tbl_Locations.Plot_Name"
-    Expression ="tbl_Locations.Unit_Code"
-    Expression ="tbl_Locations.Unit_Group"
-    Expression ="tbl_Locations.Subunit_Code"
-    Alias ="Cycle"
-    Expression ="1+Int((Year([Event_Date])-2006)/4)"
-    Expression ="tbl_Locations.Panel"
-    Expression ="tbl_Locations.Frame"
-    Alias ="Sample_Year"
-    Expression ="Year([Event_Date])"
-    Alias ="Date"
-    Expression ="CLng(Format([Event_Date],\"yyyymmdd\"))"
-    Expression ="tbl_Tags.Tag"
-    Expression ="tbl_Tags.Tag_Status"
-    Expression ="tbl_Sapling_Foliage_Conditions.Condition"
-    Alias ="Condition_Description"
-    Expression ="tlu_Enumerations.Enum_Description"
-    Expression ="tbl_Sapling_Foliage_Conditions.Percent_Afflicted"
-    Expression ="tbl_Tags.TSN"
-    Expression ="tlu_Plants.Latin_Name"
-    Alias ="Status"
-    Expression ="tbl_Sapling_Data.Sapling_Status"
-End
-Begin Joins
-    LeftTable ="tbl_Tags"
-    RightTable ="tlu_Plants"
-    Expression ="tbl_Tags.TSN = tlu_Plants.TSN"
-    Flag =1
-    LeftTable ="tbl_Locations"
-    RightTable ="tbl_Tags"
-    Expression ="tbl_Locations.Location_ID = tbl_Tags.Location_ID"
-    Flag =1
-    LeftTable ="tbl_Events"
-    RightTable ="tbl_Sapling_Data"
-    Expression ="tbl_Events.Event_ID = tbl_Sapling_Data.Event_ID"
-    Flag =1
-    LeftTable ="tbl_Tags"
-    RightTable ="tbl_Sapling_Data"
-    Expression ="tbl_Tags.Tag_ID = tbl_Sapling_Data.Tag_ID"
-    Flag =1
-    LeftTable ="tbl_Sapling_Data"
-    RightTable ="tbl_Sapling_Foliage_Conditions"
-    Expression ="tbl_Sapling_Data.Sapling_Data_ID = tbl_Sapling_Foliage_Conditions.Sapling_Data_I"
-        "D"
-    Flag =1
-    LeftTable ="tbl_Sapling_Foliage_Conditions"
-    RightTable ="tlu_Enumerations"
-    Expression ="tbl_Sapling_Foliage_Conditions.Condition = tlu_Enumerations.Enum_Code"
-    Flag =1
-End
-Begin OrderBy
-    Expression ="tbl_Locations.Plot_Name"
-    Flag =0
-    Expression ="tbl_Tags.Tag"
-    Flag =0
-End
+﻿dbMemo "SQL" ="SELECT l.Plot_Name, l.Unit_Code, l.Unit_Group, l.Subunit_Code, 1+Int((Year(e.Eve"
+    "nt_Date)-2006)/4) AS Cycle, l.Panel, l.Frame, Year(e.Event_Date) AS Sample_Year,"
+    " CLng(Format(e.Event_Date,\"yyyymmdd\")) AS [Date], t.Tag, t.Tag_Status, sfc.Con"
+    "dition, en.Enum_Description AS Condition_Description, sfc.Percent_Afflicted, t.T"
+    "SN, p.Latin_Name, sd.Sapling_Status AS Status\015\012FROM (((((tbl_Sapling_Data "
+    "AS sd INNER JOIN tbl_Sapling_Foliage_Conditions AS sfc ON sd.Sapling_Data_ID = s"
+    "fc.Sapling_Data_ID) INNER JOIN tbl_Events AS e ON e.Event_ID = sd.Event_ID) INNE"
+    "R JOIN tbl_Tags AS t ON t.Tag_ID = sd.Tag_ID) INNER JOIN tbl_Locations AS l ON l"
+    ".Location_ID = t.Location_ID) INNER JOIN tlu_Plants AS p ON t.TSN = p.TSN) INNER"
+    " JOIN tlu_Enumerations AS en ON sfc.Condition = en.Enum_Code\015\012WHERE en.Enu"
+    "m_Group=\"Foliage Condition\"\015\012AND sd.Sapling_Status <> 'Removed from stud"
+    "y'\015\012ORDER BY l.Plot_Name, t.Tag;\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -163,81 +107,52 @@ Begin
         dbText "Name" ="tbl_Tags.Tag_Status"
         dbLong "AggregateType" ="-1"
     End
-End
-Begin
-    State =0
-    Left =63
-    Top =37
-    Right =1366
-    Bottom =791
-    Left =-1
-    Top =-1
-    Right =1271
-    Bottom =485
-    Left =0
-    Top =0
-    ColumnsShown =539
     Begin
-        Left =763
-        Top =17
-        Right =907
-        Bottom =229
-        Top =0
-        Name ="tbl_Locations"
-        Name =""
+        dbText "Name" ="l.Panel"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =576
-        Top =14
-        Right =720
-        Bottom =158
-        Top =0
-        Name ="tbl_Events"
-        Name =""
+        dbText "Name" ="l.Plot_Name"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =577
-        Top =181
-        Right =758
-        Bottom =486
-        Top =0
-        Name ="tbl_Tags"
-        Name =""
+        dbText "Name" ="l.Unit_Code"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =1019
-        Top =18
-        Right =1163
-        Bottom =440
-        Top =0
-        Name ="tlu_Plants"
-        Name =""
+        dbText "Name" ="l.Unit_Group"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =-6
-        Top =221
-        Right =138
-        Bottom =365
-        Top =0
-        Name ="tlu_Enumerations"
-        Name =""
+        dbText "Name" ="l.Subunit_Code"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =381
-        Top =196
-        Right =525
-        Bottom =340
-        Top =0
-        Name ="tbl_Sapling_Data"
-        Name =""
+        dbText "Name" ="l.Frame"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =161
-        Top =88
-        Right =305
-        Bottom =232
-        Top =0
-        Name ="tbl_Sapling_Foliage_Conditions"
-        Name =""
+        dbText "Name" ="t.Tag"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.Tag_Status"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="sfc.Condition"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="sfc.Percent_Afflicted"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="t.TSN"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Latin_Name"
+        dbLong "AggregateType" ="-1"
     End
 End

@@ -856,12 +856,12 @@ End Sub
 ' Revisions:
 '   BLC    - 8/18/2018 - initial version
 ' ---------------------------------
-Public Sub SetProgress(CurrentStep As Integer, TotalSteps As Integer, Msg As String)
+Public Sub SetProgress(CurrentStep As Integer, TotalSteps As Integer, msg As String)
 On Error GoTo Err_Handler
 
     'initialize steps if step is 0 or 1
     If CurrentStep = 0 Then _
-        SysCmd acSysCmdInitMeter, Msg, TotalSteps
+        SysCmd acSysCmdInitMeter, msg, TotalSteps
     
     'update meter
     SysCmd acSysCmdUpdateMeter, CurrentStep

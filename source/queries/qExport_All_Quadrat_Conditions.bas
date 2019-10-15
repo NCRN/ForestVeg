@@ -1,53 +1,13 @@
-﻿Operation =1
-Option =0
-Begin InputTables
-    Name ="tbl_Locations"
-    Name ="tbl_Events"
-    Name ="tbl_Quadrat_Data"
-End
-Begin OutputColumns
-    Expression ="tbl_Locations.Plot_Name"
-    Expression ="tbl_Locations.Unit_Code"
-    Expression ="tbl_Locations.Unit_Group"
-    Expression ="tbl_Locations.Subunit_Code"
-    Alias ="Cycle"
-    Expression ="1+Int((Year([Event_Date])-2006)/4)"
-    Expression ="tbl_Locations.Panel"
-    Expression ="tbl_Locations.Frame"
-    Alias ="Sample_Year"
-    Expression ="Year([tbl_Events].[Event_Date])"
-    Alias ="Date"
-    Expression ="CLng(Format([Event_Date],\"yyyymmdd\"))"
-    Expression ="tbl_Quadrat_Data.Quadrat_Number"
-    Expression ="tbl_Quadrat_Data.Percent_Trees"
-    Expression ="tbl_Quadrat_Data.Percent_Bryophytes"
-    Expression ="tbl_Quadrat_Data.Percent_Rock"
-    Alias ="Percent_Coarse_Woody_Debris"
-    Expression ="tbl_Quadrat_Data.Percent_Woody_Debris"
-    Expression ="tbl_Quadrat_Data.Percent_Fine_Woody_Debris"
-    Expression ="tbl_Quadrat_Data.Percent_Other"
-    Expression ="tbl_Quadrat_Data.Percent_Grasses"
-    Expression ="tbl_Quadrat_Data.Percent_Sedges"
-    Expression ="tbl_Quadrat_Data.Percent_Herbs"
-    Expression ="tbl_Quadrat_Data.Percent_Ferns"
-    Expression ="tbl_Quadrat_Data.Quadrat_Notes"
-End
-Begin Joins
-    LeftTable ="tbl_Locations"
-    RightTable ="tbl_Events"
-    Expression ="tbl_Locations.Location_ID = tbl_Events.Location_ID"
-    Flag =1
-    LeftTable ="tbl_Events"
-    RightTable ="tbl_Quadrat_Data"
-    Expression ="tbl_Events.Event_ID = tbl_Quadrat_Data.Event_ID"
-    Flag =1
-End
-Begin OrderBy
-    Expression ="tbl_Locations.Plot_Name"
-    Flag =0
-    Expression ="tbl_Quadrat_Data.Quadrat_Number"
-    Flag =0
-End
+﻿dbMemo "SQL" ="SELECT l.Plot_Name, l.Unit_Code, l.Unit_Group, l.Subunit_Code, 1+Int((Year([Even"
+    "t_Date])-2006)/4) AS Cycle, l.Panel, l.Frame, Year(e.Event_Date) AS Sample_Year,"
+    " CLng(Format(e.Event_Date,\"yyyymmdd\")) AS [Date], qd.Quadrat_Number, qd.Percen"
+    "t_Trees, qd.Percent_Bryophytes, qd.Percent_Rock, qd.Percent_Woody_Debris AS Perc"
+    "ent_Coarse_Woody_Debris, qd.Percent_Fine_Woody_Debris, qd.Percent_Other, qd.Perc"
+    "ent_Grasses, qd.Percent_Sedges, qd.Percent_Herbs, qd.Percent_Ferns, qd.Quadrat_N"
+    "otes\015\012FROM (tbl_Locations AS l INNER JOIN tbl_Events AS e ON l.Location_ID"
+    " = e.Location_ID) INNER JOIN tbl_Quadrat_Data AS qd ON e.Event_ID = qd.Event_ID\015"
+    "\012ORDER BY l.Plot_Name, qd.Quadrat_Number;\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -77,12 +37,6 @@ Begin
     Begin
         dbText "Name" ="tbl_Quadrat_Data.Percent_Rock"
         dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Quadrat_Data.Percent_Woody_Debris"
-        dbLong "AggregateType" ="-1"
-        dbInteger "ColumnWidth" ="2295"
-        dbBoolean "ColumnHidden" ="0"
     End
     Begin
         dbText "Name" ="tbl_Quadrat_Data.Percent_Other"
@@ -154,45 +108,72 @@ Begin
         dbText "Name" ="tbl_Quadrat_Data.Percent_Fine_Woody_Debris"
         dbLong "AggregateType" ="-1"
     End
-End
-Begin
-    State =0
-    Left =33
-    Top =75
-    Right =1430
-    Bottom =857
-    Left =-1
-    Top =-1
-    Right =1365
-    Bottom =516
-    Left =0
-    Top =0
-    ColumnsShown =539
     Begin
-        Left =512
-        Top =16
-        Right =735
-        Bottom =393
-        Top =0
-        Name ="tbl_Locations"
-        Name =""
+        dbText "Name" ="qd.Percent_Ferns"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =275
-        Top =13
-        Right =430
-        Bottom =434
-        Top =0
-        Name ="tbl_Events"
-        Name =""
+        dbText "Name" ="qd.Percent_Rock"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =48
-        Top =12
-        Right =251
-        Bottom =379
-        Top =0
-        Name ="tbl_Quadrat_Data"
-        Name =""
+        dbText "Name" ="l.Unit_Code"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qd.Percent_Bryophytes"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.Plot_Name"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.Unit_Group"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.Subunit_Code"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.Panel"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.Frame"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qd.Quadrat_Number"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qd.Percent_Trees"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qd.Percent_Fine_Woody_Debris"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qd.Percent_Other"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qd.Percent_Grasses"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qd.Percent_Sedges"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qd.Percent_Herbs"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="qd.Quadrat_Notes"
+        dbLong "AggregateType" ="-1"
     End
 End
