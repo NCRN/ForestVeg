@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Report
     LayoutForPrint = NotDefault
@@ -14,9 +14,8 @@ Begin Report
     Width =11160
     DatasheetFontHeight =10
     ItemSuffix =70
-    Left =-1305
     DatasheetGridlinesColor =12632256
-    Filter ="[Event_ID]='20190503204533-289562463.760376'"
+    Filter ="[Event_ID]='{DAE1D23F-5C31-43F1-8C88-52D2FE75772F}'"
     RecSrcDt = Begin
         0xf58c6abea030e540
     End

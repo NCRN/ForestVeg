@@ -16,7 +16,7 @@ Sub UnitTest1()
     End If
 
     Set CC = New clsMsgBox
-    CC.Title = "Title"
+    CC.title = "Title"
     CC.Prompt = "Prompt"
     CC.Icon = Question + DefaultButton3
     CC.ButtonText1 = "ButtonText1"
@@ -32,7 +32,7 @@ Sub UnitTest1()
     End If
 
     Set CC = New clsMsgBox
-    CC.Title = "Title"
+    CC.title = "Title"
     CC.Prompt = "Prompt"
     CC.Icon = Exclamation
     CC.ButtonText1 = "ButtonText1"
@@ -46,7 +46,7 @@ Sub UnitTest1()
     End If
 
     Set CC = New clsMsgBox
-    CC.Title = "NoIconTitle"
+    CC.title = "NoIconTitle"
     CC.Prompt = "NoIconPrompt"
     CC.Icon = NoIcon
     CC.ButtonText1 = "ButtonText1"
@@ -90,7 +90,7 @@ Sub UnitTest2()
 
     Set CC = New clsMsgBox
     CC.UseCancel = True
-    CC.Title = "Title"
+    CC.title = "Title"
     CC.Prompt = "Prompt"
     CC.Icon = Question + DefaultButton3
     CC.ButtonText1 = "ButtonText1"
@@ -108,7 +108,7 @@ Sub UnitTest2()
 
     Set CC = New clsMsgBox
     CC.UseCancel = True
-    CC.Title = "Title"
+    CC.title = "Title"
     CC.Prompt = "Prompt"
     CC.Icon = Exclamation
     CC.ButtonText1 = "ButtonText1"
@@ -119,7 +119,7 @@ Sub UnitTest2()
 
     Set CC = New clsMsgBox
     CC.UseCancel = True
-    CC.Title = "NoIconTitle"
+    CC.title = "NoIconTitle"
     CC.Prompt = "NoIconPrompt"
     CC.Icon = NoIcon
     CC.ButtonText1 = "ButtonText1"

@@ -456,7 +456,7 @@ Private Sub cmdExport_to_Excel_Click()
 
     strQryName = Me.cmbQuery
 
-    strInitFile = Application.CurrentProject.Path & "\" & _
+    strInitFile = Application.CurrentProject.path & "\" & _
         strQryName & "_" & CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".xlsx"
     ' Open the save file dialog and update to the actual name given by the user
     strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.xls*)", "*.xls*")
@@ -491,7 +491,7 @@ Private Sub cmdExport_to_Text_Click()
 
     strQryName = Me.cmbQuery
 
-    strInitFile = Application.CurrentProject.Path & "\" & _
+    strInitFile = Application.CurrentProject.path & "\" & _
         strQryName & "_" & CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".txt"
     ' Open the save file dialog and update to the actual name given by the user
     strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.txt)", "*.txt")
@@ -569,7 +569,7 @@ Err_Handler:
 
 End Sub
 
-Private Sub cmbQuery_NotInList(NewData As String, response As Integer)
+Private Sub cmbQuery_NotInList(NewData As String, Response As Integer)
     On Error GoTo Err_Handler
 
     Me.ActiveControl.Undo
@@ -603,7 +603,7 @@ Private Sub cmbQuery_AfterUpdate()
     ' Bind the subform to the newly-selected object
     Me.subResults.Enabled = True
     Me.subResults.Visible = True
-    Me.subResults.SourceObject = "Query." & Me.cmbQuery.Value
+    Me.subResults.SourceObject = "Query." & Me.cmbQuery.value
 
     ' Set focus to the subform to allow scrolling, etc.
     Me.subResults.SetFocus
@@ -676,7 +676,7 @@ Private Sub cmdPivotTable_Click()
 
     ' Open the selected query as a pivot table after checking that a query is selected
     If IsNull(Me.cmbQuery) = False Then
-        DoCmd.OpenQuery Me.cmbQuery.Value, acViewPivotTable, acReadOnly
+        DoCmd.OpenQuery Me.cmbQuery.value, acViewPivotTable, acReadOnly
         DoCmd.Maximize
     End If
 
@@ -707,7 +707,7 @@ Private Sub cmdExportExcel_Click()
 
     strQryName = Me.cmbQuery
 
-    strInitFile = Application.CurrentProject.Path & "\" & _
+    strInitFile = Application.CurrentProject.path & "\" & _
         strQryName & "_" & CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".xls"
     ' Open the save file dialog and update to the actual name given by the user
     strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.xls)", "*.xls")
@@ -742,7 +742,7 @@ Private Sub cmdExportText_Click()
 
     strQryName = Me.cmbQuery
 
-    strInitFile = Application.CurrentProject.Path & "\" & _
+    strInitFile = Application.CurrentProject.path & "\" & _
         strQryName & "_" & CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".txt"
     ' Open the save file dialog and update to the actual name given by the user
     strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.txt)", "*.txt")

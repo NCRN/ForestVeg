@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     RecordSelectors = NotDefault
@@ -16,10 +16,10 @@ Begin Form
     Width =13500
     DatasheetFontHeight =9
     ItemSuffix =33
-    Left =735
-    Top =2985
-    Right =10980
-    Bottom =5295
+    Left =210
+    Top =3390
+    Right =10455
+    Bottom =5700
     DatasheetGridlinesColor =15062992
     OrderBy ="[tbl_Tags].[Tag]"
     RecSrcDt = Begin
@@ -59,6 +59,15 @@ Begin Form
             FontName ="Calibri"
             BorderLineStyle =0
         End
+        Begin CheckBox
+            BorderLineStyle =0
+            LabelX =230
+            LabelY =-30
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
         Begin TextBox
             FELineBreak = NotDefault
             BorderLineStyle =0
@@ -83,10 +92,37 @@ Begin Form
             Name ="FormHeader"
         End
         Begin Section
-            Height =900
+            Height =1260
             BackColor =15527148
             Name ="Detail"
             Begin
+                Begin TextBox
+                    OldBorderStyle =0
+                    OverlapFlags =93
+                    IMESentenceMode =3
+                    Left =5280
+                    Top =540
+                    Width =900
+                    Height =315
+                    TabIndex =11
+                    Name ="tbxRFSHighlight"
+                    ConditionalFormat = Begin
+                        0x010000007e000000010000000100000000000000000000000e00000001000000 ,
+                        0x00000000fff20000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x5b00630068006b005200460053005d003d00540072007500650000000000
+                    End
+
+                    LayoutCachedLeft =5280
+                    LayoutCachedTop =540
+                    LayoutCachedWidth =6180
+                    LayoutCachedHeight =855
+                    ConditionalFormat14 = Begin
+                        0x01000100000001000000000000000100000000000000fff200000d0000005b00 ,
+                        0x630068006b005200460053005d003d0054007200750065000000000000000000 ,
+                        0x00000000000000000000000000
+                    End
+                End
                 Begin ComboBox
                     FontItalic = NotDefault
                     TabStop = NotDefault
@@ -185,7 +221,7 @@ Begin Form
                     End
                     Begin
                         Begin Label
-                            OverlapFlags =93
+                            OverlapFlags =85
                             TextAlign =3
                             Left =7260
                             Top =480
@@ -521,10 +557,11 @@ Begin Form
                     End
                 End
                 Begin TextBox
-                    OverlapFlags =93
+                    Visible = NotDefault
+                    OverlapFlags =85
                     IMESentenceMode =3
-                    Left =5460
-                    Top =495
+                    Left =6300
+                    Top =540
                     Width =660
                     Height =300
                     TabIndex =9
@@ -532,16 +569,16 @@ Begin Form
                     ControlSource ="RFS"
                     Format ="True/False"
 
-                    LayoutCachedLeft =5460
-                    LayoutCachedTop =495
-                    LayoutCachedWidth =6120
-                    LayoutCachedHeight =795
+                    LayoutCachedLeft =6300
+                    LayoutCachedTop =540
+                    LayoutCachedWidth =6960
+                    LayoutCachedHeight =840
                 End
                 Begin Label
                     Visible = NotDefault
-                    OverlapFlags =247
-                    Left =5340
-                    Top =540
+                    OverlapFlags =85
+                    Left =5400
+                    Top =900
                     Width =2115
                     Height =285
                     FontSize =10
@@ -549,10 +586,42 @@ Begin Form
                     ForeColor =1643706
                     Name ="lblRFS"
                     Caption ="-- Removed from Study --"
-                    LayoutCachedLeft =5340
-                    LayoutCachedTop =540
-                    LayoutCachedWidth =7455
-                    LayoutCachedHeight =825
+                    LayoutCachedLeft =5400
+                    LayoutCachedTop =900
+                    LayoutCachedWidth =7515
+                    LayoutCachedHeight =1185
+                End
+                Begin CheckBox
+                    OverlapFlags =247
+                    Left =5820
+                    Top =600
+                    Width =240
+                    TabIndex =10
+                    BorderColor =10921638
+                    Name ="chkRFS"
+                    ControlSource ="RFS"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =5820
+                    LayoutCachedTop =600
+                    LayoutCachedWidth =6060
+                    LayoutCachedHeight =840
+                    Begin
+                        Begin Label
+                            OverlapFlags =247
+                            Left =5340
+                            Top =540
+                            Width =405
+                            Height =315
+                            Name ="lblChkRFS"
+                            Caption ="RFS"
+                            ControlTipText ="Removed from Study (RFS)"
+                            LayoutCachedLeft =5340
+                            LayoutCachedTop =540
+                            LayoutCachedWidth =5745
+                            LayoutCachedHeight =855
+                        End
+                    End
                 End
             End
         End
@@ -762,7 +831,7 @@ On Error GoTo Err_Handler
     
     'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
     OpenChangeValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, _
-        "tbl_Tags", "Tag", "Tag_ID", Me!Tag_ID, Me!Tag.Value
+        "tbl_Tags", "Tag", "Tag_ID", Me!Tag_ID, Me!Tag.value
 
 Exit_Handler:
     Exit Sub
@@ -805,7 +874,7 @@ On Error GoTo Err_Handler
     'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
     OpenChangeValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, _
         "tbl_Tags", "Azimuth", "Tag_ID", Me!Tag_ID, _
-        Nz(Me!Azimuth.Value, "Null")
+        Nz(Me!Azimuth.value, "Null")
 
 Exit_Handler:
     Exit Sub
@@ -849,7 +918,7 @@ On Error GoTo Err_Handler
     'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
     OpenChangeValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, _
         "tbl_Tags", "Distance", "Tag_ID", Me!Tag_ID, _
-        Nz(Me!Distance.Value, "Null")
+        Nz(Me!Distance.value, "Null")
 
 Exit_Handler:
     Exit Sub
@@ -893,7 +962,7 @@ On Error GoTo Err_Handler
     'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
     OpenChangeValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, _
         "tbl_Tags", "Microplot_Number", "Tag_ID", Me!Tag_ID, _
-        Nz(Me!Microplot_Number.Value, "Null")
+        Nz(Me!Microplot_Number.value, "Null")
 
 Exit_Handler:
     Exit Sub

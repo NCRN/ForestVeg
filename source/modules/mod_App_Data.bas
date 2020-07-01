@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Data
 ' Level:        Application module
-' Version:      1.03
+' Version:      1.06
 '
 ' Description:  application data related functions & procedures
 '
@@ -18,6 +18,9 @@ Option Explicit
 '                                        mod_Db module where it normally resides)
 '                                        added DB_SYS_TABLES, APP_SYS_TABLES (normally in framework)
 '               BLC - 8/27/2019 - 1.05 - added lngLtBlue, enabled lngLtGray
+'               BLC - 6/29/2020 - 1.06 - ValidDBH() changed sapling IF statement to include equivalent DBH check vs sapling habit alone
+'                                        Added GetEquivDBH() for avoiding Sapling DBH popups when subforms don't populate before check
+'                                        Added TruncateNumber() - shift to framework module later
 ' =================================
 
 ' ---------------------------------
@@ -172,6 +175,7 @@ End Sub
 '   BLC - 4/18/2018 - renamed txtTag > tbxTag
 '   BLC - 4/19/2018 - revised to use CurrDb & accept Sapling/Tree to determine value
 '   BLC - 4/21/2018 - revise & condense logic
+'   BLC - 6/29/2020 - changed sapling IF statement to include equivalent DBH check vs sapling habit alone
 ' ---------------------------------
 Public Function ValidDBH(Habit As String) As Boolean 'fsub_Sapling_DBH_Exit(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -202,7 +206,7 @@ On Error GoTo Err_Handler
 
 '   Me.Refresh
     
-    Set db = CurrDb
+    Set db = currDb
         
     'fetch tree/sapling form names
     frmDataName = Replace("fsub_Habit_Data", "Habit", Habit)
@@ -254,7 +258,7 @@ On Error GoTo Err_Handler
 Debug.Print "DBH_mod_App_Data: " & strSQL
     
     'use usys_temp_qdf
-    Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
+    Set qdf = currDb.QueryDefs("usys_temp_qdf")
     qdf.sql = strSQL
     
     Set rs = db.OpenRecordset("usys_temp_qdf")
@@ -287,11 +291,14 @@ Debug.Print "DBH_mod_App_Data: " & strSQL
         'any records (Saplings)
         ElseIf rs.RecordCount >= 1 Then
                 
+            'refresh to update tbxEquivDBH BEFORE ValidDBH check
+            Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH.Requery
+                
             'saplings DBH > = 1 (minimum threshold) check
-'            If Habit = "Sapling" And _
-'                Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH!tbxEquivDBH < 1 Then
+            If Habit = "Sapling" And _
+                Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH!tbxEquivDBH < 1 Then
 
-            If Habit = "Sapling" Then
+'            If Habit = "Sapling" Then
             
                 'nest IF since Tree doesn't have fsub_Sapling_DBH
                 'avoids error #2455 - you have entered an invalid reference to the property Form/Report
@@ -384,6 +391,71 @@ Err_Handler:
 End Function
 
 ' ---------------------------------
+' SUB:          GetEquivDBH
+' Description:  retrieve equivalent DBH value for a given sapling
+' Assumptions:  -
+' Parameters:   DataID - sapling identifier (typically GUID, set as variant)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 30, 2020
+' Adapted:      -
+' Revisions:
+'   BLC - 6/30/2020 - initial version
+' ---------------------------------
+Public Function GetEquivDBH(DataID As Variant) As Double
+On Error GoTo Err_Handler
+    
+    Dim strSQL As String
+    Dim qdf As QueryDef
+    Dim rs As DAO.Recordset
+    
+    'default
+    GetEquivDBH = 0
+    
+    'ensure data ID is not empty
+    If Len(DataID) > 0 Then
+        strSQL = "SELECT sdbh.Sapling_Data_ID, sdbh.Live, " _
+                    & "(" _
+                    & "(SUM(3.1415*(sdbh.DBH/2)^2)" _
+                    & "*(1/3.1415))^.5" _
+                    & ")*2 AS EquivDBH " _
+                    & "FROM tbl_Sapling_DBH sdbh " _
+                    & "WHERE sdbh.Sapling_Data_ID = " & DataID & " " _
+                    & "GROUP BY sdbh.Sapling_Data_ID,sdbh.Live"
+    Debug.Print strSQL
+    
+        'use usys_temp_qdf
+        Set qdf = currDb.QueryDefs("usys_temp_qdf")
+        qdf.sql = strSQL
+        
+        Set rs = currDb.OpenRecordset("usys_temp_qdf")
+        
+        If Not (rs.BOF And rs.EOF) Then
+            rs.MoveLast
+        
+            If rs.RecordCount = 1 Then
+                'valid
+                GetEquivDBH = rs("EquivDBH")
+            End If
+        End If
+    End If
+    
+Debug.Print GetEquivDBH
+
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetEquivDBH[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
 ' FUNCTION:     GetPriorDBH
 ' Description:  retrieve the tag's previous DBH value
 ' Assumptions:  -
@@ -421,10 +493,10 @@ On Error GoTo Err_Handler
              "ORDER BY Updated_Date;"
     
     'use usys_temp_qdf
-    Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
+    Set qdf = currDb.QueryDefs("usys_temp_qdf")
     qdf.sql = strSQL
     
-    Set rs = CurrDb.OpenRecordset("usys_temp_qdf")
+    Set rs = currDb.OpenRecordset("usys_temp_qdf")
     
     If Not (rs.BOF And rs.EOF) Then
         rs.MoveLast
@@ -486,10 +558,10 @@ On Error GoTo Err_Handler
              "ORDER BY Updated_Date;"
     
     'use usys_temp_qdf
-    Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
+    Set qdf = currDb.QueryDefs("usys_temp_qdf")
     qdf.sql = strSQL
     
-    Set rs = CurrDb.OpenRecordset("usys_temp_qdf")
+    Set rs = currDb.OpenRecordset("usys_temp_qdf")
     
     If Not (rs.BOF And rs.EOF) Then
         rs.MoveLast
@@ -552,10 +624,10 @@ On Error GoTo Err_Handler
              "= '" & DataID & "';"
     
     'use usys_temp_qdf
-    Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
+    Set qdf = currDb.QueryDefs("usys_temp_qdf")
     qdf.sql = strSQL
     
-    Set rs = CurrDb.OpenRecordset("usys_temp_qdf")
+    Set rs = currDb.OpenRecordset("usys_temp_qdf")
     
     If Not (rs.BOF And rs.EOF) Then
         rs.MoveLast
@@ -851,6 +923,39 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - MakeLiveFlag[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+' ---------------------------------
+' FUNCTION:     TruncateNumber
+' Description:  Truncates a number to a desired # of decimal places
+' Assumptions:  -
+' Parameters:   InputNumber - number to be truncated (double)
+'               DecimalPlaces - number of decimal places to return (int)
+' Returns:      InputNumber truncated to # of DecimalPlaces desired (double)
+' Throws:       none
+' References:
+'   Makah, March 23, 2015
+'   https://stackoverflow.com/questions/11347704/truncating-double-with-vba-in-excel
+' Source/date:  Bonnie Campbell, June 30, 2020
+' Adapted:      -
+' Revisions:
+'   BLC - 6/30/2020 - initial version
+' ---------------------------------
+Public Function TruncateNumber(ByVal InputNumber As Double, ByVal DecimalPlaces As Integer) As Double
+On Error GoTo Err_Handler
+
+    TruncateNumber = Int(InputNumber * (10 ^ DecimalPlaces)) / (10 ^ DecimalPlaces)
+
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - TruncateNumber[mod_App_Data])"
     End Select
     Resume Exit_Handler
 End Function

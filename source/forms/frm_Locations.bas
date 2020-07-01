@@ -1,9 +1,8 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     PopUp = NotDefault
     AutoCenter = NotDefault
-    FilterOn = NotDefault
     DefaultView =0
     TabularFamily =0
     PictureAlignment =2
@@ -14,12 +13,11 @@ Begin Form
     Width =14400
     DatasheetFontHeight =9
     ItemSuffix =45
-    Left =12270
-    Top =5310
-    Right =27210
-    Bottom =14055
+    Left =4245
+    Top =2685
+    Right =11865
+    Bottom =6855
     DatasheetGridlinesColor =12632256
-    Filter ="[Location_ID]='{75F868EE-CC52-42CC-84DE-0E6963E99CA7}'"
     RecSrcDt = Begin
         0xdca6db037508e340
     End

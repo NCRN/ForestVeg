@@ -14,5 +14,8 @@ CREATE TABLE [tsys_App_Defaults] (
   [Verify_links_startup] BIT ,
   [Panel] SHORT ,
   [Entry_Role] VARCHAR (32),
-  [Timeframe] SHORT 
+  [Timeframe] SHORT ,
+  [Root_Path] VARCHAR (255),
+  [Data_Path] VARCHAR (255),
+  [Photo_Path] VARCHAR (255)
 )

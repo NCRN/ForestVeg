@@ -4,7 +4,7 @@ Private Declare PtrSafe Function apiGetUserName Lib "advapi32.dll" Alias _
     "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
 
 'From Steve Potts posting on Google Access Forum
-Declare PtrSafe Function GetUserName _
+Declare PtrSafe Function GetUsername _
    Lib "advapi32.dll" _
    Alias "GetUserNameA" _
    (ByVal lpBuffer As String, _
@@ -15,24 +15,24 @@ Public Function WindowsName() As String
    WindowsName = " "
    Dim strName As String
    strName = Space(8)
-   Call GetUserName(strName, 8)
+   Call GetUsername(strName, 8)
    WindowsName = strName
 End Function
 
-Function NetworkUserName() As String
+Function NetworkUsername() As String
 'On Error GoTo Err_Handler
     'Purpose:    Returns the network login name
     Dim lngLen As Long
     Dim lngX As Long
     Dim strUserName As String
 
-    NetworkUserName = "Unknown"
+    NetworkUsername = "Unknown"
 
     strUserName = String$(254, 0)
     lngLen = 255&
     lngX = apiGetUserName(strUserName, lngLen)
     If (lngX > 0&) Then
-        NetworkUserName = Left$(strUserName, lngLen - 1&)
+        NetworkUsername = Left$(strUserName, lngLen - 1&)
     End If
 
 Exit_Handler:

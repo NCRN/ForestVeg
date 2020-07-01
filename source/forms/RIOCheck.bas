@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     RecordSelectors = NotDefault
@@ -16,10 +16,10 @@ Begin Form
     Width =10080
     DatasheetFontHeight =11
     ItemSuffix =31
-    Left =7470
-    Top =2280
-    Right =17805
-    Bottom =9045
+    Left =8010
+    Top =2985
+    Right =18345
+    Bottom =9750
     DatasheetGridlinesColor =14276557
     RecSrcDt = Begin
         0xe7620d04d25ae540
@@ -1582,37 +1582,37 @@ Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immedia
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(Value As String)
-Public Event InvalidDirections(Value As String)
-Public Event InvalidCallingForm(Value As String)
+Public Event InvalidTitle(value As String)
+Public Event InvalidDirections(value As String)
+Public Event InvalidCallingForm(value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(Value As String)
-    If Len(Value) > 0 Then
-        m_Title = Value
+Public Property Let title(value As String)
+    If Len(value) > 0 Then
+        m_Title = value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         'Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(Value)
+        RaiseEvent InvalidTitle(value)
     End If
 End Property
 
-Public Property Get Title() As String
-    Title = m_Title
+Public Property Get title() As String
+    title = m_Title
 End Property
 
-Public Property Let Directions(Value As String)
-    If Len(Value) > 0 Then
-        m_Directions = Value
+Public Property Let Directions(value As String)
+    If Len(value) > 0 Then
+        m_Directions = value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(Value)
+        RaiseEvent InvalidDirections(value)
     End If
 End Property
 
@@ -1620,16 +1620,16 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(Value As String)
-        m_CallingForm = Value
+Public Property Let CallingForm(value As String)
+        m_CallingForm = value
 End Property
 
 Public Property Get CallingForm() As String
     CallingForm = m_CallingForm
 End Property
 
-Public Property Let Cols(Value As Integer)
-        m_Cols = Value
+Public Property Let Cols(value As Integer)
+        m_Cols = value
 End Property
 
 Public Property Get Cols() As Integer
@@ -1694,7 +1694,7 @@ On Error GoTo Err_Handler
     'dev mode
     tbxDevMode = DEV_MODE
                 
-    Title = "RIO Check"
+    title = "RIO Check"
     'lblTitle.Caption = "" 'clear header title
     Directions = "Are all the Retired in Office (RIO) tags actually IN the office?"
     
@@ -1955,7 +1955,7 @@ End Sub
 Private Sub lbxRIOtags_Click()
 On Error GoTo Err_Handler
 
-    SetTempVar "SelectedTagID", lbxRIOtags.Value
+    SetTempVar "SelectedTagID", lbxRIOtags.value
 'Debug.Print TempVars("SelectedTagID")
 
     'populate last selected tag
@@ -1989,7 +1989,7 @@ End Sub
 Private Sub lbxActuallyInOffice_Click()
 On Error GoTo Err_Handler
 
-    SetTempVar "SelectedTagID", lbxActuallyInOffice.Value
+    SetTempVar "SelectedTagID", lbxActuallyInOffice.value
 'Debug.Print TempVars("SelectedTagID")
 
     'populate last selected tag
@@ -2080,7 +2080,7 @@ On Error GoTo Err_Handler
     
     FNameExists = False
     
-FNAME:
+fName:
     Do While FNameExists = False
         strFileName = InputBox("Enter the name for this report." & vbCrLf & vbCrLf & _
                         "On the next screen, choose the directory location " & _
@@ -2098,7 +2098,7 @@ SaveOrReplace:
                 'DoCmd.OutputTo acOutputReport, rpt, acFormatPDF, strExportFileName, -1, "", , acExportQualityPrint
 '                DoCmd.OutputTo ObjectType:=acOutputReport, ObjectName:=rpt, OutputFormat:=acFormatPDF, OutputFile:=strExportFileName, _
 '                        AutoStart:=True, TemplateFile:="", OutputQuality:=acExportQualityPrint
-                DoCmd.OutputTo ObjectType:=acOutputReport, ObjectName:=rptName, OutputFormat:=acFormatPDF, _
+                DoCmd.OutputTo ObjectType:=acOutputReport, objectname:=rptName, OutputFormat:=acFormatPDF, _
                         OutputFile:=strExportFileName, _
                         OutputQuality:=acExportQualityPrint
                 
@@ -2111,7 +2111,7 @@ SaveOrReplace:
                     DeleteFile (strExportFileName)
                     GoTo SaveOrReplace
                 Else
-                    GoTo FNAME
+                    GoTo fName
                 End If
             End If
             
@@ -2133,7 +2133,7 @@ SaveOrReplace:
             
             With CC
                 .UseCancel = True
-                .Title = strTitle
+                .title = strTitle
                 .Prompt = strPrompt
                 .Icon = Question + DefaultButton3
                 .ButtonText1 = "Open PDF"
@@ -2264,7 +2264,7 @@ On Error GoTo Err_Handler
     strItem = lbxFrom.Column(0) & ";" & lbxFrom.Column(1) & IIf(Cols = 3, ";" & lbxFrom.Column(2), "")
     
     lbxTo.AddItem (strItem) '(lbxFrom.Value)
-    lbxFrom.RemoveItem (lbxFrom.Value)
+    lbxFrom.RemoveItem (lbxFrom.value)
 
 Exit_Handler:
     Exit Sub
@@ -2362,7 +2362,7 @@ On Error GoTo Err_Handler
             For i = 0 To Cols - 1 'Cols =  2 or 3 column lbx
 'Debug.Print "i=" & i
 'Debug.Print "j=" & j
-                .Fields(i).Value = ary(j)
+                .Fields(i).value = ary(j)
                 If j < UBound(ary) Then j = j + 1 'next j
 'Debug.Print "j=" & j
             
@@ -2417,7 +2417,7 @@ Private Sub SetListCounts()
 On Error GoTo Err_Handler
 
     'set values
-    tbxRIOTagCount.Value = ">>" & lbxRIOtags.ListCount
+    tbxRIOTagCount.value = ">>" & lbxRIOtags.ListCount
     tbxCount = ">>" & lbxActuallyInOffice.ListCount
     
     With lbxActuallyInOffice

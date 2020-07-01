@@ -75,7 +75,7 @@ On Error GoTo Err_Handler
             End Select
         End If
         
-        .tbxNetworkUserName = NetworkUserName()
+        .tbxNetworkUserName = NetworkUsername()
         .tbxHistory_Notes.SetFocus
         
         Set frm.ctlToReset = ctlControlToReset
@@ -133,7 +133,7 @@ On Error GoTo Err_Handler
         !Record_ID_Field_Name = strRecordIDFieldName
     
         .tbxValueOld = strOldValue
-        .tbxNetworkUserName = NetworkUserName()
+        .tbxNetworkUserName = NetworkUsername()
         .tbxValueNew.SetFocus
         
         Set .ctlToReset = ctlControlToReset
@@ -196,7 +196,7 @@ On Error GoTo Err_Handler
         
         .tbxValueOld = strOldValue
         .tbxValueNew = strNewValue
-        .tbxNetworkUserName = NetworkUserName()
+        .tbxNetworkUserName = NetworkUsername()
         .tbxHistoryNotes.SetFocus
         
         Set .ctlToReset = ctlControlToReset

@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Report
     LayoutForPrint = NotDefault
@@ -13,7 +13,7 @@ Begin Report
     GridY =24
     Width =10800
     DatasheetFontHeight =10
-    ItemSuffix =44
+    ItemSuffix =46
     Left =795
     Top =1755
     DatasheetGridlinesColor =12632256
@@ -32,7 +32,7 @@ Begin Report
     Caption ="srpt_Trees"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0xf0000000f0000000190100000301000000000000302a00001c02000001000000 ,
+        0x6a010000f0000000660100001e01000000000000302a00001c02000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =255
@@ -94,7 +94,7 @@ Begin Report
         End
         Begin FormHeader
             KeepTogether = NotDefault
-            Height =660
+            Height =705
             Name ="ReportHeader"
             Begin
                 Begin Label
@@ -271,6 +271,24 @@ Begin Report
                     LayoutCachedWidth =9330
                     LayoutCachedHeight =600
                 End
+                Begin Label
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =5340
+                    Top =525
+                    Width =1200
+                    Height =180
+                    FontSize =7
+                    FontWeight =600
+                    ForeColor =0
+                    Name ="lblPriorDBH"
+                    Caption ="Prior DBH (cm)"
+                    FontName ="Calibri"
+                    LayoutCachedLeft =5340
+                    LayoutCachedTop =525
+                    LayoutCachedWidth =6540
+                    LayoutCachedHeight =705
+                End
             End
         End
         Begin PageHeader
@@ -287,7 +305,7 @@ Begin Report
         Begin Section
             KeepTogether = NotDefault
             CanGrow = NotDefault
-            Height =540
+            Height =600
             OnFormat ="[Event Procedure]"
             Name ="Detail"
             Begin
@@ -419,10 +437,10 @@ Begin Report
                     LayoutCachedHeight =240
                 End
                 Begin TextBox
-                    TextAlign =3
+                    TextAlign =2
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =5520
+                    Left =5460
                     Width =720
                     FontSize =9
                     TabIndex =4
@@ -447,8 +465,8 @@ Begin Report
                         0x61005d003d00220022002c0031002c003000290000000000
                     End
 
-                    LayoutCachedLeft =5520
-                    LayoutCachedWidth =6240
+                    LayoutCachedLeft =5460
+                    LayoutCachedWidth =6180
                     LayoutCachedHeight =240
                     ConditionalFormat14 = Begin
                         0x01000500000001000000000000000100000000000000faf3e800250000004900 ,
@@ -579,7 +597,7 @@ Begin Report
                 End
                 Begin Subform
                     Left =1440
-                    Top =300
+                    Top =360
                     Width =2956
                     Height =60
                     TabIndex =7
@@ -589,13 +607,13 @@ Begin Report
                     LinkMasterFields ="Tree_Data_ID"
 
                     LayoutCachedLeft =1440
-                    LayoutCachedTop =300
+                    LayoutCachedTop =360
                     LayoutCachedWidth =4396
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =420
                 End
                 Begin Subform
                     Left =4440
-                    Top =300
+                    Top =360
                     Width =2956
                     Height =60
                     TabIndex =8
@@ -605,13 +623,13 @@ Begin Report
                     LinkMasterFields ="Tree_Data_ID"
 
                     LayoutCachedLeft =4440
-                    LayoutCachedTop =300
+                    LayoutCachedTop =360
                     LayoutCachedWidth =7396
-                    LayoutCachedHeight =360
+                    LayoutCachedHeight =420
                 End
                 Begin Subform
                     Left =7680
-                    Top =300
+                    Top =360
                     Width =2956
                     Height =60
                     TabIndex =9
@@ -620,12 +638,16 @@ Begin Report
                     LinkChildFields ="Tree_Data_ID"
                     LinkMasterFields ="Tree_Data_ID"
 
+                    LayoutCachedLeft =7680
+                    LayoutCachedTop =360
+                    LayoutCachedWidth =10636
+                    LayoutCachedHeight =420
                 End
                 Begin TextBox
                     CanGrow = NotDefault
                     CanShrink = NotDefault
                     IMESentenceMode =3
-                    Top =300
+                    Top =360
                     Width =1560
                     Height =60
                     FontSize =6
@@ -635,6 +657,9 @@ Begin Report
                     ControlSource ="Tree_Notes"
                     StatusBarText ="Number of physical tag attached to tree"
 
+                    LayoutCachedTop =360
+                    LayoutCachedWidth =1560
+                    LayoutCachedHeight =420
                 End
                 Begin CheckBox
                     Left =7920
@@ -713,7 +738,7 @@ Begin Report
                     TextAlign =2
                     TextFontFamily =34
                     Left =4500
-                    Top =300
+                    Top =360
                     Width =2865
                     Height =225
                     FontSize =8
@@ -723,9 +748,9 @@ Begin Report
                     Caption ="N o  T r e e   C o n d i t i o n s"
                     FontName ="Arial"
                     LayoutCachedLeft =4500
-                    LayoutCachedTop =300
+                    LayoutCachedTop =360
                     LayoutCachedWidth =7365
-                    LayoutCachedHeight =525
+                    LayoutCachedHeight =585
                 End
                 Begin Label
                     FontItalic = NotDefault
@@ -746,6 +771,46 @@ Begin Report
                     LayoutCachedTop =15
                     LayoutCachedWidth =3720
                     LayoutCachedHeight =285
+                End
+                Begin TextBox
+                    FontItalic = NotDefault
+                    DecimalPlaces =1
+                    TextAlign =2
+                    BackStyle =1
+                    IMESentenceMode =3
+                    Left =5460
+                    Top =180
+                    Width =720
+                    FontSize =7
+                    TabIndex =16
+                    Name ="tbxPriorDBH"
+                    ControlSource ="=TruncateNumber(GetPriorDBH([Tree_Data_ID],\"Tree\"),1)"
+                    Format ="General Number"
+                    FontName ="Calibri"
+                    ConditionalFormat = Begin
+                        0x01000000e8000000020000000100000000000000000000002400000001000100 ,
+                        0x00000000fff2000001000000000000002500000043000000010101000072bc00 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x41006200730028005b00450071007500690076005f004400420048005f006300 ,
+                        0x6d005d002d005b007400620078005000720069006f0072004400420048005d00 ,
+                        0x29003e003400000000005b007400620078005000720069006f00720044004200 ,
+                        0x48005d003c003e005b00450071007500690076005f004400420048005f006300 ,
+                        0x6d005d0000000000
+                    End
+
+                    LayoutCachedLeft =5460
+                    LayoutCachedTop =180
+                    LayoutCachedWidth =6180
+                    LayoutCachedHeight =420
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100010000000000fff20000230000004100 ,
+                        0x6200730028005b00450071007500690076005f004400420048005f0063006d00 ,
+                        0x5d002d005b007400620078005000720069006f0072004400420048005d002900 ,
+                        0x3e00340000000000000000000000000000000000000000000001000000000000 ,
+                        0x00010101000072bc00ffffff001d0000005b007400620078005000720069006f ,
+                        0x0072004400420048005d003c003e005b00450071007500690076005f00440042 ,
+                        0x0048005f0063006d005d00000000000000000000000000000000000000000000
+                    End
                 End
             End
         End

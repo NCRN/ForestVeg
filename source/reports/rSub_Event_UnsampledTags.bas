@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Report
     LayoutForPrint = NotDefault
@@ -11,26 +11,38 @@ Begin Report
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =8640
+    Width =4320
     DatasheetFontHeight =10
     ItemSuffix =46
-    Left =6930
-    Top =4755
+    Left =810
+    Top =750
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
-        0x51b40f584e19e540
+        0xf9628c6e967de540
     End
-    RecordSource ="SELECT t.Tag_ID, t.Tag, t.Tag_Status,  IIf(IsNull([azimuth]),\"\",[Azimuth] & \""
-        " / \" & [distance] & \"m\") AS Azi_Dist,  t.Microplot_Number AS MP, t.Location_I"
-        "D FROM (tbl_Tags t  LEFT JOIN qry_Status_Sapling_Current_Event ON t.Tag_ID = qry"
-        "_Status_Sapling_Current_Event.Tag_ID)  LEFT JOIN qry_Status_Tree_Current_Event O"
-        "N t.Tag_ID = qry_Status_Tree_Current_Event.Tag_ID WHERE ( ((qry_Status_Sapling_C"
-        "urrent_Event.Event_ID) Is Null)  AND ((qry_Status_Tree_Current_Event.Event_ID) I"
-        "s Null)) ORDER BY t.Tag_Status, t.Tag;"
+    RecordSource ="SELECT * FROM ( SELECT t.Tag_ID, t.Tag, t.Tag_Status, IIf(IsNull([azimuth]),\"\""
+        ",[Azimuth] & \" / \" & [distance] & \"m\") AS Azi_Dist, t.Microplot_Number AS MP"
+        ", t.Location_ID, LEN(t.Tag)*10/LEN(t.TAG) AS RecordOrder FROM (tbl_Tags AS t  LE"
+        "FT JOIN qry_Status_Sapling_Current_Event sce ON t.Tag_ID = sce.Tag_ID)  LEFT JOI"
+        "N qry_Status_Tree_Current_Event tce ON t.Tag_ID = tce.Tag_ID WHERE  sce.Event_ID"
+        " Is Null AND tce.Event_ID Is Null AND t.Tag_Status NOT IN ('Retired (In Office)'"
+        ", 'Inactive (In Field)', 'Inactive (Lost)') GROUP BY LEN(t.Tag)*1/LEN(t.Tag), t."
+        "Tag_Status, t.Tag, t.Tag_ID, IIf(IsNull([azimuth]),\"\",[Azimuth] & \" / \" & [d"
+        "istance] & \"m\"),  t.Microplot_Number, t.Location_ID ORDER BY t.Tag_Status, t.T"
+        "ag ) grp1  UNION ALL  SELECT * FROM ( SELECT t.Tag_ID, t.Tag, t.Tag_Status, IIf("
+        "IsNull([azimuth]),\"\",[Azimuth] & \" / \" & [distance] & \"m\") AS Azi_Dist, t."
+        "Microplot_Number AS MP, t.Location_ID,  LEN(t.Tag)*10^5/LEN(t.Tag)  AS RecordOrd"
+        "er FROM (tbl_Tags AS t  LEFT JOIN qry_Status_Sapling_Current_Event sce ON t.Tag_"
+        "ID = sce.Tag_ID)  LEFT JOIN qry_Status_Tree_Current_Event tce ON t.Tag_ID = tce."
+        "Tag_ID WHERE  sce.Event_ID Is Null AND tce.Event_ID Is Null AND t.Tag_Status IN "
+        "('Retired (In Office)', 'Inactive (In Field)', 'Inactive (Lost)') GROUP BY LEN(t"
+        ".Tag)*10^5/LEN(t.Tag), t.Tag_Status, t.Tag, t.Tag_ID, IIf(IsNull([azimuth]),\"\""
+        ",[Azimuth] & \" / \" & [distance] & \"m\"),  t.Microplot_Number, t.Location_ID O"
+        "RDER BY t.Tag_Status, t.Tag ) grp2 ORDER BY RecordOrder, t.Tag_Status, t.Tag;"
     Caption ="rSub_Event_UnsampledTags"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0xe0010000e0010000680100006801000000000000c02100000f00000001000000 ,
+        0xe0010000e0010000680100006801000000000000e01000003c00000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =255
@@ -93,24 +105,35 @@ Begin Report
         Begin FormHeader
             KeepTogether = NotDefault
             CanGrow = NotDefault
-            Height =240
+            CanShrink = NotDefault
+            NewRowOrCol =1
+            Height =0
             BackColor =15590879
             Name ="ReportHeader"
+        End
+        Begin PageHeader
+            Height =220
+            BackColor =15590879
+            Name ="PageHeaderSection"
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
             Begin
                 Begin Label
                     FontItalic = NotDefault
                     TextAlign =2
                     TextFontFamily =34
                     Width =840
-                    Height =225
+                    Height =220
                     FontSize =8
                     FontWeight =800
                     ForeColor =5855577
                     Name ="lblHdrTag"
                     Caption ="Tag"
                     FontName ="Arial"
+                    TopPadding =0
+                    BottomPadding =0
                     LayoutCachedWidth =840
-                    LayoutCachedHeight =225
+                    LayoutCachedHeight =220
                     ForeThemeColorIndex =0
                     ForeTint =65.0
                 End
@@ -120,16 +143,18 @@ Begin Report
                     TextFontFamily =34
                     Left =900
                     Width =1440
-                    Height =225
+                    Height =220
                     FontSize =8
                     FontWeight =800
                     ForeColor =5855577
                     Name ="lblHdrTagStatus"
                     Caption ="Tag Status"
                     FontName ="Arial"
+                    TopPadding =0
+                    BottomPadding =0
                     LayoutCachedLeft =900
                     LayoutCachedWidth =2340
-                    LayoutCachedHeight =225
+                    LayoutCachedHeight =220
                     ForeThemeColorIndex =0
                     ForeTint =65.0
                 End
@@ -139,16 +164,18 @@ Begin Report
                     TextFontFamily =34
                     Left =2520
                     Width =840
-                    Height =225
+                    Height =220
                     FontSize =8
                     FontWeight =800
                     ForeColor =5855577
                     Name ="lblHdrAziDist"
                     Caption ="Azi/Dist"
                     FontName ="Arial"
+                    TopPadding =0
+                    BottomPadding =0
                     LayoutCachedLeft =2520
                     LayoutCachedWidth =3360
-                    LayoutCachedHeight =225
+                    LayoutCachedHeight =220
                     ForeThemeColorIndex =0
                     ForeTint =65.0
                 End
@@ -158,39 +185,35 @@ Begin Report
                     TextFontFamily =34
                     Left =3360
                     Width =840
-                    Height =225
+                    Height =220
                     FontSize =8
                     FontWeight =800
                     ForeColor =5855577
                     Name ="lblHdrMP"
                     Caption ="MP"
                     FontName ="Arial"
+                    TopPadding =0
+                    BottomPadding =0
                     LayoutCachedLeft =3360
                     LayoutCachedWidth =4200
-                    LayoutCachedHeight =225
+                    LayoutCachedHeight =220
                     ForeThemeColorIndex =0
                     ForeTint =65.0
                 End
             End
         End
-        Begin PageHeader
-            Height =0
-            Name ="PageHeaderSection"
-        End
         Begin Section
             KeepTogether = NotDefault
             CanGrow = NotDefault
-            Height =15
+            CanShrink = NotDefault
+            NewRowOrCol =2
+            Height =60
             OnFormat ="[Event Procedure]"
             Name ="Detail"
             Begin
-                Begin Line
-                    BorderWidth =2
-                    Width =0
-                    Name ="Line14"
-                End
                 Begin TextBox
                     CanGrow = NotDefault
+                    CanShrink = NotDefault
                     TextAlign =2
                     BackStyle =1
                     IMESentenceMode =3
@@ -206,6 +229,7 @@ Begin Report
                 End
                 Begin TextBox
                     CanGrow = NotDefault
+                    CanShrink = NotDefault
                     TextAlign =2
                     BackStyle =1
                     IMESentenceMode =3
@@ -223,6 +247,7 @@ Begin Report
                 End
                 Begin TextBox
                     CanGrow = NotDefault
+                    CanShrink = NotDefault
                     TextAlign =2
                     BackStyle =1
                     IMESentenceMode =3
@@ -241,6 +266,7 @@ Begin Report
                 End
                 Begin TextBox
                     CanGrow = NotDefault
+                    CanShrink = NotDefault
                     TextAlign =2
                     BackStyle =1
                     IMESentenceMode =3
@@ -260,21 +286,18 @@ Begin Report
             End
         End
         Begin PageFooter
-            Height =15
+            Height =0
             Name ="PageFooterSection"
-            Begin
-                Begin Line
-                    BorderWidth =3
-                    Width =0
-                    BorderColor =12632256
-                    Name ="Line15"
-                End
-            End
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
         End
         Begin FormFooter
             KeepTogether = NotDefault
+            CanGrow = NotDefault
+            CanShrink = NotDefault
             Height =0
             Name ="ReportFooter"
+            AutoHeight =255
         End
     End
 End

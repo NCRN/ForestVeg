@@ -1441,7 +1441,7 @@ Private Sub PageTabs_Change()
         ' Run the function to update the current QA query record
         varReturn = fxnUpdateQAResults(False, Me.selObject)
         Me.Requery
-        strCriteria = "[Query_name] = """ & Me.selObject.Value & _
+        strCriteria = "[Query_name] = """ & Me.selObject.value & _
             """ AND [Time_frame] = """ & Me.cmbTimeframe & _
             """ AND [Data_scope] = " & Me.optgScope
 
@@ -1702,10 +1702,10 @@ Private Sub cmdViewReport_Click()
         "Save report to a file?") = vbYes Then
         If strTimeframe <> "" Then
             ' Add timeframe to file name
-            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
                 strTimeframe & "_" & CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".snp"
         Else
-            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
                 CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".snp"
         End If
         ' Open the save file dialog and update to the actual name given by the user
@@ -1760,9 +1760,9 @@ Private Sub selObject_AfterUpdate()
     End If
     
     ' Bind the subform to the selected query
-    Me.subQueryResults.SourceObject = "Query." & Me.selObject.Value
+    Me.subQueryResults.SourceObject = "Query." & Me.selObject.value
     ' Build the filter string and see if a record already exists
-    strCriteria = "[Query_name] = """ & Me.selObject.Value & _
+    strCriteria = "[Query_name] = """ & Me.selObject.value & _
         """ AND [Time_frame] = """ & Me.cmbTimeframe & _
         """ AND [Data_scope] = " & Me.optgScope
     If DCount("*", "tbl_QA_Results", strCriteria) = 0 Then
@@ -1783,7 +1783,7 @@ Private Sub selObject_AfterUpdate()
 
     On Error Resume Next
     For Each qdf In qdfs
-        If qdf.Name = Me.selObject.Value Then
+        If qdf.Name = Me.selObject.value Then
             MsgBox ("This query returns (" & DCount("*", qdf.Name) & _
                 ") records that meet the following criteria: " & _
                 vbCrLf & vbCrLf & qdf.Properties("Description"))
@@ -1812,7 +1812,7 @@ Private Sub cmdDesignView_Click()
 
     ' Open the selected query in design view after checking that a query is selected
     If IsNull(Me.selObject) = False Then _
-        DoCmd.OpenQuery Me.selObject.Value, acViewDesign, acReadOnly
+        DoCmd.OpenQuery Me.selObject.value, acViewDesign, acReadOnly
 
 Exit_Procedure:
     Exit Sub
@@ -1839,7 +1839,7 @@ Private Sub cmdAutoFix_Click()
 
     On Error Resume Next
     Set ctlAutoFix = Forms!frm_Data_QA.subQueryResults!varAutoFix
-    varAutoFix = ctlAutoFix.Value
+    varAutoFix = ctlAutoFix.value
     On Error GoTo Err_Handler
 
     If IsNull(varAutoFix) Then
@@ -1910,11 +1910,11 @@ Private Sub cmdOpenRecord_Click()
     
     On Error Resume Next
     Set ctlObject = Forms!frm_Data_QA.subQueryResults!varObject
-    varObject = ctlObject.Value
+    varObject = ctlObject.value
     Set ctlFilter = Forms!frm_Data_QA.subQueryResults!varFilter
-    varFilter = ctlFilter.Value
+    varFilter = ctlFilter.value
     Set ctlArgs = Forms!frm_Data_QA.subQueryResults!varArgs
-    varArgs = ctlArgs.Value
+    varArgs = ctlArgs.value
     On Error GoTo Err_Handler
 
     If IsNull(varObject) Then
@@ -2027,7 +2027,7 @@ Private Sub cmdExport_Click()
     ' Requery the selected record in the recordset, and update the subform
     Me.subQueryResults.Requery
     strQName = Me.selObject
-    strSaveFile = CurrentProject.Path & "\" & strQName & "_" & _
+    strSaveFile = CurrentProject.path & "\" & strQName & "_" & _
         CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".xls"
     DoCmd.OutputTo acOutputQuery, strQName, acFormatXLS, strSaveFile, True
     MsgBox "File saved to:" & vbCrLf & vbCrLf & strSaveFile
@@ -2147,7 +2147,7 @@ Private Sub selTable_AfterUpdate()
     Else
     ' If a table is selected ...
         If fxnTableExists(Me.selTable) Then
-            Me.subDataTables.SourceObject = "Table." & Me.selTable.Value
+            Me.subDataTables.SourceObject = "Table." & Me.selTable.value
         Else
             MsgBox "Unable to find the selected table in the database ...", , _
                 "Table not found"
@@ -2502,7 +2502,7 @@ Private Function fxnSetQueryFlag()
 
     ' Update the visual flag to indicate whether or not the query results are editable
     '   Note: suffix of "_X" means that the query results may be edited
-    If Right(Me.selObject.Value, 2) = "_X" Then
+    If Right(Me.selObject.value, 2) = "_X" Then
         Me.txtEditQuery = "OK"
         Me.txtEditQuery.ForeColor = 16777215   'white
         Me.txtEditQuery.BackColor = 4227072    'green

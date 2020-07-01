@@ -1,10 +1,7 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     RecordSelectors = NotDefault
-    MaxButton = NotDefault
-    MinButton = NotDefault
-    ControlBox = NotDefault
     AutoCenter = NotDefault
     NavigationButtons = NotDefault
     AllowDeletions = NotDefault
@@ -12,6 +9,7 @@ Begin Form
     AllowAdditions = NotDefault
     OrderByOn = NotDefault
     ScrollBars =2
+    ViewsAllowed =1
     TabularFamily =0
     BorderStyle =1
     PictureAlignment =2
@@ -20,14 +18,13 @@ Begin Form
     GridY =24
     Width =11580
     DatasheetFontHeight =10
-    ItemSuffix =64
-    Left =-975
-    Top =1215
-    Right =10605
-    Bottom =6600
+    ItemSuffix =68
+    Left =15
+    Top =645
+    Right =11595
+    Bottom =6030
     DatasheetGridlinesColor =12632256
-    Filter ="Unit_Code='ANTI'"
-    OrderBy ="Event_Year DESC"
+    OrderBy ="Plot_Name"
     RecSrcDt = Begin
         0x0f463b98b308e440
     End
@@ -40,6 +37,7 @@ Begin Form
         0x010000006801000000000000a10700000100000001000000
     End
     OnGotFocus ="[Event Procedure]"
+    AllowDatasheetView =0
     FilterOnLoad =0
     ShowPageMargins =0
     AllowLayoutView =0
@@ -639,7 +637,7 @@ Begin Form
                 End
                 Begin Label
                     BackStyle =1
-                    OverlapFlags =85
+                    OverlapFlags =93
                     TextAlign =2
                     Left =-15
                     Width =11355
@@ -665,6 +663,26 @@ Begin Form
                     LayoutCachedTop =1200
                     LayoutCachedWidth =11340
                     LayoutCachedHeight =1200
+                End
+                Begin Label
+                    Visible = NotDefault
+                    OldBorderStyle =1
+                    OverlapFlags =215
+                    TextAlign =2
+                    Left =9840
+                    Top =105
+                    Width =1320
+                    Height =345
+                    FontSize =12
+                    FontWeight =600
+                    BorderColor =52479
+                    ForeColor =16776960
+                    Name ="lblQCMode"
+                    Caption ="QC MODE"
+                    LayoutCachedLeft =9840
+                    LayoutCachedTop =105
+                    LayoutCachedWidth =11160
+                    LayoutCachedHeight =450
                 End
             End
         End
@@ -1396,7 +1414,7 @@ Option Explicit
 ' =================================
 ' FORM:    frm_Data_Gateway
 ' Level:        Application module
-' Version:      1.06
+' Version:      1.08
 '
 ' Description:  form related functions & procedures
 '
@@ -1415,6 +1433,8 @@ Option Explicit
 '               BLC - 5/23/2018  - 1.04 - added documentation/error handling
 '               BLC - 11/9/2018  - 1.05 - update to handle Pseudoevents
 '               BLC - 4/17/2019  - 1.06 - update PseudoEvent handling
+'               BLC - 4/2/2020   - 1.07 - fit report to window after opening vs. default smaller view
+'               BLC - 6/22/2020  - 1.08 - add QC mode
 ' =================================
 
 ' ---------------------------------
@@ -1451,9 +1471,14 @@ Dim strCurrentRecordCriteria As String
 '   MEL/GS - unknown - initial version
 '   BLC - 5/23/2018 - update documentation, error handling
 '   BLC - 4/17/2019 - hide PseudoEvent toggle IF not DEV_MODE
+'   BLC - 6/22/2020 - add QC mode
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
+
+    'QC mode?
+    SetTempVar "QC_MODE", IIf(Me.OpenArgs = "QC_MODE", True, False)
+    lblQCMode.Visible = Nz(TempVars("QC_MODE"), False)
 
     Dim varReturn As Variant
 
@@ -1581,6 +1606,7 @@ End Sub
 '   BLC - 5/23/2018 - update documentation, error handling,
 '                     revise to open rpt_Event_Summary_Unfiltered vs.
 '                     Copy of rpt_Event_Summary_Unfiltered
+'   BLC - 4/2/2020  - fit report to window after opening vs. default smaller view
 ' ---------------------------------
 Private Sub btnViewReport_Click()
 On Error GoTo Err_Handler
@@ -1606,6 +1632,11 @@ On Error GoTo Err_Handler
 Debug.Print strCriteria
         'DoCmd.OpenReport stDocName, acPreview, "qRpt_Event_Summary_Unfiltered", stCriteria
         DoCmd.OpenReport strDocName, acPreview, , strCriteria
+        
+        'set to full size
+        DoCmd.Maximize
+        DoCmd.RunCommand acCmdZoom100 '100%
+        'DoCmd.RunCommand acCmdFitToWindow 'fit window size
     End If
 
 Exit_Handler:
@@ -1927,7 +1958,7 @@ On Error GoTo Err_Handler
     'tglPseudoEvent.Value = Not tglPseudoEvent.Value
     
     'set pseudoevent field
-    tbxPseudoEvent = IIf(tglPseudoEvent.Value = True, 1, 0)
+    tbxPseudoEvent = IIf(tglPseudoEvent.value = True, 1, 0)
 
 Exit_Handler:
     Exit Sub
@@ -2532,6 +2563,7 @@ End Sub
 ' Revisions:
 '   MEL/GS - unknown - initial version
 '   BLC - 5/24/2018 - update documentation, error handling
+'   BLC - 4/2/2020 - fit report to window after opening vs. default smaller view
 ' ---------------------------------
 Private Sub tbxReportTrigger_Click()
 On Error GoTo Err_Handler
@@ -2550,6 +2582,11 @@ On Error GoTo Err_Handler
         strCriteria = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
         'DoCmd.OpenReport stDocName, acPreview, "qRpt_Event_Summary_Unfiltered", stCriteria
         DoCmd.OpenReport strDocName, acPreview, , strCriteria
+    
+        'set to full size
+        DoCmd.Maximize
+        DoCmd.RunCommand acCmdZoom100 '100%
+        'DoCmd.RunCommand acCmdFitToWindow 'fit window size
     End If
 
 Exit_Handler:
@@ -2580,6 +2617,11 @@ On Error GoTo Err_Handler
         strCriteria = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
         'DoCmd.OpenReport stDocName, acPreview, "qRpt_Event_Summary_Unfiltered", stCriteria
         DoCmd.OpenReport strDocName, acPreview, , strCriteria
+        
+        'set to full size
+        DoCmd.Maximize
+        DoCmd.RunCommand acCmdZoom100 '100%
+        'DoCmd.RunCommand acCmdFitToWindow 'fit window size
     End If
     
 Exit_Procedure:
@@ -2613,12 +2655,12 @@ On Error GoTo Err_Handler
     RootFolder = "T:\I&M"
     PhotoFolder = "T:\I&M\Monitoring\Forest_Vegetation\Photos\"
     If FolderExists(PhotoFolder & Me!txtPlot_Name) Then
-        retVal = Shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
+        retVal = shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
         GoTo Exit_Handler
     Else
         If FolderExists(RootFolder) Then
             MsgBox ("Folder for this plot not found....Opening the root of the Photos folder.")
-            retVal = Shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
+            retVal = shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
             GoTo Exit_Handler
         Else
             MsgBox ("The network appears to be unavailable. Network access is required to view photos.")
@@ -2647,12 +2689,12 @@ On Error GoTo Err_Handler
     RootFolder = "T:\I&M"
     PhotoFolder = "T:\I&M\Monitoring\Forest_Vegetation\Photos\"
     If FolderExists(PhotoFolder & Me!txtPlot_Name) Then
-        retVal = Shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
+        retVal = shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
         GoTo Exit_Procedure
     Else
         If FolderExists(RootFolder) Then
             MsgBox ("Folder for this plot not found....Opening the root of the Photos folder.")
-            retVal = Shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
+            retVal = shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
             GoTo Exit_Procedure
         Else
             MsgBox ("The network appears to be unavailable. Network access is required to view photos.")
@@ -3084,7 +3126,7 @@ On Error GoTo Err_Handler
 
     ' Change the label format to indicate the sorted field
     strSortFieldLabel = "lbl" & Replace(strFieldName, "_", "")
-    With Me.Controls.Item(strSortFieldLabel)
+    With Me.Controls.item(strSortFieldLabel)
         .FontItalic = IIf(.FontItalic = False, True, False)
         .FontBold = IIf(.FontBold = False, True, False)
     
@@ -3145,11 +3187,11 @@ Private Function fxnSortRecords(ByVal strFieldName As String, _
     strSortFieldLabel = Replace(strSortFieldLabel, "_", "")
 
     ' Change the label format to indicate the sorted field
-    Me.Controls.Item(strSortFieldLabel).FontItalic = False
-    Me.Controls.Item(strSortFieldLabel).FontBold = False
+    Me.Controls.item(strSortFieldLabel).FontItalic = False
+    Me.Controls.item(strSortFieldLabel).FontBold = False
     'strSortFieldLabel = "lbl" & strFieldName
-    Me.Controls.Item(strSortFieldLabel).FontItalic = True
-    Me.Controls.Item(strSortFieldLabel).FontBold = True
+    Me.Controls.item(strSortFieldLabel).FontItalic = True
+    Me.Controls.item(strSortFieldLabel).FontBold = True
 
 Exit_Procedure:
     Exit Function

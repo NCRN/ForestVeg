@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     PopUp = NotDefault
@@ -22,10 +22,10 @@ Begin Form
     Width =12660
     DatasheetFontHeight =9
     ItemSuffix =21
-    Left =-31471
-    Top =4230
-    Right =-18556
-    Bottom =8235
+    Left =6375
+    Top =1710
+    Right =18435
+    Bottom =5715
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0xde59bba555ace340
@@ -620,6 +620,7 @@ Begin Form
                     RowSource ="SELECT tlu_Enumerations.Enum_Code FROM tlu_Enumerations WHERE (((tlu_Enumeration"
                         "s.Enum_Group)=\"Quick Comments\")) ORDER BY tlu_Enumerations.Sort_Order;"
                     ColumnWidths ="5760"
+                    AfterUpdate ="[Event Procedure]"
 
                     LayoutCachedLeft =1980
                     LayoutCachedTop =2160
@@ -793,7 +794,7 @@ End Sub
 ' Description:  combobox after update actions
 ' Assumptions:  -
 ' Parameters:   -
-' Returns:      -
+' Returns:      -G
 ' Throws:       none
 ' References:   -
 ' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
@@ -837,7 +838,7 @@ Private Sub btnAccept_Click()
 On Error GoTo Err_Handler
 
     If Me.Dirty Then Me.Dirty = False
-    ctlToReset.Value = Me!Value_New
+    ctlToReset.value = Me!Value_New
     DoCmd.Close acForm, Me.Name, acSaveNo
     frmReferrer.SaveRecord
         

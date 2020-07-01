@@ -2200,7 +2200,7 @@ On Error GoTo Err_Handler
                 "Grasses", "Sedges", "Herbs", "Ferns")
     
     'determine quadrat
-    Select Case Me!grpQuadrat_Selection.Value
+    Select Case Me!grpQuadrat_Selection.value
         Case 1
             strQuadrat = "360-3m"
         Case 2
@@ -2294,8 +2294,8 @@ On Error GoTo Err_Handler
     Me.Filter = "[Quadrat_Number] = """ & strQuadrat & """ "
     Me.FilterOn = True
     'Temporary fix to save Quadrat record before entering subform
-    Me!txtQuadrat_Comments.Value = Me!txtQuadrat_Comments.Value & " "
-    Me!txtQuadrat_Comments.Value = Left(Me!txtQuadrat_Comments.Value, Len(Me!txtQuadrat_Comments.Value) - 1)
+    Me!txtQuadrat_Comments.value = Me!txtQuadrat_Comments.value & " "
+    Me!txtQuadrat_Comments.value = Left(Me!txtQuadrat_Comments.value, Len(Me!txtQuadrat_Comments.value) - 1)
     'DoCmd.RunCommand acCmdSaveRecord
     'Me!txt_Percent_Trees.SetFocus
     Me!fsub_Quad_Herbaceous.Requery

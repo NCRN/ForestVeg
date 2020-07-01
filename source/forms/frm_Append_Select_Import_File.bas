@@ -726,7 +726,7 @@ On Error GoTo Err_Handler
     Application.SysCmd acSysCmdSetStatus, "Processing import tables..."
     
     'Pull the filename to be imported from a text box on the form
-    strPath = Me!txt_Import_File.Value
+    strPath = Me!txt_Import_File.value
     strImportFileRole = Mid(strPath, InStrAtPos(strPath, "_", 0) + 1, InStrAtPos(strPath, ".", 0) - InStrAtPos(strPath, "_", 0) - 1)
     strImportFileDate = Mid(strPath, InStrAtPos(strPath, "_", CharacterCount(strPath, "_") - 2) + 1, 8)
 Debug.Print strImportFileRole
@@ -811,17 +811,17 @@ Debug.Print strTableToImport
                             
                             Case "tbl_Events"
                                 'strDeleteExistingEventsQry = "DELETE [" & strTableToImport_NewName & "].* "
-                                Dim strWHERE As String
-                                strWHERE = ""
+                                Dim strWhere As String
+                                strWhere = ""
                                 Select Case strImportFileRole
                                     Case "PRIMARY"
                                     Case "SECONDARY"
-                                        strWHERE = " WHERE YEAR(e.Event_Date) < Year(Now()-1)"
+                                        strWhere = " WHERE YEAR(e.Event_Date) < Year(Now()-1)"
                                 End Select
                                 EventDeleteQuery = "DELETE i.* " _
                                     & "FROM [" & strTableToImport_NewName & "] i " _
                                     & "INNER JOIN tbl_Events e ON i.Event_ID = e.Event_ID" _
-                                    & strWHERE _
+                                    & strWhere _
                                     & ";"
                                     
                                 'dbMain.Execute strDeleteExistingEventsQry
@@ -914,7 +914,7 @@ Next_Record:
         
     Loop
     
-    Dim response As String
+    Dim Response As String
     
     If intImport2 = 2 Then
     
@@ -935,9 +935,9 @@ Debug.Print "e delete qry: " & EventDeleteQuery
     If Not IsNothing(EventDeleteQuery) = True Then _
         dbMain.Execute EventDeleteQuery
     
-    response = MsgBox("Import Complete! Would you like to proceed with appending data?", vbYesNo, "Import Data Tables")
+    Response = MsgBox("Import Complete! Would you like to proceed with appending data?", vbYesNo, "Import Data Tables")
         
-    If response = vbYes Then
+    If Response = vbYes Then
         Dim ImportFile As String
         ImportFile = Me.txt_Import_File_Name
         DoCmd.Close
@@ -1112,10 +1112,10 @@ End Sub
 Private Sub cbxImporter_AfterUpdate()
 On Error GoTo Err_Handler
 
-    SetTempVar "ImportContact", cbxImporter.Value
+    SetTempVar "ImportContact", cbxImporter.value
     
     'enable file selection if there's a contact selected
-    If Not IsNothing(cbxImporter.Value) Then
+    If Not IsNothing(cbxImporter.value) Then
         Me.btnBrowse.Enabled = True
         Me.btnSkipImport.Enabled = True
     End If

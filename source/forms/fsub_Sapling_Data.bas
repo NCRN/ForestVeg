@@ -1,9 +1,10 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     RecordSelectors = NotDefault
     NavigationButtons = NotDefault
     DividingLines = NotDefault
+    FilterOn = NotDefault
     AllowDesignChanges = NotDefault
     DefaultView =0
     TabularCharSet =204
@@ -13,11 +14,11 @@ Begin Form
     GridY =24
     Width =13944
     DatasheetFontHeight =9
-    ItemSuffix =76
-    Left =3465
-    Top =4305
-    Right =17235
-    Bottom =10620
+    ItemSuffix =79
+    Left =1095
+    Top =2985
+    Right =14865
+    Bottom =9300
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0xd0ed4c4b94aee340
@@ -947,7 +948,7 @@ Begin Form
                 End
                 Begin Subform
                     Visible = NotDefault
-                    OverlapFlags =223
+                    OverlapFlags =255
                     Left =4410
                     Top =2220
                     Width =3539
@@ -1603,6 +1604,42 @@ Begin Form
                     WebImagePaddingTop =1
                     Overlaps =1
                 End
+                Begin TextBox
+                    Visible = NotDefault
+                    OverlapFlags =223
+                    IMESentenceMode =3
+                    Left =4200
+                    Top =1980
+                    Width =300
+                    Height =315
+                    TabIndex =36
+                    ForeColor =16711680
+                    Name ="tbxSaplingDataID"
+                    ControlSource ="Sapling_Data_ID"
+
+                    LayoutCachedLeft =4200
+                    LayoutCachedTop =1980
+                    LayoutCachedWidth =4500
+                    LayoutCachedHeight =2295
+                End
+                Begin TextBox
+                    Visible = NotDefault
+                    OverlapFlags =93
+                    IMESentenceMode =3
+                    Left =4200
+                    Top =2415
+                    Width =300
+                    Height =315
+                    TabIndex =37
+                    ForeColor =16711680
+                    Name ="tbxSaplingEquivDBH"
+                    ControlSource ="=GetEquivDBH([Sapling_Data_ID])"
+
+                    LayoutCachedLeft =4200
+                    LayoutCachedTop =2415
+                    LayoutCachedWidth =4500
+                    LayoutCachedHeight =2730
+                End
             End
         End
         Begin FormFooter
@@ -1622,7 +1659,7 @@ Option Explicit
 ' =================================
 ' FORM:         fsub_Sapling_Data
 ' Level:        Application report
-' Version:      1.09
+' Version:      1.10
 '
 ' Description:  Form related functions & procedures for application
 ' Requires:     Keypad Utils module
@@ -1643,6 +1680,7 @@ Option Explicit
 '               BLC - 5/3/2019    - 1.07 - added RefreshTagDropDowns, tglExtendTagList
 '               BLC - 5/20/2019   - 1.08 - added SwapTagDropDowns
 '               BLC - 5/23/2019   - 1.09 - added SetTagRFS, Tag property
+'               BLC - 6/30/2020   - 1.10 - added GetEquivDBH check to avoid popups due to subform not updating EquivDBH until *after* check
 ' =================================
 
 ' ---------------------------------
@@ -2549,6 +2587,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/22/2018 - initial version
+'   BLC - 6/30/2020 - added GetEquivDBH check to avoid popups due to subform not updating EquivDBH until *after* check
 ' ---------------------------------
 Private Sub cbxSelectSampledTag_Change()
 On Error GoTo Err_Handler
@@ -2556,7 +2595,10 @@ On Error GoTo Err_Handler
 '    'fetch DBH_Check value from db (convert 1 -> -1 for Access logic)
 '    chkDBHCheck = IIf(Me!DBH_Check = 1, -1, 0)
 
-    CheckDBH
+    'set check @ 2 to ensure check is entered before needed @ < 1
+    If GetEquivDBH(Me.Sapling_Data_ID) < 2 Then
+        CheckDBH
+    End If
 
 Exit_Handler:
     Exit Sub
@@ -2630,14 +2672,14 @@ On Error GoTo Err_Handler
 
     Select Case Me!cbxBrowsePick.Column(0)
         Case "Yes / Yes"
-            Me!tbxBrowsable.Value = "Yes"
-            Me!tbxBrowsed.Value = "Yes"
+            Me!tbxBrowsable.value = "Yes"
+            Me!tbxBrowsed.value = "Yes"
         Case "Yes / No"
-            Me!tbxBrowsable.Value = "Yes"
-            Me!tbxBrowsed.Value = "No"
+            Me!tbxBrowsable.value = "Yes"
+            Me!tbxBrowsed.value = "No"
         Case "No / No"
-            Me!tbxBrowsable.Value = "No"
-            Me!tbxBrowsed.Value = "No"
+            Me!tbxBrowsable.value = "No"
+            Me!tbxBrowsed.value = "No"
     End Select
 
 Exit_Handler:
@@ -2705,11 +2747,11 @@ End Sub
 Private Sub cbxSaplingStatus_AfterUpdate()
 On Error GoTo Err_Handler
     
-    Dim response As String
+    Dim Response As String
     
     If Left(SaplingStatus, 4) = "Dead" And Left(Me!cbxSaplingStatus, 5) = "Alive" Then
-        response = MsgBox("You have changed the status of this sapling from dead to alive", vbOKCancel, "NCRN Forest Vegetation Monitoring")
-            If response = vbOK Then
+        Response = MsgBox("You have changed the status of this sapling from dead to alive", vbOKCancel, "NCRN Forest Vegetation Monitoring")
+            If Response = vbOK Then
                 MsgBox "Changes approved"
             Else
                 MsgBox "Changes rejected"
@@ -2883,7 +2925,7 @@ On Error GoTo Err_Handler
     Loop
     'If we haven't found record and exited by now, create new record.
     DoCmd.GoToRecord , , acNewRec
-    Tag_ID.Value = strFind
+    Tag_ID.value = strFind
     DoCmd.RunCommand acCmdSaveRecord
     Me!fsub_Tag_Sapling.Requery
     Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tag_Sapling]!cbxTagStatus = "Sapling"
@@ -2959,7 +3001,7 @@ On Error GoTo Err_Handler
     Loop
     'If we haven't found record and exited by now, create new record.
     DoCmd.GoToRecord , , acNewRec
-    Tag_ID.Value = strFind
+    Tag_ID.value = strFind
     DoCmd.RunCommand acCmdSaveRecord
     Me!fsub_Tag_Sapling.Requery
     Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tag_Sapling]!tbxTagStatus = "Sapling"
@@ -3172,7 +3214,7 @@ End Sub
 Private Function ToggleDBH()
 On Error GoTo Err_Handler
     
-    Select Case Me!cbxHabit.Value
+    Select Case Me!cbxHabit.value
         Case "Tree"
             Me!fsub_Sapling_DBH.Visible = True
         Case "Shrub"

@@ -1452,8 +1452,8 @@ Attribute VB_Exposed = False
 Option Compare Database
 
 Private Sub cmbo_Family_Change()
-    Me!cmbo_Genus.Value = "*"
-    Me!cmbo_Species.Value = "*"
+    Me!cmbo_Genus.value = "*"
+    Me!cmbo_Species.value = "*"
 End Sub
 
 Private Sub cmbo_Family_AfterUpdate()
@@ -1463,14 +1463,14 @@ Private Sub cmbo_Family_AfterUpdate()
 
 Private Sub cmbo_Genus_AfterUpdate()
 If Me!cmbo_Family = "" Or Me!cmbo_Family = "*" Or IsNull(Me!cmbo_Family) Then
-    Me!cmbo_Family.Value = Me!cmbo_Genus.Column(0)
+    Me!cmbo_Family.value = Me!cmbo_Genus.Column(0)
 End If
     Me!cmbo_Species.Locked = False
     Me!cmbo_Species.Requery
 End Sub
 
 Private Sub cmbo_Genus_Change()
-    Me!cmbo_Species.Value = "*"
+    Me!cmbo_Species.value = "*"
 End Sub
 
 'Private Sub cmbo_Genus_GotFocus()
@@ -1546,11 +1546,11 @@ Private Sub cmd_Unlock_Attributes_Click()
     If cmd_Unlock_Attributes.Caption = "Unlock Attributes" Then
         LockStatus = False
         cmd_Unlock_Attributes.Caption = "Lock Attributes"
-        Box_Attributes.borderColor = vbRed
+        Box_Attributes.BorderColor = vbRed
      Else
         LockStatus = True
         cmd_Unlock_Attributes.Caption = "Unlock Attributes"
-        Box_Attributes.borderColor = vbBlack
+        Box_Attributes.BorderColor = vbBlack
     End If
     Me!txt_Common_Preferred.Locked = LockStatus
     Me!txt_Order.Locked = LockStatus

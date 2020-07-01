@@ -1061,7 +1061,7 @@ Err_Handler:
 
 End Sub
 
-Private Sub cboContact_NotInList(NewData As String, response As Integer)
+Private Sub cboContact_NotInList(NewData As String, Response As Integer)
 On Error GoTo Err_Handler
 
 Me.ActiveControl.Undo

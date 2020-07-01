@@ -422,7 +422,7 @@ Attribute VB_Exposed = False
 Option Compare Database
 
 Private Sub Form_Load()
-    txtPlantType.Value = Me.OpenArgs & " Species Lookup"
+    txtPlantType.value = Me.OpenArgs & " Species Lookup"
     txtValue = ""
     txtLatin = ""
     txtCommon = ""
@@ -430,7 +430,7 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub Form_Open(Cancel As Integer)
-    txtPlantType.Value = Me.OpenArgs & " Species Lookup"
+    txtPlantType.value = Me.OpenArgs & " Species Lookup"
     txtValue = ""
     txtLatin = ""
     txtCommon = ""

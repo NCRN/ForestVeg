@@ -262,8 +262,8 @@ Debug.Print sql
     'processing
     Application.SysCmd acSysCmdSetStatus, "Deleting MASTER tbl_Events pseudoevents..."
     
-    DeletePseudoEvents "tbl_Events", Year(Now())
-    DeletePseudoEvents "tbl_Events", Year(Now()) - 1
+    DeletePseudoEvents "tbl_Events", year(Now())
+    DeletePseudoEvents "tbl_Events", year(Now()) - 1
 
     'return the pseudo-event IDs
     Set ArchivePseudoEvents = rs

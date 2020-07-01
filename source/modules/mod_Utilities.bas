@@ -174,6 +174,8 @@ MsgBox strMessage
     End With
 End Sub
 
+'FIX - Following code fails for files in the current directory - actually it is a test for whether
+'      a directory exists not file - BLC - 6/4/2020
 Public Function FileExists(varFile As Variant) As Boolean
 'Return whether a file exists
 On Error GoTo Err_FileExists
@@ -640,7 +642,7 @@ End Function
 Public Function FiscalYear(datDate As Date) As Integer
 Dim intYear As Integer
 
-intYear = Year(datDate)
+intYear = year(datDate)
 If Month(datDate) >= 10 Then
     intYear = intYear + 1
 End If
@@ -1081,53 +1083,53 @@ Public Function fPathParsing(fullPath As String, PathFormat As String) As String
             'Seasonals
             '? fPathParsing("C:\work\Seasonals.xls", "E")
             '.xls
-Dim i As Integer, f As String, Found As Integer
-Dim DirName As String, FNAME As String, Ext As String
+Dim i As Integer, f As String, found As Integer
+Dim DirName As String, fName As String, ext As String
   
   fullPath = Trim$(fullPath)
 '
 ' Get directory name
 '
   f = ""
-  Found = False
+  found = False
   For i = Len(fullPath) To 1 Step -1
     If Mid$(fullPath, i, 1) = "\" Then
       f = Mid$(fullPath, i + 1)
       DirName = Left$(fullPath, i)
-      Found = True
+      found = True
       Exit For
     End If
   Next i
-  If Not Found Then
+  If Not found Then
     f = fullPath
   End If
 '
 ' Get File name and extension
 '
   If f = "." Or f = ".." Then
-    FNAME = f
+    fName = f
   Else
     i = InStr(f, ".")
     If i > 0 Then
-      FNAME = Left$(f, i - 1)
-      Ext = Mid$(f, i)
+      fName = Left$(f, i - 1)
+      ext = Mid$(f, i)
     Else
-      FNAME = f
+      fName = f
     End If
   End If
 Select Case PathFormat
     Case "D"
         fPathParsing = DirName
     Case "N"
-        fPathParsing = FNAME
+        fPathParsing = fName
     Case "E"
-        fPathParsing = Ext
+        fPathParsing = ext
     Case "DN"
-        fPathParsing = DirName & FNAME
+        fPathParsing = DirName & fName
     Case "NE"
-        fPathParsing = FNAME & Ext
+        fPathParsing = fName & ext
     Case "DNE"
-        fPathParsing = DirName & FNAME & Ext
+        fPathParsing = DirName & fName & ext
     Case Else
         fPathParsing = fullPath
 
@@ -1378,7 +1380,7 @@ Dim strFileName As String
 
 On Error GoTo Error_Handler
 
-strFileName = CurrentDb.TableDefs(strTableName).Connect
+strFileName = CurrentDb.TableDefs(strTableName).connect
 If Len(strFileName) > 0 Then
     'linked table
     strFileName = ReplaceString_TSB(strFileName, ";DATABASE=", "", False)
@@ -1516,7 +1518,7 @@ Public Function fxnQueryExists(QueryName As String) As Boolean
 '=================================================  ============================
 
 Dim strQueryNameCheck
-On Error GoTo ErrorCode
+On Error GoTo errorCode
 
 'try to assign queryname value
 strQueryNameCheck = CurrentDb.QueryDefs(QueryName)
@@ -1528,7 +1530,7 @@ ExitCode:
     On Error Resume Next
     Exit Function
 
-ErrorCode:
+errorCode:
     Select Case Err.Number
         Case 3265  'Item not found in this collection
             fxnQueryExists = False

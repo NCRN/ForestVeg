@@ -1,5 +1,11 @@
+Option Compare Database
+Option Explicit
+
 ' =================================
 ' MODULE:       basLinkedTables
+' Level:        Application form module
+' Version:      1.01
+'
 ' Description:  Standard module for verifying and updating links to back-end tables
 '
 '   The functions in this module require that the database contain the following two tables:
@@ -12,10 +18,21 @@
 '       Description_text (txt 255).
 '
 ' Source/date:  John R. Boetsch, May 24, 2006
-' Revisions:    <name, date, desc - add lines as you go>
+' Revisions:    JRB, 5/24/2006 - 1.00 - initial version
+'               BC,  4/2/2020  - 1.01 - updated fxnGetLinkFile to file dialog vs adh for 64-bit update
+' =================================
 
-Option Compare Database
-Option Explicit
+' ---------------------------------
+'  Declarations
+' ---------------------------------
+
+' ---------------------------------
+'  Properties
+' ---------------------------------
+
+' ----------------
+'  Methods
+' ----------------
 
 ' =================================
 ' FUNCTION:     fxnVerifyLinks
@@ -169,6 +186,7 @@ End Function
 ' References:   adhAddFilterItem, adhCommonFileOpenSave
 ' Source/date:  Susan Huse, fall 2004
 ' Revisions:    John R. Boetsch, May 17, 2006 - updated documentation and error trap
+'               Bonnie Campbell, April 2, 2020 - revised to reference fso vs. adh method (64-bit update)
 ' =================================
 
 Public Function fxnGetLinkFile(Optional ByVal varInitialDir As Variant) As Variant
@@ -178,19 +196,48 @@ Public Function fxnGetLinkFile(Optional ByVal varInitialDir As Variant) As Varia
     Dim lngFlags As Long
 
     ' Use the open file dialog to interactively browse to and select the desired file
-    strFilter = adhAddFilterItem(strFilter, "Access (*.*db)", "*.*db")
-    
-    lngFlags = adhOFN_HIDEREADONLY Or _
-        adhOFN_HIDEREADONLY Or adhOFN_NOCHANGEDIR
-    
-    fxnGetLinkFile = adhCommonFileOpenSave( _
-        InitialDir:=varInitialDir, _
-        OpenFile:=True, _
-        Filter:=strFilter, _
-        Flags:=lngFlags, _
-        DialogTitle:="Locate data file")
+    'strFilter = adhAddFilterItem(strFilter, "Access (*.*db)", "*.*db")
+    'strFilter = adhAddFilterItem(strFilter, "Access (*.*db)")
+    'strFilter = adhAddFilterItem(strFilter, "*.*db")
+    'strFilter = adhAddFilterItem(strFilter, "Access (*.accdb)")
+    'strFilter = "*.accdb;*.mdb" '"Access Databases", "*.accdb;*.mdb"
 
-Exit_Procedure:
+' deprecated:
+'    lngFlags = adhOFN_HIDEREADONLY Or _
+'        adhOFN_HIDEREADONLY Or adhOFN_NOCHANGEDIR
+'
+'    fxnGetLinkFile = adhCommonFileOpenSave( _
+'        InitialDir:=varInitialDir, _
+'        OpenFile:=True, _
+'        Filter:=strFilter, _
+'        Flags:=lngFlags, _
+'        DialogTitle:="Locate data file")
+
+    ' file dialog works, but shows folders as well
+    Dim dlg As Object 'Application.FileDialog
+    Set dlg = Application.FileDialog(msoFileDialogFilePicker)
+
+    Dim strTitle As String
+    strTitle = "Locate data file"
+
+    'prepare file dialog
+    With dlg
+        .title = strTitle
+        .AllowMultiSelect = False
+        .Filters.Clear
+        .Filters.Add "Access Databases", "*.accdb"
+        .Filters.Add "", "*.mdb"
+        .Filters.Add "", "*.*db"
+        .InitialFileName = varInitialDir
+        
+        If .Show = -1 Then
+            fxnGetLinkFile = .SelectedItems(1)
+        Else
+            fxnGetLinkFile = Null
+        End If
+    End With
+    
+Exit_Handler:
     Exit Function
 
 Err_Handler:
@@ -198,7 +245,7 @@ Err_Handler:
         Case Else
             MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
                 "Error encountered (fxnGetLinkFile)"
-            Resume Exit_Procedure
+            Resume Exit_Handler
     End Select
 
 End Function
@@ -271,7 +318,7 @@ Public Function fxnRefreshLinks(strSQL As String, varFileName As Variant) As Boo
         varReturn = SysCmd(acSysCmdUpdateMeter, intI)
         strLinkTableName = rst![Link_table]
         Set tdf = db.TableDefs(strLinkTableName)
-        tdf.Connect = ";DATABASE=" & varFileName
+        tdf.connect = ";DATABASE=" & varFileName
         tdf.RefreshLink
         rst.MoveNext
     Loop

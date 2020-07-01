@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     AutoResize = NotDefault
@@ -23,11 +23,11 @@ Begin Form
     Width =14820
     DatasheetFontHeight =10
     ItemSuffix =225
-    Left =1575
-    Right =16320
-    Bottom =13425
+    Left =-210
+    Top =-30
+    Right =14535
+    Bottom =10980
     DatasheetGridlinesColor =12632256
-    Filter ="[Location_ID]='{5B8AA79D-FDEE-4CA5-AC93-EA82744EDCEF}'"
     OrderBy ="[tbl_Locations].[Plot_Name], [tbl_Locations].[Panel]"
     RecSrcDt = Begin
         0x6851775efa47e440
@@ -42,9 +42,6 @@ Begin Form
         0xa0050000a0050000a0050000a005000000000000201c0000e010000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
-    AllowPivotTableView =0
-    AllowPivotChartView =0
-    AllowPivotChartView =0
     FilterOnLoad =0
     ShowPageMargins =0
     AllowLayoutView =0
@@ -2313,8 +2310,8 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' FORM NAME:    frm_Data_Entry
-' Description:  Primary field data entry form
+' FORM NAME:    frm_Photos
+' Description:  Field photo metadata form
 ' Data source:  tbl_Locations
 ' Data access:  edit; allow additions off except for new records
 ' Pages:        none
@@ -2348,6 +2345,20 @@ Private Sub Form_Current()
     RefillImages
 End Sub
 
+' ---------------------------------
+' SUB:          lblPhotosLink_Click
+' Description:  label click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   MEL/GS - unknown - initial version
+'   BLC    - 5/9/2020 - revised handling of root & photo folder locations
+' ---------------------------------
 Private Sub lblLink_To_Plot_Photos_Click()
 On Error GoTo Err_Handler
 
@@ -2355,15 +2366,15 @@ On Error GoTo Err_Handler
     Dim RootFolder As String
     Dim PhotoFolder As String
     
-    RootFolder = "T:\I&M"
-    PhotoFolder = "T:\I&M\Monitoring\Forest_Vegetation\Photos\"
+    RootFolder = TempVars("RootPath") '"T:\I&M"
+    PhotoFolder = TempVars("FullPhotoPath") '"T:\I&M\Monitoring\Forest_Vegetation\Photos\"
     If FolderExists(PhotoFolder & Me!txtPlot_Name) Then
-        retVal = Shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
+        retVal = shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
         GoTo Exit_Procedure
     Else
         If FolderExists(RootFolder) Then
             MsgBox ("Folder for this plot not found....Opening the root of the Photos folder.")
-            retVal = Shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
+            retVal = shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
             GoTo Exit_Procedure
         Else
             MsgBox ("The network appears to be unavailable. Network access is required to view photos.")
@@ -2378,14 +2389,14 @@ Err_Handler:
 End Sub
 
 Private Sub cmdEditLocation_Click()
-Dim strOpenargs As String
+Dim strOpenArgs As String
 Dim strCriteria As String
 
     If Not IsNothing(Me!txtLocation_ID) Then
-        strOpenargs = XML_Tag("FormFrom", Me.Name)
-        strOpenargs = strOpenargs & XML_Tag("ControlFrom", "txtLocation_ID")
+        strOpenArgs = XML_Tag("FormFrom", Me.Name)
+        strOpenArgs = strOpenArgs & XML_Tag("ControlFrom", "txtLocation_ID")
         strCriteria = GetCriteriaString("Location_ID=", "tbl_Locations", "Location_ID", Me.Name, "txtLocation_ID")
-        DoCmd.OpenForm "frm_Locations", , , strCriteria, acFormEdit, acWindowNormal, strOpenargs
+        DoCmd.OpenForm "frm_Locations", , , strCriteria, acFormEdit, acWindowNormal, strOpenArgs
     End If
 End Sub
 
@@ -2515,7 +2526,7 @@ Forms("frm_Photo_QA").Error_Detected = strError_Detected
 Forms("frm_Photo_QA").Event_Date1 = datEventDate1
 Forms("frm_Photo_QA").Event_Date2 = datEventDate2
 Forms("frm_Photo_QA").Location_ID = strLocationID
-Forms("frm_Photo_QA").AD_Name = NetworkUserName()
+Forms("frm_Photo_QA").AD_Name = NetworkUsername()
 Forms("frm_Photo_QA").Error_Date = Now()
 
 If strError_Detected = True Then

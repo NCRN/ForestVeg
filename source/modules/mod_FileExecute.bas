@@ -50,7 +50,7 @@ Dim stRet As String
         Select Case lRet
             Case ERROR_NO_ASSOC:
                 'Try the OpenWith dialog
-                varTaskID = Shell("rundll32.exe shell32.dll,OpenAs_RunDLL " _
+                varTaskID = shell("rundll32.exe shell32.dll,OpenAs_RunDLL " _
    & stFile, WIN_NORMAL)
                 lRet = (varTaskID <> 0)
             Case ERROR_OUT_OF_MEM:

@@ -22,7 +22,7 @@ On Error GoTo Error_Handler
 
 For Each ctl In frm.Controls
     If InStr(ctl.Tag, "<data>") > 0 Then
-        If Not IsNull(ctl.Value) Then
+        If Not IsNull(ctl.value) Then
             booHasData = True
             Exit For
         End If

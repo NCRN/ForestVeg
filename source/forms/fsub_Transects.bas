@@ -598,7 +598,7 @@ Attribute VB_Exposed = False
 Option Compare Database
 
 Private Sub CboQuickFind_AfterUpdate()
-    Me!cboTSN.Value = Me!CboQuickFind.Column(2)
+    Me!cboTSN.value = Me!CboQuickFind.Column(2)
     Me!CboQuickFind = ""
     Me!txtDiameter.SetFocus
 End Sub

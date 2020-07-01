@@ -691,13 +691,13 @@ On Error GoTo Err_Handler
         
         Do Until rsDelete.EOF
         
-        If Me!optgSelectDelete.Value = 1 Then
+        If Me!optgSelectDelete.value = 1 Then
              
             rsDelete.Edit
             rsDelete![Delete_Table] = True
             rsDelete.Update
             
-        ElseIf Me!optgSelectDelete.Value = 2 Then
+        ElseIf Me!optgSelectDelete.value = 2 Then
             rsDelete.Edit
             rsDelete![Delete_Table] = False
             rsDelete.Update

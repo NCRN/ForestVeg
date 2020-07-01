@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     RecordSelectors = NotDefault
@@ -20,13 +20,13 @@ Begin Form
     Cycle =1
     GridX =24
     GridY =24
-    Width =10140
+    Width =10215
     DatasheetFontHeight =10
-    ItemSuffix =88
-    Left =45
-    Top =615
-    Right =10185
-    Bottom =5895
+    ItemSuffix =104
+    Left =720
+    Top =1275
+    Right =10935
+    Bottom =6840
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x3b82f36a92b1e340
@@ -124,7 +124,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =5295
+            Height =5580
             BackColor =0
             Name ="Detail"
             BackThemeColorIndex =0
@@ -145,15 +145,15 @@ Begin Form
                     OverlapFlags =223
                     TextFontCharSet =204
                     Top =1800
-                    Width =10140
-                    Height =3495
+                    Width =10215
+                    Height =3780
                     FontWeight =700
                     Name ="tabMenu"
                     FontName ="Arial"
 
                     LayoutCachedTop =1800
-                    LayoutCachedWidth =10140
-                    LayoutCachedHeight =5295
+                    LayoutCachedWidth =10215
+                    LayoutCachedHeight =5580
                     UseTheme =255
                     BackColor =14277081
                     BackThemeColorIndex =1
@@ -176,14 +176,14 @@ Begin Form
                             OverlapFlags =87
                             Left =75
                             Top =2220
-                            Width =9990
-                            Height =2994
+                            Width =10065
+                            Height =3285
                             Name ="pagMain"
                             Caption =" Main menu"
                             LayoutCachedLeft =75
                             LayoutCachedTop =2220
-                            LayoutCachedWidth =10065
-                            LayoutCachedHeight =5214
+                            LayoutCachedWidth =10140
+                            LayoutCachedHeight =5505
                             WebImagePaddingLeft =2
                             WebImagePaddingTop =2
                             WebImagePaddingRight =2
@@ -1013,54 +1013,110 @@ Begin Form
                             OverlapFlags =247
                             Left =75
                             Top =2220
-                            Width =9990
-                            Height =3000
+                            Width =10065
+                            Height =3285
                             Name ="pagDefaults"
                             Caption =" Defaults"
                             LayoutCachedLeft =75
                             LayoutCachedTop =2220
-                            LayoutCachedWidth =10065
-                            LayoutCachedHeight =5220
+                            LayoutCachedWidth =10140
+                            LayoutCachedHeight =5505
                             WebImagePaddingLeft =2
                             WebImagePaddingTop =2
                             WebImagePaddingRight =2
                             WebImagePaddingBottom =2
                             Begin
+                                Begin OptionGroup
+                                    BackStyle =1
+                                    OverlapFlags =255
+                                    Left =4920
+                                    Top =2940
+                                    Width =4980
+                                    Height =1560
+                                    BackColor =16709608
+                                    BorderColor =10921638
+                                    Name ="rctPaths"
+
+                                    LayoutCachedLeft =4920
+                                    LayoutCachedTop =2940
+                                    LayoutCachedWidth =9900
+                                    LayoutCachedHeight =4500
+                                    BorderThemeColorIndex =1
+                                    BorderShade =65.0
+                                    Begin
+                                        Begin Label
+                                            BackStyle =1
+                                            OverlapFlags =255
+                                            TextAlign =2
+                                            Left =5160
+                                            Top =2820
+                                            Width =1680
+                                            Height =300
+                                            FontWeight =600
+                                            TopMargin =58
+                                            Name ="lblPaths"
+                                            Caption ="Directory Paths"
+                                            LayoutCachedLeft =5160
+                                            LayoutCachedTop =2820
+                                            LayoutCachedWidth =6840
+                                            LayoutCachedHeight =3120
+                                            BackThemeColorIndex =1
+                                        End
+                                    End
+                                End
                                 Begin Rectangle
                                     OverlapFlags =255
-                                    Left =180
-                                    Top =2712
-                                    Width =5115
-                                    Height =1623
+                                    Left =120
+                                    Top =2520
+                                    Width =9840
+                                    Height =2103
                                     Name ="boxDefaultPane"
-                                    LayoutCachedLeft =180
-                                    LayoutCachedTop =2712
-                                    LayoutCachedWidth =5295
-                                    LayoutCachedHeight =4335
+                                    LayoutCachedLeft =120
+                                    LayoutCachedTop =2520
+                                    LayoutCachedWidth =9960
+                                    LayoutCachedHeight =4623
                                 End
                                 Begin CommandButton
                                     OverlapFlags =247
-                                    Left =4185
-                                    Top =2520
+                                    Left =8700
+                                    Top =2400
                                     Width =900
                                     Height =309
                                     FontSize =9
                                     FontWeight =700
+                                    TabIndex =1
                                     ForeColor =0
                                     Name ="btnChangeDefaults"
                                     Caption ="Change"
                                     OnClick ="[Event Procedure]"
                                     FontName ="Arial"
                                     ControlTipText ="Change the defaults"
+                                    LeftPadding =60
+                                    RightPadding =75
+                                    BottomPadding =120
 
-                                    LayoutCachedLeft =4185
-                                    LayoutCachedTop =2520
-                                    LayoutCachedWidth =5085
-                                    LayoutCachedHeight =2829
-                                    WebImagePaddingLeft =2
-                                    WebImagePaddingTop =2
-                                    WebImagePaddingRight =1
-                                    WebImagePaddingBottom =1
+                                    LayoutCachedLeft =8700
+                                    LayoutCachedTop =2400
+                                    LayoutCachedWidth =9600
+                                    LayoutCachedHeight =2709
+                                    ForeThemeColorIndex =0
+                                    UseTheme =1
+                                    Gradient =12
+                                    BackColor =0
+                                    BackThemeColorIndex =0
+                                    BorderThemeColorIndex =0
+                                    HoverColor =65280
+                                    PressedColor =0
+                                    PressedThemeColorIndex =0
+                                    PressedShade =80.0
+                                    HoverForeColor =0
+                                    HoverForeThemeColorIndex =0
+                                    PressedForeColor =0
+                                    PressedForeThemeColorIndex =0
+                                    Shadow =-1
+                                    QuickStyle =22
+                                    QuickStyleMask =-1
+                                    WebImagePaddingTop =1
                                 End
                                 Begin TextBox
                                     Enabled = NotDefault
@@ -1069,24 +1125,24 @@ Begin Form
                                     OverlapFlags =247
                                     TextAlign =2
                                     IMESentenceMode =3
-                                    Left =2025
-                                    Top =2970
+                                    Left =1650
+                                    Top =3060
                                     Width =3000
-                                    TabIndex =1
+                                    TabIndex =2
                                     Name ="cUser"
                                     ControlSource ="User_name"
                                     FontName ="Arial"
 
-                                    LayoutCachedLeft =2025
-                                    LayoutCachedTop =2970
-                                    LayoutCachedWidth =5025
-                                    LayoutCachedHeight =3210
+                                    LayoutCachedLeft =1650
+                                    LayoutCachedTop =3060
+                                    LayoutCachedWidth =4650
+                                    LayoutCachedHeight =3300
                                     Begin
                                         Begin Label
                                             OverlapFlags =247
                                             TextAlign =3
-                                            Left =1305
-                                            Top =2970
+                                            Left =930
+                                            Top =3060
                                             Width =663
                                             Height =252
                                             FontSize =9
@@ -1095,10 +1151,10 @@ Begin Form
                                             Name ="lblUser"
                                             Caption ="User"
                                             FontName ="Arial"
-                                            LayoutCachedLeft =1305
-                                            LayoutCachedTop =2970
-                                            LayoutCachedWidth =1968
-                                            LayoutCachedHeight =3222
+                                            LayoutCachedLeft =930
+                                            LayoutCachedTop =3060
+                                            LayoutCachedWidth =1593
+                                            LayoutCachedHeight =3312
                                         End
                                     End
                                 End
@@ -1109,24 +1165,24 @@ Begin Form
                                     OverlapFlags =247
                                     TextAlign =2
                                     IMESentenceMode =3
-                                    Left =2025
-                                    Top =3645
+                                    Left =1650
+                                    Top =3735
                                     Width =1095
-                                    TabIndex =2
+                                    TabIndex =3
                                     Name ="cPanel"
                                     ControlSource ="Panel"
                                     FontName ="Arial"
 
-                                    LayoutCachedLeft =2025
-                                    LayoutCachedTop =3645
-                                    LayoutCachedWidth =3120
-                                    LayoutCachedHeight =3885
+                                    LayoutCachedLeft =1650
+                                    LayoutCachedTop =3735
+                                    LayoutCachedWidth =2745
+                                    LayoutCachedHeight =3975
                                     Begin
                                         Begin Label
                                             OverlapFlags =247
                                             TextAlign =3
-                                            Left =1305
-                                            Top =3645
+                                            Left =930
+                                            Top =3735
                                             Width =654
                                             Height =252
                                             FontSize =9
@@ -1135,10 +1191,10 @@ Begin Form
                                             Name ="lblPanel"
                                             Caption ="Panel"
                                             FontName ="Arial"
-                                            LayoutCachedLeft =1305
-                                            LayoutCachedTop =3645
-                                            LayoutCachedWidth =1959
-                                            LayoutCachedHeight =3897
+                                            LayoutCachedLeft =930
+                                            LayoutCachedTop =3735
+                                            LayoutCachedWidth =1584
+                                            LayoutCachedHeight =3987
                                         End
                                     End
                                 End
@@ -1149,24 +1205,24 @@ Begin Form
                                     OverlapFlags =247
                                     TextAlign =2
                                     IMESentenceMode =3
-                                    Left =2025
-                                    Top =3975
+                                    Left =1650
+                                    Top =4065
                                     Width =3000
-                                    TabIndex =3
+                                    TabIndex =4
                                     Name ="cProtocol"
                                     ControlSource ="Protocol_Name"
                                     FontName ="Arial"
 
-                                    LayoutCachedLeft =2025
-                                    LayoutCachedTop =3975
-                                    LayoutCachedWidth =5025
-                                    LayoutCachedHeight =4215
+                                    LayoutCachedLeft =1650
+                                    LayoutCachedTop =4065
+                                    LayoutCachedWidth =4650
+                                    LayoutCachedHeight =4305
                                     Begin
                                         Begin Label
                                             OverlapFlags =247
                                             TextAlign =3
-                                            Left =1185
-                                            Top =3975
+                                            Left =810
+                                            Top =4065
                                             Width =795
                                             Height =255
                                             FontSize =9
@@ -1175,32 +1231,32 @@ Begin Form
                                             Name ="lblActivity"
                                             Caption ="Protocol"
                                             FontName ="Arial"
-                                            LayoutCachedLeft =1185
-                                            LayoutCachedTop =3975
-                                            LayoutCachedWidth =1980
-                                            LayoutCachedHeight =4230
+                                            LayoutCachedLeft =810
+                                            LayoutCachedTop =4065
+                                            LayoutCachedWidth =1605
+                                            LayoutCachedHeight =4320
                                         End
                                     End
                                 End
                                 Begin CheckBox
                                     OverlapFlags =247
-                                    Left =5835
-                                    Top =2910
+                                    Left =1680
+                                    Top =4770
                                     ColumnWidth =2208
-                                    TabIndex =4
+                                    TabIndex =5
                                     Name ="chkBackupOnStartup"
                                     ControlSource ="Backup_prompt_startup"
                                     StatusBarText ="Whether or not the application prompts for backups upon startup"
 
-                                    LayoutCachedLeft =5835
-                                    LayoutCachedTop =2910
-                                    LayoutCachedWidth =6095
-                                    LayoutCachedHeight =3150
+                                    LayoutCachedLeft =1680
+                                    LayoutCachedTop =4770
+                                    LayoutCachedWidth =1940
+                                    LayoutCachedHeight =5010
                                     Begin
                                         Begin Label
                                             OverlapFlags =247
-                                            Left =6065
-                                            Top =2880
+                                            Left =1910
+                                            Top =4740
                                             Width =2532
                                             Height =252
                                             FontSize =9
@@ -1208,32 +1264,32 @@ Begin Form
                                             Name ="lblBackupOnStartup"
                                             Caption ="Prompt for backup on startup"
                                             FontName ="Arial"
-                                            LayoutCachedLeft =6065
-                                            LayoutCachedTop =2880
-                                            LayoutCachedWidth =8597
-                                            LayoutCachedHeight =3132
+                                            LayoutCachedLeft =1910
+                                            LayoutCachedTop =4740
+                                            LayoutCachedWidth =4442
+                                            LayoutCachedHeight =4992
                                         End
                                     End
                                 End
                                 Begin CheckBox
                                     OverlapFlags =247
-                                    Left =5835
-                                    Top =3270
+                                    Left =1680
+                                    Top =5130
                                     ColumnWidth =1908
-                                    TabIndex =5
+                                    TabIndex =6
                                     Name ="chkBackupOnExit"
                                     ControlSource ="Backup_prompt_exit"
                                     StatusBarText ="Whether or not the application prompts for backups upon exiting"
 
-                                    LayoutCachedLeft =5835
-                                    LayoutCachedTop =3270
-                                    LayoutCachedWidth =6095
-                                    LayoutCachedHeight =3510
+                                    LayoutCachedLeft =1680
+                                    LayoutCachedTop =5130
+                                    LayoutCachedWidth =1940
+                                    LayoutCachedHeight =5370
                                     Begin
                                         Begin Label
                                             OverlapFlags =247
-                                            Left =6065
-                                            Top =3240
+                                            Left =1910
+                                            Top =5100
                                             Width =2244
                                             Height =252
                                             FontSize =9
@@ -1241,31 +1297,31 @@ Begin Form
                                             Name ="lblBackupOnExit"
                                             Caption ="Prompt for backup on exit"
                                             FontName ="Arial"
-                                            LayoutCachedLeft =6065
-                                            LayoutCachedTop =3240
-                                            LayoutCachedWidth =8309
-                                            LayoutCachedHeight =3492
+                                            LayoutCachedLeft =1910
+                                            LayoutCachedTop =5100
+                                            LayoutCachedWidth =4154
+                                            LayoutCachedHeight =5352
                                         End
                                     End
                                 End
                                 Begin CheckBox
                                     OverlapFlags =247
-                                    Left =5835
-                                    Top =3632
-                                    TabIndex =6
+                                    Left =5100
+                                    Top =4772
+                                    TabIndex =7
                                     Name ="chkCompactBEOnExit"
                                     ControlSource ="Compact_be_exit"
                                     StatusBarText ="Whether or not the application compacts the back-end db upon exiting"
 
-                                    LayoutCachedLeft =5835
-                                    LayoutCachedTop =3632
-                                    LayoutCachedWidth =6095
-                                    LayoutCachedHeight =3872
+                                    LayoutCachedLeft =5100
+                                    LayoutCachedTop =4772
+                                    LayoutCachedWidth =5360
+                                    LayoutCachedHeight =5012
                                     Begin
                                         Begin Label
                                             OverlapFlags =247
-                                            Left =6063
-                                            Top =3600
+                                            Left =5328
+                                            Top =4740
                                             Width =2376
                                             Height =252
                                             FontSize =9
@@ -1273,31 +1329,31 @@ Begin Form
                                             Name ="lblCompactBEOnExit"
                                             Caption ="Compact back-end on exit"
                                             FontName ="Arial"
-                                            LayoutCachedLeft =6063
-                                            LayoutCachedTop =3600
-                                            LayoutCachedWidth =8439
-                                            LayoutCachedHeight =3852
+                                            LayoutCachedLeft =5328
+                                            LayoutCachedTop =4740
+                                            LayoutCachedWidth =7704
+                                            LayoutCachedHeight =4992
                                         End
                                     End
                                 End
                                 Begin CheckBox
                                     OverlapFlags =247
-                                    Left =5835
-                                    Top =3992
-                                    TabIndex =7
+                                    Left =5100
+                                    Top =5132
+                                    TabIndex =8
                                     Name ="chkVerifyOnStartup"
                                     ControlSource ="Verify_links_startup"
                                     StatusBarText ="Whether or not the application verifies table connections upon startup"
 
-                                    LayoutCachedLeft =5835
-                                    LayoutCachedTop =3992
-                                    LayoutCachedWidth =6095
-                                    LayoutCachedHeight =4232
+                                    LayoutCachedLeft =5100
+                                    LayoutCachedTop =5132
+                                    LayoutCachedWidth =5360
+                                    LayoutCachedHeight =5372
                                     Begin
                                         Begin Label
                                             OverlapFlags =247
-                                            Left =6063
-                                            Top =3960
+                                            Left =5328
+                                            Top =5100
                                             Width =2376
                                             Height =252
                                             FontSize =9
@@ -1305,10 +1361,10 @@ Begin Form
                                             Name ="lblVerifyOnStartup"
                                             Caption ="Verify table links on startup"
                                             FontName ="Arial"
-                                            LayoutCachedLeft =6063
-                                            LayoutCachedTop =3960
-                                            LayoutCachedWidth =8439
-                                            LayoutCachedHeight =4212
+                                            LayoutCachedLeft =5328
+                                            LayoutCachedTop =5100
+                                            LayoutCachedWidth =7704
+                                            LayoutCachedHeight =5352
                                         End
                                     End
                                 End
@@ -1320,27 +1376,27 @@ Begin Form
                                     OverlapFlags =247
                                     TextAlign =2
                                     IMESentenceMode =3
-                                    Left =2025
-                                    Top =3300
+                                    Left =1650
+                                    Top =3390
                                     Width =3000
                                     Height =255
-                                    TabIndex =8
+                                    TabIndex =9
                                     Name ="cEntry_Role"
                                     ControlSource ="Entry_Role"
                                     RowSourceType ="Table/Query"
                                     RowSource ="PRIMARY;SECONDARY;SINGLE"
                                     FontName ="Arial"
 
-                                    LayoutCachedLeft =2025
-                                    LayoutCachedTop =3300
-                                    LayoutCachedWidth =5025
-                                    LayoutCachedHeight =3555
+                                    LayoutCachedLeft =1650
+                                    LayoutCachedTop =3390
+                                    LayoutCachedWidth =4650
+                                    LayoutCachedHeight =3645
                                     Begin
                                         Begin Label
                                             OverlapFlags =247
                                             TextAlign =3
-                                            Left =615
-                                            Top =3300
+                                            Left =240
+                                            Top =3390
                                             Width =1365
                                             Height =255
                                             FontSize =9
@@ -1349,10 +1405,10 @@ Begin Form
                                             Name ="lblProject"
                                             Caption ="Data Entry Role"
                                             FontName ="Arial"
-                                            LayoutCachedLeft =615
-                                            LayoutCachedTop =3300
-                                            LayoutCachedWidth =1980
-                                            LayoutCachedHeight =3555
+                                            LayoutCachedLeft =240
+                                            LayoutCachedTop =3390
+                                            LayoutCachedWidth =1605
+                                            LayoutCachedHeight =3645
                                         End
                                     End
                                 End
@@ -1363,24 +1419,24 @@ Begin Form
                                     OverlapFlags =247
                                     TextAlign =2
                                     IMESentenceMode =3
-                                    Left =3930
-                                    Top =3645
+                                    Left =3555
+                                    Top =3735
                                     Width =1095
-                                    TabIndex =9
+                                    TabIndex =10
                                     Name ="cTimeframe"
                                     ControlSource ="Timeframe"
                                     FontName ="Arial"
 
-                                    LayoutCachedLeft =3930
-                                    LayoutCachedTop =3645
-                                    LayoutCachedWidth =5025
-                                    LayoutCachedHeight =3885
+                                    LayoutCachedLeft =3555
+                                    LayoutCachedTop =3735
+                                    LayoutCachedWidth =4650
+                                    LayoutCachedHeight =3975
                                     Begin
                                         Begin Label
                                             OverlapFlags =247
                                             TextAlign =3
-                                            Left =3195
-                                            Top =3645
+                                            Left =2820
+                                            Top =3735
                                             Width =654
                                             Height =252
                                             FontSize =9
@@ -1389,12 +1445,142 @@ Begin Form
                                             Name ="lblTimeframe"
                                             Caption ="Year"
                                             FontName ="Arial"
-                                            LayoutCachedLeft =3195
-                                            LayoutCachedTop =3645
-                                            LayoutCachedWidth =3849
-                                            LayoutCachedHeight =3897
+                                            LayoutCachedLeft =2820
+                                            LayoutCachedTop =3735
+                                            LayoutCachedWidth =3474
+                                            LayoutCachedHeight =3987
                                         End
                                     End
+                                End
+                                Begin TextBox
+                                    Enabled = NotDefault
+                                    Locked = NotDefault
+                                    OverlapFlags =247
+                                    IMESentenceMode =3
+                                    Left =5760
+                                    Top =3360
+                                    Width =3180
+                                    Height =255
+                                    TabIndex =11
+                                    Name ="tbxRoot"
+                                    ControlSource ="Root_Path"
+
+                                    LayoutCachedLeft =5760
+                                    LayoutCachedTop =3360
+                                    LayoutCachedWidth =8940
+                                    LayoutCachedHeight =3615
+                                    Begin
+                                        Begin Label
+                                            OverlapFlags =247
+                                            Left =4980
+                                            Top =3360
+                                            Width =615
+                                            Height =240
+                                            FontWeight =700
+                                            Name ="lblRoot"
+                                            Caption ="Root"
+                                            LayoutCachedLeft =4980
+                                            LayoutCachedTop =3360
+                                            LayoutCachedWidth =5595
+                                            LayoutCachedHeight =3600
+                                        End
+                                    End
+                                End
+                                Begin TextBox
+                                    Enabled = NotDefault
+                                    Locked = NotDefault
+                                    OverlapFlags =247
+                                    IMESentenceMode =3
+                                    Left =6720
+                                    Top =3720
+                                    Width =3060
+                                    Height =255
+                                    TabIndex =12
+                                    Name ="tbxData"
+                                    ControlSource ="Data_Path"
+
+                                    LayoutCachedLeft =6720
+                                    LayoutCachedTop =3720
+                                    LayoutCachedWidth =9780
+                                    LayoutCachedHeight =3975
+                                    Begin
+                                        Begin Label
+                                            OverlapFlags =247
+                                            Left =4980
+                                            Top =3720
+                                            Width =615
+                                            Height =240
+                                            FontWeight =700
+                                            Name ="lblData"
+                                            Caption ="Data"
+                                            LayoutCachedLeft =4980
+                                            LayoutCachedTop =3720
+                                            LayoutCachedWidth =5595
+                                            LayoutCachedHeight =3960
+                                        End
+                                    End
+                                End
+                                Begin TextBox
+                                    Enabled = NotDefault
+                                    Locked = NotDefault
+                                    OverlapFlags =247
+                                    IMESentenceMode =3
+                                    Left =6720
+                                    Top =4140
+                                    Width =3060
+                                    Height =255
+                                    TabIndex =13
+                                    Name ="tbxPhoto"
+                                    ControlSource ="Photo_Path"
+
+                                    LayoutCachedLeft =6720
+                                    LayoutCachedTop =4140
+                                    LayoutCachedWidth =9780
+                                    LayoutCachedHeight =4395
+                                    Begin
+                                        Begin Label
+                                            OverlapFlags =247
+                                            Left =4980
+                                            Top =4140
+                                            Width =615
+                                            Height =240
+                                            FontWeight =700
+                                            Name ="lblPhoto"
+                                            Caption ="Photo"
+                                            LayoutCachedLeft =4980
+                                            LayoutCachedTop =4140
+                                            LayoutCachedWidth =5595
+                                            LayoutCachedHeight =4380
+                                        End
+                                    End
+                                End
+                                Begin Label
+                                    OverlapFlags =247
+                                    Left =5760
+                                    Top =3720
+                                    Width =780
+                                    Height =300
+                                    Name ="lblDataRoot"
+                                    Caption ="Root"
+                                    ControlTipText ="Root path of the data directory"
+                                    LayoutCachedLeft =5760
+                                    LayoutCachedTop =3720
+                                    LayoutCachedWidth =6540
+                                    LayoutCachedHeight =4020
+                                End
+                                Begin Label
+                                    OverlapFlags =247
+                                    Left =5760
+                                    Top =4140
+                                    Width =780
+                                    Height =300
+                                    Name ="lblPhotoRoot"
+                                    Caption ="Root"
+                                    ControlTipText ="Root path of the photo directory"
+                                    LayoutCachedLeft =5760
+                                    LayoutCachedTop =4140
+                                    LayoutCachedWidth =6540
+                                    LayoutCachedHeight =4440
                                 End
                             End
                         End
@@ -1402,14 +1588,14 @@ Begin Form
                             OverlapFlags =247
                             Left =75
                             Top =2220
-                            Width =9990
-                            Height =3000
+                            Width =10065
+                            Height =3285
                             Name ="pagAbout"
                             Caption =" About"
                             LayoutCachedLeft =75
                             LayoutCachedTop =2220
-                            LayoutCachedWidth =10065
-                            LayoutCachedHeight =5220
+                            LayoutCachedWidth =10140
+                            LayoutCachedHeight =5505
                             WebImagePaddingLeft =2
                             WebImagePaddingTop =2
                             WebImagePaddingRight =2
@@ -4185,6 +4371,20 @@ On Error GoTo Err_Handler
     Me.Caption = strCaption
     
 '    SetDbVersions
+    'Set current user ID
+    SetTempVar "CurrentUserID", ""
+
+    'get user full name
+    Dim sysInfo As Object
+    Dim oUser As Object
+    
+    Set sysInfo = CreateObject("ADSystemInfo")
+    If Not IsNull(sysInfo) Then
+        Set oUser = GetObject("LDAP://" & sysInfo.UserName & "")
+        If Not IsNothing(oUser) Then
+            Debug.Print "Display Name: "; Tab(20); oUser.Get("DisplayName")
+        End If
+    End If
     
 Exit_Handler:
     Exit Sub
@@ -4206,6 +4406,9 @@ Err_Handler:
             MsgBox "Error #" & Err.Number & ":  Missing system table info. Please notify" & _
                 vbCrLf & "the database administrator before using this application.", _
                 vbCritical, "System table error (tsys_App_Releases)"
+        Case -2147023541 'no connection to LDAP so can't get username
+            'continue on w/o error
+            Resume Next
         Case Else
             MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
                 "Error encountered (#" & Err.Number & " - Form_Open[frm_Switchboard])"
@@ -4501,7 +4704,7 @@ On Error GoTo Err_Handler
         'check if there are pseudoevents first
         Dim db As DAO.Database
         Dim rs As DAO.Recordset
-        Set db = CurrDb
+        Set db = currDb
         
         Set rs = db.OpenRecordset("qFrm_PseudoEvents", dbOpenDynaset)
 '        If Not (rs.BOF And rs.EOF) Then
@@ -5361,7 +5564,7 @@ On Error GoTo Err_Handler
     SetTempVar "Db BE Version", CStr(beDb.Properties("Db Version"))
 
     'get front & back-end versions
-    tbxVersionFE = Nz(CurrDb.Properties("Db Version"), "-")
+    tbxVersionFE = Nz(currDb.Properties("Db Version"), "-")
     'tbxVersionBE = Nz(CurrDb.Properties("Db BE Version"), "-")
     tbxVersionBE = Nz(TempVars("Db BE Version"), "-")
     

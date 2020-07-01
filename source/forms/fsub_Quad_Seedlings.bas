@@ -518,14 +518,14 @@ Private Sub cboBrowsePick_AfterUpdate()
 On Error GoTo Err_Handler
     Select Case Me!cboBrowsePick.Column(0)
         Case "Yes / Yes"
-            Me!txtBrowsable.Value = "Yes"
-            Me!txtBrowsed.Value = "Yes"
+            Me!txtBrowsable.value = "Yes"
+            Me!txtBrowsed.value = "Yes"
         Case "Yes / No"
-            Me!txtBrowsable.Value = "Yes"
-            Me!txtBrowsed.Value = "No"
+            Me!txtBrowsable.value = "Yes"
+            Me!txtBrowsed.value = "No"
         Case "No / No"
-            Me!txtBrowsable.Value = "No"
-            Me!txtBrowsed.Value = "No"
+            Me!txtBrowsable.value = "No"
+            Me!txtBrowsed.value = "No"
     End Select
 Exit_Procedure:
     Exit Sub
@@ -535,7 +535,7 @@ Err_Handler:
 End Sub
 
 Private Sub CboQuickFind_AfterUpdate()
-    Me!cboTSN.Value = Me!CboQuickFind.Column(3)
+    Me!cboTSN.value = Me!CboQuickFind.Column(3)
     Me!CboQuickFind = ""
     Me!txtHeight.SetFocus
 End Sub

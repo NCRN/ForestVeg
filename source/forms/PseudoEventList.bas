@@ -567,37 +567,37 @@ Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immedia
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(Value As String)
-Public Event InvalidDirections(Value As String)
-Public Event InvalidCallingForm(Value As String)
+Public Event InvalidTitle(value As String)
+Public Event InvalidDirections(value As String)
+Public Event InvalidCallingForm(value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(Value As String)
-    If Len(Value) > 0 Then
-        m_Title = Value
+Public Property Let title(value As String)
+    If Len(value) > 0 Then
+        m_Title = value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         'Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(Value)
+        RaiseEvent InvalidTitle(value)
     End If
 End Property
 
-Public Property Get Title() As String
-    Title = m_Title
+Public Property Get title() As String
+    title = m_Title
 End Property
 
-Public Property Let Directions(Value As String)
-    If Len(Value) > 0 Then
-        m_Directions = Value
+Public Property Let Directions(value As String)
+    If Len(value) > 0 Then
+        m_Directions = value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(Value)
+        RaiseEvent InvalidDirections(value)
     End If
 End Property
 
@@ -605,8 +605,8 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(Value As String)
-        m_CallingForm = Value
+Public Property Let CallingForm(value As String)
+        m_CallingForm = value
 End Property
 
 Public Property Get CallingForm() As String
@@ -645,7 +645,7 @@ On Error GoTo Err_Handler
     tbxDevMode = DEV_MODE
 
                 
-    Title = "Create New Event"
+    title = "Create New Event"
     'lblTitle.Caption = "" 'clear header title
     Directions = "Choose the park for your event. " _
               & "If a pseudo-event (rehab) was done in the last year " _
@@ -1144,7 +1144,7 @@ On Error GoTo Err_Handler
 
     ' Change the label format to indicate the sorted field
     strSortFieldLabel = "lbl" & Replace(strFieldName, "_", "")
-    With Me.Controls.Item(strSortFieldLabel)
+    With Me.Controls.item(strSortFieldLabel)
         .FontItalic = IIf(.FontItalic = False, True, False)
         .FontBold = IIf(.FontBold = False, True, False)
     
@@ -1190,7 +1190,7 @@ On Error GoTo Err_Handler
     
     'add park filter to filter string
     strFilter = "[Unit_Code]='" & ParkCode _
-             & "' AND Year([Event_Date]) > " & Year(Now()) - 2
+             & "' AND Year([Event_Date]) > " & year(Now()) - 2
 '    strFilter = "[Unit_Code]='" & Me!cbxParkCode _
 '             & "' AND Year([Event_Date]) > " & Year(Now()) - 2
 Debug.Print strFilter

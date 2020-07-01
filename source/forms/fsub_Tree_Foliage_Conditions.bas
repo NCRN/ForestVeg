@@ -416,7 +416,7 @@ End Sub
 Private Sub Form_AfterUpdate()
 On Error GoTo Err_Handler
 
-    Forms![frm_Events]![fsub_Tree_Data]![chkFoliageConditionsChecked].Value = True
+    Forms![frm_Events]![fsub_Tree_Data]![chkFoliageConditionsChecked].value = True
     Me.Parent.Refresh
 
 Exit_Handler:

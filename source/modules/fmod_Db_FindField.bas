@@ -346,7 +346,7 @@ Public Function ObjectExists(obj As Object, strObjectName As String) As Boolean
     '           If ObjectExists(CurrentProject.AllForms, "Form1") Then
     Dim varDummy As Variant
     On Error Resume Next
-    varDummy = obj.Item(strObjectName).Name
+    varDummy = obj.item(strObjectName).Name
     ObjectExists = (Err.Number = 0&)
 End Function
 

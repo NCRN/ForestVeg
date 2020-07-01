@@ -1,15 +1,14 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     RecordSelectors = NotDefault
-    MaxButton = NotDefault
-    MinButton = NotDefault
     ControlBox = NotDefault
     AutoCenter = NotDefault
     NavigationButtons = NotDefault
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
+    FilterOn = NotDefault
     DefaultView =0
     ScrollBars =0
     ViewsAllowed =1
@@ -22,12 +21,12 @@ Begin Form
     GridY =24
     Width =14400
     DatasheetFontHeight =10
-    ItemSuffix =161
-    Left =1035
-    Top =2415
-    Right =15435
-    Bottom =11610
+    ItemSuffix =167
+    Left =975
+    Right =15375
+    Bottom =10350
     DatasheetGridlinesColor =12632256
+    Filter ="[Event_ID]='20190808105910-890455424.785614'"
     RecSrcDt = Begin
         0x47be11900a4be540
     End
@@ -142,29 +141,16 @@ Begin Form
             GridlineThemeColorIndex =1
             GridlineShade =65.0
         End
-        Begin Section
-            CanGrow = NotDefault
-            Height =9210
-            BackColor =15527148
-            Name ="Detail"
+        Begin FormHeader
+            Height =540
+            BackColor =0
+            Name ="FormHeader"
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
             Begin
-                Begin Rectangle
-                    Visible = NotDefault
-                    SpecialEffect =0
-                    BackStyle =1
-                    OldBorderStyle =0
-                    OverlapFlags =93
-                    Top =540
-                    Width =14400
-                    Height =1080
-                    Name ="rctPseudoEvent"
-                    LayoutCachedTop =540
-                    LayoutCachedWidth =14400
-                    LayoutCachedHeight =1620
-                End
                 Begin Label
                     BackStyle =1
-                    OverlapFlags =95
+                    OverlapFlags =93
                     TextAlign =2
                     Width =14400
                     Height =540
@@ -180,14 +166,13 @@ Begin Form
                 End
                 Begin CommandButton
                     TabStop = NotDefault
-                    OverlapFlags =215
-                    Left =13320
-                    Top =120
+                    OverlapFlags =223
+                    Left =13440
+                    Top =90
                     Width =900
                     Height =330
                     FontSize =10
                     FontWeight =700
-                    TabIndex =1
                     Name ="cmdClose"
                     Caption ="Close"
                     OnClick ="[Event Procedure]"
@@ -197,10 +182,10 @@ Begin Form
                     RightPadding =75
                     BottomPadding =120
 
-                    LayoutCachedLeft =13320
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =14220
-                    LayoutCachedHeight =450
+                    LayoutCachedLeft =13440
+                    LayoutCachedTop =90
+                    LayoutCachedWidth =14340
+                    LayoutCachedHeight =420
                     ForeThemeColorIndex =0
                     UseTheme =255
                     Shape =1
@@ -225,22 +210,227 @@ Begin Form
                     WebImagePaddingTop =1
                     Overlaps =1
                 End
+                Begin ToggleButton
+                    TabStop = NotDefault
+                    OverlapFlags =215
+                    Left =120
+                    Top =90
+                    Width =1080
+                    Height =330
+                    ColumnOrder =0
+                    FontWeight =700
+                    TabIndex =1
+                    Name ="tglBrowse_Edit"
+                    Caption ="Editing OFF"
+                    FontName ="Calibri"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Toggle between browse and edit modes"
+                    LeftPadding =60
+                    RightPadding =75
+                    BottomPadding =120
+                    ImageData = Begin
+                        0x00000000
+                    End
+
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =90
+                    LayoutCachedWidth =1200
+                    LayoutCachedHeight =420
+                    ForeThemeColorIndex =0
+                    UseTheme =255
+                    Shape =1
+                    Gradient =12
+                    BackColor =8289145
+                    BackThemeColorIndex =4
+                    BorderColor =8289145
+                    BorderThemeColorIndex =4
+                    HoverColor =9226162
+                    HoverThemeColorIndex =7
+                    HoverTint =60.0
+                    PressedColor =6644321
+                    PressedThemeColorIndex =4
+                    PressedShade =80.0
+                    HoverForeColor =0
+                    HoverForeThemeColorIndex =0
+                    PressedForeColor =0
+                    PressedForeThemeColorIndex =0
+                    Shadow =-1
+                    QuickStyle =23
+                    QuickStyleMask =-1
+                    WebImagePaddingTop =1
+                    Overlaps =1
+                End
+                Begin CommandButton
+                    Visible = NotDefault
+                    OverlapFlags =215
+                    Left =10620
+                    Top =75
+                    Width =2766
+                    Height =366
+                    FontWeight =600
+                    TabIndex =2
+                    Name ="btnConvertPseudoEvent"
+                    Caption ="  Convert to Regular Event"
+                    OnClick ="[Event Procedure]"
+                    PictureData = Begin
+                        0x2800000010000000100000000100040000000000800000000000000000000000 ,
+                        0x0000000000000000000000000000800000800000008080008000000080008000 ,
+                        0x8080000080808000c0c0c0000000ff00c0c0c00000ffff00ff000000c0c0c000 ,
+                        0xffff0000ffffff00dddddddddddddddd00d00d00dddddddd00d00d00dddddddd ,
+                        0xdddddddddddddddddddddddddddddddddddddddddddddd00ddddd7ddddddd000 ,
+                        0xd7dd7c7ddddd000d7c7dd7ddddd000ddd7dddddddd000dddddddddddd000dddd ,
+                        0xddd7dddd000ddddddd7c7dd000ddddddddd7dd0b0dddddddddddd0b0dddddddd ,
+                        0xddddd70ddddddddd000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000
+                    End
+                    ObjectPalette = Begin
+                        0x000301000000000000000000
+                    End
+                    ControlTipText ="Convert pseudoevent to normal event (NOTE - you cannot convert it back so make s"
+                        "ure!)"
+                    LeftPadding =60
+                    RightPadding =75
+                    BottomPadding =120
+
+                    LayoutCachedLeft =10620
+                    LayoutCachedTop =75
+                    LayoutCachedWidth =13386
+                    LayoutCachedHeight =441
+                    PictureCaptionArrangement =5
+                    ForeThemeColorIndex =0
+                    UseTheme =1
+                    Shape =1
+                    Gradient =12
+                    BackColor =1796857
+                    BackThemeColorIndex =5
+                    BorderColor =1796857
+                    BorderThemeColorIndex =5
+                    HoverColor =65280
+                    HoverTint =80.0
+                    PressedColor =413911
+                    PressedThemeColorIndex =5
+                    PressedShade =80.0
+                    HoverForeColor =0
+                    HoverForeThemeColorIndex =0
+                    PressedForeColor =0
+                    PressedForeThemeColorIndex =0
+                    Shadow =-1
+                    QuickStyle =24
+                    QuickStyleMask =-1
+                    WebImagePaddingTop =1
+                    Overlaps =1
+                End
+                Begin Label
+                    Visible = NotDefault
+                    OverlapFlags =215
+                    TextAlign =2
+                    Left =1320
+                    Top =60
+                    Width =3120
+                    Height =450
+                    FontSize =18
+                    FontWeight =700
+                    BackColor =-2147483643
+                    ForeColor =16777215
+                    Name ="lblPseudoEventFlag"
+                    Caption ="* PSEUDO EVENT *"
+                    FontName ="Berlin Sans FB Demi"
+                    LayoutCachedLeft =1320
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =4440
+                    LayoutCachedHeight =510
+                End
+                Begin Label
+                    Visible = NotDefault
+                    OldBorderStyle =1
+                    OverlapFlags =215
+                    TextAlign =2
+                    Left =9840
+                    Top =60
+                    Width =600
+                    Height =420
+                    FontWeight =600
+                    BorderColor =52479
+                    ForeColor =16776960
+                    Name ="lblQCMode"
+                    Caption ="QC MODE"
+                    LayoutCachedLeft =9840
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =10440
+                    LayoutCachedHeight =480
+                End
+            End
+        End
+        Begin Section
+            CanGrow = NotDefault
+            Height =9465
+            BackColor =15527148
+            Name ="Detail"
+            Begin
+                Begin TextBox
+                    Enabled = NotDefault
+                    Locked = NotDefault
+                    TabStop = NotDefault
+                    SpecialEffect =0
+                    OldBorderStyle =0
+                    OverlapFlags =93
+                    TextAlign =2
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =6720
+                    Top =120
+                    Width =4560
+                    Height =300
+                    FontSize =12
+                    TabIndex =11
+                    Name ="txtXY"
+                    FontName ="Calibri"
+
+                    LayoutCachedLeft =6720
+                    LayoutCachedTop =120
+                    LayoutCachedWidth =11280
+                    LayoutCachedHeight =420
+                End
                 Begin TextBox
                     Enabled = NotDefault
                     Locked = NotDefault
                     SpecialEffect =0
                     OldBorderStyle =0
-                    OverlapFlags =223
+                    OverlapFlags =93
                     TextAlign =3
                     BackStyle =0
                     IMESentenceMode =3
                     Left =2700
-                    Top =480
                     Width =2160
                     Height =420
                     FontSize =18
                     FontWeight =700
-                    TabIndex =2
+                    TabIndex =13
                     Name ="txtStart_Date"
                     ControlSource ="Event_Date"
                     Format ="Short Date"
@@ -248,9 +438,20 @@ Begin Form
                     FontName ="Calibri"
 
                     LayoutCachedLeft =2700
-                    LayoutCachedTop =480
                     LayoutCachedWidth =4860
-                    LayoutCachedHeight =900
+                    LayoutCachedHeight =420
+                End
+                Begin Rectangle
+                    Visible = NotDefault
+                    SpecialEffect =0
+                    BackStyle =1
+                    OldBorderStyle =0
+                    OverlapFlags =255
+                    Width =14400
+                    Height =1140
+                    Name ="rctPseudoEvent"
+                    LayoutCachedWidth =14400
+                    LayoutCachedHeight =1140
                 End
                 Begin TextBox
                     Enabled = NotDefault
@@ -258,51 +459,94 @@ Begin Form
                     TabStop = NotDefault
                     SpecialEffect =0
                     OldBorderStyle =0
-                    OverlapFlags =223
+                    OverlapFlags =255
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =60
+                    Width =2583
+                    Height =420
+                    ColumnWidth =1440
+                    FontSize =18
+                    FontWeight =700
+                    TabIndex =12
+                    Name ="txtPlot_Name"
+                    StatusBarText ="Unique identifier for each sample location"
+                    FontName ="Calibri"
+
+                    LayoutCachedLeft =60
+                    LayoutCachedWidth =2643
+                    LayoutCachedHeight =420
+                End
+                Begin TextBox
+                    Visible = NotDefault
+                    Enabled = NotDefault
+                    Locked = NotDefault
+                    OverlapFlags =247
+                    IMESentenceMode =3
+                    Left =10200
+                    Top =120
+                    Width =1005
+                    Name ="txtLocation_ID"
+                    ControlSource ="Location_ID"
+                    StatusBarText ="M. Link to tbl_Locations (Loc_ID)"
+
+                    LayoutCachedLeft =10200
+                    LayoutCachedTop =120
+                    LayoutCachedWidth =11205
+                    LayoutCachedHeight =360
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    Locked = NotDefault
+                    SpecialEffect =0
+                    OldBorderStyle =0
+                    OverlapFlags =247
                     TextAlign =2
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =6720
-                    Top =600
-                    Width =4560
+                    Left =5040
+                    Top =120
+                    Width =1620
                     Height =300
                     FontSize =12
-                    TabIndex =3
-                    Name ="txtXY"
+                    TabIndex =1
+                    Name ="txtProtocol_Name"
+                    ControlSource ="=\"Protocol: \" & [Protocol_Name]"
                     FontName ="Calibri"
 
-                    LayoutCachedLeft =6720
-                    LayoutCachedTop =600
-                    LayoutCachedWidth =11280
-                    LayoutCachedHeight =900
+                    LayoutCachedLeft =5040
+                    LayoutCachedTop =120
+                    LayoutCachedWidth =6660
+                    LayoutCachedHeight =420
                 End
                 Begin Tab
                     MultiRow = NotDefault
-                    OverlapFlags =215
-                    Top =1200
+                    OverlapFlags =119
+                    Top =1140
                     Width =14250
-                    Height =8010
+                    Height =8325
                     FontSize =12
-                    TabIndex =4
+                    TabIndex =2
                     Name ="tabctlData"
                     FontName ="Calibri"
 
-                    LayoutCachedTop =1200
+                    LayoutCachedTop =1140
                     LayoutCachedWidth =14250
-                    LayoutCachedHeight =9210
+                    LayoutCachedHeight =9465
                     Begin
                         Begin Page
-                            OverlapFlags =87
+                            OverlapFlags =119
                             Left =135
-                            Top =1695
+                            Top =1635
                             Width =13980
-                            Height =7385
+                            Height =7700
                             Name ="pagIntro"
                             Caption ="Intro"
                             LayoutCachedLeft =135
-                            LayoutCachedTop =1695
+                            LayoutCachedTop =1635
                             LayoutCachedWidth =14115
-                            LayoutCachedHeight =9080
+                            LayoutCachedHeight =9335
                             BorderThemeColorIndex =-1
                             BorderShade =100.0
                             GridlineThemeColorIndex =-1
@@ -317,7 +561,7 @@ Begin Form
                                     OldBorderStyle =0
                                     SpecialEffect =0
                                     Left =240
-                                    Top =2055
+                                    Top =2310
                                     Width =5520
                                     Height =2100
                                     Name ="subObservers"
@@ -326,15 +570,15 @@ Begin Form
                                     LinkMasterFields ="Event_ID"
 
                                     LayoutCachedLeft =240
-                                    LayoutCachedTop =2055
+                                    LayoutCachedTop =2310
                                     LayoutCachedWidth =5760
-                                    LayoutCachedHeight =4155
+                                    LayoutCachedHeight =4410
                                 End
                                 Begin Subform
                                     OverlapFlags =247
                                     BorderWidth =3
                                     Left =6060
-                                    Top =2115
+                                    Top =2370
                                     Width =7980
                                     Height =6885
                                     TabIndex =1
@@ -344,14 +588,14 @@ Begin Form
                                     LinkMasterFields ="Location_ID"
 
                                     LayoutCachedLeft =6060
-                                    LayoutCachedTop =2115
+                                    LayoutCachedTop =2370
                                     LayoutCachedWidth =14040
-                                    LayoutCachedHeight =9000
+                                    LayoutCachedHeight =9255
                                     Begin
                                         Begin Label
-                                            OverlapFlags =223
+                                            OverlapFlags =255
                                             Left =6060
-                                            Top =1815
+                                            Top =2070
                                             Width =2760
                                             Height =300
                                             FontSize =12
@@ -361,9 +605,9 @@ Begin Form
                                             FontName ="Calibri"
                                             EventProcPrefix ="fsub_Note_History_Label"
                                             LayoutCachedLeft =6060
-                                            LayoutCachedTop =1815
+                                            LayoutCachedTop =2070
                                             LayoutCachedWidth =8820
-                                            LayoutCachedHeight =2115
+                                            LayoutCachedHeight =2370
                                         End
                                     End
                                 End
@@ -372,7 +616,7 @@ Begin Form
                                     OldBorderStyle =0
                                     SpecialEffect =0
                                     Left =240
-                                    Top =4680
+                                    Top =4935
                                     Width =5460
                                     TabIndex =2
                                     Name ="subPlot_Floor_Conditions"
@@ -381,14 +625,14 @@ Begin Form
                                     LinkMasterFields ="Event_ID"
 
                                     LayoutCachedLeft =240
-                                    LayoutCachedTop =4680
+                                    LayoutCachedTop =4935
                                     LayoutCachedWidth =5700
-                                    LayoutCachedHeight =6120
+                                    LayoutCachedHeight =6375
                                     Begin
                                         Begin Label
-                                            OverlapFlags =223
+                                            OverlapFlags =255
                                             Left =240
-                                            Top =4380
+                                            Top =4635
                                             Width =3480
                                             Height =300
                                             FontSize =14
@@ -398,16 +642,16 @@ Begin Form
                                             FontName ="Calibri"
                                             EventProcPrefix ="lblPlot_Floor_Conditions"
                                             LayoutCachedLeft =240
-                                            LayoutCachedTop =4380
+                                            LayoutCachedTop =4635
                                             LayoutCachedWidth =3720
-                                            LayoutCachedHeight =4680
+                                            LayoutCachedHeight =4935
                                         End
                                     End
                                 End
                                 Begin CommandButton
-                                    OverlapFlags =223
+                                    OverlapFlags =255
                                     Left =12060
-                                    Top =1695
+                                    Top =1950
                                     Width =1980
                                     Height =300
                                     FontSize =10
@@ -426,9 +670,9 @@ Begin Form
                                     End
 
                                     LayoutCachedLeft =12060
-                                    LayoutCachedTop =1695
+                                    LayoutCachedTop =1950
                                     LayoutCachedWidth =14040
-                                    LayoutCachedHeight =1995
+                                    LayoutCachedHeight =2250
                                     ForeThemeColorIndex =0
                                     UseTheme =255
                                     Shape =1
@@ -453,9 +697,9 @@ Begin Form
                                 End
                                 Begin CheckBox
                                     SpecialEffect =0
-                                    OverlapFlags =223
+                                    OverlapFlags =255
                                     Left =3360
-                                    Top =6360
+                                    Top =6615
                                     Height =210
                                     TabIndex =4
                                     BorderColor =2366701
@@ -464,28 +708,28 @@ Begin Form
                                     AfterUpdate ="[Event Procedure]"
 
                                     LayoutCachedLeft =3360
-                                    LayoutCachedTop =6360
+                                    LayoutCachedTop =6615
                                     LayoutCachedWidth =3620
-                                    LayoutCachedHeight =6570
+                                    LayoutCachedHeight =6825
                                 End
                                 Begin Rectangle
                                     SpecialEffect =4
                                     BorderWidth =3
-                                    OverlapFlags =223
+                                    OverlapFlags =255
                                     Left =240
-                                    Top =7710
+                                    Top =7965
                                     Width =5520
                                     Height =1080
                                     Name ="boxMetadata"
                                     LayoutCachedLeft =240
-                                    LayoutCachedTop =7710
+                                    LayoutCachedTop =7965
                                     LayoutCachedWidth =5760
-                                    LayoutCachedHeight =8790
+                                    LayoutCachedHeight =9045
                                 End
                                 Begin Label
-                                    OverlapFlags =215
+                                    OverlapFlags =247
                                     Left =240
-                                    Top =7470
+                                    Top =7725
                                     Width =1260
                                     Height =240
                                     FontSize =10
@@ -494,16 +738,16 @@ Begin Form
                                     Caption ="Metadata"
                                     FontName ="Calibri"
                                     LayoutCachedLeft =240
-                                    LayoutCachedTop =7470
+                                    LayoutCachedTop =7725
                                     LayoutCachedWidth =1500
-                                    LayoutCachedHeight =7710
+                                    LayoutCachedHeight =7965
                                 End
                                 Begin TextBox
-                                    OverlapFlags =215
+                                    OverlapFlags =247
                                     TextFontCharSet =204
                                     IMESentenceMode =3
                                     Left =1440
-                                    Top =7830
+                                    Top =8085
                                     Width =1200
                                     FontSize =10
                                     TabIndex =5
@@ -513,16 +757,16 @@ Begin Form
                                     FontName ="Calibri"
 
                                     LayoutCachedLeft =1440
-                                    LayoutCachedTop =7830
+                                    LayoutCachedTop =8085
                                     LayoutCachedWidth =2640
-                                    LayoutCachedHeight =8070
+                                    LayoutCachedHeight =8325
                                     Begin
                                         Begin Label
-                                            OverlapFlags =215
+                                            OverlapFlags =247
                                             TextFontCharSet =204
                                             TextAlign =3
                                             Left =240
-                                            Top =7830
+                                            Top =8085
                                             Width =1080
                                             Height =240
                                             FontSize =10
@@ -530,21 +774,21 @@ Begin Form
                                             Caption ="Updated"
                                             FontName ="Calibri"
                                             LayoutCachedLeft =240
-                                            LayoutCachedTop =7830
+                                            LayoutCachedTop =8085
                                             LayoutCachedWidth =1320
-                                            LayoutCachedHeight =8070
+                                            LayoutCachedHeight =8325
                                         End
                                     End
                                 End
                                 Begin ComboBox
                                     LimitToList = NotDefault
-                                    OverlapFlags =215
+                                    OverlapFlags =247
                                     TextFontCharSet =204
                                     IMESentenceMode =3
                                     ColumnCount =2
                                     ListWidth =2880
                                     Left =2760
-                                    Top =7830
+                                    Top =8085
                                     Width =2823
                                     Height =252
                                     FontSize =10
@@ -560,16 +804,16 @@ Begin Form
                                     StatusBarText ="Observer identifier"
                                     FontName ="Calibri"
                                     LayoutCachedLeft =2760
-                                    LayoutCachedTop =7830
+                                    LayoutCachedTop =8085
                                     LayoutCachedWidth =5583
-                                    LayoutCachedHeight =8082
+                                    LayoutCachedHeight =8337
                                 End
                                 Begin TextBox
-                                    OverlapFlags =215
+                                    OverlapFlags =247
                                     TextFontCharSet =204
                                     IMESentenceMode =3
                                     Left =1440
-                                    Top =8130
+                                    Top =8385
                                     Width =1200
                                     FontSize =10
                                     TabIndex =7
@@ -579,16 +823,16 @@ Begin Form
                                     FontName ="Calibri"
 
                                     LayoutCachedLeft =1440
-                                    LayoutCachedTop =8130
+                                    LayoutCachedTop =8385
                                     LayoutCachedWidth =2640
-                                    LayoutCachedHeight =8370
+                                    LayoutCachedHeight =8625
                                     Begin
                                         Begin Label
-                                            OverlapFlags =215
+                                            OverlapFlags =247
                                             TextFontCharSet =204
                                             TextAlign =3
                                             Left =240
-                                            Top =8130
+                                            Top =8385
                                             Width =1080
                                             Height =240
                                             FontSize =10
@@ -596,21 +840,21 @@ Begin Form
                                             Caption ="Verified"
                                             FontName ="Calibri"
                                             LayoutCachedLeft =240
-                                            LayoutCachedTop =8130
+                                            LayoutCachedTop =8385
                                             LayoutCachedWidth =1320
-                                            LayoutCachedHeight =8370
+                                            LayoutCachedHeight =8625
                                         End
                                     End
                                 End
                                 Begin ComboBox
                                     LimitToList = NotDefault
-                                    OverlapFlags =215
+                                    OverlapFlags =247
                                     TextFontCharSet =204
                                     IMESentenceMode =3
                                     ColumnCount =2
                                     ListWidth =2880
                                     Left =2760
-                                    Top =8130
+                                    Top =8385
                                     Width =2823
                                     Height =252
                                     FontSize =10
@@ -626,16 +870,16 @@ Begin Form
                                     StatusBarText ="Observer identifier"
                                     FontName ="Calibri"
                                     LayoutCachedLeft =2760
-                                    LayoutCachedTop =8130
+                                    LayoutCachedTop =8385
                                     LayoutCachedWidth =5583
-                                    LayoutCachedHeight =8382
+                                    LayoutCachedHeight =8637
                                 End
                                 Begin TextBox
-                                    OverlapFlags =215
+                                    OverlapFlags =247
                                     TextFontCharSet =204
                                     IMESentenceMode =3
                                     Left =1440
-                                    Top =8430
+                                    Top =8685
                                     Width =1200
                                     FontSize =10
                                     TabIndex =9
@@ -645,16 +889,16 @@ Begin Form
                                     FontName ="Calibri"
 
                                     LayoutCachedLeft =1440
-                                    LayoutCachedTop =8430
+                                    LayoutCachedTop =8685
                                     LayoutCachedWidth =2640
-                                    LayoutCachedHeight =8670
+                                    LayoutCachedHeight =8925
                                     Begin
                                         Begin Label
-                                            OverlapFlags =215
+                                            OverlapFlags =247
                                             TextFontCharSet =204
                                             TextAlign =3
                                             Left =240
-                                            Top =8430
+                                            Top =8685
                                             Width =1080
                                             Height =240
                                             FontSize =10
@@ -662,21 +906,21 @@ Begin Form
                                             Caption ="Certified"
                                             FontName ="Calibri"
                                             LayoutCachedLeft =240
-                                            LayoutCachedTop =8430
+                                            LayoutCachedTop =8685
                                             LayoutCachedWidth =1320
-                                            LayoutCachedHeight =8670
+                                            LayoutCachedHeight =8925
                                         End
                                     End
                                 End
                                 Begin ComboBox
                                     LimitToList = NotDefault
-                                    OverlapFlags =215
+                                    OverlapFlags =247
                                     TextFontCharSet =204
                                     IMESentenceMode =3
                                     ColumnCount =2
                                     ListWidth =2880
                                     Left =2760
-                                    Top =8430
+                                    Top =8685
                                     Width =2823
                                     Height =252
                                     FontSize =10
@@ -692,9 +936,9 @@ Begin Form
                                     StatusBarText ="Observer identifier"
                                     FontName ="Calibri"
                                     LayoutCachedLeft =2760
-                                    LayoutCachedTop =8430
+                                    LayoutCachedTop =8685
                                     LayoutCachedWidth =5583
-                                    LayoutCachedHeight =8682
+                                    LayoutCachedHeight =8937
                                 End
                                 Begin TextBox
                                     Locked = NotDefault
@@ -703,7 +947,7 @@ Begin Form
                                     OverlapFlags =247
                                     IMESentenceMode =3
                                     Left =3600
-                                    Top =6240
+                                    Top =6495
                                     Width =2220
                                     Height =360
                                     FontSize =14
@@ -723,9 +967,9 @@ Begin Form
                                     End
 
                                     LayoutCachedLeft =3600
-                                    LayoutCachedTop =6240
+                                    LayoutCachedTop =6495
                                     LayoutCachedWidth =5820
-                                    LayoutCachedHeight =6600
+                                    LayoutCachedHeight =6855
                                     ConditionalFormat14 = Begin
                                         0x01000100000001000000000000000100000000000000dfa7a500160000005b00 ,
                                         0x500069006300740075007200650073005f00540061006b0065006e005d003c00 ,
@@ -733,9 +977,9 @@ Begin Form
                                     End
                                 End
                                 Begin CommandButton
-                                    OverlapFlags =223
+                                    OverlapFlags =255
                                     Left =4020
-                                    Top =2415
+                                    Top =2670
                                     Width =300
                                     Height =300
                                     FontSize =12
@@ -794,57 +1038,57 @@ Begin Form
                                     End
 
                                     LayoutCachedLeft =4020
-                                    LayoutCachedTop =2415
+                                    LayoutCachedTop =2670
                                     LayoutCachedWidth =4320
-                                    LayoutCachedHeight =2715
+                                    LayoutCachedHeight =2970
                                     WebImagePaddingLeft =1
                                     WebImagePaddingTop =1
                                     Overlaps =1
                                 End
                                 Begin Line
                                     LineSlant = NotDefault
-                                    OverlapFlags =87
+                                    OverlapFlags =119
                                     Left =240
-                                    Top =7410
+                                    Top =7665
                                     Width =5520
-                                    Name ="Line137"
+                                    Name ="lnMetadata"
                                     GridlineColor =10921638
                                     LayoutCachedLeft =240
-                                    LayoutCachedTop =7410
+                                    LayoutCachedTop =7665
                                     LayoutCachedWidth =5760
-                                    LayoutCachedHeight =7410
+                                    LayoutCachedHeight =7665
                                 End
                                 Begin Line
                                     LineSlant = NotDefault
-                                    OverlapFlags =87
+                                    OverlapFlags =119
                                     Left =240
-                                    Top =6180
+                                    Top =6435
                                     Width =5520
-                                    Name ="Line142"
+                                    Name ="lnDeerImpact"
                                     GridlineColor =10921638
                                     LayoutCachedLeft =240
-                                    LayoutCachedTop =6180
+                                    LayoutCachedTop =6435
                                     LayoutCachedWidth =5760
-                                    LayoutCachedHeight =6180
+                                    LayoutCachedHeight =6435
                                 End
                                 Begin Line
                                     LineSlant = NotDefault
-                                    OverlapFlags =87
+                                    OverlapFlags =119
                                     Left =240
-                                    Top =4260
+                                    Top =4515
                                     Width =5520
-                                    Name ="Line143"
+                                    Name ="lnPlotFloor"
                                     GridlineColor =10921638
                                     LayoutCachedLeft =240
-                                    LayoutCachedTop =4260
+                                    LayoutCachedTop =4515
                                     LayoutCachedWidth =5760
-                                    LayoutCachedHeight =4260
+                                    LayoutCachedHeight =4515
                                 End
                                 Begin Label
-                                    OverlapFlags =223
+                                    OverlapFlags =255
                                     TextAlign =1
                                     Left =240
-                                    Top =1755
+                                    Top =2010
                                     Width =3480
                                     Height =311
                                     FontSize =14
@@ -853,18 +1097,18 @@ Begin Form
                                     Caption ="Participants and Roles"
                                     FontName ="Calibri"
                                     LayoutCachedLeft =240
-                                    LayoutCachedTop =1755
+                                    LayoutCachedTop =2010
                                     LayoutCachedWidth =3720
-                                    LayoutCachedHeight =2066
+                                    LayoutCachedHeight =2321
                                 End
                                 Begin ComboBox
-                                    OverlapFlags =215
+                                    OverlapFlags =247
                                     TextAlign =1
                                     IMESentenceMode =3
                                     ColumnCount =2
                                     ListWidth =3888
                                     Left =1680
-                                    Top =6240
+                                    Top =6495
                                     Width =720
                                     Height =359
                                     FontSize =13
@@ -896,9 +1140,9 @@ Begin Form
                                     BottomMargin =22
 
                                     LayoutCachedLeft =1680
-                                    LayoutCachedTop =6240
+                                    LayoutCachedTop =6495
                                     LayoutCachedWidth =2400
-                                    LayoutCachedHeight =6599
+                                    LayoutCachedHeight =6854
                                     ConditionalFormat14 = Begin
                                         0x01000100000001000000000000000100000000000000dfa7a5001d0000004900 ,
                                         0x73004e0075006c006c0028005b00630062006f0054007200650065005f005300 ,
@@ -908,9 +1152,9 @@ Begin Form
                                 End
                                 Begin CommandButton
                                     FontUnderline = NotDefault
-                                    OverlapFlags =215
+                                    OverlapFlags =247
                                     Left =240
-                                    Top =6240
+                                    Top =6495
                                     Width =1380
                                     FontSize =13
                                     TabIndex =14
@@ -926,9 +1170,9 @@ Begin Form
                                     BackStyle =0
 
                                     LayoutCachedLeft =240
-                                    LayoutCachedTop =6240
+                                    LayoutCachedTop =6495
                                     LayoutCachedWidth =1620
-                                    LayoutCachedHeight =6600
+                                    LayoutCachedHeight =6855
                                     Alignment =3
                                     WebImagePaddingLeft =2
                                     WebImagePaddingTop =2
@@ -937,51 +1181,51 @@ Begin Form
                                 End
                                 Begin Line
                                     LineSlant = NotDefault
-                                    OverlapFlags =87
+                                    OverlapFlags =119
                                     Left =240
-                                    Top =6660
+                                    Top =6915
                                     Width =5520
-                                    Name ="Line147"
+                                    Name ="lnCheckboxes"
                                     GridlineColor =10921638
                                     LayoutCachedLeft =240
-                                    LayoutCachedTop =6660
+                                    LayoutCachedTop =6915
                                     LayoutCachedWidth =5760
-                                    LayoutCachedHeight =6660
+                                    LayoutCachedHeight =6915
                                 End
                                 Begin CheckBox
-                                    OverlapFlags =215
+                                    OverlapFlags =247
                                     Left =300
-                                    Top =6750
+                                    Top =7005
                                     Width =240
                                     TabIndex =15
                                     Name ="chk_Early_Detect"
                                     ControlSource ="Early_Detect"
 
                                     LayoutCachedLeft =300
-                                    LayoutCachedTop =6750
+                                    LayoutCachedTop =7005
                                     LayoutCachedWidth =540
-                                    LayoutCachedHeight =6990
+                                    LayoutCachedHeight =7245
                                     Begin
                                         Begin Label
-                                            OverlapFlags =215
+                                            OverlapFlags =247
                                             Left =540
-                                            Top =6720
+                                            Top =6975
                                             Width =2100
                                             Height =240
                                             FontWeight =700
-                                            Name ="Label149"
+                                            Name ="lblEarlyDetectSpecies"
                                             Caption ="Early Detection Species"
                                             LayoutCachedLeft =540
-                                            LayoutCachedTop =6720
+                                            LayoutCachedTop =6975
                                             LayoutCachedWidth =2640
-                                            LayoutCachedHeight =6960
+                                            LayoutCachedHeight =7215
                                         End
                                     End
                                 End
                                 Begin CheckBox
-                                    OverlapFlags =215
+                                    OverlapFlags =247
                                     Left =300
-                                    Top =7110
+                                    Top =7365
                                     Width =240
                                     Height =180
                                     TabIndex =16
@@ -989,70 +1233,207 @@ Begin Form
                                     ControlSource ="Rare_Spp"
 
                                     LayoutCachedLeft =300
-                                    LayoutCachedTop =7110
+                                    LayoutCachedTop =7365
                                     LayoutCachedWidth =540
-                                    LayoutCachedHeight =7290
+                                    LayoutCachedHeight =7545
                                     Begin
                                         Begin Label
                                             OverlapFlags =247
                                             Left =525
-                                            Top =7080
+                                            Top =7335
                                             Width =1215
                                             Height =240
                                             FontWeight =700
-                                            Name ="Label151"
+                                            Name ="lblRareSpecies"
                                             Caption ="Rare Species "
                                             LayoutCachedLeft =525
-                                            LayoutCachedTop =7080
+                                            LayoutCachedTop =7335
                                             LayoutCachedWidth =1740
-                                            LayoutCachedHeight =7320
+                                            LayoutCachedHeight =7575
                                         End
                                     End
                                 End
                                 Begin CheckBox
-                                    OverlapFlags =215
+                                    OverlapFlags =247
                                     Left =2820
-                                    Top =6750
+                                    Top =7005
                                     Width =240
                                     TabIndex =17
                                     Name ="chk_Plot_Maint"
                                     ControlSource ="Plot_Maint"
 
                                     LayoutCachedLeft =2820
-                                    LayoutCachedTop =6750
+                                    LayoutCachedTop =7005
                                     LayoutCachedWidth =3060
-                                    LayoutCachedHeight =6990
+                                    LayoutCachedHeight =7245
                                     Begin
                                         Begin Label
                                             OverlapFlags =247
                                             Left =3045
-                                            Top =6720
+                                            Top =6975
                                             Width =1575
                                             Height =240
                                             FontWeight =700
-                                            Name ="Label153"
+                                            Name ="lblPlotMaintenance"
                                             Caption ="Plot Maintenance"
                                             LayoutCachedLeft =3045
-                                            LayoutCachedTop =6720
+                                            LayoutCachedTop =6975
                                             LayoutCachedWidth =4620
-                                            LayoutCachedHeight =6960
+                                            LayoutCachedHeight =7215
                                         End
                                     End
+                                End
+                                Begin CommandButton
+                                    Visible = NotDefault
+                                    OverlapFlags =255
+                                    Left =4140
+                                    Top =1680
+                                    Width =576
+                                    Height =576
+                                    TabIndex =18
+                                    Name ="btnFlag"
+                                    Caption ="btnFlag"
+                                    PictureData = Begin
+                                        0x2800000020000000200000000100180000000000000c0000c40e0000c40e0000 ,
+                                        0x0000000000000000b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7 ,
+                                        0xb8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9 ,
+                                        0xb7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8 ,
+                                        0xb9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7 ,
+                                        0xb8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9 ,
+                                        0xb7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8 ,
+                                        0xb9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7 ,
+                                        0xb8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9 ,
+                                        0xb7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8 ,
+                                        0xb9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7000000000000b8b9b7 ,
+                                        0xb8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b6b8b9b6b8b9b7b8b9 ,
+                                        0xb7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8b9b7b8 ,
+                                        0xb9b7b8b9b7b8b9b7b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6000000000000b8b9b6 ,
+                                        0xb8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6000000000000b8b9b6 ,
+                                        0xb8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6000000000000b8b9b6 ,
+                                        0xb8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6000000000000b8b9b6 ,
+                                        0xb8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6000000000000b8b9b6 ,
+                                        0xb8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6000000000000b8b9b6 ,
+                                        0xb8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6000000000000b8b9b6 ,
+                                        0xb8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6000000000000b8b9b6 ,
+                                        0xb8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6000000000000b8b9b6 ,
+                                        0xb8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6000000000000696aed ,
+                                        0xaaacc4b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b60000000000006c6deb ,
+                                        0x1415ff7a7be5b7b9b7b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6000000000000a5a7c8 ,
+                                        0x0004ff0004ff2c2dfc8889ddb8b9b6b8b9b6b8b9b6b8b9b69798d45d5ef12c2d ,
+                                        0xfc0f0fff0004ff2a2bfd7d7ee3b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6000000000000b8b9b6 ,
+                                        0x2829fd0004ff0004ff0004ff2122fe5354f45758f32829fd0004ff0004ff0004 ,
+                                        0xff0004ff0004ff0004ff0004ff4b4cf6b4b6bab8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6000000000000b8b9b6 ,
+                                        0x5a5bf20004ff0004ff0004ff0004ff0004ff0004ff0004ff0004ff0004ff0004 ,
+                                        0xff0004ff0004ff0004ff0004ff0004ff4041f9b6b7b9b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6000000000000b8b9b6 ,
+                                        0x7475e80004ff0004ff0004ff0004ff0004ff0004ff0004ff0004ff0004ff0004 ,
+                                        0xff0004ff0004ff0004ff0004ff0004ff0004ff5556f4b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6000000000000b8b9b6 ,
+                                        0x7475e80004ff0004ff0004ff0004ff0004ff0004ff0004ff0004ff0004ff0004 ,
+                                        0xff0004ff0004ff0004ff0004ff0004ff0004ff0004ff7c7de4b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6000000000000b8b9b6 ,
+                                        0x3e3efa0004ff0004ff0004ff0004ff0004ff0004ff0004ff0004ff0004ff0004 ,
+                                        0xff0004ff0004ff0004ff2c2cfc4243f93a3afa0f0fff0f0fffa4a6c9b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b60000000000008b8ddb ,
+                                        0x0004ff0004ff0004ff0004ff0004ff0004ff0004ff0004ff0004ff0004ff0004 ,
+                                        0xff0004ff494af7a1a2ccb8b9b6b8b9b6b8b9b6b3b5bb7f80e26465efb8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b60000000000002e2efc ,
+                                        0x0004ff0004ff0004ff0004ff0004ff0004ff0004ff0004ff0004ff0004ff2c2c ,
+                                        0xfc9294d6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b60000000000009d9fcf ,
+                                        0x5c5df11819fe0004ff0004ff0004ff0004ff0004ff0004ff0f0fff7273e9b6b8 ,
+                                        0xb8b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6 ,
+                                        0xb8b9b6b6b7b88f91d8595af22627fd0004ff1c1cfe6061f0adafc1b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6 ,
+                                        0xb8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6 ,
+                                        0xb8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6 ,
+                                        0xb8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6 ,
+                                        0xb8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6 ,
+                                        0xb8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6 ,
+                                        0xb8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6 ,
+                                        0xb8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9 ,
+                                        0xb6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8b9b6b8 ,
+                                        0xb9b6b8b9b6b8b9b6
+                                    End
+                                    ObjectPalette = Begin
+                                        0x000301000000000000000000
+                                    End
+                                    ControlTipText ="Find Next"
+                                    Picture ="flag_red.bmp"
+                                    LeftPadding =60
+                                    RightPadding =75
+                                    BottomPadding =120
+
+                                    LayoutCachedLeft =4140
+                                    LayoutCachedTop =1680
+                                    LayoutCachedWidth =4716
+                                    LayoutCachedHeight =2256
+                                    ForeThemeColorIndex =0
+                                    UseTheme =1
+                                    Shape =1
+                                    BorderColor =8289145
+                                    BorderThemeColorIndex =4
+                                    HoverForeColor =0
+                                    HoverForeThemeColorIndex =0
+                                    PressedForeColor =0
+                                    PressedForeThemeColorIndex =0
+                                    Shadow =-1
+                                    QuickStyle =23
+                                    QuickStyleMask =-49
+                                    WebImagePaddingTop =1
                                 End
                             End
                         End
                         Begin Page
                             OverlapFlags =247
                             Left =135
-                            Top =1695
+                            Top =1635
                             Width =13980
-                            Height =7380
+                            Height =7695
                             Name ="pagTransects"
                             Caption ="Transect"
                             LayoutCachedLeft =135
-                            LayoutCachedTop =1695
+                            LayoutCachedTop =1635
                             LayoutCachedWidth =14115
-                            LayoutCachedHeight =9075
+                            LayoutCachedHeight =9330
                             BorderThemeColorIndex =-1
                             BorderShade =100.0
                             GridlineThemeColorIndex =-1
@@ -1066,7 +1447,7 @@ Begin Form
                                     SpecialEffect =1
                                     OverlapFlags =247
                                     Left =360
-                                    Top =2715
+                                    Top =2970
                                     Width =1680
                                     Height =1200
                                     Name ="grpTransect_Selection"
@@ -1074,16 +1455,16 @@ Begin Form
                                     DefaultValue ="1"
 
                                     LayoutCachedLeft =360
-                                    LayoutCachedTop =2715
+                                    LayoutCachedTop =2970
                                     LayoutCachedWidth =2040
-                                    LayoutCachedHeight =3915
+                                    LayoutCachedHeight =4170
                                     Begin
                                         Begin Label
                                             BackStyle =1
                                             OverlapFlags =247
                                             TextAlign =2
                                             Left =480
-                                            Top =2595
+                                            Top =2850
                                             Width =1440
                                             Height =240
                                             FontSize =10
@@ -1093,14 +1474,14 @@ Begin Form
                                             Caption ="Select a Transect"
                                             FontName ="Calibri"
                                             LayoutCachedLeft =480
-                                            LayoutCachedTop =2595
+                                            LayoutCachedTop =2850
                                             LayoutCachedWidth =1920
-                                            LayoutCachedHeight =2835
+                                            LayoutCachedHeight =3090
                                         End
                                         Begin ToggleButton
                                             OverlapFlags =247
                                             Left =840
-                                            Top =2955
+                                            Top =3210
                                             Height =390
                                             FontSize =14
                                             FontWeight =700
@@ -1116,9 +1497,9 @@ Begin Form
                                             End
 
                                             LayoutCachedLeft =840
-                                            LayoutCachedTop =2955
+                                            LayoutCachedTop =3210
                                             LayoutCachedWidth =1560
-                                            LayoutCachedHeight =3345
+                                            LayoutCachedHeight =3600
                                             ForeThemeColorIndex =0
                                             UseTheme =1
                                             Shape =1
@@ -1146,7 +1527,7 @@ Begin Form
                                         Begin ToggleButton
                                             OverlapFlags =247
                                             Left =480
-                                            Top =3435
+                                            Top =3690
                                             Height =390
                                             FontSize =14
                                             FontWeight =700
@@ -1163,9 +1544,9 @@ Begin Form
                                             End
 
                                             LayoutCachedLeft =480
-                                            LayoutCachedTop =3435
+                                            LayoutCachedTop =3690
                                             LayoutCachedWidth =1200
-                                            LayoutCachedHeight =3825
+                                            LayoutCachedHeight =4080
                                             ForeThemeColorIndex =0
                                             UseTheme =1
                                             Shape =1
@@ -1193,7 +1574,7 @@ Begin Form
                                         Begin ToggleButton
                                             OverlapFlags =247
                                             Left =1260
-                                            Top =3435
+                                            Top =3690
                                             Height =390
                                             FontSize =14
                                             FontWeight =700
@@ -1210,9 +1591,9 @@ Begin Form
                                             End
 
                                             LayoutCachedLeft =1260
-                                            LayoutCachedTop =3435
+                                            LayoutCachedTop =3690
                                             LayoutCachedWidth =1980
-                                            LayoutCachedHeight =3825
+                                            LayoutCachedHeight =4080
                                             ForeThemeColorIndex =0
                                             UseTheme =1
                                             Shape =1
@@ -1246,7 +1627,7 @@ Begin Form
                                     TextAlign =2
                                     IMESentenceMode =3
                                     Left =360
-                                    Top =1935
+                                    Top =2190
                                     Width =1680
                                     Height =540
                                     FontSize =22
@@ -1259,14 +1640,14 @@ Begin Form
                                     FontName ="Calibri"
 
                                     LayoutCachedLeft =360
-                                    LayoutCachedTop =1935
+                                    LayoutCachedTop =2190
                                     LayoutCachedWidth =2040
-                                    LayoutCachedHeight =2475
+                                    LayoutCachedHeight =2730
                                 End
                                 Begin CheckBox
                                     OverlapFlags =255
                                     Left =795
-                                    Top =4515
+                                    Top =4770
                                     Width =335
                                     Height =285
                                     TabIndex =2
@@ -1276,14 +1657,14 @@ Begin Form
                                     DefaultValue ="0"
 
                                     LayoutCachedLeft =795
-                                    LayoutCachedTop =4515
+                                    LayoutCachedTop =4770
                                     LayoutCachedWidth =1130
-                                    LayoutCachedHeight =4800
+                                    LayoutCachedHeight =5055
                                 End
                                 Begin CheckBox
                                     OverlapFlags =255
                                     Left =780
-                                    Top =4995
+                                    Top =5250
                                     Width =335
                                     Height =285
                                     TabIndex =3
@@ -1293,14 +1674,14 @@ Begin Form
                                     DefaultValue ="0"
 
                                     LayoutCachedLeft =780
-                                    LayoutCachedTop =4995
+                                    LayoutCachedTop =5250
                                     LayoutCachedWidth =1115
-                                    LayoutCachedHeight =5280
+                                    LayoutCachedHeight =5535
                                 End
                                 Begin CheckBox
                                     OverlapFlags =255
                                     Left =780
-                                    Top =5475
+                                    Top =5730
                                     Width =335
                                     Height =285
                                     TabIndex =4
@@ -1310,28 +1691,28 @@ Begin Form
                                     DefaultValue ="0"
 
                                     LayoutCachedLeft =780
-                                    LayoutCachedTop =5475
+                                    LayoutCachedTop =5730
                                     LayoutCachedWidth =1115
-                                    LayoutCachedHeight =5760
+                                    LayoutCachedHeight =6015
                                 End
                                 Begin Rectangle
                                     OverlapFlags =255
                                     Left =360
-                                    Top =4200
+                                    Top =4455
                                     Width =1679
                                     Height =1650
                                     Name ="shpTransect_Checked"
                                     LayoutCachedLeft =360
-                                    LayoutCachedTop =4200
+                                    LayoutCachedTop =4455
                                     LayoutCachedWidth =2039
-                                    LayoutCachedHeight =5850
+                                    LayoutCachedHeight =6105
                                 End
                                 Begin Label
                                     BackStyle =1
                                     OverlapFlags =247
                                     TextAlign =2
                                     Left =420
-                                    Top =4035
+                                    Top =4290
                                     Width =1515
                                     Height =240
                                     FontSize =10
@@ -1340,14 +1721,14 @@ Begin Form
                                     Caption ="Transect Checked"
                                     FontName ="Calibri"
                                     LayoutCachedLeft =420
-                                    LayoutCachedTop =4035
+                                    LayoutCachedTop =4290
                                     LayoutCachedWidth =1935
-                                    LayoutCachedHeight =4275
+                                    LayoutCachedHeight =4530
                                 End
                                 Begin Subform
                                     OverlapFlags =247
                                     Left =2520
-                                    Top =1905
+                                    Top =2160
                                     Width =10065
                                     Height =6435
                                     TabIndex =5
@@ -1357,9 +1738,9 @@ Begin Form
                                     LinkMasterFields ="Event_ID"
 
                                     LayoutCachedLeft =2520
-                                    LayoutCachedTop =1905
+                                    LayoutCachedTop =2160
                                     LayoutCachedWidth =12585
-                                    LayoutCachedHeight =8340
+                                    LayoutCachedHeight =8595
                                 End
                                 Begin TextBox
                                     Locked = NotDefault
@@ -1369,7 +1750,7 @@ Begin Form
                                     TextAlign =2
                                     IMESentenceMode =3
                                     Left =1040
-                                    Top =4395
+                                    Top =4650
                                     Width =705
                                     Height =375
                                     FontSize =16
@@ -1389,9 +1770,9 @@ Begin Form
                                     End
 
                                     LayoutCachedLeft =1040
-                                    LayoutCachedTop =4395
+                                    LayoutCachedTop =4650
                                     LayoutCachedWidth =1745
-                                    LayoutCachedHeight =4770
+                                    LayoutCachedHeight =5025
                                     ConditionalFormat14 = Begin
                                         0x01000100000001000000000000000101000000000000dfa7a500150000005b00 ,
                                         0x4300570044005f0043006800650063006b005f003300360030005d003c003e00 ,
@@ -1406,7 +1787,7 @@ Begin Form
                                     TextAlign =2
                                     IMESentenceMode =3
                                     Left =1025
-                                    Top =4875
+                                    Top =5130
                                     Width =705
                                     Height =375
                                     FontSize =16
@@ -1426,9 +1807,9 @@ Begin Form
                                     End
 
                                     LayoutCachedLeft =1025
-                                    LayoutCachedTop =4875
+                                    LayoutCachedTop =5130
                                     LayoutCachedWidth =1730
-                                    LayoutCachedHeight =5250
+                                    LayoutCachedHeight =5505
                                     ConditionalFormat14 = Begin
                                         0x01000100000001000000000000000101000000000000dfa7a500150000005b00 ,
                                         0x4300570044005f0043006800650063006b005f003100320030005d003c003e00 ,
@@ -1443,7 +1824,7 @@ Begin Form
                                     TextAlign =2
                                     IMESentenceMode =3
                                     Left =1005
-                                    Top =5355
+                                    Top =5610
                                     Width =705
                                     Height =375
                                     FontSize =16
@@ -1463,9 +1844,9 @@ Begin Form
                                     End
 
                                     LayoutCachedLeft =1005
-                                    LayoutCachedTop =5355
+                                    LayoutCachedTop =5610
                                     LayoutCachedWidth =1710
-                                    LayoutCachedHeight =5730
+                                    LayoutCachedHeight =5985
                                     ConditionalFormat14 = Begin
                                         0x01000100000001000000000000000101000000000000dfa7a500150000005b00 ,
                                         0x4300570044005f0043006800650063006b005f003200340030005d003c003e00 ,
@@ -1477,15 +1858,15 @@ Begin Form
                         Begin Page
                             OverlapFlags =247
                             Left =60
-                            Top =1695
+                            Top =1635
                             Width =14055
-                            Height =7380
+                            Height =7695
                             Name ="pagTrees"
                             Caption ="Trees"
                             LayoutCachedLeft =60
-                            LayoutCachedTop =1695
+                            LayoutCachedTop =1635
                             LayoutCachedWidth =14115
-                            LayoutCachedHeight =9075
+                            LayoutCachedHeight =9330
                             BorderThemeColorIndex =-1
                             BorderShade =100.0
                             GridlineThemeColorIndex =-1
@@ -1499,7 +1880,7 @@ Begin Form
                                     OverlapFlags =247
                                     SpecialEffect =3
                                     Left =60
-                                    Top =1724
+                                    Top =1979
                                     Width =14054
                                     Height =7094
                                     Name ="fsub_Tree_Data"
@@ -1508,24 +1889,24 @@ Begin Form
                                     LinkMasterFields ="Event_ID"
 
                                     LayoutCachedLeft =60
-                                    LayoutCachedTop =1724
+                                    LayoutCachedTop =1979
                                     LayoutCachedWidth =14114
-                                    LayoutCachedHeight =8818
+                                    LayoutCachedHeight =9073
                                 End
                             End
                         End
                         Begin Page
                             OverlapFlags =247
                             Left =60
-                            Top =1695
+                            Top =1635
                             Width =14055
-                            Height =7380
+                            Height =7695
                             Name ="pagSaplings"
                             Caption ="Saplings"
                             LayoutCachedLeft =60
-                            LayoutCachedTop =1695
+                            LayoutCachedTop =1635
                             LayoutCachedWidth =14115
-                            LayoutCachedHeight =9075
+                            LayoutCachedHeight =9330
                             BorderThemeColorIndex =-1
                             BorderShade =100.0
                             GridlineThemeColorIndex =-1
@@ -1539,7 +1920,7 @@ Begin Form
                                     OverlapFlags =247
                                     SpecialEffect =3
                                     Left =60
-                                    Top =1724
+                                    Top =1979
                                     Width =14054
                                     Height =6599
                                     Name ="fsub_Sapling_Data"
@@ -1549,27 +1930,27 @@ Begin Form
                                     OnEnter ="[Event Procedure]"
 
                                     LayoutCachedLeft =60
-                                    LayoutCachedTop =1724
+                                    LayoutCachedTop =1979
                                     LayoutCachedWidth =14114
-                                    LayoutCachedHeight =8323
+                                    LayoutCachedHeight =8578
                                 End
                             End
                         End
                         Begin Page
                             OverlapFlags =247
                             Left =60
-                            Top =1695
+                            Top =1635
                             Width =14055
-                            Height =7380
+                            Height =7695
                             Name ="pagQuadrats"
                             Caption ="Quadrats"
                             ImageData = Begin
                                 0x00000000
                             End
                             LayoutCachedLeft =60
-                            LayoutCachedTop =1695
+                            LayoutCachedTop =1635
                             LayoutCachedWidth =14115
-                            LayoutCachedHeight =9075
+                            LayoutCachedHeight =9330
                             BorderThemeColorIndex =-1
                             BorderShade =100.0
                             GridlineThemeColorIndex =-1
@@ -1583,7 +1964,7 @@ Begin Form
                                     OverlapFlags =247
                                     SpecialEffect =3
                                     Left =60
-                                    Top =1724
+                                    Top =1979
                                     Width =14054
                                     Height =6599
                                     Name ="fsub_Quadrats"
@@ -1592,22 +1973,22 @@ Begin Form
                                     LinkMasterFields ="Event_ID"
 
                                     LayoutCachedLeft =60
-                                    LayoutCachedTop =1724
+                                    LayoutCachedTop =1979
                                     LayoutCachedWidth =14114
-                                    LayoutCachedHeight =8323
+                                    LayoutCachedHeight =8578
                                 End
                             End
                         End
                     End
                 End
                 Begin CommandButton
-                    OverlapFlags =223
+                    OverlapFlags =255
                     Left =12300
-                    Top =600
+                    Top =120
                     Width =900
                     Height =660
                     FontWeight =700
-                    TabIndex =5
+                    TabIndex =3
                     Name ="cmdEditLocation"
                     Caption ="Edit Location"
                     OnClick ="[Event Procedure]"
@@ -1618,9 +1999,9 @@ Begin Form
                     BottomPadding =120
 
                     LayoutCachedLeft =12300
-                    LayoutCachedTop =600
+                    LayoutCachedTop =120
                     LayoutCachedWidth =13200
-                    LayoutCachedHeight =1260
+                    LayoutCachedHeight =780
                     ForeThemeColorIndex =0
                     UseTheme =255
                     Shape =1
@@ -1643,145 +2024,27 @@ Begin Form
                     WebImagePaddingTop =1
                     Overlaps =1
                 End
-                Begin ToggleButton
-                    TabStop = NotDefault
-                    OverlapFlags =223
-                    Left =240
-                    Top =120
-                    Width =1080
-                    Height =330
-                    FontWeight =700
-                    TabIndex =6
-                    Name ="tglBrowse_Edit"
-                    Caption ="Editing OFF"
-                    FontName ="Calibri"
-                    OnClick ="[Event Procedure]"
-                    ControlTipText ="Toggle between browse and edit modes"
-                    LeftPadding =60
-                    RightPadding =75
-                    BottomPadding =120
-                    ImageData = Begin
-                        0x00000000
-                    End
-
-                    LayoutCachedLeft =240
-                    LayoutCachedTop =120
-                    LayoutCachedWidth =1320
-                    LayoutCachedHeight =450
-                    ForeThemeColorIndex =0
-                    UseTheme =255
-                    Shape =1
-                    Gradient =12
-                    BackColor =8289145
-                    BackThemeColorIndex =4
-                    BorderColor =8289145
-                    BorderThemeColorIndex =4
-                    HoverColor =9226162
-                    HoverThemeColorIndex =7
-                    HoverTint =60.0
-                    PressedColor =6644321
-                    PressedThemeColorIndex =4
-                    PressedShade =80.0
-                    HoverForeColor =0
-                    HoverForeThemeColorIndex =0
-                    PressedForeColor =0
-                    PressedForeThemeColorIndex =0
-                    Shadow =-1
-                    QuickStyle =23
-                    QuickStyleMask =-1
-                    WebImagePaddingTop =1
-                    Overlaps =1
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    Locked = NotDefault
-                    TabStop = NotDefault
-                    SpecialEffect =0
-                    OldBorderStyle =0
-                    OverlapFlags =223
-                    TextAlign =1
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =60
-                    Top =480
-                    Width =2583
-                    Height =420
-                    ColumnWidth =1440
-                    FontSize =18
-                    FontWeight =700
-                    Name ="txtPlot_Name"
-                    StatusBarText ="Unique identifier for each sample location"
-                    FontName ="Calibri"
-
-                    LayoutCachedLeft =60
-                    LayoutCachedTop =480
-                    LayoutCachedWidth =2643
-                    LayoutCachedHeight =900
-                End
-                Begin TextBox
-                    Visible = NotDefault
-                    Enabled = NotDefault
-                    Locked = NotDefault
-                    OverlapFlags =247
-                    IMESentenceMode =3
-                    Left =10200
-                    Top =600
-                    Width =1005
-                    TabIndex =7
-                    Name ="txtLocation_ID"
-                    ControlSource ="Location_ID"
-                    StatusBarText ="M. Link to tbl_Locations (Loc_ID)"
-
-                    LayoutCachedLeft =10200
-                    LayoutCachedTop =600
-                    LayoutCachedWidth =11205
-                    LayoutCachedHeight =840
-                End
-                Begin TextBox
-                    Enabled = NotDefault
-                    Locked = NotDefault
-                    SpecialEffect =0
-                    OldBorderStyle =0
-                    OverlapFlags =215
-                    TextAlign =2
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =5040
-                    Top =600
-                    Width =1620
-                    Height =300
-                    FontSize =12
-                    TabIndex =8
-                    Name ="txtProtocol_Name"
-                    ControlSource ="=\"Protocol: \" & [Protocol_Name]"
-                    FontName ="Calibri"
-
-                    LayoutCachedLeft =5040
-                    LayoutCachedTop =600
-                    LayoutCachedWidth =6660
-                    LayoutCachedHeight =900
-                End
                 Begin TextBox
                     Locked = NotDefault
-                    OverlapFlags =215
+                    OverlapFlags =255
                     IMESentenceMode =3
                     Left =3000
-                    Top =960
+                    Top =480
                     Width =3540
-                    TabIndex =9
+                    TabIndex =4
                     Name ="txtEvent_ID"
                     ControlSource ="Event_ID"
 
                     LayoutCachedLeft =3000
-                    LayoutCachedTop =960
+                    LayoutCachedTop =480
                     LayoutCachedWidth =6540
-                    LayoutCachedHeight =1200
+                    LayoutCachedHeight =720
                 End
                 Begin Label
                     FontUnderline = NotDefault
-                    OverlapFlags =215
+                    OverlapFlags =247
                     Left =7080
-                    Top =1260
+                    Top =780
                     Width =1980
                     Height =300
                     FontSize =10
@@ -1791,15 +2054,15 @@ Begin Form
                     FontName ="Calibri"
                     HyperlinkAddress ="http://maps.google.com/maps?q=ANTI-0092@39.4746557,-77.7262205&iwloc=A&t=h"
                     LayoutCachedLeft =7080
-                    LayoutCachedTop =1260
+                    LayoutCachedTop =780
                     LayoutCachedWidth =9060
-                    LayoutCachedHeight =1560
+                    LayoutCachedHeight =1080
                 End
                 Begin Label
                     FontUnderline = NotDefault
-                    OverlapFlags =215
+                    OverlapFlags =247
                     Left =9180
-                    Top =1260
+                    Top =780
                     Width =1800
                     Height =300
                     FontSize =10
@@ -1809,18 +2072,18 @@ Begin Form
                     FontName ="Calibri"
                     OnClick ="[Event Procedure]"
                     LayoutCachedLeft =9180
-                    LayoutCachedTop =1260
+                    LayoutCachedTop =780
                     LayoutCachedWidth =10980
-                    LayoutCachedHeight =1560
+                    LayoutCachedHeight =1080
                 End
                 Begin CommandButton
-                    OverlapFlags =215
+                    OverlapFlags =247
                     Left =13320
-                    Top =600
+                    Top =120
                     Width =900
                     Height =660
                     FontWeight =700
-                    TabIndex =10
+                    TabIndex =5
                     Name ="cmdTriggerReport"
                     Caption ="Event Report"
                     OnClick ="[Event Procedure]"
@@ -1831,9 +2094,9 @@ Begin Form
                     BottomPadding =120
 
                     LayoutCachedLeft =13320
-                    LayoutCachedTop =600
+                    LayoutCachedTop =120
                     LayoutCachedWidth =14220
-                    LayoutCachedHeight =1260
+                    LayoutCachedHeight =780
                     ForeThemeColorIndex =0
                     UseTheme =255
                     Shape =1
@@ -1856,14 +2119,42 @@ Begin Form
                     WebImagePaddingTop =1
                     Overlaps =1
                 End
+                Begin TextBox
+                    Visible = NotDefault
+                    Enabled = NotDefault
+                    Locked = NotDefault
+                    TabStop = NotDefault
+                    SpecialEffect =0
+                    OldBorderStyle =0
+                    OverlapFlags =247
+                    TextAlign =1
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =2460
+                    Top =60
+                    Width =483
+                    Height =360
+                    FontSize =18
+                    FontWeight =700
+                    TabIndex =6
+                    Name ="tbxPseudoEvent"
+                    ControlSource ="PseudoEvent"
+                    StatusBarText ="Unique identifier for each sample location"
+                    FontName ="Calibri"
+
+                    LayoutCachedLeft =2460
+                    LayoutCachedTop =60
+                    LayoutCachedWidth =2943
+                    LayoutCachedHeight =420
+                End
                 Begin CommandButton
                     OverlapFlags =255
                     Left =11280
-                    Top =600
+                    Top =120
                     Width =900
                     Height =660
                     FontWeight =700
-                    TabIndex =11
+                    TabIndex =7
                     Name ="cmdPlot_Chart"
                     Caption ="Plot Chart"
                     OnClick ="[Event Procedure]"
@@ -1874,9 +2165,9 @@ Begin Form
                     BottomPadding =120
 
                     LayoutCachedLeft =11280
-                    LayoutCachedTop =600
+                    LayoutCachedTop =120
                     LayoutCachedWidth =12180
-                    LayoutCachedHeight =1260
+                    LayoutCachedHeight =780
                     ForeThemeColorIndex =0
                     UseTheme =255
                     Shape =1
@@ -1910,58 +2201,28 @@ Begin Form
                     BackStyle =0
                     IMESentenceMode =3
                     Left =6720
-                    Top =900
+                    Top =420
                     Width =4560
                     Height =300
                     FontSize =12
-                    TabIndex =12
+                    TabIndex =8
                     Name ="txtSlope_Aspect"
                     FontName ="Calibri"
 
                     LayoutCachedLeft =6720
-                    LayoutCachedTop =900
+                    LayoutCachedTop =420
                     LayoutCachedWidth =11280
-                    LayoutCachedHeight =1200
-                End
-                Begin TextBox
-                    Visible = NotDefault
-                    Enabled = NotDefault
-                    Locked = NotDefault
-                    TabStop = NotDefault
-                    SpecialEffect =0
-                    OldBorderStyle =0
-                    OverlapFlags =247
-                    TextAlign =1
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Left =2460
-                    Top =540
-                    Width =483
-                    Height =360
-                    FontSize =18
-                    FontWeight =700
-                    TabIndex =13
-                    Name ="tbxPseudoEvent"
-                    ControlSource ="PseudoEvent"
-                    StatusBarText ="Unique identifier for each sample location"
-                    FontName ="Calibri"
-
-                    LayoutCachedLeft =2460
-                    LayoutCachedTop =540
-                    LayoutCachedWidth =2943
-                    LayoutCachedHeight =900
+                    LayoutCachedHeight =720
                 End
                 Begin CommandButton
-                    Visible = NotDefault
-                    OverlapFlags =215
-                    Left =10395
-                    Top =105
+                    OverlapFlags =255
+                    Left =60
+                    Top =480
                     Width =2766
-                    Height =366
                     FontWeight =600
-                    TabIndex =14
-                    Name ="btnConvertPseudoEvent"
-                    Caption ="  Convert to Regular Event"
+                    TabIndex =9
+                    Name ="btnEditEventDate"
+                    Caption ="  Change Event Date"
                     OnClick ="[Event Procedure]"
                     PictureData = Begin
                         0x2800000010000000100000000100040000000000800000000000000000000000 ,
@@ -2002,16 +2263,15 @@ Begin Form
                     ObjectPalette = Begin
                         0x000301000000000000000000
                     End
-                    ControlTipText ="Convert pseudoevent to normal event (NOTE - you cannot convert it back so make s"
-                        "ure!)"
+                    ControlTipText ="Change event date"
                     LeftPadding =60
                     RightPadding =75
                     BottomPadding =120
 
-                    LayoutCachedLeft =10395
-                    LayoutCachedTop =105
-                    LayoutCachedWidth =13161
-                    LayoutCachedHeight =471
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =480
+                    LayoutCachedWidth =2826
+                    LayoutCachedHeight =840
                     PictureCaptionArrangement =5
                     ForeThemeColorIndex =0
                     UseTheme =1
@@ -2036,27 +2296,94 @@ Begin Form
                     WebImagePaddingTop =1
                     Overlaps =1
                 End
-                Begin Label
+                Begin TextBox
                     Visible = NotDefault
+                    Enabled = NotDefault
+                    Locked = NotDefault
+                    SpecialEffect =0
+                    OldBorderStyle =0
                     OverlapFlags =247
-                    TextAlign =2
-                    Left =1500
-                    Top =60
-                    Width =3120
-                    Height =450
+                    TextAlign =3
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =2760
+                    Top =660
+                    Width =2160
+                    Height =420
                     FontSize =18
                     FontWeight =700
-                    BackColor =-2147483643
-                    ForeColor =16777215
-                    Name ="lblPseudoEventFlag"
-                    Caption ="* PSEUDO EVENT *"
-                    FontName ="Berlin Sans FB Demi"
-                    LayoutCachedLeft =1500
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =4620
-                    LayoutCachedHeight =510
+                    TabIndex =10
+                    Name ="tbxEventDate"
+                    ControlSource ="Event_Date"
+                    Format ="Short Date"
+                    StatusBarText ="M. Starting date for the event (Start_Date)"
+                    FontName ="Calibri"
+
+                    LayoutCachedLeft =2760
+                    LayoutCachedTop =660
+                    LayoutCachedWidth =4920
+                    LayoutCachedHeight =1080
+                End
+                Begin Image
+                    Visible = NotDefault
+                    PictureType =2
+                    Left =5520
+                    Top =1320
+                    Width =540
+                    Height =540
+                    Name ="imgFlag"
+                    OnClick ="[Event Procedure]"
+                    Picture ="flag_red"
+
+                    LayoutCachedLeft =5520
+                    LayoutCachedTop =1320
+                    LayoutCachedWidth =6060
+                    LayoutCachedHeight =1860
+                    TabIndex =14
+                End
+                Begin Image
+                    Visible = NotDefault
+                    PictureType =2
+                    Left =6120
+                    Top =1320
+                    Width =540
+                    Height =540
+                    Name ="Image165"
+                    OnClick ="[Event Procedure]"
+                    Picture ="flag_yellow"
+
+                    LayoutCachedLeft =6120
+                    LayoutCachedTop =1320
+                    LayoutCachedWidth =6660
+                    LayoutCachedHeight =1860
+                    TabIndex =15
+                End
+                Begin Image
+                    Visible = NotDefault
+                    PictureType =2
+                    Left =6720
+                    Top =1320
+                    Width =540
+                    Height =540
+                    Name ="Image166"
+                    OnClick ="[Event Procedure]"
+                    Picture ="flag_blue"
+
+                    LayoutCachedLeft =6720
+                    LayoutCachedTop =1320
+                    LayoutCachedWidth =7260
+                    LayoutCachedHeight =1860
+                    TabIndex =16
                 End
             End
+        End
+        Begin FormFooter
+            Height =360
+            BackColor =15527148
+            Name ="FormFooter"
+            AutoHeight =1
+            AlternateBackThemeColorIndex =1
+            AlternateBackShade =95.0
         End
     End
 End
@@ -2071,7 +2398,7 @@ Option Explicit
 ' =================================
 ' FORM:         frm_Events
 ' Level:        Form module
-' Version:      1.04
+' Version:      1.06
 '
 ' Description:  add event related functions & procedures
 '
@@ -2082,6 +2409,8 @@ Option Explicit
 '               BLC   - 11/9/2018 - 1.02 - added pseudoevent functionality
 '               BLC   - 4/17/2018 - 1.03 - updated convert pseudoevent to regular event
 '               BLC   - 5/3/2019  - 1.04 - set plot & event ID temp vars
+'               BLC - 4/2/2020    - 1.05 - fit report to window after opening vs. default smaller view
+'               BLC - 6/22/2020   - 1.06 - add QC mode for flagging
 ' =================================
 
 ' ---------------------------------
@@ -2160,6 +2489,16 @@ On Error GoTo Err_Handler
 
     Dim strCaptionSuffix As String
     Dim booEditOn As Boolean
+'SetAppIcon "ncrn_forestveg.ico"
+
+    'minimize utilities
+    ToggleForm "frm_Data_Gateway", -1
+    
+Debug.Print "QCmode = " & TempVars("QC_MODE")
+    'QC mode?
+    lblQCMode.Visible = Nz(TempVars("QC_MODE"), False)
+    btnFlag.Visible = Nz(TempVars("QC_MODE"), False)
+    imgFlag.Visible = Nz(TempVars("QC_MODE"), False)
 
 '    ' Set the opening parameters depending on the arguments passed from the previous form
 '    If Me.OpenArgs = "(Browsing)" Then
@@ -2207,7 +2546,7 @@ On Error GoTo Err_Handler
     SetEditMode (booEditOn)
 
     'check for PseudoEvents
-    SetTempVar "IsPseudoEvent", Nz(Me.tbxPseudoEvent.Value, 0) 'tbxPseudoEvent.Value
+    SetTempVar "IsPseudoEvent", Nz(Me.tbxPseudoEvent.value, 0) 'tbxPseudoEvent.Value
     Dim bgdColor As Long, txtColor As Long
 
     'defaults
@@ -2238,8 +2577,8 @@ On Error GoTo Err_Handler
     'lblPseudoEventFlag.BackColor = txtColor
     
     'set globals
-    SetTempVar "plot", Me.Location_ID.Value
-    SetTempVar "eventID", Me.Event_ID.Value
+    SetTempVar "plot", Me.Location_ID.value
+    SetTempVar "eventID", Me.Event_ID.value
 
 Exit_Handler:
     Exit Sub
@@ -2372,6 +2711,55 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnConvertPseudoEvent_Click[frm_Events])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnEditEventDate_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 2, 2020
+' Adapted:      -
+' Revisions:
+'   BLC - 4/2/2020 - initial version, adapted from Location edit
+' ---------------------------------
+Private Sub btnEditEventDate_Click()
+On Error GoTo Err_Handler
+
+    DisplayMessage "notready"
+    GoTo Exit_Handler
+
+    Dim strOpenArgs As String
+    Dim strCriteria As String
+
+    If Not IsNothing(Me.txtStart_date) Then
+        strOpenArgs = XML_Tag("FormFrom", Me.Name)
+        Add2Self strOpenArgs, XML_Tag("ControlFrom", "txtStart_date")
+        Add2Self strOpenArgs, XML_Tag("ControlValue", Me.txtStart_date)
+        Add2Self strOpenArgs, XML_Tag("EditTable", "tbl_Events")
+        Add2Self strOpenArgs, XML_Tag("EditID", Me.txtEvent_ID)
+        Add2Self strOpenArgs, XML_Tag("EditField", "Event_Date")
+        Add2Self strOpenArgs, XML_Tag("EditIDField", "Event_ID")
+        If IsNull(TempVars("UserID")) Then DoCmd.OpenForm "frm_Select_User", acNormal, , , acFormEdit, acWindowNormal, "frm_Pad_Date"
+        Add2Self strOpenArgs, XML_Tag("UpdateByID", TempVars("UserID"))
+        'strCriteria = GetCriteriaString("Event_Date=", "tbl_Events", "Event_Date", Me.Name, "txtStart_date")
+        strCriteria = ""
+        DoCmd.OpenForm "frm_Pad_Date", , , strCriteria, acFormEdit, acWindowNormal, strOpenArgs
+    End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnEditEventDate_Click[frm_Events])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -2552,13 +2940,13 @@ End Sub
 Private Sub cmdPlot_Chart_Click()
 On Error GoTo Err_Handler
     
-    Dim strOpenargs As String
+    Dim strOpenArgs As String
     Dim strCriteria As String
     If Not IsNothing(Me!txtLocation_ID) Then
-        strOpenargs = XML_Tag("FormFrom", Me.Name)
-        strOpenargs = strOpenargs & XML_Tag("ControlFrom", "txtLocation_ID")
+        strOpenArgs = XML_Tag("FormFrom", Me.Name)
+        strOpenArgs = strOpenArgs & XML_Tag("ControlFrom", "txtLocation_ID")
         strCriteria = GetCriteriaString("Location_ID=", "tbl_Locations", "Location_ID", Me.Name, "txtLocation_ID")
-        DoCmd.OpenForm "frm_Plot_Chart", , , strCriteria, acFormEdit, acWindowNormal, strOpenargs
+        DoCmd.OpenForm "frm_Plot_Chart", , , strCriteria, acFormEdit, acWindowNormal, strOpenArgs
     End If
 
 Exit_Handler:
@@ -2586,6 +2974,7 @@ End Sub
 ' Revisions:
 '   MEL/GS - unknown - initial version
 '   BLC - 11/9/2018 - add documentation, error handling
+'   BLC - 4/2/2020  - fit report to window after opening vs. default smaller view
 ' ---------------------------------
 Private Sub cmdTriggerReport_Click()
 On Error GoTo Err_Handler
@@ -2600,6 +2989,10 @@ On Error GoTo Err_Handler
     strCriteria = GetCriteriaString("[Event_ID]=", "tbl_Events", "Event_ID", Me.Name, "txtEvent_ID")
     DoCmd.OpenReport strDocName, acPreview, , strCriteria
     
+       'set to full size
+    DoCmd.Maximize
+    DoCmd.RunCommand acCmdZoom100 '100%
+    'DoCmd.RunCommand acCmdFitToWindow 'fit window size
     
 Exit_Procedure:
     Exit Sub
@@ -2667,8 +3060,8 @@ On Error GoTo Err_Handler
     
     Dim strTransect As String
     
-    strTransect = Me!grpTransect_Selection.Value
-    Me.txtTransect_Selection.Value = "'" & strTransect & "'"
+    strTransect = Me!grpTransect_Selection.value
+    Me.txtTransect_Selection.value = "'" & strTransect & "'"
     Forms![frm_Events]![fsub_Transects]!txtTransect_Azimuth.DefaultValue = "'" & strTransect & "'"
     Forms![frm_Events]![fsub_Transects].Form.Filter = "[Transect_Azimuth] = """ & strTransect & """ "
     Forms![frm_Events]![fsub_Transects].Form.FilterOn = True
@@ -2699,6 +3092,7 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 11/9/2018 - add documentation, error handling
 '   BLC - 12/10/2018 - revised error handling
+'   BLC - 4/5/2020 - revised handling of root & photo folder locations
 ' ---------------------------------
 Private Sub lblLink_To_Plot_Photos_Click()
 On Error GoTo Err_Handler
@@ -2707,15 +3101,15 @@ On Error GoTo Err_Handler
     Dim RootFolder As String
     Dim PhotoFolder As String
     
-    RootFolder = "T:\I&M"
-    PhotoFolder = "T:\I&M\Monitoring\Forest_Vegetation\Photos\"
+    RootFolder = TempVars("Root") '"T:\I&M"
+    PhotoFolder = TempVars("Photo") '"T:\I&M\Monitoring\Forest_Vegetation\Photos\"
     If FolderExists(PhotoFolder & Me!txtPlot_Name) Then
-        retVal = Shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
+        retVal = shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
         GoTo Exit_Handler
     Else
         If FolderExists(RootFolder) Then
             MsgBox ("Folder for this plot not found....Opening the root of the Photos folder.")
-            retVal = Shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
+            retVal = shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
             GoTo Exit_Handler
         Else
             MsgBox ("The network appears to be unavailable. Network access is required to view photos.")
@@ -2814,14 +3208,14 @@ End Sub
 Private Sub cmdEditLocation_Click()
 On Error GoTo Err_Handler
 
-    Dim strOpenargs As String
+    Dim strOpenArgs As String
     Dim strCriteria As String
     
     If Not IsNothing(Me!txtLocation_ID) Then
-        strOpenargs = XML_Tag("FormFrom", Me.Name)
-        strOpenargs = strOpenargs & XML_Tag("ControlFrom", "txtLocation_ID")
+        strOpenArgs = XML_Tag("FormFrom", Me.Name)
+        strOpenArgs = strOpenArgs & XML_Tag("ControlFrom", "txtLocation_ID")
         strCriteria = GetCriteriaString("Location_ID=", "tbl_Locations", "Location_ID", Me.Name, "txtLocation_ID")
-        DoCmd.OpenForm "frm_Locations", , , strCriteria, acFormEdit, acWindowNormal, strOpenargs
+        DoCmd.OpenForm "frm_Locations", , , strCriteria, acFormEdit, acWindowNormal, strOpenArgs
     End If
 
 Exit_Handler:
@@ -2971,10 +3365,14 @@ End Sub
 ' Revisions:
 '   MEL/GS - unknown - initial version
 '   BLC - 11/9/2018 - add documentation, error handling
+'   BLC - 6/22/20202 - restore data gateway
 ' ---------------------------------
 Private Sub Form_Close()
 On Error GoTo Err_Handler
 
+    'restore data gateway
+    ToggleForm "frm_Data_Gateway", 0
+    
     If IsLoaded("frm_Data_Gateway") Then
         Forms("frm_Data_Gateway").Requery
     End If
@@ -3148,6 +3546,40 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - btnAddEventNote[frm_Events])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          imgFlag_Click
+' Description:  image click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 22, 2020
+' Adapted:      -
+' Revisions:
+'   BLC - 6/22/2020 - initial version
+' ---------------------------------
+Private Sub imgFlag_Click()
+On Error GoTo Err_Handler
+    
+    Dim strOpenArgs As String
+    
+    strOpenArgs = Me.Name & "|" & Me.RecordSource & "|" & "Event" & "|" & Me.txtEvent_ID & "|" & "|" & Nz(TempVars("UserID"), "") & "|"
+    
+    DoCmd.OpenForm "SetFlag", , , , acFormEdit, acWindowNormal, strOpenArgs
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - imgFlag_Click[frm_Events])"
     End Select
     Resume Exit_Handler
 End Sub

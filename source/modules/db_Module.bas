@@ -98,7 +98,7 @@ On Error GoTo Err_Handler
                 Dim NewTableName As String
                 
                 'rename to YYYYMMDD_currentname, then delete
-                NewTableName = Year(Date) & Month(Date) & Day(Date) & "_" & LocalTableName
+                NewTableName = year(Date) & Month(Date) & Day(Date) & "_" & LocalTableName
                 DoCmd.CopyObject , NewTableName, acTable, LocalTableName
                 CurrentDb.TableDefs.Delete LocalTableName
 
@@ -212,8 +212,8 @@ On Error GoTo Err_Handler
 
     'Build connected TableDefs, connected tables list
     For Each tdfCurrent In dbCurrent.TableDefs
-        If Len(tdfCurrent.Connect) > 0 Then
-            If UCase$(Left$(tdfCurrent.Connect, 5)) = "ODBC;" Then
+        If Len(tdfCurrent.connect) > 0 Then
+            If UCase$(Left$(tdfCurrent.connect, 5)) = "ODBC;" Then
             ReDim Preserve typNewTables(0 To intToChange)
             typNewTables(intToChange).Attributes = tdfCurrent.Attributes
             typNewTables(intToChange).TableName = tdfCurrent.Name
@@ -234,7 +234,7 @@ On Error GoTo Err_Handler
         
         'Create new TableDef object, using the DSN-less connection
         Set tdfCurrent = dbCurrent.CreateTableDef(typNewTables(intLoop).TableName)
-        tdfCurrent.Connect = strConnectionString
+        tdfCurrent.connect = strConnectionString
         
         ' Unfortunately, I'm current unable to test this code,
         ' but I've been told trying this line of code is failing for most people...
@@ -265,11 +265,11 @@ Next
 
 For Each qdfCurrent In dbCurrent.QueryDefs
     On Error Resume Next
-    strQdfConnect = qdfCurrent.Connect
+    strQdfConnect = qdfCurrent.connect
     On Error GoTo Err_Handler
     If Len(strQdfConnect) > 0 Then
-        If UCase$(Left$(qdfCurrent.Connect, 5)) = "ODBC;" Then
-            qdfCurrent.Connect = strConnectionString
+        If UCase$(Left$(qdfCurrent.connect, 5)) = "ODBC;" Then
+            qdfCurrent.connect = strConnectionString
         End If
     End If
     strQdfConnect = vbNullString
@@ -397,13 +397,13 @@ On Error GoTo Err_Handler
 
     Dim rs As DAO.Recordset
     Dim sql As String
-    Dim response As Integer
+    Dim Response As Integer
     
-    response = Eval(MsgBox("Pre-Season Prep will delete data from data tables (e.g. events, sapling data)." _
+    Response = Eval(MsgBox("Pre-Season Prep will delete data from data tables (e.g. events, sapling data)." _
                     & vbCrLf & vbCrLf & "Are you sure you wish to proceed?", vbYesNo, "Confirm Delete Data"))
     
     'exit if user choses not to purge data
-    If response = vbNo Then GoTo Exit_Handler
+    If Response = vbNo Then GoTo Exit_Handler
     
     'retrieve table names for tables containing annual data
     sql = "SELECT Link_table FROM tsys_Link_Tables WHERE AnnualDbPurge = 1;"
@@ -710,7 +710,7 @@ On Error GoTo Err_Handler
     Dim strPath As String
     Dim strSourceTable As String
      
-    strConnect = CurrentDb.TableDefs(strLinkedTbl).Connect      'Connect String
+    strConnect = CurrentDb.TableDefs(strLinkedTbl).connect      'Connect String
      
     If InStr(strConnect, "=") = 0 Then
       MsgBox strLinkedTbl & " is not a Linked Table!", vbCritical, "Linked Table Error"

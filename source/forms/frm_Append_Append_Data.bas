@@ -1104,37 +1104,37 @@ Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immedia
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(Value As String)
-Public Event InvalidDirections(Value As String)
-Public Event InvalidCallingForm(Value As String)
+Public Event InvalidTitle(value As String)
+Public Event InvalidDirections(value As String)
+Public Event InvalidCallingForm(value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Title(Value As String)
-    If Len(Value) > 0 Then
-        m_Title = Value
+Public Property Let title(value As String)
+    If Len(value) > 0 Then
+        m_Title = value
 
         'set the form title & caption
         'Me.lblTitle.Caption = m_Title
         'Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(Value)
+        RaiseEvent InvalidTitle(value)
     End If
 End Property
 
-Public Property Get Title() As String
-    Title = m_Title
+Public Property Get title() As String
+    title = m_Title
 End Property
 
-Public Property Let Directions(Value As String)
-    If Len(Value) > 0 Then
-        m_Directions = Value
+Public Property Let Directions(value As String)
+    If Len(value) > 0 Then
+        m_Directions = value
 
         'set the form directions
         'Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(Value)
+        RaiseEvent InvalidDirections(value)
     End If
 End Property
 
@@ -1142,8 +1142,8 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(Value As String)
-        m_CallingForm = Value
+Public Property Let CallingForm(value As String)
+        m_CallingForm = value
 End Property
 
 Public Property Get CallingForm() As String
@@ -1402,9 +1402,9 @@ On Error GoTo Err_Handler
     Me!cmbo_Append_Table.RowSource = ""
     For Each tdef In db.TableDefs
         Dim iTableName As Long
-            iTableName = Len(Me!txt_Table_Name.Value)
+            iTableName = Len(Me!txt_Table_Name.value)
         Dim strTableName As String
-            strTableName = Me!txt_Table_Name.Value
+            strTableName = Me!txt_Table_Name.value
         Dim strAppTableName As String
        
         If Left(tdef.Name, 1) = "_" Then
@@ -1949,14 +1949,14 @@ End Sub
 Private Sub Detail_Click()
 On Error GoTo Err_Handler
 
-    If Me!optframe_Step2Append.Value = 2 Then
+    If Me!optframe_Step2Append.value = 2 Then
         If Me!cmbo_Select_Event = "" Then
             MsgBox "You must complete the necessary information above.", , "Append Data"
             Me!cmbo_Select_Event.SetFocus
-        ElseIf Me!cmbo_Select_Import_Event_Table.Value = "" Then
+        ElseIf Me!cmbo_Select_Import_Event_Table.value = "" Then
             MsgBox "You must complete the necessary information above.", , "Append Data"
             Me!cmbo_Select_Import_Event_Table.SetFocus
-        ElseIf Me!cmbo_Select_Import_Events.Value = "" Then
+        ElseIf Me!cmbo_Select_Import_Events.value = "" Then
             MsgBox "You must complete the necessary information above.", , "Append Data"
             Me!cmbo_Select_Import_Events.SetFocus
         End If
@@ -2033,13 +2033,13 @@ On Error GoTo Err_Handler
         
         Do Until rsSelect.EOF
         
-        If Me!optgSelectTables.Value = 1 Then
+        If Me!optgSelectTables.value = 1 Then
              
             rsSelect.Edit
             rsSelect![Append] = True
             rsSelect.Update
             
-        ElseIf Me!optgSelectTables.Value = 2 Then
+        ElseIf Me!optgSelectTables.value = 2 Then
             rsSelect.Edit
             rsSelect![Append] = False
             rsSelect.Update
@@ -2248,7 +2248,7 @@ End Sub
 Private Sub optframe_Step1Append_AfterUpdate()
 On Error GoTo Err_Handler
 
-    Select Case optframe_Step1Append.Value
+    Select Case optframe_Step1Append.value
     
         '-----------------------
         '  One Tablet
@@ -2256,7 +2256,7 @@ On Error GoTo Err_Handler
         Case 1
             Me.Detail.Visible = True
             
-             Me!optframe_Step2Append.Value = 0
+             Me!optframe_Step2Append.value = 0
              optframe_Step2Append.Enabled = False
              
              Me.tglImportPseudoEvents.Enabled = True
@@ -2285,7 +2285,7 @@ On Error GoTo Err_Handler
             Me.tglImportPseudoEvents.Enabled = True
             
             optframe_Step2Append.Enabled = True
-            Me!optframe_Step2Append.Value = 0
+            Me!optframe_Step2Append.value = 0
             Me!optframe_Step2Append.SetFocus
             Me.Detail.Visible = False
             
@@ -2339,7 +2339,7 @@ On Error GoTo Err_Handler
     '-----------------------
     '  Primary Tablet
     '-----------------------
-    If Me!optframe_Step2Append.Value = 1 Then
+    If Me!optframe_Step2Append.value = 1 Then
       
         Me.RecordSource = "qry_Append_Primary_Tablet_Append"
         
@@ -2353,7 +2353,7 @@ On Error GoTo Err_Handler
     '-----------------------
     '  Secondary Tablet
     '-----------------------
-    ElseIf Me!optframe_Step2Append.Value = 2 Then
+    ElseIf Me!optframe_Step2Append.value = 2 Then
            
         Me!cmbo_Select_Event.Enabled = True
         Me!cmbo_Select_Import_Event_Table.Enabled = True
@@ -2407,10 +2407,10 @@ On Error GoTo Err_Handler
     Me.lblPseudoEventsIncluded.Visible = False
     Me.lblPseudoEventsDeleted.Visible = False
     
-    SetTempVar "ImportPseudoEvents", tglImportPseudoEvents.Value
+    SetTempVar "ImportPseudoEvents", tglImportPseudoEvents.value
     
     With tglImportPseudoEvents
-        Select Case .Value
+        Select Case .value
             Case True
                 .Caption = "YES, INCLUDE"
                 .BackColor = lngLtLime
@@ -2427,7 +2427,7 @@ On Error GoTo Err_Handler
     End With
     
     'trigger the after update event if the table has been selected to refresh the import events combobox
-    If Len(Me.cmbo_Select_Import_Event_Table.Value) > 0 Then
+    If Len(Me.cmbo_Select_Import_Event_Table.value) > 0 Then
         cmbo_Select_Import_Event_Table_AfterUpdate
         Me.cmbo_Select_Import_Events.Requery
     End If
@@ -2477,7 +2477,7 @@ On Error GoTo Err_Handler
         Exit Sub
     
     Else
-        strTableName = Me!cmbo_Select_Import_Event_Table.Value
+        strTableName = Me!cmbo_Select_Import_Event_Table.value
         
         Dim strExclude As String
         strExclude = IIf(Me.tglImportPseudoEvents = True, "", " WHERE PseudoEvent = 0 ")
@@ -2542,7 +2542,7 @@ On Error GoTo Err_Handler
         Exit Sub
     
     Else
-        strTableName = Me!cmbo_Select_Import_Events.Value
+        strTableName = Me!cmbo_Select_Import_Events.value
         
         EventSQL = "SELECT e.Event_ID, [Plot_Name] & "" "" & "" "" & [Event_Date] AS PickString " _
                     & "FROM tbl_Locations l " _
@@ -2558,10 +2558,10 @@ On Error GoTo Err_Handler
                
     End If
 
-Debug.Print "cmbo_Select_Import_Events.Value: " & Me.cmbo_Select_Import_Events.Value
+Debug.Print "cmbo_Select_Import_Events.Value: " & Me.cmbo_Select_Import_Events.value
     
     'set GUIDReplace
-    SetTempVar "GUIDReplace", Me.cmbo_Select_Import_Events.Value
+    SetTempVar "GUIDReplace", Me.cmbo_Select_Import_Events.value
 
 Exit_Handler:
     Exit Sub
@@ -2610,7 +2610,7 @@ On Error GoTo Err_Handler
     End If
     
     'set GUIDMain
-    SetTempVar "GUIDMain", Me.cmbo_Select_Event.Value
+    SetTempVar "GUIDMain", Me.cmbo_Select_Event.value
 
 Exit_Handler:
     Exit Sub
@@ -2823,8 +2823,8 @@ Debug.Print strMain
             '-------------------------------------
             ' Secondary Tablet: replace Event_IDs
             '-------------------------------------
-            If Me!optframe_Step1Append.Value = 2 Then
-                If Me!optframe_Step2Append.Value = 2 Then
+            If Me!optframe_Step1Append.value = 2 Then
+                If Me!optframe_Step2Append.value = 2 Then
                     If Me!cmbo_Select_Event = "" Or IsNull(Me!cmbo_Select_Event) Then
                         MsgBox "You must complete the appending criteria", vbExclamation, "Append Data"
                         Me!cmbo_Select_Event.SetFocus
@@ -2882,7 +2882,7 @@ Debug.Print strMain
 '                        Dim strFindUpdate As String
                     
 '                        strFindUpdate = GUIDReplace
-                        strTableName = Me!cmbo_Append_Table.Value
+                        strTableName = Me!cmbo_Append_Table.value
                     
                         ' Only select those records where the EventID = the GUID to be replaced
 ''                        strUpdateEventIDSQL = "SELECT [" & strAppend & "].* " _

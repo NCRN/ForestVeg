@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Report
     LayoutForPrint = NotDefault
@@ -14,7 +14,7 @@ Begin Report
     Width =10741
     DatasheetFontHeight =10
     ItemSuffix =57
-    Left =405
+    Left =165
     Top =1515
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
@@ -145,7 +145,7 @@ Begin Report
         Begin Section
             KeepTogether = NotDefault
             CanGrow = NotDefault
-            Height =1104
+            Height =1680
             Name ="Detail"
             Begin
                 Begin TextBox
@@ -612,9 +612,9 @@ Begin Report
                             TextFontCharSet =238
                             TextAlign =2
                             TextFontFamily =34
-                            Left =5760
+                            Left =6060
                             Top =720
-                            Width =3000
+                            Width =2580
                             Height =240
                             FontSize =9
                             FontWeight =400
@@ -622,9 +622,9 @@ Begin Report
                             Name ="lblHerbaceous_Subreport"
                             Caption ="T a r g e t e d   H e r b a c e o u s"
                             FontName ="Calibri"
-                            LayoutCachedLeft =5760
+                            LayoutCachedLeft =6060
                             LayoutCachedTop =720
-                            LayoutCachedWidth =8760
+                            LayoutCachedWidth =8640
                             LayoutCachedHeight =960
                         End
                     End
@@ -761,7 +761,7 @@ Begin Report
                     FontItalic = NotDefault
                     TextAlign =2
                     TextFontFamily =34
-                    Left =9000
+                    Left =9300
                     Top =720
                     Width =1095
                     Height =240
@@ -771,15 +771,15 @@ Begin Report
                     Name ="Label56"
                     Caption ="B r o w s e"
                     FontName ="Calibri"
-                    LayoutCachedLeft =9000
+                    LayoutCachedLeft =9300
                     LayoutCachedTop =720
-                    LayoutCachedWidth =10095
+                    LayoutCachedWidth =10395
                     LayoutCachedHeight =960
                 End
             End
         End
         Begin PageFooter
-            Height =15
+            Height =720
             Name ="PageFooterSection"
             Begin
                 Begin Line

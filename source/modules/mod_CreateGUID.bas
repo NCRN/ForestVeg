@@ -3,6 +3,7 @@
 ' Description:  Standard module for creating a GUID value on demand
 ' Source/date:  Ben Baird, http://vbthunder.com/, downloaded 12/22/2005
 ' Revisions:    John R. Boetsch, May 26, 2006 - documentation and minimal edits
+'               BLC - 3/10/2020 - 64-bit OS updates
 
 Option Compare Database
 Option Explicit
@@ -14,10 +15,17 @@ Private Type guid
     Data4(8) As Byte
 End Type
 
-Private Declare PtrSafe Function CoCreateGuid Lib "ole32.dll" (pguid As guid) As Long
-
-Private Declare PtrSafe Function StringFromGUID2 Lib "ole32.dll" _
-    (rguid As Any, ByVal lpstrClsId As Long, ByVal cbMax As Long) As Long
+#If VBA7 Then
+    Private Declare PtrSafe Function CoCreateGuid Lib "ole32.dll" (pguid As guid) As LongPtr
+    
+    Private Declare PtrSafe Function StringFromGUID2 Lib "ole32.dll" _
+        (rguid As Any, ByVal lpstrClsId As LongPtr, ByVal cbMax As LongPtr) As LongPtr
+#Else
+    Private Declare Function CoCreateGuid Lib "ole32.dll" (pguid As guid) As Long
+    
+    Private Declare Function StringFromGUID2 Lib "ole32.dll" _
+        (rguid As Any, ByVal lpstrClsId As Long, ByVal cbMax As Long) As Long
+#End If
 
 ' =================================
 ' FUNCTION:     fxnGUIDGen
@@ -30,6 +38,7 @@ Private Declare PtrSafe Function StringFromGUID2 Lib "ole32.dll" _
 '               format as a string
 ' Source/date:  Ben Baird, http://vbthunder.com/, downloaded 12/22/2005
 ' Revisions:    John R. Boetsch, May 26, 2006 - documentation and minimal edits
+'               BLC - 3/10/2020 - 64-bit OS updates
 ' =================================
 
 Public Function fxnGUIDGen() As String
@@ -38,10 +47,10 @@ Public Function fxnGUIDGen() As String
     Dim uGUID As guid       ' the structured guid
     Dim sGUID As String     ' for storing the results
     Dim bGUID() As Byte     ' the formatted string
-    Dim lLen As Long
-    Dim retVal As Long
+    Dim lLen As LongPtr
+    Dim retVal As LongPtr
     lLen = 40
-    bGUID = String(lLen, 0)
+    bGUID = String(CInt(lLen), 0)
 
     ' use the API to generate the guid
     CoCreateGuid uGUID
@@ -49,9 +58,9 @@ Public Function fxnGUIDGen() As String
     ' use the API to format as string
     retVal = StringFromGUID2(uGUID, VarPtr(bGUID(0)), lLen)
     sGUID = bGUID
-    If (Asc(Mid$(sGUID, retVal, 1)) = 0) Then retVal = retVal - 1
+    If (Asc(Mid$(sGUID, CLng(retVal), 1)) = 0) Then retVal = retVal - 1
     ' truncate the string
-    fxnGUIDGen = Left$(sGUID, retVal)
+    fxnGUIDGen = Left$(sGUID, CLng(retVal))
 
 Exit_Procedure:
     Exit Function

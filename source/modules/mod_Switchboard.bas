@@ -193,14 +193,14 @@ Public Function fxnFileExists(ByVal strPath As String) As Boolean
 
     fxnFileExists = False    ' Default in case of error
 
-    Dim FS As Variant
+    Dim fs As Variant
 
-    Set FS = CreateObject("Scripting.FileSystemObject")
-    If FS.FileExists(strPath) Then fxnFileExists = True
+    Set fs = CreateObject("Scripting.FileSystemObject")
+    If fs.FileExists(strPath) Then fxnFileExists = True
 
 Exit_Procedure:
     On Error Resume Next
-    Set FS = Nothing
+    Set fs = Nothing
     Exit Function
 
 Err_Handler:
@@ -232,7 +232,7 @@ End Function
 Public Function fxnMakeBackup()
 Dim db As DAO.Database
 Dim rst As DAO.Recordset
-Dim FS As Variant
+Dim fs As Variant
 Dim strSysTable As String
 Dim strSourceFileName As String
 Dim strCopyFileName As Variant
@@ -250,7 +250,7 @@ Else
     strSysTable = "tsys_Link_Files"     ' System table listing linked tables
     
     Set rst = db.OpenRecordset("SELECT Link_file_path FROM tsys_Link_Files WHERE Backup;", dbOpenForwardOnly)
-    Set FS = CreateObject("Scripting.FileSystemObject")
+    Set fs = CreateObject("Scripting.FileSystemObject")
     
     strBackupDate = Format$(Now, "YYYYMMDD_HHNN")
     
@@ -272,7 +272,7 @@ Else
                 MsgBox "No Backup Made", vbOKOnly
             Else
                 ' Perform the actual file copy
-                FS.CopyFile rst!Link_file_path, strCopyFileName
+                fs.CopyFile rst!Link_file_path, strCopyFileName
                 MsgBox "Backup file successfully created: " & vbCrLf & vbCrLf & _
                     strCopyFileName, vbOKOnly
             End If
@@ -286,7 +286,7 @@ End If  ' End of initial user msgbox prompt
 
 Exit_Procedure:
     On Error Resume Next
-    Set FS = Nothing
+    Set fs = Nothing
     rst.Close
     Set rst = Nothing
     Set db = Nothing
@@ -346,7 +346,7 @@ Public Function fxnSaveFile(strFileName As String, strFileType As String, _
         Filter:=strFilter, _
         Flags:=lngFlags, _
         DialogTitle:="Save As", _
-        fileName:=strFileName)
+        FileName:=strFileName)
 
 Exit_Procedure:
     Exit Function
@@ -378,11 +378,11 @@ Public Function fxnDeleteFile(ByVal strPath As String) As Boolean
 
     fxnDeleteFile = False    ' Default in case of error
 
-    Dim FS As Variant
+    Dim fs As Variant
 
-    Set FS = CreateObject("Scripting.FileSystemObject")
+    Set fs = CreateObject("Scripting.FileSystemObject")
     If fxnFileExists(strPath) Then
-        FS.DeleteFile strPath, True
+        fs.DeleteFile strPath, True
         fxnDeleteFile = True
     Else
         MsgBox "Unable to delete the specified file", vbCritical, _
@@ -391,7 +391,7 @@ Public Function fxnDeleteFile(ByVal strPath As String) As Boolean
 
 Exit_Procedure:
     On Error Resume Next
-    Set FS = Nothing
+    Set fs = Nothing
     Exit Function
 
 Err_Handler:

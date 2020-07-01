@@ -211,7 +211,7 @@ Option Explicit
 ' Revisions:    <name, date, desc - add lines as you go>
 ' =================================
 
-Private Sub cboContact_ID_NotInList(NewData As String, response As Integer)
+Private Sub cboContact_ID_NotInList(NewData As String, Response As Integer)
     On Error GoTo Err_Handler
 
     Dim ctl As Control
@@ -219,12 +219,12 @@ Private Sub cboContact_ID_NotInList(NewData As String, response As Integer)
     Set ctl = Me!cboContact_ID
     ' Prompt user to verify they wish to add new value
     If MsgBox("The contact is not in list. Would you like to add this name?", vbYesNo) = vbYes Then
-        response = acDataErrContinue
+        Response = acDataErrContinue
         ctl.Undo
         DoCmd.OpenForm "frm_Contacts", , , , , , "new"
     Else
     ' Suppress error message and undo changes
-        response = acDataErrContinue
+        Response = acDataErrContinue
         ctl.Undo
     End If
 

@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_UI
 ' Level:        Application module
-' Version:      1.02
+' Version:      1.03
 '
 ' Description:  Application User Interface related functions & subroutines
 '
@@ -12,6 +12,7 @@ Option Explicit
 ' Revisions:    BLC, 4/19/2018  - 1.00 - initial version
 '               BLC, 5/21/2018  - 1.01 - accommodate NULL if user hasn't set value
 '               BLC, 5/3/2109   - 1.02 - shifted GoToForm, WriteRecordCriteria from frm_Data_Gateway
+'               BLC, 6/29/2020  - 1.03 - added in development message
 ' =================================
 
 ' ---------------------------------
@@ -58,6 +59,50 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - DisableControls[mod_App_UI])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          DisplayMessage
+' Description:  displays user message
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, June 29, 2020
+' Adapted:      -
+' Revisions:
+'   BLC - 6/29/2018 - initial version
+' ---------------------------------
+Public Sub DisplayMessage(topic As String)
+On Error GoTo Err_Handler
+    
+    Dim msg As String
+    Dim title As String
+    Dim msgtype As Long
+    
+    Select Case topic
+        Case "notready"
+            title = "Patience Required - Feature Not Yet Ready for Prime Time"
+            msg = "Sorry, this feature is not quite ready." _
+                    & vbCrLf & "Please check back in the next release." _
+                    & vbCrLf & vbCrLf & "Thank you for your patience..." _
+                    & vbCrLf & "...and for checking out new features!"
+            msgtype = vbInformation
+    End Select
+    
+    MsgBox msg, msgtype, title
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - DisplayMessage[mod_App_UI])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -155,7 +200,7 @@ End Sub
 '   BLC - 4/22/2018 - initial version
 '   BLC - 5/21/2018 - accommodate NULL if user hasn't set value
 ' ---------------------------------
-Public Function ValidPct(pct As Variant, Optional NullOK As Boolean = False) As Double
+Public Function ValidPct(Pct As Variant, Optional NullOK As Boolean = False) As Double
 On Error GoTo Err_Handler
     
     Dim IsValid As Boolean
@@ -165,17 +210,17 @@ On Error GoTo Err_Handler
     IsValid = False
     
     'handle when NULLs are OK (i.e. when no value is yet set)
-    If (NullOK = True) And (IsNull(pct) = True) Then
+    If (NullOK = True) And (IsNull(Pct) = True) Then
         IsValid = True
         GoTo Exit_Handler
     End If
     
-    Select Case pct
+    Select Case Pct
 '        Case Is = 0
 '            ValidPct = pct
 '            IsValid = True
         Case 0 To 100
-            ValidPct = pct
+            ValidPct = Pct
             IsValid = True
 '        Case Is = 100
 '            ValidPct = pct
@@ -299,6 +344,172 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - WriteRecordCriteria[mod_App_UI])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          SetAppIcon
+' Description:  Sets the application icon.
+' Assumptions:  IconFile is actually an icon (*.ico) file
+'               A check is made to see that it is a file & has the ico extension
+'               however this doesn't guarantee 100% that the file is an icon.
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   Vishal Monpara, December 15, 2009
+'   https://www.vishalon.net/blog/change-ms-access-application-title-and-icon-using-vba
+' Source/date:  Bonnie Campbell, June 4, 2020
+' Adapted:      -
+' Revisions:
+'   BLC - 6/4/2020 - initial version
+' ---------------------------------
+Public Sub SetAppIcon(IconFile As String)
+On Error GoTo Err_Handler
+  
+    'set file path
+    Dim IconFullPath As String
+    IconFullPath = CurrentProject.path & "\" & IconFile
+  
+    'is IconFile actually present?
+    If FileExists(IconFullPath) And Right(LCase(IconFullPath), 3) = "ico" Then
+  
+        With currDb
+            .Properties("AppIcon").value = IconFullPath
+            .Properties("AppTitle").value = .Properties("Title")
+            'if you want to extend icon to reports
+            '.Properties("UseAppIconForFrmRpt").Value = True
+        
+            Application.RefreshTitleBar
+        End With
+        
+    Else
+        MsgBox "Sorry that is not a valid icon file.", vbInformation, "Invalid Icon File"
+    End If
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - " & Application.VBE.ActiveCodePane & " [" & Application.VBE.A & "])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' Sub:          SortListForm
+' Description:  form label sort on click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:
+'   pere_de_chipstic, August 5, 2012
+'   http://www.utteraccess.com/forum/Sort-Continuous-Form-Hea-t1991553.html
+'   Allen Browne, June 28, 2006
+'   https://bytes.com/topic/access/answers/506322-using-orderby-multiple-fields
+' Source/date:  Bonnie Campbell, January 19, 2017 - for NCPN tools
+' Adapted:      -
+' Revisions:
+'   BLC - 1/19/2017 - initial version
+'   BLC - 1/31/2017 - adjusted to accommodate templates list
+'   BLC - 2/21/2017 - adjusted to accommodate Contact list
+'   BLC - 10/18/2017 - added cases for Comment list
+'   BLC - 12/7/2017 - added cases for VegPlot, Event lists
+'   BLC - 1/17/2018 - added cases for Task list
+'   BLC - 6/11/2020 - repurposed for NCRN ForestVeg
+' ---------------------------------
+Public Sub SortListForm(frm As Form, ctrl As Control)
+On Error GoTo Err_Handler
+
+    Dim strSort As String
+    
+    'default
+    strSort = ""
+    
+    'set sort field
+    Select Case Replace(ctrl.Name, "lbl", "")
+        Case "Citation"
+            strSort = "LongCitation"
+        Case "Comment"
+            strSort = "Comment"
+        Case "CommentType"
+            strSort = "CommentType"
+        Case "CommentTypeID"
+            strSort = "CommentType_ID"
+        Case "Email"
+            strSort = "Email"
+        Case "HdrID"
+            strSort = "ID"
+            Select Case frm.Name
+                Case "ContactList"
+                    strSort = "c.ID"
+                Case "TaskList"
+                    strSort = "t.ID"
+            End Select
+        Case "Location"
+            strSort = "Location"
+        Case "ModalSedSize"
+            strSort = "ModalSedimentSize_ID"
+        Case "Name"
+            strSort = "LastName"
+        Case "PctMSS"
+            strSort = "PctModalSedimentSize"
+        Case "PlotNumDist"
+            strSort = IIf(TempVars("ParkCode") = "DINO", "PlotNumber", "PlotDistance_m")
+        Case "Priority"
+            strSort = "Priority"
+        Case "Reference"
+            strSort = "ShortCitation"
+        Case "Site"
+            strSort = "Site"
+        Case "SOP"
+            strSort = "FullName"
+        Case "SOPNum"
+            strSort = "SOPNumber"
+        Case "StartDate"
+            strSort = "StartDate"
+        Case "Syntax"
+            strSort = "Syntax"
+        Case "Task"
+            strSort = "Task"
+        Case "TaskType"
+            strSort = "TaskType"
+        Case "Template"
+            strSort = "TemplateName"
+        Case "Status"
+            strSort = "Status"
+        Case "Version"
+            strSort = "Version"
+        Case "LastModifiedDate"
+            strSort = "LastModified"
+        Case "EffectiveDate"
+            strSort = "EffectiveDate"
+        Case ""
+    End Select
+
+    'set the sort
+    If InStr(frm.OrderBy, strSort) = 0 Then
+        frm.OrderBy = strSort
+    ElseIf Right(frm.OrderBy, 4) = "Desc" Then
+        frm.OrderBy = strSort
+    Else
+        frm.OrderBy = strSort & " Desc"
+    End If
+    
+    frm.OrderByOn = True
+    
+Exit_Handler:
+    Exit Sub
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SortListForm[mod_App_UI form])"
     End Select
     Resume Exit_Handler
 End Sub

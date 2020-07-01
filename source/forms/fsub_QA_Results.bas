@@ -900,18 +900,18 @@ Private Function fxnSortRecords(ByVal strFieldName As String, _
     Me.Form.OrderByOn = True
 
     ' Change the label format to indicate the sorted field
-    Me.Controls.Item(strSortFieldLabel).FontItalic = False
-    Me.Controls.Item(strSortFieldLabel).FontBold = False
+    Me.Controls.item(strSortFieldLabel).FontItalic = False
+    Me.Controls.item(strSortFieldLabel).FontBold = False
     strSortFieldLabel = "lab" & strFieldName
-    Me.Controls.Item(strSortFieldLabel).FontItalic = True
-    Me.Controls.Item(strSortFieldLabel).FontBold = True
+    Me.Controls.item(strSortFieldLabel).FontItalic = True
+    Me.Controls.item(strSortFieldLabel).FontBold = True
     ' Do the same for the second sort field, if applicable
     If strField2Name <> "" Then
-        Me.Controls.Item(strSortFieldLabel2).FontItalic = False
-        Me.Controls.Item(strSortFieldLabel2).FontBold = False
+        Me.Controls.item(strSortFieldLabel2).FontItalic = False
+        Me.Controls.item(strSortFieldLabel2).FontBold = False
         strSortFieldLabel = "lab" & strField2Name
-        Me.Controls.Item(strSortFieldLabel2).FontItalic = True
-        Me.Controls.Item(strSortFieldLabel2).FontBold = True
+        Me.Controls.item(strSortFieldLabel2).FontItalic = True
+        Me.Controls.item(strSortFieldLabel2).FontBold = True
     End If
 
 Exit_Procedure:

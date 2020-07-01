@@ -2532,7 +2532,7 @@ On Error GoTo Err_Handler
     
     'If we haven't found record and exited by now, create new record.
     DoCmd.GoToRecord , , acNewRec
-    Tag_ID.Value = strFind
+    Tag_ID.value = strFind
     DoCmd.RunCommand acCmdSaveRecord
     Me!fsub_Tag_Tree.Requery
     Forms![frm_Events]![fsub_Tree_Data]![fsub_Tag_Tree]!cbxTagStatus = "Tree"

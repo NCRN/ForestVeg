@@ -2193,7 +2193,7 @@ End Sub
 '   BLC - 5/14/2018 - documentation, error handling
 
 ' ---------------------------------
-Private Sub cbxSelectQuery_NotInList(NewData As String, response As Integer)
+Private Sub cbxSelectQuery_NotInList(NewData As String, Response As Integer)
 On Error GoTo Err_Handler
     
     Me.ActiveControl.Undo
@@ -2246,18 +2246,18 @@ On Error GoTo Err_Handler
 
     On Error Resume Next
     For Each qdf In qdfs
-        If qdf.Name = Me.cbxSelectQuery.Value Then
+        If qdf.Name = Me.cbxSelectQuery.value Then
             Me.tbxDesc = qdf.Properties("Description")
         End If
     Next qdf
 
     On Error GoTo Err_Handler
     ' Bind the subform to the newly-selected object
-    Me.subResults.SourceObject = "Query." & Me.cbxSelectQuery.Value
+    Me.subResults.SourceObject = "Query." & Me.cbxSelectQuery.value
 
     ' Update the visual flag to indicate whether or not the query returns filtered results
     '   Note: suffix of "_X" means that the query cannot accept parameters (e.g., crosstab)
-    If Right(Me.cbxSelectQuery.Value, 2) = "_X" Then
+    If Right(Me.cbxSelectQuery.value, 2) = "_X" Then
         Me.tbxUnfilteredFlag = "No"
         Me.tbxUnfilteredFlag.ForeColor = 16777215   'white
         Me.tbxUnfilteredFlag.BackColor = 255        'red
@@ -3390,7 +3390,7 @@ On Error GoTo Err_Handler
     
     ' Open the selected query as a pivot chart after checking that a query is selected
     If IsNull(Me.cbxSelectQuery) = False Then
-        DoCmd.OpenQuery Me.cbxSelectQuery.Value, acViewPivotChart, acReadOnly
+        DoCmd.OpenQuery Me.cbxSelectQuery.value, acViewPivotChart, acReadOnly
         DoCmd.Maximize
     End If
     
@@ -3430,7 +3430,7 @@ On Error GoTo Err_Handler
     
     ' Open the selected query as a pivot table after checking that a query is selected
     If IsNull(Me.cbxSelectQuery) = False Then
-        DoCmd.OpenQuery Me.cbxSelectQuery.Value, acViewPivotTable, acReadOnly
+        DoCmd.OpenQuery Me.cbxSelectQuery.value, acViewPivotTable, acReadOnly
         DoCmd.Maximize
     End If
     
@@ -3468,7 +3468,7 @@ On Error GoTo Err_Handler
     
     ' Open the selected query in a new window after checking that a query is selected
     If IsNull(Me.cbxSelectQuery) = False Then
-        DoCmd.OpenQuery Me.cbxSelectQuery.Value, acViewNormal, acReadOnly
+        DoCmd.OpenQuery Me.cbxSelectQuery.value, acViewNormal, acReadOnly
         DoCmd.Maximize
     End If
     
@@ -3513,7 +3513,7 @@ On Error GoTo Err_Handler
     
     strQryName = Me.cbxSelectQuery
 
-    strInitFile = Application.CurrentProject.Path & "\" & _
+    strInitFile = Application.CurrentProject.path & "\" & _
         strQryName & "_" & CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".xls"
     ' Open the save file dialog and update to the actual name given by the user
     strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.xls)", "*.xls")
@@ -3562,7 +3562,7 @@ On Error GoTo Err_Handler
 
     strQryName = Me.cbxSelectQuery
 
-    strInitFile = Application.CurrentProject.Path & "\" & _
+    strInitFile = Application.CurrentProject.path & "\" & _
         strQryName & "_" & CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".txt"
     ' Open the save file dialog and update to the actual name given by the user
     strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.txt)", "*.txt")
@@ -3604,7 +3604,7 @@ On Error GoTo Err_Handler
     
     ' Open the selected query in design view after checking that a query is selected
     If IsNull(Me.cbxSelectQuery) = False Then _
-        DoCmd.OpenQuery Me.cbxSelectQuery.Value, acViewDesign, acReadOnly
+        DoCmd.OpenQuery Me.cbxSelectQuery.value, acViewDesign, acReadOnly
         
 Exit_Handler:
     Exit Sub
@@ -3791,7 +3791,7 @@ On Error GoTo Err_Handler
     
     Dim strQryName(8, 2) As String
     Dim qNum As Integer
-    Dim qDef As QueryDef
+    Dim QDef As QueryDef
     Dim strParkName As String
     Dim strInitFile As String
     Dim strSaveFile As String
@@ -3838,12 +3838,12 @@ On Error GoTo Err_Handler
 '   Next
     
     'Generate the default output file name and allow user to edit it
-    strInitFile = Application.CurrentProject.Path & "\Exports\NCRN_ForestVeg_All_" & strParkName & "_" & Me.cbxYearFilter & "-" & Me.cbxYearFilter + 3 & "_" & CStr(Format(Now(), "yyyymmdd")) & ".xlsx"
+    strInitFile = Application.CurrentProject.path & "\Exports\NCRN_ForestVeg_All_" & strParkName & "_" & Me.cbxYearFilter & "-" & Me.cbxYearFilter + 3 & "_" & CStr(Format(Now(), "yyyymmdd")) & ".xlsx"
     strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.xls*)", "*.xls*")
     strSaveFolder = fPathParsing(strSaveFile, "D")
     'Cycle through queries and create an worksheet tab for each one
     For qNum = 0 To 6
-        Set qDef = db.CreateQueryDef(strQryName(qNum, 1), CurrentDb.QueryDefs(strQryName(qNum, 0)).sql)
+        Set QDef = db.CreateQueryDef(strQryName(qNum, 1), CurrentDb.QueryDefs(strQryName(qNum, 0)).sql)
         'Export each parameter to a seperate worksheet in an XLSX workbook (SpreadsheetType = '10' for .XLSX)
         DoCmd.TransferSpreadsheet acExport, 10, strQryName(qNum, 1), strSaveFile, True
         'Export each parameter to a seperate CSV file.
@@ -3891,7 +3891,7 @@ On Error GoTo Err_Handler
     
     Dim strQryName(15, 2) As String
     Dim qNum As Integer
-    Dim qDef As QueryDef
+    Dim QDef As QueryDef
     Dim strParkName As String
     Dim strInitFile As String
     Dim strSaveFile As String
@@ -3935,7 +3935,7 @@ On Error GoTo Err_Handler
 
     
     'Generate the default output file name and allow user to edit it
-    strInitFile = Application.CurrentProject.Path & "\Exports\NCRN_ForestVeg_All_Data_" & CStr(Format(Now(), "yyyymmdd")) & ".xlsx"
+    strInitFile = Application.CurrentProject.path & "\Exports\NCRN_ForestVeg_All_Data_" & CStr(Format(Now(), "yyyymmdd")) & ".xlsx"
     strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.xls*)", "*.xls*")
     strSaveFolder = fPathParsing(strSaveFile, "D")
     
@@ -3952,7 +3952,7 @@ On Error GoTo Err_Handler
         Application.SysCmd acSysCmdUpdateMeter, qNum
         Application.SysCmd acSysCmdSetStatus, "Exporting " & strQryName(qNum, 1) & "..."
         
-        Set qDef = db.CreateQueryDef(strQryName(qNum, 1), CurrentDb.QueryDefs(strQryName(qNum, 0)).sql)
+        Set QDef = db.CreateQueryDef(strQryName(qNum, 1), CurrentDb.QueryDefs(strQryName(qNum, 0)).sql)
         'Export each parameter to a seperate worksheet in an XLSX workbook (SpreadsheetType = '10' for .XLSX)
         DoCmd.TransferSpreadsheet acExport, 10, strQryName(qNum, 1), strSaveFile, True
         'Export each parameter to a seperate CSV file.
@@ -4066,7 +4066,7 @@ On Error GoTo Err_Handler
     Application.FollowHyperlink uri, , True, False
     
     'open save location
-    Shell "C:\WINDOWS\explorer.exe """ & SavePath & "", vbNormalFocus
+    shell "C:\WINDOWS\explorer.exe """ & SavePath & "", vbNormalFocus
     
 Exit_Handler:
     'end work
@@ -4115,7 +4115,7 @@ End Sub
 Public Sub PrepareExports(SavePath As String, DataYear As Integer, Optional iFileType As Integer = 1, Optional ZipFile As Boolean = True)
 On Error GoTo Err_Handler
         
-    Dim qryName As String
+    Dim QryName As String
     Dim strInitFile As String
     Dim strSaveFile As String
     Dim strSaveFolder As String
@@ -4123,9 +4123,9 @@ On Error GoTo Err_Handler
     Dim i As Integer
     Dim tpl As String
     Dim FileType As String
-    Dim fileName As String
+    Dim FileName As String
     Dim filePath As String
-    Dim fileFullPath As String
+    Dim FileFullPath As String
     Dim NewDir As String
     Dim NewFile As String
     
@@ -4139,9 +4139,9 @@ On Error GoTo Err_Handler
 
     'prep filename
     FileType = IIf(iFileType = 1, "CSV", "XLS")
-    fileName = Format(Now(), "YYYYMMDD") & "_" & DataYear & "_AnnualData." & LCase(FileType) & FileType
-    filePath = IIf(Len(SavePath) > 0, SavePath, Application.CurrentProject.Path)
-    fileFullPath = filePath & "\" & fileName
+    FileName = Format(Now(), "YYYYMMDD") & "_" & DataYear & "_AnnualData." & LCase(FileType) & FileType
+    filePath = IIf(Len(SavePath) > 0, SavePath, Application.CurrentProject.path)
+    FileFullPath = filePath & "\" & FileName
     
     'create new directory
     NewDir = SavePath & "\NCRN_" & DataYear & "_ForestVeg"
@@ -4179,7 +4179,7 @@ Debug.Print tpl
         
         'set temp query SQL
         Dim qdf As DAO.QueryDef
-        Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
+        Set qdf = currDb.QueryDefs("usys_temp_qdf")
         
         SysCmd acSysCmdInitMeter, "Exporting...", rs.RecordCount
         
@@ -4353,7 +4353,7 @@ On Error GoTo Err_Handler
         
             'build header
             For iCols = 0 To rs.Fields.Count - 1
-                wksht.Cells(1, iCols + 1).Value = rs.Fields(iCols).Name
+                wksht.Cells(1, iCols + 1).value = rs.Fields(iCols).Name
             Next
             
             With wksht.Range(wksht.Cells(i + 1, 1), _
@@ -4436,11 +4436,11 @@ Public Function BrowseFolder(DialogTitle As String, _
     Optional InitialView As Office.MsoFileDialogView = msoFileDialogViewList) As String
 On Error GoTo Err_Handler
 
-    Dim V As Variant
+    Dim v As Variant
     Dim InitFolder As String
     
     With Application.FileDialog(msoFileDialogFolderPicker)
-        .Title = DialogTitle
+        .title = DialogTitle
         .InitialView = InitialView
         
         If Len(InitialFolder) > 0 Then
@@ -4458,15 +4458,15 @@ On Error GoTo Err_Handler
         On Error Resume Next
         Err.Clear
         
-        V = .SelectedItems(1)
+        v = .SelectedItems(1)
         
         If Err.Number <> 0 Then
-            V = vbNullString
+            v = vbNullString
         End If
         
     End With
     
-    BrowseFolder = CStr(V)
+    BrowseFolder = CStr(v)
 
 Exit_Handler:
     Exit Function
@@ -4517,7 +4517,7 @@ On Error GoTo Err_Handler
     'loop through files - adding them to the zip
     For Each objFile In objFolder.Files
         
-        objShell.Namespace("" & OutputZip).CopyHere objFile.Path
+        objShell.Namespace("" & OutputZip).CopyHere objFile.path
         
         sngStart = Timer
         Do While Timer < sngStart + 2

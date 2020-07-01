@@ -1,0 +1,3 @@
+CREATE TABLE [IsSeedlingSpecies] (
+  [Master_PLANT_Code] VARCHAR (20) CONSTRAINT [PrimaryKey] PRIMARY KEY  UNIQUE  NOT NULL 
+)

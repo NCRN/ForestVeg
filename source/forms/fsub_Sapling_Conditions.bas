@@ -366,7 +366,7 @@ End Sub
 Private Sub Form_AfterUpdate()
 On Error GoTo Err_Handler
 
-    Forms![frm_Events]![fsub_Sapling_Data]![chkConditionsChecked].Value = True
+    Forms![frm_Events]![fsub_Sapling_Data]![chkConditionsChecked].value = True
     Me.Parent.Refresh
 
 Exit_Handler:
@@ -403,7 +403,7 @@ On Error GoTo Err_Handler
     Dim intTSN As Long
     Dim strTaxa As String
     
-    intTSN = Forms!frm_Events!fsub_Sapling_Data!fsub_Tag_Sapling!cbxTSN.Value
+    intTSN = Forms!frm_Events!fsub_Sapling_Data!fsub_Tag_Sapling!cbxTSN.value
     
     'MsgBox intTSN
     

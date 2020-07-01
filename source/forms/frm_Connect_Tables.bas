@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     AllowFilters = NotDefault
@@ -23,10 +23,10 @@ Begin Form
     Width =10254
     DatasheetFontHeight =10
     ItemSuffix =96
-    Left =4665
-    Top =3195
-    Right =14925
-    Bottom =6960
+    Left =4860
+    Top =1410
+    Right =15375
+    Bottom =7515
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xb46db5e5f0f8e240
@@ -439,7 +439,7 @@ Option Explicit
 ' =================================
 ' FORM:         frm_Connect_Tables form
 ' Level:        Application form module
-' Version:      1.03
+' Version:      1.04
 '
 ' Description:  updates back-end db connections, related functions & procedures
 '
@@ -455,6 +455,7 @@ Option Explicit
 '                                        fixed specification of initial directory
 '                                        to current directory, simplified a little
 '               BLC - 1/30/2019 - 1.03 - added documenation, error handling
+'               BLC - 4/2/2020  - 1.04 - added trailing slash for opening directory
 ' =================================
 
 ' ---------------------------------
@@ -577,6 +578,7 @@ End Sub
 ' Revisions:
 '   MEL/GS - unknown - initial version
 '   BLC - 1/30/2019 - update documentation, error handling
+'   BLC - 4/2/2020  - update current directory path to add trailing slash
 ' ---------------------------------
 Private Sub btnBrowse_Click()
 On Error GoTo Err_Handler
@@ -587,7 +589,7 @@ On Error GoTo Err_Handler
     Dim arrFile() As String
 
     strCurrentFile = Me!tbxCurrentName
-    strCurrentDir = Me!tbxCurrentPath
+    strCurrentDir = Me!tbxCurrentPath & "\"
 
     ' Clip to indicate just the folder of the current back-end
     strCurrentDir = Left(strCurrentDir, Len(strCurrentDir) - Len(strCurrentFile) - 1)
@@ -604,7 +606,6 @@ On Error GoTo Err_Handler
     arrFile = Split(varFilePath, "\")
     Me!tbxNewName = arrFile(UBound(arrFile))
     Me!btnUpdateLinks.Enabled = True
-
 
 Exit_Handler:
     Exit Sub
@@ -694,8 +695,8 @@ On Error GoTo Err_Handler
         ElseIf IsNull(rst.Fields("New_file_path")) = False Then
             With rst
                 .Edit
-                !Link_file_name = rst.Fields("New_file_name").Value
-                !Link_file_path = rst.Fields("New_file_path").Value
+                !Link_file_name = rst.Fields("New_file_name").value
+                !Link_file_path = rst.Fields("New_file_path").value
                 !New_file_name = Null
                 !New_file_path = Null
                 .Update
