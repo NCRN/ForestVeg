@@ -447,11 +447,11 @@ Private Sub ButtonPrint_Click()
 On Error GoTo Err_ButtonPrint_Click
 
     Dim stDocName As String
-    Dim strWhere As String
+    Dim strWHERE As String
 
-    strWhere = "version_key_number = " & Me![version_key_number]
+    strWHERE = "version_key_number = " & Me![version_key_number]
     stDocName = "rpt_Show_All_Versions"
-    DoCmd.OpenReport stDocName, acPreview, , strWhere
+    DoCmd.OpenReport stDocName, acPreview, , strWHERE
 
 Exit_ButtonPrint_Click:
     Exit Sub
@@ -517,7 +517,7 @@ On Error GoTo Err_ButtonAdd_Click
         Me!narrative_version.Locked = False
         Me!project_ID.Locked = True  ' Dont let them change the project ID on new records.
         Me.Requery ' Refresh form SOPs from table
-        Me.Filter = ""  ' Clear filter so new record will display.
+        Me.filter = ""  ' Clear filter so new record will display.
 
 Exit_ButtonAdd_Click:
     Exit Sub

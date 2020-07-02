@@ -182,7 +182,7 @@ Begin Form
                     BorderColor =8355711
                     Name ="lblTitle"
                     Caption ="QA Tool"
-                    FontName ="Calibri"
+                    FontName ="Franklin Gothic Book"
                     GridlineColor =10921638
                     LayoutCachedLeft =120
                     LayoutCachedWidth =3600
@@ -212,7 +212,7 @@ Begin Form
                     ForeColor =16777164
                     Name ="lblDirections"
                     Caption ="Enter the contact information and click save."
-                    FontName ="Calibri"
+                    FontName ="Franklin Gothic Book"
                     GridlineColor =10921638
                     LayoutCachedLeft =120
                     LayoutCachedTop =360
@@ -242,14 +242,14 @@ Begin Form
                     LayoutCachedWidth =14160
                     LayoutCachedHeight =414
                     UseTheme =255
-                    BackColor =14136213
+                    BackColor =11710639
                     BackThemeColorIndex =4
                     BackTint =60.0
-                    BorderColor =14136213
+                    BorderColor =11710639
                     BorderThemeColorIndex =4
                     BorderTint =60.0
                     HoverColor =65280
-                    PressedColor =9592887
+                    PressedColor =6249563
                     PressedThemeColorIndex =4
                     PressedShade =75.0
                     HoverForeColor =4210752
@@ -573,7 +573,7 @@ Begin Form
                     ForeColor =4210752
                     Name ="btnUndo"
                     Caption ="Edit"
-                    FontName ="Calibri"
+                    FontName ="Franklin Gothic Book"
                     ControlTipText ="Undo/Clear values"
                     GridlineColor =10921638
                     ImageData = Begin
@@ -623,16 +623,16 @@ Begin Form
                     UseTheme =1
                     Shape =1
                     Gradient =12
-                    BackColor =14136213
+                    BackColor =11710639
                     BackThemeColorIndex =4
                     BackTint =60.0
-                    BorderColor =14136213
+                    BorderColor =11710639
                     BorderThemeColorIndex =4
                     BorderTint =60.0
                     ThemeFontIndex =1
                     HoverColor =65280
                     HoverTint =40.0
-                    PressedColor =9592887
+                    PressedColor =6249563
                     PressedThemeColorIndex =4
                     PressedShade =75.0
                     HoverForeColor =4210752
@@ -679,7 +679,7 @@ Begin Form
                     Name ="btnClose"
                     Caption =" Close"
                     OnClick ="[Event Procedure]"
-                    FontName ="Calibri"
+                    FontName ="Franklin Gothic Book"
                     ControlTipText ="Close this form"
                     GridlineColor =10921638
                     ImageData = Begin
@@ -731,16 +731,16 @@ Begin Form
                     UseTheme =1
                     Shape =1
                     Gradient =12
-                    BackColor =14136213
+                    BackColor =11710639
                     BackThemeColorIndex =4
                     BackTint =60.0
-                    BorderColor =14136213
+                    BorderColor =11710639
                     BorderThemeColorIndex =4
                     BorderTint =60.0
                     ThemeFontIndex =1
                     HoverColor =65280
                     HoverTint =40.0
-                    PressedColor =9592887
+                    PressedColor =6249563
                     PressedThemeColorIndex =4
                     PressedShade =75.0
                     HoverForeColor =4210752
@@ -832,14 +832,14 @@ Begin Form
                                     LayoutCachedWidth =11400
                                     LayoutCachedHeight =825
                                     UseTheme =255
-                                    BackColor =14136213
+                                    BackColor =11710639
                                     BackThemeColorIndex =4
                                     BackTint =60.0
-                                    BorderColor =14136213
+                                    BorderColor =11710639
                                     BorderThemeColorIndex =4
                                     BorderTint =60.0
                                     HoverColor =65280
-                                    PressedColor =9592887
+                                    PressedColor =6249563
                                     PressedThemeColorIndex =4
                                     PressedShade =75.0
                                     HoverForeColor =4210752
@@ -871,14 +871,14 @@ Begin Form
                                     LayoutCachedWidth =13740
                                     LayoutCachedHeight =825
                                     UseTheme =255
-                                    BackColor =14136213
+                                    BackColor =11710639
                                     BackThemeColorIndex =4
                                     BackTint =60.0
-                                    BorderColor =14136213
+                                    BorderColor =11710639
                                     BorderThemeColorIndex =4
                                     BorderTint =60.0
                                     HoverColor =65280
-                                    PressedColor =9592887
+                                    PressedColor =6249563
                                     PressedThemeColorIndex =4
                                     PressedShade =75.0
                                     HoverForeColor =4210752
@@ -1025,14 +1025,14 @@ Begin Form
                                     LayoutCachedWidth =7260
                                     LayoutCachedHeight =825
                                     UseTheme =255
-                                    BackColor =14136213
+                                    BackColor =11710639
                                     BackThemeColorIndex =4
                                     BackTint =60.0
-                                    BorderColor =14136213
+                                    BorderColor =11710639
                                     BorderThemeColorIndex =4
                                     BorderTint =60.0
                                     HoverColor =65280
-                                    PressedColor =9592887
+                                    PressedColor =6249563
                                     PressedThemeColorIndex =4
                                     PressedShade =75.0
                                     HoverForeColor =4210752
@@ -1158,14 +1158,14 @@ Begin Form
                                     LayoutCachedWidth =9720
                                     LayoutCachedHeight =825
                                     UseTheme =255
-                                    BackColor =14136213
+                                    BackColor =11710639
                                     BackThemeColorIndex =4
                                     BackTint =60.0
-                                    BorderColor =14136213
+                                    BorderColor =11710639
                                     BorderThemeColorIndex =4
                                     BorderTint =60.0
                                     HoverColor =65280
-                                    PressedColor =9592887
+                                    PressedColor =6249563
                                     PressedThemeColorIndex =4
                                     PressedShade =75.0
                                     HoverForeColor =4210752
@@ -1193,7 +1193,7 @@ Begin Form
                                     Name ="btnViewSummary"
                                     Caption ="View Summary Report"
                                     OnClick ="[Event Procedure]"
-                                    FontName ="Calibri"
+                                    FontName ="Franklin Gothic Book"
                                     ControlTipText ="View the quality review results as a report"
                                     GridlineColor =10921638
                                     ImageData = Begin
@@ -1245,16 +1245,16 @@ Begin Form
                                     UseTheme =1
                                     Shape =1
                                     Gradient =12
-                                    BackColor =14136213
+                                    BackColor =11710639
                                     BackThemeColorIndex =4
                                     BackTint =60.0
-                                    BorderColor =14136213
+                                    BorderColor =11710639
                                     BorderThemeColorIndex =4
                                     BorderTint =60.0
                                     ThemeFontIndex =1
                                     HoverColor =65280
                                     HoverTint =40.0
-                                    PressedColor =9592887
+                                    PressedColor =6249563
                                     PressedThemeColorIndex =4
                                     PressedShade =75.0
                                     HoverForeColor =4210752
@@ -1281,7 +1281,7 @@ Begin Form
                                     ForeColor =4210752
                                     Name ="btnRefresh"
                                     Caption =" Refresh Results"
-                                    FontName ="Calibri"
+                                    FontName ="Franklin Gothic Book"
                                     ControlTipText ="Run the validation queries and refresh the results summary"
                                     GridlineColor =10921638
                                     ImageData = Begin
@@ -1333,16 +1333,16 @@ Begin Form
                                     UseTheme =1
                                     Shape =1
                                     Gradient =12
-                                    BackColor =14136213
+                                    BackColor =11710639
                                     BackThemeColorIndex =4
                                     BackTint =60.0
-                                    BorderColor =14136213
+                                    BorderColor =11710639
                                     BorderThemeColorIndex =4
                                     BorderTint =60.0
                                     ThemeFontIndex =1
                                     HoverColor =65280
                                     HoverTint =40.0
-                                    PressedColor =9592887
+                                    PressedColor =6249563
                                     PressedThemeColorIndex =4
                                     PressedShade =75.0
                                     HoverForeColor =4210752
@@ -1883,7 +1883,7 @@ Begin Form
                                     ForeColor =4210752
                                     Name ="btnDesignView"
                                     Caption ="Design View"
-                                    FontName ="Calibri"
+                                    FontName ="Franklin Gothic Book"
                                     ControlTipText ="Open the selected query in design view"
                                     GridlineColor =10921638
                                     ImageData = Begin
@@ -1934,16 +1934,16 @@ Begin Form
                                     UseTheme =1
                                     Shape =1
                                     Gradient =12
-                                    BackColor =14136213
+                                    BackColor =11710639
                                     BackThemeColorIndex =4
                                     BackTint =60.0
-                                    BorderColor =14136213
+                                    BorderColor =11710639
                                     BorderThemeColorIndex =4
                                     BorderTint =60.0
                                     ThemeFontIndex =1
                                     HoverColor =65280
                                     HoverTint =40.0
-                                    PressedColor =9592887
+                                    PressedColor =6249563
                                     PressedThemeColorIndex =4
                                     PressedShade =75.0
                                     HoverForeColor =4210752
@@ -1991,7 +1991,7 @@ Begin Form
                                     BackColor =-2147483643
                                     BorderColor =0
                                     ForeColor =-2147483640
-                                    ColumnInfo ="\"\";\"\";\"\";\"\";\"0\";\"0\""
+                                    ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"200\""
                                     Name ="cbxTable"
                                     RowSourceType ="Table/Query"
                                     RowSource ="SELECT tsys_Link_Tables.Link_table, tsys_Link_Tables.Description_text FROM tsys_"
@@ -2091,7 +2091,7 @@ Begin Form
                     StatusBarText ="Open the form / query / table specified in the query to the record selected in t"
                         "he subform"
                     OnClick ="[Event Procedure]"
-                    FontName ="Calibri"
+                    FontName ="Franklin Gothic Book"
                     ControlTipText ="Open the form / query / table specified in the query to the record selected in t"
                         "he subform"
                     GridlineColor =10921638
@@ -2108,16 +2108,16 @@ Begin Form
                     UseTheme =1
                     Shape =1
                     Gradient =12
-                    BackColor =14136213
+                    BackColor =11710639
                     BackThemeColorIndex =4
                     BackTint =60.0
-                    BorderColor =14136213
+                    BorderColor =11710639
                     BorderThemeColorIndex =4
                     BorderTint =60.0
                     ThemeFontIndex =1
                     HoverColor =65280
                     HoverTint =40.0
-                    PressedColor =9592887
+                    PressedColor =6249563
                     PressedThemeColorIndex =4
                     PressedShade =75.0
                     HoverForeColor =4210752
@@ -2148,7 +2148,7 @@ Begin Form
                     Caption ="Auto-Fix"
                     StatusBarText ="Run a pre-built query to automatically fix all the records"
                     OnClick ="[Event Procedure]"
-                    FontName ="Calibri"
+                    FontName ="Franklin Gothic Book"
                     ControlTipText ="Run a pre-built query to automatically fix all the records"
                     GridlineColor =10921638
 
@@ -2164,16 +2164,16 @@ Begin Form
                     UseTheme =1
                     Shape =1
                     Gradient =12
-                    BackColor =14136213
+                    BackColor =11710639
                     BackThemeColorIndex =4
                     BackTint =60.0
-                    BorderColor =14136213
+                    BorderColor =11710639
                     BorderThemeColorIndex =4
                     BorderTint =60.0
                     ThemeFontIndex =1
                     HoverColor =65280
                     HoverTint =40.0
-                    PressedColor =9592887
+                    PressedColor =6249563
                     PressedThemeColorIndex =4
                     PressedShade =75.0
                     HoverForeColor =4210752
@@ -2203,7 +2203,7 @@ Begin Form
                     Caption =" Data Browser"
                     StatusBarText ="Open the project data browser"
                     OnClick ="[Event Procedure]"
-                    FontName ="Calibri"
+                    FontName ="Franklin Gothic Book"
                     ControlTipText ="Open the project data browser"
                     GridlineColor =10921638
                     ImageData = Begin
@@ -2255,16 +2255,16 @@ Begin Form
                     UseTheme =1
                     Shape =1
                     Gradient =12
-                    BackColor =14136213
+                    BackColor =11710639
                     BackThemeColorIndex =4
                     BackTint =60.0
-                    BorderColor =14136213
+                    BorderColor =11710639
                     BorderThemeColorIndex =4
                     BorderTint =60.0
                     ThemeFontIndex =1
                     HoverColor =65280
                     HoverTint =40.0
-                    PressedColor =9592887
+                    PressedColor =6249563
                     PressedThemeColorIndex =4
                     PressedShade =75.0
                     HoverForeColor =4210752
@@ -2294,7 +2294,7 @@ Begin Form
                     Caption ="Export to Excel"
                     StatusBarText ="Export the results of the selected query to Excel"
                     OnClick ="[Event Procedure]"
-                    FontName ="Calibri"
+                    FontName ="Franklin Gothic Book"
                     ControlTipText ="Export the results of the selected query to Excel"
                     GridlineColor =10921638
                     ImageData = Begin
@@ -2345,16 +2345,16 @@ Begin Form
                     UseTheme =1
                     Shape =1
                     Gradient =12
-                    BackColor =14136213
+                    BackColor =11710639
                     BackThemeColorIndex =4
                     BackTint =60.0
-                    BorderColor =14136213
+                    BorderColor =11710639
                     BorderThemeColorIndex =4
                     BorderTint =60.0
                     ThemeFontIndex =1
                     HoverColor =65280
                     HoverTint =40.0
-                    PressedColor =9592887
+                    PressedColor =6249563
                     PressedThemeColorIndex =4
                     PressedShade =75.0
                     HoverForeColor =4210752
@@ -2384,7 +2384,7 @@ Begin Form
                     Caption ="Export to Excel"
                     StatusBarText ="Open the selected query in a new window"
                     OnClick ="[Event Procedure]"
-                    FontName ="Calibri"
+                    FontName ="Franklin Gothic Book"
                     ControlTipText ="Open the selected query in a new window"
                     GridlineColor =10921638
                     ImageData = Begin
@@ -2435,16 +2435,16 @@ Begin Form
                     UseTheme =1
                     Shape =1
                     Gradient =12
-                    BackColor =14136213
+                    BackColor =11710639
                     BackThemeColorIndex =4
                     BackTint =60.0
-                    BorderColor =14136213
+                    BorderColor =11710639
                     BorderThemeColorIndex =4
                     BorderTint =60.0
                     ThemeFontIndex =1
                     HoverColor =65280
                     HoverTint =40.0
-                    PressedColor =9592887
+                    PressedColor =6249563
                     PressedThemeColorIndex =4
                     PressedShade =75.0
                     HoverForeColor =4210752
@@ -2474,7 +2474,7 @@ Begin Form
                     Caption =" Requery"
                     StatusBarText ="Requery the results set for the selected query"
                     OnClick ="[Event Procedure]"
-                    FontName ="Calibri"
+                    FontName ="Franklin Gothic Book"
                     ControlTipText ="Requery the results set for the selected query"
                     GridlineColor =10921638
                     ImageData = Begin
@@ -2526,16 +2526,16 @@ Begin Form
                     UseTheme =1
                     Shape =1
                     Gradient =12
-                    BackColor =14136213
+                    BackColor =11710639
                     BackThemeColorIndex =4
                     BackTint =60.0
-                    BorderColor =14136213
+                    BorderColor =11710639
                     BorderThemeColorIndex =4
                     BorderTint =60.0
                     ThemeFontIndex =1
                     HoverColor =65280
                     HoverTint =40.0
-                    PressedColor =9592887
+                    PressedColor =6249563
                     PressedThemeColorIndex =4
                     PressedShade =75.0
                     HoverForeColor =4210752
@@ -2667,37 +2667,37 @@ Private m_CallingForm As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidCallingForm(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
-Public Property Get title() As String
-    title = m_Title
+Public Property Get Title() As String
+    Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -2705,11 +2705,11 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(value As String)
-    If Len(value) > 0 Then
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+    If Len(Value) > 0 Then
+        m_CallingForm = Value
     Else
-        RaiseEvent InvalidCallingForm(value)
+        RaiseEvent InvalidCallingForm(Value)
     End If
 End Property
 
@@ -2749,22 +2749,22 @@ Private Sub Form_Open(Cancel As Integer)
     'restore calling form
     ToggleForm Me.CallingForm, -1
 
-    title = "QA Tool"
+    Title = "QA Tool"
     Directions = "Choose the desired data timeframe && scope."
-    lblDirections.ForeColor = lngLtBlue
+    lblDirections.forecolor = lngLtBlue
 '    btnComment.Caption = StringFromCodepoint(uComment)
 '    btnComment.ForeColor = lngBlue
     
     'set hovers
-    btnClose.HoverColor = lngGreen
-    btnRefresh.HoverColor = lngGreen
-    btnViewSummary.HoverColor = lngGreen
-    btnDesignView.HoverColor = lngGreen
-    btnAutoFix.HoverColor = lngGreen
-    btnOpenBrowser.HoverColor = lngGreen
-    btnExport.HoverColor = lngGreen
-    btnCloseup.HoverColor = lngGreen
-    btnRequery.HoverColor = lngGreen
+    btnClose.hoverColor = lngGreen
+    btnRefresh.hoverColor = lngGreen
+    btnViewSummary.hoverColor = lngGreen
+    btnDesignView.hoverColor = lngGreen
+    btnAutoFix.hoverColor = lngGreen
+    btnOpenBrowser.hoverColor = lngGreen
+    btnExport.hoverColor = lngGreen
+    btnCloseup.hoverColor = lngGreen
+    btnRequery.hoverColor = lngGreen
     
     ' Close the form if the switchboard is not open
     If SwitchboardIsOpen = False Then
@@ -2775,12 +2775,15 @@ Private Sub Form_Open(Cancel As Integer)
     End If
 
     'set default app mode & initialize controls
-    setUserAccess Me
+'----------------------------------------------
+' RETIRED - 7/1/2020 - compile issues
+'----------------------------------------------
+'    setUserAccess Me
     
     ' Initialize UI
     With Me
         ' Set form time frame to global time frame
-        .cbxTimeframe = TempVars.item("Timeframe")
+        .cbxTimeframe = TempVars.Item("Timeframe")
         
         .cbxDoneFilter = "False"
         .tglFilterByDone = True
@@ -2818,7 +2821,7 @@ Private Sub Form_Load()
     ' Requery the results subform to reflect updates if the user chose to run upon opening
     If blnRunQueries Then Me.subResults.Requery
     ' Turn off the form filter and move to a blank record so that no query record is visible
-    Me.Filter = ""
+    Me.filter = ""
     DoCmd.GoToRecord , , acNewRec
 
 Exit_Handler:
@@ -2858,11 +2861,11 @@ End Sub
 Private Sub cbxTimeframe_AfterUpdate()
     On Error GoTo Err_Handler
 
-    If Me.cbxTimeframe <> TempVars.item("Timeframe") Then
+    If Me.cbxTimeframe <> TempVars.Item("Timeframe") Then
         Me.btnRefresh.Enabled = False
         Me.optgMode.Enabled = False
     Else
-        Select Case TempVars.item("UserAccessLevel")
+        Select Case TempVars.Item("UserAccessLevel")
           Case "admin", "power user"
             Me.btnRefresh.Enabled = True
             Me.optgMode.Enabled = True
@@ -2910,7 +2913,7 @@ Private Sub optgMode_AfterUpdate()
         Me.tbxQueryDesc.Locked = True
         Me.tbxRemedy.Locked = True
         Me.subDataTables.Locked = True
-        Me.Detail.BackColor = 13025979 ' steel blue (default)
+        Me.Detail.backcolor = 13025979 ' steel blue (default)
     Else
     ' Edit mode
         ' Unlock the subform if an editable query
@@ -2920,7 +2923,7 @@ Private Sub optgMode_AfterUpdate()
         Me.tbxQueryDesc.Locked = False
         Me.tbxRemedy.Locked = False
         Me.subDataTables.Locked = False
-        Me.Detail.BackColor = 12574431 ' haystack
+        Me.Detail.backcolor = 12574431 ' haystack
     End If
 
 Exit_Handler:
@@ -3079,7 +3082,7 @@ Private Sub PageTabs_Change()
         varReturn = UpdateQAResults(False, Me.cbxObject)
         Me.Requery
         FilterRecords
-        strCriteria = "[Query_name] = """ & Me.cbxObject.value & _
+        strCriteria = "[Query_name] = """ & Me.cbxObject.Value & _
             """ AND [Time_frame] = """ & Me.cbxTimeframe & _
             """ AND [Data_scope] = " & Me.optgScope
 
@@ -3266,7 +3269,7 @@ Private Sub btnRefresh_Click()
     ' Save the current record, reset the form filter and query selector, reset the form
     '   to allow additions, and move to a blank record
     If Me.Dirty Then DoCmd.RunCommand acCmdSaveRecord
-    Me.Filter = ""
+    Me.filter = ""
     Me.FilterOn = False
     Me.cbxObject = Null
     Me.subQueryResults.SourceObject = ""
@@ -3367,10 +3370,10 @@ Private Sub btnViewSummary_Click()
         "Save report to a file?") = vbYes Then
         If strTimeframe <> "" Then
             ' Add timeframe to file name
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 strTimeframe & "_" & CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".snp"
         Else
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".snp"
         End If
         ' Open the save file dialog and update to the actual name given by the user
@@ -3434,15 +3437,15 @@ Private Sub cbxObject_AfterUpdate()
         Me.AllowAdditions = True
         DoCmd.GoToRecord , , acNewRec
         Me.tbxEditQuery = ""
-        Me.tbxEditQuery.ForeColor = 0          'black
-        Me.tbxEditQuery.BackColor = 8454143    'yellow
+        Me.tbxEditQuery.forecolor = 0          'black
+        Me.tbxEditQuery.backcolor = 8454143    'yellow
         GoTo Exit_Handler
     End If
     
     ' Bind the subform to the selected query
-    Me.subQueryResults.SourceObject = "Query." & Me.cbxObject.value
+    Me.subQueryResults.SourceObject = "Query." & Me.cbxObject.Value
     ' Build the filter string and see if a record already exists
-    strCriteria = "[Query_name] = """ & Me.cbxObject.value & _
+    strCriteria = "[Query_name] = """ & Me.cbxObject.Value & _
         """ AND [Time_frame] = """ & Me.cbxTimeframe & _
         """ AND [Data_scope] = " & Me.optgScope
     If DCount("*", "tbl_QA_Results", strCriteria) = 0 Then
@@ -3450,7 +3453,7 @@ Private Sub cbxObject_AfterUpdate()
         varReturn = UpdateQAResults(False, Me.cbxObject, True)
     End If
     ' Set the form to the selected record
-    Me.Form.Filter = strCriteria
+    Me.Form.filter = strCriteria
     Me.Form.FilterOn = True
 
     ' Call the function to update the query flag
@@ -3463,7 +3466,7 @@ Private Sub cbxObject_AfterUpdate()
 
     On Error Resume Next
     For Each qdf In qdfs
-        If qdf.Name = Me.cbxObject.value Then
+        If qdf.Name = Me.cbxObject.Value Then
             MsgBox ("This query returns (" & DCount("*", qdf.Name) & _
                 ") records that meet the following criteria: " & _
                 vbCrLf & vbCrLf & qdf.Properties("Description"))
@@ -3509,7 +3512,7 @@ Private Sub btnDesignView_Click()
 
     ' Open the selected query in design view after checking that a query is selected
     If IsNull(Me.cbxObject) = False Then _
-        DoCmd.OpenQuery Me.cbxObject.value, acViewDesign, acReadOnly
+        DoCmd.OpenQuery Me.cbxObject.Value, acViewDesign, acReadOnly
 
 Exit_Handler:
     Exit Sub
@@ -3547,7 +3550,7 @@ Private Sub btnAutoFix_Click()
 
     On Error Resume Next
     Set ctlAutoFix = Forms!frm_QA_Tool.subQueryResults!varAutoFix
-    varAutoFix = ctlAutoFix.value
+    varAutoFix = ctlAutoFix.Value
     On Error GoTo Err_Handler
 
     If IsNull(varAutoFix) Then
@@ -3633,11 +3636,11 @@ Private Sub btnOpenRecord_Click()
     
     On Error Resume Next
     Set ctlObject = Forms!frm_QA_Tool.subQueryResults!varObject
-    varObject = ctlObject.value
+    varObject = ctlObject.Value
     Set ctlFilter = Forms!frm_QA_Tool.subQueryResults!varFilter
-    varFilter = ctlFilter.value
+    varFilter = ctlFilter.Value
     Set ctlArgs = Forms!frm_QA_Tool.subQueryResults!varArgs
-    varArgs = ctlArgs.value
+    varArgs = ctlArgs.Value
     On Error GoTo Err_Handler
 
     If IsNull(varObject) Then
@@ -3779,7 +3782,7 @@ Private Sub btnExport_Click()
     ' Requery the selected record in the recordset, and update the subform
     Me.subQueryResults.Requery
     strQName = Me.cbxObject
-    strSaveFile = CurrentProject.path & "\" & strQName & "_" & _
+    strSaveFile = CurrentProject.Path & "\" & strQName & "_" & _
         CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".xls"
     DoCmd.OutputTo acOutputQuery, strQName, acFormatXLS, strSaveFile, True
     MsgBox "File saved to:" & vbCrLf & vbCrLf & strSaveFile
@@ -3816,9 +3819,9 @@ Private Sub btnCloseup_Click()
     ' Open the selected query in a new window after checking that a query is selected
     If IsNull(Me.cbxObject) = False Then
         If Me.tbxEditQuery = "OK" Then
-            DoCmd.OpenQuery Me.cbxObject.value, acViewNormal, acEdit
+            DoCmd.OpenQuery Me.cbxObject.Value, acViewNormal, acEdit
         Else
-            DoCmd.OpenQuery Me.cbxObject.value, acViewNormal, acReadOnly
+            DoCmd.OpenQuery Me.cbxObject.Value, acViewNormal, acReadOnly
         End If
         DoCmd.Maximize
     End If
@@ -3976,7 +3979,7 @@ Private Sub cbxTable_AfterUpdate()
     Else
     ' If a table is selected ...
         If TableExists(Me.cbxTable) Then
-            Me.subDataTables.SourceObject = "Table." & Me.cbxTable.value
+            Me.subDataTables.SourceObject = "Table." & Me.cbxTable.Value
         Else
             MsgBox "Unable to find the selected table in the database ...", , _
                 "Table not found"
@@ -4082,12 +4085,12 @@ Private Function FilterRecords()
     ' Apply the filter
     'Me.Filter = strFilter
     'Me.FilterOn = bFilterOn
-    Me.subResults.Form.Filter = strFilter
+    Me.subResults.Form.filter = strFilter
     Me.subResults.Form.FilterOn = bFilterOn
 
     ' Make the labels bold or not depending on filter settings
-    Me.lblTypeFilter.FontBold = Me.tglFilterByType
-    Me.lblDoneFilter.FontBold = Me.tglFilterByDone
+    Me.lblTypeFilter.fontBold = Me.tglFilterByType
+    Me.lblDoneFilter.fontBold = Me.tglFilterByDone
 
 Exit_Handler:
     Exit Function
@@ -4124,17 +4127,17 @@ Private Function SetQueryFlag()
 
     ' Update the visual flag to indicate whether or not the query results are editable
     '   Note: suffix of "_X" means that the query results may be edited
-    If Right(Me.cbxObject.value, 2) = "_X" Then
+    If Right(Me.cbxObject.Value, 2) = "_X" Then
         Me.tbxEditQuery = "OK"
-        Me.tbxEditQuery.ForeColor = 16777215   'white
-        Me.tbxEditQuery.BackColor = 4227072    'green
+        Me.tbxEditQuery.forecolor = 16777215   'white
+        Me.tbxEditQuery.backcolor = 4227072    'green
         ' Unlock the subform if in edit mode
         If Me.optgMode = 1 Then Me.subQueryResults.Locked = False _
             Else Me.subQueryResults.Locked = True
     Else
         Me.tbxEditQuery = "No"
-        Me.tbxEditQuery.ForeColor = 16777215   'white
-        Me.tbxEditQuery.BackColor = 255        'red
+        Me.tbxEditQuery.forecolor = 16777215   'white
+        Me.tbxEditQuery.backcolor = 255        'red
         ' Lock the subform
         Me.subQueryResults.Locked = True
     End If
@@ -4177,7 +4180,7 @@ Private Function EnableAutoFix()
     Set ctlAutoFix = Forms!frm_QA_Tool.subQueryResults!varAutoFix
 
     ' If no error, the field is there ... enable the ctl if user has sufficient rights
-    Select Case TempVars.item("UserAccessLevel")
+    Select Case TempVars.Item("UserAccessLevel")
       Case "admin", "power user"
         Me.btnAutoFix.Enabled = True
     End Select

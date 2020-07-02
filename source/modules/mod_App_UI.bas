@@ -80,20 +80,20 @@ Public Sub DisplayMessage(topic As String)
 On Error GoTo Err_Handler
     
     Dim msg As String
-    Dim title As String
-    Dim msgtype As Long
+    Dim Title As String
+    Dim msgType As Long
     
     Select Case topic
         Case "notready"
-            title = "Patience Required - Feature Not Yet Ready for Prime Time"
+            Title = "Patience Required - Feature Not Yet Ready for Prime Time"
             msg = "Sorry, this feature is not quite ready." _
                     & vbCrLf & "Please check back in the next release." _
                     & vbCrLf & vbCrLf & "Thank you for your patience..." _
                     & vbCrLf & "...and for checking out new features!"
-            msgtype = vbInformation
+            msgType = vbInformation
     End Select
     
-    MsgBox msg, msgtype, title
+    MsgBox msg, msgType, Title
 
 Exit_Handler:
     Exit Sub
@@ -233,14 +233,14 @@ On Error GoTo Err_Handler
     'set the control value?
     'Screen.ActiveControl = ValidPct
     If IsValid = False Then
-        Screen.ActiveControl.BackColor = lngYellow
-        Screen.ActiveControl.ForeColor = lngRed
+        Screen.ActiveControl.backcolor = lngYellow
+        Screen.ActiveControl.forecolor = lngRed
         MsgBox "Percent cover values range from 0 to 100 (inclusive). " _
                 & vbCrLf & "Please check the highlighted value.", vbOKOnly, _
                 "NCRN Vegetation Monitoring > Invalid Percent Value"
     Else
-        Screen.ActiveControl.BackColor = lngWhite
-        Screen.ActiveControl.ForeColor = lngBlack
+        Screen.ActiveControl.backcolor = lngWhite
+        Screen.ActiveControl.forecolor = lngBlack
     End If
     
 Exit_Handler:
@@ -370,14 +370,14 @@ On Error GoTo Err_Handler
   
     'set file path
     Dim IconFullPath As String
-    IconFullPath = CurrentProject.path & "\" & IconFile
+    IconFullPath = CurrentProject.Path & "\" & IconFile
   
     'is IconFile actually present?
     If FileExists(IconFullPath) And Right(LCase(IconFullPath), 3) = "ico" Then
   
-        With currDb
-            .Properties("AppIcon").value = IconFullPath
-            .Properties("AppTitle").value = .Properties("Title")
+        With CurrDb
+            .Properties("AppIcon").Value = IconFullPath
+            .Properties("AppTitle").Value = .Properties("Title")
             'if you want to extend icon to reports
             '.Properties("UseAppIconForFrmRpt").Value = True
         
@@ -395,7 +395,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - " & Application.VBE.ActiveCodePane & " [" & Application.VBE.A & "])"
+            "Error encountered (#" & Err.Number & " - " & Application.VBE.ActiveCodePane & " [" & Application.VBE.a & "])"
     End Select
     Resume Exit_Handler
 End Sub

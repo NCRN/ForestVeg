@@ -2458,7 +2458,7 @@ On Error GoTo Err_Handler
             
     strSQL = Replace(strSQL, "PARKNAME", TempVars!Park)
 Debug.Print strSQL
-    qdf.sql = strSQL
+    qdf.SQL = strSQL
     
 
 If ReportIsLoaded("rpt_Tgt_Species_List_Park_Summary") Then

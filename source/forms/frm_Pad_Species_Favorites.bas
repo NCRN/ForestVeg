@@ -510,7 +510,7 @@ On Error GoTo cmdList_Select_Click_Err
         Me.FilterOn = False
     Else
         cmdList_Select.Caption = "All"
-        Me.Filter = "Favorite = TRUE"
+        Me.filter = "Favorite = TRUE"
         Me.FilterOn = True
     End If
 
@@ -625,7 +625,7 @@ Private Sub Form_Open(Cancel As Integer)
     End Select
     
     cmdList_Select.Caption = "All"
-    Me.Filter = "Favorite = True"
+    Me.filter = "Favorite = True"
     Me.FilterOn = True
 End Sub
 

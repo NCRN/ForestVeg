@@ -520,25 +520,25 @@ Private m_Title As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
+Public Event InvalidTitle(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
-Public Property Get title() As String
-    title = m_Title
+Public Property Get Title() As String
+    Title = m_Title
 End Property
 
 '---------------------
@@ -569,10 +569,10 @@ On Error GoTo Err_Handler
     lblQuote.Caption = "A river is the report card for its watershed."
     lblAttrib.Caption = "— Alan Levere, Connecticut Department of Environmental Protection"
     
-    btnNext.ForeColor = lngBlue
+    btnNext.forecolor = lngBlue
     
     'set hover
-    btnNext.HoverColor = lngGreen
+    btnNext.hoverColor = lngGreen
 
     'initialize app settings --> shifted to PreSplash
     'initApp

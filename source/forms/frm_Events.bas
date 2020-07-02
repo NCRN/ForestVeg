@@ -2496,9 +2496,9 @@ On Error GoTo Err_Handler
     
 Debug.Print "QCmode = " & TempVars("QC_MODE")
     'QC mode?
-    lblQCMode.Visible = Nz(TempVars("QC_MODE"), False)
-    btnFlag.Visible = Nz(TempVars("QC_MODE"), False)
-    imgFlag.Visible = Nz(TempVars("QC_MODE"), False)
+    lblQCMode.visible = Nz(TempVars("QC_MODE"), False)
+    btnFlag.visible = Nz(TempVars("QC_MODE"), False)
+    imgFlag.visible = Nz(TempVars("QC_MODE"), False)
 
 '    ' Set the opening parameters depending on the arguments passed from the previous form
 '    If Me.OpenArgs = "(Browsing)" Then
@@ -2546,28 +2546,28 @@ Debug.Print "QCmode = " & TempVars("QC_MODE")
     SetEditMode (booEditOn)
 
     'check for PseudoEvents
-    SetTempVar "IsPseudoEvent", Nz(Me.tbxPseudoEvent.value, 0) 'tbxPseudoEvent.Value
+    SetTempVar "IsPseudoEvent", Nz(Me.tbxPseudoEvent.Value, 0) 'tbxPseudoEvent.Value
     Dim bgdColor As Long, txtColor As Long
 
     'defaults
     txtColor = lngWhite
     bgdColor = HTMLConvert("#ECECEC")
-    btnConvertPseudoEvent.HoverColor = lngGreen
-    btnConvertPseudoEvent.Visible = False
-    lblPseudoEventFlag.Visible = False
-    rctPseudoEvent.Visible = False
+    btnConvertPseudoEvent.hoverColor = lngGreen
+    btnConvertPseudoEvent.visible = False
+    lblPseudoEventFlag.visible = False
+    rctPseudoEvent.visible = False
 
     If TempVars("IsPseudoEvent") = 1 Then
         'bgdColor = lngLtPink
         txtColor = lngLtPink
-        lblPseudoEventFlag.ForeColor = txtColor
-        lblPseudoEventFlag.Visible = True
-        rctPseudoEvent.BackColor = txtColor
-        rctPseudoEvent.Visible = True
+        lblPseudoEventFlag.forecolor = txtColor
+        lblPseudoEventFlag.visible = True
+        rctPseudoEvent.backcolor = txtColor
+        rctPseudoEvent.visible = True
 
         'expose conversion button ONLY in edit mode
         If Not Right(Me.tglBrowse_Edit.Caption, 4) = "EDIT" Then
-            btnConvertPseudoEvent.Visible = True
+            btnConvertPseudoEvent.visible = True
         End If
     End If
     
@@ -2577,8 +2577,8 @@ Debug.Print "QCmode = " & TempVars("QC_MODE")
     'lblPseudoEventFlag.BackColor = txtColor
     
     'set globals
-    SetTempVar "plot", Me.Location_ID.value
-    SetTempVar "eventID", Me.Event_ID.value
+    SetTempVar "plot", Me.Location_ID.Value
+    SetTempVar "eventID", Me.Event_ID.Value
 
 Exit_Handler:
     Exit Sub
@@ -2681,25 +2681,25 @@ End Sub
 Private Sub btnConvertPseudoEvent_Click()
 On Error GoTo Err_Handler
 
-    Dim retVal As Boolean
+    Dim RetVal As Boolean
     
-    retVal = MsgBox("Click OK to confirm you want to convert this event to a regular event." _
+    RetVal = MsgBox("Click OK to confirm you want to convert this event to a regular event." _
                     & vbCrLf & vbCrLf & "NOTE:" & vbCrLf & vbCrLf _
                     & "You cannot revert back to a pseudoevent, so be sure you want to do this!", _
                      vbOKCancel, "Confirm Convert from PseudoEvent to Regular Event")
     
     'convert if desired
-    If retVal = True Then
-        lblPseudoEventFlag.Visible = False
+    If RetVal = True Then
+        lblPseudoEventFlag.visible = False
         btnConvertPseudoEvent.Enabled = False
-        btnConvertPseudoEvent.Visible = False
-        rctPseudoEvent.Visible = False
+        btnConvertPseudoEvent.visible = False
+        rctPseudoEvent.visible = False
 
         'convert to regular event
         Me.PseudoEvent = 0
 
     Else
-        lblPseudoEventFlag.Visible = True
+        lblPseudoEventFlag.visible = True
         btnConvertPseudoEvent.Enabled = True
     End If
     
@@ -3060,10 +3060,10 @@ On Error GoTo Err_Handler
     
     Dim strTransect As String
     
-    strTransect = Me!grpTransect_Selection.value
-    Me.txtTransect_Selection.value = "'" & strTransect & "'"
+    strTransect = Me!grpTransect_Selection.Value
+    Me.txtTransect_Selection.Value = "'" & strTransect & "'"
     Forms![frm_Events]![fsub_Transects]!txtTransect_Azimuth.DefaultValue = "'" & strTransect & "'"
-    Forms![frm_Events]![fsub_Transects].Form.Filter = "[Transect_Azimuth] = """ & strTransect & """ "
+    Forms![frm_Events]![fsub_Transects].Form.filter = "[Transect_Azimuth] = """ & strTransect & """ "
     Forms![frm_Events]![fsub_Transects].Form.FilterOn = True
 
 Exit_Handler:
@@ -3097,19 +3097,19 @@ End Sub
 Private Sub lblLink_To_Plot_Photos_Click()
 On Error GoTo Err_Handler
 
-    Dim retVal As Double
+    Dim RetVal As Double
     Dim RootFolder As String
     Dim PhotoFolder As String
     
     RootFolder = TempVars("Root") '"T:\I&M"
     PhotoFolder = TempVars("Photo") '"T:\I&M\Monitoring\Forest_Vegetation\Photos\"
     If FolderExists(PhotoFolder & Me!txtPlot_Name) Then
-        retVal = shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
+        RetVal = shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
         GoTo Exit_Handler
     Else
         If FolderExists(RootFolder) Then
             MsgBox ("Folder for this plot not found....Opening the root of the Photos folder.")
-            retVal = shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
+            RetVal = shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
             GoTo Exit_Handler
         Else
             MsgBox ("The network appears to be unavailable. Network access is required to view photos.")
@@ -3453,12 +3453,12 @@ On Error GoTo Err_Handler
     
     If booEditOn Then
         Me!tglBrowse_Edit.Caption = "Editing ON"
-        Me!lblEvent_Form_Header.BackColor = RGB(128, 0, 0)
-        Me.btnConvertPseudoEvent.Visible = False
+        Me!lblEvent_Form_Header.backcolor = RGB(128, 0, 0)
+        Me.btnConvertPseudoEvent.visible = False
     Else
         Me!tglBrowse_Edit.Caption = "Editing OFF"
-        Me!lblEvent_Form_Header.BackColor = vbBlack
-        Me.btnConvertPseudoEvent.Visible = True
+        Me!lblEvent_Form_Header.backcolor = vbBlack
+        Me.btnConvertPseudoEvent.visible = True
     End If
     
     'Me.FilterOn = booEditOn

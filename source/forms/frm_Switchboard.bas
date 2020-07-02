@@ -4378,13 +4378,13 @@ On Error GoTo Err_Handler
     Dim sysInfo As Object
     Dim oUser As Object
     
-    Set sysInfo = CreateObject("ADSystemInfo")
-    If Not IsNull(sysInfo) Then
-        Set oUser = GetObject("LDAP://" & sysInfo.UserName & "")
-        If Not IsNothing(oUser) Then
-            Debug.Print "Display Name: "; Tab(20); oUser.Get("DisplayName")
-        End If
-    End If
+'    Set sysInfo = CreateObject("ADSystemInfo")
+'    If Not IsNull(sysInfo) Then
+'        Set oUser = GetObject("LDAP://" & sysInfo.UserName & "")
+'        If Not IsNothing(oUser) Then
+'            Debug.Print "Display Name: "; Tab(20); oUser.Get("DisplayName")
+'        End If
+'    End If
     
 Exit_Handler:
     Exit Sub
@@ -4488,11 +4488,11 @@ Private Sub Form_Load()
 
     If IsNothing(varAuthorEmail) Then
         varAuthorEmail = "Author email unknown"
-        Me!lblAuthorEmail.ForeColor = vbWhite
+        Me!lblAuthorEmail.forecolor = vbWhite
         Me!lblAuthorEmail.FontUnderline = False
         Me!lblAuthorEmail.HyperlinkAddress = ""
     Else
-        Me!lblAuthorEmail.ForeColor = vbBlue
+        Me!lblAuthorEmail.forecolor = vbBlue
         Me!lblAuthorEmail.FontUnderline = True
         Me!lblAuthorEmail.HyperlinkAddress = "mailto:" + varAuthorEmail
     End If
@@ -4704,7 +4704,7 @@ On Error GoTo Err_Handler
         'check if there are pseudoevents first
         Dim db As DAO.Database
         Dim rs As DAO.Recordset
-        Set db = currDb
+        Set db = CurrDb
         
         Set rs = db.OpenRecordset("qFrm_PseudoEvents", dbOpenDynaset)
 '        If Not (rs.BOF And rs.EOF) Then
@@ -5564,12 +5564,12 @@ On Error GoTo Err_Handler
     SetTempVar "Db BE Version", CStr(beDb.Properties("Db Version"))
 
     'get front & back-end versions
-    tbxVersionFE = Nz(currDb.Properties("Db Version"), "-")
+    tbxVersionFE = Nz(CurrDb.Properties("Db Version"), "-")
     'tbxVersionBE = Nz(CurrDb.Properties("Db BE Version"), "-")
     tbxVersionBE = Nz(TempVars("Db BE Version"), "-")
     
     'hide BE label for now
-    lblVersionBE.Visible = IIf(Len(tbxVersionBE) > 0, True, False)
+    lblVersionBE.visible = IIf(Len(tbxVersionBE) > 0, True, False)
 
 '    Debug.Print "lp=" & TempVars("BEfilepath")
 

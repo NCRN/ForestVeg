@@ -59,7 +59,7 @@ On Error GoTo Err_Handler
     
     Dim rs As DAO.Recordset
     Dim rsEventTables As DAO.Recordset
-    Dim sql As String
+    Dim SQL As String
     Dim EventIDTable As String
     Dim prefix As String
     Dim suffix As String
@@ -72,8 +72,8 @@ On Error GoTo Err_Handler
     ArchivePseudoEvents
     
     'retrieve EventTable's pseudoevents
-    sql = "SELECT Event_ID FROM " & EventTable & " WHERE PseudoEvent = 1;"
-    Set rs = CurrentDb.OpenRecordset(sql)
+    SQL = "SELECT Event_ID FROM " & EventTable & " WHERE PseudoEvent = 1;"
+    Set rs = CurrentDb.OpenRecordset(SQL)
     
     'iterate through pseudo-events and update related eventIDs
     If Not (rs.BOF And rs.EOF) Then
@@ -97,8 +97,8 @@ On Error GoTo Err_Handler
             Do While Not rs.EOF
             
                 'tables w/ Event_IDs (tbl_Events first)
-                sql = "SELECT Table_Name FROM tsys_Append_Tables WHERE HasEventID = 1 ORDER BY Append_Order;"
-                Set rsEventTables = CurrentDb.OpenRecordset(sql)
+                SQL = "SELECT Table_Name FROM tsys_Append_Tables WHERE HasEventID = 1 ORDER BY Append_Order;"
+                Set rsEventTables = CurrentDb.OpenRecordset(SQL)
                 
                 If Not (rsEventTables.BOF And rsEventTables.EOF) Then
                 
@@ -131,12 +131,12 @@ On Error GoTo Err_Handler
                             'update related records
                             'sql = "UPDATE " & rsEventTables("Table_Name") & " SET Event_ID = '" & eid & "' WHERE Event_ID = '" & rs("Event_ID") & "';"
                             'sql = "UPDATE " & EventIDTable & " SET Event_ID = '" & eid & "' WHERE Event_ID = '" & rs("Event_ID") & "';"
-                            sql = "UPDATE " & EventIDTable & " SET Event_ID = '" & eid & "' WHERE Event_ID = '" & oeid & "';"
+                            SQL = "UPDATE " & EventIDTable & " SET Event_ID = '" & eid & "' WHERE Event_ID = '" & oeid & "';"
             
-            Debug.Print sql
+            Debug.Print SQL
                             With DoCmd
                                 .SetWarnings False
-                                .RunSQL sql
+                                .RunSQL SQL
                                 .SetWarnings True
                             End With
             
@@ -207,7 +207,7 @@ Public Function ArchivePseudoEvents(Optional yr As Integer = 0) As DAO.Recordset
 On Error GoTo Err_Handler
     
     'defaults
-    Dim sql As String
+    Dim SQL As String
     Dim yrs As String
     Dim rs As DAO.Recordset
     
@@ -216,9 +216,9 @@ On Error GoTo Err_Handler
     yrs = IIf(yr = 0, "Year(Now()), Year(Now())-1", yr)
     
     'capture pseudo-event IDs
-    sql = "SELECT Event_ID FROM tbl_Events WHERE PseudoEvent = 1 AND Year(Event_Date) IN (" & yrs & ");"
-Debug.Print sql
-    Set rs = CurrentDb.OpenRecordset(sql)
+    SQL = "SELECT Event_ID FROM tbl_Events WHERE PseudoEvent = 1 AND Year(Event_Date) IN (" & yrs & ");"
+Debug.Print SQL
+    Set rs = CurrentDb.OpenRecordset(SQL)
     
     'create PseudoEvent_ARCHIVE if it doesn't already exist
     If TableExists("tsys_PseudoEvent_ARCHIVE") = False Then
@@ -229,23 +229,23 @@ Debug.Print sql
         ConvertLinkedToLocal "tsys_PseudoEvent_ARCHIVE"
         
         'clear table of existing event data (from CopyObject)
-        sql = "DELETE * FROM tsys_PseudoEvent_ARCHIVE"
+        SQL = "DELETE * FROM tsys_PseudoEvent_ARCHIVE"
         
         With DoCmd
             .SetWarnings False
-            .RunSQL sql
+            .RunSQL SQL
             .SetWarnings True
         End With
         
     End If
 
-    sql = "INSERT INTO tsys_PseudoEvent_ARCHIVE SELECT * FROM tbl_Events WHERE PseudoEvent = 1 AND Year(Event_Date) IN (" & yrs & ");"
+    SQL = "INSERT INTO tsys_PseudoEvent_ARCHIVE SELECT * FROM tbl_Events WHERE PseudoEvent = 1 AND Year(Event_Date) IN (" & yrs & ");"
     
-    Debug.Print sql
+    Debug.Print SQL
     
     With DoCmd
         .SetWarnings False
-        .RunSQL sql
+        .RunSQL SQL
         .SetWarnings True
     End With
     
@@ -262,8 +262,8 @@ Debug.Print sql
     'processing
     Application.SysCmd acSysCmdSetStatus, "Deleting MASTER tbl_Events pseudoevents..."
     
-    DeletePseudoEvents "tbl_Events", year(Now())
-    DeletePseudoEvents "tbl_Events", year(Now()) - 1
+    DeletePseudoEvents "tbl_Events", Year(Now())
+    DeletePseudoEvents "tbl_Events", Year(Now()) - 1
 
     'return the pseudo-event IDs
     Set ArchivePseudoEvents = rs
@@ -303,16 +303,16 @@ Public Sub DeletePseudoEvents(Optional EventTable As String = "tbl_Events", Opti
 On Error GoTo Err_Handler
     
     'defaults
-    Dim sql As String
+    Dim SQL As String
     Dim yrs As String
     
     yrs = IIf(yr = 0, "Year(Now()), Year(Now())-1", yr)
     
-    sql = "DELETE * FROM " & EventTable & " WHERE PseudoEvent = 1 AND Year(Event_Date) IN (" & yrs & ");"
+    SQL = "DELETE * FROM " & EventTable & " WHERE PseudoEvent = 1 AND Year(Event_Date) IN (" & yrs & ");"
     
     With DoCmd
         .SetWarnings False
-        .RunSQL sql
+        .RunSQL SQL
         .SetWarnings True
     End With
         
@@ -348,7 +348,7 @@ On Error GoTo Err_Handler
     Dim EventIDTable As String
     Dim prefix As String
     Dim suffix As String
-    Dim sql As String
+    Dim SQL As String
     Dim sqlJOIN As String
     Dim tbl As String
     Dim rsTables As DAO.Recordset
@@ -363,12 +363,12 @@ On Error GoTo Err_Handler
     prefix = Replace(Replace(EventTable, suffix, ""), "tbl_Events", "")
     
     'retrieve Event_IDs
-    sql = "SELECT Event_ID FROM " & EventTable
-    Set rs = CurrentDb.OpenRecordset(sql)
+    SQL = "SELECT Event_ID FROM " & EventTable
+    Set rs = CurrentDb.OpenRecordset(SQL)
     
     'retrieve append tables
-    sql = "SELECT Table_Name FROM tsys_Append_Tables ORDER BY Append_Order;"
-    Set rsTables = CurrentDb.OpenRecordset(sql)
+    SQL = "SELECT Table_Name FROM tsys_Append_Tables ORDER BY Append_Order;"
+    Set rsTables = CurrentDb.OpenRecordset(SQL)
     
     'populate recordsets
     If Not (rs.BOF = True And rs.EOF = True) Then
@@ -427,10 +427,10 @@ Debug.Print rsTables("Table_Name")
 
         tbl = prefix & rsTables("Table_Name") & suffix
         
-        sql = "DELETE * FROM " & tbl & sqlJOIN
+        SQL = "DELETE * FROM " & tbl & sqlJOIN
         
         If skipDelete = False Then
-Debug.Print tbl & ": " & sql
+Debug.Print tbl & ": " & SQL
            With DoCmd
                .SetWarnings False
 '               .RunSQL sql
@@ -449,7 +449,7 @@ Err_Handler:
       Case 3128
         Debug.Print "ERROR 3128:"
         Debug.Print tbl
-        Debug.Print sql
+        Debug.Print SQL
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - DeleteRelatedPseudoEventRecords[mod_PseudoEvents])"
@@ -477,12 +477,12 @@ End Sub
 Public Sub LogPseudoEventIDUpdate(OrigEID As String, NewEID As String, tbl As String, TriggerProcess As String, CID As String)
 On Error GoTo Err_Handler
     
-    Dim sql As String
+    Dim SQL As String
     
     Select Case tbl
     '------- PRIMARY -------------
         Case "tbl_Events"
-            sql = "UPDATE tbl_Events SET Event_ID = '" & fxnGUIDGen & "' WHERE Event_ID = '" & OrigEID & "';"
+            SQL = "UPDATE tbl_Events SET Event_ID = '" & fxnGUIDGen & "' WHERE Event_ID = '" & OrigEID & "';"
                     
         Case "tbl_Tree_Data"
             
@@ -498,7 +498,7 @@ On Error GoTo Err_Handler
     
     'create table if it doesn't exist
     If TableExists("tsys_EventID_Update_History") = False Then
-        sql = "CREATE TABLE tsys_EventID_Update_History(" _
+        SQL = "CREATE TABLE tsys_EventID_Update_History(" _
             & " Process VARCHAR(2) NOT NULL" _
             & ",OriginalEventID VARCHAR(50) NOT NULL" _
             & ",NewEventID VARCHAR(50) NOT NULL" _
@@ -509,19 +509,19 @@ On Error GoTo Err_Handler
             
         With DoCmd
             .SetWarnings False
-            .RunSQL sql
+            .RunSQL SQL
             .SetWarnings True
         End With
             
     End If
     
     'log the event ID change
-    sql = "INSERT INTO tsys_EventID_Update_History (Process, OriginalEventID, NewEventID, UpdatedTable, ProcessDate, ContactID) " _
+    SQL = "INSERT INTO tsys_EventID_Update_History (Process, OriginalEventID, NewEventID, UpdatedTable, ProcessDate, ContactID) " _
             & " SELECT '" & TriggerProcess & "', '" & OrigEID & "', '" & NewEID & "', '" & tbl & "', Now(), '" & CID & "';"
-    Debug.Print sql
+    Debug.Print SQL
     With DoCmd
         .SetWarnings False
-        .RunSQL sql
+        .RunSQL SQL
         .SetWarnings True
     End With
     

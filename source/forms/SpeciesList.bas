@@ -351,7 +351,7 @@ Option Explicit
 ' Revisions:
 '   BLC - 4/27/2016 - initial version
 ' ---------------------------------
-Private Sub XX()
+Private Sub xx()
 On Error GoTo Err_Handler
 
 

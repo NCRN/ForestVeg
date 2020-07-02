@@ -55,7 +55,7 @@ On Error GoTo Err_Handler
     strTitle = Nz(DialogTitle, "Choose the directory you would like to save the file in")
     Set fd = Application.FileDialog(msoFileDialogFolderPicker)
     fd.AllowMultiSelect = False
-    fd.title = strTitle
+    fd.Title = strTitle
     fd.InitialFileName = OpenAt
     If fd.Show = True Then
         FolderName = fd.SelectedItems(1)

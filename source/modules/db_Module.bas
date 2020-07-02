@@ -98,7 +98,7 @@ On Error GoTo Err_Handler
                 Dim NewTableName As String
                 
                 'rename to YYYYMMDD_currentname, then delete
-                NewTableName = year(Date) & Month(Date) & Day(Date) & "_" & LocalTableName
+                NewTableName = Year(Date) & Month(Date) & Day(Date) & "_" & LocalTableName
                 DoCmd.CopyObject , NewTableName, acTable, LocalTableName
                 CurrentDb.TableDefs.Delete LocalTableName
 
@@ -328,8 +328,8 @@ Function GenerateIndexSQL(TableName As String) As String
 On Error GoTo Err_Handler
 
     Dim dbCurr As DAO.Database
-    Dim idxCurr As DAO.Index
-    Dim fldCurr As DAO.Field
+    Dim idxCurr As DAO.index
+    Dim fldCurr As DAO.field
     Dim strSQL As String
     Dim tdfCurr As DAO.TableDef
     
@@ -396,7 +396,7 @@ Public Sub PurgeAnnualData(Optional BackupWithPurgedTables As Boolean = False)
 On Error GoTo Err_Handler
 
     Dim rs As DAO.Recordset
-    Dim sql As String
+    Dim SQL As String
     Dim Response As Integer
     
     Response = Eval(MsgBox("Pre-Season Prep will delete data from data tables (e.g. events, sapling data)." _
@@ -406,9 +406,9 @@ On Error GoTo Err_Handler
     If Response = vbNo Then GoTo Exit_Handler
     
     'retrieve table names for tables containing annual data
-    sql = "SELECT Link_table FROM tsys_Link_Tables WHERE AnnualDbPurge = 1;"
+    SQL = "SELECT Link_table FROM tsys_Link_Tables WHERE AnnualDbPurge = 1;"
     
-    Set rs = CurrentDb.OpenRecordset(sql)
+    Set rs = CurrentDb.OpenRecordset(SQL)
     
     'start @ beginning
     If Not (rs.EOF And rs.BOF) Then
@@ -448,11 +448,11 @@ On Error GoTo Err_Handler
             'empty current table
             Application.SysCmd acSysCmdSetStatus, "Purging " & rs("Link_table") & "..."
             
-            sql = "DELETE * FROM " & rs("Link_table") & ";"
+            SQL = "DELETE * FROM " & rs("Link_table") & ";"
             
-            Debug.Print sql & vbCrLf
+            Debug.Print SQL & vbCrLf
           
-            CurrentDb.Execute sql, dbFailOnError
+            CurrentDb.Execute SQL, dbFailOnError
             
             rs.MoveNext
         Loop
@@ -622,7 +622,7 @@ Public Sub CopySchemaAndData_DAO(SourceTable As String, DestinationTable As Stri
 On Error GoTo Err_Handler
 
     Dim tblSource As DAO.TableDef
-    Dim fld As DAO.Field
+    Dim fld As DAO.field
     
     Dim db As DAO.Database
     Set db = CurrentDb
@@ -634,7 +634,7 @@ On Error GoTo Err_Handler
     
     'Iterate over source table fields and add to new table
     For Each fld In tblSource.Fields
-       Dim destField As DAO.Field
+       Dim destField As DAO.field
        Set destField = tblDest.CreateField(fld.Name, fld.Type, fld.Size)
        If fld.Type = 10 Then
           'text, allow zero length
@@ -644,11 +644,11 @@ On Error GoTo Err_Handler
     Next fld
     
     'Handle Indexes
-    Dim idx As Index
+    Dim idx As index
     Dim iIndex As Integer
     For iIndex = 0 To tblSource.Indexes.Count - 1
        Set idx = tblSource.Indexes(iIndex)
-       Dim newIndex As Index
+       Dim newIndex As index
        Set newIndex = tblDest.CreateIndex(idx.Name)
        With newIndex
           .Unique = idx.Unique
@@ -666,9 +666,9 @@ On Error GoTo Err_Handler
     db.TableDefs.Append tblDest
     
     'Finally, copy data from source to destination table
-    Dim sql As String
-    sql = "INSERT INTO " & DestinationTable & " SELECT * FROM " & SourceTable
-    db.Execute sql
+    Dim SQL As String
+    SQL = "INSERT INTO " & DestinationTable & " SELECT * FROM " & SourceTable
+    db.Execute SQL
 
 Exit_Handler:
    Set fld = Nothing
@@ -716,7 +716,7 @@ On Error GoTo Err_Handler
       MsgBox strLinkedTbl & " is not a Linked Table!", vbCritical, "Linked Table Error"
         Exit Sub
     Else
-      strPath = Mid$(strConnect, InStr(strConnect, "=") + 1)        'Actual DB Path
+      strPath = mid$(strConnect, InStr(strConnect, "=") + 1)        'Actual DB Path
       strSourceTable = CurrentDb.TableDefs(strLinkedTbl).SourceTableName
      
       DoCmd.DeleteObject acTable, strLinkedTbl

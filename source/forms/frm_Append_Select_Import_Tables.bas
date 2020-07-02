@@ -454,9 +454,9 @@ rsImportTables.MoveFirst
 '
  Do Until rsImportTables.EOF
     If Me.txt_Table_Name = "tbl_Locations" Then
-        Me.chk_Import.value = 0
+        Me.chk_Import.Value = 0
     Else
-        Me.chk_Import.value = 1
+        Me.chk_Import.Value = 1
 
     End If
 
@@ -516,18 +516,18 @@ End Sub
 Private Sub optframe_Step1Import_AfterUpdate()
 
  'Set the public variable
- intImport2 = Me!optframe_Step1Import.value
+ intImport2 = Me!optframe_Step1Import.Value
 
-Select Case optframe_Step1Import.value
+Select Case optframe_Step1Import.Value
 Case 1
      optframe_Step2Import.Enabled = False
-     Me!optframe_Step2Import.value = 0
+     Me!optframe_Step2Import.Value = 0
      Me.RecordSource = "tsys_Import_Tables"
      Me!cmd_Open_Import_Form.Enabled = True
      
 Case 2
     optframe_Step2Import.Enabled = True
-    Me!optframe_Step2Import.value = 0
+    Me!optframe_Step2Import.Value = 0
     Me!optframe_Step2Import.SetFocus
     
 Case Else
@@ -547,7 +547,7 @@ Dim db As DAO.Database
     
 Me!cmd_Open_Import_Form.Enabled = True
    
-Select Case optframe_Step2Import.value
+Select Case optframe_Step2Import.Value
 
 Case 1
 Me.RecordSource = "qry_Append_Primary_Tablet_Import"

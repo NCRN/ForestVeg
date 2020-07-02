@@ -1154,7 +1154,7 @@ End Sub
 Private Sub tbxSearchFor_LostFocus()
 On Error GoTo Err_Handler
     
-    If Len(tbxSearchFor.value) > 0 Then
+    If Len(tbxSearchFor.Value) > 0 Then
         'check if species list is identified
         If Len(TempVars("speciestype")) > 0 Then
             'enable the search "button"
@@ -1473,7 +1473,7 @@ End Sub
 ' ---------------------------------
 Private Sub tbxLUCode_DblClick(Cancel As Integer)
 On Error GoTo Err_Handler
-    Dim item As String
+    Dim Item As String
     Dim i As Integer
     Dim lbx As ListBox
     
@@ -1498,7 +1498,7 @@ On Error GoTo Err_Handler
     'add components of item (code, species (UT or whatever), & ITIS) to listbox
 
     'prepare item for listbox value
-    item = tbxMasterPlantCode & ";" & tbxMasterSpecies & ";" & tbxLUCode & ";0;0"
+    Item = tbxMasterPlantCode & ";" & tbxMasterSpecies & ";" & tbxLUCode & ";0;0"
     
     'iterate through listbox (use .Column(x,i) vs .ListIndex(i) which results in error 451 property let not defined, property get...)
     If IsListDuplicate(Forms("frm_Tgt_Species").Controls("lbxTgtSpecies"), 2, tbxLUCode) Then
@@ -1510,7 +1510,7 @@ On Error GoTo Err_Handler
     
     With lbx
         'add item if not duplicate
-        .AddItem item
+        .AddItem Item
     
         'update target species count
         Forms("frm_Tgt_Species").Controls("lblTgtSpeciesCount").Caption = .ListCount - 1 & " species"
@@ -1571,13 +1571,13 @@ Private Sub btnSearch_Click()
 On Error GoTo Err_Handler
     
     Dim speciestype As Variant
-    Dim strSearch As String, strSpecies As String, strWhere As String, strSQL As String
+    Dim strSearch As String, strSpecies As String, strWHERE As String, strSQL As String
     Dim i As Integer
 
     'ignore if disabled
     If btnSearch.Enabled = False Then GoTo Exit_Sub
 
-    strSearch = Trim(tbxSearchFor.value)
+    strSearch = Trim(tbxSearchFor.Value)
             
     'check strSearch is alpha numeric
     
@@ -1592,7 +1592,7 @@ On Error GoTo Err_Handler
     End If
     
     'determine which species names are to be searched (ITIS, UT, CO, WY, Common)
-    strWhere = " WHERE "
+    strWHERE = " WHERE "
         
     'reset headers
     ResetHeaders Me, True, "*", False, 0, 8355711 ', vbWhite '#7F7F7F rgb(127,127,127)
@@ -1615,7 +1615,7 @@ On Error GoTo Err_Handler
             'If CountInString(speciestype, ";") > 1 Then
             i = i + 1
             If i > 1 Then
-                strWhere = strWhere & " OR "
+                strWHERE = strWHERE & " OR "
             
             End If
         
@@ -1641,19 +1641,19 @@ On Error GoTo Err_Handler
                     strSpecies = "LU_Code"
             End Select
                     
-            strWhere = strWhere & " " & strSpecies & " LIKE '*" & strSearch & "*'"
+            strWHERE = strWHERE & " " & strSpecies & " LIKE '*" & strSearch & "*'"
             
         End If
     Next
     
     'prep WHERE clause
-    If Len(Replace(strWhere, "WHERE", "")) = 0 Then strWhere = ""
+    If Len(Replace(strWHERE, "WHERE", "")) = 0 Then strWHERE = ""
     
     'build SQL statement
     strSQL = "SELECT DISTINCT LU_Code, Master_Species, Utah_Species, CO_Species, WY_Species, " _
             & "Master_Common_Name, Master_PLANT_Code " _
             & "FROM tlu_NCPN_Plants " _
-            & strWhere & ";"
+            & strWHERE & ";"
                
     'run search
     Dim rs As DAO.Recordset
@@ -1683,9 +1683,9 @@ On Error GoTo Err_Handler
         rs.MoveFirst
         
         'hide no records
-        lblNoRecords.Visible = False
+        lblNoRecords.visible = False
     Else
-        lblNoRecords.Visible = True
+        lblNoRecords.visible = True
     End If
         
     'set # species found
@@ -1708,7 +1708,7 @@ On Error GoTo Err_Handler
     
     'leave last selections for checkboxes (don't clear TempVars.item("speciestype"))
     'must clear to clear highlighting & reset speciestypes
-    TempVars.item("speciestype") = ""
+    TempVars.Item("speciestype") = ""
 
 Exit_Sub:
     Exit Sub

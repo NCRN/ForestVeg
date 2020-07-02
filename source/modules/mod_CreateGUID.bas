@@ -8,7 +8,7 @@
 Option Compare Database
 Option Explicit
 
-Private Type guid
+Private Type GUID
     Data1 As Long
     Data2 As Long
     Data3 As Long
@@ -16,7 +16,7 @@ Private Type guid
 End Type
 
 #If VBA7 Then
-    Private Declare PtrSafe Function CoCreateGuid Lib "ole32.dll" (pguid As guid) As LongPtr
+    Private Declare PtrSafe Function CoCreateGuid Lib "ole32.dll" (pguid As GUID) As LongPtr
     
     Private Declare PtrSafe Function StringFromGUID2 Lib "ole32.dll" _
         (rguid As Any, ByVal lpstrClsId As LongPtr, ByVal cbMax As LongPtr) As LongPtr
@@ -44,11 +44,11 @@ End Type
 Public Function fxnGUIDGen() As String
     On Error GoTo Err_Handler
 
-    Dim uGUID As guid       ' the structured guid
+    Dim uGUID As GUID       ' the structured guid
     Dim sGUID As String     ' for storing the results
     Dim bGUID() As Byte     ' the formatted string
     Dim lLen As LongPtr
-    Dim retVal As LongPtr
+    Dim RetVal As LongPtr
     lLen = 40
     bGUID = String(CInt(lLen), 0)
 
@@ -56,11 +56,11 @@ Public Function fxnGUIDGen() As String
     CoCreateGuid uGUID
 
     ' use the API to format as string
-    retVal = StringFromGUID2(uGUID, VarPtr(bGUID(0)), lLen)
+    RetVal = StringFromGUID2(uGUID, VarPtr(bGUID(0)), lLen)
     sGUID = bGUID
-    If (Asc(Mid$(sGUID, CLng(retVal), 1)) = 0) Then retVal = retVal - 1
+    If (Asc(mid$(sGUID, CLng(RetVal), 1)) = 0) Then RetVal = RetVal - 1
     ' truncate the string
-    fxnGUIDGen = Left$(sGUID, CLng(retVal))
+    fxnGUIDGen = Left$(sGUID, CLng(RetVal))
 
 Exit_Procedure:
     Exit Function

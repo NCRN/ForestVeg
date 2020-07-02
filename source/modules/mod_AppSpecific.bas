@@ -72,7 +72,7 @@ Public Function MakeTreeConditionList(strEventID As String, strTreeDataID As Str
             rst.MoveNext
         Loop
 
-    strConditionList = Mid(strConditionList, 3)
+    strConditionList = mid(strConditionList, 3)
     MakeTreeConditionList = strConditionList
 
 End Function

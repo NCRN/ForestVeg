@@ -1582,37 +1582,37 @@ Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immedia
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidCallingForm(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         'Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
-Public Property Get title() As String
-    title = m_Title
+Public Property Get Title() As String
+    Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -1620,20 +1620,20 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(value As String)
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+        m_CallingForm = Value
 End Property
 
 Public Property Get CallingForm() As String
     CallingForm = m_CallingForm
 End Property
 
-Public Property Let Cols(value As Integer)
-        m_Cols = value
+Public Property Let cols(Value As Integer)
+        m_Cols = Value
 End Property
 
-Public Property Get Cols() As Integer
-    Cols = m_Cols
+Public Property Get cols() As Integer
+    cols = m_Cols
 End Property
 
 ' ----------------
@@ -1669,7 +1669,7 @@ On Error GoTo Err_Handler
     
     'set defaults
     Me.RecordSource = "tbl_Tags"
-    Me.Filter = "Tag_Status = 'Retired (In Office)'"
+    Me.filter = "Tag_Status = 'Retired (In Office)'"
     Me.FilterOn = True
     Me.FilterOnLoad = True
     Me.OrderBy = "Tag"
@@ -1689,58 +1689,58 @@ On Error GoTo Err_Handler
     'status bar message
     DoCmd.Hourglass True
     Application.SysCmd acSysCmdSetStatus, "Loading tags..."
-    Me.lblLoading.Visible = True
+    Me.lblLoading.visible = True
     
     'dev mode
     tbxDevMode = DEV_MODE
                 
-    title = "RIO Check"
+    Title = "RIO Check"
     'lblTitle.Caption = "" 'clear header title
     Directions = "Are all the Retired in Office (RIO) tags actually IN the office?"
     
     'defaults
-    lblDirections.ForeColor = lngWhite
+    lblDirections.forecolor = lngWhite
 '    rctPseudoEvent.BackColor = lngLtTan
-    btnSave.HoverColor = lngGreen
+    btnSave.hoverColor = lngGreen
 '    btnReportRIOHistory.HoverColor = lngGreen
 
     'recordcount
     Dim rs As DAO.Recordset
     Dim rsTags As DAO.Recordset
     Dim iCount As Integer
-    Dim sql As String
+    Dim SQL As String
     Dim itm As String
     Dim tags As Variant
     
     'listbox prep
     Dim widths As String
     
-    Cols = 2 '# of columns to use 2 => Tag_ID, Tag    3 => Tag_ID, Tag, Plot
+    cols = 2 '# of columns to use 2 => Tag_ID, Tag    3 => Tag_ID, Tag, Plot
     
-    Select Case Cols
+    Select Case cols
         Case 2
             widths = "0"";1"""
-            sql = "SELECT Tag_ID, Tag FROM tbl_Tags t " _
+            SQL = "SELECT Tag_ID, Tag FROM tbl_Tags t " _
                     & "WHERE t.Tag_Status IN ('Retired (In Office)') " _
                     & "ORDER BY Tag;"
         
         Case 3
             widths = "0"";1"";0"""
-            sql = "SELECT Tag_ID, Tag, l.Plot_Name AS Plot FROM tbl_Tags t " _
+            SQL = "SELECT Tag_ID, Tag, l.Plot_Name AS Plot FROM tbl_Tags t " _
                     & "LEFT JOIN tbl_Locations l ON l.Location_ID = t.Location_ID " _
                     & "WHERE t.Tag_Status IN ('Retired (In Office)') " _
                     & "ORDER BY Tag;"
     End Select
     
-    lbxRIOtags.ColumnCount = Cols
-    lbxActuallyInOffice.ColumnCount = Cols
+    lbxRIOtags.ColumnCount = cols
+    lbxActuallyInOffice.ColumnCount = cols
     lbxRIOtags.ColumnWidths = widths
     lbxActuallyInOffice.ColumnWidths = widths
     
     'default
     iCount = 0
 
-Debug.Print sql
+Debug.Print SQL
 
 '    Set rs = CurrentDb.OpenRecordset(sql)
     'use the dupe
@@ -1768,7 +1768,7 @@ Debug.Print sql
         lblTotalRIOCount.Caption = lblTotalRIOCount.Caption & " " & TempVars("TotalRIOs")
         
         Do While Not rs.EOF
-            Select Case Cols
+            Select Case cols
                 Case 3
                     itm = rs("Tag_ID") & ";" & rs("Tag") & ";" & rs("Plot")
                 Case 2
@@ -1812,7 +1812,7 @@ Debug.Print sql
     'status bar message
     Application.SysCmd acSysCmdSetStatus, lbxRIOtags.ListCount & " tags loaded!"
 
-    Me.lblLoading.Visible = False
+    Me.lblLoading.visible = False
 
 Exit_Handler:
     Application.SysCmd acSysCmdClearStatus
@@ -1955,7 +1955,7 @@ End Sub
 Private Sub lbxRIOtags_Click()
 On Error GoTo Err_Handler
 
-    SetTempVar "SelectedTagID", lbxRIOtags.value
+    SetTempVar "SelectedTagID", lbxRIOtags.Value
 'Debug.Print TempVars("SelectedTagID")
 
     'populate last selected tag
@@ -1989,7 +1989,7 @@ End Sub
 Private Sub lbxActuallyInOffice_Click()
 On Error GoTo Err_Handler
 
-    SetTempVar "SelectedTagID", lbxActuallyInOffice.value
+    SetTempVar "SelectedTagID", lbxActuallyInOffice.Value
 'Debug.Print TempVars("SelectedTagID")
 
     'populate last selected tag
@@ -2093,7 +2093,7 @@ fName:
             strExportPath = SelectFolder()
             strExportFileName = strExportPath & "\" & strFileName & ".pdf"
 SaveOrReplace:
-            If Dir(strExportFileName) = "" Then
+            If dir(strExportFileName) = "" Then
                 'DoCmd.OutputTo acOutputReport, rpt, "PDFFormat(*.pdf)", strExportFileName, ShowPDF, "", 0, acExportQualityPrint
                 'DoCmd.OutputTo acOutputReport, rpt, acFormatPDF, strExportFileName, -1, "", , acExportQualityPrint
 '                DoCmd.OutputTo ObjectType:=acOutputReport, ObjectName:=rpt, OutputFormat:=acFormatPDF, OutputFile:=strExportFileName, _
@@ -2133,9 +2133,9 @@ SaveOrReplace:
             
             With CC
                 .UseCancel = True
-                .title = strTitle
+                .Title = strTitle
                 .Prompt = strPrompt
-                .Icon = Question + DefaultButton3
+                .icon = Question + DefaultButton3
                 .ButtonText1 = "Open PDF"
                 .ButtonText2 = "Print PDF"
                 .ButtonText3 = "Cancel"
@@ -2261,10 +2261,10 @@ On Error GoTo Err_Handler
     ' listbox has 3 columns - 0 = bound value, 1 = tag #, 2 =
     ' because listbox has multiple columns, lbxFrom.Value cannot be added alone - need strItem to populate all columns
     Dim strItem As String
-    strItem = lbxFrom.Column(0) & ";" & lbxFrom.Column(1) & IIf(Cols = 3, ";" & lbxFrom.Column(2), "")
+    strItem = lbxFrom.Column(0) & ";" & lbxFrom.Column(1) & IIf(cols = 3, ";" & lbxFrom.Column(2), "")
     
     lbxTo.AddItem (strItem) '(lbxFrom.Value)
-    lbxFrom.RemoveItem (lbxFrom.value)
+    lbxFrom.RemoveItem (lbxFrom.Value)
 
 Exit_Handler:
     Exit Sub
@@ -2332,7 +2332,7 @@ On Error GoTo Err_Handler
     
     With lbx
         For r = 0 To lbx.ListCount - 1
-            For c = 0 To Cols - 1 'Cols = 2 or 3 column lbx
+            For c = 0 To cols - 1 'Cols = 2 or 3 column lbx
                 slist = slist & lbx.Column(c, r) & ","
             Next
             'slist = slist & ","
@@ -2351,7 +2351,7 @@ On Error GoTo Err_Handler
         With .Fields
             .Append "Tag_ID", adVarChar, 255
             .Append "Tag", adInteger
-            If Cols = 3 Then .Append "Plot_Name", adVarChar, 255
+            If cols = 3 Then .Append "Plot_Name", adVarChar, 255
         End With
         .Open
         
@@ -2359,10 +2359,10 @@ On Error GoTo Err_Handler
         
         For j = 0 To UBound(ary)
             .AddNew
-            For i = 0 To Cols - 1 'Cols =  2 or 3 column lbx
+            For i = 0 To cols - 1 'Cols =  2 or 3 column lbx
 'Debug.Print "i=" & i
 'Debug.Print "j=" & j
-                .Fields(i).value = ary(j)
+                .Fields(i).Value = ary(j)
                 If j < UBound(ary) Then j = j + 1 'next j
 'Debug.Print "j=" & j
             
@@ -2417,14 +2417,14 @@ Private Sub SetListCounts()
 On Error GoTo Err_Handler
 
     'set values
-    tbxRIOTagCount.value = ">>" & lbxRIOtags.ListCount
+    tbxRIOTagCount.Value = ">>" & lbxRIOtags.ListCount
     tbxCount = ">>" & lbxActuallyInOffice.ListCount
     
     With lbxActuallyInOffice
         If .Tag = .ListCount Then
-            .BackColor = lngLtLime
+            .backcolor = lngLtLime
         Else
-            .BackColor = lngWhite
+            .backcolor = lngWhite
         End If
     End With
 

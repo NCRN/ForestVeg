@@ -841,7 +841,7 @@ Private Function fxnOpenClickedQuery()
             Me.Parent.Form!subQueryResults.SourceObject = "Query." & Me.txtQuery_name
   '      End If
         ' Set the form to the selected record
-        Me.Parent.Form.Filter = "[Query_name] = """ & Me.txtQuery_name & _
+        Me.Parent.Form.filter = "[Query_name] = """ & Me.txtQuery_name & _
             """ AND [Time_frame] = """ & Me.Time_frame & """"
         Me.Parent.Form.FilterOn = True
         Me.Parent.Form.AllowAdditions = False
@@ -900,18 +900,18 @@ Private Function fxnSortRecords(ByVal strFieldName As String, _
     Me.Form.OrderByOn = True
 
     ' Change the label format to indicate the sorted field
-    Me.Controls.item(strSortFieldLabel).FontItalic = False
-    Me.Controls.item(strSortFieldLabel).FontBold = False
+    Me.Controls.Item(strSortFieldLabel).FontItalic = False
+    Me.Controls.Item(strSortFieldLabel).fontBold = False
     strSortFieldLabel = "lab" & strFieldName
-    Me.Controls.item(strSortFieldLabel).FontItalic = True
-    Me.Controls.item(strSortFieldLabel).FontBold = True
+    Me.Controls.Item(strSortFieldLabel).FontItalic = True
+    Me.Controls.Item(strSortFieldLabel).fontBold = True
     ' Do the same for the second sort field, if applicable
     If strField2Name <> "" Then
-        Me.Controls.item(strSortFieldLabel2).FontItalic = False
-        Me.Controls.item(strSortFieldLabel2).FontBold = False
+        Me.Controls.Item(strSortFieldLabel2).FontItalic = False
+        Me.Controls.Item(strSortFieldLabel2).fontBold = False
         strSortFieldLabel = "lab" & strField2Name
-        Me.Controls.item(strSortFieldLabel2).FontItalic = True
-        Me.Controls.item(strSortFieldLabel2).FontBold = True
+        Me.Controls.Item(strSortFieldLabel2).FontItalic = True
+        Me.Controls.Item(strSortFieldLabel2).fontBold = True
     End If
 
 Exit_Procedure:

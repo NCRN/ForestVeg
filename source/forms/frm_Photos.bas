@@ -2362,19 +2362,19 @@ End Sub
 Private Sub lblLink_To_Plot_Photos_Click()
 On Error GoTo Err_Handler
 
-    Dim retVal As Double
+    Dim RetVal As Double
     Dim RootFolder As String
     Dim PhotoFolder As String
     
     RootFolder = TempVars("RootPath") '"T:\I&M"
     PhotoFolder = TempVars("FullPhotoPath") '"T:\I&M\Monitoring\Forest_Vegetation\Photos\"
     If FolderExists(PhotoFolder & Me!txtPlot_Name) Then
-        retVal = shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
+        RetVal = shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
         GoTo Exit_Procedure
     Else
         If FolderExists(RootFolder) Then
             MsgBox ("Folder for this plot not found....Opening the root of the Photos folder.")
-            retVal = shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
+            RetVal = shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
             GoTo Exit_Procedure
         Else
             MsgBox ("The network appears to be unavailable. Network access is required to view photos.")
@@ -2530,10 +2530,10 @@ Forms("frm_Photo_QA").AD_Name = NetworkUsername()
 Forms("frm_Photo_QA").Error_Date = Now()
 
 If strError_Detected = True Then
-    Forms("frm_Photo_QA").txtError_Description.Visible = True
+    Forms("frm_Photo_QA").txtError_Description.visible = True
     Forms("frm_Photo_QA").txtError_Description.SetFocus
 Else
-    Forms("frm_Photo_QA").txtError_Description.Visible = False
+    Forms("frm_Photo_QA").txtError_Description.visible = False
     Forms("frm_Photo_QA").cmd_Close_Form.SetFocus
 End If
 

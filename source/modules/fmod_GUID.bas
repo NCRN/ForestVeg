@@ -52,15 +52,15 @@ Option Explicit
 Public Function FormatIsGUID(strGUID As Variant)
 On Error GoTo Err_Handler
         
-    Dim regex As New RegExp
+    Dim RegEx As New RegExp
     
 '    regex.Pattern = "^(\{){0,1}[0-9a-fA-F]{8}\-" & _
 '                         "[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-" & _
 '                         "[0-9a-fA-F]{12}(\}){0,1}$"
 
-    regex.Pattern = "^\{\d{14}-\d{9}.\d{6}\}$"
+    RegEx.Pattern = "^\{\d{14}-\d{9}.\d{6}\}$"
     
-    FormatIsGUID = regex.test(strGUID)
+    FormatIsGUID = RegEx.Test(strGUID)
     
 Exit_Handler:
     Exit Function

@@ -1571,22 +1571,22 @@ On Error GoTo Err_Handler
     Dim strQuadrat As String
     Me!txtQuadrat_Number.DefaultValue = ""
     Me!txtQuadrat_Number.Requery
-    Me!lblQuadrat_Selection.ForeColor = 255
+    Me!lblQuadrat_Selection.forecolor = 255
     
-    Me!fsub_Quad_Herbaceous.Visible = False
-    Me!fsub_Quad_Seedlings.Visible = False
-    Me!txtQuadrat_Number.Visible = False
-    Me!txtQuadrat_Comments.Visible = False
-    Me!txtPercent_Trees.Visible = False
-    Me!txtPercent_Bryophytes.Visible = False
-    Me!txtPercent_CWD.Visible = False
-    Me!txtPercent_FWD.Visible = False
-    Me!txtPercent_Rock.Visible = False
-    Me!txtPercent_Other.Visible = False
-    Me!txtPercent_Grasses.Visible = False
-    Me!txtPercent_Sedges.Visible = False
-    Me!txtPercent_Herbs.Visible = False
-    Me!txtPercent_Ferns.Visible = False
+    Me!fsub_Quad_Herbaceous.visible = False
+    Me!fsub_Quad_Seedlings.visible = False
+    Me!txtQuadrat_Number.visible = False
+    Me!txtQuadrat_Comments.visible = False
+    Me!txtPercent_Trees.visible = False
+    Me!txtPercent_Bryophytes.visible = False
+    Me!txtPercent_CWD.visible = False
+    Me!txtPercent_FWD.visible = False
+    Me!txtPercent_Rock.visible = False
+    Me!txtPercent_Other.visible = False
+    Me!txtPercent_Grasses.visible = False
+    Me!txtPercent_Sedges.visible = False
+    Me!txtPercent_Herbs.visible = False
+    Me!txtPercent_Ferns.visible = False
 Exit_Handler:
     Exit Sub
     
@@ -2200,7 +2200,7 @@ On Error GoTo Err_Handler
                 "Grasses", "Sedges", "Herbs", "Ferns")
     
     'determine quadrat
-    Select Case Me!grpQuadrat_Selection.value
+    Select Case Me!grpQuadrat_Selection.Value
         Case 1
             strQuadrat = "360-3m"
         Case 2
@@ -2227,11 +2227,11 @@ On Error GoTo Err_Handler
             strQuadrat = "300"
     End Select
     
-    Me!lblQuadrat_Selection.ForeColor = 0
-    Me!fsub_Quad_Herbaceous.Visible = True
-    Me!fsub_Quad_Seedlings.Visible = True
-    Me!txtQuadrat_Comments.Visible = True
-    Me!txtQuadrat_Number.Visible = True
+    Me!lblQuadrat_Selection.forecolor = 0
+    Me!fsub_Quad_Herbaceous.visible = True
+    Me!fsub_Quad_Seedlings.visible = True
+    Me!txtQuadrat_Comments.visible = True
+    Me!txtQuadrat_Number.visible = True
     
 '    Me!txtPercent_Trees.Visible = True
 '    Me!txtPercent_Bryophytes.Visible = True
@@ -2250,7 +2250,7 @@ On Error GoTo Err_Handler
     
         With Me.Form.Controls(ctlName)
         
-            .Visible = True
+            .visible = True
             .Locked = False
             .Enabled = True
             
@@ -2291,11 +2291,11 @@ On Error GoTo Err_Handler
     
     'strQuadrat = Me!Frame_Quadrat_Selection.Value
     Me.txtQuadrat_Number.DefaultValue = "'" & strQuadrat & "'"
-    Me.Filter = "[Quadrat_Number] = """ & strQuadrat & """ "
+    Me.filter = "[Quadrat_Number] = """ & strQuadrat & """ "
     Me.FilterOn = True
     'Temporary fix to save Quadrat record before entering subform
-    Me!txtQuadrat_Comments.value = Me!txtQuadrat_Comments.value & " "
-    Me!txtQuadrat_Comments.value = Left(Me!txtQuadrat_Comments.value, Len(Me!txtQuadrat_Comments.value) - 1)
+    Me!txtQuadrat_Comments.Value = Me!txtQuadrat_Comments.Value & " "
+    Me!txtQuadrat_Comments.Value = Left(Me!txtQuadrat_Comments.Value, Len(Me!txtQuadrat_Comments.Value) - 1)
     'DoCmd.RunCommand acCmdSaveRecord
     'Me!txt_Percent_Trees.SetFocus
     Me!fsub_Quad_Herbaceous.Requery

@@ -169,7 +169,7 @@ On Error GoTo Err_Handler
 
     'turn on label if missing seedling ID (Genus)
     'visible IF there is no data (if no genus = False, returns True & displays)
-    lblMissingID.Visible = IIf(Len(Genus) > 0, False, True)
+    lblMissingID.visible = IIf(Len(Genus) > 0, False, True)
     
 Exit_Handler:
     Exit Sub

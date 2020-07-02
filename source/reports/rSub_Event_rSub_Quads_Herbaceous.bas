@@ -182,7 +182,7 @@ On Error GoTo Err_Handler
 
     'turn on label if missing sapling ID (tbxLatinName)
     'visible IF there is no data (if no latin name = False, returns True & displays)
-    lblMissingID.Visible = IIf(Len(tbxLatinName) > 0, False, True)
+    lblMissingID.visible = IIf(Len(tbxLatinName) > 0, False, True)
     
 Exit_Handler:
     Exit Sub

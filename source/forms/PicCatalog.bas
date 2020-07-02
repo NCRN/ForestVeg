@@ -635,39 +635,39 @@ Private m_SelPhoto As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidCallingForm(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
-Public Event InvalidSelPhoto(value As Long)
+Public Event InvalidSelPhoto(Value As Long)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         'Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
-Public Property Get title() As String
-    title = m_Title
+Public Property Get Title() As String
+    Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -675,11 +675,11 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(value As String)
-    If Len(value) > 0 Then
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+    If Len(Value) > 0 Then
+        m_CallingForm = Value
     Else
-        RaiseEvent InvalidCallingForm(value)
+        RaiseEvent InvalidCallingForm(Value)
     End If
 End Property
 
@@ -687,9 +687,9 @@ Public Property Get CallingForm() As String
     CallingForm = m_CallingForm
 End Property
 
-Public Property Let SelPhotos(value As Collection)
+Public Property Let SelPhotos(Value As Collection)
 '    If  Then
-        Set m_SelPhotos = value
+        Set m_SelPhotos = Value
 '    Else
 '        RaiseEvent InvalidSelPhotos(Value)
 '    End If
@@ -699,11 +699,11 @@ Public Property Get SelPhotos() As Collection
     Set SelPhotos = m_SelPhotos
 End Property
 
-Public Property Let SelPhoto(value As Long)
-    If IsNumeric(value) Then
-        m_SelPhoto = value
+Public Property Let SelPhoto(Value As Long)
+    If IsNumeric(Value) Then
+        m_SelPhoto = Value
     Else
-        RaiseEvent InvalidSelPhoto(value)
+        RaiseEvent InvalidSelPhoto(Value)
     End If
 
     'check if value is already present
@@ -712,7 +712,7 @@ Public Property Let SelPhoto(value As Long)
     Dim i As Long
     
     For i = 1 To Me.SelPhotos.Count
-        If SelPhotos.item(i) = value Then
+        If SelPhotos.Item(i) = Value Then
             InCollection = True
             Exit For
         End If
@@ -720,7 +720,7 @@ Public Property Let SelPhoto(value As Long)
     
     If InCollection = False Then
         'add to the collection
-        Me.SelPhotos.Add value
+        Me.SelPhotos.Add Value
     End If
     
 End Property
@@ -758,22 +758,22 @@ On Error GoTo Err_Handler
     ToggleForm Me.CallingForm, -1
     
     'set context - based on TempVars
-    lblContext.ForeColor = lngLime
+    lblContext.forecolor = lngLime
     lblContext.Caption = GetContext()
     
-    title = "Photo Binder Photos"
+    Title = "Photo Binder Photos"
     'lblTitle.Caption = "" 'hide second title
     Directions = "Select the desired photos, then click the Make PPT button to begin the powerpoint wizard."
-    lblDirections.ForeColor = lngLtBlue
-    btnMakePPT.ForeColor = lngBlue
+    lblDirections.forecolor = lngLtBlue
+    btnMakePPT.forecolor = lngBlue
     btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.ForeColor = lngBlue
+    btnComment.forecolor = lngBlue
     
     'set hint
     
     'set hover
-    btnMakePPT.HoverColor = lngGreen
-    btnComment.HoverColor = lngGreen
+    btnMakePPT.hoverColor = lngGreen
+    btnComment.hoverColor = lngGreen
       
     'defaults
     btnComment.Enabled = False
@@ -785,7 +785,7 @@ On Error GoTo Err_Handler
     'Set Me.grid.SourceObject = Forms("PicPhotos").Form
   
     'filters
-    Me.Filter = ""
+    Me.filter = ""
     Me.FilterOnLoad = True
     
     'initialize values << place here before initial call to Form_Current()
@@ -1316,10 +1316,10 @@ On Error GoTo Err_Handler
                                     'Case acTextBox
                                     Case acLabel
                                         If ssctrl.Name = "lblName" Then _
-                                            ssctrl.ForeColor = IIf(selection = True, lngGreen, lngLtTextGray)
+                                            ssctrl.forecolor = IIf(selection = True, lngGreen, lngLtTextGray)
                                     Case acImage
                                         If ssctrl.Name = "imgPhoto" Then _
-                                            ssctrl.BorderColor = IIf(selection = True, lngGreen, lngLtBgdGray)
+                                            ssctrl.borderColor = IIf(selection = True, lngGreen, lngLtBgdGray)
                                 End Select
                             
                                 'add photo to selected photos collection
@@ -1494,12 +1494,12 @@ On Error GoTo Err_Handler
     Application.Echo False
     
     'clear existing filter
-    Me.Filter = ""
+    Me.filter = ""
     
     'set filter based on selections
-    Me.Filter = "PhotoType = '" & cbxPhotoType & "'" _
+    Me.filter = "PhotoType = '" & cbxPhotoType & "'" _
                 & " AND Year(PhotoDate) = " & Me.cbxYear
-Debug.Print Me.Filter
+Debug.Print Me.filter
 
     Me.FilterOn = True
     

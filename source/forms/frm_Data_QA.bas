@@ -1304,7 +1304,7 @@ Private Sub Form_Open(Cancel As Integer)
     ' Change form settings depending on application mode
     'Select Case Forms!frm_Switchboard!cAppMode
     '  Case "admin", "power user"
-        Me.pgDataTables.Visible = True
+        Me.pgDataTables.visible = True
         Me.cmdDesignView.Enabled = True
         Me.optgScope.Enabled = True
         Me.cmbTimeframe.Enabled = True
@@ -1373,7 +1373,7 @@ Private Sub Form_Load()
     ' Requery the results subform to reflect updates if the user chose to run upon opening
     If blnRunQueries Then Me.subResults.Requery
     ' Turn off the form filter and move to a blank record so that no query record is visible
-    Me.Filter = ""
+    Me.filter = ""
     DoCmd.GoToRecord , , acNewRec
 
 Exit_Procedure:
@@ -1441,7 +1441,7 @@ Private Sub PageTabs_Change()
         ' Run the function to update the current QA query record
         varReturn = fxnUpdateQAResults(False, Me.selObject)
         Me.Requery
-        strCriteria = "[Query_name] = """ & Me.selObject.value & _
+        strCriteria = "[Query_name] = """ & Me.selObject.Value & _
             """ AND [Time_frame] = """ & Me.cmbTimeframe & _
             """ AND [Data_scope] = " & Me.optgScope
 
@@ -1481,7 +1481,7 @@ Private Sub optgMode_AfterUpdate()
         Me.txtQueryDesc.Locked = True
         Me.txtRemedy.Locked = True
         Me.subDataTables.Locked = True
-        Me.Detail.BackColor = 13025979 ' steel blue (default)
+        Me.Detail.backcolor = 13025979 ' steel blue (default)
     Else
     ' Edit mode
         ' Unlock the subform if an editable query
@@ -1491,7 +1491,7 @@ Private Sub optgMode_AfterUpdate()
         Me.txtQueryDesc.Locked = False
         Me.txtRemedy.Locked = False
         Me.subDataTables.Locked = False
-        Me.Detail.BackColor = 12574431 ' haystack
+        Me.Detail.backcolor = 12574431 ' haystack
     End If
 
 Exit_Procedure:
@@ -1617,7 +1617,7 @@ Private Sub cmdRefresh_Click()
     ' Save the current record, reset the form filter and query selector, reset the form
     '   to allow additions, and move to a blank record
     If Me.Dirty Then DoCmd.RunCommand acCmdSaveRecord
-    Me.Filter = ""
+    Me.filter = ""
     Me.FilterOn = False
     Me.selObject = Null
     Me.subQueryResults.SourceObject = ""
@@ -1702,10 +1702,10 @@ Private Sub cmdViewReport_Click()
         "Save report to a file?") = vbYes Then
         If strTimeframe <> "" Then
             ' Add timeframe to file name
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 strTimeframe & "_" & CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".snp"
         Else
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".snp"
         End If
         ' Open the save file dialog and update to the actual name given by the user
@@ -1754,15 +1754,15 @@ Private Sub selObject_AfterUpdate()
         Me.AllowAdditions = True
         DoCmd.GoToRecord , , acNewRec
         Me.txtEditQuery = ""
-        Me.txtEditQuery.ForeColor = 0          'black
-        Me.txtEditQuery.BackColor = 8454143    'yellow
+        Me.txtEditQuery.forecolor = 0          'black
+        Me.txtEditQuery.backcolor = 8454143    'yellow
         GoTo Exit_Procedure
     End If
     
     ' Bind the subform to the selected query
-    Me.subQueryResults.SourceObject = "Query." & Me.selObject.value
+    Me.subQueryResults.SourceObject = "Query." & Me.selObject.Value
     ' Build the filter string and see if a record already exists
-    strCriteria = "[Query_name] = """ & Me.selObject.value & _
+    strCriteria = "[Query_name] = """ & Me.selObject.Value & _
         """ AND [Time_frame] = """ & Me.cmbTimeframe & _
         """ AND [Data_scope] = " & Me.optgScope
     If DCount("*", "tbl_QA_Results", strCriteria) = 0 Then
@@ -1770,7 +1770,7 @@ Private Sub selObject_AfterUpdate()
         varReturn = fxnUpdateQAResults(False, Me.selObject, True)
     End If
     ' Set the form to the selected record
-    Me.Form.Filter = strCriteria
+    Me.Form.filter = strCriteria
     Me.Form.FilterOn = True
 
     ' Call the function to update the query flag
@@ -1783,7 +1783,7 @@ Private Sub selObject_AfterUpdate()
 
     On Error Resume Next
     For Each qdf In qdfs
-        If qdf.Name = Me.selObject.value Then
+        If qdf.Name = Me.selObject.Value Then
             MsgBox ("This query returns (" & DCount("*", qdf.Name) & _
                 ") records that meet the following criteria: " & _
                 vbCrLf & vbCrLf & qdf.Properties("Description"))
@@ -1812,7 +1812,7 @@ Private Sub cmdDesignView_Click()
 
     ' Open the selected query in design view after checking that a query is selected
     If IsNull(Me.selObject) = False Then _
-        DoCmd.OpenQuery Me.selObject.value, acViewDesign, acReadOnly
+        DoCmd.OpenQuery Me.selObject.Value, acViewDesign, acReadOnly
 
 Exit_Procedure:
     Exit Sub
@@ -1839,7 +1839,7 @@ Private Sub cmdAutoFix_Click()
 
     On Error Resume Next
     Set ctlAutoFix = Forms!frm_Data_QA.subQueryResults!varAutoFix
-    varAutoFix = ctlAutoFix.value
+    varAutoFix = ctlAutoFix.Value
     On Error GoTo Err_Handler
 
     If IsNull(varAutoFix) Then
@@ -1910,11 +1910,11 @@ Private Sub cmdOpenRecord_Click()
     
     On Error Resume Next
     Set ctlObject = Forms!frm_Data_QA.subQueryResults!varObject
-    varObject = ctlObject.value
+    varObject = ctlObject.Value
     Set ctlFilter = Forms!frm_Data_QA.subQueryResults!varFilter
-    varFilter = ctlFilter.value
+    varFilter = ctlFilter.Value
     Set ctlArgs = Forms!frm_Data_QA.subQueryResults!varArgs
-    varArgs = ctlArgs.value
+    varArgs = ctlArgs.Value
     On Error GoTo Err_Handler
 
     If IsNull(varObject) Then
@@ -2027,7 +2027,7 @@ Private Sub cmdExport_Click()
     ' Requery the selected record in the recordset, and update the subform
     Me.subQueryResults.Requery
     strQName = Me.selObject
-    strSaveFile = CurrentProject.path & "\" & strQName & "_" & _
+    strSaveFile = CurrentProject.Path & "\" & strQName & "_" & _
         CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".xls"
     DoCmd.OutputTo acOutputQuery, strQName, acFormatXLS, strSaveFile, True
     MsgBox "File saved to:" & vbCrLf & vbCrLf & strSaveFile
@@ -2147,7 +2147,7 @@ Private Sub selTable_AfterUpdate()
     Else
     ' If a table is selected ...
         If fxnTableExists(Me.selTable) Then
-            Me.subDataTables.SourceObject = "Table." & Me.selTable.value
+            Me.subDataTables.SourceObject = "Table." & Me.selTable.Value
         Else
             MsgBox "Unable to find the selected table in the database ...", , _
                 "Table not found"
@@ -2309,7 +2309,7 @@ Private Function fxnUpdateQAResults(Optional blnUpdateAll As Boolean = True, _
             frm.Repaint
             ' Create the record if all queries are being updated
             If blnUpdateAll Or (blnCreateNew And strQName = strSingleQName) Then
-                strQType = Mid(strQName, 5, 1)
+                strQType = mid(strQName, 5, 1)
                 If strQType = "" Then strQType = "0"
                 ' Create the statement to insert new records
                 strSQL = "INSERT INTO tbl_QA_Results " & _
@@ -2463,12 +2463,12 @@ Private Function fxnFilterRecords()
     ' Apply the filter
     'Me.Filter = strFilter
     'Me.FilterOn = bFilterOn
-    Me.subResults.Form.Filter = strFilter
+    Me.subResults.Form.filter = strFilter
     Me.subResults.Form.FilterOn = bFilterOn
 
     ' Make the labels bold or not depending on filter settings
-    Me.labTypeFilter.FontBold = Me.togFilterByType
-    Me.labDoneFilter.FontBold = Me.togFilterByDone
+    Me.labTypeFilter.fontBold = Me.togFilterByType
+    Me.labDoneFilter.fontBold = Me.togFilterByDone
 
 Exit_Procedure:
     Exit Function
@@ -2502,17 +2502,17 @@ Private Function fxnSetQueryFlag()
 
     ' Update the visual flag to indicate whether or not the query results are editable
     '   Note: suffix of "_X" means that the query results may be edited
-    If Right(Me.selObject.value, 2) = "_X" Then
+    If Right(Me.selObject.Value, 2) = "_X" Then
         Me.txtEditQuery = "OK"
-        Me.txtEditQuery.ForeColor = 16777215   'white
-        Me.txtEditQuery.BackColor = 4227072    'green
+        Me.txtEditQuery.forecolor = 16777215   'white
+        Me.txtEditQuery.backcolor = 4227072    'green
         ' Unlock the subform if in edit mode
         If Me.optgMode = 1 Then Me.subQueryResults.Locked = False _
             Else Me.subQueryResults.Locked = True
     Else
         Me.txtEditQuery = "No"
-        Me.txtEditQuery.ForeColor = 16777215   'white
-        Me.txtEditQuery.BackColor = 255        'red
+        Me.txtEditQuery.forecolor = 16777215   'white
+        Me.txtEditQuery.backcolor = 255        'red
         ' Lock the subform
         Me.subQueryResults.Locked = True
     End If

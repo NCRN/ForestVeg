@@ -1391,7 +1391,7 @@ Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
     
     'check for DbAdmin functionality (app level DB_ADMIN set in the db_Module)
-    Me.btnPreSeasonPrep.Visible = IIf(Nz(DB_ADMIN, False), True, False)
+    Me.btnPreSeasonPrep.visible = IIf(Nz(DB_ADMIN, False), True, False)
 
     Dim strCaption As String
 
@@ -1817,10 +1817,10 @@ Dim var1, var2 As Double
 var1 = 1.2
 var2 = 3.4
 
-Dim path As String
-path = "RScript C:\R_code\hello.R " & var1 & " " & var2
+Dim Path As String
+Path = "RScript C:\R_code\hello.R " & var1 & " " & var2
 
-errorCode = shell.Run(path, style, waitTillComplete)
+errorCode = shell.Run(Path, style, waitTillComplete)
 
 End Sub
 Public Function TestSubTime()
@@ -1849,13 +1849,13 @@ End Sub
 
 Public Sub CopyFile(Source As String, DestinationDir As String, NewFileName As String)
 
-    Dim fso As Object
-    Set fso = VBA.CreateObject("Scripting.FileSystemObject")
+    Dim FSO As Object
+    Set FSO = VBA.CreateObject("Scripting.FileSystemObject")
     
     Dim Destination As String
     
     Destination = DestinationDir & "\" & NewFileName
     
-    Call fso.CopyFile(Source, Destination)
+    Call FSO.CopyFile(Source, Destination)
 
 End Sub

@@ -19,10 +19,10 @@ Begin Form
     Width =10320
     DatasheetFontHeight =9
     ItemSuffix =27
-    Left =4584
-    Top =3144
-    Right =15384
-    Bottom =8484
+    Left =4950
+    Top =3885
+    Right =15495
+    Bottom =8970
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0x3438fc614e6fe440
@@ -181,7 +181,7 @@ Begin Form
                     GridlineThemeColorIndex =-1
                     GridlineShade =100.0
                     UseTheme =1
-                    BackColor =14922894
+                    BackColor =11777204
                     BackThemeColorIndex =2
                     BackTint =40.0
                     PressedColor =-2147483625
@@ -192,18 +192,18 @@ Begin Form
                     Begin
                         Begin Page
                             OverlapFlags =87
-                            Left =60
-                            Top =372
-                            Width =3108
-                            Height =3828
-                            BorderColor =12835293
+                            Left =75
+                            Top =435
+                            Width =3075
+                            Height =3750
+                            BorderColor =13092021
                             Name ="pgDefaults"
                             Caption =" Defaults"
                             GridlineColor =10921638
-                            LayoutCachedLeft =60
-                            LayoutCachedTop =372
-                            LayoutCachedWidth =3168
-                            LayoutCachedHeight =4200
+                            LayoutCachedLeft =75
+                            LayoutCachedTop =435
+                            LayoutCachedWidth =3150
+                            LayoutCachedHeight =4185
                             WebImagePaddingLeft =2
                             WebImagePaddingTop =2
                             WebImagePaddingRight =2
@@ -783,18 +783,18 @@ Begin Form
                         End
                         Begin Page
                             OverlapFlags =247
-                            Left =60
-                            Top =372
-                            Width =3108
-                            Height =3828
-                            BorderColor =12835293
+                            Left =75
+                            Top =435
+                            Width =3075
+                            Height =3750
+                            BorderColor =13092021
                             Name ="pgAbout"
                             Caption =" Db Info"
                             GridlineColor =10921638
-                            LayoutCachedLeft =60
-                            LayoutCachedTop =372
-                            LayoutCachedWidth =3168
-                            LayoutCachedHeight =4200
+                            LayoutCachedLeft =75
+                            LayoutCachedTop =435
+                            LayoutCachedWidth =3150
+                            LayoutCachedHeight =4185
                             WebImagePaddingLeft =2
                             WebImagePaddingTop =2
                             WebImagePaddingRight =2
@@ -1120,18 +1120,18 @@ Begin Form
                         End
                         Begin Page
                             OverlapFlags =247
-                            Left =60
-                            Top =372
-                            Width =3108
-                            Height =3828
-                            BorderColor =12835293
+                            Left =75
+                            Top =435
+                            Width =3075
+                            Height =3750
+                            BorderColor =13092021
                             Name ="pgSettings"
                             Caption =" Settings"
                             GridlineColor =10921638
-                            LayoutCachedLeft =60
-                            LayoutCachedTop =372
-                            LayoutCachedWidth =3168
-                            LayoutCachedHeight =4200
+                            LayoutCachedLeft =75
+                            LayoutCachedTop =435
+                            LayoutCachedWidth =3150
+                            LayoutCachedHeight =4185
                             WebImagePaddingLeft =2
                             WebImagePaddingTop =2
                             WebImagePaddingRight =2
@@ -2313,7 +2313,10 @@ Option Explicit
 Private Sub Form_Open(Cancel As Integer)
 
     ' Update the DbAdmin switchboard settings according to application mode
-    setUserAccess Me
+'----------------------------------------------
+' RETIRED - 7/1/2020 - compile issues
+'----------------------------------------------
+'    setUserAccess Me
     
     'initialize app settings
     initApp
@@ -2323,7 +2326,7 @@ Private Sub Form_Open(Cancel As Integer)
     If TempVars("HasAccessBE") Then DoCmd.OpenForm "frm_Lock_BE", , , , , acHidden
 
     ' If there is an Access back-end, make the backups button visible
-    Me!btnBackup.Visible = TempVars("HasAccessBE")
+    Me!btnBackup.visible = TempVars("HasAccessBE")
 
 End Sub
 
@@ -3104,10 +3107,10 @@ Private Sub btnTaskListRpt_Click()
         "Save report to a file?") = vbYes Then
         If varResponse = vbYes And strTimeframe <> "" Then
             ' Add timeframe to file name
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 strTimeframe & "_" & CStr(Format(Now(), "yyyymmdd")) & ".snp"
         Else
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 CStr(Format(Now(), "yyyymmdd")) & ".snp"
         End If
         ' Open the save file dialog and update to the actual name given by the user
@@ -3213,10 +3216,10 @@ Private Sub btnSpeciesListRpt_Click()
         "Save report to a file?") = vbYes Then
         If strTimeframe <> "" Then
             ' Add timeframe to file name
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 strTimeframe & "_" & CStr(Format(Now(), "yyyymmdd")) & ".snp"
         Else
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 CStr(Format(Now(), "yyyymmdd")) & ".snp"
         End If
         ' Open the save file dialog and update to the actual name given by the user
@@ -3317,10 +3320,10 @@ Private Sub btnNavReport_Click()
         "Save report to a file?") = vbYes Then
         If strTimeframe <> "" Then
             ' Add timeframe to file name
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 strTimeframe & "_" & CStr(Format(Now(), "yyyymmdd")) & ".snp"
         Else
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 CStr(Format(Now(), "yyyymmdd")) & ".snp"
         End If
         ' Open the save file dialog and update to the actual name given by the user
@@ -3406,10 +3409,10 @@ Private Sub btnQAReport_Click()
         "Save report to a file?") = vbYes Then
         If strTimeframe <> "" Then
             ' Add timeframe to file name
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 strTimeframe & "_" & CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".snp"
         Else
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".snp"
         End If
         ' Open the save file dialog and update to the actual name given by the user
@@ -3495,7 +3498,7 @@ Private Sub btnNavCoords_Click()
     DoCmd.OpenQuery strQryName, acViewNormal, acReadOnly
     If MsgBox("Would you like to save this file?", vbYesNo, _
         "Save the export file?") = vbYes Then
-        strInitFile = Application.CurrentProject.path & "\" & _
+        strInitFile = Application.CurrentProject.Path & "\" & _
             strQryName & "_" & CStr(Format(Now(), "yyyymmdd")) & ".xls"
         ' Open the save file dialog and update to the actual name given by the user
         strSaveFile = SaveFile(strInitFile, "Microsoft Excel (*.xls)", "*.xls")

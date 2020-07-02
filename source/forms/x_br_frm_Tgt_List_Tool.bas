@@ -209,12 +209,12 @@ Begin Form
                             LayoutCachedHeight =1905
                             UseTheme =1
                             Shape =2
-                            BackColor =12835293
+                            BackColor =13092021
                             BackThemeColorIndex =3
                             BackShade =90.0
                             OldBorderStyle =0
                             HoverColor =10092492
-                            PressedColor =12835293
+                            PressedColor =13092021
                             PressedThemeColorIndex =3
                             PressedShade =90.0
                             HoverForeColor =9974127
@@ -279,7 +279,7 @@ Begin Form
                             LayoutCachedHeight =1905
                             UseTheme =1
                             Shape =2
-                            BackColor =14806254
+                            BackColor =14276557
                             BackThemeColorIndex =3
                             OldBorderStyle =0
                             HoverColor =10092492
@@ -370,7 +370,7 @@ Begin Form
                     ForeColor =8355711
                     Name ="lblInstructions"
                     Caption =" "
-                    FontName ="Calibri"
+                    FontName ="Franklin Gothic Book"
                     GridlineColor =10921638
                     LayoutCachedLeft =6420
                     LayoutCachedTop =2175
@@ -392,7 +392,7 @@ Begin Form
                     Width =5460
                     Height =5400
                     BackColor =13434879
-                    BorderColor =12835293
+                    BorderColor =13092021
                     Name ="rctLeftInset"
                     GridlineColor =10921638
                     LayoutCachedLeft =780
@@ -451,7 +451,7 @@ Begin Form
                                     Width =2400
                                     Height =2880
                                     BackColor =8829910
-                                    BorderColor =12835293
+                                    BorderColor =13092021
                                     Name ="rctInsetCtr_Create"
                                     GridlineColor =10921638
                                     LayoutCachedLeft =2280
@@ -477,7 +477,7 @@ Begin Form
                                     ForeColor =16711680
                                     Name ="btnCreateTgtLists"
                                     Caption ="Create Target List"
-                                    FontName ="Calibri"
+                                    FontName ="Franklin Gothic Book"
                                     OnClick ="[Event Procedure]"
                                     ControlTipText ="Create species target list"
                                     LayoutCachedLeft =2280
@@ -500,7 +500,7 @@ Begin Form
                                     ForeColor =16711680
                                     Name ="btnAddExtraArea"
                                     Caption ="Add Extra Area(s)"
-                                    FontName ="Calibri"
+                                    FontName ="Franklin Gothic Book"
                                     OnClick ="[Event Procedure]"
                                     ControlTipText ="Add extra area"
                                     LayoutCachedLeft =2280
@@ -539,7 +539,7 @@ Begin Form
                                     Width =2400
                                     Height =2880
                                     BackColor =8829910
-                                    BorderColor =12835293
+                                    BorderColor =13092021
                                     Name ="rctInsetCtr_Logs"
                                     GridlineColor =10921638
                                     LayoutCachedLeft =2279
@@ -564,7 +564,7 @@ Begin Form
                                     ForeColor =16711680
                                     Name ="btnEditLog"
                                     Caption ="Edit Log"
-                                    FontName ="Calibri"
+                                    FontName ="Franklin Gothic Book"
                                     ControlTipText ="Open edit log"
                                     LayoutCachedLeft =2205
                                     LayoutCachedTop =4455
@@ -581,7 +581,7 @@ Begin Form
                                     Width =2399
                                     Height =2880
                                     BackColor =8829910
-                                    BorderColor =12835293
+                                    BorderColor =13092021
                                     Name ="rctInsetCtr_Search"
                                     LayoutCachedLeft =2279
                                     LayoutCachedTop =2999
@@ -602,7 +602,7 @@ Begin Form
                                     ForeColor =16711680
                                     Name ="btnSearch"
                                     Caption ="Species Search"
-                                    FontName ="Calibri"
+                                    FontName ="Franklin Gothic Book"
                                     OnClick ="[Event Procedure]"
                                     ControlTipText ="Open species search"
                                     LayoutCachedLeft =2280
@@ -641,7 +641,7 @@ Begin Form
                                     Width =2400
                                     Height =2880
                                     BackColor =8829910
-                                    BorderColor =12835293
+                                    BorderColor =13092021
                                     Name ="rctInsetLeft_Reports"
                                     GridlineColor =10921638
                                     LayoutCachedLeft =2280
@@ -668,7 +668,7 @@ Begin Form
                                     ForeColor =16711680
                                     Name ="btnCrewSpeciesList"
                                     Caption ="Crew Species List"
-                                    FontName ="Calibri"
+                                    FontName ="Franklin Gothic Book"
                                     OnClick ="[Event Procedure]"
                                     ShortcutMenuBar ="Run Species List report"
                                     ControlTipText ="Prepare field crew target species list"
@@ -692,7 +692,7 @@ Begin Form
                                     ForeColor =16711680
                                     Name ="btnSpeciesListByPark"
                                     Caption ="Species List by Park"
-                                    FontName ="Calibri"
+                                    FontName ="Franklin Gothic Book"
                                     OnClick ="[Event Procedure]"
                                     ShortcutMenuBar ="Run target species list by park report"
                                     ControlTipText ="Run target species list by park report"
@@ -717,7 +717,7 @@ Begin Form
                                     ForeColor =16711680
                                     Name ="btnTgtListAnnualSummary"
                                     Caption ="Annual Summary"
-                                    FontName ="Calibri"
+                                    FontName ="Franklin Gothic Book"
                                     OnClick ="[Event Procedure]"
                                     ShortcutMenuBar ="Run species list annual summary report"
                                     ControlTipText ="Run species list annual summary report"
@@ -742,7 +742,7 @@ Begin Form
                                     ForeColor =16711680
                                     Name ="btnParkSpeciesList"
                                     Caption ="Park Species List"
-                                    FontName ="Calibri"
+                                    FontName ="Franklin Gothic Book"
                                     OnClick ="[Event Procedure]"
                                     ShortcutMenuBar ="Run Park Personnel Species List report"
                                     ControlTipText ="Prepare park personnel target species list"
@@ -767,7 +767,7 @@ Begin Form
                                     ForeColor =16711680
                                     Name ="btnTgtListParkSummary"
                                     Caption ="Park Summary"
-                                    FontName ="Calibri"
+                                    FontName ="Franklin Gothic Book"
                                     OnClick ="[Event Procedure]"
                                     ShortcutMenuBar ="Run species list park summary report"
                                     ControlTipText ="Run species list park summary report"
@@ -868,7 +868,7 @@ Begin Form
                     ForeColor =5855577
                     Name ="lblInsetTitle"
                     Caption ="Choose what you'd like to create or modify"
-                    FontName ="Calibri"
+                    FontName ="Franklin Gothic Book"
                     GridlineColor =10921638
                     LayoutCachedLeft =840
                     LayoutCachedTop =2235
@@ -971,13 +971,16 @@ On Error GoTo Err_Handler
     '                            since subform loads first *BEFORE* form
 
     'set default app mode & initialize controls
-    setUserAccess Me, "update"
+'----------------------------------------------
+' RETIRED - 7/1/2020 - compile issues
+'----------------------------------------------
+'    setUserAccess Me, "update"
     
     ' Initialize UI
-    optGrpTabs.value = 1 'Create
+    optGrpTabs.Value = 1 'Create
     
     Me.optGrpTabs_Click
-    Me!fsub_Filter.Visible = False
+    Me!fsub_Filter.visible = False
     
 Exit_Sub:
     DoCmd.SetWarnings True
@@ -1082,8 +1085,8 @@ On Error GoTo Quit_procedure
         rst.MoveFirst
         Do Until rst.EOF
             ' Check for empty string or non-existent file first
-            If IsNull(rst![File_path]) = False Then
-                strOrigFile = rst![File_path]
+            If IsNull(rst![file_path]) = False Then
+                strOrigFile = rst![file_path]
                 strFileExt = ParseFileExt(strOrigFile)
                 If FileExists(strOrigFile) Then
                     intCount = 0
@@ -1144,7 +1147,10 @@ Private Sub Form_Close()
     On Error GoTo Err_Handler
 
     'log user exit
-    logUserAction Me
+'----------------------------------------------
+' RETIRED - 7/1/2020 - compile issues
+'----------------------------------------------
+'    logUserAction Me
 
     'check if form is open
     If FormIsOpen("frm_Main_Menu") Then
@@ -1209,7 +1215,7 @@ Dim blnLeftInsetHide As Boolean
     strAction = ""
     
     'identify current tab
-    Select Case optGrpTabs.value
+    Select Case optGrpTabs.Value
         Case 1 'Create
             strTab = "tabCreate"
             strAction = "tbl"
@@ -1220,7 +1226,7 @@ Dim blnLeftInsetHide As Boolean
             lngTabColor = RGB(221, 217, 195) 'tan DDD9C3 RGB(221,217,195) 14539203
             'update instructions & make visible
             PopulateInstructions Me!lblInstructions, "Search"
-            Me!lblInstructions.Visible = True
+            Me!lblInstructions.visible = True
         Case 3 'Reports
             strTab = "tabReports"
             strAction = "rpt"
@@ -1232,16 +1238,16 @@ Dim blnLeftInsetHide As Boolean
             'Application.LoadCustomUI "tabExportOptions", GetRibbonXML("Export")
             'update instructions & make visible
             PopulateInstructions Me!lblInstructions, "Export"
-            Me!lblInstructions.Visible = True
+            Me!lblInstructions.visible = True
         Case 5 'DB Admin
             strTab = "tabDbAdmin"
             lngTabColor = HTMLConvert("#D8D8D8") 'lt gray D8D8D8 RGB(216,216,216) 14211288
             'blnLeftInsetHide = True
-            lblCover.BackColor = lngTabColor
-            lblCover.Visible = True
+            lblCover.backcolor = lngTabColor
+            lblCover.visible = True
             'update instructions & make visible
             PopulateInstructions Me!lblInstructions, "DbAdmin"
-            Me!lblInstructions.Visible = True
+            Me!lblInstructions.visible = True
     End Select
     
     'identify action type (qry = query, rpt = report, exp = export, tbl = table, frm = form)
@@ -1260,19 +1266,19 @@ Dim blnLeftInsetHide As Boolean
     buttonUnHighlight Me!lblInstructions
     
     'hide filter
-    Me.Controls.item("fsub_Filter").Visible = False
+    Me.Controls.Item("fsub_Filter").visible = False
     
     'unhide left inset rectangle
-    Me.Controls.item("rctLeftInset").Visible = True
+    Me.Controls.Item("rctLeftInset").visible = True
     If blnLeftInsetHide Then
-        Me.Controls.item("rctLeftInset").Visible = False
+        Me.Controls.Item("rctLeftInset").visible = False
     End If
     
     'update title & make visible
     PopulateInsetTitle Me!lblInsetTitle, Replace(strTab, "tab", "")
         
     'set tab color
-    rctMainTabColor.BackColor = lngTabColor
+    rctMainTabColor.backcolor = lngTabColor
         
     'keep tabs hidden
     If strTab = "tabView" Or strTab = "tabDbAdmin" Then
@@ -1339,7 +1345,7 @@ Private Sub btnAddExtraArea_Click()
     'button actions
     ActionButton_Click btnAddExtraArea, "frm_Extra_Areas"
     
-    fsub_Filter.Visible = False
+    fsub_Filter.visible = False
        
 End Sub
 
@@ -1451,21 +1457,21 @@ On Error GoTo Err_Handler:
 
     'reveal filter subform & clear fields
     With fsub_Filter
-        .Visible = True
+        .visible = True
         Select Case fsub_Filter.SourceObject
             Case "fsub_Select_Park_Year"
-                !cbxPark.value = ""
-                !cbxYear.value = "SEL"
+                !cbxPark.Value = ""
+                !cbxYear.Value = "SEL"
             Case "fsub_Select_Tgt_Lists"
             Case "fsub_Select_Year"
             Case "fsub_Select_Park"
-                !cbxPark.value = ""
+                !cbxPark.Value = ""
             End Select
     End With
     
     'hide filter subform for unused tabs
     If strAction = "DbAdmin" Or strAction = "View" Or strAction = "Search" Then
-        lblCover.Visible = True
+        lblCover.visible = True
     End If
     
     Me.Repaint

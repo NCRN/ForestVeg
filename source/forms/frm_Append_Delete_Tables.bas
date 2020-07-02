@@ -382,7 +382,7 @@ On Error GoTo Err_Handler
    
    'use NULL Delete_Date vs. Delete_Table = False since tables could have been
    'selected for deletion, but no deletion completed
-    Me.Filter = " [Delete_Date] IS NULL"   '" [Delete_Table] =  " & False
+    Me.filter = " [Delete_Date] IS NULL"   '" [Delete_Table] =  " & False
     
     Me.FilterOn = True
     
@@ -691,13 +691,13 @@ On Error GoTo Err_Handler
         
         Do Until rsDelete.EOF
         
-        If Me!optgSelectDelete.value = 1 Then
+        If Me!optgSelectDelete.Value = 1 Then
              
             rsDelete.Edit
             rsDelete![Delete_Table] = True
             rsDelete.Update
             
-        ElseIf Me!optgSelectDelete.value = 2 Then
+        ElseIf Me!optgSelectDelete.Value = 2 Then
             rsDelete.Edit
             rsDelete![Delete_Table] = False
             rsDelete.Update

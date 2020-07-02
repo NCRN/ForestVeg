@@ -1478,7 +1478,7 @@ On Error GoTo Err_Handler
 
     'QC mode?
     SetTempVar "QC_MODE", IIf(Me.OpenArgs = "QC_MODE", True, False)
-    lblQCMode.Visible = Nz(TempVars("QC_MODE"), False)
+    lblQCMode.visible = Nz(TempVars("QC_MODE"), False)
 
     Dim varReturn As Variant
 
@@ -1493,10 +1493,10 @@ On Error GoTo Err_Handler
     End If
     
     'hide PseudoEvent toggle when not in DEV_MODE
-    Me.tglPseudoEvent.Visible = IIf(TempVars("DEV_MODE") = True, False, True)
+    Me.tglPseudoEvent.visible = IIf(TempVars("DEV_MODE") = True, False, True)
     
     'temporarily hide toggle
-    Me.tglPseudoEvent.Visible = False
+    Me.tglPseudoEvent.visible = False
     
 Exit_Handler:
     Exit Sub
@@ -1958,7 +1958,7 @@ On Error GoTo Err_Handler
     'tglPseudoEvent.Value = Not tglPseudoEvent.Value
     
     'set pseudoevent field
-    tbxPseudoEvent = IIf(tglPseudoEvent.value = True, 1, 0)
+    tbxPseudoEvent = IIf(tglPseudoEvent.Value = True, 1, 0)
 
 Exit_Handler:
     Exit Sub
@@ -2211,7 +2211,7 @@ On Error GoTo Err_Handler
     Me!cbxFrameFilter = Null
     Me!cbxYearFilter = Null
     Me!cbxStatusFilter = Null
-    Me.Filter = ""
+    Me.filter = ""
     
 Exit_Handler:
     Exit Sub
@@ -2234,7 +2234,7 @@ Private Sub cmdClearFilter_Click()
     Me!cboFrameFilter = Null
     Me!cboYearFilter = Null
     Me!cboStatusFilter = Null
-    Me.Filter = ""
+    Me.filter = ""
     
 Exit_Procedure:
     Exit Sub
@@ -2648,19 +2648,19 @@ End Sub
 Private Sub tbxViewPhotos_Click()
 On Error GoTo Err_Handler
     
-    Dim retVal As Double
+    Dim RetVal As Double
     Dim RootFolder As String
     Dim PhotoFolder As String
     
     RootFolder = "T:\I&M"
     PhotoFolder = "T:\I&M\Monitoring\Forest_Vegetation\Photos\"
     If FolderExists(PhotoFolder & Me!txtPlot_Name) Then
-        retVal = shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
+        RetVal = shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
         GoTo Exit_Handler
     Else
         If FolderExists(RootFolder) Then
             MsgBox ("Folder for this plot not found....Opening the root of the Photos folder.")
-            retVal = shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
+            RetVal = shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
             GoTo Exit_Handler
         Else
             MsgBox ("The network appears to be unavailable. Network access is required to view photos.")
@@ -2682,19 +2682,19 @@ End Sub
 Private Sub txtViewPhotos_Click()
 On Error GoTo Err_Handler
 
-    Dim retVal As Double
+    Dim RetVal As Double
     Dim RootFolder As String
     Dim PhotoFolder As String
     
     RootFolder = "T:\I&M"
     PhotoFolder = "T:\I&M\Monitoring\Forest_Vegetation\Photos\"
     If FolderExists(PhotoFolder & Me!txtPlot_Name) Then
-        retVal = shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
+        RetVal = shell("explorer /e,/root, " & PhotoFolder & Me!txtPlot_Name, vbNormalFocus)
         GoTo Exit_Procedure
     Else
         If FolderExists(RootFolder) Then
             MsgBox ("Folder for this plot not found....Opening the root of the Photos folder.")
-            retVal = shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
+            RetVal = shell("explorer /e,/root, " & PhotoFolder, vbNormalFocus)
             GoTo Exit_Procedure
         Else
             MsgBox ("The network appears to be unavailable. Network access is required to view photos.")
@@ -2824,32 +2824,32 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC - 5/24/2018 - update documentation, error handling
 ' ---------------------------------
-Private Function FilterString(val As Variant, FieldName As String, CurrentFilter As Variant) As Variant
+Private Function FilterString(val As Variant, fieldName As String, CurrentFilter As Variant) As Variant
 On Error GoTo Err_Handler
 
     Const cstrNull As String = "[Null]"
-    Dim Filter As Variant
+    Dim filter As Variant
 
     If IsNull(val) Then
-        Filter = CurrentFilter
+        filter = CurrentFilter
     Else
-        Filter = (CurrentFilter + " AND ") & FieldName
+        filter = (CurrentFilter + " AND ") & fieldName
         If val = cstrNull Then
-            Filter = Filter & " Is Null"
+            filter = filter & " Is Null"
         Else
         If IsNumeric(val) Then
-            Filter = Filter & "=" & val & ""
+            filter = filter & "=" & val & ""
             Else
             If IsDate(val) Then
-                Filter = Filter & "=#" & val & "#"
+                filter = filter & "=#" & val & "#"
                 Else
-                    Filter = Filter & "=" & CorrectText(CStr(val))
+                    filter = filter & "=" & CorrectText(CStr(val))
                 End If
             End If
         End If
     End If
     
-    FilterString = Filter
+    FilterString = filter
 
     
 Exit_Handler:
@@ -2929,9 +2929,9 @@ End Function
 Public Sub FilterGateway(FilterOn As Boolean)
 On Error GoTo Err_Handler
     
-    Dim Filter As Variant
+    Dim filter As Variant
 
-    Filter = Null
+    filter = Null
     
     Me!tglFilter = FilterOn
     
@@ -2939,18 +2939,18 @@ On Error GoTo Err_Handler
         Me!tglFilter.Caption = "Filter Is On"
     
         'add park filter to filter string
-        Filter = FilterString(Me!cbxParkFilter, "Unit_Code", Filter)
+        filter = FilterString(Me!cbxParkFilter, "Unit_Code", filter)
         'add unit filter to filter string
-        Filter = FilterString(Me!cbxUnitGroupFilter, "Unit_Group", Filter)
+        filter = FilterString(Me!cbxUnitGroupFilter, "Unit_Group", filter)
         'add panel filter to filter string
-        Filter = FilterString(Me!cbxPanelFilter, "Panel", Filter)
+        filter = FilterString(Me!cbxPanelFilter, "Panel", filter)
         'add frame filter to filter string
-        Filter = FilterString(Me!cbxFrameFilter, "Frame", Filter)
+        filter = FilterString(Me!cbxFrameFilter, "Frame", filter)
         'add year filter to filter string
-        Filter = FilterString(Me!cbxYearFilter, "Event_Year", Filter)
+        filter = FilterString(Me!cbxYearFilter, "Event_Year", filter)
         'add status filter to filter string
-        Filter = FilterString(Me!cbxStatusFilter, "Location_Status", Filter)
-        Me.Filter = Nz(Filter)
+        filter = FilterString(Me!cbxStatusFilter, "Location_Status", filter)
+        Me.filter = Nz(filter)
     Else
         Me!tglFilter.Caption = "Filter Is Off"
     End If
@@ -3000,7 +3000,7 @@ If booFilterOn Then
     varFilter = FilterString(Me!cboYearFilter, "Event_Year", varFilter)
     'add status filter to filter string
     varFilter = FilterString(Me!cboStatusFilter, "Location_Status", varFilter)
-    Me.Filter = Nz(varFilter)
+    Me.filter = Nz(varFilter)
 Else
     Me!tglFilter.Caption = "Filter Is Off"
 End If
@@ -3126,9 +3126,9 @@ On Error GoTo Err_Handler
 
     ' Change the label format to indicate the sorted field
     strSortFieldLabel = "lbl" & Replace(strFieldName, "_", "")
-    With Me.Controls.item(strSortFieldLabel)
+    With Me.Controls.Item(strSortFieldLabel)
         .FontItalic = IIf(.FontItalic = False, True, False)
-        .FontBold = IIf(.FontBold = False, True, False)
+        .fontBold = IIf(.fontBold = False, True, False)
     
 '        .FontItalic = False
 '        .fontBold = False
@@ -3187,11 +3187,11 @@ Private Function fxnSortRecords(ByVal strFieldName As String, _
     strSortFieldLabel = Replace(strSortFieldLabel, "_", "")
 
     ' Change the label format to indicate the sorted field
-    Me.Controls.item(strSortFieldLabel).FontItalic = False
-    Me.Controls.item(strSortFieldLabel).FontBold = False
+    Me.Controls.Item(strSortFieldLabel).FontItalic = False
+    Me.Controls.Item(strSortFieldLabel).fontBold = False
     'strSortFieldLabel = "lbl" & strFieldName
-    Me.Controls.item(strSortFieldLabel).FontItalic = True
-    Me.Controls.item(strSortFieldLabel).FontBold = True
+    Me.Controls.Item(strSortFieldLabel).FontItalic = True
+    Me.Controls.Item(strSortFieldLabel).fontBold = True
 
 Exit_Procedure:
     Exit Function

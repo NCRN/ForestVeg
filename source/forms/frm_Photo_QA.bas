@@ -410,9 +410,9 @@ Option Compare Database
 
 Private Sub chkError_Detected_AfterUpdate()
     If Me.chkError_Detected = True Then
-        Me.txtError_Description.Visible = True
+        Me.txtError_Description.visible = True
     Else
-      Me.txtError_Description.Visible = False
+      Me.txtError_Description.visible = False
     End If
 End Sub
 
