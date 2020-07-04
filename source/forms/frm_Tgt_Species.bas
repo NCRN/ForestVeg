@@ -1068,7 +1068,7 @@ On Error GoTo Err_Handler
     
    'check for selected items --> if present, enable btnRemove
     If lbxTgtSpecies.ItemsSelected.Count > 0 Then
-        If btnRemove.BackColor <> CTRL_REMOVE_ENABLED Then
+        If btnRemove.backcolor <> CTRL_REMOVE_ENABLED Then
             EnableControl btnRemove, CTRL_REMOVE_ENABLED, TEXT_ENABLED
             EnableControl btnRemoveAll, CTRL_REMOVE_ENABLED, TEXT_ENABLED
         End If
@@ -1167,7 +1167,7 @@ Private Sub lbxTgtSpecies_KeyUp(KeyCode As Integer, Shift As Integer)
 On Error GoTo Err_Handler
 
 '    If lbxSpecies.ItemsSelected.Count > 0 And lblRemove.backcolor <> TempVars.item("ctrlRemoveEnabled") Then
-    If btnRemove.BackColor <> CTRL_REMOVE_ENABLED Then
+    If btnRemove.backcolor <> CTRL_REMOVE_ENABLED Then
         EnableControl btnRemove, CTRL_REMOVE_ENABLED, TEXT_ENABLED
         EnableControl btnRemoveAll, CTRL_REMOVE_ENABLED, TEXT_ENABLED
     End If
@@ -1207,7 +1207,7 @@ On Error GoTo Err_Handler
     
     'ignore if 'disabled'
     'If lblAdd.backcolor = lngGray Then GoTo Exit_Sub
-    If btnAdd.BackColor = lngGray Then GoTo Exit_Sub
+    If btnAdd.backcolor = lngGray Then GoTo Exit_Sub
     
     'MoveSingleItem Me, "lbxSpecies", "lbxTgtSpecies"
     MoveSingleItem Me, "fsub_Species_Listbox", "lbxTgtSpecies"
@@ -1258,7 +1258,7 @@ Private Sub btnRemove_Click()
 On Error GoTo Err_Handler
     
     'ignore if 'disabled'
-    If btnRemove.BackColor = CTRL_DISABLED Then GoTo Exit_Sub
+    If btnRemove.backcolor = CTRL_DISABLED Then GoTo Exit_Sub
     
     'MoveSingleItem Me, "lbxTgtSpecies", "fsub_Species_Listbox"
     RemoveSelectedItems lbxTgtSpecies
@@ -1419,7 +1419,7 @@ On Error GoTo Err_Handler
     DoCmd.Hourglass True
     
     'delete the full list for current or future years
-    If CInt(TempVars("TgtYear")) > 0 And CInt(TempVars("TgtYear")) > year(Now()) Then
+    If CInt(TempVars("TgtYear")) > 0 And CInt(TempVars("TgtYear")) > Year(Now()) Then
     
         MsgBox "Removing previously saved " & TempVars("park") & " - " & TempVars("TgtYear") & _
                 " species. " & vbCrLf & vbCrLf & _
@@ -1446,7 +1446,7 @@ On Error GoTo Err_Handler
     
         'warn the user, but allow them to choose to add to the previous year list (or not)
         Dim strCurrPrev As String
-        strCurrPrev = IIf(CInt(TempVars("TgtYear")) = year(Now()), "the current", "a previous")
+        strCurrPrev = IIf(CInt(TempVars("TgtYear")) = Year(Now()), "the current", "a previous")
 
         iResponse = MsgBox("The list you are saving is for " & strCurrPrev & " year ( " & _
                 TempVars("park") & " - " & TempVars("TgtYear") & " )." & vbCrLf & vbCrLf & _
@@ -1577,7 +1577,7 @@ On Error GoTo Err_Handler
     
     Set qdf = CurrentDb.QueryDefs("qry_Tgt_Species_List")
     
-    strSQL = qdf.sql
+    strSQL = qdf.SQL
     
     strSQL = "SELECT tbl_Target_List.Park_Code AS Park, " & _
              "tbl_Target_List.Target_Year AS TgtYear, " & _
@@ -1599,7 +1599,7 @@ On Error GoTo Err_Handler
     'DoCmd.OpenQuery "qryTgtSpeciesList", acViewNormal, acReadOnly
     'DoCmd.RunSQL strSQL <=== NO! not on a SELECT...
     
-    CurrentDb.CreateQueryDef("temp_Tgt_Species").sql = strSQL
+    CurrentDb.CreateQueryDef("temp_Tgt_Species").SQL = strSQL
     DoCmd.OpenQuery "temp_Tgt_Species"
     
     'set statusbar notice

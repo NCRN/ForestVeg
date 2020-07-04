@@ -885,24 +885,24 @@ On Error GoTo Err_Handler
         rSub_rSub_Tree_Conditions.Report.HasData = False Then
                 
             'visible IF there is no data (if HasData = False, returns True & displays)
-            lblNoTreeConditions.Visible = Not rSub_rSub_Tree_Conditions.Report.HasData
+            lblNoTreeConditions.visible = Not rSub_rSub_Tree_Conditions.Report.HasData
             
             'doesn't appear for living trees w/ V-C-F checkboxes complete
             'rSub_Event_Trees > chkVines_Checked, chkConditions_Checked, chkFoliage_Conditions_Checked
             'qry < Vines_Checked, Conditions_Checked, Foliage_Conditions_Checked
             If Me!Vines_Checked + Me!Conditions_Checked + Me!Foliage_Conditions_Checked = -3 Then
-                lblNoTreeConditions.Visible = False
+                lblNoTreeConditions.visible = False
                 'Debug.Print "NO RED"
             End If
             
     Else
         'hide it
-        lblNoTreeConditions.Visible = False
+        lblNoTreeConditions.visible = False
     End If
 
     'turn on label if missing sapling ID (tbxLatinName)
     'visible IF there is no data (if no latin name = False, returns True & displays)
-    lblMissingID.Visible = IIf(Len(tbxLatinName) > 0, False, True)
+    lblMissingID.visible = IIf(Len(tbxLatinName) > 0, False, True)
     
 Exit_Handler:
     Exit Sub

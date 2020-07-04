@@ -1715,7 +1715,7 @@ On Error GoTo Err_Handler
     'hide double check unless necessary
     'lblDBHCheck.Visible = False
     'chkDBHCheck.Visible = False
-    tbxHighlightChk.Visible = False
+    tbxHighlightChk.visible = False
     
 '    'set default comment bgd color
 '    tbxComments.BackColor = lngWhite
@@ -1886,7 +1886,7 @@ Private Sub chkDBHCheck_Click()
 On Error GoTo Err_Handler
     
     'Toggle check label color based on if checked or not
-    lblDBHCheck.ForeColor = IIf(chkDBHCheck, lngBlue, lngRed)
+    lblDBHCheck.forecolor = IIf(chkDBHCheck, lngBlue, lngRed)
     
     'update the record's value (since DBH_Check is 0/1 vs. 0/-1)
     SetDBHCheck Me.Sapling_Data_ID, "Sapling", chkDBHCheck
@@ -2672,14 +2672,14 @@ On Error GoTo Err_Handler
 
     Select Case Me!cbxBrowsePick.Column(0)
         Case "Yes / Yes"
-            Me!tbxBrowsable.value = "Yes"
-            Me!tbxBrowsed.value = "Yes"
+            Me!tbxBrowsable.Value = "Yes"
+            Me!tbxBrowsed.Value = "Yes"
         Case "Yes / No"
-            Me!tbxBrowsable.value = "Yes"
-            Me!tbxBrowsed.value = "No"
+            Me!tbxBrowsable.Value = "Yes"
+            Me!tbxBrowsed.Value = "No"
         Case "No / No"
-            Me!tbxBrowsable.value = "No"
-            Me!tbxBrowsed.value = "No"
+            Me!tbxBrowsable.Value = "No"
+            Me!tbxBrowsed.Value = "No"
     End Select
 
 Exit_Handler:
@@ -2925,7 +2925,7 @@ On Error GoTo Err_Handler
     Loop
     'If we haven't found record and exited by now, create new record.
     DoCmd.GoToRecord , , acNewRec
-    Tag_ID.value = strFind
+    Tag_ID.Value = strFind
     DoCmd.RunCommand acCmdSaveRecord
     Me!fsub_Tag_Sapling.Requery
     Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tag_Sapling]!cbxTagStatus = "Sapling"
@@ -3001,7 +3001,7 @@ On Error GoTo Err_Handler
     Loop
     'If we haven't found record and exited by now, create new record.
     DoCmd.GoToRecord , , acNewRec
-    Tag_ID.value = strFind
+    Tag_ID.Value = strFind
     DoCmd.RunCommand acCmdSaveRecord
     Me!fsub_Tag_Sapling.Requery
     Forms![frm_Events]![fsub_Sapling_Data]![fsub_Tag_Sapling]!tbxTagStatus = "Sapling"
@@ -3164,7 +3164,7 @@ Private Sub CheckDBH()
 On Error GoTo Err_Handler
     
     'set default comment bgd color
-    tbxComments.BackColor = lngWhite
+    tbxComments.backcolor = lngWhite
     
     'fetch DBH_Check value from db (convert 1 -> -1 for Access logic)
     chkDBHCheck = IIf(Me!DBH_Check = 1, -1, 0)
@@ -3178,7 +3178,7 @@ On Error GoTo Err_Handler
     End If
 
     'set text color if checked
-    If Me!DBH_Check = 1 Then Me.lblDBHCheck.ForeColor = lngBlue
+    If Me!DBH_Check = 1 Then Me.lblDBHCheck.forecolor = lngBlue
     
 Exit_Handler:
     Exit Sub
@@ -3214,13 +3214,13 @@ End Sub
 Private Function ToggleDBH()
 On Error GoTo Err_Handler
     
-    Select Case Me!cbxHabit.value
+    Select Case Me!cbxHabit.Value
         Case "Tree"
-            Me!fsub_Sapling_DBH.Visible = True
+            Me!fsub_Sapling_DBH.visible = True
         Case "Shrub"
-            Me!fsub_Sapling_DBH.Visible = False
+            Me!fsub_Sapling_DBH.visible = False
         Case Else
-            Me!fsub_Sapling_DBH.Visible = True
+            Me!fsub_Sapling_DBH.visible = True
     End Select
     
 Exit_Handler:

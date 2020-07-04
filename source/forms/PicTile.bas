@@ -349,24 +349,24 @@ Private m_TileVisible As Byte
 '---------------------
 ' Events
 '---------------------
-Public Event Selected(value As Boolean)
-Public Event CriticalState(value As Boolean)
-Public Event GoodState(value As Boolean)
+Public Event Selected(Value As Boolean)
+Public Event CriticalState(Value As Boolean)
+Public Event GoodState(Value As Boolean)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let title(value As String)
-    m_Title = value
+Public Property Let Title(Value As String)
+    m_Title = Value
     'lblTitle.Caption = m_Title
 End Property
 
-Public Property Get title() As String
-    title = m_Title
+Public Property Get Title() As String
+    Title = m_Title
 End Property
 
-Public Property Let TileTag(value As String)
-    m_TileTag = value
+Public Property Let TileTag(Value As String)
+    m_TileTag = Value
 '    lblLink1.Tag = m_TileTag
 '    lblLink2.Tag = m_TileTag
 '    lblLink3.Tag = m_TileTag
@@ -383,9 +383,9 @@ Public Property Get PicCaption() As String
     PicCaption = m_PicCaption
 End Property
 
-Public Property Let PicCaption(value As String)
-    If Len(Trim(value)) = 0 Then value = "Pic"
-    m_PicCaption = value
+Public Property Let PicCaption(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Pic"
+    m_PicCaption = Value
 '    lblPic.Caption = m_PicCaption
 End Property
 
@@ -393,13 +393,13 @@ Public Property Get PicAction() As String
     PicAction = m_PicAction
 End Property
 
-Public Property Let PicAction(value As String)
-    If Len(Trim(value)) = 0 Then value = "Pic"
-    m_PicAction = value
+Public Property Let PicAction(Value As String)
+    If Len(Trim(Value)) = 0 Then Value = "Pic"
+    m_PicAction = Value
 End Property
 
-Public Property Let TitleFontColor(value As Long)
-    m_TitleFontColor = value
+Public Property Let TitleFontColor(Value As Long)
+    m_TitleFontColor = Value
     'lblTitle.ForeColor = m_TitleFontColor
 End Property
 
@@ -407,12 +407,12 @@ Public Property Get TitleFontColor() As Long
     TitleFontColor = m_TitleFontColor
 End Property
 
-Public Property Let TileHeaderColor(value As Long)
-    If Len(Trim(value)) < 0 Then value = vbGreen '"#3F3F3F"
-    m_TileHeaderColor = value
-    FormHeader.BackColor = m_TileHeaderColor
+Public Property Let TileHeaderColor(Value As Long)
+    If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
+    m_TileHeaderColor = Value
+    FormHeader.backcolor = m_TileHeaderColor
     'set font color to match
-    Select Case value
+    Select Case Value
         Case vbGreen
             Me.TitleFontColor = vbBlack
         Case vbRed, vbBlue
@@ -428,9 +428,9 @@ Public Property Get TileVisible() As Byte
     TileVisible = m_TileVisible
 End Property
 
-Public Property Let TileVisible(value As Byte)
-    m_TileVisible = value
-    Me.Visible = m_TileVisible
+Public Property Let TileVisible(Value As Byte)
+    m_TileVisible = Value
+    Me.visible = m_TileVisible
 End Property
 
 '---------------------
@@ -767,22 +767,22 @@ On Error GoTo Err_Handler
     Set frm = Me.Parent.Parent '.SelPhotos 'Form.SelPhotos
     
     If selection = True Then
-        imgPhoto.BorderColor = lngGreen
-        lblName.ForeColor = lngGreen
+        imgPhoto.borderColor = lngGreen
+        lblName.forecolor = lngGreen
         
         'add to PicCatalog form's collection
         frm.SelPhoto = lblID.Caption
         
     Else
-        imgPhoto.BorderColor = lngLtBgdGray
-        lblName.ForeColor = lngLtTextGray
+        imgPhoto.borderColor = lngLtBgdGray
+        lblName.forecolor = lngLtTextGray
         
         'remove from list
         Dim i As Long
         
         If frm.SelPhotos.Count > 0 Then
             For i = 1 To frm.SelPhotos.Count
-                If frm.SelPhotos.item(i) = lblID.Caption Then
+                If frm.SelPhotos.Item(i) = lblID.Caption Then
                     'remove from PicCatalog form's collection (must use index since collection is unkeyed)
                     frm.SelPhotos.Remove i 'lblID.Caption
                     Exit For
@@ -798,7 +798,7 @@ On Error GoTo Err_Handler
     If frm.SelPhotos.Count > 0 Then
         Dim pics As String
         For i = 1 To frm.SelPhotos.Count
-            pics = pics & frm.SelPhotos.item(i) & Space(2)
+            pics = pics & frm.SelPhotos.Item(i) & Space(2)
         Next
         Debug.Print pics
         

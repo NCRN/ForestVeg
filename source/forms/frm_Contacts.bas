@@ -1228,12 +1228,12 @@ Function fxnFormDefaults(strFormMode As String)
     Case "new"
     ' Modify the form properties to allow new records
         Me!cmdClose.SetFocus    ' Must do this before turning off new button
-        Me!cmdUndo.Visible = True
-        Me!cmdSubmit.Visible = True
+        Me!cmdUndo.visible = True
+        Me!cmdSubmit.visible = True
         Me!cmdEdit.Enabled = False
         Me!cmdNew.Enabled = False
         Me.AllowAdditions = True
-        Me.Detail.BackColor = 12574431 ' haystack
+        Me.Detail.backcolor = 12574431 ' haystack
         If Not Me.NewRecord Then
             DoCmd.GoToRecord , , acNewRec
         End If
@@ -1245,12 +1245,12 @@ Function fxnFormDefaults(strFormMode As String)
     Case "edit"
     ' Modify the form properties to allow edits
         Me!cmdClose.SetFocus    ' Must do this before turning off edit button
-        Me!cmdUndo.Visible = True
-        Me!cmdSubmit.Visible = True
+        Me!cmdUndo.visible = True
+        Me!cmdSubmit.visible = True
         Me!cmdEdit.Enabled = False
         Me!cmdNew.Enabled = False
         Me.AllowAdditions = True
-        Me.Detail.BackColor = 12574431 ' haystack
+        Me.Detail.backcolor = 12574431 ' haystack
     ' Unlock fields
         bLockState = False
         GoTo Change_Ctl_State
@@ -1258,13 +1258,13 @@ Function fxnFormDefaults(strFormMode As String)
     Case "view"
     ' Set the form to the default form view
         Me!cmdClose.SetFocus    ' Must do this before disabling ctls
-        Me!cmdUndo.Visible = False
-        Me!cmdSubmit.Visible = False
+        Me!cmdUndo.visible = False
+        Me!cmdSubmit.visible = False
         Me!cmdEdit.Enabled = True
         Me!cmdNew.Enabled = True
         Me.DataEntry = False
         Me.AllowAdditions = False
-        Me.Detail.BackColor = 14541277 ' light blue (default)
+        Me.Detail.backcolor = 14541277 ' light blue (default)
     ' Lock fields
         bLockState = True
         GoTo Change_Ctl_State
@@ -1356,7 +1356,7 @@ Dim strCriteria As String
 On Error GoTo Error_Handler
 
 strCriteria = GetCriteriaString("[Contact_ID]=", "tlu_Contacts", "Contact_ID", Me.Name, "cboContact")
-Me.Filter = strCriteria
+Me.filter = strCriteria
 Me.FilterOn = True
 
 Exit_Handler:

@@ -2656,39 +2656,39 @@ Private m_CallingForm As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidLabel(value As String)
-Public Event InvalidCaption(value As String)
-Public Event InvalidCallingForm(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidLabel(Value As String)
+Public Event InvalidCaption(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
-Public Property Get title() As String
-    title = m_Title
+Public Property Get Title() As String
+    Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -2696,14 +2696,14 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let ButtonCaption(value As String)
-    If Len(value) > 0 Then
-        m_ButtonCaption = value
+Public Property Let ButtonCaption(Value As String)
+    If Len(Value) > 0 Then
+        m_ButtonCaption = Value
 
         'set the form button caption
         'Me.btnSave.Caption = m_ButtonCaption
     Else
-        RaiseEvent InvalidCaption(value)
+        RaiseEvent InvalidCaption(Value)
     End If
 End Property
 
@@ -2711,11 +2711,11 @@ Public Property Get ButtonCaption() As String
     ButtonCaption = m_ButtonCaption
 End Property
 
-Public Property Let CallingForm(value As String)
-    If Len(value) > 0 Then
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+    If Len(Value) > 0 Then
+        m_CallingForm = Value
     Else
-        RaiseEvent InvalidCallingForm(value)
+        RaiseEvent InvalidCallingForm(Value)
     End If
 End Property
 
@@ -2755,62 +2755,65 @@ On Error GoTo Err_Handler
     'minimize Main
     ToggleForm Me.CallingForm, -1
     
-    title = "Db Admin"
+    Title = "Db Admin"
     Directions = "Choose the desired action below."
-    lblDirections.ForeColor = lngLtBlue
+    lblDirections.forecolor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.ForeColor = lngBlue
+    btnComment.forecolor = lngBlue
     
     'set mode display
-    tbxAppMode.ForeColor = lngGreen
+    tbxAppMode.forecolor = lngGreen
     tbxAppMode.BorderStyle = 0  '0-transparent, 1-normal
     tbxAppMode.TextAlign = 2    '0-general, 1-left, 2-center, 3-right
     
     'set hovers
-    btnComment.HoverColor = lngGreen
-    btnBackup.HoverColor = lngGreen
-    btnBrowser.HoverColor = lngGreen
-    btnChangeDbInfo.HoverColor = lngGreen
-    btnChangeDefaults.HoverColor = lngGreen
-    btnDbWindow.HoverColor = lngGreen
-    btnEditLog.HoverColor = lngGreen
-    btnEnter.HoverColor = lngGreen
-    btnLookups.HoverColor = lngGreen
-    btnManageLinks.HoverColor = lngGreen
-    btnNavCoords.HoverColor = lngGreen
-    btnNavReport.HoverColor = lngGreen
-    btnQA.HoverColor = lngGreen
-    btnQAReport.HoverColor = lngGreen
-    btnReconnect.HoverColor = lngGreen
-    btnReleaseHistory.HoverColor = lngGreen
-    btnReportBug.HoverColor = lngGreen
-    btnSetRoles.HoverColor = lngGreen
-    btnSpeciesListRpt.HoverColor = lngGreen
-    btnSummaries.HoverColor = lngGreen
-    btnTaskList.HoverColor = lngGreen
-    btnTaskListRpt.HoverColor = lngGreen
-    btnUISetup.HoverColor = lngGreen
-    btnViewTemplates.HoverColor = lngGreen
-    btnImportCSV.HoverColor = lngGreen
-    btnSOPs.HoverColor = lngGreen
+    btnComment.hoverColor = lngGreen
+    btnBackup.hoverColor = lngGreen
+    btnBrowser.hoverColor = lngGreen
+    btnChangeDbInfo.hoverColor = lngGreen
+    btnChangeDefaults.hoverColor = lngGreen
+    btnDbWindow.hoverColor = lngGreen
+    btnEditLog.hoverColor = lngGreen
+    btnEnter.hoverColor = lngGreen
+    btnLookups.hoverColor = lngGreen
+    btnManageLinks.hoverColor = lngGreen
+    btnNavCoords.hoverColor = lngGreen
+    btnNavReport.hoverColor = lngGreen
+    btnQA.hoverColor = lngGreen
+    btnQAReport.hoverColor = lngGreen
+    btnReconnect.hoverColor = lngGreen
+    btnReleaseHistory.hoverColor = lngGreen
+    btnReportBug.hoverColor = lngGreen
+    btnSetRoles.hoverColor = lngGreen
+    btnSpeciesListRpt.hoverColor = lngGreen
+    btnSummaries.hoverColor = lngGreen
+    btnTaskList.hoverColor = lngGreen
+    btnTaskListRpt.hoverColor = lngGreen
+    btnUISetup.hoverColor = lngGreen
+    btnViewTemplates.hoverColor = lngGreen
+    btnImportCSV.hoverColor = lngGreen
+    btnSOPs.hoverColor = lngGreen
       
     'defaults
     Me.RecordSource = GetTemplate("s_db_admin_info") '"tsys_App_Defaults"
     cbxVersion.RowSource = GetTemplate("s_app_releases")
     cbxVersion.ControlSource = "Release_ID" '"ID"
     
-    tbxAppMode.value = TempVars("UserAccessLevel")
+    tbxAppMode.Value = TempVars("UserAccessLevel")
     
     'hide unused defaults
-    lblDatum.Visible = False
-    tbxDatum.Visible = False
-    lblDeclination.Visible = False
-    tbxDeclination.Visible = False
-    lblGPS_model.Visible = False
-    tbxGPS_model.Visible = False
+    lblDatum.visible = False
+    tbxDatum.visible = False
+    lblDeclination.visible = False
+    tbxDeclination.visible = False
+    lblGPS_model.visible = False
+    tbxGPS_model.visible = False
     
     ' Update the DbAdmin switchboard settings according to application mode
-    setUserAccess Me
+'----------------------------------------------
+' RETIRED - 7/1/2020 - compile issues
+'----------------------------------------------
+'    setUserAccess Me
     
     'initialize app settings
 '    initApp    '<< DUPE call (already called in PreSplash form)
@@ -2820,7 +2823,7 @@ On Error GoTo Err_Handler
     If Nz(TempVars("HasAccessBE"), False) Then DoCmd.OpenForm "LockBE", , , , , acHidden
 
     ' If there is an Access back-end, make the backups button visible
-    Me!btnBackup.Visible = Nz(TempVars("HasAccessBE"), False)
+    Me!btnBackup.visible = Nz(TempVars("HasAccessBE"), False)
     
 Exit_Handler:
     Exit Sub
@@ -2877,7 +2880,7 @@ End Sub
 Private Sub Form_Activate()
 
     'set toggle based on current value
-    Me.tglDevMode.value = DEV_MODE
+    Me.tglDevMode.Value = DEV_MODE
     
     ToggleDevMode
 
@@ -2910,7 +2913,7 @@ Private Sub Form_Current()
 On Error GoTo Err_Handler
               
     'set toggle based on current value
-    Me.tglDevMode.value = DEV_MODE
+    Me.tglDevMode.Value = DEV_MODE
     
     ToggleDevMode
     
@@ -3045,9 +3048,9 @@ On Error GoTo Err_Handler
         
         With Me.tglDevMode
             .Caption = "DEV MODE ON"
-            .BackColor = lngLtLime
-            .FontBold = True
-            .ForeColor = lngBlue
+            .backcolor = lngLtLime
+            .fontBold = True
+            .forecolor = lngBlue
         End With
     Else
         'false = down
@@ -3055,9 +3058,9 @@ On Error GoTo Err_Handler
     
         With Me.tglDevMode
             .Caption = "DEV MODE OFF"
-            .BackColor = lngLtrYellow
-            .FontBold = False
-            .ForeColor = lngRed
+            .backcolor = lngLtrYellow
+            .fontBold = False
+            .forecolor = lngRed
         End With
     End If
  
@@ -3980,10 +3983,10 @@ On Error GoTo Err_Handler
         "Save report to a file?") = vbYes Then
         If varResponse = vbYes And strTimeframe <> "" Then
             ' Add timeframe to file name
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 strTimeframe & "_" & CStr(Format(Now(), "yyyymmdd")) & ".snp"
         Else
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 CStr(Format(Now(), "yyyymmdd")) & ".snp"
         End If
         ' Open the save file dialog and update to the actual name given by the user
@@ -4089,10 +4092,10 @@ On Error GoTo Err_Handler
         "Save report to a file?") = vbYes Then
         If strTimeframe <> "" Then
             ' Add timeframe to file name
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 strTimeframe & "_" & CStr(Format(Now(), "yyyymmdd")) & ".snp"
         Else
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 CStr(Format(Now(), "yyyymmdd")) & ".snp"
         End If
         ' Open the save file dialog and update to the actual name given by the user
@@ -4197,10 +4200,10 @@ On Error GoTo Err_Handler
         "Save report to a file?") = vbYes Then
         If strTimeframe <> "" Then
             ' Add timeframe to file name
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 strTimeframe & "_" & CStr(Format(Now(), "yyyymmdd")) & ".snp"
         Else
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 CStr(Format(Now(), "yyyymmdd")) & ".snp"
         End If
         ' Open the save file dialog and update to the actual name given by the user
@@ -4290,10 +4293,10 @@ On Error GoTo Err_Handler
         "Save report to a file?") = vbYes Then
         If strTimeframe <> "" Then
             ' Add timeframe to file name
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 strTimeframe & "_" & CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".snp"
         Else
-            strInitFile = Application.CurrentProject.path & "\" & strRptName & "_" & _
+            strInitFile = Application.CurrentProject.Path & "\" & strRptName & "_" & _
                 CStr(Format(Now(), "yyyymmdd_hhnnss")) & ".snp"
         End If
         ' Open the save file dialog and update to the actual name given by the user
@@ -4383,7 +4386,7 @@ On Error GoTo Err_Handler
     DoCmd.OpenQuery strQryName, acViewNormal, acReadOnly
     If MsgBox("Would you like to save this file?", vbYesNo, _
         "Save the export file?") = vbYes Then
-        strInitFile = Application.CurrentProject.path & "\" & _
+        strInitFile = Application.CurrentProject.Path & "\" & _
             strQryName & "_" & CStr(Format(Now(), "yyyymmdd")) & ".xls"
         ' Open the save file dialog and update to the actual name given by the user
         strSaveFile = SaveFile(strInitFile, "Microsoft Excel (*.xls)", "*.xls")

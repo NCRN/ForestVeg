@@ -62,8 +62,8 @@ On Error GoTo Err_Handler
         
         varImportFileName = adhCommonFileOpenSave( _
             OpenFile:=True, _
-            Filter:=strFilter, _
-            Flags:=lngFlags, _
+            filter:=strFilter, _
+            flags:=lngFlags, _
             DialogTitle:="Locate data file")
         
         If IsNull(varImportFileName) Then

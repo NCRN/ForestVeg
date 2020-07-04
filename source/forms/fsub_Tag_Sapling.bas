@@ -698,7 +698,7 @@ On Error GoTo Err_Handler
     
     If IsLoaded("fsub_Tag_Sapling") Then Me.Parent.Form!cbxHabit = Nz(Me.SaplingHabit, "")
 
-    Me.Detail.BackColor = IIf(tbxRFS, lngLtRose, lngWhite)
+    Me.Detail.backcolor = IIf(tbxRFS, lngLtRose, lngWhite)
 
 Exit_Handler:
     Exit Sub
@@ -846,7 +846,7 @@ On Error GoTo Err_Handler
     
     'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
     OpenChangeValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, _
-        "tbl_Tags", "Tag", "Tag_ID", Me!Tag_ID, Me!Tag.value
+        "tbl_Tags", "Tag", "Tag_ID", Me!Tag_ID, Me!Tag.Value
     
 Exit_Handler:
     Exit Sub
@@ -890,7 +890,7 @@ On Error GoTo Err_Handler
     'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
     OpenChangeValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, _
         "tbl_Tags", "Azimuth", "Tag_ID", Me!Tag_ID, _
-        Nz(Me!Azimuth.value, "Null")
+        Nz(Me!Azimuth.Value, "Null")
     
 Exit_Handler:
     Exit Sub
@@ -934,7 +934,7 @@ On Error GoTo Err_Handler
     'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
     OpenChangeValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, _
         "tbl_Tags", "Distance", "Tag_ID", Me!Tag_ID, _
-        Nz(Me!Distance.value, "Null")
+        Nz(Me!Distance.Value, "Null")
     
 Exit_Handler:
     Exit Sub
@@ -978,7 +978,7 @@ On Error GoTo Err_Handler
     'strChangeDescription,strChangeFieldType,frmFormToSave,ctlControlToReset,strTableName,strFieldName,strRecordIDFieldName,strRecordID,strOldValue
     OpenChangeValueAndLog ChangeDescription, ChangeFieldType, frm, ctl, _
         "tbl_Tags", "Microplot_Number", "Tag_ID", Me!Tag_ID, _
-        Nz(Me!Microplot_Number.value, "Null")
+        Nz(Me!Microplot_Number.Value, "Null")
   
 Exit_Handler:
     Exit Sub

@@ -641,37 +641,37 @@ Private m_Edit As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidCallingForm(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         'Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
-Public Property Get title() As String
-    title = m_Title
+Public Property Get Title() As String
+    Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -679,8 +679,8 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(value As String)
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+        m_CallingForm = Value
 End Property
 
 Public Property Get CallingForm() As String
@@ -688,9 +688,9 @@ Public Property Get CallingForm() As String
 End Property
 
 'editing info
-Public Property Let EditByID(value As String)
-    If Not IsNull(value) Then
-        m_EditByID = value
+Public Property Let EditByID(Value As String)
+    If Not IsNull(Value) Then
+        m_EditByID = Value
     Else
         m_EditByID = XML_Read("UpdateByID", Me.OpenArgs)
     End If
@@ -701,9 +701,9 @@ Public Property Get EditByID() As String
     EditTable = m_EditTable
 End Property
 
-Public Property Let OriginalDate(value As Date)
-    If Not IsNull(value) Then
-        m_OriginalDate = value
+Public Property Let OriginalDate(Value As Date)
+    If Not IsNull(Value) Then
+        m_OriginalDate = Value
     Else
         m_OriginalDate = XML_Read("ControlValue", Me.OpenArgs)
     End If
@@ -714,9 +714,9 @@ Public Property Get OriginalDate() As Date
     OriginalDate = m_OriginalDate
 End Property
 
-Public Property Let EditTable(value As String)
-    If Not IsNull(value) Then
-        m_EditTable = value
+Public Property Let EditTable(Value As String)
+    If Not IsNull(Value) Then
+        m_EditTable = Value
     Else
         m_EditTable = XML_Read("EditTable", Me.OpenArgs)
     End If
@@ -727,9 +727,9 @@ Public Property Get EditTable() As String
     EditTable = m_EditTable
 End Property
 
-Public Property Let EditField(value As String)
-    If Not IsNull(value) Then
-        m_EditField = value
+Public Property Let EditField(Value As String)
+    If Not IsNull(Value) Then
+        m_EditField = Value
     Else
         m_EditField = XML_Read("EditField", Me.OpenArgs)
     End If
@@ -740,9 +740,9 @@ Public Property Get EditField() As String
     EditField = m_EditField
 End Property
 
-Public Property Let EditIDField(value As String)
-    If Not IsNull(value) Then
-        m_EditIDField = value
+Public Property Let EditIDField(Value As String)
+    If Not IsNull(Value) Then
+        m_EditIDField = Value
     Else
         m_EditIDField = XML_Read("EditIDField", Me.OpenArgs)
     End If
@@ -753,9 +753,9 @@ Public Property Get EditIDField() As String
     EditIDField = m_EditIDField
 End Property
 
-Public Property Let EditID(value As String)
-    If Not IsNull(value) Then
-        m_EditID = value
+Public Property Let EditID(Value As String)
+    If Not IsNull(Value) Then
+        m_EditID = Value
     Else
         m_EditID = XML_Read("EditID", Me.OpenArgs)
     End If
@@ -797,16 +797,16 @@ On Error GoTo Err_Handler
     'dev mode
     tbxDevMode = DEV_MODE
                 
-    title = "Edit Date"
+    Title = "Edit Date"
     'lblTitle.Caption = "" 'clear header title
     Directions = "Choose the desired date. " _
               & "Click Save to save the new date. " _
               & "Changing the date WILL change underlying data."
     
     'defaults
-    lblDirections.ForeColor = lngBlue
-    btnSave.HoverColor = lngGreen
-    btnCancel.HoverColor = lngRed
+    lblDirections.forecolor = lngBlue
+    btnSave.hoverColor = lngGreen
+    btnCancel.hoverColor = lngRed
        
     'set values
     EditTable = XML_Read("EditTable", Me.OpenArgs)
@@ -951,7 +951,7 @@ End Sub
 Private Sub tbxDate_GotFocus()
 On Error GoTo Err_Handler
 
-    tbxDate.ForeColor = lngBlack
+    tbxDate.forecolor = lngBlack
     
 Exit_Handler:
     Exit Sub
@@ -1098,7 +1098,7 @@ End Sub
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
 
-    Dim sql As String
+    Dim SQL As String
 
     'save history
     SaveHistory Me.tbxTable, Me.EditField, Me.lblEditing.Caption, Me.tbxID, _
@@ -1107,11 +1107,11 @@ On Error GoTo Err_Handler
     'identify update being made
     Select Case Me.EditTable
         Case "tbl_Events"
-            sql = "UPDATE table_Events SET " & Me.EditField & " = #" & Me.tbxDate & "#, Updated_By = " & Me.tbxUpdateByID _
+            SQL = "UPDATE table_Events SET " & Me.EditField & " = #" & Me.tbxDate & "#, Updated_By = " & Me.tbxUpdateByID _
              & ", Updated_Date = #" & Date & "# WHERE " & Me.EditIDField & "= " & Me.EditID & ";"
     End Select
     
-    Debug.Print sql
+    Debug.Print SQL
     
     'update event date
     'DoCmd.RunSQL ""
@@ -1221,7 +1221,7 @@ Private Sub SaveHistory(EditTable As String, EditField As String, _
                         Optional UpdateNotes As String = "")
 On Error GoTo Err_Handler
 
-    Dim sql As String
+    Dim SQL As String
     Dim strVals As String
     
     'set defaults
@@ -1235,12 +1235,12 @@ On Error GoTo Err_Handler
                & "'" & UpdateNotes & "'," _
                & "'" & UpdatedByID & "', '" & NetworkUsername & "', " _
                & "#" & ChangeDate & "#, #" & LastUpdate & "#"
-    sql = "INSERT INTO tbl_History(Table_Name, Record_ID_Field_Name, Record_ID, Field_Name, Value_New, Value_Old, " _
+    SQL = "INSERT INTO tbl_History(Table_Name, Record_ID_Field_Name, Record_ID, Field_Name, Value_New, Value_Old, " _
           & "Value_History_Notes, Contact_ID, Network_User_Name, Change_Date, LastUpdate) VALUES (" & strVals & ");"
     
-    Debug.Print sql
+    Debug.Print SQL
     
-    DoCmd.RunSQL sql
+    DoCmd.RunSQL SQL
     
 Exit_Handler:
     Exit Sub

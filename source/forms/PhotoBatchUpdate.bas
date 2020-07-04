@@ -1071,39 +1071,39 @@ Private m_SelPhoto As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidCallingForm(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
-Public Event InvalidSelPhoto(value As Long)
+Public Event InvalidSelPhoto(Value As Long)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
-Public Property Get title() As String
-    title = m_Title
+Public Property Get Title() As String
+    Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -1111,11 +1111,11 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(value As String)
-    If Len(value) > 0 Then
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+    If Len(Value) > 0 Then
+        m_CallingForm = Value
     Else
-        RaiseEvent InvalidCallingForm(value)
+        RaiseEvent InvalidCallingForm(Value)
     End If
 End Property
 
@@ -1123,9 +1123,9 @@ Public Property Get CallingForm() As String
     CallingForm = m_CallingForm
 End Property
 
-Public Property Let SelPhotos(value As Collection)
+Public Property Let SelPhotos(Value As Collection)
 '    If  Then
-        Set m_SelPhotos = value
+        Set m_SelPhotos = Value
 '    Else
 '        RaiseEvent InvalidSelPhotos(Value)
 '    End If
@@ -1135,11 +1135,11 @@ Public Property Get SelPhotos() As Collection
     Set SelPhotos = m_SelPhotos
 End Property
 
-Public Property Let SelPhoto(value As Long)
-    If IsNumeric(value) Then
-        m_SelPhoto = value
+Public Property Let SelPhoto(Value As Long)
+    If IsNumeric(Value) Then
+        m_SelPhoto = Value
     Else
-        RaiseEvent InvalidSelPhoto(value)
+        RaiseEvent InvalidSelPhoto(Value)
     End If
 
     'check if value is already present
@@ -1148,7 +1148,7 @@ Public Property Let SelPhoto(value As Long)
     Dim i As Long
     
     For i = 1 To Me.SelPhotos.Count
-        If SelPhotos.item(i) = value Then
+        If SelPhotos.Item(i) = Value Then
             InCollection = True
             Exit For
         End If
@@ -1156,7 +1156,7 @@ Public Property Let SelPhoto(value As Long)
     
     If InCollection = False Then
         'add to the collection
-        Me.SelPhotos.Add value
+        Me.SelPhotos.Add Value
     End If
     
 End Property
@@ -1203,48 +1203,48 @@ On Error GoTo Err_Handler
     ToggleForm Me.CallingForm, -1
     
     'set context - based on TempVars
-    lblContext.ForeColor = lngLime
+    lblContext.forecolor = lngLime
     lblContext.Caption = GetContext()
 
-    title = "Set Photo Info"
+    Title = "Set Photo Info"
     Directions = "Set the sampling event, photographer and type for the selected photos."
-    tbxIcon.value = StringFromCodepoint(uBullet)
-    lblDirections.ForeColor = lngLtBlue
+    tbxIcon.Value = StringFromCodepoint(uBullet)
+    lblDirections.forecolor = lngLtBlue
     lblPhotoTypesHint.Caption = "Photo Types: " & vbCrLf & _
                                 "F-feature" & Space(2) & "T-transect" & Space(2) & "O-overview" & Space(2) & "R-reference" & Space(2) & "U-unclassified " & vbCrLf & _
                                 "OA-OtherAnimal" & Space(2) & "OP-Plant" & Space(2) & "OC-Cultural" & Space(2) & "OD-Disturbance" & Space(2) & "OF-Field Work" & Space(2) & "OS-Scenic" & Space(2) & "OW-Weather" & Space(2) & "OO-Other"
-    lblPhotoTypesHint.ForeColor = lngBlue
+    lblPhotoTypesHint.forecolor = lngBlue
     btnAddTask.Caption = StringFromCodepoint(uCheckItem) & " Add Task"
-    btnAddTask.ForeColor = lngBlue
+    btnAddTask.forecolor = lngBlue
     btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.ForeColor = lngBlue
+    btnComment.forecolor = lngBlue
     btnAddEvent.Caption = StringFromCodepoint(uCalendarSpiral) & Space(2) & "Add Event"
-    btnAddEvent.ForeColor = lngBlue
+    btnAddEvent.forecolor = lngBlue
     btnAddContact.Caption = StringFromCodepoint(uUsers) & Space(2) & "Add Photographer"
-    btnAddContact.ForeColor = lngBlue
+    btnAddContact.forecolor = lngBlue
     btnUpdatePhotos.Caption = StringFromCodepoint(uPicFramed) & Space(2) & "Update Photos"
-    btnUpdatePhotos.ForeColor = lngBlue
+    btnUpdatePhotos.forecolor = lngBlue
     
-    lblRecordRefID.ForeColor = lngLtLime
+    lblRecordRefID.forecolor = lngLtLime
         
     'set hover
-    btnAddEvent.HoverColor = lngGreen
-    btnAddContact.HoverColor = lngGreen
-    btnUpdatePhotos.HoverColor = lngGreen
-    btnAddTask.HoverColor = lngGreen
-    btnComment.HoverColor = lngGreen
-    btnSave.HoverColor = lngGreen
-    btnUndo.HoverColor = lngGreen
+    btnAddEvent.hoverColor = lngGreen
+    btnAddContact.hoverColor = lngGreen
+    btnUpdatePhotos.hoverColor = lngGreen
+    btnAddTask.hoverColor = lngGreen
+    btnComment.hoverColor = lngGreen
+    btnSave.hoverColor = lngGreen
+    btnUndo.hoverColor = lngGreen
       
     'hidden (unused) controls
-    btnComment.Visible = False
-    btnSave.Visible = False
-    btnUndo.Visible = False
-    lblPhotoFilter.Visible = False
-    cbxPhotoFilter.Visible = False
+    btnComment.visible = False
+    btnSave.visible = False
+    btnUndo.visible = False
+    lblPhotoFilter.visible = False
+    cbxPhotoFilter.visible = False
       
     'defaults
-    tbxIcon.ForeColor = lngRed
+    tbxIcon.forecolor = lngRed
     btnAddTask.Enabled = False
     btnComment.Enabled = False
     btnSave.Enabled = False
@@ -1541,12 +1541,12 @@ On Error GoTo Err_Handler
     'clear the overall collection
     Me.SelPhotos = New Collection
     
-    Dim item As Variant 'items selected are variants
+    Dim Item As Variant 'items selected are variants
     
-    For Each item In lbxPhotos.ItemsSelected
+    For Each Item In lbxPhotos.ItemsSelected
         'add photo to selected photos collection
-        Me.SelPhoto = lbxPhotos.ItemData(item)
-Debug.Print lbxPhotos.ItemData(item)
+        Me.SelPhoto = lbxPhotos.ItemData(Item)
+Debug.Print lbxPhotos.ItemData(Item)
     Next
     
     'clear message & icon
@@ -1727,7 +1727,7 @@ On Error GoTo Err_Handler
                 'Debug.Print .ItemData(i) 'listbox row
                 Dim row As Long
                 
-                row = .ItemsSelected.item(i - 1) 'listbox row for item selected
+                row = .ItemsSelected.Item(i - 1) 'listbox row for item selected
                 Debug.Print "row:" & row
                 
                 Debug.Print "Col(3,row): " & .Column(3, row)
@@ -1742,8 +1742,8 @@ On Error GoTo Err_Handler
                 'filename, i is NOT the row #
                 ' cols: 0-photo ID, 1-photo type, 2-photo directory,
                 '       3-photo filename, 4-date taken
-                lblMsg.ForeColor = lngLime
-                lblMsgIcon.ForeColor = lngLime
+                lblMsg.forecolor = lngLime
+                lblMsgIcon.forecolor = lngLime
                 lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
                 'lblMsg.Caption = "Photo " & .Column(3, i) & " updated"
                 lblMsg.Caption = "Photo " & .Column(3, row) & " updated"
@@ -1916,7 +1916,7 @@ On Error GoTo Err_Handler
             isOK = True
     End If
     
-    tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
+    tbxIcon.forecolor = IIf(isOK = True, lngDkGreen, lngRed)
     'btnSave.Enabled = isOK
     btnUpdatePhotos.Enabled = isOK
     

@@ -1098,37 +1098,37 @@ Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immedia
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidCallingForm(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         'Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
-Public Property Get title() As String
-    title = m_Title
+Public Property Get Title() As String
+    Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -1136,8 +1136,8 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(value As String)
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+        m_CallingForm = Value
 End Property
 
 Public Property Get CallingForm() As String
@@ -1175,7 +1175,7 @@ On Error GoTo Err_Handler
     'dev mode
     tbxDevMode = DEV_MODE
                 
-    title = "Create New Event"
+    Title = "Create New Event"
     'lblTitle.Caption = "" 'clear header title
     Directions = "dirs"
     
@@ -1184,7 +1184,7 @@ On Error GoTo Err_Handler
 Debug.Print "newrecord = " & Me.NewRecord
 
     'defaults
-    rctPseudoEvent.BackColor = lngLtTan
+    rctPseudoEvent.backcolor = lngLtTan
     
     'disable until data allows
     cbxLocationID.Enabled = False
@@ -1194,16 +1194,16 @@ Debug.Print "newrecord = " & Me.NewRecord
     
     'hints
     lblPseudoEvent.Caption = "Pseudo Event?"
-    lblPseudoEvent.ForeColor = lngBlue
+    lblPseudoEvent.forecolor = lngBlue
     lblPseudoEvent.ControlTipText = "Bush-hogged or other non-data collecting visit that may impact analysis"
-    lblPseudoEvent.Visible = True
+    lblPseudoEvent.visible = True
     lblHintPseudoEvent.Caption = "Bush-hogged or other non-data collecting visit that may impact analysis"
-    lblHintPseudoEvent.ForeColor = lngBlue
+    lblHintPseudoEvent.forecolor = lngBlue
     lblHintPseudoEvent.ControlTipText = "Bush-hogged or other non-data collecting visit that may impact analysis"
-    lblHintPseudoEvent.Visible = True
+    lblHintPseudoEvent.visible = True
     
     'set hover
-    tglPseudoEvent.HoverColor = lngGreen
+    tglPseudoEvent.hoverColor = lngGreen
        
     'set park code
     If IsEmpty(Me.OpenArgs) = False And Me.OpenArgs <> "Choose Park" Then
@@ -1374,12 +1374,12 @@ On Error GoTo Err_Handler
     ToggleCaption tglPseudoEvent, True
     
     'set value for PseudoEvent
-    Debug.Print "pse=" & tglPseudoEvent.value
-    tbxPseudoEvent.value = CByte(Abs(tglPseudoEvent.value))
-    Debug.Print "tbxpse=" & tbxPseudoEvent.value
+    Debug.Print "pse=" & tglPseudoEvent.Value
+    tbxPseudoEvent.Value = CByte(Abs(tglPseudoEvent.Value))
+    Debug.Print "tbxpse=" & tbxPseudoEvent.Value
     
     'set database value
-    Me.PseudoEvent = CByte(Abs(tglPseudoEvent.value))
+    Me.PseudoEvent = CByte(Abs(tglPseudoEvent.Value))
 '    tbxRecordPseudoEvent.Value = CByte(Abs(tglPseudoEvent.Value))
     
     'check
@@ -1547,12 +1547,12 @@ On Error GoTo Err_Handler
     'default
     isOK = False
     
-    If cbxLocationID.value > 0 Then tbxEventDate.Enabled = True
-    If IsDate(tbxEventDate.value) Then tglPseudoEvent.Enabled = True
+    If cbxLocationID.Value > 0 Then tbxEventDate.Enabled = True
+    If IsDate(tbxEventDate.Value) Then tglPseudoEvent.Enabled = True
 
-    If Len(Nz(cbxParkCode.value, "")) > 0 _
-        And isGUID(cbxLocationID.value) = True _
-        And IsDate(tbxEventDate.value) = True Then '_
+    If Len(Nz(cbxParkCode.Value, "")) > 0 _
+        And IsGUID(cbxLocationID.Value) = True _
+        And IsDate(tbxEventDate.Value) = True Then '_
         
         isOK = True
         
@@ -1601,7 +1601,7 @@ End Sub
 ' Revisions:
 '   BLC - 10/23/2018 - initial version
 ' ---------------------------------
-Public Function isGUID(strInspect As String) As Boolean
+Public Function IsGUID(strInspect As String) As Boolean
 On Error GoTo Err_Handler
 
     Dim strPattern As String
@@ -1609,7 +1609,7 @@ On Error GoTo Err_Handler
                  "[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-" & _
                  "[0-9a-fA-F]{12}(\}){0,1}$"
 
-    isGUID = IsRegExpMatch(strInspect, strPattern)
+    IsGUID = IsRegExpMatch(strInspect, strPattern)
    
 Exit_Handler:
     Exit Function

@@ -26,27 +26,33 @@ Option Explicit
 ' ---------------------------------
 '  Declarations
 ' ---------------------------------
-'Public Const lngWhite As Long = 16777215    '?RGB(255,255,255) #FFFFFF
-'Public Const lngYellow As Long = 65535      '?RGB(255,255,0) #FFFF00
-Public Const lngLtYellow As Long = 14745599 '?RGB(255,255,224) #FFFFE0
-'Public Const lngGray As Long = 8224125      '?RGB(125, 125, 125)
-Public Const lngLtGray As Long = 13882323   '?RGB(211, 211, 211)
-Public Const lngGray50 As Long = 8355711    '?RGB(127,127,127) Text 1, Lighter 50% #7F7F7F Gray50
-'Public Const lngLime As Long = 6750105      '?RGB(153, 255, 102) #99FF66
-Public Const lngBlue As Long = 16711680     '?RGB(0, 0, 255) #0000FF
-Public Const lngBlack As Long = 0           '?RGB(0,0,0) #000000
-Public Const lngRed As Long = 255           '?RGB(255,0,0) #FF0000
-Public Const lngGreen As Long = 65280       '?RGB(0,255,0) #00FF00
-Public Const lngLtBlue As Long = 16777164   '?RGB(204,255,255) #CCFFFF
-Public Const lngPink As Long = 10582263     '?RGB(247,120,161) #F778A1 carnation red
-Public Const lngLime As Long = 6750105      '?RGB(153, 255, 102) #99FF66
-Public Const lngLtLime As Long = 6750156    '?RGB(204,255,102) #CCFF66
+    'Public Const lngWhite As Long = 16777215    '?RGB(255,255,255) #FFFFFF
+    'Public Const lngYellow As Long = 65535      '?RGB(255,255,0) #FFFF00
+    Public Const lngLtYellow As Long = 14745599 '?RGB(255,255,224) #FFFFE0
+    'Public Const lngGray As Long = 8224125      '?RGB(125, 125, 125)
+'    Public Const lngLtGray As Long = 13882323   '?RGB(211, 211, 211)
+'    Public Const lngGray50 As Long = 8355711    '?RGB(127,127,127) Text 1, Lighter 50% #7F7F7F Gray50
+    'Public Const lngLime As Long = 6750105      '?RGB(153, 255, 102) #99FF66
+'    Public Const lngBlue As Long = 16711680     '?RGB(0, 0, 255) #0000FF
+'    Public Const lngBlack As Long = 0           '?RGB(0,0,0) #000000
+'    Public Const lngRed As Long = 255           '?RGB(255,0,0) #FF0000
+'    Public Const lngGreen As Long = 65280       '?RGB(0,255,0) #00FF00
+'    Public Const lngLtBlue As Long = 16777164   '?RGB(204,255,255) #CCFFFF
+    Public Const lngPink As Long = 10582263     '?RGB(247,120,161) #F778A1 carnation red
+'    Public Const lngLime As Long = 6750105      '?RGB(153, 255, 102) #99FF66
+'    Public Const lngLtLime As Long = 6750156    '?RGB(204,255,102) #CCFF66
 
-Public Const pi As Single = 3.1415            'pi value
+'-----------------'-----------------------------
+' RETIRED - 7/1/2020 - covered in fw_mod_Math
+'----------------------------------------------
+'Public Const PI As Single = 3.1415            'pi value
 
 'normally in framework
-Public DB_SYS_TABLES As Variant
-Public APP_SYS_TABLES As Variant
+'----------------------------------------------
+' RETIRED - 7/1/2020 - covered in fw_mod_App_Settings
+'----------------------------------------------
+'Public DB_SYS_TABLES As Variant
+'Public APP_SYS_TABLES As Variant
 
 Public SWITCHBOARD As Form
 
@@ -98,7 +104,7 @@ On Error GoTo Err_Handler
     Set cbx = frm.Controls(cbxName)
     
     'default
-    frmTag.Controls("cbxTagStatus").BackColor = lngWhite
+    frmTag.Controls("cbxTagStatus").backcolor = lngWhite
     
     'dead statuses only
     If Left(cbx, 4) = "Dead" Then
@@ -113,7 +119,7 @@ On Error GoTo Err_Handler
                 'do nothing
             Case Else
                 'highlight
-                frmTag.Controls("cbxTagStatus").BackColor = lngYellow
+                frmTag.Controls("cbxTagStatus").backcolor = lngYellow
         End Select
             
     End If
@@ -206,7 +212,7 @@ On Error GoTo Err_Handler
 
 '   Me.Refresh
     
-    Set db = currDb
+    Set db = CurrDb
         
     'fetch tree/sapling form names
     frmDataName = Replace("fsub_Habit_Data", "Habit", Habit)
@@ -216,7 +222,7 @@ On Error GoTo Err_Handler
     
     'unhighlight DBH Double Checked as default
     With Forms!frm_Events.Form.Controls(frmDataName).Form
-        .Controls("lblDBHCheck").ForeColor = lngBlack
+        .Controls("lblDBHCheck").forecolor = lngBlack
         '.Controls("tbxHighlightChk").Visible = False
         '.Controls("tbxComments").BackColor = lngWhite
     End With
@@ -226,7 +232,7 @@ On Error GoTo Err_Handler
     'intTag = Forms!frm_Events!fsub_Sapling_Data!fsub_Tag_Sapling!tbxTag
     intTag = Forms!frm_Events.Form.Controls(frmDataName).Form.Controls(frmTagName).Controls("tbxTag")
     
-    strEquivDBHCalc = "Round((((Sum(" & pi & "*((IIf([Live]=True,[DBH],0))/2)^2))*(1/" & pi & "))^0.5)*2,6)"
+    strEquivDBHCalc = "Round((((Sum(" & PI & "*((IIf([Live]=True,[DBH],0))/2)^2))*(1/" & PI & "))^0.5)*2,6)"
     
 '    strSQL = "SELECT tbl_Locations.Location_ID, tbl_Events.Event_ID, tbl_Locations.Admin_Unit_Code, tbl_Locations.Subunit_Code, tbl_Events.Event_Date, tbl_Tags.Tag, " _
 '            & "Round((((Sum(3.1415*((IIf([Live]=True,[DBH],0))/2)^2))*(1/3.1415))^0.5)*2,6) AS EquivDBH " _
@@ -258,8 +264,8 @@ On Error GoTo Err_Handler
 Debug.Print "DBH_mod_App_Data: " & strSQL
     
     'use usys_temp_qdf
-    Set qdf = currDb.QueryDefs("usys_temp_qdf")
-    qdf.sql = strSQL
+    Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
+    qdf.SQL = strSQL
     
     Set rs = db.OpenRecordset("usys_temp_qdf")
     
@@ -321,10 +327,10 @@ Debug.Print "DBH_mod_App_Data: " & strSQL
             With Forms!frm_Events.Form.Controls(frmDataName).Form
                 '.Controls("lblDBHCheck").Visible = True
                 '.Controls("chkDBHCheck").Visible = True
-                .Controls("tbxHighlightChk").Visible = True
-                .Controls("lblDBHCheck").ForeColor = lngRed
-                .Controls("tbxHighlightChk").BackColor = lngLtYellow
-                .Controls("tbxComments").BackColor = lngYellow
+                .Controls("tbxHighlightChk").visible = True
+                .Controls("lblDBHCheck").forecolor = lngRed
+                .Controls("tbxHighlightChk").backcolor = lngLtYellow
+                .Controls("tbxComments").backcolor = lngYellow
             
                 'set focus
                 .Controls(frmDBHName).Form.Controls("tbxDBH").SetFocus
@@ -426,10 +432,10 @@ On Error GoTo Err_Handler
     Debug.Print strSQL
     
         'use usys_temp_qdf
-        Set qdf = currDb.QueryDefs("usys_temp_qdf")
-        qdf.sql = strSQL
+        Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
+        qdf.SQL = strSQL
         
-        Set rs = currDb.OpenRecordset("usys_temp_qdf")
+        Set rs = CurrDb.OpenRecordset("usys_temp_qdf")
         
         If Not (rs.BOF And rs.EOF) Then
             rs.MoveLast
@@ -493,10 +499,10 @@ On Error GoTo Err_Handler
              "ORDER BY Updated_Date;"
     
     'use usys_temp_qdf
-    Set qdf = currDb.QueryDefs("usys_temp_qdf")
-    qdf.sql = strSQL
+    Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
+    qdf.SQL = strSQL
     
-    Set rs = currDb.OpenRecordset("usys_temp_qdf")
+    Set rs = CurrDb.OpenRecordset("usys_temp_qdf")
     
     If Not (rs.BOF And rs.EOF) Then
         rs.MoveLast
@@ -558,10 +564,10 @@ On Error GoTo Err_Handler
              "ORDER BY Updated_Date;"
     
     'use usys_temp_qdf
-    Set qdf = currDb.QueryDefs("usys_temp_qdf")
-    qdf.sql = strSQL
+    Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
+    qdf.SQL = strSQL
     
-    Set rs = currDb.OpenRecordset("usys_temp_qdf")
+    Set rs = CurrDb.OpenRecordset("usys_temp_qdf")
     
     If Not (rs.BOF And rs.EOF) Then
         rs.MoveLast
@@ -624,10 +630,10 @@ On Error GoTo Err_Handler
              "= '" & DataID & "';"
     
     'use usys_temp_qdf
-    Set qdf = currDb.QueryDefs("usys_temp_qdf")
-    qdf.sql = strSQL
+    Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
+    qdf.SQL = strSQL
     
-    Set rs = currDb.OpenRecordset("usys_temp_qdf")
+    Set rs = CurrDb.OpenRecordset("usys_temp_qdf")
     
     If Not (rs.BOF And rs.EOF) Then
         rs.MoveLast
@@ -707,8 +713,8 @@ On Error GoTo Err_Handler
         rs.MoveNext
     Loop
 
-    strStemListLive = Mid(strStemListLive, 3)
-    strStemListDead = Mid(strStemListDead, 3)
+    strStemListLive = mid(strStemListLive, 3)
+    strStemListDead = mid(strStemListDead, 3)
     strStemList = "L: " & strStemListLive & " D: " & strStemListDead
     
     MakeTreeStemList = strStemList
@@ -767,8 +773,8 @@ On Error GoTo Err_Handler
         rs.MoveNext
     Loop
 
-    strStemListLive = Mid(strStemListLive, 3)
-    strStemListDead = Mid(strStemListDead, 3)
+    strStemListLive = mid(strStemListLive, 3)
+    strStemListDead = mid(strStemListDead, 3)
     strStemList = "L: " & strStemListLive & " D: " & strStemListDead
     
     MakeSaplingStemList = strStemList
@@ -803,7 +809,7 @@ End Function
 '   BLC - 5/14/2018 - move from mod_AppSpecific > mod_App_Data & revise to accommodate both
 '                     trees & saplings
 ' ---------------------------------
-Public Function MakeStemList(Mode As String, EventID As String, DataID As String) As String
+Public Function MakeStemList(mode As String, EventID As String, DataID As String) As String
 On Error GoTo Err_Handler
 
     'Collapse all sapling stems into a single field   mel 8/21/06
@@ -813,7 +819,7 @@ On Error GoTo Err_Handler
     Dim strStemListLive As String
     Dim strStemListDead As String
     
-    Select Case Mode
+    Select Case mode
         Case "Sapling"
             strSQL = "SELECT d.DBH, d.Live, sd.Event_ID, sd.Sapling_Data_ID " _
                 & "FROM tbl_Sapling_Data sd " _
@@ -840,8 +846,8 @@ On Error GoTo Err_Handler
         rs.MoveNext
     Loop
 
-    strStemListLive = Mid(strStemListLive, 3)
-    strStemListDead = Mid(strStemListDead, 3)
+    strStemListLive = mid(strStemListLive, 3)
+    strStemListDead = mid(strStemListDead, 3)
     strStemList = "L: " & strStemListLive & " D: " & strStemListDead
     
     MakeStemList = strStemList
@@ -874,7 +880,7 @@ End Function
 ' Revisions:
 '   BLC - 5/14/2018 - initial version
 ' ---------------------------------
-Public Function MakeLiveFlag(Mode As String, EventID As String, DataID As String) As String
+Public Function MakeLiveFlag(mode As String, EventID As String, DataID As String) As String
 On Error GoTo Err_Handler
 
     Dim strSQL As String
@@ -882,7 +888,7 @@ On Error GoTo Err_Handler
     Dim iStemsLive As Integer
     'Dim iStemsDead As Integer
     
-    Select Case Mode
+    Select Case mode
         Case "Sapling"
             strSQL = "SELECT d.DBH, d.Live, sd.Event_ID, sd.Sapling_Data_ID " _
                 & "FROM tbl_Sapling_Data sd " _

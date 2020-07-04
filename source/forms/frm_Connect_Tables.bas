@@ -695,8 +695,8 @@ On Error GoTo Err_Handler
         ElseIf IsNull(rst.Fields("New_file_path")) = False Then
             With rst
                 .Edit
-                !Link_file_name = rst.Fields("New_file_name").value
-                !Link_file_path = rst.Fields("New_file_path").value
+                !Link_file_name = rst.Fields("New_file_name").Value
+                !Link_file_path = rst.Fields("New_file_path").Value
                 !New_file_name = Null
                 !New_file_path = Null
                 .Update

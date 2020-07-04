@@ -222,7 +222,7 @@ Public Function fxnGetLinkFile(Optional ByVal varInitialDir As Variant) As Varia
 
     'prepare file dialog
     With dlg
-        .title = strTitle
+        .Title = strTitle
         .AllowMultiSelect = False
         .Filters.Clear
         .Filters.Add "Access Databases", "*.accdb"

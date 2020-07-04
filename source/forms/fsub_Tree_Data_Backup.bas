@@ -794,7 +794,7 @@ Private Sub cboTag_Finder_AfterUpdate()
     Loop
     'If we haven't found record and exited by now, create new record.
     DoCmd.GoToRecord , , acNewRec
-    Tag_ID.value = strFind
+    Tag_ID.Value = strFind
     DoCmd.RunCommand acCmdSaveRecord
     Me!fsub_Tag_Tree.Requery
     Forms![frm_Events]![fsub_Tree_Data]![fsub_Tag_Tree]!txtTag_Status = "Tree"
@@ -811,7 +811,7 @@ HandleErrors:
         Case 3021 'record not found .... Mel says DOUBLE CHECK
             MsgBox ("Case 3021 error cboTagFinder code")
             DoCmd.GoToRecord , , acNewRec
-            txtTag_ID.value = Me!cboTag_Finder.Column(0)
+            txtTag_ID.Value = Me!cboTag_Finder.Column(0)
             DoCmd.RunCommand acCmdSaveRecord
             Me!fsub_Tree_Data.Requery
         Case Else

@@ -913,7 +913,7 @@ Private Sub btnAccept_Click()
 On Error GoTo Err_Handler
 
     If Me.Dirty Then Me.Dirty = False
-    ctlToReset.value = Me!Value_New
+    ctlToReset.Value = Me!Value_New
     DoCmd.Close acForm, Me.Name, acSaveNo
     
     frmReferrer.SaveRecord
@@ -952,7 +952,7 @@ Private Sub btnCancel_Click()
 On Error GoTo Err_Handler
         
     'Command below is not needed when for is called from button instead of BeforeUpdate
-    ctlToReset.value = ctlToReset.OldValue
+    ctlToReset.Value = ctlToReset.OldValue
     DoCmd.SetWarnings False
     DoCmd.RunCommand acCmdDeleteRecord
     DoCmd.SetWarnings True

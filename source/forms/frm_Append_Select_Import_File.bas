@@ -576,16 +576,16 @@ Option Explicit
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
 
-    Dim sql As String
+    Dim SQL As String
     
     'set importer contacts
-    sql = "SELECT Contact_ID, Last_Name, First_Name, Last_Name & ', ' & First_Name AS Pick_List FROM tlu_Contacts " & _
+    SQL = "SELECT Contact_ID, Last_Name, First_Name, Last_Name & ', ' & First_Name AS Pick_List FROM tlu_Contacts " & _
             "WHERE Active = True ORDER BY Last_Name, First_Name;"
             
     'Debug.Print sql
     
     With cbxImporter
-        .RowSource = sql
+        .RowSource = SQL
         .ColumnCount = 4
         .BoundColumn = 1
         .ColumnWidths = "0;0;0;1.5in;"
@@ -726,9 +726,9 @@ On Error GoTo Err_Handler
     Application.SysCmd acSysCmdSetStatus, "Processing import tables..."
     
     'Pull the filename to be imported from a text box on the form
-    strPath = Me!txt_Import_File.value
-    strImportFileRole = Mid(strPath, InStrAtPos(strPath, "_", 0) + 1, InStrAtPos(strPath, ".", 0) - InStrAtPos(strPath, "_", 0) - 1)
-    strImportFileDate = Mid(strPath, InStrAtPos(strPath, "_", CharacterCount(strPath, "_") - 2) + 1, 8)
+    strPath = Me!txt_Import_File.Value
+    strImportFileRole = mid(strPath, InStrAtPos(strPath, "_", 0) + 1, InStrAtPos(strPath, ".", 0) - InStrAtPos(strPath, "_", 0) - 1)
+    strImportFileDate = mid(strPath, InStrAtPos(strPath, "_", CharacterCount(strPath, "_") - 2) + 1, 8)
 Debug.Print strImportFileRole
 
     'Open the database that contains the objects for import
@@ -811,17 +811,17 @@ Debug.Print strTableToImport
                             
                             Case "tbl_Events"
                                 'strDeleteExistingEventsQry = "DELETE [" & strTableToImport_NewName & "].* "
-                                Dim strWhere As String
-                                strWhere = ""
+                                Dim strWHERE As String
+                                strWHERE = ""
                                 Select Case strImportFileRole
                                     Case "PRIMARY"
                                     Case "SECONDARY"
-                                        strWhere = " WHERE YEAR(e.Event_Date) < Year(Now()-1)"
+                                        strWHERE = " WHERE YEAR(e.Event_Date) < Year(Now()-1)"
                                 End Select
                                 EventDeleteQuery = "DELETE i.* " _
                                     & "FROM [" & strTableToImport_NewName & "] i " _
                                     & "INNER JOIN tbl_Events e ON i.Event_ID = e.Event_ID" _
-                                    & strWhere _
+                                    & strWHERE _
                                     & ";"
                                     
                                 'dbMain.Execute strDeleteExistingEventsQry
@@ -1112,10 +1112,10 @@ End Sub
 Private Sub cbxImporter_AfterUpdate()
 On Error GoTo Err_Handler
 
-    SetTempVar "ImportContact", cbxImporter.value
+    SetTempVar "ImportContact", cbxImporter.Value
     
     'enable file selection if there's a contact selected
-    If Not IsNothing(cbxImporter.value) Then
+    If Not IsNothing(cbxImporter.Value) Then
         Me.btnBrowse.Enabled = True
         Me.btnSkipImport.Enabled = True
     End If

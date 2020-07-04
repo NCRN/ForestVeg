@@ -1104,37 +1104,37 @@ Private m_SaveOK As Boolean 'ok to save record (prevents bound form from immedia
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidCallingForm(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         'Me.lblTitle.Caption = m_Title
         'Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
-Public Property Get title() As String
-    title = m_Title
+Public Property Get Title() As String
+    Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         'Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -1142,8 +1142,8 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(value As String)
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+        m_CallingForm = Value
 End Property
 
 Public Property Get CallingForm() As String
@@ -1184,12 +1184,12 @@ On Error GoTo Err_Handler
     Me.OrderByOn = True
     
     'defaults
-    Me.btnSelectFile.Visible = False
+    Me.btnSelectFile.visible = False
     Me.cmbo_Select_Import_Event_Table.Enabled = False
     Me.cmbo_Select_Import_Events.Enabled = False
     Me.cmbo_Select_Event.Enabled = False
-    Me.lblPseudoEventsIncluded.Visible = False
-    Me.lblPseudoEventsDeleted.Visible = False
+    Me.lblPseudoEventsIncluded.visible = False
+    Me.lblPseudoEventsDeleted.visible = False
     
     'fetch import filename & determine if secondary or primary
     ImportFile = Nz(Me.OpenArgs, "")
@@ -1402,9 +1402,9 @@ On Error GoTo Err_Handler
     Me!cmbo_Append_Table.RowSource = ""
     For Each tdef In db.TableDefs
         Dim iTableName As Long
-            iTableName = Len(Me!txt_Table_Name.value)
+            iTableName = Len(Me!txt_Table_Name.Value)
         Dim strTableName As String
-            strTableName = Me!txt_Table_Name.value
+            strTableName = Me!txt_Table_Name.Value
         Dim strAppTableName As String
        
         If Left(tdef.Name, 1) = "_" Then
@@ -1949,14 +1949,14 @@ End Sub
 Private Sub Detail_Click()
 On Error GoTo Err_Handler
 
-    If Me!optframe_Step2Append.value = 2 Then
+    If Me!optframe_Step2Append.Value = 2 Then
         If Me!cmbo_Select_Event = "" Then
             MsgBox "You must complete the necessary information above.", , "Append Data"
             Me!cmbo_Select_Event.SetFocus
-        ElseIf Me!cmbo_Select_Import_Event_Table.value = "" Then
+        ElseIf Me!cmbo_Select_Import_Event_Table.Value = "" Then
             MsgBox "You must complete the necessary information above.", , "Append Data"
             Me!cmbo_Select_Import_Event_Table.SetFocus
-        ElseIf Me!cmbo_Select_Import_Events.value = "" Then
+        ElseIf Me!cmbo_Select_Import_Events.Value = "" Then
             MsgBox "You must complete the necessary information above.", , "Append Data"
             Me!cmbo_Select_Import_Events.SetFocus
         End If
@@ -2033,13 +2033,13 @@ On Error GoTo Err_Handler
         
         Do Until rsSelect.EOF
         
-        If Me!optgSelectTables.value = 1 Then
+        If Me!optgSelectTables.Value = 1 Then
              
             rsSelect.Edit
             rsSelect![Append] = True
             rsSelect.Update
             
-        ElseIf Me!optgSelectTables.value = 2 Then
+        ElseIf Me!optgSelectTables.Value = 2 Then
             rsSelect.Edit
             rsSelect![Append] = False
             rsSelect.Update
@@ -2248,15 +2248,15 @@ End Sub
 Private Sub optframe_Step1Append_AfterUpdate()
 On Error GoTo Err_Handler
 
-    Select Case optframe_Step1Append.value
+    Select Case optframe_Step1Append.Value
     
         '-----------------------
         '  One Tablet
         '-----------------------
         Case 1
-            Me.Detail.Visible = True
+            Me.Detail.visible = True
             
-             Me!optframe_Step2Append.value = 0
+             Me!optframe_Step2Append.Value = 0
              optframe_Step2Append.Enabled = False
              
              Me.tglImportPseudoEvents.Enabled = True
@@ -2264,7 +2264,7 @@ On Error GoTo Err_Handler
              Me!cmbo_Select_Event.Enabled = False
              Me!cmbo_Select_Import_Event_Table.Enabled = False
              Me!cmbo_Select_Import_Events.Enabled = False
-             Me!lblStepTwoFinish.Visible = False
+             Me!lblStepTwoFinish.visible = False
             
              Me.RecordSource = "tsys_Append_Tables"
              Me!cmbo_Select_Event = ""
@@ -2285,9 +2285,9 @@ On Error GoTo Err_Handler
             Me.tglImportPseudoEvents.Enabled = True
             
             optframe_Step2Append.Enabled = True
-            Me!optframe_Step2Append.value = 0
+            Me!optframe_Step2Append.Value = 0
             Me!optframe_Step2Append.SetFocus
-            Me.Detail.Visible = False
+            Me.Detail.visible = False
             
             Me!cmd_Append_Event_Data.Enabled = False
             
@@ -2329,17 +2329,17 @@ End Sub
 Private Sub optframe_Step2Append_AfterUpdate()
 On Error GoTo Err_Handler
 
-    Me.Detail.Visible = True
+    Me.Detail.visible = True
     
     'default
-    Me.lblEventsSecondaryImport.ForeColor = lngLtGray
-    Me.lblEventSecondary.ForeColor = lngLtGray
-    Me.lblMasterEventAppend.ForeColor = lngLtGray
+    Me.lblEventsSecondaryImport.forecolor = lngLtGray
+    Me.lblEventSecondary.forecolor = lngLtGray
+    Me.lblMasterEventAppend.forecolor = lngLtGray
     
     '-----------------------
     '  Primary Tablet
     '-----------------------
-    If Me!optframe_Step2Append.value = 1 Then
+    If Me!optframe_Step2Append.Value = 1 Then
       
         Me.RecordSource = "qry_Append_Primary_Tablet_Append"
         
@@ -2353,12 +2353,12 @@ On Error GoTo Err_Handler
     '-----------------------
     '  Secondary Tablet
     '-----------------------
-    ElseIf Me!optframe_Step2Append.value = 2 Then
+    ElseIf Me!optframe_Step2Append.Value = 2 Then
            
         Me!cmbo_Select_Event.Enabled = True
         Me!cmbo_Select_Import_Event_Table.Enabled = True
         Me!cmbo_Select_Import_Events.Enabled = True
-        Me!lblStepTwoFinish.Visible = True
+        Me!lblStepTwoFinish.visible = True
         
         Me.RecordSource = "qry_Append_Secondary_Tablet_Append"
         Me!cmbo_Select_Event = ""
@@ -2369,7 +2369,7 @@ On Error GoTo Err_Handler
         
         Me!cmd_Append_Event_Data.Enabled = True
         
-        Me.lblEventsSecondaryImport.ForeColor = lngLtBlue
+        Me.lblEventsSecondaryImport.forecolor = lngLtBlue
     End If
 
 Exit_Handler:
@@ -2404,30 +2404,30 @@ On Error GoTo Err_Handler
     'Debug.Print Abs(tglImportPseudoEvents.Value)
     
     'default
-    Me.lblPseudoEventsIncluded.Visible = False
-    Me.lblPseudoEventsDeleted.Visible = False
+    Me.lblPseudoEventsIncluded.visible = False
+    Me.lblPseudoEventsDeleted.visible = False
     
-    SetTempVar "ImportPseudoEvents", tglImportPseudoEvents.value
+    SetTempVar "ImportPseudoEvents", tglImportPseudoEvents.Value
     
     With tglImportPseudoEvents
-        Select Case .value
+        Select Case .Value
             Case True
                 .Caption = "YES, INCLUDE"
-                .BackColor = lngLtLime
-                .ForeColor = lngBlue
-                Me.lblPseudoEventsIncluded.Visible = True
+                .backcolor = lngLtLime
+                .forecolor = lngBlue
+                Me.lblPseudoEventsIncluded.visible = True
             Case False
                 .Caption = "NO, EXCLUDE"
-                .BackColor = lngWhite
-                .ForeColor = lngRed
-                Me.lblPseudoEventsDeleted.Visible = True
+                .backcolor = lngWhite
+                .forecolor = lngRed
+                Me.lblPseudoEventsDeleted.visible = True
             Case Else
                 .Caption = "??"
         End Select
     End With
     
     'trigger the after update event if the table has been selected to refresh the import events combobox
-    If Len(Me.cmbo_Select_Import_Event_Table.value) > 0 Then
+    If Len(Me.cmbo_Select_Import_Event_Table.Value) > 0 Then
         cmbo_Select_Import_Event_Table_AfterUpdate
         Me.cmbo_Select_Import_Events.Requery
     End If
@@ -2467,17 +2467,17 @@ On Error GoTo Err_Handler
     Dim EventSQL As String
     
     'default
-    Me.lblEventsSecondaryImport.ForeColor = lngLtGray
-    Me.lblEventSecondary.ForeColor = lngLtGray
-    Me.lblMasterEventAppend.ForeColor = lngLtGray
-    Me.lblStepTwoFinish.ForeColor = lngLtGray
+    Me.lblEventsSecondaryImport.forecolor = lngLtGray
+    Me.lblEventSecondary.forecolor = lngLtGray
+    Me.lblMasterEventAppend.forecolor = lngLtGray
+    Me.lblStepTwoFinish.forecolor = lngLtGray
     
     If Me!cmbo_Select_Import_Event_Table = "" Or IsNull(Me!cmbo_Select_Import_Event_Table) Then
         
         Exit Sub
     
     Else
-        strTableName = Me!cmbo_Select_Import_Event_Table.value
+        strTableName = Me!cmbo_Select_Import_Event_Table.Value
         
         Dim strExclude As String
         strExclude = IIf(Me.tglImportPseudoEvents = True, "", " WHERE PseudoEvent = 0 ")
@@ -2497,7 +2497,7 @@ Debug.Print "Import EventTable - select import events - EventSQL = " & EventSQL
           
         Me!cmbo_Select_Import_Events.RowSource = EventSQL
 
-        Me.lblEventSecondary.ForeColor = lngLtBlue
+        Me.lblEventSecondary.forecolor = lngLtBlue
 
     End If
 
@@ -2533,16 +2533,16 @@ On Error GoTo Err_Handler
     Dim EventSQL As String
     
     'default
-    Me.lblEventsSecondaryImport.ForeColor = lngLtGray
-    Me.lblEventSecondary.ForeColor = lngLtGray
-    Me.lblMasterEventAppend.ForeColor = lngLtGray
-    Me.lblStepTwoFinish.ForeColor = lngLtGray
+    Me.lblEventsSecondaryImport.forecolor = lngLtGray
+    Me.lblEventSecondary.forecolor = lngLtGray
+    Me.lblMasterEventAppend.forecolor = lngLtGray
+    Me.lblStepTwoFinish.forecolor = lngLtGray
     
     If Me!cmbo_Select_Import_Events = "" Or IsNull(Me!cmbo_Select_Import_Events) Then
         Exit Sub
     
     Else
-        strTableName = Me!cmbo_Select_Import_Events.value
+        strTableName = Me!cmbo_Select_Import_Events.Value
         
         EventSQL = "SELECT e.Event_ID, [Plot_Name] & "" "" & "" "" & [Event_Date] AS PickString " _
                     & "FROM tbl_Locations l " _
@@ -2554,14 +2554,14 @@ On Error GoTo Err_Handler
           
         Me!cmbo_Select_Event.RowSource = EventSQL
                
-        Me.lblMasterEventAppend.ForeColor = lngLtBlue
+        Me.lblMasterEventAppend.forecolor = lngLtBlue
                
     End If
 
-Debug.Print "cmbo_Select_Import_Events.Value: " & Me.cmbo_Select_Import_Events.value
+Debug.Print "cmbo_Select_Import_Events.Value: " & Me.cmbo_Select_Import_Events.Value
     
     'set GUIDReplace
-    SetTempVar "GUIDReplace", Me.cmbo_Select_Import_Events.value
+    SetTempVar "GUIDReplace", Me.cmbo_Select_Import_Events.Value
 
 Exit_Handler:
     Exit Sub
@@ -2595,22 +2595,22 @@ On Error GoTo Err_Handler
     Dim EventSQL As String
     
     'default
-    Me.lblEventsSecondaryImport.ForeColor = lngLtGray
-    Me.lblEventSecondary.ForeColor = lngLtGray
-    Me.lblMasterEventAppend.ForeColor = lngLtGray
-    Me.lblStepTwoFinish.ForeColor = lngLtGray
+    Me.lblEventsSecondaryImport.forecolor = lngLtGray
+    Me.lblEventSecondary.forecolor = lngLtGray
+    Me.lblMasterEventAppend.forecolor = lngLtGray
+    Me.lblStepTwoFinish.forecolor = lngLtGray
     
     If Me!cmbo_Select_Event = "" Or IsNull(Me!cmbo_Select_Event) Then
         Exit Sub
     
     Else
         
-        Me.lblStepTwoFinish.ForeColor = lngLtBlue
+        Me.lblStepTwoFinish.forecolor = lngLtBlue
                
     End If
     
     'set GUIDMain
-    SetTempVar "GUIDMain", Me.cmbo_Select_Event.value
+    SetTempVar "GUIDMain", Me.cmbo_Select_Event.Value
 
 Exit_Handler:
     Exit Sub
@@ -2823,8 +2823,8 @@ Debug.Print strMain
             '-------------------------------------
             ' Secondary Tablet: replace Event_IDs
             '-------------------------------------
-            If Me!optframe_Step1Append.value = 2 Then
-                If Me!optframe_Step2Append.value = 2 Then
+            If Me!optframe_Step1Append.Value = 2 Then
+                If Me!optframe_Step2Append.Value = 2 Then
                     If Me!cmbo_Select_Event = "" Or IsNull(Me!cmbo_Select_Event) Then
                         MsgBox "You must complete the appending criteria", vbExclamation, "Append Data"
                         Me!cmbo_Select_Event.SetFocus
@@ -2882,7 +2882,7 @@ Debug.Print strMain
 '                        Dim strFindUpdate As String
                     
 '                        strFindUpdate = GUIDReplace
-                        strTableName = Me!cmbo_Append_Table.value
+                        strTableName = Me!cmbo_Append_Table.Value
                     
                         ' Only select those records where the EventID = the GUID to be replaced
 ''                        strUpdateEventIDSQL = "SELECT [" & strAppend & "].* " _
@@ -3098,7 +3098,7 @@ NextRecord:
     MsgBox "Update and Appending complete!", , "Update and Append Data"
     
     'make the file selection visible
-    Me.btnSelectFile.Visible = True
+    Me.btnSelectFile.visible = True
 'CompareTables:
 '    'identify table
 '    strMain = rsForm![Table_Name]

@@ -105,17 +105,17 @@ End Property
 Public Property Get Prompt() As String
     Prompt = m_sPrompt
 End Property
-Public Property Let title(ByVal NewValue As String)
+Public Property Let Title(ByVal NewValue As String)
     m_sTitle = NewValue
 End Property
-Public Property Get title() As String
-    title = m_sTitle
+Public Property Get Title() As String
+    Title = m_sTitle
 End Property
-Public Property Let Icon(ByVal NewValue As MessageBoxIcon)
+Public Property Let icon(ByVal NewValue As MessageBoxIcon)
     m_eIcon = NewValue
 End Property
-Public Property Get Icon() As MessageBoxIcon
-    Icon = m_eIcon
+Public Property Get icon() As MessageBoxIcon
+    icon = m_eIcon
 End Property
 Public Property Let ButtonText1(ByVal NewValue As String)
     m_sButtonText1 = NewValue
@@ -251,17 +251,17 @@ On Error GoTo Err_Handler
     If Not m_hInstance > 0 Then Err.Raise vbObjectError + 1, m_sSource, "Instance handle not found"
     If Not m_hThreadID > 0 Then Err.Raise vbObjectError + 2, m_sSource, "Thread id not found"
 
-    If Len(Me.title) = 0 Then Me.title = "Microsoft Excel"
+    If Len(Me.Title) = 0 Then Me.Title = "Microsoft Excel"
     bCancel = Me.UseCancel
     
     If Len(Me.ButtonText1) > 0 And Len(Me.ButtonText2) > 0 And Len(Me.ButtonText3) > 0 Then
-        lType = Me.Icon Or IIf(bCancel, vbYesNoCancel, vbAbortRetryIgnore)
+        lType = Me.icon Or IIf(bCancel, vbYesNoCancel, vbAbortRetryIgnore)
         
     ElseIf Len(Me.ButtonText1) > 0 And Len(Me.ButtonText2) Then
-        lType = Me.Icon Or IIf(bCancel, vbOKCancel, vbYesNo)
+        lType = Me.icon Or IIf(bCancel, vbOKCancel, vbYesNo)
     Else
         If Len(Me.ButtonText1) = 0 Then Me.ButtonText1 = "OK"
-        lType = Me.Icon Or vbOKOnly
+        lType = Me.icon Or vbOKOnly
     End If
     
     m_lProcHook = SetWindowsHookEx(WH_CBT, _
@@ -273,7 +273,7 @@ On Error GoTo Err_Handler
     'Private Declare PtrSafe Function MessageBoxA Lib "user32" (ByVal hwnd As Long, ByVal lpText As String, ByVal lpCaption As String, ByVal wType As LongPtr) As LongPtr
 
     SetProp hWndApplication, "ObjPtr", PtrFromObject(Me)
-    lR = MessageBoxA(hWndApplication, Me.Prompt, Me.title, lType Or MB_TASKMODAL)
+    lR = MessageBoxA(hWndApplication, Me.Prompt, Me.Title, lType Or MB_TASKMODAL)
     
     If Len(Me.ButtonText1) > 0 And Len(Me.ButtonText2) > 0 And Len(Me.ButtonText3) > 0 Then
         If lR = IIf(bCancel, vbYes, vbAbort) Then
@@ -322,16 +322,16 @@ End Function
 '   BLC - 10/1/2019 - initial version
 ' ---------------------------------
 Public Function MessageBoxEx(ByVal Prompt As String, _
-                             Optional Icon As MessageBoxIcon, _
-                             Optional ByVal title As String, _
+                             Optional icon As MessageBoxIcon, _
+                             Optional ByVal Title As String, _
                              Optional ByVal ButtonText1 As String, _
                              Optional ByVal ButtonText2 As String, _
                              Optional ByVal ButtonText3 As String) As MessageBoxReturn
 On Error GoTo Err_Handler
 
     Me.Prompt = Prompt
-    Me.Icon = Icon
-    Me.title = title
+    Me.icon = icon
+    Me.Title = Title
     Me.ButtonText1 = ButtonText1
     Me.ButtonText2 = ButtonText2
     Me.ButtonText3 = ButtonText3

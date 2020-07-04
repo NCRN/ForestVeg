@@ -174,35 +174,38 @@ MsgBox strMessage
     End With
 End Sub
 
-'FIX - Following code fails for files in the current directory - actually it is a test for whether
-'      a directory exists not file - BLC - 6/4/2020
-Public Function FileExists(varFile As Variant) As Boolean
-'Return whether a file exists
-On Error GoTo Err_FileExists
+'----------------------------------------------
+' RETIRED - 7/1/2020 - covered in fw_mod_File
+'----------------------------------------------
+''FIX - Following code fails for files in the current directory - actually it is a test for whether
+''      a directory exists not file - BLC - 6/4/2020
+'Public Function FileExists(varFile As Variant) As Boolean
+''Return whether a file exists
+'On Error GoTo Err_FileExists
+'
+'If IsNull(varFile) Then
+'    FileExists = False
+'    Exit Function
+'End If
+'FileExists = (Len(dir(varFile)) > 0)
+'
+'Exit_FileExists:
+'    Exit Function
+'
+'Err_FileExists:
+'    FileExists = False
+'    Resume Exit_FileExists
+'
+'End Function
 
-If IsNull(varFile) Then
-    FileExists = False
-    Exit Function
-End If
-FileExists = (Len(Dir(varFile)) > 0)
-
-Exit_FileExists:
-    Exit Function
-
-Err_FileExists:
-    FileExists = False
-    Resume Exit_FileExists
-
-End Function
-
-Public Function FolderExists(varPath As Variant) As Boolean
-    'Return whether a folder exists
-    'Added 6/14/2011 Based on Code from Allen Browne
-    On Error Resume Next
-    If Len(varPath) > 0 Then
-        FolderExists = (Len(Dir$(varPath, vbDirectory)) > 0&)
-    End If
-End Function
+'Public Function FolderExists(varPath As Variant) As Boolean
+'    'Return whether a folder exists
+'    'Added 6/14/2011 Based on Code from Allen Browne
+'    On Error Resume Next
+'    If Len(varPath) > 0 Then
+'        FolderExists = (Len(dir$(varPath, vbDirectory)) > 0&)
+'    End If
+'End Function
 
 Public Function GetPath(ByVal strFilePath As String) As String
 
@@ -212,7 +215,7 @@ Dim strTemp As String
 
 Do While (InStr(strFilePath, "\") > 0)
     strTemp = strTemp & Left(strFilePath, InStr(strFilePath, "\"))
-    strFilePath = Mid(strFilePath, InStr(strFilePath, "\") + 1)
+    strFilePath = mid(strFilePath, InStr(strFilePath, "\") + 1)
 Loop
 
 Exit_Handler:
@@ -237,7 +240,7 @@ Function ReplaceChars_TSB(strIn As String, strFind As String, strReplace As Stri
   Dim chrTmp As String * 1
 
   For intCounter = 1 To Len(strIn)
-    chrTmp = Mid$(strIn, intCounter)
+    chrTmp = mid$(strIn, intCounter)
     If chrTmp <> strFind Then
       strTmp = strTmp & chrTmp
     Else
@@ -255,33 +258,33 @@ Dim strOut As String
 Dim intI As Integer
 
 For intI = 1 To Len(strIn)
-    If IsCap(Mid(strIn, intI, 1)) Then
+    If IsCap(mid(strIn, intI, 1)) Then
         Select Case intI
             Case 2 To (Len(strIn) - 1)  'middle letters
                 'if the previous letter was a capital letter, don't put a space before this one
                 'unless the next letter is lowercase
-                If IsCap(Mid(strIn, intI - 1, 1)) Then
-                    If IsCap(Mid(strIn, intI + 1, 1)) Then
-                        strOut = strOut & Mid(strIn, intI, 1)
+                If IsCap(mid(strIn, intI - 1, 1)) Then
+                    If IsCap(mid(strIn, intI + 1, 1)) Then
+                        strOut = strOut & mid(strIn, intI, 1)
                     Else
-                        strOut = strOut & " " & Mid(strIn, intI, 1)
+                        strOut = strOut & " " & mid(strIn, intI, 1)
                     End If
                 Else
                     'if the previous letter was lowercase, put a space
-                    strOut = strOut & " " & Mid(strIn, intI, 1)
+                    strOut = strOut & " " & mid(strIn, intI, 1)
                 End If
             Case 1  'first letter
                 strOut = UCase(Left(strIn, 1))
             Case Len(strIn) 'last letter
                 'if the previous letter was a capital, don't put a space
-                If IsCap(Mid(strIn, intI - 1, 1)) Then
-                    strOut = strOut & Mid(strIn, intI, 1)
+                If IsCap(mid(strIn, intI - 1, 1)) Then
+                    strOut = strOut & mid(strIn, intI, 1)
                 Else
-                    strOut = strOut & " " & Mid(strIn, intI, 1)
+                    strOut = strOut & " " & mid(strIn, intI, 1)
                 End If
         End Select
     Else
-        strOut = strOut & Mid(strIn, intI, 1)
+        strOut = strOut & mid(strIn, intI, 1)
     End If
 Next
 
@@ -307,7 +310,7 @@ Function ReplaceString_TSB(strTextIn As String, strFind As String, strReplace As
   intPos = InStr(1, strTmp, strFind, intCaseSensitive)
   
   Do While intPos > 0
-    strTmp = Left$(strTmp, intPos - 1) & strReplace & Mid$(strTmp, intPos + Len(strFind))
+    strTmp = Left$(strTmp, intPos - 1) & strReplace & mid$(strTmp, intPos + Len(strFind))
     intPos = InStr(intPos + Len(strReplace), strTmp, strFind, intCaseSensitive)
   Loop
 
@@ -337,7 +340,7 @@ Do Until InStr(strList, strDelimiter) = 0
         strItem = Left(strList, InStr(strList, strDelimiter) - 1)
     End If
         
-    strList = Mid(strList, InStr(strList, strDelimiter) + 1)
+    strList = mid(strList, InStr(strList, strDelimiter) + 1)
 
     'Compare the item to the string we wish to replace
     If StrComp(strItem, strFind, intCompare) = 0 Then
@@ -359,7 +362,7 @@ Loop
 'Clean up the semicolons
     'First eliminate any leading semicolons
     Do Until Left(strResult, 1) <> strDelimiter
-        strResult = Mid(strResult, 2)
+        strResult = mid(strResult, 2)
     Loop
     'Next eliminate any trailing semicolons
     Do Until Right(strResult, 1) <> strDelimiter
@@ -367,7 +370,7 @@ Loop
     Loop
     'Finally, eliminate grouped semicolons in the list
     For intI = 1 To Len(strResult)
-        strChar = Mid(strResult, intI, 1)
+        strChar = mid(strResult, intI, 1)
         If strChar = strDelimiter Then
             If booSemi = True Then
             Else
@@ -396,9 +399,9 @@ For Each ctl In frm.Controls
     If ctl.Tag = strTag Then
         Select Case strOperation
             Case "Hide"
-                ctl.Visible = False
+                ctl.visible = False
             Case "Unhide"
-                ctl.Visible = True
+                ctl.visible = True
             Case "Disable"
                 ctl.Enabled = False
             Case "Enable"
@@ -439,13 +442,13 @@ Do
         strWord = Trim(strIn)
     Else
         strWord = Left(strIn, InStr(strIn, " ") - 1)
-        strIn = Mid(strIn, InStr(strIn, " ") + 1)
+        strIn = mid(strIn, InStr(strIn, " ") + 1)
     End If
         Select Case strWord
             Case "id", "tsn", "nps"
                 strWord = UCase(strWord)
             Case Else
-                strWord = UCase(Left(strWord, 1)) & Mid(strWord, 2)
+                strWord = UCase(Left(strWord, 1)) & mid(strWord, 2)
         End Select
     strWorking = strWorking & " " & strWord
 Loop Until booLastWord
@@ -473,7 +476,7 @@ If Not IsNothing(varIn) Then
     Do Until (InStr(strWorking, " ")) = 0
         'we have at least one space
         intSpaceCount = intSpaceCount + 1
-        strWorking = Mid(strWorking, InStr(strWorking, " ") + 1)
+        strWorking = mid(strWorking, InStr(strWorking, " ") + 1)
     Loop
 End If
 
@@ -485,7 +488,7 @@ Dim strTemp As String
 
 Do While (InStr(strFilePath, "\") > 0)
     strTemp = strTemp & Left(strFilePath, InStr(strFilePath, "\"))
-    strFilePath = Mid(strFilePath, InStr(strFilePath, "\") + 1)
+    strFilePath = mid(strFilePath, InStr(strFilePath, "\") + 1)
 Loop
 
 GetFileName = strFilePath
@@ -529,10 +532,10 @@ End If
 
 Do Until InStr(strListMain, strDelimiter) = 0
     strItem = strDelimiter & Trim(Left(strListMain, InStr(strListMain, strDelimiter)))
-    strListMain = Mid(strListMain, InStr(strListMain, strDelimiter) + 1)
+    strListMain = mid(strListMain, InStr(strListMain, strDelimiter) + 1)
 
     If InStr(strListToKeep, strItem) > 0 Then
-        strNewList = strNewList & Mid(strItem, 2)
+        strNewList = strNewList & mid(strItem, 2)
     End If
 Loop
 
@@ -551,7 +554,7 @@ Dim intI As Integer
 
     'First eliminate any leading delimiters
     Do Until Left(strList, 1) <> strDelimiter
-        strList = Mid(strList, 2)
+        strList = mid(strList, 2)
     Loop
     'Next eliminate any trailing delimiters
     Do Until Right(strList, 1) <> strDelimiter
@@ -559,7 +562,7 @@ Dim intI As Integer
     Loop
     'Finally, eliminate grouped delimiters in the list
     For intI = 1 To Len(strList)
-        strChar = Mid(strList, intI, 1)
+        strChar = mid(strList, intI, 1)
         If strChar = strDelimiter Then
             If booSemi = True Then
             Else
@@ -583,7 +586,7 @@ Dim strNewList As String
 
 Do Until InStr(strListToRemove, strDelimiter) = 0
     strItem = Trim(Left(strListToRemove, InStr(strListToRemove, strDelimiter) - 1))
-    strListToRemove = Mid(strListToRemove, InStr(strListToRemove, strDelimiter) + 1)
+    strListToRemove = mid(strListToRemove, InStr(strListToRemove, strDelimiter) + 1)
 
     'Remove the item from inside the body of the Main List
     strListMain = ReplaceListItem(strListMain, strItem, "", strDelimiter, False, True)
@@ -642,7 +645,7 @@ End Function
 Public Function FiscalYear(datDate As Date) As Integer
 Dim intYear As Integer
 
-intYear = year(datDate)
+intYear = Year(datDate)
 If Month(datDate) >= 10 Then
     intYear = intYear + 1
 End If
@@ -656,7 +659,7 @@ Dim i As Integer
 Dim intCount As Integer
 
 For i = 1 To Len(strInput)
-    If Mid(strInput, i, 1) = strChar Then
+    If mid(strInput, i, 1) = strChar Then
         intCount = intCount + 1
     End If
 Next
@@ -687,7 +690,7 @@ Dim i As Integer, n As Integer, tlen As Integer
 n = 0
 tlen = Len(strSearchString)
 For i = Len(RTrim(strString)) To 1 Step -1
-  If Mid(strString, i, tlen) = strSearchString Then
+  If mid(strString, i, tlen) = strSearchString Then
       n = i
       Exit For
   End If
@@ -700,7 +703,7 @@ Public Sub PrintFields(strObjectName)
 Dim db As Database
 Dim tdf As TableDef
 Dim qdf As QueryDef
-Dim fld As Field
+Dim fld As field
 Dim strOutput As String
 
 On Error Resume Next
@@ -749,7 +752,7 @@ Function GetLastWord_TSB(strIn As String, strRest As String, chrDelimit As Strin
   intP = 1
 
   For intI = Len(strTmp) To 1 Step -1
-    If Mid$(strTmp, intI, 1) = chrDelimit Then
+    If mid$(strTmp, intI, 1) = chrDelimit Then
       intP = intI + 1
       Exit For
     End If
@@ -759,7 +762,7 @@ Function GetLastWord_TSB(strIn As String, strRest As String, chrDelimit As Strin
     GetLastWord_TSB = strTmp
     strRest = ""
   Else
-    GetLastWord_TSB = Mid$(strTmp, intP)
+    GetLastWord_TSB = mid$(strTmp, intP)
     strRest = Trim$(Left$(strTmp, intP - 1))
   End If
 
@@ -807,7 +810,7 @@ Do
     intDelimPos = InStr(strRemainder, strDelimiter)
     If intDelimPos > 0 Then
         strOutput = strOutput & strDelimiter & Left(strRemainder, intDelimPos - 1)
-        strRemainder = Mid(strRemainder, intDelimPos + 1)
+        strRemainder = mid(strRemainder, intDelimPos + 1)
     Else
         If Len(strRemainder) > 0 Then
             strOutput = strOutput & strDelimiter & strRemainder
@@ -816,7 +819,7 @@ Do
 Loop Until bytCount = bytItemCount Or intDelimPos = 0
 
 If Len(strOutput) > 0 Then
-    ListItemGet = Mid(strOutput, Len(strDelimiter) + 1)
+    ListItemGet = mid(strOutput, Len(strDelimiter) + 1)
 Else
     ListItemGet = strOutput
 End If
@@ -826,8 +829,8 @@ End Function
 Public Function TableNamesAndIndexes(Optional varFileType As Variant) As String
 Dim db As Database
 Dim tdf As TableDef
-Dim idx As Index
-Dim fld As Field
+Dim idx As index
+Dim fld As field
 Dim rst As Recordset
 
 Set db = CurrentDb
@@ -927,7 +930,7 @@ Dim intPhraseLength As Integer
 intPos = Len(strIn)
 intPhraseLength = Len(strPhrase)
 
-Do Until Mid(strIn, intPos, intPhraseLength) = strPhrase
+Do Until mid(strIn, intPos, intPhraseLength) = strPhrase
     intPos = intPos - 1
     If intPos = 0 Then
         Exit Do
@@ -953,7 +956,7 @@ intLength = Len(strIn)
 
 Do Until i = intLength
     i = i + 1
-    strChar = Mid(strIn, i, 1)
+    strChar = mid(strIn, i, 1)
     Select Case Asc(strChar)
         Case 65 To 90, 97 To 122, 46, 32, 45
             'upper and lower case letters, period, space, and hyphen
@@ -984,7 +987,7 @@ Do Until InStr(strWorking, strCharStart) = 0 Or InStr(strWorking, strCharEnd) = 
     Do
         intParenEnd = 0
         intCurrentPos = intCurrentPos + 1
-        strChar = Mid(strWorking, intCurrentPos, 1)
+        strChar = mid(strWorking, intCurrentPos, 1)
         Select Case strChar
             Case strCharStart
                 intParenStart = intCurrentPos
@@ -994,7 +997,7 @@ Do Until InStr(strWorking, strCharStart) = 0 Or InStr(strWorking, strCharEnd) = 
         End Select
     Loop Until intParenEnd > 0
     
-    strWorking = Left(strWorking, intParenStart - 1) & Mid(strWorking, intParenEnd + 1)
+    strWorking = Left(strWorking, intParenStart - 1) & mid(strWorking, intParenEnd + 1)
 Loop
 
 EliminateDataBetweenChars = strWorking
@@ -1069,7 +1072,7 @@ Function DeleteObject_TSB(intType As Integer, strName As String) As Boolean
 
 End Function
 
-Public Function fPathParsing(fullPath As String, PathFormat As String) As String
+Public Function fPathParsing(FullPath As String, PathFormat As String) As String
 ' Edited by: Alan Williams 11/5/2002
 ' Parses fullpath into Dir, filename, and extension.
 ' Example calls:
@@ -1084,24 +1087,24 @@ Public Function fPathParsing(fullPath As String, PathFormat As String) As String
             '? fPathParsing("C:\work\Seasonals.xls", "E")
             '.xls
 Dim i As Integer, f As String, found As Integer
-Dim DirName As String, fName As String, ext As String
+Dim DirName As String, fName As String, Ext As String
   
-  fullPath = Trim$(fullPath)
+  FullPath = Trim$(FullPath)
 '
 ' Get directory name
 '
   f = ""
   found = False
-  For i = Len(fullPath) To 1 Step -1
-    If Mid$(fullPath, i, 1) = "\" Then
-      f = Mid$(fullPath, i + 1)
-      DirName = Left$(fullPath, i)
+  For i = Len(FullPath) To 1 Step -1
+    If mid$(FullPath, i, 1) = "\" Then
+      f = mid$(FullPath, i + 1)
+      DirName = Left$(FullPath, i)
       found = True
       Exit For
     End If
   Next i
   If Not found Then
-    f = fullPath
+    f = FullPath
   End If
 '
 ' Get File name and extension
@@ -1112,7 +1115,7 @@ Dim DirName As String, fName As String, ext As String
     i = InStr(f, ".")
     If i > 0 Then
       fName = Left$(f, i - 1)
-      ext = Mid$(f, i)
+      Ext = mid$(f, i)
     Else
       fName = f
     End If
@@ -1123,30 +1126,30 @@ Select Case PathFormat
     Case "N"
         fPathParsing = fName
     Case "E"
-        fPathParsing = ext
+        fPathParsing = Ext
     Case "DN"
         fPathParsing = DirName & fName
     Case "NE"
-        fPathParsing = fName & ext
+        fPathParsing = fName & Ext
     Case "DNE"
-        fPathParsing = DirName & fName & ext
+        fPathParsing = DirName & fName & Ext
     Case Else
-        fPathParsing = fullPath
+        fPathParsing = FullPath
 
 End Select
 
 End Function
 
 Public Sub Create_File(strFullFileName As String, text As String)
-  Dim fso, txtfile
+  Dim FSO, txtfile
   
-  Set fso = CreateObject("Scripting.FileSystemObject")
-  Set txtfile = fso.CreateTextFile(strFullFileName, True)
+  Set FSO = CreateObject("Scripting.FileSystemObject")
+  Set txtfile = FSO.CreateTextFile(strFullFileName, True)
   txtfile.Write (text)
   txtfile.Close
   
   Set txtfile = Nothing
-  Set fso = Nothing
+  Set FSO = Nothing
 End Sub
 
 Public Function XML_Tag(strTag As String, strValue As String) As String
@@ -1182,7 +1185,7 @@ lngLeadTagPosition = InStr(strIn, strLeadTag)
 lngEndTagPosition = InStr(strIn, strEndTag)
 
 If lngLeadTagPosition > 0 And lngEndTagPosition > lngLeadTagPosition Then
-    strOut = Mid(strIn, lngLeadTagPosition + Len(strLeadTag), lngEndTagPosition - lngLeadTagPosition - Len(strLeadTag))
+    strOut = mid(strIn, lngLeadTagPosition + Len(strLeadTag), lngEndTagPosition - lngLeadTagPosition - Len(strLeadTag))
 End If
 
 XML_Read = strOut
@@ -1261,7 +1264,7 @@ Function fxnReplaceString(strTextIn As String, strFind As String, _
     intPos = InStr(1, strTemp, strFind, intCaseSensitive)
 
     Do While intPos > 0
-        strTemp = Left$(strTemp, intPos - 1) & strReplace & Mid$(strTemp, intPos + Len(strFind))
+        strTemp = Left$(strTemp, intPos - 1) & strReplace & mid$(strTemp, intPos + Len(strFind))
         intPos = InStr(intPos + Len(strReplace), strTemp, strFind, intCaseSensitive)
     Loop
 
@@ -1368,9 +1371,9 @@ Const cBlack As Long = 0
 ctl.FontUnderline = booHyperlink
 
 If booHyperlink Then
-    ctl.ForeColor = cBlue
+    ctl.forecolor = cBlue
 Else
-    ctl.ForeColor = cBlack
+    ctl.forecolor = cBlack
 End If
     
 End Sub

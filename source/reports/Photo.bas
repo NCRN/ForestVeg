@@ -4792,11 +4792,11 @@ Public Event InvalidPark(Park As String)
 '---------------------
 ' Properties
 '---------------------
-Public Property Let Park(value As String)
-    If Len(value) = 4 Then
-        m_Park = value
+Public Property Let Park(Value As String)
+    If Len(Value) = 4 Then
+        m_Park = Value
     Else
-        RaiseEvent InvalidPark(value)
+        RaiseEvent InvalidPark(Value)
     End If
 End Property
 
@@ -4888,7 +4888,7 @@ On Error GoTo Err_Handler
     Me.tbxCount.ControlSource = "Num"
 
     'hide modal Main form
-    Forms("Main").Visible = False
+    Forms("Main").visible = False
     
 Exit_Handler:
     Exit Sub
@@ -4950,7 +4950,7 @@ Private Sub Report_Close()
 On Error GoTo Err_Handler
 
     'unhide modal Main form
-    Forms("Main").Visible = True
+    Forms("Main").visible = True
     
 Exit_Handler:
     Exit Sub

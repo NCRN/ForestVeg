@@ -393,7 +393,7 @@ End Sub
 Private Sub Form_AfterUpdate()
 On Error GoTo Err_Handler
 
-    Forms![frm_Events]![fsub_Tree_Data]![chkVinesChecked].value = True
+    Forms![frm_Events]![fsub_Tree_Data]![chkVinesChecked].Value = True
     Me.Parent.Refresh
     
 Exit_Handler:

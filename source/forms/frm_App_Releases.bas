@@ -569,7 +569,7 @@ If Not IsNothing(Me!cboRelease_by) Then
     strName = CorrectText(Me!cboRelease_by)
 
     strSQL = "SELECT Work_phone, Work_extension, Email_address, Organization FROM tlu_Contacts "
-    strSQL = strSQL & "WHERE CorrectText(Last_Name & ', ' & First_Name)=" & Chr(34) & strName & Chr(34) & ";"
+    strSQL = strSQL & "WHERE CorrectText(Last_Name & ', ' & First_Name)=" & chr(34) & strName & chr(34) & ";"
     
     Set rst = CurrentDb.OpenRecordset(strSQL, dbOpenForwardOnly)
     'only replace if there's a match to an existing name and phone, email, and organization are currently blank

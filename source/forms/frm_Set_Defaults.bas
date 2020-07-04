@@ -865,37 +865,37 @@ Private m_PhotoPath As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidCallingForm(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         'Me.lblTitle.Caption = m_Title
         'Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
-Public Property Get title() As String
-    title = m_Title
+Public Property Get Title() As String
+    Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         'Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -903,8 +903,8 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(value As String)
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+        m_CallingForm = Value
 End Property
 
 Public Property Get CallingForm() As String
@@ -912,9 +912,9 @@ Public Property Get CallingForm() As String
 End Property
 
 'path info
-Public Property Let RootPath(value As String)
-    If Not IsNull(value) Then
-        m_RootPath = value
+Public Property Let RootPath(Value As String)
+    If Not IsNull(Value) Then
+        m_RootPath = Value
     End If
     SetTempVar "RootPath", m_RootPath
 End Property
@@ -923,9 +923,9 @@ Public Property Get RootPath() As String
     RootPath = m_RootPath
 End Property
 
-Public Property Let DataPath(value As String)
-    If Not IsNull(value) Then
-        m_DataPath = value
+Public Property Let DataPath(Value As String)
+    If Not IsNull(Value) Then
+        m_DataPath = Value
     End If
     SetTempVar "DataPath", Replace(m_DataPath, Me.RootPath, "")
     SetTempVar "FullDataPath", Nz(Me.RootPath, "") & m_DataPath
@@ -935,9 +935,9 @@ Public Property Get DataPath() As String
     DataPath = m_DataPath
 End Property
 
-Public Property Let PhotoPath(value As String)
-    If Not IsNull(value) Then
-        m_PhotoPath = value
+Public Property Let PhotoPath(Value As String)
+    If Not IsNull(Value) Then
+        m_PhotoPath = Value
     End If
     SetTempVar "PhotoPath", m_PhotoPath
     SetTempVar "FullPhotoPath", Nz(Me.RootPath, "") & m_PhotoPath
@@ -978,7 +978,7 @@ On Error GoTo Err_Handler
     'dev mode
 '    tbxDevMode = DEV_MODE
                 
-    title = "Edit Date"
+    Title = "Edit Date"
     'lblTitle.Caption = "" 'clear header title
     Directions = "Choose the desired date. " _
               & "Click Save to save the new date. " _

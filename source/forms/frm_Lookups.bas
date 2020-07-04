@@ -524,7 +524,7 @@ Private Sub cboTable_AfterUpdate()
     Else:
     ' If a table is selected ...
         booAllowEdits = DLookup("[Allow_edits_lookup]", "tsys_Link_Tables", "[Link_table]=" & CorrectText(Me!cboTable))
-        Me!subLookupTables.SourceObject = "Table." & Me!cboTable.value
+        Me!subLookupTables.SourceObject = "Table." & Me!cboTable.Value
         Me!subLookupTables.Locked = Not booAllowEdits
         Me!subLookupTables.Form.AllowDeletions = booAllowEdits
         Me!subLookupTables.Form.AllowEdits = booAllowEdits

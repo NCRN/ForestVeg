@@ -55,7 +55,7 @@ On Error GoTo TableInfoErr
    ' Argument:  Name of a table in the current database.
    Dim db As DAO.Database
    Dim tdf As DAO.TableDef
-   Dim fld As DAO.Field
+   Dim fld As DAO.field
    
    Set db = CurrentDb()
    Set tdf = db.TableDefs(strTableName)
@@ -99,63 +99,65 @@ Function GetQueryDescription(strQryName As String) As String
    GetQueryDescription = qdf.Properties("Description")
 End Function
 
-
-Function FieldTypeName(fld As DAO.Field) As String
-    'Purpose: Converts the numeric results of DAO Field.Type to text.
-    Dim strReturn As String    'Name to return
-
-    Select Case CLng(fld.Type) 'fld.Type is Integer, but constants are Long.
-        Case dbBoolean: strReturn = "Yes/No"            ' 1
-        Case dbByte: strReturn = "Byte"                 ' 2
-        Case dbInteger: strReturn = "Integer"           ' 3
-        Case dbLong                                     ' 4
-            If (fld.Attributes And dbAutoIncrField) = 0& Then
-                strReturn = "Long Integer"
-            Else
-                strReturn = "AutoNumber"
-            End If
-        Case dbCurrency: strReturn = "Currency"         ' 5
-        Case dbSingle: strReturn = "Single"             ' 6
-        Case dbDouble: strReturn = "Double"             ' 7
-        Case dbDate: strReturn = "Date/Time"            ' 8
-        Case dbBinary: strReturn = "Binary"             ' 9 (no interface)
-        Case dbText                                     '10
-            If (fld.Attributes And dbFixedField) = 0& Then
-                strReturn = "Text"
-            Else
-                strReturn = "Text (fixed width)"        '(no interface)
-            End If
-        Case dbLongBinary: strReturn = "OLE Object"     '11
-        Case dbMemo                                     '12
-            If (fld.Attributes And dbHyperlinkField) = 0& Then
-                strReturn = "Memo"
-            Else
-                strReturn = "Hyperlink"
-            End If
-        Case dbGUID: strReturn = "GUID"                 '15
-
-        'Attached tables only: cannot create these in JET.
-        Case dbBigInt: strReturn = "Big Integer"        '16
-        Case dbVarBinary: strReturn = "VarBinary"       '17
-        Case dbChar: strReturn = "Char"                 '18
-        Case dbNumeric: strReturn = "Numeric"           '19
-        Case dbDecimal: strReturn = "Decimal"           '20
-        Case dbFloat: strReturn = "Float"               '21
-        Case dbTime: strReturn = "Time"                 '22
-        Case dbTimeStamp: strReturn = "Time Stamp"      '23
-
-        'Constants for complex types don't work prior to Access 2007.
-        Case 101&: strReturn = "Attachment"         'dbAttachment
-        Case 102&: strReturn = "Complex Byte"       'dbComplexByte
-        Case 103&: strReturn = "Complex Integer"    'dbComplexInteger
-        Case 104&: strReturn = "Complex Long"       'dbComplexLong
-        Case 105&: strReturn = "Complex Single"     'dbComplexSingle
-        Case 106&: strReturn = "Complex Double"     'dbComplexDouble
-        Case 107&: strReturn = "Complex GUID"       'dbComplexGUID
-        Case 108&: strReturn = "Complex Decimal"    'dbComplexDecimal
-        Case 109&: strReturn = "Complex Text"       'dbComplexText
-        Case Else: strReturn = "Field type " & fld.Type & " unknown"
-    End Select
-
-    FieldTypeName = strReturn
-End Function
+'----------------------------------------------
+' RETIRED - 7/1/2020 - covered in dev_mod_Git
+'----------------------------------------------
+'Function FieldTypeName(fld As DAO.field) As String
+'    'Purpose: Converts the numeric results of DAO Field.Type to text.
+'    Dim strReturn As String    'Name to return
+'
+'    Select Case CLng(fld.Type) 'fld.Type is Integer, but constants are Long.
+'        Case dbBoolean: strReturn = "Yes/No"            ' 1
+'        Case dbByte: strReturn = "Byte"                 ' 2
+'        Case dbInteger: strReturn = "Integer"           ' 3
+'        Case dbLong                                     ' 4
+'            If (fld.Attributes And dbAutoIncrField) = 0& Then
+'                strReturn = "Long Integer"
+'            Else
+'                strReturn = "AutoNumber"
+'            End If
+'        Case dbCurrency: strReturn = "Currency"         ' 5
+'        Case dbSingle: strReturn = "Single"             ' 6
+'        Case dbDouble: strReturn = "Double"             ' 7
+'        Case dbDate: strReturn = "Date/Time"            ' 8
+'        Case dbBinary: strReturn = "Binary"             ' 9 (no interface)
+'        Case dbText                                     '10
+'            If (fld.Attributes And dbFixedField) = 0& Then
+'                strReturn = "Text"
+'            Else
+'                strReturn = "Text (fixed width)"        '(no interface)
+'            End If
+'        Case dbLongBinary: strReturn = "OLE Object"     '11
+'        Case dbMemo                                     '12
+'            If (fld.Attributes And dbHyperlinkField) = 0& Then
+'                strReturn = "Memo"
+'            Else
+'                strReturn = "Hyperlink"
+'            End If
+'        Case dbGUID: strReturn = "GUID"                 '15
+'
+'        'Attached tables only: cannot create these in JET.
+'        Case dbBigInt: strReturn = "Big Integer"        '16
+'        Case dbVarBinary: strReturn = "VarBinary"       '17
+'        Case dbChar: strReturn = "Char"                 '18
+'        Case dbNumeric: strReturn = "Numeric"           '19
+'        Case dbDecimal: strReturn = "Decimal"           '20
+'        Case dbFloat: strReturn = "Float"               '21
+'        Case dbTime: strReturn = "Time"                 '22
+'        Case dbTimeStamp: strReturn = "Time Stamp"      '23
+'
+'        'Constants for complex types don't work prior to Access 2007.
+'        Case 101&: strReturn = "Attachment"         'dbAttachment
+'        Case 102&: strReturn = "Complex Byte"       'dbComplexByte
+'        Case 103&: strReturn = "Complex Integer"    'dbComplexInteger
+'        Case 104&: strReturn = "Complex Long"       'dbComplexLong
+'        Case 105&: strReturn = "Complex Single"     'dbComplexSingle
+'        Case 106&: strReturn = "Complex Double"     'dbComplexDouble
+'        Case 107&: strReturn = "Complex GUID"       'dbComplexGUID
+'        Case 108&: strReturn = "Complex Decimal"    'dbComplexDecimal
+'        Case 109&: strReturn = "Complex Text"       'dbComplexText
+'        Case Else: strReturn = "Field type " & fld.Type & " unknown"
+'    End Select
+'
+'    FieldTypeName = strReturn
+'End Function

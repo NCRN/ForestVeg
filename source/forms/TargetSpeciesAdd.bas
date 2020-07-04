@@ -619,37 +619,37 @@ Private m_CallingForm As String
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidCallingForm(value As String)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidCallingForm(Value As String)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
-Public Property Get title() As String
-    title = m_Title
+Public Property Get Title() As String
+    Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -657,11 +657,11 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(value As String)
-    If Len(value) > 0 Then
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+    If Len(Value) > 0 Then
+        m_CallingForm = Value
     Else
-        RaiseEvent InvalidCallingForm(value)
+        RaiseEvent InvalidCallingForm(Value)
     End If
 End Property
 
@@ -709,12 +709,12 @@ On Error GoTo Err_Handler
     lblDirections.Caption = "Select the target list, species, and enter" _
                                 & "the date target species monitoring began. " _
                                 & "Then click save to add the target species to the list."
-    tbxIcon.value = StringFromCodepoint(uLocked)
-    tbxIcon.ForeColor = lngDkGreen
-    lblDirections.ForeColor = lngLtBlue
+    tbxIcon.Value = StringFromCodepoint(uLocked)
+    tbxIcon.forecolor = lngDkGreen
+    lblDirections.forecolor = lngLtBlue
     
     'set hover
-    btnSave.HoverColor = lngGreen
+    btnSave.hoverColor = lngGreen
     
     'set syntax values
     'SetTempVar "EnumType", "SyntaxType"
@@ -1050,14 +1050,14 @@ On Error GoTo Err_Handler
     
     'set color of icon depending on if values are set
     'requires: site code & name (directions & description optional)
-    If Len(Nz(cbxTargetList.value, "")) > 0 _
-        And Len(Nz(cbxSpecies.value, "")) > 0 _
-        And Len(Nz(tbxEffectiveDate.value, "")) > 0 _
+    If Len(Nz(cbxTargetList.Value, "")) > 0 _
+        And Len(Nz(cbxSpecies.Value, "")) > 0 _
+        And Len(Nz(tbxEffectiveDate.Value, "")) > 0 _
         Then
         isOK = True
     End If
     
-    tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
+    tbxIcon.forecolor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK
     
     'refresh form

@@ -1588,7 +1588,7 @@ On Error GoTo Err_Handler
     'hide double check unless necessary
     'lblDBHCheck.Visible = False
     'chkDBHCheck.Visible = False
-    tbxHighlightChk.Visible = False
+    tbxHighlightChk.visible = False
     
 '    'set default comment bgd color
 '    tbxComments.BackColor = lngWhite
@@ -1898,7 +1898,7 @@ Private Sub chkDBHCheck_Click()
 On Error GoTo Err_Handler
     
     'Toggle check label color based on if checked or not
-    lblDBHCheck.ForeColor = IIf(chkDBHCheck, lngBlue, lngRed)
+    lblDBHCheck.forecolor = IIf(chkDBHCheck, lngBlue, lngRed)
     
     'update the record's value (since DBH_Check is 0/1 vs. 0/-1)
     SetDBHCheck Me.Tree_Data_ID, "Tree", chkDBHCheck
@@ -2532,7 +2532,7 @@ On Error GoTo Err_Handler
     
     'If we haven't found record and exited by now, create new record.
     DoCmd.GoToRecord , , acNewRec
-    Tag_ID.value = strFind
+    Tag_ID.Value = strFind
     DoCmd.RunCommand acCmdSaveRecord
     Me!fsub_Tag_Tree.Requery
     Forms![frm_Events]![fsub_Tree_Data]![fsub_Tag_Tree]!cbxTagStatus = "Tree"
@@ -2832,7 +2832,7 @@ Private Sub CheckDBH()
 On Error GoTo Err_Handler
     
     'set default comment bgd color
-    tbxComments.BackColor = lngWhite
+    tbxComments.backcolor = lngWhite
     
     'fetch DBH_Check value from db (convert 1 -> -1 for Access logic)
     chkDBHCheck = IIf(Me!DBH_Check = 1, -1, 0)
@@ -2846,7 +2846,7 @@ On Error GoTo Err_Handler
     End If
 
     'set text color if checked
-    If Me!DBH_Check = 1 Then Me.lblDBHCheck.ForeColor = lngBlue
+    If Me!DBH_Check = 1 Then Me.lblDBHCheck.forecolor = lngBlue
     
 Exit_Handler:
     Exit Sub

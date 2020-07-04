@@ -15,7 +15,7 @@ Begin Report
     DatasheetFontHeight =10
     ItemSuffix =70
     DatasheetGridlinesColor =12632256
-    Filter ="[Event_ID]='{DAE1D23F-5C31-43F1-8C88-52D2FE75772F}'"
+    Filter ="[Event_ID]='{7A2453B5-B719-41D4-8AF4-EB31F12DF43E}'"
     RecSrcDt = Begin
         0xf58c6abea030e540
     End
@@ -1105,9 +1105,9 @@ Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
 On Error GoTo Err_Handler
 
     'show/hide label
-    Me.lblNoDataUnsampled.Visible = Not Me.Report.Controls("rSub_UnsampledTags").Report.HasData
-    Me.lblNoDataUnsampledQuadrats.Visible = Not Me.Report.Controls("rSub_Unsampled_Quadrats").Report.HasData
-    Me.lblNoDataMonster.Visible = Not Me.Report.Controls("rSub_Monster_Saplings").Report.HasData
+    Me.lblNoDataUnsampled.visible = Not Me.Report.Controls("rSub_UnsampledTags").Report.HasData
+    Me.lblNoDataUnsampledQuadrats.visible = Not Me.Report.Controls("rSub_Unsampled_Quadrats").Report.HasData
+    Me.lblNoDataMonster.visible = Not Me.Report.Controls("rSub_Monster_Saplings").Report.HasData
     
     
 Exit_Handler:

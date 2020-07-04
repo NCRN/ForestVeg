@@ -196,8 +196,8 @@ Public Event Terminate()
 '---------------------
 ' Properties
 '---------------------
-Public Property Let crumb(value As String)
-    m_Crumb = value
+Public Property Let crumb(Value As String)
+    m_Crumb = Value
     lblCrumb.Caption = m_Crumb
 End Property
 
@@ -205,21 +205,21 @@ Public Property Get crumb() As String
     crumb = m_Crumb
 End Property
 
-Public Property Let CrumbFontColor(value As Long)
-    m_CrumbFontColor = value
-    lblCrumb.ForeColor = m_CrumbFontColor
+Public Property Let CrumbFontColor(Value As Long)
+    m_CrumbFontColor = Value
+    lblCrumb.forecolor = m_CrumbFontColor
 End Property
 
 Public Property Get CrumbFontColor() As Long
     CrumbFontColor = m_CrumbFontColor
 End Property
 
-Public Property Let BreadcrumbHeaderColor(value As Long)
-    If Len(Trim(value)) < 0 Then value = vbGreen '"#3F3F3F"
-    m_BreadcrumbHeaderColor = value
-    FormHeader.BackColor = m_BreadcrumbHeaderColor
+Public Property Let BreadcrumbHeaderColor(Value As Long)
+    If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
+    m_BreadcrumbHeaderColor = Value
+    FormHeader.backcolor = m_BreadcrumbHeaderColor
     'set font color to match
-    Select Case value
+    Select Case Value
         Case vbGreen, vbCyan, vbWhite
             Me.CrumbFontColor = vbBlack
         Case vbRed, vbBlue, vbMagenta, vbBlack
@@ -235,9 +235,9 @@ Public Property Get BreadcrumbVisible() As Byte
     BreadcrumbVisible = m_BreadcrumbVisible
 End Property
 
-Public Property Let BreadcrumbVisible(value As Byte)
-    m_BreadcrumbVisible = value
-    Me.Visible = m_BreadcrumbVisible
+Public Property Let BreadcrumbVisible(Value As Byte)
+    m_BreadcrumbVisible = Value
+    Me.visible = m_BreadcrumbVisible
 End Property
 
 '---------------------

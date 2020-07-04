@@ -672,7 +672,7 @@ End Sub
 Private Sub btnCancel_Click()
 On Error GoTo Err_Handler
         
-    ctlToReset.value = ctlToReset.OldValue
+    ctlToReset.Value = ctlToReset.OldValue
     DoCmd.SetWarnings False
     DoCmd.RunCommand acCmdDeleteRecord
     DoCmd.SetWarnings True

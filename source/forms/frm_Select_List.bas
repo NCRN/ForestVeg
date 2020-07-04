@@ -375,12 +375,12 @@ End Sub
 Private Sub lbxParks_Click()
 On Error GoTo Err_Handler
 Dim strParks As String, strComma As String
-Dim item As Variant
+Dim Item As Variant
 
     'determine the selected park(s)
-    For Each item In lbxParks.ItemsSelected
+    For Each Item In lbxParks.ItemsSelected
         
-        strParks = strParks & "'" & lbxParks.ItemData(item) & "',"
+        strParks = strParks & "'" & lbxParks.ItemData(Item) & "',"
 
     Next
     
@@ -419,12 +419,12 @@ End Sub
 Private Sub lbxYears_Click()
 On Error GoTo Err_Handler
 Dim strYears As String, strComma As String
-Dim item As Variant
+Dim Item As Variant
 
     'determine the selected year(s)
-    For Each item In lbxYears.ItemsSelected
+    For Each Item In lbxYears.ItemsSelected
         
-        strYears = strYears & lbxYears.ItemData(item) & ","
+        strYears = strYears & lbxYears.ItemData(Item) & ","
         
     Next
         
@@ -504,18 +504,18 @@ End Sub
 Private Sub btnLoadList_Click()
 On Error GoTo Err_Handler
     
-    Dim strSQL As String, strWhere As String, strFieldNames As String
+    Dim strSQL As String, strWHERE As String, strFieldNames As String
     Dim rs As DAO.Recordset, rsTgtSpecies As DAO.Recordset, rsNew As DAO.Recordset
     Dim aryFieldTypes() As Variant
       
     'determine the selected park(s) & year(s)
     If Len(TempVars("parks")) > 0 And Len(TempVars("years")) > 0 Then
-        strWhere = "WHERE tbl_Target_List.Park_Code IN (" & TempVars("parks") & ") " _
+        strWHERE = "WHERE tbl_Target_List.Park_Code IN (" & TempVars("parks") & ") " _
                  & "AND tbl_Target_List.Target_Year IN (" & TempVars("years") & ")"
     End If
     
     'prep WHERE clause
-    If Len(Replace(strWhere, "WHERE", "")) = 0 Then strWhere = ""
+    If Len(Replace(strWHERE, "WHERE", "")) = 0 Then strWHERE = ""
     
     'build SQL statement
 '    strSQL = "SELECT DISTINCT Master_Plant_Code_FK AS Code, Species_Name AS Species, " _
@@ -527,7 +527,7 @@ On Error GoTo Err_Handler
             & "LU_Code AS LUCode,  Transect_Only, Target_Area_ID " _
             & "FROM tbl_Target_Species " _
             & "INNER JOIN tbl_Target_List ON tbl_Target_Species.Tgt_List_ID_FK = tbl_Target_List.Tgt_List_ID " _
-            & strWhere & ";"
+            & strWHERE & ";"
             
             
     'fetch data

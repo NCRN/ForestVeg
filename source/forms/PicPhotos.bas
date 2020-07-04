@@ -861,38 +861,38 @@ Private m_TilesPerRow As Integer    '# of tiles per row
 '---------------------
 ' Event Declarations
 '---------------------
-Public Event InvalidTitle(value As String)
-Public Event InvalidDirections(value As String)
-Public Event InvalidCallingForm(value As String)
-Public Event InvalidTilesPerRow(value As Integer)
+Public Event InvalidTitle(Value As String)
+Public Event InvalidDirections(Value As String)
+Public Event InvalidCallingForm(Value As String)
+Public Event InvalidTilesPerRow(Value As Integer)
 
 '---------------------
 ' Properties
 '---------------------
-Public Property Let title(value As String)
-    If Len(value) > 0 Then
-        m_Title = value
+Public Property Let Title(Value As String)
+    If Len(Value) > 0 Then
+        m_Title = Value
 
         'set the form title & caption
         Me.lblTitle.Caption = m_Title
         Me.Caption = m_Title
     Else
-        RaiseEvent InvalidTitle(value)
+        RaiseEvent InvalidTitle(Value)
     End If
 End Property
 
-Public Property Get title() As String
-    title = m_Title
+Public Property Get Title() As String
+    Title = m_Title
 End Property
 
-Public Property Let Directions(value As String)
-    If Len(value) > 0 Then
-        m_Directions = value
+Public Property Let Directions(Value As String)
+    If Len(Value) > 0 Then
+        m_Directions = Value
 
         'set the form directions
         'Me.lblDirections.Caption = m_Directions
     Else
-        RaiseEvent InvalidDirections(value)
+        RaiseEvent InvalidDirections(Value)
     End If
 End Property
 
@@ -900,11 +900,11 @@ Public Property Get Directions() As String
     Directions = m_Directions
 End Property
 
-Public Property Let CallingForm(value As String)
-    If Len(value) > 0 Then
-        m_CallingForm = value
+Public Property Let CallingForm(Value As String)
+    If Len(Value) > 0 Then
+        m_CallingForm = Value
     Else
-        RaiseEvent InvalidCallingForm(value)
+        RaiseEvent InvalidCallingForm(Value)
     End If
 End Property
 
@@ -912,11 +912,11 @@ Public Property Get CallingForm() As String
     CallingForm = m_CallingForm
 End Property
 
-Public Property Let TilesPerRow(value As Integer)
-    If value > 0 Then
-        m_TilesPerRow = value
+Public Property Let TilesPerRow(Value As Integer)
+    If Value > 0 Then
+        m_TilesPerRow = Value
     Else
-        RaiseEvent InvalidTilesPerRow(value)
+        RaiseEvent InvalidTilesPerRow(Value)
     End If
 End Property
 
@@ -958,15 +958,15 @@ On Error GoTo Err_Handler
     TilesPerRow = 5
     
     'set hover
-    btnPrev.HoverColor = lngGreen
-    btnNext.HoverColor = lngGreen
+    btnPrev.hoverColor = lngGreen
+    btnNext.hoverColor = lngGreen
       
     'defaults
     lblMsgIcon.Caption = ""
     lblMsg.Caption = ""
   
     'filters
-    Me.Filter = ""
+    Me.filter = ""
     Me.FilterOn = True
     Me.FilterOnLoad = True
     
@@ -1251,10 +1251,10 @@ On Error GoTo Err_Handler
                     'Case acTextBox
                     Case acLabel
                         If sctrl.Name = "lblName" Then _
-                            sctrl.ForeColor = IIf(selection = True, lngGreen, lngLtTextGray)
+                            sctrl.forecolor = IIf(selection = True, lngGreen, lngLtTextGray)
                     Case acImage
                         If sctrl.Name = "imgPhoto" Then _
-                            sctrl.BorderColor = IIf(selection = True, lngGreen, lngLtBgdGray)
+                            sctrl.borderColor = IIf(selection = True, lngGreen, lngLtBgdGray)
                 End Select
                 
             Next
@@ -1351,7 +1351,7 @@ Debug.Print "bad row/col"
 Debug.Print "good row/col"
                 
                     'display tiles
-                    ctrl.Visible = True
+                    ctrl.visible = True
                 
                     'set # tiles
                     If prevrow <> row Then

@@ -197,7 +197,7 @@ On Error GoTo Err_Handler
     'Arguments: obj = the TableDef or QueryDef to search.
     '           strText2Match is the text to search for, including any wildcards.
     'Return:    Count of matches listed.
-    Dim fld As DAO.Field
+    Dim fld As DAO.field
     Dim lngKt As Long
     
     For Each fld In obj.Fields
@@ -346,7 +346,7 @@ Public Function ObjectExists(obj As Object, strObjectName As String) As Boolean
     '           If ObjectExists(CurrentProject.AllForms, "Form1") Then
     Dim varDummy As Variant
     On Error Resume Next
-    varDummy = obj.item(strObjectName).Name
+    varDummy = obj.Item(strObjectName).Name
     ObjectExists = (Err.Number = 0&)
 End Function
 

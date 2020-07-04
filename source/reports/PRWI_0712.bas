@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Report
     LayoutForPrint = NotDefault
@@ -64,7 +64,6 @@ Begin Report
             Begin
                 Begin Subform
                     Locked = NotDefault
-                    OverlapFlags =81
                     OldBorderStyle =0
                     Top =2475
                     Width =10800
@@ -80,7 +79,6 @@ Begin Report
                 End
                 Begin Subform
                     Locked = NotDefault
-                    OverlapFlags =81
                     OldBorderStyle =0
                     Top =3840
                     Width =10800
@@ -97,7 +95,6 @@ Begin Report
                 End
                 Begin Subform
                     Locked = NotDefault
-                    OverlapFlags =81
                     OldBorderStyle =0
                     Top =2925
                     Width =10800
@@ -114,7 +111,6 @@ Begin Report
                 End
                 Begin Subform
                     Locked = NotDefault
-                    OverlapFlags =81
                     OldBorderStyle =0
                     Top =4320
                     Width =10800
@@ -131,7 +127,6 @@ Begin Report
                 End
                 Begin Subform
                     Locked = NotDefault
-                    OverlapFlags =81
                     OldBorderStyle =0
                     Top =4980
                     Width =10800
@@ -148,7 +143,6 @@ Begin Report
                 End
                 Begin Subform
                     Locked = NotDefault
-                    OverlapFlags =81
                     OldBorderStyle =0
                     Top =1380
                     Width =10800
@@ -164,7 +158,6 @@ Begin Report
                     LayoutCachedHeight =2099
                 End
                 Begin Label
-                    OverlapFlags =81
                     TextFontCharSet =186
                     TextAlign =1
                     TextFontFamily =34
@@ -180,7 +173,6 @@ Begin Report
                 End
                 Begin Subform
                     Locked = NotDefault
-                    OverlapFlags =243
                     OldBorderStyle =0
                     Left =5490
                     Top =60
@@ -199,7 +191,6 @@ Begin Report
                 End
                 Begin TextBox
                     FontItalic = NotDefault
-                    OverlapFlags =81
                     TextFontCharSet =238
                     TextFontFamily =34
                     IMESentenceMode =3
@@ -219,7 +210,6 @@ Begin Report
                 End
                 Begin TextBox
                     FontItalic = NotDefault
-                    OverlapFlags =81
                     TextFontCharSet =238
                     TextFontFamily =34
                     IMESentenceMode =3
@@ -241,7 +231,6 @@ Begin Report
                 End
                 Begin TextBox
                     FontItalic = NotDefault
-                    OverlapFlags =83
                     TextFontCharSet =238
                     TextFontFamily =34
                     IMESentenceMode =3
@@ -262,7 +251,6 @@ Begin Report
                     LayoutCachedHeight =480
                 End
                 Begin TextBox
-                    OverlapFlags =81
                     TextFontCharSet =238
                     TextFontFamily =34
                     BackStyle =0
@@ -280,7 +268,6 @@ Begin Report
                     LayoutCachedHeight =480
                 End
                 Begin TextBox
-                    OverlapFlags =81
                     TextFontCharSet =204
                     TextAlign =1
                     TextFontFamily =34
@@ -325,7 +312,6 @@ Begin Report
                 End
                 Begin TextBox
                     Visible = NotDefault
-                    OverlapFlags =81
                     TextFontCharSet =238
                     TextFontFamily =34
                     IMESentenceMode =3
@@ -347,7 +333,6 @@ Begin Report
                 Begin Label
                     FontItalic = NotDefault
                     FontUnderline = NotDefault
-                    OverlapFlags =81
                     TextFontCharSet =238
                     TextAlign =1
                     TextFontFamily =34
@@ -366,7 +351,6 @@ Begin Report
                 Begin Label
                     FontItalic = NotDefault
                     FontUnderline = NotDefault
-                    OverlapFlags =81
                     TextFontCharSet =238
                     TextAlign =1
                     TextFontFamily =34
@@ -384,7 +368,6 @@ Begin Report
                 End
                 Begin TextBox
                     OldBorderStyle =1
-                    OverlapFlags =81
                     TextAlign =4
                     TextFontFamily =34
                     IMESentenceMode =3
@@ -417,7 +400,6 @@ Begin Report
                     End
                     Begin
                         Begin Label
-                            OverlapFlags =81
                             TextFontFamily =34
                             Left =360
                             Top =1020
@@ -436,7 +418,6 @@ Begin Report
                 End
                 Begin TextBox
                     OldBorderStyle =1
-                    OverlapFlags =81
                     TextAlign =4
                     TextFontFamily =34
                     IMESentenceMode =3
@@ -469,7 +450,6 @@ Begin Report
                     End
                     Begin
                         Begin Label
-                            OverlapFlags =81
                             TextFontFamily =34
                             Left =2880
                             Top =3089
@@ -488,7 +468,6 @@ Begin Report
                 End
                 Begin TextBox
                     OldBorderStyle =1
-                    OverlapFlags =81
                     TextAlign =4
                     TextFontFamily =34
                     IMESentenceMode =3
@@ -521,7 +500,6 @@ Begin Report
                     End
                     Begin
                         Begin Label
-                            OverlapFlags =81
                             TextFontFamily =34
                             Left =3720
                             Top =3089
@@ -540,7 +518,6 @@ Begin Report
                 End
                 Begin TextBox
                     OldBorderStyle =1
-                    OverlapFlags =81
                     TextAlign =4
                     TextFontFamily =34
                     IMESentenceMode =3
@@ -573,7 +550,6 @@ Begin Report
                     End
                     Begin
                         Begin Label
-                            OverlapFlags =81
                             TextFontFamily =34
                             Left =4560
                             Top =3089
@@ -593,7 +569,6 @@ Begin Report
                 Begin Label
                     FontItalic = NotDefault
                     FontUnderline = NotDefault
-                    OverlapFlags =81
                     TextAlign =1
                     TextFontFamily =34
                     Top =3420
@@ -611,7 +586,6 @@ Begin Report
                 Begin Label
                     FontItalic = NotDefault
                     FontUnderline = NotDefault
-                    OverlapFlags =81
                     TextAlign =1
                     TextFontFamily =34
                     Top =3960
@@ -629,7 +603,6 @@ Begin Report
                 Begin Label
                     FontItalic = NotDefault
                     FontUnderline = NotDefault
-                    OverlapFlags =81
                     TextAlign =1
                     TextFontFamily =34
                     Top =4500
@@ -645,7 +618,6 @@ Begin Report
                     LayoutCachedHeight =4890
                 End
                 Begin TextBox
-                    OverlapFlags =81
                     TextAlign =1
                     TextFontFamily =34
                     IMESentenceMode =3
@@ -679,7 +651,6 @@ Begin Report
                     End
                     Begin
                         Begin Label
-                            OverlapFlags =211
                             TextAlign =3
                             TextFontFamily =34
                             Left =1575
@@ -699,7 +670,6 @@ Begin Report
                 End
                 Begin TextBox
                     FontItalic = NotDefault
-                    OverlapFlags =83
                     TextFontFamily =34
                     IMESentenceMode =3
                     Left =3360
@@ -734,7 +704,6 @@ Begin Report
                         Begin Label
                             FontItalic = NotDefault
                             BackStyle =1
-                            OverlapFlags =83
                             TextFontFamily =34
                             Left =2820
                             Top =720
@@ -755,7 +724,6 @@ Begin Report
                 End
                 Begin TextBox
                     FontItalic = NotDefault
-                    OverlapFlags =83
                     TextFontFamily =34
                     IMESentenceMode =3
                     Left =4440
@@ -790,7 +758,6 @@ Begin Report
                         Begin Label
                             FontItalic = NotDefault
                             BackStyle =1
-                            OverlapFlags =83
                             TextFontFamily =34
                             Left =3750
                             Top =720
@@ -817,7 +784,6 @@ Begin Report
             Begin
                 Begin TextBox
                     FontItalic = NotDefault
-                    OverlapFlags =83
                     TextAlign =3
                     TextFontFamily =34
                     IMESentenceMode =3
@@ -835,7 +801,6 @@ Begin Report
                     Begin
                         Begin Label
                             FontItalic = NotDefault
-                            OverlapFlags =81
                             TextAlign =3
                             TextFontFamily =34
                             Left =7980
@@ -854,7 +819,6 @@ Begin Report
                 End
                 Begin TextBox
                     FontItalic = NotDefault
-                    OverlapFlags =81
                     TextAlign =1
                     TextFontFamily =34
                     IMESentenceMode =3
@@ -871,7 +835,6 @@ Begin Report
                 End
                 Begin TextBox
                     FontItalic = NotDefault
-                    OverlapFlags =81
                     TextAlign =1
                     TextFontFamily =34
                     IMESentenceMode =3

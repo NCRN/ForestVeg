@@ -16,9 +16,9 @@ Sub UnitTest1()
     End If
 
     Set CC = New clsMsgBox
-    CC.title = "Title"
+    CC.Title = "Title"
     CC.Prompt = "Prompt"
-    CC.Icon = Question + DefaultButton3
+    CC.icon = Question + DefaultButton3
     CC.ButtonText1 = "ButtonText1"
     CC.ButtonText2 = "ButtonText2"
     CC.ButtonText3 = "ButtonText3"
@@ -32,9 +32,9 @@ Sub UnitTest1()
     End If
 
     Set CC = New clsMsgBox
-    CC.title = "Title"
+    CC.Title = "Title"
     CC.Prompt = "Prompt"
-    CC.Icon = Exclamation
+    CC.icon = Exclamation
     CC.ButtonText1 = "ButtonText1"
     iR = CC.MessageBox()
     If iR = Button1 Then
@@ -46,9 +46,9 @@ Sub UnitTest1()
     End If
 
     Set CC = New clsMsgBox
-    CC.title = "NoIconTitle"
+    CC.Title = "NoIconTitle"
     CC.Prompt = "NoIconPrompt"
-    CC.Icon = NoIcon
+    CC.icon = NoIcon
     CC.ButtonText1 = "ButtonText1"
     CC.ButtonText2 = "ButtonText2"
     iR = CC.MessageBox()
@@ -90,9 +90,9 @@ Sub UnitTest2()
 
     Set CC = New clsMsgBox
     CC.UseCancel = True
-    CC.title = "Title"
+    CC.Title = "Title"
     CC.Prompt = "Prompt"
-    CC.Icon = Question + DefaultButton3
+    CC.icon = Question + DefaultButton3
     CC.ButtonText1 = "ButtonText1"
     CC.ButtonText2 = "ButtonText2"
     CC.ButtonText3 = "ButtonText3"
@@ -108,9 +108,9 @@ Sub UnitTest2()
 
     Set CC = New clsMsgBox
     CC.UseCancel = True
-    CC.title = "Title"
+    CC.Title = "Title"
     CC.Prompt = "Prompt"
-    CC.Icon = Exclamation
+    CC.icon = Exclamation
     CC.ButtonText1 = "ButtonText1"
     iR = CC.MessageBox()
     If iR = Button1 Then
@@ -119,9 +119,9 @@ Sub UnitTest2()
 
     Set CC = New clsMsgBox
     CC.UseCancel = True
-    CC.title = "NoIconTitle"
+    CC.Title = "NoIconTitle"
     CC.Prompt = "NoIconPrompt"
-    CC.Icon = NoIcon
+    CC.icon = NoIcon
     CC.ButtonText1 = "ButtonText1"
     CC.ButtonText2 = "ButtonText2"
     iR = CC.MessageBox()
@@ -141,7 +141,7 @@ Sub UnitTest2()
     End If
 End Sub
 
-Public Function test()
+Public Function Test()
     UnitTest1
     UnitTest2
 End Function

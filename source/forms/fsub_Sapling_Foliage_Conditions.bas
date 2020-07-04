@@ -416,7 +416,7 @@ End Sub
 Private Sub Form_AfterUpdate()
 On Error GoTo Err_Handler
 
-    Forms![frm_Events]![fsub_Sapling_Data]![chkFoliageConditionsChecked].value = True
+    Forms![frm_Events]![fsub_Sapling_Data]![chkFoliageConditionsChecked].Value = True
     Me.Parent.Refresh
     
 Exit_Handler:
