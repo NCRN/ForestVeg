@@ -1426,7 +1426,7 @@ End Sub
 Private Sub cbxFlagType_AfterUpdate()
 On Error GoTo Err_Handler
     
-    Me.filter = "FlagType = '" & cbxFlagType & "'"
+    Me.Filter = "FlagType = '" & cbxFlagType & "'"
     Me.FilterOn = Not IsNull(Me.cbxFlagType)
 
 Exit_Handler:

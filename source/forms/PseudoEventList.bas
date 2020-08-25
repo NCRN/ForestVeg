@@ -1195,9 +1195,9 @@ On Error GoTo Err_Handler
 '             & "' AND Year([Event_Date]) > " & Year(Now()) - 2
 Debug.Print strFilter
 
-    Me.filter = strFilter
+    Me.Filter = strFilter
     'Me.Requery
-Debug.Print Me.filter
+Debug.Print Me.Filter
     DoCmd.ApplyFilter , strFilter
     
 Exit_Handler:

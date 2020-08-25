@@ -22,11 +22,12 @@ Begin Form
     Width =14400
     DatasheetFontHeight =10
     ItemSuffix =167
-    Left =975
-    Right =15375
-    Bottom =10350
+    Left =735
+    Top =45
+    Right =15135
+    Bottom =10395
     DatasheetGridlinesColor =12632256
-    Filter ="[Event_ID]='20190808105910-890455424.785614'"
+    Filter ="[Event_ID]='{445DF397-13FD-4344-9209-5889A362FB7C}'"
     RecSrcDt = Begin
         0x47be11900a4be540
     End
@@ -3063,7 +3064,7 @@ On Error GoTo Err_Handler
     strTransect = Me!grpTransect_Selection.Value
     Me.txtTransect_Selection.Value = "'" & strTransect & "'"
     Forms![frm_Events]![fsub_Transects]!txtTransect_Azimuth.DefaultValue = "'" & strTransect & "'"
-    Forms![frm_Events]![fsub_Transects].Form.filter = "[Transect_Azimuth] = """ & strTransect & """ "
+    Forms![frm_Events]![fsub_Transects].Form.Filter = "[Transect_Azimuth] = """ & strTransect & """ "
     Forms![frm_Events]![fsub_Transects].Form.FilterOn = True
 
 Exit_Handler:

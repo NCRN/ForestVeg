@@ -23,10 +23,10 @@ Begin Form
     Width =10215
     DatasheetFontHeight =10
     ItemSuffix =104
-    Left =720
-    Top =1275
-    Right =10935
-    Bottom =6840
+    Left =75
+    Top =750
+    Right =10290
+    Bottom =8490
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x3b82f36a92b1e340
@@ -912,7 +912,7 @@ Begin Form
                                     BackStyle =0
                                     Left =180
                                     Top =4980
-                                    Width =1512
+                                    Width =2697
                                     Height =234
                                     TabIndex =7
                                     ForeColor =9870754
@@ -929,7 +929,7 @@ Begin Form
 
                                     LayoutCachedLeft =180
                                     LayoutCachedTop =4980
-                                    LayoutCachedWidth =1692
+                                    LayoutCachedWidth =2877
                                     LayoutCachedHeight =5214
                                     ConditionalFormat14 = Begin
                                         0x010001000000010000000000000001000000ff7d7d00ffffff001e0000005b00 ,

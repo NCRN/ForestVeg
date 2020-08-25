@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     RecordSelectors = NotDefault
@@ -19,7 +19,7 @@ Begin Form
     Left =4680
     Top =990
     Right =14760
-    Bottom =11850
+    Bottom =9000
     DatasheetGridlinesColor =12632256
     OrderBy ="Append_Order"
     RecSrcDt = Begin
@@ -189,7 +189,7 @@ Begin Form
                     ColumnOrder =5
                     TabIndex =3
                     BackColor =13434879
-                    ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"10\";\"0\""
+                    ColumnInfo ="\"Event ID\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"10\";\"0\""
                     ConditionalFormat = Begin
                         0x0100000068000000010000000000000003000000000000000300000001000000 ,
                         0x00000000ffffff00000000000000000000000000000000000000000000000000 ,

@@ -1669,7 +1669,7 @@ On Error GoTo Err_Handler
     
     'set defaults
     Me.RecordSource = "tbl_Tags"
-    Me.filter = "Tag_Status = 'Retired (In Office)'"
+    Me.Filter = "Tag_Status = 'Retired (In Office)'"
     Me.FilterOn = True
     Me.FilterOnLoad = True
     Me.OrderBy = "Tag"

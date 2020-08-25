@@ -966,7 +966,7 @@ On Error GoTo Err_Handler
     lblMsg.Caption = ""
   
     'filters
-    Me.filter = ""
+    Me.Filter = ""
     Me.FilterOn = True
     Me.FilterOnLoad = True
     

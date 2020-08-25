@@ -19,67 +19,7 @@ dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
 Begin
     Begin
-        dbText "Name" ="tbl_Locations.Plot_Name"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Quadrat_Data.Quadrat_Number"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Quadrat_Data.Percent_Trees"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Quadrat_Data.Percent_Bryophytes"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Quadrat_Data.Percent_Rock"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Quadrat_Data.Percent_Other"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Quadrat_Data.Percent_Grasses"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Quadrat_Data.Percent_Sedges"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Quadrat_Data.Percent_Herbs"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Quadrat_Data.Percent_Ferns"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Quadrat_Data.Quadrat_Notes"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Panel"
-        dbLong "AggregateType" ="-1"
-        dbInteger "ColumnWidth" ="900"
-        dbBoolean "ColumnHidden" ="0"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Frame"
-        dbLong "AggregateType" ="-1"
-        dbInteger "ColumnWidth" ="960"
-        dbBoolean "ColumnHidden" ="0"
-    End
-    Begin
         dbText "Name" ="Date"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Unit_Code"
         dbLong "AggregateType" ="-1"
     End
     Begin
@@ -87,25 +27,13 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Subunit_Code"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="Cycle"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Unit_Group"
         dbLong "AggregateType" ="-1"
     End
     Begin
         dbText "Name" ="Percent_Coarse_Woody_Debris"
         dbInteger "ColumnWidth" ="2295"
         dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Quadrat_Data.Percent_Fine_Woody_Debris"
         dbLong "AggregateType" ="-1"
     End
     Begin

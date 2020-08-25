@@ -1,8 +1,7 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Report
     LayoutForPrint = NotDefault
-    AllowDesignChanges = NotDefault
     DefaultView =0
     TabularFamily =0
     DateGrouping =1
@@ -11,22 +10,22 @@ Begin Report
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =10800
+    Width =11160
     DatasheetFontHeight =10
-    ItemSuffix =56
-    Left =2820
-    Top =525
+    ItemSuffix =70
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
-        0x41ab439f33b2e340
+        0xf58c6abea030e540
     End
-    RecordSource ="qRpt_Event_Summary"
+    RecordSource ="qRpt_Event_Summary_Unfiltered"
+    OnOpen ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0xf801000038040000f80100003804000000000000302a0000cf21000001000000 ,
+        0xf801000038040000f80100003804000000000000982b00007c1a000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
-    FilterOnLoad =0
+    FilterOnLoad =255
+    AllowLayoutView =0
     DatasheetGridlinesColor12 =12632256
     Begin
         Begin Label
@@ -58,7 +57,8 @@ Begin Report
         Begin Section
             KeepTogether = NotDefault
             CanGrow = NotDefault
-            Height =8655
+            Height =6780
+            OnFormat ="[Event Procedure]"
             Name ="Detail"
             Begin
                 Begin Subform
@@ -66,7 +66,7 @@ Begin Report
                     OldBorderStyle =0
                     Top =2475
                     Width =10800
-                    Height =629
+                    Height =0
                     Name ="rSub_Plot_Floor_Condition"
                     SourceObject ="Report.rSub_Event_Plot_Floor_Condition"
                     LinkChildFields ="Event_ID"
@@ -74,76 +74,76 @@ Begin Report
 
                     LayoutCachedTop =2475
                     LayoutCachedWidth =10800
-                    LayoutCachedHeight =3104
+                    LayoutCachedHeight =2475
                 End
                 Begin Subform
                     Locked = NotDefault
                     OldBorderStyle =0
-                    Top =4440
+                    Top =3840
                     Width =10800
-                    Height =1095
+                    Height =0
                     TabIndex =1
                     Name ="rSub_Event_Trees"
                     SourceObject ="Report.rSub_Event_Trees"
                     LinkChildFields ="Event_ID"
                     LinkMasterFields ="Event_ID"
 
-                    LayoutCachedTop =4440
+                    LayoutCachedTop =3840
                     LayoutCachedWidth =10800
-                    LayoutCachedHeight =5535
+                    LayoutCachedHeight =3840
                 End
                 Begin Subform
                     Locked = NotDefault
                     OldBorderStyle =0
-                    Top =3450
+                    Top =2925
                     Width =10800
-                    Height =674
+                    Height =0
                     TabIndex =2
                     Name ="srpt_Transects"
                     SourceObject ="Report.rSub_Event_CWD"
                     LinkChildFields ="Event_ID"
                     LinkMasterFields ="Event_ID"
 
-                    LayoutCachedTop =3450
+                    LayoutCachedTop =2925
                     LayoutCachedWidth =10800
-                    LayoutCachedHeight =4124
+                    LayoutCachedHeight =2925
                 End
                 Begin Subform
                     Locked = NotDefault
                     OldBorderStyle =0
-                    Top =5550
-                    Width =10680
-                    Height =1335
+                    Top =4320
+                    Width =10800
+                    Height =0
                     TabIndex =3
                     Name ="srpt_Microplots"
                     SourceObject ="Report.rSub_Event_Saplings"
                     LinkChildFields ="Event_ID"
                     LinkMasterFields ="Event_ID"
 
-                    LayoutCachedTop =5550
-                    LayoutCachedWidth =10680
-                    LayoutCachedHeight =6885
+                    LayoutCachedTop =4320
+                    LayoutCachedWidth =10800
+                    LayoutCachedHeight =4320
                 End
                 Begin Subform
                     Locked = NotDefault
                     OldBorderStyle =0
-                    Top =6915
-                    Width =10680
-                    Height =1740
+                    Top =4980
+                    Width =10800
+                    Height =0
                     TabIndex =4
                     Name ="rSub_Event_Quadrats"
                     SourceObject ="Report.rSub_Event_Quadrats"
                     LinkChildFields ="Event_ID"
                     LinkMasterFields ="Event_ID"
 
-                    LayoutCachedTop =6915
-                    LayoutCachedWidth =10680
-                    LayoutCachedHeight =8655
+                    LayoutCachedTop =4980
+                    LayoutCachedWidth =10800
+                    LayoutCachedHeight =4980
                 End
                 Begin Subform
                     Locked = NotDefault
                     OldBorderStyle =0
-                    Top =1440
+                    Top =1380
                     Width =10800
                     Height =719
                     TabIndex =5
@@ -152,23 +152,23 @@ Begin Report
                     LinkChildFields ="Location_ID"
                     LinkMasterFields ="Location_ID"
 
-                    LayoutCachedTop =1440
+                    LayoutCachedTop =1380
                     LayoutCachedWidth =10800
-                    LayoutCachedHeight =2159
+                    LayoutCachedHeight =2099
                 End
                 Begin Label
                     TextFontCharSet =186
                     TextAlign =1
                     TextFontFamily =34
-                    Top =4155
+                    Top =3090
                     Width =2400
                     Height =225
                     FontWeight =700
                     Name ="Label22"
                     Caption ="TRANSECTS CHECKED --->"
-                    LayoutCachedTop =4155
+                    LayoutCachedTop =3090
                     LayoutCachedWidth =2400
-                    LayoutCachedHeight =4380
+                    LayoutCachedHeight =3315
                 End
                 Begin Subform
                     Locked = NotDefault
@@ -259,7 +259,7 @@ Begin Report
                     FontSize =22
                     FontWeight =700
                     TabIndex =10
-                    Name ="Text5"
+                    Name ="tbxPlotName"
                     ControlSource ="=[Plot_Name]"
                     FontName ="Calibri"
 
@@ -278,7 +278,7 @@ Begin Report
                     FontSize =18
                     FontWeight =700
                     TabIndex =11
-                    Name ="Text8"
+                    Name ="tbxEventDate"
                     ControlSource ="Event_Date"
                     Format ="mm/dd/yyyy"
                     FontName ="Calibri"
@@ -288,34 +288,33 @@ Begin Report
                     LayoutCachedHeight =1005
                 End
                 Begin TextBox
-                    Visible = NotDefault
-                    TextFontCharSet =238
                     TextAlign =3
                     TextFontFamily =34
                     IMESentenceMode =3
-                    Left =2940
-                    Top =1140
-                    Width =1065
+                    Left =3480
+                    Top =1080
+                    Width =2880
                     Height =225
                     ColumnWidth =1245
+                    FontSize =6
                     TabIndex =12
                     Name ="txtEvent_ID"
                     ControlSource ="Event_ID"
                     StatusBarText ="M. Event identifier (Event_ID)"
                     FontName ="Calibri"
 
-                    LayoutCachedLeft =2940
-                    LayoutCachedTop =1140
-                    LayoutCachedWidth =4005
-                    LayoutCachedHeight =1365
+                    LayoutCachedLeft =3480
+                    LayoutCachedTop =1080
+                    LayoutCachedWidth =6360
+                    LayoutCachedHeight =1305
                 End
                 Begin TextBox
                     Visible = NotDefault
                     TextFontCharSet =238
                     TextFontFamily =34
                     IMESentenceMode =3
-                    Left =4065
-                    Top =1140
+                    Left =4605
+                    Top =1080
                     Width =900
                     Height =225
                     TabIndex =13
@@ -324,10 +323,10 @@ Begin Report
                     StatusBarText ="M. Location identifier (Location_ID)"
                     FontName ="Calibri"
 
-                    LayoutCachedLeft =4065
-                    LayoutCachedTop =1140
-                    LayoutCachedWidth =4965
-                    LayoutCachedHeight =1365
+                    LayoutCachedLeft =4605
+                    LayoutCachedTop =1080
+                    LayoutCachedWidth =5505
+                    LayoutCachedHeight =1305
                 End
                 Begin Label
                     FontItalic = NotDefault
@@ -335,7 +334,7 @@ Begin Report
                     TextFontCharSet =238
                     TextAlign =1
                     TextFontFamily =34
-                    Top =3105
+                    Top =2580
                     Width =5940
                     Height =345
                     FontSize =14
@@ -343,9 +342,9 @@ Begin Report
                     Name ="Label14"
                     Caption ="Coarse Woody Debris"
                     FontName ="Calibri"
-                    LayoutCachedTop =3105
+                    LayoutCachedTop =2580
                     LayoutCachedWidth =5940
-                    LayoutCachedHeight =3450
+                    LayoutCachedHeight =2925
                 End
                 Begin Label
                     FontItalic = NotDefault
@@ -354,16 +353,16 @@ Begin Report
                     TextAlign =1
                     TextFontFamily =34
                     Top =2115
-                    Width =3180
-                    Height =360
+                    Width =5475
+                    Height =375
                     FontSize =14
                     FontWeight =700
                     Name ="Label41"
-                    Caption ="Forest Floor Conditions"
+                    Caption ="Forest Floor Conditions and Plot Observations"
                     FontName ="Calibri"
                     LayoutCachedTop =2115
-                    LayoutCachedWidth =3180
-                    LayoutCachedHeight =2475
+                    LayoutCachedWidth =5475
+                    LayoutCachedHeight =2490
                 End
                 Begin TextBox
                     OldBorderStyle =1
@@ -371,7 +370,7 @@ Begin Report
                     TextFontFamily =34
                     IMESentenceMode =3
                     Left =60
-                    Top =1080
+                    Top =1020
                     Width =240
                     Height =259
                     FontSize =12
@@ -389,9 +388,9 @@ Begin Report
                     End
 
                     LayoutCachedLeft =60
-                    LayoutCachedTop =1080
+                    LayoutCachedTop =1020
                     LayoutCachedWidth =300
-                    LayoutCachedHeight =1339
+                    LayoutCachedHeight =1279
                     ConditionalFormat14 = Begin
                         0x01000100000001000000000000000101000000000000ed1c2400160000005b00 ,
                         0x500069006300740075007200650073005f00540061006b0065006e005d003d00 ,
@@ -401,7 +400,7 @@ Begin Report
                         Begin Label
                             TextFontFamily =34
                             Left =360
-                            Top =1094
+                            Top =1020
                             Width =1260
                             Height =225
                             FontSize =10
@@ -409,9 +408,9 @@ Begin Report
                             Caption ="Pictures Taken"
                             FontName ="Calibri"
                             LayoutCachedLeft =360
-                            LayoutCachedTop =1094
+                            LayoutCachedTop =1020
                             LayoutCachedWidth =1620
-                            LayoutCachedHeight =1319
+                            LayoutCachedHeight =1245
                         End
                     End
                 End
@@ -421,7 +420,7 @@ Begin Report
                     TextFontFamily =34
                     IMESentenceMode =3
                     Left =2580
-                    Top =4140
+                    Top =3075
                     Width =240
                     Height =259
                     FontSize =12
@@ -439,9 +438,9 @@ Begin Report
                     End
 
                     LayoutCachedLeft =2580
-                    LayoutCachedTop =4140
+                    LayoutCachedTop =3075
                     LayoutCachedWidth =2820
-                    LayoutCachedHeight =4399
+                    LayoutCachedHeight =3334
                     ConditionalFormat14 = Begin
                         0x01000100000001000000000000000101000000000000ed1c2400150000005b00 ,
                         0x4300570044005f0043006800650063006b005f003300360030005d003d004600 ,
@@ -451,7 +450,7 @@ Begin Report
                         Begin Label
                             TextFontFamily =34
                             Left =2880
-                            Top =4154
+                            Top =3089
                             Width =360
                             Height =225
                             FontSize =10
@@ -459,9 +458,9 @@ Begin Report
                             Caption ="360"
                             FontName ="Calibri"
                             LayoutCachedLeft =2880
-                            LayoutCachedTop =4154
+                            LayoutCachedTop =3089
                             LayoutCachedWidth =3240
-                            LayoutCachedHeight =4379
+                            LayoutCachedHeight =3314
                         End
                     End
                 End
@@ -471,7 +470,7 @@ Begin Report
                     TextFontFamily =34
                     IMESentenceMode =3
                     Left =3420
-                    Top =4140
+                    Top =3075
                     Width =240
                     Height =259
                     FontSize =12
@@ -489,9 +488,9 @@ Begin Report
                     End
 
                     LayoutCachedLeft =3420
-                    LayoutCachedTop =4140
+                    LayoutCachedTop =3075
                     LayoutCachedWidth =3660
-                    LayoutCachedHeight =4399
+                    LayoutCachedHeight =3334
                     ConditionalFormat14 = Begin
                         0x01000100000001000000000000000101000000000000ed1c2400150000005b00 ,
                         0x4300570044005f0043006800650063006b005f003100320030005d003d004600 ,
@@ -501,7 +500,7 @@ Begin Report
                         Begin Label
                             TextFontFamily =34
                             Left =3720
-                            Top =4154
+                            Top =3089
                             Width =360
                             Height =225
                             FontSize =10
@@ -509,9 +508,9 @@ Begin Report
                             Caption ="120"
                             FontName ="Calibri"
                             LayoutCachedLeft =3720
-                            LayoutCachedTop =4154
+                            LayoutCachedTop =3089
                             LayoutCachedWidth =4080
-                            LayoutCachedHeight =4379
+                            LayoutCachedHeight =3314
                         End
                     End
                 End
@@ -521,7 +520,7 @@ Begin Report
                     TextFontFamily =34
                     IMESentenceMode =3
                     Left =4260
-                    Top =4140
+                    Top =3075
                     Width =240
                     Height =259
                     FontSize =12
@@ -539,9 +538,9 @@ Begin Report
                     End
 
                     LayoutCachedLeft =4260
-                    LayoutCachedTop =4140
+                    LayoutCachedTop =3075
                     LayoutCachedWidth =4500
-                    LayoutCachedHeight =4399
+                    LayoutCachedHeight =3334
                     ConditionalFormat14 = Begin
                         0x01000100000001000000000000000101000000000000ed1c2400150000005b00 ,
                         0x4300570044005f0043006800650063006b005f003200340030005d003d004600 ,
@@ -551,7 +550,7 @@ Begin Report
                         Begin Label
                             TextFontFamily =34
                             Left =4560
-                            Top =4154
+                            Top =3089
                             Width =360
                             Height =225
                             FontSize =10
@@ -559,47 +558,111 @@ Begin Report
                             Caption ="240"
                             FontName ="Calibri"
                             LayoutCachedLeft =4560
-                            LayoutCachedTop =4154
+                            LayoutCachedTop =3089
                             LayoutCachedWidth =4920
-                            LayoutCachedHeight =4379
+                            LayoutCachedHeight =3314
                         End
                     End
                 End
-                Begin TextBox
+                Begin Label
                     FontItalic = NotDefault
+                    FontUnderline = NotDefault
+                    TextAlign =1
+                    TextFontFamily =34
+                    Top =3420
+                    Width =2295
+                    Height =360
+                    FontSize =14
+                    FontWeight =700
+                    Name ="lblHeading"
+                    Caption ="Trees"
+                    FontName ="Calibri"
+                    LayoutCachedTop =3420
+                    LayoutCachedWidth =2295
+                    LayoutCachedHeight =3780
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    FontUnderline = NotDefault
+                    TextAlign =1
+                    TextFontFamily =34
+                    Top =3960
+                    Width =3195
+                    Height =390
+                    FontSize =14
+                    FontWeight =700
+                    Name ="Label52"
+                    Caption ="Saplings"
+                    FontName ="Calibri"
+                    LayoutCachedTop =3960
+                    LayoutCachedWidth =3195
+                    LayoutCachedHeight =4350
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    FontUnderline = NotDefault
+                    TextAlign =1
+                    TextFontFamily =34
+                    Top =4500
+                    Width =4200
+                    Height =390
+                    FontSize =14
+                    FontWeight =700
+                    Name ="Label53"
+                    Caption ="Seedlings and Herbaceous"
+                    FontName ="Calibri"
+                    LayoutCachedTop =4500
+                    LayoutCachedWidth =4200
+                    LayoutCachedHeight =4890
+                End
+                Begin TextBox
+                    TextAlign =1
                     TextFontFamily =34
                     IMESentenceMode =3
-                    Left =4500
-                    Top =720
-                    Width =480
-                    Height =225
-                    TabIndex =19
-                    ForeColor =255
-                    Name ="Text54"
-                    ControlSource ="Aspect"
+                    Left =2940
+                    Top =1020
+                    Width =300
+                    Height =285
+                    FontSize =11
+                    FontWeight =700
+                    TabIndex =18
+                    Name ="Deer_Impact"
+                    ControlSource ="Deer_Impact"
+                    StatusBarText ="Deer impact classification (1-5)"
+                    FontName ="Calibri"
+                    ConditionalFormat = Begin
+                        0x010000008e000000010000000100000000000000000000001600000001000000 ,
+                        0x00000000ed1c2400000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x490073004e0075006c006c0028005b0044006500650072005f0049006d007000 ,
+                        0x6100630074005d00290000000000
+                    End
 
-                    LayoutCachedLeft =4500
-                    LayoutCachedTop =720
-                    LayoutCachedWidth =4980
-                    LayoutCachedHeight =945
-                    BackThemeColorIndex =1
+                    LayoutCachedLeft =2940
+                    LayoutCachedTop =1020
+                    LayoutCachedWidth =3240
+                    LayoutCachedHeight =1305
+                    ConditionalFormat14 = Begin
+                        0x01000100000001000000000000000100000000000000ed1c2400150000004900 ,
+                        0x73004e0075006c006c0028005b0044006500650072005f0049006d0070006100 ,
+                        0x630074005d002900000000000000000000000000000000000000000000
+                    End
                     Begin
                         Begin Label
-                            FontItalic = NotDefault
-                            BackStyle =1
+                            TextAlign =3
                             TextFontFamily =34
-                            Left =3840
-                            Top =720
-                            Width =600
-                            Height =225
-                            ForeColor =255
-                            Name ="Label55"
-                            Caption ="Aspect:"
-                            LayoutCachedLeft =3840
-                            LayoutCachedTop =720
-                            LayoutCachedWidth =4440
-                            LayoutCachedHeight =945
-                            BackThemeColorIndex =1
+                            Left =1575
+                            Top =1020
+                            Width =1305
+                            Height =285
+                            FontSize =11
+                            Name ="Label57"
+                            Caption ="Deer Impact: "
+                            FontName ="Calibri"
+                            LayoutCachedLeft =1575
+                            LayoutCachedTop =1020
+                            LayoutCachedWidth =2880
+                            LayoutCachedHeight =1305
                         End
                     End
                 End
@@ -607,39 +670,286 @@ Begin Report
                     FontItalic = NotDefault
                     TextFontFamily =34
                     IMESentenceMode =3
-                    Left =3330
-                    Top =735
-                    Width =480
+                    Left =3360
+                    Top =720
+                    Width =345
                     Height =225
-                    TabIndex =18
-                    ForeColor =255
-                    Name ="Text52"
+                    TabIndex =19
+                    ForeColor =8355711
+                    Name ="txtSlope"
                     ControlSource ="Slope"
+                    ConditionalFormat = Begin
+                        0x0100000088000000010000000100000000000000000000001300000001000000 ,
+                        0x00000000ed1c2400000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x490073004e0075006c006c0028005b0074007800740053006c006f0070006500 ,
+                        0x5d00290000000000
+                    End
 
-                    LayoutCachedLeft =3330
-                    LayoutCachedTop =735
-                    LayoutCachedWidth =3810
-                    LayoutCachedHeight =960
+                    LayoutCachedLeft =3360
+                    LayoutCachedTop =720
+                    LayoutCachedWidth =3705
+                    LayoutCachedHeight =945
                     BackThemeColorIndex =1
+                    ForeThemeColorIndex =1
+                    ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x01000100000001000000000000000100000000000000ed1c2400120000004900 ,
+                        0x73004e0075006c006c0028005b0074007800740053006c006f00700065005d00 ,
+                        0x2900000000000000000000000000000000000000000000
+                    End
                     Begin
                         Begin Label
                             FontItalic = NotDefault
                             BackStyle =1
                             TextFontFamily =34
                             Left =2820
-                            Top =735
+                            Top =720
                             Width =480
                             Height =225
-                            ForeColor =255
-                            Name ="Label53"
+                            ForeColor =8355711
+                            Name ="Label59"
                             Caption ="Slope:"
                             LayoutCachedLeft =2820
-                            LayoutCachedTop =735
+                            LayoutCachedTop =720
                             LayoutCachedWidth =3300
-                            LayoutCachedHeight =960
+                            LayoutCachedHeight =945
                             BackThemeColorIndex =1
+                            ForeThemeColorIndex =1
+                            ForeShade =50.0
                         End
                     End
+                End
+                Begin TextBox
+                    FontItalic = NotDefault
+                    TextFontFamily =34
+                    IMESentenceMode =3
+                    Left =4440
+                    Top =720
+                    Width =345
+                    Height =225
+                    TabIndex =20
+                    ForeColor =8355711
+                    Name ="txtAspect"
+                    ControlSource ="Aspect"
+                    ConditionalFormat = Begin
+                        0x010000008a000000010000000100000000000000000000001400000001000000 ,
+                        0x00000000ed1c2400000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x490073004e0075006c006c0028005b0074007800740041007300700065006300 ,
+                        0x74005d00290000000000
+                    End
+
+                    LayoutCachedLeft =4440
+                    LayoutCachedTop =720
+                    LayoutCachedWidth =4785
+                    LayoutCachedHeight =945
+                    BackThemeColorIndex =1
+                    ForeThemeColorIndex =1
+                    ForeShade =50.0
+                    ConditionalFormat14 = Begin
+                        0x01000100000001000000000000000100000000000000ed1c2400130000004900 ,
+                        0x73004e0075006c006c0028005b00740078007400410073007000650063007400 ,
+                        0x5d002900000000000000000000000000000000000000000000
+                    End
+                    Begin
+                        Begin Label
+                            FontItalic = NotDefault
+                            BackStyle =1
+                            TextFontFamily =34
+                            Left =3750
+                            Top =720
+                            Width =645
+                            Height =225
+                            ForeColor =8355711
+                            Name ="Label61"
+                            Caption ="Aspect:"
+                            LayoutCachedLeft =3750
+                            LayoutCachedTop =720
+                            LayoutCachedWidth =4395
+                            LayoutCachedHeight =945
+                            BackThemeColorIndex =1
+                            ForeThemeColorIndex =1
+                            ForeShade =50.0
+                        End
+                    End
+                End
+                Begin Subform
+                    Locked = NotDefault
+                    OldBorderStyle =0
+                    Top =5580
+                    Width =10800
+                    Height =0
+                    TabIndex =21
+                    Name ="rSub_UnsampledTags"
+                    SourceObject ="Report.rSub_Event_UnsampledTags"
+                    LinkChildFields ="Location_ID"
+                    LinkMasterFields ="Location_ID"
+
+                    LayoutCachedTop =5580
+                    LayoutCachedWidth =10800
+                    LayoutCachedHeight =5580
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    FontUnderline = NotDefault
+                    BackStyle =1
+                    TextAlign =1
+                    TextFontFamily =34
+                    Top =5100
+                    Width =10800
+                    Height =390
+                    FontSize =14
+                    FontWeight =700
+                    BackColor =12581629
+                    Name ="lblHdrUnsampledTags"
+                    Caption ="Unsampled Tags"
+                    FontName ="Calibri"
+                    LayoutCachedTop =5100
+                    LayoutCachedWidth =10800
+                    LayoutCachedHeight =5490
+                End
+                Begin Subform
+                    Locked = NotDefault
+                    OldBorderStyle =0
+                    Top =6660
+                    Width =10800
+                    Height =0
+                    TabIndex =22
+                    Name ="rsub_Monster_Saplings"
+                    SourceObject ="Report.rSub_Event_Monster_Saplings"
+                    LinkChildFields ="Event_ID;Location_ID;Event_Date"
+                    LinkMasterFields ="Event_ID;Location_ID;Event_Date"
+
+                    LayoutCachedTop =6660
+                    LayoutCachedWidth =10800
+                    LayoutCachedHeight =6660
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    FontUnderline = NotDefault
+                    BackStyle =1
+                    TextAlign =1
+                    TextFontFamily =34
+                    Top =6180
+                    Width =10800
+                    Height =390
+                    FontSize =14
+                    FontWeight =700
+                    BackColor =12581629
+                    Name ="lblHdrMonsterSaplings"
+                    Caption ="Monster Saplings"
+                    FontName ="Calibri"
+                    LayoutCachedTop =6180
+                    LayoutCachedWidth =10800
+                    LayoutCachedHeight =6570
+                End
+                Begin Label
+                    TextAlign =3
+                    TextFontFamily =34
+                    Left =9480
+                    Top =6360
+                    Width =1200
+                    Height =225
+                    FontWeight =700
+                    Name ="lblDBHgt10cm"
+                    Caption ="DBH > 10 cm"
+                    LayoutCachedLeft =9480
+                    LayoutCachedTop =6360
+                    LayoutCachedWidth =10680
+                    LayoutCachedHeight =6585
+                End
+                Begin Label
+                    Visible = NotDefault
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =2880
+                    Top =5160
+                    Width =1905
+                    Height =288
+                    FontWeight =700
+                    ForeColor =5855577
+                    Name ="lblNoDataUnsampled"
+                    Caption ="-- None Found --"
+                    LayoutCachedLeft =2880
+                    LayoutCachedTop =5160
+                    LayoutCachedWidth =4785
+                    LayoutCachedHeight =5448
+                    ForeThemeColorIndex =0
+                    ForeTint =65.0
+                End
+                Begin Label
+                    Visible = NotDefault
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =2880
+                    Top =6240
+                    Width =1905
+                    Height =288
+                    FontWeight =700
+                    ForeColor =5855577
+                    Name ="lblNoDataMonster"
+                    Caption ="-- None Found --"
+                    LayoutCachedLeft =2880
+                    LayoutCachedTop =6240
+                    LayoutCachedWidth =4785
+                    LayoutCachedHeight =6528
+                    ForeThemeColorIndex =0
+                    ForeTint =65.0
+                End
+                Begin Subform
+                    Locked = NotDefault
+                    OldBorderStyle =0
+                    Top =6120
+                    Width =10800
+                    Height =0
+                    TabIndex =23
+                    Name ="rSub_Unsampled_Quadrats"
+                    SourceObject ="Report.rSub_Event_UnsampledQuadrats"
+                    LinkChildFields ="Location_ID;Event_ID"
+                    LinkMasterFields ="Location_ID;Event_ID"
+
+                    LayoutCachedTop =6120
+                    LayoutCachedWidth =10800
+                    LayoutCachedHeight =6120
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    FontUnderline = NotDefault
+                    BackStyle =1
+                    TextAlign =1
+                    TextFontFamily =34
+                    Top =5640
+                    Width =10800
+                    Height =390
+                    FontSize =14
+                    FontWeight =700
+                    BackColor =12581629
+                    Name ="lblUnsampledQuadrats"
+                    Caption ="Unsampled Quadrats"
+                    FontName ="Calibri"
+                    LayoutCachedTop =5640
+                    LayoutCachedWidth =10800
+                    LayoutCachedHeight =6030
+                End
+                Begin Label
+                    Visible = NotDefault
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =2880
+                    Top =5700
+                    Width =1905
+                    Height =288
+                    FontWeight =700
+                    ForeColor =5855577
+                    Name ="lblNoDataUnsampledQuadrats"
+                    Caption ="-- None Found --"
+                    LayoutCachedLeft =2880
+                    LayoutCachedTop =5700
+                    LayoutCachedWidth =4785
+                    LayoutCachedHeight =5988
+                    ForeThemeColorIndex =0
+                    ForeTint =65.0
                 End
             End
         End
@@ -649,31 +959,163 @@ Begin Report
             Begin
                 Begin TextBox
                     FontItalic = NotDefault
-                    TextAlign =1
+                    TextAlign =3
                     TextFontFamily =34
                     IMESentenceMode =3
-                    Left =900
+                    Left =8880
                     Top =180
-                    Width =2580
+                    Width =2280
                     ForeColor =8421504
-                    Name ="Text18"
+                    Name ="tbxPrintDate"
                     ControlSource ="=Now()"
 
+                    LayoutCachedLeft =8880
+                    LayoutCachedTop =180
+                    LayoutCachedWidth =11160
+                    LayoutCachedHeight =420
                     Begin
                         Begin Label
                             FontItalic = NotDefault
                             TextAlign =3
                             TextFontFamily =34
+                            Left =7980
                             Top =180
-                            Width =840
+                            Width =900
                             Height =225
                             ForeColor =8421504
                             Name ="Label19"
                             Caption ="Printed on:"
+                            LayoutCachedLeft =7980
+                            LayoutCachedTop =180
+                            LayoutCachedWidth =8880
+                            LayoutCachedHeight =405
                         End
                     End
+                End
+                Begin TextBox
+                    FontItalic = NotDefault
+                    TextAlign =1
+                    TextFontFamily =34
+                    IMESentenceMode =3
+                    Top =180
+                    Width =1380
+                    TabIndex =1
+                    ForeColor =8421504
+                    Name ="tbxFooterPlotName"
+                    ControlSource ="Plot_Name"
+
+                    LayoutCachedTop =180
+                    LayoutCachedWidth =1380
+                    LayoutCachedHeight =420
+                End
+                Begin TextBox
+                    FontItalic = NotDefault
+                    TextAlign =1
+                    TextFontFamily =34
+                    IMESentenceMode =3
+                    Left =1440
+                    Top =180
+                    Width =2520
+                    TabIndex =2
+                    ForeColor =8421504
+                    Name ="tbxFooterEventDate"
+                    ControlSource ="Event_Date"
+
+                    LayoutCachedLeft =1440
+                    LayoutCachedTop =180
+                    LayoutCachedWidth =3960
+                    LayoutCachedHeight =420
                 End
             End
         End
     End
 End
+CodeBehindForm
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Compare Database
+Option Explicit
+
+' =================================
+' REPORT:       rpt_Event_Summary_Unfiltered
+' Level:        Application report
+' Version:      1.01
+'
+' Description:  Report related functions & procedures for application
+'
+' Source/date:  Bonnie Campbell, April 20, 2018
+' Revisions:    BLC - 4/20/2018 - 1.00 - initial version
+'               BLC - 5/1/2018  - 1.01 - added unsampled quadrats
+' =================================
+
+' ---------------------------------
+' SUB:          Report_Open
+' Description:  report open actions
+' Assumptions:  -
+' Parameters:   Cancel - whether open action(s) should be cancelled (boolean)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 12, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/12/2018 - initial version
+' ---------------------------------
+Private Sub Report_Open(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    'Forms!frm_Events!Event_ID
+    'If IsError(Forms!frm_Events!Event_ID) Then Debug.Print "error"
+    
+    Debug.Print "oa= " & Me.OpenArgs
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Report_Open[rpt_Event_Summary_Unfiltered])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          Detail_Format
+' Description:  report format actions
+' Assumptions:  -
+' Parameters:   Cancel - whether format action should be cancelled (boolean)
+'               FormatCount - number of times a section (in this case the detail section)
+'                             is formatted (integer)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, April 20, 2018
+' Adapted:      -
+' Revisions:
+'   BLC - 4/20/2018 - initial version
+'   BLC - 5/1/2018 - added unsampled quadrats
+' ---------------------------------
+Private Sub Detail_Format(Cancel As Integer, FormatCount As Integer)
+On Error GoTo Err_Handler
+
+    'show/hide label
+    Me.lblNoDataUnsampled.visible = Not Me.Report.Controls("rSub_UnsampledTags").Report.HasData
+    Me.lblNoDataUnsampledQuadrats.visible = Not Me.Report.Controls("rSub_Unsampled_Quadrats").Report.HasData
+    Me.lblNoDataMonster.visible = Not Me.Report.Controls("rSub_Monster_Saplings").Report.HasData
+    
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Detail_Format[rpt_Event_Summary_Unfiltered])"
+    End Select
+    Resume Exit_Handler
+End Sub

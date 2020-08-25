@@ -1643,14 +1643,15 @@ On Error GoTo Err_Handler
                     "s_export_all_tag_status_by_cycle_x_by_year"
                     '-- required parameters --
                     .Parameters("yr") = TempVars("ExportYear")
-
+            Debug.Print .Parameters("yr")
                 Case Else
                     'handle other non-parameterized queries
                     
             End Select
-            
+            Debug.Print Template
+            Debug.Print .SQL
+
             Set rs = .OpenRecordset(dbOpenDynaset)
-            
         End With
         
     End With

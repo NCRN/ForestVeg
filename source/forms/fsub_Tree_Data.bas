@@ -1,9 +1,10 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     RecordSelectors = NotDefault
     NavigationButtons = NotDefault
     DividingLines = NotDefault
+    FilterOn = NotDefault
     AllowDesignChanges = NotDefault
     DefaultView =0
     TabularCharSet =204
@@ -14,10 +15,10 @@ Begin Form
     Width =14040
     DatasheetFontHeight =9
     ItemSuffix =80
-    Left =4830
-    Top =4305
-    Right =18855
-    Bottom =11370
+    Left =1215
+    Top =2985
+    Right =15240
+    Bottom =10050
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0x015274d28119e540
@@ -1514,6 +1515,89 @@ Begin Form
                     WebImagePaddingTop =1
                     Overlaps =1
                 End
+                Begin TextBox
+                    Visible = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =93
+                    IMESentenceMode =3
+                    Left =60
+                    Top =4155
+                    Width =1260
+                    Height =705
+                    TabIndex =35
+                    BackColor =14745599
+                    Name ="tbxHighlightPriorDBH"
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =4155
+                    LayoutCachedWidth =1320
+                    LayoutCachedHeight =4860
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    OverlapFlags =255
+                    TextAlign =3
+                    Left =180
+                    Top =4140
+                    Width =855
+                    Height =300
+                    FontSize =10
+                    LeftMargin =22
+                    TopMargin =22
+                    RightMargin =22
+                    BottomMargin =22
+                    BackColor =15527148
+                    ForeColor =16711680
+                    Name ="lblPriorDBH"
+                    Caption ="Prior DBH"
+                    ControlTipText ="[Experimental Value] Prior DBH value is based on a simple sum of DBH values from"
+                        " all the tree's stems (for this tag) from the last monitoring event before this "
+                        "one"
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =4140
+                    LayoutCachedWidth =1035
+                    LayoutCachedHeight =4440
+                End
+                Begin TextBox
+                    OldBorderStyle =0
+                    OverlapFlags =247
+                    TextAlign =3
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =180
+                    Top =4380
+                    Width =855
+                    Height =480
+                    FontSize =10
+                    TabIndex =36
+                    LeftMargin =22
+                    TopMargin =22
+                    RightMargin =22
+                    BottomMargin =22
+                    BackColor =15527148
+                    BorderColor =0
+                    Name ="tbxPriorDBH"
+                    ControlSource ="=IIf(Nz(GetPriorDBH([Tree_Data_ID],\"Tree\",[Tag_ID]),0)=0,\"N/A\",Round(GetPrio"
+                        "rDBH([Tree_Data_ID],\"Tree\",[Tag_ID]),2))"
+                    ControlTipText ="[Experimental Value] Prior DBH value is based on a simple sum of DBH values from"
+                        " all the tree's stems (for this tag) from the last monitoring event before this "
+                        "one"
+                    ConditionalFormat = Begin
+                        0x010000006e000000010000000000000002000000000000000600000001000000 ,
+                        0x0000ff00ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x22004e002f004100220000000000
+                    End
+
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =4380
+                    LayoutCachedWidth =1035
+                    LayoutCachedHeight =4860
+                    ConditionalFormat14 = Begin
+                        0x0100010000000000000002000000010000000000ff00ffffff00050000002200 ,
+                        0x4e002f0041002200000000000000000000000000000000000000000000
+                    End
+                End
             End
         End
         Begin FormFooter
@@ -1794,6 +1878,7 @@ End Sub
 '               BLC   - 4/9/2018 - added documentation, error handling
 '   BLC - 4/19/2018 - update ValidDBH w/ Habit
 '   BLC - 4/21/2018 - code cleanup
+'   BLC - 8/7/2020  - adjusted ValidDBH to include event date parameter
 ' ---------------------------------
 Private Sub fsub_Tree_DBH_Exit(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -1801,7 +1886,7 @@ On Error GoTo Err_Handler
     Me.Refresh
     
     'check for +/-4cm or < 1cm sapling DBH
-    ValidDBH "Tree"
+    ValidDBH "Tree", Me.Parent.tbxEventDate
 
 Exit_Handler:
     Exit Sub
@@ -2802,7 +2887,7 @@ On Error GoTo Err_Handler
         MsgBox "You must SELECT A TAG before you can enter record details!", vbExclamation, "Enter Tag First"
         'Me!cboLocation_ID.SetFocus
     End If
-
+    
 Exit_Handler:
     Exit Sub
     
@@ -2827,6 +2912,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/22/2018 - initial version
+'   BLC - 8/7/2020  - adjusted ValidDBH to include event date parameter
 ' ---------------------------------
 Private Sub CheckDBH()
 On Error GoTo Err_Handler
@@ -2841,12 +2927,14 @@ On Error GoTo Err_Handler
     If Me.Form.Controls("fsub_Tree_DBH").Form.Recordset.RecordCount > 0 Then
         
         'check for +/-4cm or < 1cm sapling DBH
-        ValidDBH "Tree"
+        ValidDBH "Tree", Me.Parent.tbxEventDate
 
     End If
 
     'set text color if checked
     If Me!DBH_Check = 1 Then Me.lblDBHCheck.forecolor = lngBlue
+    
+    Debug.Print "xx_Data_ID " & Me.Tag_ID & " Prior DBH - " & GetPriorDBH(Me.Tree_Data_ID, "Tree", Me.Tag_ID)
     
 Exit_Handler:
     Exit Sub

@@ -382,7 +382,7 @@ On Error GoTo Err_Handler
    
    'use NULL Delete_Date vs. Delete_Table = False since tables could have been
    'selected for deletion, but no deletion completed
-    Me.filter = " [Delete_Date] IS NULL"   '" [Delete_Table] =  " & False
+    Me.Filter = " [Delete_Date] IS NULL"   '" [Delete_Table] =  " & False
     
     Me.FilterOn = True
     

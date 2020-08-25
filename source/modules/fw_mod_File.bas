@@ -240,7 +240,7 @@ On Error GoTo Err_Handler
 
         If Len(FileFilters) > 0 Then
             Dim aryFilters() As String
-            Dim filter As Variant
+            Dim Filter As Variant
             Dim filterData() As String
             
             .Filters.Clear
@@ -248,9 +248,9 @@ On Error GoTo Err_Handler
             'prepare filter description & file types
             aryFilters = Split(FileFilters, "|")
             
-            For Each filter In aryFilters
+            For Each Filter In aryFilters
                 'filter description - extension
-                filterData = Split(CStr(filter), "-")
+                filterData = Split(CStr(Filter), "-")
                             
                 .Filters.Add filterData(0), "*." & filterData(1)
             
@@ -404,7 +404,7 @@ Public Function GetFile(Optional ByVal strInitialDir As String, _
     GetFile = adhCommonFileOpenSave( _
         InitialDir:=strInitialDir, _
         OpenFile:=True, _
-        filter:=strFilter, _
+        Filter:=strFilter, _
         flags:=lngFlags, _
         DialogTitle:=strTitle)
 
@@ -425,36 +425,73 @@ End Function
 ' Description:  Opens the open/save file dialog and returns the file name selected by the user
 ' Parameters:   strFileName, strFileType, strFileExt - file name/path, type and extension
 '               strTitle - title of the dialog box (optional)
+'               strButtonLabel - label on the save button (optional)
 ' Returns:      name of the file to save; or Null if user cancels
 ' Throws:       none
 ' References:   adhAddFilterItem, adhCommonFileOpenSave
+'   cheekybuddha, February 1, 2018
+'   https://www.utteraccess.com/forum/index.php?showtopic=2047596
 ' Source/date:  Susan Huse, fall 2004
 ' Revisions:    John R. Boetsch, May 2005 - minor revisions and documentation
 ' Revisions:    JRB, 5/16/2006 - updated documentation, error traps
 '               JRB, 6/22/2009 - added strTitle to parameters
 '               BLC, 4/30/2015 - move from mod_Utilities to mod_File
 '               BLC, 5/18/2015 - renamed, removed fxn prefix
+'               BLC, 7/30/2020 - revised for 64-bit, retired adh calls, replaced w/ FileDialog
+'                                adjusted to add button title
 ' =================================
 Public Function SaveFile(ByVal strFileName As String, ByVal strFileType As String, _
-    ByVal strFileExt As String, Optional ByVal strTitle As String = "Save As") As Variant
+    ByVal strFileExt As String, Optional ByVal strTitle As String = "Save As", _
+    Optional ByVal strButtonLabel As String = "Save File") As Variant
 
     On Error GoTo Err_Handler
 
     Dim strFilter As String
-    Dim lngFlags As Long
+'    Dim lngFlags As Long
+'
+'    ' Use the save file dialog to interactively browse to and select the desired file
+'    strFilter = adhAddFilterItem(strFilter, strFileType, strFileExt)
+'
+'    lngFlags = adhOFN_HIDEREADONLY Or adhOFN_OVERWRITEPROMPT Or _
+'        adhOFN_HIDEREADONLY Or adhOFN_NOCHANGEDIR
+'
+'    SaveFile = adhCommonFileOpenSave( _
+'        OpenFile:=False, _
+'        filter:=strFilter, _
+'        flags:=lngFlags, _
+'        DialogTitle:=strTitle, _
+'        FileName:=strFileName)
 
-    ' Use the save file dialog to interactively browse to and select the desired file
-    strFilter = adhAddFilterItem(strFilter, strFileType, strFileExt)
-
-    lngFlags = adhOFN_HIDEREADONLY Or adhOFN_OVERWRITEPROMPT Or _
-        adhOFN_HIDEREADONLY Or adhOFN_NOCHANGEDIR
-
-    SaveFile = adhCommonFileOpenSave( _
-        OpenFile:=False, _
-        filter:=strFilter, _
-        flags:=lngFlags, _
-        DialogTitle:=strTitle, _
-        FileName:=strFileName)
+    Dim fd As FileDialog
+    Set fd = Application.FileDialog(msoFileDialogSaveAs)
+    
+    With fd
+        .Title = strTitle
+        .ButtonName = strButtonLabel
+        .InitialFileName = strFileName '"*.accdb" 'strFileName
+        .AllowMultiSelect = False
+        
+        ' filters trigger errors in Access for SaveAs file dialog
+        '.Filters.Clear
+        '.Filters.Add strFileType, strFileExt
+        
+        If .Show Then
+            SaveFile = .SelectedItems(1)
+        Else
+            'MsgBox "No file saved."
+            SaveFile = ""
+            Exit Function
+        End If
+'        SaveFile = fd.Execute
+        'SaveFile = .Show '.Execute
+'        If .Show Then
+'            strPathFile = .SelectedItems(1)
+'        Else
+'            MsgBox "No file saved."
+'            Exit Sub
+'        End If
+        
+    End With
 
 Exit_Handler:
     Exit Function
@@ -467,6 +504,87 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Function
+
+' =================================
+' FUNCTION:     SaveAsFile
+' Description:  Opens the open/save file dialog and returns the file name selected by the user
+' Parameters:   strFileName, strFileType, strFileExt - file name/path, type and extension
+'               strTitle - title of the dialog box (optional)
+'               strButtonLabel - label on the save button (optional)
+' Returns:      name of the file to save; or Null if user cancels
+' Throws:       none
+' References:
+'   cheekybuddha, February 1, 2018
+'   https://www.utteraccess.com/forum/index.php?showtopic=2047596
+' Source/date:  Bonnie Campbell, August 20, 2020
+' Revisions:
+'               BLC - 8/20/2020 - initial version
+' =================================
+Public Function SaveAsFile(ByVal strFileName As String, ByVal strFileType As String, _
+    ByVal strFileExt As String, Optional ByVal strTitle As String = "Save As", _
+    Optional ByVal strButtonLabel As String = "Save File") As Variant
+
+    On Error GoTo Err_Handler
+
+    Dim strFilter As String
+'    Dim lngFlags As Long
+'
+'    ' Use the save file dialog to interactively browse to and select the desired file
+'    strFilter = adhAddFilterItem(strFilter, strFileType, strFileExt)
+'
+'    lngFlags = adhOFN_HIDEREADONLY Or adhOFN_OVERWRITEPROMPT Or _
+'        adhOFN_HIDEREADONLY Or adhOFN_NOCHANGEDIR
+'
+'    SaveFile = adhCommonFileOpenSave( _
+'        OpenFile:=False, _
+'        filter:=strFilter, _
+'        flags:=lngFlags, _
+'        DialogTitle:=strTitle, _
+'        FileName:=strFileName)
+
+    Dim fd As FileDialog
+    'Set fd = Application.GetSaveAsFilename(msoFileDialogSaveAs)
+    
+    With fd
+        .Title = strTitle
+        .ButtonName = strButtonLabel
+        .InitialFileName = strFileName '"*.accdb" 'strFileName
+        .AllowMultiSelect = False
+        
+        ' filters trigger errors in Access for SaveAs file dialog
+        '.Filters.Clear
+        '.Filters.Add strFileType, strFileExt
+        
+        If .Show Then
+ '           SaveFile = .SelectedItems(1)
+        Else
+            'MsgBox "No file saved."
+'            SaveFile = ""
+            Exit Function
+        End If
+'        SaveFile = fd.Execute
+        'SaveFile = .Show '.Execute
+'        If .Show Then
+'            strPathFile = .SelectedItems(1)
+'        Else
+'            MsgBox "No file saved."
+'            Exit Sub
+'        End If
+        
+    End With
+
+Exit_Handler:
+    Exit Function
+
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SaveAsFile[fw_mod_File])"
+    End Select
+    Resume Exit_Handler
+End Function
+
 
 ' =================================
 ' FUNCTION:     FileExists

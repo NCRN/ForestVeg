@@ -1,4 +1,4 @@
 ﻿tbl_CWD_Data
-;DATABASE=C:\Projects\TEST_DATA\FORESTVEG\2020 PREP\Forest_Veg_be_2020.accdb
+;DATABASE=.\Forest_Veg_be_2020_20200821_TEST.accdb
 tbl_CWD_Data
 CWD_Data_ID

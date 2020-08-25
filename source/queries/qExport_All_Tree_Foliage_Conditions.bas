@@ -22,69 +22,17 @@ dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
 Begin
     Begin
-        dbText "Name" ="tlu_Plants.Latin_Name"
-        dbInteger "ColumnWidth" ="2700"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tags.Tag"
-        dbInteger "ColumnWidth" ="735"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tags.TSN"
-        dbInteger "ColumnWidth" ="780"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Panel"
-        dbInteger "ColumnWidth" ="900"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Frame"
-        dbInteger "ColumnWidth" ="960"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tree_Foliage_Conditions.Condition"
-        dbInteger "ColumnWidth" ="1215"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tree_Foliage_Conditions.Percent_Afflicted"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="Condition_Description"
         dbLong "AggregateType" ="-1"
         dbInteger "ColumnWidth" ="2250"
         dbBoolean "ColumnHidden" ="0"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Unit_Code"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="Sample_Year"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Subunit_Code"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="Cycle"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Plot_Name"
         dbLong "AggregateType" ="-1"
     End
     Begin
@@ -94,17 +42,9 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Unit_Group"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="Status"
         dbInteger "ColumnWidth" ="1425"
         dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tags.Tag_Status"
         dbLong "AggregateType" ="-1"
     End
     Begin

@@ -22,30 +22,6 @@ dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
 Begin
     Begin
-        dbText "Name" ="tbl_Locations.Unit_Code"
-        dbInteger "ColumnWidth" ="735"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Plot_Name"
-        dbInteger "ColumnWidth" ="1275"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Panel"
-        dbInteger "ColumnWidth" ="1170"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tlu_Plants.Latin_Name"
-        dbInteger "ColumnWidth" ="2640"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="Host_TSN"
         dbInteger "ColumnWidth" ="960"
         dbBoolean "ColumnHidden" ="0"
@@ -62,20 +38,6 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tlu_Plants.Exotic"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Unit_Group"
-        dbInteger "ColumnWidth" ="660"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Locations.Subunit_Code"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="Host_Status"
         dbLong "AggregateType" ="-1"
     End
@@ -84,29 +46,7 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Frame"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="Date"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tlu_Plants.TaxonCode"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Sapling_Vines.TSN"
-        dbInteger "ColumnWidth" ="855"
-        dbBoolean "ColumnHidden" ="0"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="tbl_Tags.Tag_Status"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="qCalc_Saplings_with_Vines_in_Crown.Condition"
         dbLong "AggregateType" ="-1"
     End
     Begin

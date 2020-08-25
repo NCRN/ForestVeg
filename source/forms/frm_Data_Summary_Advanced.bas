@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     AllowFilters = NotDefault
@@ -21,10 +21,9 @@ Begin Form
     Width =14400
     DatasheetFontHeight =9
     ItemSuffix =85
-    Left =4725
-    Top =1170
-    Right =19125
-    Bottom =11880
+    Left =1065
+    Right =15465
+    Bottom =10710
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x2680758ff389e340
@@ -1763,6 +1762,7 @@ Begin Form
                     LayoutCachedHeight =1365
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     TextFontCharSet =238
                     Left =120
@@ -1787,6 +1787,7 @@ Begin Form
                     WebImagePaddingBottom =1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =120
                     Top =8160
@@ -1906,6 +1907,7 @@ Begin Form
                     End
                 End
                 Begin CheckBox
+                    Enabled = NotDefault
                     OverlapFlags =85
                     Left =2100
                     Top =9330
@@ -2003,6 +2005,7 @@ Begin Form
                             End
                         End
                         Begin OptionButton
+                            Enabled = NotDefault
                             OverlapFlags =87
                             Left =2625
                             Top =9688
@@ -2073,7 +2076,7 @@ Option Explicit
 ' =================================
 ' MODULE:       frm_Data_Summary_Advanced
 ' Level:        Application module
-' Version:      1.03
+' Version:      1.04
 '
 ' Description:  Standard form for summarizing/exploring project data
 ' Source/date:  John Boetsch, Jan 2010
@@ -2083,6 +2086,7 @@ Option Explicit
 '               BLC   - 5/14/2018 - 1.01 - added documentation, error handling
 '               BLC   - 1/xx/2019 - 1.02 - added annual data exports
 '               BLC   - 10/9/2019 - 1.03 - added status messaging for progress
+'               BLC   - 8/19/2020 - 1.04 - updated fxnSave parameters
 ' =================================
 
 ' ---------------------------------
@@ -3725,6 +3729,8 @@ On Error GoTo Err_Handler
     
     Dim sttDocName As String
     sttDocName = "rpt_Event_Summary"
+
+'MsgBox Forms!frm_Data_Summary_Advanced!cbxEventSelection
     DoCmd.OpenReport sttDocName, acPreview
     
 Exit_Handler:
@@ -3883,6 +3889,7 @@ End Sub
 '   ML/GS - unknown - initial version
 '   BLC - 5/14/2018 - documentation, error handling
 '   BLC - 10/9/2019 - added status messaging for progress
+'   BLC - 8/19/2020 - updated fxnSave parameters
 ' ---------------------------------
 Private Sub btnExportAll_Click()
 On Error GoTo Err_Handler
@@ -3936,7 +3943,8 @@ On Error GoTo Err_Handler
     
     'Generate the default output file name and allow user to edit it
     strInitFile = Application.CurrentProject.Path & "\Exports\NCRN_ForestVeg_All_Data_" & CStr(Format(Now(), "yyyymmdd")) & ".xlsx"
-    strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.xls*)", "*.xls*")
+    'strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.xls*)", "*.xls*")
+    strSaveFile = fxnSaveFile(strInitFile, "Excel", "*xls*", "Microsoft Excel (*.xls*) - *.xls*")
     strSaveFolder = fPathParsing(strSaveFile, "D")
     
     'status messaging & progress
@@ -4130,7 +4138,9 @@ On Error GoTo Err_Handler
     Dim NewFile As String
     
 '    'Generate the default output file name and allow user to edit it
-'    strInitFile = Application.CurrentProject.Path & "\Exports\NCRN_ForestVeg_All_Data_" & CStr(Format(Now(), "yyyymmdd")) & ".xlsx"
+    strInitFile = Application.CurrentProject.Path & "\Exports\NCRN_ForestVeg_All_Data_" & CStr(Format(Now(), "yyyymmdd")) & ".xlsx"
+    strSaveFile = SaveFile(strInitFile, "Excel", "xls*", "Save Export File As", "Save Export File")
+'    strSaveFile = fxnSaveFile(strInitFile, "Excel", "xls*", "Microsoft Excel (*.xls*) - *.xls*")
 '    strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.xls*)", "*.xls*")
 '    strSaveFolder = fPathParsing(strSaveFile, "D")
     
@@ -4174,7 +4184,7 @@ On Error GoTo Err_Handler
 '        qryName = IIf(rs("TableName") <> "Tag_History", "qExport_All_" & rs("TableName"), "qExport_Tag_Status_by_Cycle_x")
         tpl = rs("RelatedTemplate")
 Debug.Print tpl
-'        Dim rs2 As DAO.Recordset
+        Dim rs2 As DAO.Recordset
 '        Set rs2 = GetRecords(tpl)
         
         'set temp query SQL
@@ -4192,11 +4202,15 @@ Debug.Print tpl
             .SQL = Replace(GetTemplate(tpl), "Parameters yr integer;", "")
 '            .Parameters("yr") = DataYear >> DoCmd.TransferText retriggers params
             .SQL = Replace(.SQL, "[yr]", DataYear)
+ Debug.Print .SQL
+ '           Set rs2 = GetRecords(tpl) '<-- retains parameters (yr)
+            
+            
             
             Select Case FileType
                 Case "XLS"
-                    'DoCmd.TransferSpreadsheet acExport, 10, qryName, strSaveFile, True
-                    'DoCmd.TransferSpreadsheet acExport, 10, rs2, strSaveFile, True
+                    DoCmd.TransferSpreadsheet acExport, 10, QryName, strSaveFile, True
+                    DoCmd.TransferSpreadsheet acExport, 10, rs2, strSaveFile, True
                     
 '                    RecordsetToExcel rs2, fileFullPath, rs("AnnualData")
                     

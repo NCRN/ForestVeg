@@ -11,28 +11,30 @@ Begin Report
     DatasheetGridlinesBehavior =3
     GridX =24
     GridY =24
-    Width =10800
+    Width =10919
     DatasheetFontHeight =10
-    ItemSuffix =46
-    Left =795
-    Top =1755
+    ItemSuffix =49
+    Left =600
+    Top =780
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
-        0x44e573aedc48e540
+        0x5b9755aa1682e540
     End
-    RecordSource ="SELECT t.Tag, p.Latin_Name,  q.Stems, q.Equiv_DBH_cm, td.Crown_Class & \" \" & q"
-        ".CrownClass AS CC,   td.TreeVigor & \" \" & tv.TreeVigorClass AS Vig,  td.Vines_"
-        "Checked, td.Conditions_Checked, td.Foliage_Conditions_Checked, td.Tree_Status, t"
-        ".Azimuth, t.Distance, td.Tree_Notes,  td.Tree_Data_ID, td.Event_ID,  MakeStemLis"
-        "t('Tree', td.Event_ID,td.Tree_Data_Id) AS StemList,  MakeLiveFlag('Tree',td.Even"
-        "t_ID,td.Tree_Data_Id) AS LiveFlag  FROM (((tbl_Tree_Data td  LEFT JOIN qCalc_Bas"
-        "al_Area_per_Tree q ON td.Tree_Data_ID = q.Tree_Data_ID)   LEFT JOIN tbl_Tags t O"
-        "N td.Tag_ID = t.Tag_ID)   LEFT JOIN tlu_Plants p ON t.TSN = p.TSN)   LEFT JOIN t"
-        "luTreeVigor tv ON td.TreeVigor = tv.TreeVigorCode  ORDER BY t.Tag;"
+    RecordSource ="SELECT t.Tag, t.Tag_ID, p.Latin_Name, q.Stems, q.Equiv_DBH_cm,  td.Crown_Class &"
+        " \" \" & q.CrownClass AS CC,  td.TreeVigor & \" \" & tv.TreeVigorClass AS Vig,  "
+        "td.Vines_Checked, td.Conditions_Checked, td.Foliage_Conditions_Checked, td.Tree_"
+        "Status, t.Azimuth, t.Distance, td.Tree_Notes, td.Tree_Data_ID, td.Event_ID, e.Ev"
+        "ent_Date, MakeStemList('Tree',td.Event_ID,td.Tree_Data_Id) AS StemList, MakeLive"
+        "Flag('Tree',td.Event_ID,td.Tree_Data_Id) AS LiveFlag FROM (((((tbl_Tree_Data td "
+        " LEFT JOIN qCalc_Basal_Area_per_Tree q ON td.Tree_Data_ID = q.Tree_Data_ID)  LEF"
+        "T JOIN tbl_Tags t ON td.Tag_ID = t.Tag_ID)  LEFT JOIN tlu_Plants p ON t.TSN = p."
+        "TSN)  LEFT JOIN tluTreeVigor tv ON td.TreeVigor = tv.TreeVigorCode) LEFT JOIN tb"
+        "l_Events e ON e.Event_ID = td.Event_ID) ORDER BY t.Tag;"
     Caption ="srpt_Trees"
+    OnOpen ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0x6a010000f0000000660100001e01000000000000302a00001c02000001000000 ,
+        0x6a010000a8000000660100001e01000000000000a72a0000d809000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =255
@@ -94,7 +96,7 @@ Begin Report
         End
         Begin FormHeader
             KeepTogether = NotDefault
-            Height =705
+            Height =720
             Name ="ReportHeader"
             Begin
                 Begin Label
@@ -305,17 +307,143 @@ Begin Report
         Begin Section
             KeepTogether = NotDefault
             CanGrow = NotDefault
-            Height =600
+            CanShrink = NotDefault
+            Height =870
             OnFormat ="[Event Procedure]"
             Name ="Detail"
             Begin
+                Begin Subform
+                    Left =1440
+                    Top =645
+                    Width =2956
+                    Height =60
+                    Name ="srpt_srpt_Tree_Vines"
+                    SourceObject ="Report.rSub_Event_rSub_Tree_Vines"
+                    LinkChildFields ="Tree_Data_ID"
+                    LinkMasterFields ="Tree_Data_ID"
+
+                    LayoutCachedLeft =1440
+                    LayoutCachedTop =645
+                    LayoutCachedWidth =4396
+                    LayoutCachedHeight =705
+                End
+                Begin Subform
+                    Left =4440
+                    Top =645
+                    Width =2956
+                    Height =60
+                    TabIndex =1
+                    Name ="rSub_rSub_Tree_Conditions"
+                    SourceObject ="Report.rSub_Event_rSub_Tree_Conditions"
+                    LinkChildFields ="Tree_Data_ID"
+                    LinkMasterFields ="Tree_Data_ID"
+
+                    LayoutCachedLeft =4440
+                    LayoutCachedTop =645
+                    LayoutCachedWidth =7396
+                    LayoutCachedHeight =705
+                End
+                Begin Subform
+                    Left =7680
+                    Top =645
+                    Width =2956
+                    Height =60
+                    TabIndex =2
+                    Name ="rSub_rSub_Tree_Foliage"
+                    SourceObject ="Report.rSub_Event_rSub_Tree_Foliage"
+                    LinkChildFields ="Tree_Data_ID"
+                    LinkMasterFields ="Tree_Data_ID"
+
+                    LayoutCachedLeft =7680
+                    LayoutCachedTop =645
+                    LayoutCachedWidth =10636
+                    LayoutCachedHeight =705
+                End
+                Begin TextBox
+                    CanGrow = NotDefault
+                    CanShrink = NotDefault
+                    IMESentenceMode =3
+                    Top =645
+                    Width =1560
+                    Height =60
+                    FontSize =6
+                    TabIndex =3
+                    ForeColor =8421504
+                    Name ="tbxTreeNotes"
+                    ControlSource ="Tree_Notes"
+                    StatusBarText ="Number of physical tag attached to tree"
+
+                    LayoutCachedTop =645
+                    LayoutCachedWidth =1560
+                    LayoutCachedHeight =705
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    BackStyle =1
+                    TextAlign =2
+                    TextFontFamily =34
+                    Left =4500
+                    Top =645
+                    Width =2865
+                    Height =225
+                    FontSize =8
+                    BackColor =2366701
+                    ForeColor =16777215
+                    Name ="lblNoTreeConditions"
+                    Caption ="N o  T r e e   C o n d i t i o n s"
+                    FontName ="Arial"
+                    LayoutCachedLeft =4500
+                    LayoutCachedTop =645
+                    LayoutCachedWidth =7365
+                    LayoutCachedHeight =870
+                End
+                Begin TextBox
+                    FontItalic = NotDefault
+                    DecimalPlaces =1
+                    TextAlign =2
+                    BackStyle =1
+                    IMESentenceMode =3
+                    Left =5460
+                    Top =300
+                    Width =720
+                    FontSize =7
+                    TabIndex =4
+                    Name ="tbxPriorDBH"
+                    ControlSource ="=TruncateNumber(GetPriorDBH([Tree_Data_ID],\"Tree\",[Tag_ID]),1)"
+                    Format ="General Number"
+                    FontName ="Calibri"
+                    ConditionalFormat = Begin
+                        0x01000000e8000000020000000100000000000000000000002400000001000100 ,
+                        0x00000000fff2000001000000000000002500000043000000010101000072bc00 ,
+                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
+                        0x41006200730028005b00450071007500690076005f004400420048005f006300 ,
+                        0x6d005d002d005b007400620078005000720069006f0072004400420048005d00 ,
+                        0x29003e003400000000005b007400620078005000720069006f00720044004200 ,
+                        0x48005d003c003e005b00450071007500690076005f004400420048005f006300 ,
+                        0x6d005d0000000000
+                    End
+
+                    LayoutCachedLeft =5460
+                    LayoutCachedTop =300
+                    LayoutCachedWidth =6180
+                    LayoutCachedHeight =540
+                    ConditionalFormat14 = Begin
+                        0x01000200000001000000000000000100010000000000fff20000230000004100 ,
+                        0x6200730028005b00450071007500690076005f004400420048005f0063006d00 ,
+                        0x5d002d005b007400620078005000720069006f0072004400420048005d002900 ,
+                        0x3e00340000000000000000000000000000000000000000000001000000000000 ,
+                        0x00010101000072bc00ffffff001d0000005b007400620078005000720069006f ,
+                        0x0072004400420048005d003c003e005b00450071007500690076005f00440042 ,
+                        0x0048005f0063006d005d00000000000000000000000000000000000000000000
+                    End
+                End
                 Begin TextBox
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =7800
+                    Left =7920
                     Width =720
                     Height =239
-                    TabIndex =14
+                    TabIndex =15
                     Name ="tbxCheckBackground"
                     ControlSource ="=\"\""
                     ConditionalFormat = Begin
@@ -336,8 +464,8 @@ Begin Report
                         0x6800650063006b00650064005d003d00460061006c007300650000000000
                     End
 
-                    LayoutCachedLeft =7800
-                    LayoutCachedWidth =8520
+                    LayoutCachedLeft =7920
+                    LayoutCachedWidth =8640
                     LayoutCachedHeight =239
                     ConditionalFormat14 = Begin
                         0x01000300000001000000000000000100000000000000faf3e800250000004900 ,
@@ -362,25 +490,30 @@ Begin Report
                     TextFontCharSet =238
                     TextAlign =1
                     IMESentenceMode =3
+                    Left =120
                     Width =720
                     Height =270
                     FontSize =9
                     FontWeight =700
+                    TabIndex =5
                     Name ="tbxTag"
                     ControlSource ="Tag"
                     StatusBarText ="Number of physical tag attached to tree"
                     FontName ="Calibri"
 
+                    LayoutCachedLeft =120
+                    LayoutCachedWidth =840
+                    LayoutCachedHeight =270
                 End
                 Begin TextBox
                     TextAlign =2
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =780
+                    Left =900
                     Width =1320
                     Height =270
                     FontSize =9
-                    TabIndex =1
+                    TabIndex =6
                     Name ="tbxLocation"
                     ControlSource ="=[Azimuth] & \"º  \" & Format([Distance],\"Fixed\") & \"m\""
                     StatusBarText ="Distance (m) from plot center to near EDGE of tree"
@@ -394,6 +527,9 @@ Begin Report
                         0x69006d007500740068005d00290000000000
                     End
 
+                    LayoutCachedLeft =900
+                    LayoutCachedWidth =2220
+                    LayoutCachedHeight =270
                     ConditionalFormat14 = Begin
                         0x01000100000001000000000000000100000000000000ed1c2400270000004900 ,
                         0x73004e0075006c006c0028005b00440069007300740061006e00630065005d00 ,
@@ -406,17 +542,17 @@ Begin Report
                     FontItalic = NotDefault
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =2160
+                    Left =2280
                     Height =270
                     FontSize =9
-                    TabIndex =2
+                    TabIndex =7
                     Name ="tbxLatinName"
                     ControlSource ="Latin_Name"
                     StatusBarText ="Genus of specimen"
                     FontName ="Calibri"
 
-                    LayoutCachedLeft =2160
-                    LayoutCachedWidth =3600
+                    LayoutCachedLeft =2280
+                    LayoutCachedWidth =3720
                     LayoutCachedHeight =270
                 End
                 Begin TextBox
@@ -424,26 +560,26 @@ Begin Report
                     TextAlign =2
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =3540
+                    Left =3660
                     Width =1980
                     FontSize =9
-                    TabIndex =3
+                    TabIndex =8
                     Name ="tbxStems"
                     ControlSource ="=MakeStemList('Tree',[Event_ID],[Tree_Data_ID])"
                     FontName ="Calibri"
 
-                    LayoutCachedLeft =3540
-                    LayoutCachedWidth =5520
+                    LayoutCachedLeft =3660
+                    LayoutCachedWidth =5640
                     LayoutCachedHeight =240
                 End
                 Begin TextBox
                     TextAlign =2
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =5460
+                    Left =5580
                     Width =720
                     FontSize =9
-                    TabIndex =4
+                    TabIndex =9
                     Name ="tbxSumBasalArea"
                     ControlSource ="Equiv_DBH_cm"
                     FontName ="Calibri"
@@ -465,8 +601,8 @@ Begin Report
                         0x61005d003d00220022002c0031002c003000290000000000
                     End
 
-                    LayoutCachedLeft =5460
-                    LayoutCachedWidth =6180
+                    LayoutCachedLeft =5580
+                    LayoutCachedWidth =6300
                     LayoutCachedHeight =240
                     ConditionalFormat14 = Begin
                         0x01000500000001000000000000000100000000000000faf3e800250000004900 ,
@@ -505,10 +641,10 @@ Begin Report
                     TextAlign =2
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =6360
+                    Left =6480
                     Width =1260
                     FontSize =9
-                    TabIndex =5
+                    TabIndex =10
                     Name ="tbxCrownClass"
                     ControlSource ="CC"
                     FontName ="Calibri"
@@ -524,8 +660,8 @@ Begin Report
                         0x6c006500640022002c0031002c00300029000000000022002000220000000000
                     End
 
-                    LayoutCachedLeft =6360
-                    LayoutCachedWidth =7620
+                    LayoutCachedLeft =6480
+                    LayoutCachedWidth =7740
                     LayoutCachedHeight =240
                     ConditionalFormat14 = Begin
                         0x01000300000001000000000000000100000000000000faf3e800250000004900 ,
@@ -546,10 +682,10 @@ Begin Report
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =9480
+                    Left =9600
                     Width =1319
                     FontSize =9
-                    TabIndex =6
+                    TabIndex =11
                     Name ="tbxTreeStatus"
                     ControlSource ="Tree_Status"
                     FontName ="Calibri"
@@ -572,8 +708,8 @@ Begin Report
                         0x2c0031002c003000290000000000
                     End
 
-                    LayoutCachedLeft =9480
-                    LayoutCachedWidth =10799
+                    LayoutCachedLeft =9600
+                    LayoutCachedWidth =10919
                     LayoutCachedHeight =240
                     ConditionalFormat14 = Begin
                         0x01000300000001000000000000000100000000000000ffffcc00320000004900 ,
@@ -595,100 +731,34 @@ Begin Report
                         0x000000000000000000000000000000
                     End
                 End
-                Begin Subform
-                    Left =1440
-                    Top =360
-                    Width =2956
-                    Height =60
-                    TabIndex =7
-                    Name ="srpt_srpt_Tree_Vines"
-                    SourceObject ="Report.rSub_Event_rSub_Tree_Vines"
-                    LinkChildFields ="Tree_Data_ID"
-                    LinkMasterFields ="Tree_Data_ID"
-
-                    LayoutCachedLeft =1440
-                    LayoutCachedTop =360
-                    LayoutCachedWidth =4396
-                    LayoutCachedHeight =420
-                End
-                Begin Subform
-                    Left =4440
-                    Top =360
-                    Width =2956
-                    Height =60
-                    TabIndex =8
-                    Name ="rSub_rSub_Tree_Conditions"
-                    SourceObject ="Report.rSub_Event_rSub_Tree_Conditions"
-                    LinkChildFields ="Tree_Data_ID"
-                    LinkMasterFields ="Tree_Data_ID"
-
-                    LayoutCachedLeft =4440
-                    LayoutCachedTop =360
-                    LayoutCachedWidth =7396
-                    LayoutCachedHeight =420
-                End
-                Begin Subform
-                    Left =7680
-                    Top =360
-                    Width =2956
-                    Height =60
-                    TabIndex =9
-                    Name ="rSub_rSub_Tree_Foliage"
-                    SourceObject ="Report.rSub_Event_rSub_Tree_Foliage"
-                    LinkChildFields ="Tree_Data_ID"
-                    LinkMasterFields ="Tree_Data_ID"
-
-                    LayoutCachedLeft =7680
-                    LayoutCachedTop =360
-                    LayoutCachedWidth =10636
-                    LayoutCachedHeight =420
-                End
-                Begin TextBox
-                    CanGrow = NotDefault
-                    CanShrink = NotDefault
-                    IMESentenceMode =3
-                    Top =360
-                    Width =1560
-                    Height =60
-                    FontSize =6
-                    TabIndex =10
-                    ForeColor =8421504
-                    Name ="tbxTreeNotes"
-                    ControlSource ="Tree_Notes"
-                    StatusBarText ="Number of physical tag attached to tree"
-
-                    LayoutCachedTop =360
-                    LayoutCachedWidth =1560
-                    LayoutCachedHeight =420
-                End
                 Begin CheckBox
-                    Left =7920
-                    TabIndex =11
+                    Left =8040
+                    TabIndex =12
                     Name ="chkVines_Checked"
                     ControlSource ="Vines_Checked"
 
-                    LayoutCachedLeft =7920
-                    LayoutCachedWidth =8180
+                    LayoutCachedLeft =8040
+                    LayoutCachedWidth =8300
                     LayoutCachedHeight =240
                 End
                 Begin CheckBox
-                    Left =8100
-                    TabIndex =12
+                    Left =8220
+                    TabIndex =13
                     Name ="chkConditions_Checked"
                     ControlSource ="Conditions_Checked"
 
-                    LayoutCachedLeft =8100
-                    LayoutCachedWidth =8360
+                    LayoutCachedLeft =8220
+                    LayoutCachedWidth =8480
                     LayoutCachedHeight =240
                 End
                 Begin CheckBox
-                    Left =8280
-                    TabIndex =13
+                    Left =8400
+                    TabIndex =14
                     Name ="chkFoliage_Conditions_Checked"
                     ControlSource ="Foliage_Conditions_Checked"
 
-                    LayoutCachedLeft =8280
-                    LayoutCachedWidth =8540
+                    LayoutCachedLeft =8400
+                    LayoutCachedWidth =8660
                     LayoutCachedHeight =240
                 End
                 Begin TextBox
@@ -696,10 +766,10 @@ Begin Report
                     TextAlign =3
                     BackStyle =1
                     IMESentenceMode =3
-                    Left =8580
+                    Left =8700
                     Width =1020
                     FontSize =9
-                    TabIndex =15
+                    TabIndex =16
                     Name ="tbxVigor"
                     ControlSource ="Vig"
                     FontName ="Calibri"
@@ -715,8 +785,8 @@ Begin Report
                         0x6c006500640022002c0031002c00300029000000000022002000220000000000
                     End
 
-                    LayoutCachedLeft =8580
-                    LayoutCachedWidth =9600
+                    LayoutCachedLeft =8700
+                    LayoutCachedWidth =9720
                     LayoutCachedHeight =240
                     ConditionalFormat14 = Begin
                         0x01000300000001000000000000000100000000000000faf3e800250000004900 ,
@@ -737,27 +807,7 @@ Begin Report
                     BackStyle =1
                     TextAlign =2
                     TextFontFamily =34
-                    Left =4500
-                    Top =360
-                    Width =2865
-                    Height =225
-                    FontSize =8
-                    BackColor =2366701
-                    ForeColor =16777215
-                    Name ="lblNoTreeConditions"
-                    Caption ="N o  T r e e   C o n d i t i o n s"
-                    FontName ="Arial"
-                    LayoutCachedLeft =4500
-                    LayoutCachedTop =360
-                    LayoutCachedWidth =7365
-                    LayoutCachedHeight =585
-                End
-                Begin Label
-                    FontItalic = NotDefault
-                    BackStyle =1
-                    TextAlign =2
-                    TextFontFamily =34
-                    Left =2040
+                    Left =2160
                     Top =15
                     Width =1680
                     Height =270
@@ -767,24 +817,46 @@ Begin Report
                     Name ="lblMissingID"
                     Caption ="M I S S I N G  I D"
                     FontName ="Arial"
-                    LayoutCachedLeft =2040
+                    LayoutCachedLeft =2160
                     LayoutCachedTop =15
-                    LayoutCachedWidth =3720
+                    LayoutCachedWidth =3840
                     LayoutCachedHeight =285
                 End
+                Begin Subform
+                    CanShrink = NotDefault
+                    OldBorderStyle =1
+                    Left =4980
+                    Top =540
+                    Width =1800
+                    Height =3
+                    TabIndex =17
+                    BorderColor =12566463
+                    Name ="rsub_Event_Tree_PriorDBH_Stems"
+                    SourceObject ="Report.rSub_Event_rSub_Tree_PriorDBH_Stems"
+                    LinkChildFields ="Tag_ID"
+                    LinkMasterFields ="Tag_ID"
+
+                    LayoutCachedLeft =4980
+                    LayoutCachedTop =540
+                    LayoutCachedWidth =6780
+                    LayoutCachedHeight =543
+                    BorderThemeColorIndex =1
+                    BorderShade =75.0
+                End
                 Begin TextBox
+                    Visible = NotDefault
                     FontItalic = NotDefault
                     DecimalPlaces =1
                     TextAlign =2
-                    BackStyle =1
                     IMESentenceMode =3
-                    Left =5460
-                    Top =180
+                    Left =180
+                    Top =360
                     Width =720
+                    ColumnOrder =0
                     FontSize =7
-                    TabIndex =16
-                    Name ="tbxPriorDBH"
-                    ControlSource ="=TruncateNumber(GetPriorDBH([Tree_Data_ID],\"Tree\"),1)"
+                    TabIndex =18
+                    Name ="tbxSamplingEventDate"
+                    ControlSource ="Event_Date"
                     Format ="General Number"
                     FontName ="Calibri"
                     ConditionalFormat = Begin
@@ -798,10 +870,10 @@ Begin Report
                         0x6d005d0000000000
                     End
 
-                    LayoutCachedLeft =5460
-                    LayoutCachedTop =180
-                    LayoutCachedWidth =6180
-                    LayoutCachedHeight =420
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =360
+                    LayoutCachedWidth =900
+                    LayoutCachedHeight =600
                     ConditionalFormat14 = Begin
                         0x01000200000001000000000000000100010000000000fff20000230000004100 ,
                         0x6200730028005b00450071007500690076005f004400420048005f0063006d00 ,
@@ -849,10 +921,88 @@ Option Explicit
 ' Description:  Report related functions & procedures for application
 '
 ' Source/date:  Bonnie Campbell, April 3, 2018
-' Revisions:    BLC - 4/3/2018 - 1.00 - initial version
-'               BLC - 5/21/2018 - 1.01 - revise to only show in red if trees are not dead/non-sampled (w/o EAB-infection)
+' Revisions:    BLC - 4/3/2018   - 1.00 - initial version
+'               BLC - 5/21/2018  - 1.01 - revise to only show in red if trees are not dead/non-sampled (w/o EAB-infection)
 '               BLC - 10/24/2018 - 1.02 - fix so living trees w/ V-C-F checked aren't red
+'               BLC - 8/5/2020   - 1.03 - added prior tree stem DBHs
 ' =================================
+'---------------------
+' Simulated Inheritance
+'---------------------
+
+'---------------------
+' Declarations
+'---------------------
+Private m_SetOnce As Boolean
+
+'---------------------
+' Event Declarations
+'---------------------
+Public Event InvalidSetOnce(Value As Boolean)
+
+'---------------------
+' Properties
+'---------------------
+Public Property Let SetOnce(Value As Boolean)
+    m_SetOnce = Value
+End Property
+
+Public Property Get SetOnce() As Boolean
+   SetOnce = m_SetOnce
+End Property
+
+'---------------------
+' Events
+'---------------------
+
+
+' ---------------------------------
+' SUB:          Report_Open
+' Description:  report open actions
+' Assumptions:  -
+' Parameters:   Cancel - whether report action should be cancelled (boolean)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, August 5, 2020
+' Adapted:      -
+' Revisions:
+'   BLC - 8/5/2020 - initial version
+' ---------------------------------
+Private Sub Report_Open(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    Me.SetOnce = False
+    
+    '----------------------------------------
+    'set values for the stems DBH subreport
+    '----------------------------------------
+    Dim SubFilter As String
+
+    'If Not IsNull(Me.Parent.Event_Date) And Me.SetOnce = False Then
+'    If Not IsNull(Me.Parent.Event_Date) And Me.SetOnce = False Then
+'        SubFilter = "e.Event_Date > #" & CDate(Me.Parent.Event_Date) & "#"
+'    Debug.Print SubFilter
+'        'insert the WHERE *before* the GROUP BY clause
+''        Me.rsub_Event_Tree_PriorDBH_Stems.Report.RecordSource = Replace(Me.rsub_Event_Tree_PriorDBH_Stems.Report.RecordSource, "GROUP BY", " WHERE " & SubFilter & " GROUP BY")
+'    '        Me.FilterOn = True
+'        SetOnce = True
+'    End If
+
+'    Debug.Print Me.rsub_Event_Tree_PriorDBH_Stems.Report.RecordSource
+    '----------------------------------------
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Report_Open[rpt_rSub_Event_Trees])"
+    End Select
+    Resume Exit_Handler
+End Sub
 
 ' ---------------------------------
 ' SUB:          Detail_Format

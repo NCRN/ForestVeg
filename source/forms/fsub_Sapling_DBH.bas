@@ -1,9 +1,10 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     RecordSelectors = NotDefault
     AutoCenter = NotDefault
     NavigationButtons = NotDefault
+    ViewsAllowed =1
     TabularFamily =0
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
@@ -12,10 +13,10 @@ Begin Form
     Width =2460
     DatasheetFontHeight =10
     ItemSuffix =14
-    Left =2490
-    Top =5070
-    Right =5280
-    Bottom =7260
+    Left =2535
+    Top =5865
+    Right =5325
+    Bottom =8055
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x37d06983d518e540
@@ -30,6 +31,7 @@ Begin Form
         0x6801000068010000680100006801000000000000201c0000e010000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
+    AllowDatasheetView =0
     FilterOnLoad =0
     ShowPageMargins =0
     AllowLayoutView =0
@@ -268,7 +270,9 @@ Begin Form
             End
         End
         Begin Section
-            Height =660
+            CanGrow = NotDefault
+            CanShrink = NotDefault
+            Height =420
             BackColor =15527148
             Name ="Detail"
             Begin
@@ -485,7 +489,7 @@ Option Explicit
 ' =================================
 ' FORM:         fsub_Sapling_DBH
 ' Level:        Application report
-' Version:      1.02
+' Version:      1.04
 '
 ' Description:  Form related functions & procedures for application
 ' Requires:     Keypad Utils module
@@ -496,6 +500,9 @@ Option Explicit
 '                                          field renaming cmd>btn, Label>lbl, txt>tbx
 '                                          cmd_DBH_Keypad_Click() removed
 '               BLC   - 4/21/2018 - 1.02 - added tbxDBH lost focus event
+'               BLC   - 7/31/2020 - 1.03 - issue: cannot enter > 1 stems
+'                                          fix: commented out tbxDBH_LostFocus code
+'               BLC   - 8/7/2020  - 1.04 - adjusted ValidDBH to include event date parameter
 ' =================================
 
 ' ---------------------------------
@@ -662,6 +669,7 @@ End Sub
 '   ML/GS - unknown - initial version
 '   BLC - 4/19/2018 - added error handling, documentation
 '                     validate DBH
+'   BLC - 8/7/2020  - adjusted ValidDBH to include event date parameter
 ' ---------------------------------
 Private Sub btnDeleteDBH_Click()
 On Error GoTo Err_Handler
@@ -683,7 +691,7 @@ On Error GoTo Err_Handler
     End With
     
     'check DBH
-    ValidDBH "Sapling"
+    ValidDBH "Sapling", Me.Parent.tbxEventDate
 
 Exit_Handler:
     Exit Sub
@@ -710,12 +718,13 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/19/2018 - initial version
+'   BLC - 8/7/2020  - adjusted ValidDBH to include event date parameter
 ' ---------------------------------
 Private Sub tbxDBH_Change()
 On Error GoTo Err_Handler
     
     If Me.Recordset.RecordCount > 0 Then _
-        ValidDBH "Sapling"
+        ValidDBH "Sapling", Me.Parent.tbxEventDate
         
 Exit_Handler:
     Exit Sub
@@ -742,12 +751,14 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/21/2018 - initial version
+'   BLC - 7/31/2020 - issue: prevents users from entering > 1 stems
+'                     fix: commented out code
 ' ---------------------------------
 Private Sub tbxDBH_LostFocus()
 On Error GoTo Err_Handler
     
-    If Me.Recordset.RecordCount > 0 Then _
-        ValidDBH "Sapling"
+'    If Me.Recordset.RecordCount > 0 Then _
+'        ValidDBH "Sapling"
     
 Exit_Handler:
     Exit Sub

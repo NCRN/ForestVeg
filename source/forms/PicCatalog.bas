@@ -785,7 +785,7 @@ On Error GoTo Err_Handler
     'Set Me.grid.SourceObject = Forms("PicPhotos").Form
   
     'filters
-    Me.filter = ""
+    Me.Filter = ""
     Me.FilterOnLoad = True
     
     'initialize values << place here before initial call to Form_Current()
@@ -1494,12 +1494,12 @@ On Error GoTo Err_Handler
     Application.Echo False
     
     'clear existing filter
-    Me.filter = ""
+    Me.Filter = ""
     
     'set filter based on selections
-    Me.filter = "PhotoType = '" & cbxPhotoType & "'" _
+    Me.Filter = "PhotoType = '" & cbxPhotoType & "'" _
                 & " AND Year(PhotoDate) = " & Me.cbxYear
-Debug.Print Me.filter
+Debug.Print Me.Filter
 
     Me.FilterOn = True
     
