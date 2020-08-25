@@ -2211,7 +2211,7 @@ On Error GoTo Err_Handler
     Me!cbxFrameFilter = Null
     Me!cbxYearFilter = Null
     Me!cbxStatusFilter = Null
-    Me.filter = ""
+    Me.Filter = ""
     
 Exit_Handler:
     Exit Sub
@@ -2234,7 +2234,7 @@ Private Sub cmdClearFilter_Click()
     Me!cboFrameFilter = Null
     Me!cboYearFilter = Null
     Me!cboStatusFilter = Null
-    Me.filter = ""
+    Me.Filter = ""
     
 Exit_Procedure:
     Exit Sub
@@ -2828,28 +2828,28 @@ Private Function FilterString(val As Variant, fieldName As String, CurrentFilter
 On Error GoTo Err_Handler
 
     Const cstrNull As String = "[Null]"
-    Dim filter As Variant
+    Dim Filter As Variant
 
     If IsNull(val) Then
-        filter = CurrentFilter
+        Filter = CurrentFilter
     Else
-        filter = (CurrentFilter + " AND ") & fieldName
+        Filter = (CurrentFilter + " AND ") & fieldName
         If val = cstrNull Then
-            filter = filter & " Is Null"
+            Filter = Filter & " Is Null"
         Else
         If IsNumeric(val) Then
-            filter = filter & "=" & val & ""
+            Filter = Filter & "=" & val & ""
             Else
             If IsDate(val) Then
-                filter = filter & "=#" & val & "#"
+                Filter = Filter & "=#" & val & "#"
                 Else
-                    filter = filter & "=" & CorrectText(CStr(val))
+                    Filter = Filter & "=" & CorrectText(CStr(val))
                 End If
             End If
         End If
     End If
     
-    FilterString = filter
+    FilterString = Filter
 
     
 Exit_Handler:
@@ -2929,9 +2929,9 @@ End Function
 Public Sub FilterGateway(FilterOn As Boolean)
 On Error GoTo Err_Handler
     
-    Dim filter As Variant
+    Dim Filter As Variant
 
-    filter = Null
+    Filter = Null
     
     Me!tglFilter = FilterOn
     
@@ -2939,18 +2939,18 @@ On Error GoTo Err_Handler
         Me!tglFilter.Caption = "Filter Is On"
     
         'add park filter to filter string
-        filter = FilterString(Me!cbxParkFilter, "Unit_Code", filter)
+        Filter = FilterString(Me!cbxParkFilter, "Unit_Code", Filter)
         'add unit filter to filter string
-        filter = FilterString(Me!cbxUnitGroupFilter, "Unit_Group", filter)
+        Filter = FilterString(Me!cbxUnitGroupFilter, "Unit_Group", Filter)
         'add panel filter to filter string
-        filter = FilterString(Me!cbxPanelFilter, "Panel", filter)
+        Filter = FilterString(Me!cbxPanelFilter, "Panel", Filter)
         'add frame filter to filter string
-        filter = FilterString(Me!cbxFrameFilter, "Frame", filter)
+        Filter = FilterString(Me!cbxFrameFilter, "Frame", Filter)
         'add year filter to filter string
-        filter = FilterString(Me!cbxYearFilter, "Event_Year", filter)
+        Filter = FilterString(Me!cbxYearFilter, "Event_Year", Filter)
         'add status filter to filter string
-        filter = FilterString(Me!cbxStatusFilter, "Location_Status", filter)
-        Me.filter = Nz(filter)
+        Filter = FilterString(Me!cbxStatusFilter, "Location_Status", Filter)
+        Me.Filter = Nz(Filter)
     Else
         Me!tglFilter.Caption = "Filter Is Off"
     End If
@@ -3000,7 +3000,7 @@ If booFilterOn Then
     varFilter = FilterString(Me!cboYearFilter, "Event_Year", varFilter)
     'add status filter to filter string
     varFilter = FilterString(Me!cboStatusFilter, "Location_Status", varFilter)
-    Me.filter = Nz(varFilter)
+    Me.Filter = Nz(varFilter)
 Else
     Me!tglFilter.Caption = "Filter Is Off"
 End If

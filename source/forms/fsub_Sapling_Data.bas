@@ -14,10 +14,10 @@ Begin Form
     GridY =24
     Width =13944
     DatasheetFontHeight =9
-    ItemSuffix =79
-    Left =1095
+    ItemSuffix =82
+    Left =1215
     Top =2985
-    Right =14865
+    Right =14985
     Bottom =9300
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
@@ -1640,6 +1640,89 @@ Begin Form
                     LayoutCachedWidth =4500
                     LayoutCachedHeight =2730
                 End
+                Begin TextBox
+                    Visible = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =93
+                    IMESentenceMode =3
+                    Left =60
+                    Top =4275
+                    Width =1260
+                    Height =645
+                    TabIndex =38
+                    BackColor =14745599
+                    Name ="tbxHighlightPriorDBH"
+
+                    LayoutCachedLeft =60
+                    LayoutCachedTop =4275
+                    LayoutCachedWidth =1320
+                    LayoutCachedHeight =4920
+                End
+                Begin Label
+                    FontItalic = NotDefault
+                    OverlapFlags =255
+                    TextAlign =3
+                    Left =136
+                    Top =4260
+                    Width =899
+                    Height =299
+                    FontSize =10
+                    LeftMargin =22
+                    TopMargin =22
+                    RightMargin =22
+                    BottomMargin =22
+                    BackColor =15527148
+                    ForeColor =16711680
+                    Name ="lblPriorDBH"
+                    Caption ="Prior DBH"
+                    ControlTipText ="[Experimental Value] Prior DBH value is based on a simple sum of DBH values from"
+                        " all the sapling's stems (for this tag) from the last monitoring event before th"
+                        "is one"
+                    LayoutCachedLeft =136
+                    LayoutCachedTop =4260
+                    LayoutCachedWidth =1035
+                    LayoutCachedHeight =4559
+                End
+                Begin TextBox
+                    OldBorderStyle =0
+                    OverlapFlags =247
+                    TextAlign =3
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =180
+                    Top =4500
+                    Width =855
+                    Height =360
+                    FontSize =10
+                    TabIndex =39
+                    LeftMargin =22
+                    TopMargin =22
+                    RightMargin =22
+                    BottomMargin =22
+                    BackColor =15527148
+                    BorderColor =0
+                    Name ="tbxPriorDBH"
+                    ControlSource ="=IIf(Nz(GetPriorDBH([Sapling_Data_ID],\"Sapling\",[Tag_ID]),0)=0,\"N/A\",Round(G"
+                        "etPriorDBH([Sapling_Data_ID],\"Sapling\",[Tag_ID]),2))"
+                    ControlTipText ="[Experimental Value] Prior DBH value is based on a simple sum of DBH values from"
+                        " all the sapling's stems (for this tag) from the last monitoring event before th"
+                        "is one"
+                    ConditionalFormat = Begin
+                        0x010000006e000000010000000000000002000000000000000600000001000000 ,
+                        0x0000ff00ffffff00000000000000000000000000000000000000000000000000 ,
+                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+                        0x22004e002f004100220000000000
+                    End
+
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =4500
+                    LayoutCachedWidth =1035
+                    LayoutCachedHeight =4860
+                    ConditionalFormat14 = Begin
+                        0x0100010000000000000002000000010000000000ff00ffffff00050000002200 ,
+                        0x4e002f0041002200000000000000000000000000000000000000000000
+                    End
+                End
             End
         End
         Begin FormFooter
@@ -1659,7 +1742,7 @@ Option Explicit
 ' =================================
 ' FORM:         fsub_Sapling_Data
 ' Level:        Application report
-' Version:      1.10
+' Version:      1.11
 '
 ' Description:  Form related functions & procedures for application
 ' Requires:     Keypad Utils module
@@ -1681,6 +1764,7 @@ Option Explicit
 '               BLC - 5/20/2019   - 1.08 - added SwapTagDropDowns
 '               BLC - 5/23/2019   - 1.09 - added SetTagRFS, Tag property
 '               BLC - 6/30/2020   - 1.10 - added GetEquivDBH check to avoid popups due to subform not updating EquivDBH until *after* check
+'               BLC - 7/31/2020   - 1.11 - SetTagRFS() revise to suppress rows updated dialog (set warnings false, then re-enable after RunSQL)
 ' =================================
 
 ' ---------------------------------
@@ -3049,6 +3133,7 @@ End Sub
 '   BLC - 4/3/2018 - added error handling, documentation
 '   BLC - 4/19/2018 - update ValidDBH w/ Habit
 '   BLC - 4/21/2018 - added record count check, code cleanup
+'   BLC - 8/7/2020  - adjusted ValidDBH to include event date parameter
 ' ---------------------------------
 Private Sub fsub_Sapling_DBH_Exit(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -3059,7 +3144,7 @@ On Error GoTo Err_Handler
     If Me.Form.Controls("fsub_Sapling_DBH").Form.Recordset.RecordCount > 0 Then
         
         'check for +/-4cm or < 1cm sapling DBH
-        ValidDBH ("Sapling")
+        ValidDBH "Sapling", Me.Parent.tbxEventDBH
 
     End If
 
@@ -3159,6 +3244,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/22/2018 - initial version
+'   BLC - 8/7/2020  - adjusted ValidDBH to include event date parameter
 ' ---------------------------------
 Private Sub CheckDBH()
 On Error GoTo Err_Handler
@@ -3173,7 +3259,7 @@ On Error GoTo Err_Handler
     If Me.Form.Controls("fsub_Sapling_DBH").Form.Recordset.RecordCount > 0 Then
         
         'check for +/-4cm or < 1cm sapling DBH
-        ValidDBH ("Sapling")
+        ValidDBH "Sapling", Me.Parent.tbxEventDate
 
     End If
 
@@ -3344,6 +3430,7 @@ End Sub
 ' Source/date:  Bonnie Campbell, May 23, 2019
 ' Adapted:
 ' Revisions:    BLC - 5/23/2019  - initial version
+'               BLC - 7/31/2020  - revise to suppress rows updated dialog (set warnings false, then re-enable after RunSQL)
 ' ---------------------------------
 Public Function SetTagRFS(Status As Boolean, Tag As Integer)
 On Error GoTo Err_Handler
@@ -3358,8 +3445,11 @@ On Error GoTo Err_Handler
     
 Debug.Print updateSQL
     
-    DoCmd.RunSQL updateSQL
-    
+    With DoCmd
+        .SetWarnings False
+        .RunSQL updateSQL
+        .SetWarnings True
+    End With
     Me.fsub_Tag_Sapling.Requery
 
 Exit_Handler:

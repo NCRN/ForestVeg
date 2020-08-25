@@ -2,7 +2,6 @@
 VersionRequired =20
 Begin Report
     LayoutForPrint = NotDefault
-    FilterOn = NotDefault
     DefaultView =0
     TabularFamily =0
     DateGrouping =1
@@ -14,8 +13,9 @@ Begin Report
     Width =11160
     DatasheetFontHeight =10
     ItemSuffix =70
+    Left =165
+    Top =-45
     DatasheetGridlinesColor =12632256
-    Filter ="[Event_ID]='{7A2453B5-B719-41D4-8AF4-EB31F12DF43E}'"
     RecSrcDt = Begin
         0xf58c6abea030e540
     End

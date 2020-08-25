@@ -1086,7 +1086,7 @@ On Error GoTo Err_Handler
         Me.Context = ary(0) & " - " & ary(1) '"Plot - 24"
         
         'set filter for subform
-        Me.list.Form.filter = "CommentType='" & ary(0) & "' AND CommentType_ID=" & ary(1)
+        Me.list.Form.Filter = "CommentType='" & ary(0) & "' AND CommentType_ID=" & ary(1)
         Me.list.Form.FilterOn = True
         
         'update subform

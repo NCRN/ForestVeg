@@ -1,30 +1,8 @@
-﻿Operation =1
-Option =0
-Begin InputTables
-    Name ="tlu_Plants"
-End
-Begin OutputColumns
-    Expression ="tlu_Plants.Latin_Name"
-    Alias ="NCRN_Common"
-    Expression ="tlu_Plants.Plants_Common"
-    Expression ="tlu_Plants.Common"
-    Expression ="tlu_Plants.Family"
-    Expression ="tlu_Plants.Genus"
-    Expression ="tlu_Plants.Species"
-    Expression ="tlu_Plants.TSN"
-    Expression ="tlu_Plants.Favorite"
-    Expression ="tlu_Plants.Woody"
-    Expression ="tlu_Plants.Herbaceous"
-    Expression ="tlu_Plants.Targeted_Herb"
-    Expression ="tlu_Plants.Tree"
-    Expression ="tlu_Plants.Shrub"
-    Expression ="tlu_Plants.Vine"
-    Expression ="tlu_Plants.Exotic"
-End
-Begin OrderBy
-    Expression ="tlu_Plants.Latin_Name"
-    Flag =0
-End
+﻿dbMemo "SQL" ="SELECT p.Latin_Name, p.Common AS NCRN_Common, p.NPSpecies_Common, p.Family, p.Ge"
+    "nus, p.Species, p.TSN, p.Favorite, p.Woody, p.Herbaceous, p.Targeted_Herb, p.Tre"
+    "e, p.Shrub, p.Vine, p.Exotic\015\012FROM tlu_Plants AS p\015\012ORDER BY p.Latin"
+    "_Name;\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -103,27 +81,60 @@ Begin
         dbText "Name" ="tlu_Plants.Targeted_Herb"
         dbLong "AggregateType" ="-1"
     End
-End
-Begin
-    State =0
-    Left =302
-    Top =11
-    Right =1855
-    Bottom =927
-    Left =-1
-    Top =-1
-    Right =1812
-    Bottom =642
-    Left =0
-    Top =0
-    ColumnsShown =539
     Begin
-        Left =48
-        Top =12
-        Right =333
-        Bottom =501
-        Top =0
-        Name ="tlu_Plants"
-        Name =""
+        dbText "Name" ="p.Latin_Name"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.NPSpecies_Common"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Family"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Genus"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Species"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.TSN"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Favorite"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Woody"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Herbaceous"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Targeted_Herb"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Tree"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Shrub"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Vine"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="p.Exotic"
+        dbLong "AggregateType" ="-1"
     End
 End

@@ -1165,7 +1165,7 @@ End Sub
 Private Sub cbxTargetList_Change()
 On Error GoTo Err_Handler
     
-    Me.filter = "TargetList = '" & Me.cbxTargetList & "'"
+    Me.Filter = "TargetList = '" & Me.cbxTargetList & "'"
     Me.FilterOn = True
     
 Exit_Handler:
@@ -1195,7 +1195,7 @@ End Sub
 Private Sub cbxTargetList_AfterUpdate()
 On Error GoTo Err_Handler
     
-    Me.filter = "TargetList = '" & Me.cbxTargetList & "'"
+    Me.Filter = "TargetList = '" & Me.cbxTargetList & "'"
     Me.FilterOn = Not IsNull(Me.Name) 'True
     
 Exit_Handler:

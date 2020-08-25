@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     RecordSelectors = NotDefault
@@ -526,7 +526,7 @@ Option Explicit
 ' =================================
 ' MODULE:       frm_Append_Select_Import_File
 ' Level:        Application module
-' Version:      1.04
+' Version:      1.05
 '
 ' Description:  field data import related functions & procedures
 '
@@ -537,6 +537,7 @@ Option Explicit
 '               BLC   - 9/3/2019  - 1.02 - add EOF/BOF checks before recordcounts
 '               BLC   - 9/20/2019 - 1.03 - add importer to capture who is importing events
 '               BLC   - 9/24/2019 - 1.04 - add delete import tables button, updated importer sort order
+'               BLC   - 7/14/2020 - 1.05 - replaced GetImportFile() w/ BrowseFolder()
 ' =================================
 
 '---------------------
@@ -650,15 +651,22 @@ End Sub
 '   MEL/GS - unknown - initial version
 '   BLC  - 8/31/2019 - added documentation, error handling
 '   BLC  - 9/20/2019 - renamed btnBrowse from cmd_Browse, enabled import files button
+'   BLC  - 7/14/2020 - replaced GetImportFile() w/ BrowseFolder()
 ' ---------------------------------
 Private Sub btnBrowse_Click()
 On Error GoTo Err_Handler
 
     Dim varImportFileName As Variant
     Dim arrFile() As String
+    Dim strFilters As String
+    Dim strPath As String
     
     'Select the file to import
-    varImportFileName = GetImportFile()
+    strFilters = "Access (*.*db) - *db"
+    strPath = Application.CurrentProject.Path
+    varImportFileName = BrowseFolder("Locate data file", "Select Field Database", strPath, , _
+                                    msoFileDialogFilePicker, strFilters, False)
+    'GetImportFile()
     
     If IsNull(varImportFileName) Then
         Exit Sub

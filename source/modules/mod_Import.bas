@@ -59,10 +59,10 @@ On Error GoTo Err_Handler
         strFilter, "Access (*.*db)", "*.*db")
         lngFlags = adhOFN_HIDEREADONLY Or _
         adhOFN_HIDEREADONLY Or adhOFN_NOCHANGEDIR
-        
+       
         varImportFileName = adhCommonFileOpenSave( _
             OpenFile:=True, _
-            filter:=strFilter, _
+            Filter:=strFilter, _
             flags:=lngFlags, _
             DialogTitle:="Locate data file")
         

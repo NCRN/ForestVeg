@@ -2291,7 +2291,7 @@ On Error GoTo Err_Handler
     
     'strQuadrat = Me!Frame_Quadrat_Selection.Value
     Me.txtQuadrat_Number.DefaultValue = "'" & strQuadrat & "'"
-    Me.filter = "[Quadrat_Number] = """ & strQuadrat & """ "
+    Me.Filter = "[Quadrat_Number] = """ & strQuadrat & """ "
     Me.FilterOn = True
     'Temporary fix to save Quadrat record before entering subform
     Me!txtQuadrat_Comments.Value = Me!txtQuadrat_Comments.Value & " "

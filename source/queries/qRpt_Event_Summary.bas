@@ -1,7 +1,7 @@
 ﻿Operation =1
 Option =0
-Where ="(((qFiltered_Events.Event_ID) Like [Forms]![frm_Data_Summary]![cboEvent_Selectio"
-    "n]))"
+Where ="(((qFiltered_Events.Event_ID) Like [Forms]![frm_Data_Summary_Advanced]![cbxEvent"
+    "Selection]))"
 Begin InputTables
     Name ="qFiltered_Locations"
     Name ="qFiltered_Events"
@@ -205,14 +205,14 @@ Begin
 End
 Begin
     State =0
-    Left =174
-    Top =29
-    Right =1127
-    Bottom =591
+    Left =51
+    Top =25
+    Right =1004
+    Bottom =488
     Left =-1
     Top =-1
-    Right =921
-    Bottom =282
+    Right =929
+    Bottom =248
     Left =0
     Top =0
     ColumnsShown =539

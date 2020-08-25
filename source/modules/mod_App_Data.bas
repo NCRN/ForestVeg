@@ -4,7 +4,7 @@ Option Explicit
 ' =================================
 ' MODULE:       mod_App_Data
 ' Level:        Application module
-' Version:      1.06
+' Version:      1.08
 '
 ' Description:  application data related functions & procedures
 '
@@ -21,6 +21,8 @@ Option Explicit
 '               BLC - 6/29/2020 - 1.06 - ValidDBH() changed sapling IF statement to include equivalent DBH check vs sapling habit alone
 '                                        Added GetEquivDBH() for avoiding Sapling DBH popups when subforms don't populate before check
 '                                        Added TruncateNumber() - shift to framework module later
+'               BLC - 8/2/2020  - 1.07 - ValidDBH() adjusted to use ABS() for DBH comparison instead of OR
+'               BLC - 8/6/2020  - 1.08 - ValidDBH() - accommodate "N/A" values when no prior sampling DBH values exist
 ' =================================
 
 ' ---------------------------------
@@ -171,6 +173,7 @@ End Sub
 '                       --> Sapling DBH values < 1cm
 '                           (Minimum DBH for saplings = 1 cm)
 ' Parameters:   Habit - tree or sapling (string)
+'               EventDate - current sampling event date (date)
 ' Returns:      -
 ' Throws:       none
 ' References:   -
@@ -182,8 +185,12 @@ End Sub
 '   BLC - 4/19/2018 - revised to use CurrDb & accept Sapling/Tree to determine value
 '   BLC - 4/21/2018 - revise & condense logic
 '   BLC - 6/29/2020 - changed sapling IF statement to include equivalent DBH check vs sapling habit alone
+'   BLC - 8/2/2020  - adjusted to use ABS() for DBH comparison instead of OR
+'   BLC - 8/6/2020  - accommodate "N/A" values when no prior sampling DBH values exist
+'   BLC - 8/7/2020  - adjust to include current sampling event date to assure comparison w/ prior sampling
+'                     event date's DBH values
 ' ---------------------------------
-Public Function ValidDBH(Habit As String) As Boolean 'fsub_Sapling_DBH_Exit(Cancel As Integer)
+Public Function ValidDBH(Habit As String, EventDate As Date) As Boolean 'fsub_Sapling_DBH_Exit(Cancel As Integer)
 On Error GoTo Err_Handler
 
     Dim IsValid As Boolean
@@ -229,6 +236,11 @@ On Error GoTo Err_Handler
     
     strLocID = Forms!frm_Events!txtLocation_ID
     
+    'skip validation if value is "N/A"
+    If Forms!frm_Events.Form.Controls(frmDataName).Form.Controls(frmTagName).Controls("tbxTag") = "N/A" Then
+        Exit Function
+    End If
+    
     'intTag = Forms!frm_Events!fsub_Sapling_Data!fsub_Tag_Sapling!tbxTag
     intTag = Forms!frm_Events.Form.Controls(frmDataName).Form.Controls(frmTagName).Controls("tbxTag")
     
@@ -247,16 +259,16 @@ On Error GoTo Err_Handler
     strSQL = "SELECT l.Location_ID, e.Event_ID, l.Admin_Unit_Code, " _
             & "l.Subunit_Code, e.Event_Date, t.Tag, " _
             & strEquivDBHCalc & " AS EquivDBH " _
-            & "FROM ((tbl_Locations l " _
+            & "FROM ((((tbl_Locations l " _
             & "INNER JOIN tbl_Events e ON l.Location_ID = e.Location_ID) " _
-            & "INNER JOIN (tbl_HABIT_Data sd " _
+            & "INNER JOIN tbl_HABIT_Data sd ON e.Event_ID = sd.Event_ID) " _
             & "INNER JOIN tbl_Tags t ON sd.Tag_ID = t.Tag_ID) " _
-            & "ON e.Event_ID = sd.Event_ID) " _
-            & "INNER JOIN tbl_HABIT_DBH sbh ON sd.HABIT_Data_ID = sbh.HABIT_Data_ID " _
+            & "INNER JOIN tbl_HABIT_DBH sbh ON sd.HABIT_Data_ID = sbh.HABIT_Data_ID) " _
+            & "WHERE e.Event_Date <=#" & EventDate & "# " _
             & "GROUP BY l.Location_ID, e.Event_ID, l.Admin_Unit_Code, " _
             & "l.Subunit_Code, e.Event_Date, t.Tag " _
-            & "HAVING (((l.Location_ID) = """ & strLocID & """) " _
-            & "AND ((t.Tag) = " & intTag & ")) " _
+            & "HAVING l.Location_ID = """ & strLocID & """ " _
+            & "AND t.Tag = " & intTag & " " _
             & "ORDER BY e.Event_Date;"
 
     strSQL = Replace(strSQL, "HABIT", Habit)
@@ -275,6 +287,14 @@ Debug.Print "DBH_mod_App_Data: " & strSQL
         ' ------------------------------------
         '  validate if there are DBH records
         ' ------------------------------------
+        'no records (Saplings or Trees) --> validate OK since there
+        If rs.RecordCount = 0 Then
+            ValidDBH = True
+            Exit Function
+        End If
+        
+        'one record means only the current event has DBH values so there is nothing to validate against
+        
         'more than one record (Trees)
         If rs.RecordCount > 1 And Habit = "Tree" Then
         
@@ -283,7 +303,7 @@ Debug.Print "DBH_mod_App_Data: " & strSQL
             PastDBH = rs![EquivDBH]
                         
             ' +/- 4cm threshold check
-            If CurrentDBH - PastDBH >= 4 Or CurrentDBH - PastDBH <= -4 Then
+            If Abs(CurrentDBH - PastDBH) >= 4 Then
             
                  'exceeds +/- 4cm threshold
                 MsgBox "Warning...change in DBH exceeds +/- 4cm. " _
@@ -298,13 +318,19 @@ Debug.Print "DBH_mod_App_Data: " & strSQL
         ElseIf rs.RecordCount >= 1 Then
                 
             'refresh to update tbxEquivDBH BEFORE ValidDBH check
-            Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH.Requery
+            '--> results in Error #2455 - invalid reference to property form/report
+            'Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH.Requery
                 
             'saplings DBH > = 1 (minimum threshold) check
-            If Habit = "Sapling" And _
-                Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH!tbxEquivDBH < 1 Then
+            'avoid error #2455 - entered an expression w/ an invalid reference to the property form/report
+            '   by checking if fsub_Sapling_DBH is loaded first, if not bypass by setting 1 < 1 which
+            '   is not true so the section is skipped
+'            If Habit = "Sapling" And _
+'                IIf(IsLoaded("fsub_Sapling_DBH") = True, Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH!tbxEquivDBH, 1) < 1 Then
 
-'            If Habit = "Sapling" Then
+                'Forms!frm_Events!fsub_Sapling_Data!fsub_Sapling_DBH!tbxEquivDBH < 1 Then
+
+            If Habit = "Sapling" Then
             
                 'nest IF since Tree doesn't have fsub_Sapling_DBH
                 'avoids error #2455 - you have entered an invalid reference to the property Form/Report
@@ -464,9 +490,11 @@ End Function
 ' ---------------------------------
 ' FUNCTION:     GetPriorDBH
 ' Description:  retrieve the tag's previous DBH value
+'               (previous DBH value is for ALL stems and for the sampling event BEFORE the current one)
 ' Assumptions:  -
-' Parameters:   DataID - tag identifier (string)
+' Parameters:   DataID - tree or sapling data identifier (string)
 '               VegType - tree or sapling (string)
+'               TagID - tag identifier (string)
 ' Returns:      -
 ' Throws:       none
 ' References:   -
@@ -476,16 +504,18 @@ End Function
 '   BLC - 4/16/2018 - initial version
 '   BLC - 4/19/2018 - revise to use CurrDb
 ' ---------------------------------
-Public Function GetPriorDBH(DataID As String, VegType As String) As Double
+Public Function GetPriorDBH(DataID As String, VegType As String, TagID As String) As Double
 On Error GoTo Err_Handler
     Dim rs As DAO.Recordset
     Dim qdf As DAO.QueryDef
     Dim strSQL As String
     Dim tblName As String
     Dim fldName As String
+    Dim tblDBHName As String
     
-    tblName = "tbl_" & VegType & "_DBH"
+    tblName = "tbl_" & VegType & "_Data"
     fldName = VegType & "_Data_ID"
+    tblDBHName = "tbl_" & VegType & "_DBH"
     
 '    fails --> aggregate Max in WHERE clause
 '    strSQL = "SELECT DBH FROM " & tblName & _
@@ -493,10 +523,54 @@ On Error GoTo Err_Handler
 '             "= '" & DataID & _
 '             "' AND Max(Updated_Date);"
     
-    strSQL = "SELECT TOP 1 DBH FROM " & tblName & " " & _
-             "WHERE " & fldName & _
-             "= '" & DataID & "' " & _
-             "ORDER BY Updated_Date;"
+'    fails --> only gives last DBH not the sum of all stem dbhs and only for last sampling event
+'    strSQL = "SELECT TOP 1 DBH FROM " & tblName & " " & _
+'             "WHERE " & fldName & _
+'             "= '" & DataID & "' " & _
+'             "ORDER BY Updated_Date;"
+    
+'    strSQL = "SELECT SUM(DBH) AS SumDBH" & _
+'        "FROM tbl_Tree_DBH dbh" & _
+'        "WHERE" & _
+'        "Tree_Data_ID IN (" & _
+'        "SELECT Tree_Data_ID FROM tbl_Tree_Data WHERE Tag_ID = TagID)" & _
+'        "AND" & _
+'        "Tree_Data_ID <> DataID" & _
+'        "GROUP BY Tree_Data_ID, DBH" & _
+'        "ORDER BY Updated_Date DESC;"
+
+'genericized
+'    strSQL = "SELECT SUM(DBH) AS SumDBH " & _
+'        "FROM " & tblDBHName & " dbh " & _
+'        "WHERE " & _
+'        fldName & " IN (" & _
+'        "SELECT " & fldName & " FROM " & tblName & " WHERE Tag_ID = " & TagID & ") " & _
+'        "AND " & _
+'        fldName & " <> " & DataID & " " & _
+'        "GROUP BY " & fldName & ", DBH " & _
+'        "ORDER BY Updated_Date DESC;"
+    
+    strSQL = "SELECT SumDBH FROM " & _
+        "(SELECT TOP 1 e.Event_Date, dbh." & fldName & ", SUM(dbh.DBH) AS SumDBH " & _
+        "FROM ((tbl_Events e " & _
+        "INNER JOIN " & tblName & " d ON d.Event_ID = e.Event_ID) " & _
+        "INNER JOIN " & tblDBHName & " dbh ON dbh." & fldName & " = d." & fldName & ") " & _
+        "WHERE " & _
+        "d." & fldName & " <> " & DataID & " " & _
+        "AND " & _
+        "d.Tag_ID = " & TagID & " " & _
+"AND YEAR(e.Event_Date) < " & _
+"(" & _
+"SELECT YEAR(ee.Event_Date) " & _
+"FROM " & _
+"(tbl_Events ee " & _
+"INNER JOIN " & tblName & " dd ON dd.Event_ID = ee.Event_ID) " & _
+"WHERE dd." & fldName & " = " & DataID & " " & _
+") " & _
+        "GROUP BY dbh." & fldName & ", e.Event_Date " & " " & _
+        "ORDER BY e.Event_Date DESC);"
+    
+ Debug.Print strSQL
     
     'use usys_temp_qdf
     Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
@@ -509,7 +583,7 @@ On Error GoTo Err_Handler
     
         If rs.RecordCount = 1 Then
             'valid
-            GetPriorDBH = rs("DBH")
+            GetPriorDBH = rs("SumDBH") 'rs("DBH")
         Else
             'invalid
             GetPriorDBH = 99
@@ -533,6 +607,107 @@ Err_Handler:
 End Function
 
 ' ---------------------------------
+' FUNCTION:     GetPriorDBHStems
+' Description:  retrieve the tag's previous event stems
+'               (previous DBH stems returns ALL stems for the sampling event BEFORE the current one)
+' Assumptions:  -
+' Parameters:   DataID - tree or sapling data identifier (string)
+'               VegType - tree or sapling (string)
+'               TagID - tag identifier (string)
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, August 2, 2020
+' Adapted:      -
+' Revisions:
+'   BLC - 8/2/2020 - initial version
+' ---------------------------------
+Public Function GetPriorDBHStems(DataID As String, VegType As String, TagID As String) As DAO.Recordset
+On Error GoTo Err_Handler
+    Dim rs As DAO.Recordset
+    Dim qdf As DAO.QueryDef
+    Dim strSQL As String
+    Dim tblName As String
+    Dim fldName As String
+    Dim tblDBHName As String
+    
+    tblName = "tbl_" & VegType & "_Data"
+    fldName = VegType & "_Data_ID"
+    tblDBHName = "tbl_" & VegType & "_DBH"
+    
+    strSQL = "SELECT * FROM " & _
+        "(SELECT e.Event_Date, dbh." & fldName & ", dbh.DBH " & _
+        "FROM ((tbl_Events e " & _
+        "INNER JOIN " & tblName & " d ON d.Event_ID = e.Event_ID) " & _
+        "INNER JOIN " & tblDBHName & " dbh ON dbh." & fldName & " = d." & fldName & ") " & _
+        "WHERE " & _
+        "d." & fldName & " <> " & DataID & " " & _
+        "AND " & _
+        "d.Tag_ID = " & TagID & " " & _
+"AND YEAR(e.Event_Date) < " & _
+"(" & _
+"SELECT YEAR(ee.Event_Date) " & _
+"FROM " & _
+"(tbl_Events ee " & _
+"INNER JOIN " & tblName & " dd ON dd.Event_ID = ee.Event_ID) " & _
+"WHERE dd." & fldName & " = " & DataID & " " & _
+") " & _
+        "GROUP BY dbh." & fldName & ", e.Event_Date, dbh.DBH " & " " & _
+        "ORDER BY e.Event_Date DESC);"
+    
+ Debug.Print strSQL
+    
+    'use usys_temp_qdf
+    Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
+    qdf.SQL = strSQL
+    
+    Set rs = CurrDb.OpenRecordset("usys_temp_qdf")
+    
+    With rs
+        If Not (rs.BOF And rs.EOF) Then
+            rs.MoveLast
+        
+            If rs.RecordCount > 0 Then
+                'valid
+                Set GetPriorDBHStems = rs
+            Else
+                'invalid
+                'GetPriorDBHStems = 99
+                'GoTo Exit_Handler
+            End If
+        
+        Else
+            'add a default
+            Dim rsDefault As DAO.Recordset
+            'Set rsDefault = CurrDb.OpenRecordset("rsDefault")
+            strSQL = "SELECT DISTINCT Now() AS Event_Date, '' AS " & fldName & ", 'NoDBH' AS DBH " & _
+                   "FROM tbl_Events;"
+            
+            Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
+            qdf.SQL = strSQL
+            
+            Set rsDefault = CurrDb.OpenRecordset("usys_temp_qdf")
+            
+            Debug.Print strSQL
+            Debug.Print rsDefault.RecordCount
+            
+            Set GetPriorDBHStems = rsDefault
+        End If
+    End With
+Exit_Handler:
+    Exit Function
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - GetPriorDBHStems[mod_App_Data])"
+    End Select
+    Resume Exit_Handler
+End Function
+
+
+' ---------------------------------
 ' FUNCTION:     GetDBHCheck
 ' Description:  retrieve DBH value
 ' Assumptions:  -
@@ -546,6 +721,7 @@ End Function
 ' Revisions:
 '   BLC - 4/16/2018 - initial version
 '   BLC - 4/19/2018 - revise to use CurrDb
+'   BLC - 8/6/2020 - revise to point to tbl_HABIT_Data vs tbl_HABIT_DBH for DBH_Check
 ' ---------------------------------
 Public Function GetDBHCheck(DataID As String, Habit As String) As Byte
 On Error GoTo Err_Handler
@@ -555,7 +731,7 @@ On Error GoTo Err_Handler
     Dim tblName As String
     Dim fldName As String
     
-    tblName = "tbl_" & Habit & "_DBH"
+    tblName = "tbl_" & Habit & "_Data"
     fldName = Habit & "_Data_ID"
     
     strSQL = "SELECT TOP 1 DBH_Check FROM " & tblName & " " & _

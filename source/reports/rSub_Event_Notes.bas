@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Report
     LayoutForPrint = NotDefault
@@ -16,17 +16,17 @@ Begin Report
     ItemSuffix =5
     Left =570
     Top =1440
+    DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0xfb284ba4f4b1e340
     End
     RecordSource ="qFsub_Note_History"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0x6801000068010000680100006801000000000000302a00003b01000001000000 ,
+        0x6a01000068010000680100006801000000000000302a00003b01000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
-    DatasheetBackColor12 =16777215
     FitToPage =1
     DisplayOnSharePointSite =1
     DatasheetAlternateBackColor =16053492
@@ -38,39 +38,19 @@ Begin Report
             TextFontFamily =0
             FontSize =11
             FontName ="Calibri"
-            LeftPadding =30
-            TopPadding =30
-            RightPadding =30
-            BottomPadding =30
-            GridlineStyleLeft =0
-            GridlineStyleTop =0
-            GridlineStyleRight =0
-            GridlineStyleBottom =0
-            GridlineWidthLeft =1
-            GridlineWidthTop =1
-            GridlineWidthRight =1
-            GridlineWidthBottom =1
+        End
+        Begin Line
+            BorderLineStyle =0
         End
         Begin TextBox
             FELineBreak = NotDefault
             OldBorderStyle =0
             TextFontFamily =0
+            BorderLineStyle =0
             LabelX =-1800
             FontSize =11
             FontName ="Calibri"
             AsianLineBreak =1
-            LeftPadding =30
-            TopPadding =30
-            RightPadding =30
-            BottomPadding =30
-            GridlineStyleLeft =0
-            GridlineStyleTop =0
-            GridlineStyleRight =0
-            GridlineStyleBottom =0
-            GridlineWidthLeft =1
-            GridlineWidthTop =1
-            GridlineWidthRight =1
-            GridlineWidthBottom =1
             ShowDatePicker =0
         End
         Begin FormHeader
@@ -102,8 +82,10 @@ Begin Report
         Begin Section
             KeepTogether = NotDefault
             CanGrow = NotDefault
+            CanShrink = NotDefault
             Height =330
             Name ="Detail"
+            AutoHeight =255
             Begin
                 Begin TextBox
                     TextFontCharSet =204
@@ -160,18 +142,6 @@ Begin Report
                     Width =10800
                     BorderColor =7633277
                     Name ="Line4"
-                    LeftPadding =30
-                    TopPadding =30
-                    RightPadding =30
-                    BottomPadding =30
-                    GridlineStyleLeft =0
-                    GridlineStyleTop =0
-                    GridlineStyleRight =0
-                    GridlineStyleBottom =0
-                    GridlineWidthLeft =1
-                    GridlineWidthTop =1
-                    GridlineWidthRight =1
-                    GridlineWidthBottom =1
                     LayoutCachedTop =315
                     LayoutCachedWidth =10800
                     LayoutCachedHeight =315

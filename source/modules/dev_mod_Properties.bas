@@ -38,6 +38,7 @@ Option Explicit
 ' Adapted:      -
 ' Revisions:
 '   BLC - 11/22/2017 - initial version
+'   BLC - 8/24/2020  - update Property to DAO.Property to avoid Err 13 - Type Mismatch
 ' ---------------------------------
 Public Function AddDbProperty(DbProperty As String, _
                     DbPropertyValue As String, _
@@ -46,7 +47,7 @@ Public Function AddDbProperty(DbProperty As String, _
 On Error GoTo Err_Handler
 
     Dim db As DAO.Database
-    Dim prop As Property
+    Dim prop As DAO.Property
     
     If DbFilename = "Current" Then
         Set db = DBEngine(0)(0)

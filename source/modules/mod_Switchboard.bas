@@ -1,7 +1,14 @@
+Option Compare Database
+Option Explicit
+
 ' =================================
-' MODULE:       basSwitchboard
-' Description:  Standard module for functions associated with the application switchboard
+' Form:         frm_Switchboard
+' Level:        Application form
+' Version:      1.02
 '
+' Description:  Switchboard form object related properties, events, functions & procedures for UI display
+'
+' Requirements:
 '   The functions in this module require that the database contain the following two tables:
 '
 '   tsys_Link_Files:  Link_type (txt 50), Link_file_name (txt 100), Link_file_path (txt 255);
@@ -11,12 +18,137 @@
 '   tsys_Link_Tables:  Link_type (txt 50), Link_table (txt 100), Table_type (txt 50),
 '       Description_text (txt 255).
 '
-' Source/date:  John R. Boetsch, May 2005; based on a similar implementation by Susan Huse,
-'                   MonitoringSM.mdb v 7/28/2004
-' Revisions:    JRB, May 2006
+' Source/date:  Susan Huse, July 28, 2004 (MonitoringSM.mdb v 7/28/2004, similar implementation)
+' Adapted:      John R. Boetsch, May 2005
+' References:
+' Revisions:    JRB - 5/x/2005 - 1.00 - initial version
+'               JRB - 5/x/2006 - 1.01 - unknown
+'               BLC - 7/29/2020 - 1.02 - Revised fxnSaveFile to BrowseFile or SaveFile (64-bit update),
+'                                        updated documentation, added file open, load, current stubs
+' =================================
 
-Option Compare Database
-Option Explicit
+'---------------------
+' Declarations
+'---------------------
+
+'---------------------
+' Events
+'---------------------
+
+'---------------------
+' Properties
+'---------------------
+
+'' ----------------
+''  Form Events
+'' ----------------
+'
+'' ---------------------------------
+'' Sub:          Form_Open
+'' Description:  form opening actions
+'' Assumptions:
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, July 30, 2020
+'' Adapted:      -
+'' Revisions:
+''   BLC - 7/30/2020 - initial version
+'' ---------------------------------
+'Private Sub Form_Open(Cancel As Integer)
+'On Error GoTo Err_Handler
+'
+'    'default
+'    Me.CallingForm = "frm_Switchboard"
+''
+'    If Len(Me.OpenArgs) > 0 Then Me.CallingForm = Me.OpenArgs
+''
+''    'minimize calling form
+''    ToggleForm Me.CallingForm, -1
+''
+''    'dev mode
+''    tbxDevMode = DEV_MODE
+''
+''    Title = "Select Current User"
+''    'lblTitle.Caption = "" 'clear header title
+''    Directions = ""
+''
+''    'defaults
+''    lblDirections.forecolor = lngBlue
+''    btnSave.hoverColor = lngGreen
+''    btnCancel.hoverColor = lngRed
+'
+'Exit_Handler:
+'    Exit Sub
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - Form_Open[frm_Switchboard form])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
+'' ---------------------------------
+'' SUB:          Form_Load
+'' Description:  form loading actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, July 30, 2020
+'' Adapted:      -
+'' Revisions:
+''   BLC - 7/30/2020 - initial version
+'' ---------------------------------
+'Private Sub Form_Load()
+'On Error GoTo Err_Handler
+'
+'
+'Exit_Handler:
+'    Exit Sub
+'
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - Form_Load[frm_Switchboard])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+'
+'' ---------------------------------
+'' SUB:          Form_Current
+'' Description:  current form actions
+'' Assumptions:  -
+'' Parameters:   -
+'' Returns:      -
+'' Throws:       none
+'' References:   -
+'' Source/date:  Bonnie Campbell, July 30, 2020
+'' Adapted:      -
+'' Revisions:
+''   BLC - 7/30/2020 - initial version
+'' ---------------------------------
+'Private Sub Form_Current()
+'On Error GoTo Err_Handler
+'
+'Exit_Handler:
+'    Exit Sub
+'
+'Err_Handler:
+'    Select Case Err.Number
+'      Case Else
+'        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+'            "Error encountered (#" & Err.Number & " - Form_Current[frm_Switchboard])"
+'    End Select
+'    Resume Exit_Handler
+'End Sub
+' ----------------
+'  Methods
+' ----------------
 
 ' =================================
 ' FUNCTION:     fxnOpenDbChecks
@@ -227,6 +359,7 @@ End Function
 '               accommodate nulls from the procedure call, changed overall backup strategy
 '               SDK, Feb 26, 2007 - updated to loop through linked file table and backup every file
 '               that has backup checkbox checked
+'               BLC, 7/30/2020 - revised to use SaveFile() vs fxnSaveFile (64-bit update)
 ' =================================
 
 Public Function fxnMakeBackup()
@@ -238,6 +371,8 @@ Dim strSourceFileName As String
 Dim strCopyFileName As Variant
 Dim strFileName As String
 Dim strBackupDate As String
+Dim strDbName As String
+Dim strDbProject As String
 
 On Error GoTo Err_Handler
 
@@ -264,17 +399,26 @@ Else
         Else
             strFileName = Left(rst!Link_file_path, Len(rst!Link_file_path) - 6) & _
                 "_" & strBackupDate & "_" & Forms![frm_Switchboard]![Entry_Role] & ".accdb"
+            
+            strDbName = Right(CurrDb.Name, Len(CurrDb.Name) - InStrRev(CurrDb.Name, "\"))
+            strDbProject = Application.VBE.ActiveVBProject.Name
+            
             ' Open the save file dialog and update to the actual name given by the user
-            strCopyFileName = fxnSaveFile(strFileName, "Access (*.*db)", "*.*db")
+            'strCopyFileName = fxnSaveFile(strFileName, "Access (*.*db)", "*.*db")
+            strCopyFileName = SaveFile(strFileName, "Access", "*.*db;", _
+                                        "Save " & strDbProject & _
+                                        " Database Back-End File As", _
+                                        "Save Database Back-End") '"Access (*.*db)", "*.*db")
     
-            If IsNull(strCopyFileName) Then
+    
+            If IsNull(strCopyFileName) Or Len(strCopyFileName) = 0 Then
                 ' User canceled save operation
-                MsgBox "No Backup Made", vbOKOnly
+                MsgBox "No Backup Made", vbOKOnly, "Save Database Back-End File Cancelled"
             Else
                 ' Perform the actual file copy
                 fs.CopyFile rst!Link_file_path, strCopyFileName
                 MsgBox "Backup file successfully created: " & vbCrLf & vbCrLf & _
-                    strCopyFileName, vbOKOnly
+                    strCopyFileName, vbOKOnly, strDbProject & " Back-End File Copied!"
             End If
         End If
     
@@ -319,34 +463,51 @@ End Function
 ' FUNCTION:     fxnSaveFile
 ' Description:  Opens the save file dialog and returns the saved file name
 ' Parameters:   strFileName, strFileType, strFileExt - file name, type and extension
+'               strFilters - file search filter (string)
+'                            format:  filter dropdown text display - file extension
+'                                     the dash separates the display from the searched extension
+'                                     multiple extensions are separated by commas
+'                            examples:
+'                                     "Access (*.*db) - *db"
+'                                     "Excel (*.*xl*) - *xl*"
 ' Returns:      name of the saved file, or Null if user cancels
 ' Throws:       none
 ' References:   adhAddFilterItem, adhCommonFileOpenSave
 ' Source/date:  Susan Huse, fall 2004
 ' Revisions:    John R. Boetsch, May 2005 - minor revisions and documentation
 ' Revisions:    JRB, May 16, 2006 - updated documentation, error traps
+'               BLC, July 29, 2020 - updated to BrowseFile() for 64-bit conversion
+'               BLC, August 18, 2020 - added strFilters parameter to accommodate more than Access db files
 ' =================================
-
 Public Function fxnSaveFile(strFileName As String, strFileType As String, _
-    strFileExt As String) As Variant
+    strFileExt As String, Optional strFilters As String = "Access (*.*db) - *db") As Variant
 
     On Error GoTo Err_Handler
 
     Dim strFilter As String
     Dim lngFlags As Long
+'    Dim strFilters As String
+    Dim strPath As String
+    
+    strPath = strFileName
+
+    'strFilters = "Access (*.*db) - *db"
 
     ' Use the save file dialog to interactively select the save file name and location
-    strFilter = adhAddFilterItem(strFilter, strFileType, strFileExt)
-
-    lngFlags = adhOFN_HIDEREADONLY Or adhOFN_OVERWRITEPROMPT Or _
-        adhOFN_HIDEREADONLY Or adhOFN_NOCHANGEDIR
-
-    fxnSaveFile = adhCommonFileOpenSave( _
-        OpenFile:=False, _
-        filter:=strFilter, _
-        flags:=lngFlags, _
-        DialogTitle:="Save As", _
-        FileName:=strFileName)
+'    strFilter = adhAddFilterItem(strFilter, strFileType, strFileExt)
+'
+'    lngFlags = adhOFN_HIDEREADONLY Or adhOFN_OVERWRITEPROMPT Or _
+'        adhOFN_HIDEREADONLY Or adhOFN_NOCHANGEDIR
+'
+'    fxnSaveFile = adhCommonFileOpenSave( _
+'        OpenFile:=False, _
+'        filter:=strFilter, _
+'        flags:=lngFlags, _
+'        DialogTitle:="Save As", _
+'        FileName:=strFileName)
+    
+    fxnSaveFile = BrowseFolder("Save Data File As", "Select Field Database", strPath, , _
+                                    msoFileDialogFilePicker, strFilters, False)
 
 Exit_Procedure:
     Exit Function

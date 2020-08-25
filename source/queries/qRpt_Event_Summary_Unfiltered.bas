@@ -1,34 +1,9 @@
-﻿Operation =1
-Option =0
-Begin InputTables
-    Name ="tbl_Locations"
-    Name ="tbl_Events"
-End
-Begin OutputColumns
-    Expression ="tbl_Events.*"
-    Expression ="tbl_Locations.Plot_Name"
-    Expression ="tbl_Locations.Unit_Code"
-    Expression ="tbl_Locations.Subunit_Code"
-    Expression ="tbl_Locations.Admin_Unit_Code"
-    Expression ="tbl_Locations.X_Coord"
-    Expression ="tbl_Locations.Y_Coord"
-    Expression ="tbl_Locations.Location_Notes"
-    Expression ="tbl_Locations.Location_Status"
-    Expression ="tbl_Locations.Panel"
-    Expression ="tbl_Locations.Frame"
-    Expression ="tbl_Locations.GRTS_Order"
-    Expression ="tbl_Locations.Install_Date"
-    Expression ="tbl_Locations.Lon_WGS84"
-    Expression ="tbl_Locations.Lat_WGS84"
-    Expression ="tbl_Locations.Slope"
-    Expression ="tbl_Locations.Aspect"
-End
-Begin Joins
-    LeftTable ="tbl_Locations"
-    RightTable ="tbl_Events"
-    Expression ="tbl_Locations.Location_ID = tbl_Events.Location_ID"
-    Flag =1
-End
+﻿dbMemo "SQL" ="SELECT e.*, l.Plot_Name, l.Unit_Code, l.Subunit_Code, l.Admin_Unit_Code, l.X_Coo"
+    "rd, l.Y_Coord, l.Location_Notes, l.Location_Status, l.Panel, l.Frame, l.GRTS_Ord"
+    "er, l.Install_Date, l.Lon_WGS84, l.Lat_WGS84, l.Slope, l.Aspect\015\012FROM tbl_"
+    "Locations AS l INNER JOIN qUnfiltered_Events AS e ON l.Location_ID = e.Location_"
+    "ID;\015\012"
+dbMemo "Connect" =""
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
 dbByte "RecordsetType" ="0"
@@ -40,191 +15,183 @@ dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
 Begin
     Begin
-        dbText "Name" ="tbl_Events.Event_ID"
+        dbText "Name" ="e.tbl_Events.Verified"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Location_ID"
+        dbText "Name" ="e.tbl_Events.Rare_Spp"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Event_Date"
+        dbText "Name" ="e.tbl_Events.Early_Detect"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Entered_Date"
+        dbText "Name" ="e.tbl_Events.Updated_Date"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Verified_Date"
+        dbText "Name" ="e.tbl_Events.Event_ID"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Location_Status"
+        dbText "Name" ="e.tbl_Events.Event_Group_ID"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.GRTS_Order"
+        dbText "Name" ="e.tbl_Events.Location_ID"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Plot_Name"
+        dbText "Name" ="e.tbl_Events.Entered_Date"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Unit_Code"
+        dbText "Name" ="e.tbl_Events.Event_Notes"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Subunit_Code"
+        dbText "Name" ="e.tbl_Events.Event_Time"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Protocol_Name"
+        dbText "Name" ="e.tbl_Events.Entered_By"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Pictures_Taken"
+        dbText "Name" ="l.Lon_WGS84"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Entered_By"
+        dbText "Name" ="l.Lat_WGS84"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Verified"
+        dbText "Name" ="e.tbl_Events.Updated_By"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Verified_By"
+        dbText "Name" ="e.tbl_Events.Protocol_Name"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Certified_Date"
+        dbText "Name" ="e.tbl_Events.PseudoEvent"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.CWD_Check_240"
+        dbText "Name" ="e.tbl_Events.Event_Date"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.X_Coord"
+        dbText "Name" ="e.tbl_Events.Pictures_Taken"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Y_Coord"
+        dbText "Name" ="e.tbl_Events.CWD_Check_360"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Location_Notes"
+        dbText "Name" ="e.tbl_Events.CWD_Check_120"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Lat_WGS84"
+        dbText "Name" ="e.tbl_Events.CWD_Check_240"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Event_Notes"
+        dbText "Name" ="e.tbl_Events.Deer_Impact"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Updated_Date"
+        dbText "Name" ="e.tbl_Events.Is_Excluded"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Panel"
+        dbText "Name" ="e.tbl_Events.Plot_Maint"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Lon_WGS84"
+        dbText "Name" ="e.tbl_Events.Entered_On_Tablet"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.CWD_Check_120"
+        dbText "Name" ="e.tbl_Events.Verified_By"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Event_Group_ID"
+        dbText "Name" ="e.tbl_Events.Verified_Date"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Event_Time"
+        dbText "Name" ="e.tbl_Events.Certified"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Entered_On_Tablet"
+        dbText "Name" ="e.tbl_Events.Certified_By"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Updated_By"
+        dbText "Name" ="e.tbl_Events.Certified_Date"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Certified"
+        dbText "Name" ="e.Event_Year"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Certified_By"
+        dbText "Name" ="l.Plot_Name"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Frame"
+        dbText "Name" ="l.Unit_Code"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Install_Date"
+        dbText "Name" ="l.Subunit_Code"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.CWD_Check_360"
+        dbText "Name" ="l.Admin_Unit_Code"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Admin_Unit_Code"
+        dbText "Name" ="l.X_Coord"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Events.Deer_Impact"
+        dbText "Name" ="l.Y_Coord"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Slope"
+        dbText "Name" ="l.Location_Notes"
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Locations.Aspect"
+        dbText "Name" ="l.Location_Status"
         dbLong "AggregateType" ="-1"
     End
-End
-Begin
-    State =0
-    Left =-28
-    Top =30
-    Right =1545
-    Bottom =941
-    Left =-1
-    Top =-1
-    Right =1541
-    Bottom =577
-    Left =0
-    Top =0
-    ColumnsShown =539
     Begin
-        Left =48
-        Top =12
-        Right =226
-        Bottom =576
-        Top =0
-        Name ="tbl_Locations"
-        Name =""
+        dbText "Name" ="l.Panel"
+        dbLong "AggregateType" ="-1"
     End
     Begin
-        Left =240
-        Top =12
-        Right =384
-        Bottom =156
-        Top =0
-        Name ="tbl_Events"
-        Name =""
+        dbText "Name" ="l.Frame"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.GRTS_Order"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.Install_Date"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.Slope"
+        dbLong "AggregateType" ="-1"
+    End
+    Begin
+        dbText "Name" ="l.Aspect"
+        dbLong "AggregateType" ="-1"
     End
 End
