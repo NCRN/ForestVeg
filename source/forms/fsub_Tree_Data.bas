@@ -15,9 +15,9 @@ Begin Form
     Width =14040
     DatasheetFontHeight =9
     ItemSuffix =80
-    Left =1215
+    Left =615
     Top =2985
-    Right =15240
+    Right =14640
     Bottom =10050
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
@@ -1618,7 +1618,7 @@ Option Explicit
 ' =================================
 ' MODULE:       fsub_Tree_Data
 ' Level:        Application module
-' Version:      1.08
+' Version:      1.09
 '
 ' Description:  add event related functions & procedures
 '
@@ -1635,6 +1635,7 @@ Option Explicit
 '               BLC - 4/30/2018   - 1.06 - add DBH validation on exit (shift from DBH subform events)
 '               BLC - 5/3/2019    - 1.07 - added RefreshTagDropDowns, tglExtendTagList
 '               BLC - 5/20/2019   - 1.08 - added SwapTagDropDowns
+'               BLC - 8/26/2020   - 1.09 - handle new events w/o records
 ' =================================
 
 ' ---------------------------------
@@ -2913,6 +2914,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/22/2018 - initial version
 '   BLC - 8/7/2020  - adjusted ValidDBH to include event date parameter
+'   BLC - 8/26/2020 - handle new events w/o records
 ' ---------------------------------
 Private Sub CheckDBH()
 On Error GoTo Err_Handler
@@ -2924,7 +2926,7 @@ On Error GoTo Err_Handler
     chkDBHCheck = IIf(Me!DBH_Check = 1, -1, 0)
 
     'DBH records?
-    If Me.Form.Controls("fsub_Tree_DBH").Form.Recordset.RecordCount > 0 Then
+    If Nz(Me.Form.Controls("fsub_Tree_DBH").Form.Recordset.RecordCount, 0) > 0 Then
         
         'check for +/-4cm or < 1cm sapling DBH
         ValidDBH "Tree", Me.Parent.tbxEventDate
@@ -2934,7 +2936,7 @@ On Error GoTo Err_Handler
     'set text color if checked
     If Me!DBH_Check = 1 Then Me.lblDBHCheck.forecolor = lngBlue
     
-    Debug.Print "xx_Data_ID " & Me.Tag_ID & " Prior DBH - " & GetPriorDBH(Me.Tree_Data_ID, "Tree", Me.Tag_ID)
+    Debug.Print "xx_Data_ID " & Me.Tag_ID & " Prior DBH - " & GetPriorDBH(Nz(Me.Tree_Data_ID, "No Tree_Data_ID"), "Tree", Nz(Me.Tag_ID, "No Tag_ID"))
     
 Exit_Handler:
     Exit Sub

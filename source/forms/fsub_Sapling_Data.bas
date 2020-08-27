@@ -15,10 +15,10 @@ Begin Form
     Width =13944
     DatasheetFontHeight =9
     ItemSuffix =82
-    Left =1215
-    Top =2985
-    Right =14985
-    Bottom =9300
+    Left =60
+    Top =1785
+    Right =13830
+    Bottom =8100
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0xd0ed4c4b94aee340
@@ -1742,7 +1742,7 @@ Option Explicit
 ' =================================
 ' FORM:         fsub_Sapling_Data
 ' Level:        Application report
-' Version:      1.11
+' Version:      1.12
 '
 ' Description:  Form related functions & procedures for application
 ' Requires:     Keypad Utils module
@@ -1765,6 +1765,7 @@ Option Explicit
 '               BLC - 5/23/2019   - 1.09 - added SetTagRFS, Tag property
 '               BLC - 6/30/2020   - 1.10 - added GetEquivDBH check to avoid popups due to subform not updating EquivDBH until *after* check
 '               BLC - 7/31/2020   - 1.11 - SetTagRFS() revise to suppress rows updated dialog (set warnings false, then re-enable after RunSQL)
+'               BLC - 8/26/2020   - 1.12 - CheckDBH() handle new events w/o records
 ' =================================
 
 ' ---------------------------------
@@ -3245,6 +3246,7 @@ End Sub
 ' Revisions:
 '   BLC - 4/22/2018 - initial version
 '   BLC - 8/7/2020  - adjusted ValidDBH to include event date parameter
+'   BLC - 8/26/2020 - handle new events w/o records
 ' ---------------------------------
 Private Sub CheckDBH()
 On Error GoTo Err_Handler
@@ -3256,7 +3258,7 @@ On Error GoTo Err_Handler
     chkDBHCheck = IIf(Me!DBH_Check = 1, -1, 0)
 
     'DBH records?
-    If Me.Form.Controls("fsub_Sapling_DBH").Form.Recordset.RecordCount > 0 Then
+    If Nz(Me.Form.Controls("fsub_Sapling_DBH").Form.Recordset.RecordCount, 0) > 0 Then
         
         'check for +/-4cm or < 1cm sapling DBH
         ValidDBH "Sapling", Me.Parent.tbxEventDate

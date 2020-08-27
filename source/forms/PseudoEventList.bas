@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     PopUp = NotDefault
@@ -25,9 +25,9 @@ Begin Form
     DatasheetFontHeight =9
     ItemSuffix =24
     Left =7905
-    Top =1170
+    Top =1860
     Right =12345
-    Bottom =7995
+    Bottom =8685
     DatasheetGridlinesColor =15062992
     Filter ="[Unit_Code]='ANTI' AND Year([Event_Date]) > 2017"
     OrderBy ="Plot_Name"
@@ -279,8 +279,8 @@ Begin Form
                     ColumnInfo ="\"\";\"\";\"10\";\"100\""
                     Name ="cbxParkCode"
                     RowSourceType ="Table/Query"
-                    RowSource ="SELECT tlu_Enumerations.Enum_Code FROM tlu_Enumerations WHERE (((tlu_Enumeration"
-                        "s.Enum_Group)=\"Unit Code\")) ORDER BY tlu_Enumerations.Enum_Code;"
+                    RowSource ="SELECT e.Enum_Code \011\011FROM tlu_Enumerations e \011\011WHERE \011\011e.Enum_"
+                        "Group =\"Unit Code\" ORDER BY e.Sort_Order;"
                     ColumnWidths ="2160"
                     AfterUpdate ="[Event Procedure]"
                     DefaultValue ="\"\""

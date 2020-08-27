@@ -23,6 +23,7 @@ Option Explicit
 '                                        Added TruncateNumber() - shift to framework module later
 '               BLC - 8/2/2020  - 1.07 - ValidDBH() adjusted to use ABS() for DBH comparison instead of OR
 '               BLC - 8/6/2020  - 1.08 - ValidDBH() - accommodate "N/A" values when no prior sampling DBH values exist
+'               BLC - 8/26/2020 - 1.09 - GetPriorDBH() - handle new events w/o IDs
 ' =================================
 
 ' ---------------------------------
@@ -503,6 +504,7 @@ End Function
 ' Revisions:
 '   BLC - 4/16/2018 - initial version
 '   BLC - 4/19/2018 - revise to use CurrDb
+'   BLC - 8/26/2020 - handle new events w/o IDs
 ' ---------------------------------
 Public Function GetPriorDBH(DataID As String, VegType As String, TagID As String) As Double
 On Error GoTo Err_Handler
@@ -512,6 +514,12 @@ On Error GoTo Err_Handler
     Dim tblName As String
     Dim fldName As String
     Dim tblDBHName As String
+    
+    'handle new event records w/o IDs
+    If DataID = "No Tree_Data_ID" Or TagID = "No Tag_ID" Then
+        GetPriorDBH = 0
+        Exit Function
+    End If
     
     tblName = "tbl_" & VegType & "_Data"
     fldName = VegType & "_Data_ID"

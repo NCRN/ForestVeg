@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     PopUp = NotDefault
@@ -17,8 +17,8 @@ Begin Form
     ItemSuffix =279
     Left =5925
     Top =2115
-    Right =12120
-    Bottom =7620
+    Right =10500
+    Bottom =8010
     DatasheetGridlinesColor =14276557
     RecSrcDt = Begin
         0x9733b3777046e540
@@ -244,17 +244,16 @@ Begin Form
                     Top =1320
                     Width =2475
                     Height =510
-                    ColumnOrder =5
+                    ColumnOrder =4
                     FontSize =18
                     FontWeight =700
                     BorderColor =12632256
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"200\""
                     Name ="cbxLocationID"
                     RowSourceType ="Table/Query"
-                    RowSource ="SELECT tbl_Locations.Location_ID, tbl_Locations.Plot_Name, tbl_Locations.Panel, "
-                        "tbl_Locations.Frame, tbl_Locations.Unit_Code FROM tbl_Locations WHERE (((tbl_Loc"
-                        "ations.Panel)=[Forms]![frm_Switchboard]![Panel])) ORDER BY tbl_Locations.Plot_Na"
-                        "me;"
+                    RowSource ="\011SELECT l.Location_ID, l.Plot_Name, l.Panel, l.Frame, l.Unit_Code \011FROM tb"
+                        "l_Locations l \011WHERE  \011l.Panel=[Forms]![frm_Switchboard]![Panel] \011OR \011"
+                        "l.Panel = 0 \011ORDER BY l.Plot_Name;"
                     ColumnWidths ="0;2160"
                     AfterUpdate ="[Event Procedure]"
                     FontName ="Franklin Gothic Book"
@@ -310,7 +309,7 @@ Begin Form
                     Top =720
                     Width =2475
                     Height =510
-                    ColumnOrder =6
+                    ColumnOrder =5
                     FontSize =18
                     FontWeight =700
                     TabIndex =1
@@ -318,8 +317,8 @@ Begin Form
                     ColumnInfo ="\"\";\"\";\"10\";\"100\""
                     Name ="cbxParkCode"
                     RowSourceType ="Table/Query"
-                    RowSource ="SELECT tlu_Enumerations.Enum_Code FROM tlu_Enumerations WHERE (((tlu_Enumeration"
-                        "s.Enum_Group)=\"Unit Code\")) ORDER BY tlu_Enumerations.Enum_Code;"
+                    RowSource ="SELECT e.Enum_Code \011FROM tlu_Enumerations e \011WHERE e.Enum_Group =\"Unit Co"
+                        "de\" \011ORDER BY e.Sort_Order;"
                     ColumnWidths ="2160"
                     AfterUpdate ="[Event Procedure]"
                     DefaultValue ="\"\""
@@ -375,7 +374,7 @@ Begin Form
                     Top =1920
                     Width =2460
                     Height =510
-                    ColumnOrder =4
+                    ColumnOrder =3
                     FontSize =18
                     FontWeight =700
                     TabIndex =2
@@ -472,7 +471,7 @@ Begin Form
                     Top =2640
                     Width =270
                     Height =299
-                    ColumnOrder =2
+                    ColumnOrder =1
                     TabIndex =3
                     Name ="tglPseudoEvent"
                     AfterUpdate ="[Event Procedure]"
@@ -543,7 +542,7 @@ Begin Form
                     Top =2640
                     Width =720
                     Height =300
-                    ColumnOrder =3
+                    ColumnOrder =2
                     FontSize =9
                     TabIndex =4
                     BorderColor =8355711
@@ -1071,9 +1070,9 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' MODULE:       EventAdd
+' MODULE:       EventAdd2
 ' Level:        Application module
-' Version:      1.04
+' Version:      1.05
 '
 ' Description:  add event related functions & procedures
 '
@@ -1084,6 +1083,8 @@ Option Explicit
 '               BLC   - 10/23/2018 - 1.02 - added Form_Open event, PseudoEvent handling
 '               BLC   - 3/18/2019 - 1.03 - accommodate calling form park code
 '               BLC   - 4/16/2019 - 1.04 - revise from table form to allow record creation
+'               BLC   - 8/26/2020 - 1.05 - revised SQL to accommodate CAMP whose Panel = 0
+'                                        - adjusted location check for non-GUID locations like CAMP
 ' =================================
 
 '---------------------
@@ -1538,6 +1539,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 10/23/2018 - initial version
+'   BLC - 8/26/2020  - adjusted location check for non-GUID locations like CAMP
 ' ---------------------------------
 Public Sub ReadyForSave()
 On Error GoTo Err_Handler
@@ -1550,12 +1552,24 @@ On Error GoTo Err_Handler
     If cbxLocationID.Value > 0 Then tbxEventDate.Enabled = True
     If IsDate(tbxEventDate.Value) Then tglPseudoEvent.Enabled = True
 
+'    If Len(Nz(cbxParkCode.Value, "")) > 0 _
+'        And IsGUID(cbxLocationID.Value) = True _
+'        And IsDate(tbxEventDate.Value) = True Then '_
+'
+'            isOK = True
+'
+'    End If
+
     If Len(Nz(cbxParkCode.Value, "")) > 0 _
-        And IsGUID(cbxLocationID.Value) = True _
         And IsDate(tbxEventDate.Value) = True Then '_
-        
-        isOK = True
-        
+    
+        'enable save for GUID & non-GUID locations (e.g. CAMP)
+        Select Case cbxParkCode
+            Case "CAMP"
+                If Len(Nz(cbxLocationID.Value, "") > 0) Then isOK = True
+            Case Else
+                If IsGUID(cbxLocationID.Value) = True Then isOK = True
+        End Select
     End If
     
     'enable save button only for new sites (tbxID = 0)
@@ -1634,16 +1648,45 @@ End Function
 ' Adapted:      -
 ' Revisions:
 '   BLC - 3/18/2019 - initial version
+'   BLC - 8/26/2020 - revised SQL to accommodate CAMP whose Panel = 0
 ' ---------------------------------
 Public Function SetPlots(ParkCode As String)
 On Error GoTo Err_Handler
     
-    Me.cbxLocationID.RowSource = "SELECT tbl_Locations.Location_ID, tbl_Locations.Plot_Name, " _
-            & "tbl_Locations.Panel, tbl_Locations.Frame, tbl_Locations.Unit_Code " _
-            & "FROM tbl_Locations " _
-            & "WHERE (((tbl_Locations.Panel) = [Forms]![frm_Switchboard]![Panel]) " _
-            & "AND ((tbl_Locations.Unit_Code) = '" & ParkCode & "')) " _
-            & "ORDER BY tbl_Locations.Plot_Name;"
+'    Me.cbxLocationID.RowSource = "SELECT tbl_Locations.Location_ID, tbl_Locations.Plot_Name, " _
+'            & "tbl_Locations.Panel, tbl_Locations.Frame, tbl_Locations.Unit_Code " _
+'            & "FROM tbl_Locations " _
+'            & "WHERE (((tbl_Locations.Panel) = [Forms]![frm_Switchboard]![Panel]) " _
+'            & "AND ((tbl_Locations.Unit_Code) = '" & ParkCode & "')) " _
+'            & "ORDER BY tbl_Locations.Plot_Name;"
+
+'        Me.cbxLocationID.RowSource = "SELECT l.Location_ID, l.Plot_Name, " _
+'                & "l.Panel, l.Frame, l.Unit_Code " _
+'                & "FROM tbl_Locations l " _
+'                & "WHERE (l.Panel = [Forms]![frm_Switchboard]![Panel]  " _
+'                & "AND l.Unit_Code = '" & ParkCode & "') " _
+'                & "OR (l.Unit_Code = 'CATO' " _
+'                & "AND l.Panel = 0) " _
+'                & "ORDER BY l.Plot_Name;"
+
+        Dim sqlWHERE As String
+        
+        Select Case ParkCode
+            Case "CAMP" 'CATO special case
+                sqlWHERE = "WHERE (l.Unit_Code = 'CATO' " _
+                & "AND l.Panel = 0) "
+            Case Else
+                sqlWHERE = "WHERE (l.Panel = " & [Forms]![frm_Switchboard]![Panel] & " " _
+                & "AND l.Unit_Code = '" & ParkCode & "') "
+        End Select
+
+        Me.cbxLocationID.RowSource = "SELECT l.Location_ID, l.Plot_Name, " _
+                & "l.Panel, l.Frame, l.Unit_Code " _
+                & "FROM tbl_Locations l " _
+                & sqlWHERE _
+                & "ORDER BY l.Plot_Name;"
+        
+        Debug.Print Me.cbxLocationID.RowSource
 
     'enable plot
     cbxLocationID.Enabled = True
