@@ -758,22 +758,22 @@ On Error GoTo Err_Handler
     ToggleForm Me.CallingForm, -1
     
     'set context - based on TempVars
-    lblContext.forecolor = lngLime
+    lblContext.ForeColor = lngLime
     lblContext.Caption = GetContext()
     
     Title = "Photo Binder Photos"
     'lblTitle.Caption = "" 'hide second title
     Directions = "Select the desired photos, then click the Make PPT button to begin the powerpoint wizard."
-    lblDirections.forecolor = lngLtBlue
-    btnMakePPT.forecolor = lngBlue
+    lblDirections.ForeColor = lngLtBlue
+    btnMakePPT.ForeColor = lngBlue
     btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.forecolor = lngBlue
+    btnComment.ForeColor = lngBlue
     
     'set hint
     
     'set hover
-    btnMakePPT.hoverColor = lngGreen
-    btnComment.hoverColor = lngGreen
+    btnMakePPT.HoverColor = lngGreen
+    btnComment.HoverColor = lngGreen
       
     'defaults
     btnComment.Enabled = False
@@ -1316,7 +1316,7 @@ On Error GoTo Err_Handler
                                     'Case acTextBox
                                     Case acLabel
                                         If ssctrl.Name = "lblName" Then _
-                                            ssctrl.forecolor = IIf(selection = True, lngGreen, lngLtTextGray)
+                                            ssctrl.ForeColor = IIf(selection = True, lngGreen, lngLtTextGray)
                                     Case acImage
                                         If ssctrl.Name = "imgPhoto" Then _
                                             ssctrl.borderColor = IIf(selection = True, lngGreen, lngLtBgdGray)

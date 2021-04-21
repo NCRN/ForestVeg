@@ -939,7 +939,7 @@ On Error GoTo Err_Handler
     Directions = "dirs"
     
     'defaults
-    rctPseudoEvent.backcolor = lngLtTan
+    rctPseudoEvent.BackColor = lngLtTan
     
     'disable until data allows
     cbxLocationID.Enabled = False
@@ -949,16 +949,16 @@ On Error GoTo Err_Handler
     
     'hints
     lblPseudoEvent.Caption = "Pseudo Event?"
-    lblPseudoEvent.forecolor = lngBlue
+    lblPseudoEvent.ForeColor = lngBlue
     lblPseudoEvent.ControlTipText = "Bush-hogged or other non-data collecting visit that may impact analysis"
     lblPseudoEvent.visible = True
     lblHintPseudoEvent.Caption = "Bush-hogged or other non-data collecting visit that may impact analysis"
-    lblHintPseudoEvent.forecolor = lngBlue
+    lblHintPseudoEvent.ForeColor = lngBlue
     lblHintPseudoEvent.ControlTipText = "Bush-hogged or other non-data collecting visit that may impact analysis"
     lblHintPseudoEvent.visible = True
     
     'set hover
-    tglPseudoEvent.hoverColor = lngGreen
+    tglPseudoEvent.HoverColor = lngGreen
        
     'initialize values
     ClearForm Me

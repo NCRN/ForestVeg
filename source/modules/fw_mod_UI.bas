@@ -679,7 +679,7 @@ On Error GoTo Err_Handler:
            
         'change button background to given color
         .backstyle = 1 'Normal - required to change color
-        .backcolor = HTMLConvert("#" & strColor)
+        .BackColor = HTMLConvert("#" & strColor)
         .SpecialEffect = intEffect
     End With
     
@@ -772,8 +772,8 @@ Public Sub DisableControl(ctrl As Control)
 
 On Error GoTo Err_Handler
     
-    ctrl.backcolor = lngLtGray
-    ctrl.forecolor = lngGray
+    ctrl.BackColor = lngLtGray
+    ctrl.ForeColor = lngGray
     
     If ctrl.ControlType = acCommandButton Then
         ctrl.borderColor = lngGray
@@ -814,22 +814,22 @@ End Sub
 '   BLC - 5/10/2015 - moved to mod_List from mod_Lists
 '   BLC - 5/22/2015 - moved from mod_List to mod_UI
 ' ---------------------------------
-Public Function EnableControl(ctrl As Control, backcolor As Long, forecolor As Long, _
+Public Function EnableControl(ctrl As Control, BackColor As Long, ForeColor As Long, _
                                 Optional borderColor As Long, _
-                                Optional hoverColor As Long, _
+                                Optional HoverColor As Long, _
                                 Optional pressColor As Long, _
-                                Optional hoverForeColor As Long, _
+                                Optional HoverForeColor As Long, _
                                 Optional pressedForeColor As Long)
 On Error GoTo Err_Handler
     
-    ctrl.backcolor = backcolor
-    ctrl.forecolor = forecolor
+    ctrl.BackColor = BackColor
+    ctrl.ForeColor = ForeColor
     
     If ctrl.ControlType = acCommandButton Then
         ctrl.borderColor = borderColor
-        ctrl.hoverColor = hoverColor
+        ctrl.HoverColor = HoverColor
         ctrl.pressedColor = pressColor
-        ctrl.hoverForeColor = hoverForeColor
+        ctrl.HoverForeColor = HoverForeColor
         ctrl.pressedForeColor = pressedForeColor
     End If
 
@@ -878,7 +878,7 @@ On Error GoTo Err_Handler:
             ' change font color for appropriate controls with text
             Select Case ctrl.ControlType
                 Case acCommandButton, acComboBox, acLabel, acListBox, acTextBox, acToggleButton
-                    .forecolor = color
+                    .ForeColor = color
                 Case Else
             End Select
         End If

@@ -1028,18 +1028,18 @@ On Error GoTo Err_Handler
                             & vbCrLf & "Select the flag name to view it's definition." _
                             & vbCrLf & "Change the flag type to display different flags."
     tbxIcon.Value = StringFromCodepoint(uLocked)
-    tbxIcon.forecolor = lngDkGreen
-    lblDirections.forecolor = lngLtBlue
+    tbxIcon.ForeColor = lngDkGreen
+    lblDirections.ForeColor = lngLtBlue
     
     'set hover
-    btnCreateVersionTable.hoverColor = lngGreen
-    btnOpenTable.hoverColor = lngGreen
-    btnAddFlag.hoverColor = lngGreen
-    btnDelete.hoverColor = lngGreen
-    btnEdit.hoverColor = lngGreen
+    btnCreateVersionTable.HoverColor = lngGreen
+    btnOpenTable.HoverColor = lngGreen
+    btnAddFlag.HoverColor = lngGreen
+    btnDelete.HoverColor = lngGreen
+    btnEdit.HoverColor = lngGreen
     
     btnDelete.Caption = StringFromCodepoint(uDelete)
-    btnDelete.forecolor = lngRed
+    btnDelete.ForeColor = lngRed
 
     'enable textbox to ensure scrollbar is available for longer text
     tbxFlag.Enabled = True

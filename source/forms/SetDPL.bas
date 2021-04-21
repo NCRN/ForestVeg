@@ -994,15 +994,15 @@ On Error GoTo Err_Handler
     lblTitle.Caption = ""
     lblDirections.Caption = "Select the DPL and choose the DPLs to set."
     tbxIcon.Value = StringFromCodepoint(uLocked)
-    tbxIcon.forecolor = lngDkGreen
-    lblDirections.forecolor = lngLtBlue
+    tbxIcon.ForeColor = lngDkGreen
+    lblDirections.ForeColor = lngLtBlue
     
     'set hover
-    btnDelete.hoverColor = lngGreen
-    btnOpenTable.hoverColor = lngGreen
+    btnDelete.HoverColor = lngGreen
+    btnOpenTable.HoverColor = lngGreen
     
     btnDelete.Caption = StringFromCodepoint(uDelete)
-    btnDelete.forecolor = lngRed
+    btnDelete.ForeColor = lngRed
 
 Exit_Handler:
     Exit Sub

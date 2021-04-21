@@ -1,4 +1,4 @@
-﻿Version =20
+﻿Version =21
 VersionRequired =20
 Begin Form
     AutoCenter = NotDefault
@@ -14,11 +14,10 @@ Begin Form
     GridY =24
     Width =14460
     DatasheetFontHeight =10
-    ItemSuffix =111
-    Left =6720
-    Top =1980
-    Right =21465
-    Bottom =10080
+    ItemSuffix =113
+    Left =330
+    Right =15070
+    Bottom =8080
     DatasheetGridlinesColor =12632256
     Filter ="[TSN]=28610"
     RecSrcDt = Begin
@@ -26,6 +25,7 @@ Begin Form
     End
     RecordSource ="tlu_Plants"
     Caption ="Plants"
+    OnOpen ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
         0xa0050000a0050000a0050000a005000000000000201c0000e010000001000000 ,
@@ -359,7 +359,7 @@ Begin Form
                     OverlapFlags =93
                     IMESentenceMode =3
                     Left =1800
-                    Top =3000
+                    Top =2760
                     Width =1020
                     Height =255
                     ColumnWidth =1020
@@ -369,16 +369,16 @@ Begin Form
                     StatusBarText ="ITIS TSN Accepted"
 
                     LayoutCachedLeft =1800
-                    LayoutCachedTop =3000
+                    LayoutCachedTop =2760
                     LayoutCachedWidth =2820
-                    LayoutCachedHeight =3255
+                    LayoutCachedHeight =3015
                 End
                 Begin TextBox
                     Locked = NotDefault
                     OverlapFlags =93
                     IMESentenceMode =3
-                    Left =1800
-                    Top =2640
+                    Left =1810
+                    Top =2400
                     Width =1020
                     Height =255
                     ColumnWidth =990
@@ -387,24 +387,24 @@ Begin Form
                     ControlSource ="TSN"
                     StatusBarText ="ITIS TSN"
 
-                    LayoutCachedLeft =1800
-                    LayoutCachedTop =2640
-                    LayoutCachedWidth =2820
-                    LayoutCachedHeight =2895
+                    LayoutCachedLeft =1810
+                    LayoutCachedTop =2400
+                    LayoutCachedWidth =2830
+                    LayoutCachedHeight =2655
                     Begin
                         Begin Label
                             OverlapFlags =93
                             TextAlign =3
                             Left =660
-                            Top =2640
+                            Top =2410
                             Width =1008
                             Height =240
                             Name ="Label43"
                             Caption ="TSN:"
                             LayoutCachedLeft =660
-                            LayoutCachedTop =2640
+                            LayoutCachedTop =2410
                             LayoutCachedWidth =1668
-                            LayoutCachedHeight =2880
+                            LayoutCachedHeight =2650
                         End
                     End
                 End
@@ -626,7 +626,7 @@ Begin Form
                     TextAlign =2
                     IMESentenceMode =3
                     Left =1800
-                    Top =3360
+                    Top =3550
                     Width =1020
                     Height =255
                     TabIndex =13
@@ -637,53 +637,55 @@ Begin Form
                     OnChange ="[Event Procedure]"
 
                     LayoutCachedLeft =1800
-                    LayoutCachedTop =3360
+                    LayoutCachedTop =3550
                     LayoutCachedWidth =2820
-                    LayoutCachedHeight =3615
+                    LayoutCachedHeight =3805
                     Begin
                         Begin Label
                             OverlapFlags =93
                             TextAlign =3
                             Left =600
-                            Top =3360
+                            Top =3550
                             Width =1128
                             Height =240
                             Name ="Label50"
                             Caption ="PLANTS Code:"
                             LayoutCachedLeft =600
-                            LayoutCachedTop =3360
+                            LayoutCachedTop =3550
                             LayoutCachedWidth =1728
-                            LayoutCachedHeight =3600
+                            LayoutCachedHeight =3790
                         End
                     End
                 End
                 Begin CheckBox
+                    Enabled = NotDefault
                     OverlapFlags =93
-                    Left =240
-                    Top =3030
+                    Left =120
+                    Top =2760
                     ColumnWidth =1560
                     TabIndex =14
                     Name ="chk_Accepted_Found"
                     ControlSource ="Accepted_Found"
                     StatusBarText ="Accepted TSN is in table"
 
-                    LayoutCachedLeft =240
-                    LayoutCachedTop =3030
-                    LayoutCachedWidth =500
-                    LayoutCachedHeight =3270
+                    LayoutCachedLeft =120
+                    LayoutCachedTop =2760
+                    LayoutCachedWidth =380
+                    LayoutCachedHeight =3000
                     Begin
                         Begin Label
-                            OverlapFlags =255
-                            Left =470
-                            Top =3000
-                            Width =1305
-                            Height =240
-                            Name ="Label51"
-                            Caption ="Accepted Found"
-                            LayoutCachedLeft =470
-                            LayoutCachedTop =3000
-                            LayoutCachedWidth =1775
-                            LayoutCachedHeight =3240
+                            OverlapFlags =93
+                            Left =420
+                            Top =2700
+                            Width =1260
+                            Height =420
+                            Name ="lblAcceptedFound"
+                            Caption ="Other Accepted Found"
+                            ControlTipText ="Other species using this TSN_Accepted were found"
+                            LayoutCachedLeft =420
+                            LayoutCachedTop =2700
+                            LayoutCachedWidth =1680
+                            LayoutCachedHeight =3120
                         End
                     End
                 End
@@ -982,10 +984,10 @@ Begin Form
                     LayoutCachedTop =120
                     LayoutCachedWidth =14160
                     LayoutCachedHeight =420
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin Tab
@@ -993,33 +995,33 @@ Begin Form
                     Left =4605
                     Top =2460
                     Width =9765
-                    Height =5565
+                    Height =5570
                     TabIndex =24
                     Name ="TabCtl61"
 
                     LayoutCachedLeft =4605
                     LayoutCachedTop =2460
                     LayoutCachedWidth =14370
-                    LayoutCachedHeight =8025
+                    LayoutCachedHeight =8030
                     Begin
                         Begin Page
                             OverlapFlags =87
-                            Left =4740
-                            Top =2865
-                            Width =9495
-                            Height =5025
+                            Left =4700
+                            Top =2800
+                            Width =9580
+                            Height =5140
                             Name ="Occurrences"
                             ImageData = Begin
                                 0x00000000
                             End
-                            LayoutCachedLeft =4740
-                            LayoutCachedTop =2865
-                            LayoutCachedWidth =14235
-                            LayoutCachedHeight =7890
-                            WebImagePaddingLeft =2
-                            WebImagePaddingTop =2
-                            WebImagePaddingRight =2
-                            WebImagePaddingBottom =2
+                            LayoutCachedLeft =4700
+                            LayoutCachedTop =2800
+                            LayoutCachedWidth =14280
+                            LayoutCachedHeight =7940
+                            WebImagePaddingLeft =3
+                            WebImagePaddingTop =3
+                            WebImagePaddingRight =3
+                            WebImagePaddingBottom =3
                             Begin
                                 Begin Subform
                                     OverlapFlags =215
@@ -1069,34 +1071,34 @@ Begin Form
                     FontUnderline = NotDefault
                     OverlapFlags =93
                     Left =2880
-                    Top =3360
+                    Top =3560
                     Width =450
                     Height =255
                     ForeColor =1279872587
                     Name ="lbl_Link_to_PLANTS"
                     Caption ="Web"
-                    HyperlinkAddress ="http://plants.usda.gov/java/profile?symbol=FRAM2"
+                    HyperlinkAddress ="http://plants.usda.gov/java/profile?symbol=QUPR2"
                     LayoutCachedLeft =2880
-                    LayoutCachedTop =3360
+                    LayoutCachedTop =3560
                     LayoutCachedWidth =3330
-                    LayoutCachedHeight =3615
+                    LayoutCachedHeight =3815
                 End
                 Begin Label
                     FontUnderline = NotDefault
                     OverlapFlags =93
-                    Left =2880
-                    Top =2640
+                    Left =2860
+                    Top =2400
                     Width =450
                     Height =255
                     ForeColor =1279872587
                     Name ="lbl_Link_to_ITIS"
                     Caption ="Web"
-                    HyperlinkAddress ="http://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value=32"
-                        "931"
-                    LayoutCachedLeft =2880
-                    LayoutCachedTop =2640
-                    LayoutCachedWidth =3330
-                    LayoutCachedHeight =2895
+                    HyperlinkAddress ="http://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value=19"
+                        "398"
+                    LayoutCachedLeft =2860
+                    LayoutCachedTop =2400
+                    LayoutCachedWidth =3310
+                    LayoutCachedHeight =2655
                 End
                 Begin CheckBox
                     OverlapFlags =85
@@ -1327,16 +1329,16 @@ Begin Form
                     BorderWidth =1
                     OverlapFlags =255
                     Left =60
-                    Top =2460
+                    Top =2350
                     Width =4440
-                    Height =5580
+                    Height =5690
                     Name ="Box_Attributes"
                     GridlineWidthLeft =2
                     GridlineWidthTop =2
                     GridlineWidthRight =2
                     GridlineWidthBottom =2
                     LayoutCachedLeft =60
-                    LayoutCachedTop =2460
+                    LayoutCachedTop =2350
                     LayoutCachedWidth =4500
                     LayoutCachedHeight =8040
                 End
@@ -1355,10 +1357,10 @@ Begin Form
                     LayoutCachedTop =7560
                     LayoutCachedWidth =1740
                     LayoutCachedHeight =7860
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin TextBox
@@ -1435,6 +1437,67 @@ Begin Form
                         End
                     End
                 End
+                Begin ToggleButton
+                    OverlapFlags =255
+                    Left =2940
+                    Top =2740
+                    Width =1440
+                    Height =300
+                    TabIndex =36
+                    ForeColor =16777215
+                    Name ="tglExport"
+                    AfterUpdate ="[Event Procedure]"
+                    DefaultValue ="False"
+                    Caption ="Not Exported"
+                    FontName ="Tahoma"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Toggle whether the species should be exported or not"
+                    LeftPadding =70
+                    RightPadding =80
+                    BottomPadding =120
+
+                    LayoutCachedLeft =2940
+                    LayoutCachedTop =2740
+                    LayoutCachedWidth =4380
+                    LayoutCachedHeight =3040
+                    ForeThemeColorIndex =1
+                    UseTheme =1
+                    Shape =2
+                    Gradient =25
+                    BackColor =14262536
+                    BackThemeColorIndex =6
+                    BorderColor =14262536
+                    BorderThemeColorIndex =6
+                    HoverColor =16236067
+                    HoverThemeColorIndex =6
+                    HoverTint =80.0
+                    PressedColor =11436294
+                    PressedShade =80.0
+                    HoverForeThemeColorIndex =1
+                    PressedForeThemeColorIndex =1
+                    Shadow =-1
+                    QuickStyle =32
+                    QuickStyleMask =-1
+                    Overlaps =1
+                End
+                Begin Label
+                    OverlapFlags =247
+                    Left =360
+                    Top =3120
+                    Width =4080
+                    Height =360
+                    FontSize =7
+                    BackColor =16777215
+                    ForeColor =16711680
+                    Name ="lblHintExports"
+                    Caption ="Check the Export setting. This species may be a default synonym that needs to be"
+                        " exported since TSN = TSN_Accepted."
+                    FontName ="Tahoma"
+                    LayoutCachedLeft =360
+                    LayoutCachedTop =3120
+                    LayoutCachedWidth =4440
+                    LayoutCachedHeight =3480
+                End
             End
         End
         Begin FormFooter
@@ -1450,29 +1513,115 @@ Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Compare Database
+Option Explicit
 
-Private Sub cmbo_Family_Change()
-    Me!cmbo_Genus.Value = "*"
-    Me!cmbo_Species.Value = "*"
+' =================================
+' MODULE:       frm_Plants
+' Level:        Application module
+' Version:      1.01
+'
+' Description:  Standard form for plant data
+' Source/date:  John Boetsch, Jan 2010
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      Bonnie Campbell, May 14, 2018
+' Revisions:    JB/ML/GS - 1/2010+  - 1.00 - initial version
+'               BLC   - 1/27/2021 - 1.01 - added documentation, error handling
+' =================================
+
+' ---------------------------------
+'  Declarations
+' ---------------------------------
+
+' ----------------
+'  Events
+' ----------------
+
+' ----------------
+'  Form
+' ----------------
+' ---------------------------------
+' SUB:          Form_Open
+' Description:  form open actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  John R. Boetsch, Jan 2010
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   JB/ML/GS - 1/2010+ - initial version
+'   BLC - 1/27/2021 - documentation, error handling
+' ---------------------------------
+Private Sub Form_Open(Cancel As Integer)
+On Error GoTo Err_Handler
+
+    'defaults
+    Me.tglExport = IIf(Me!Export = 1, -1, 0)
+    lblHintExports.Caption = "Species will " & IIf(Me!Export = 1, "", "not") & " export for annual data closeout"
+
+    SetToggle
+        
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - Form_Open[frm_Plants])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub cmbo_Family_AfterUpdate()
-    Me!cmbo_Genus.Requery
-    Me!cmbo_Species.Requery
- End Sub
+' ---------------------------------
+' SUB:          cbxPickAPlant_GotFocus
+' Description:  combobox on focus actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  John R. Boetsch, Jan 2010
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   JB/ML/GS - 1/2010+ - initial version
+'   BLC - 1/27/2021 - documentation, error handling
+' ---------------------------------
+Private Sub cmbo_PickAPlant_GotFocus()
+On Error GoTo Err_Handler
+    
+    Me!cmbo_PickAPlant.Requery
 
-Private Sub cmbo_Genus_AfterUpdate()
-If Me!cmbo_Family = "" Or Me!cmbo_Family = "*" Or IsNull(Me!cmbo_Family) Then
-    Me!cmbo_Family.Value = Me!cmbo_Genus.Column(0)
-End If
-    Me!cmbo_Species.Locked = False
-    Me!cmbo_Species.Requery
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxPickAPlant_Click[frm_Plants])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub cmbo_Genus_Change()
-    Me!cmbo_Species.Value = "*"
-End Sub
-
+' ---------------------------------
+' SUB:          cbxGenus_GotFocus
+' Description:  combobox on focus actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  John R. Boetsch, Jan 2010
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   JB/ML/GS - 1/2010+ - initial version
+'   BLC - 1/27/2021 - documentation, error handling
+' ---------------------------------
 'Private Sub cmbo_Genus_GotFocus()
 '    Me.cmbo_Genus.Requery
 'If IsNull(Me!cmbo_Family) Then
@@ -1496,7 +1645,158 @@ End Sub
 'End If
 'End Sub
 
+' ---------------------------------
+' SUB:          cbxSpecies_GotFocus
+' Description:  combobox on focus actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  John R. Boetsch, Jan 2010
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   JB/ML/GS - 1/2010+ - initial version
+'   BLC - 1/27/2021 - documentation, error handling
+' ---------------------------------
+Private Sub cmbo_Species_GotFocus()
+On Error GoTo Err_Handler
+
+If Me!cmbo_Genus = "" Or IsNull(Me!cmbo_Genus) Then
+    MsgBox "You must enter a Genus prior to selecting a species.", , "Vegetation DB"
+    Me!cmbo_Genus.SetFocus
+End If
+    Me!cmbo_Species.Requery
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxSpecies_GotFocus[frm_Plants])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxFamily_Change
+' Description:  combobox change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  John R. Boetsch, Jan 2010
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   JB/ML/GS - 1/2010+ - initial version
+'   BLC - 1/27/2021 - documentation, error handling
+' ---------------------------------
+Private Sub cmbo_Family_Change()
+On Error GoTo Err_Handler
+
+    Me!cmbo_Genus.Value = "*"
+    Me!cmbo_Species.Value = "*"
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxFamily_Change[frm_Plants])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxGenus_Change
+' Description:  combobox change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  John R. Boetsch, Jan 2010
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   JB/ML/GS - 1/2010+ - initial version
+'   BLC - 1/27/2021 - documentation, error handling
+' ----------------------------------
+Private Sub cmbo_Genus_Change()
+On Error GoTo Err_Handler
+    
+    Me!cmbo_Species.Value = "*"
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxGenus_Change[frm_Plants])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          tbxPLANTSCode_Change
+' Description:  textbox change actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  John R. Boetsch, Jan 2010
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   JB/ML/GS - 1/2010+ - initial version
+'   BLC - 1/27/2021 - documentation, error handling
+' ---------------------------------
+Private Sub txt_PLANTS_Code_Change()
+On Error GoTo Err_Handler
+'If Me!txt_PLANTS_Code = "" Or IsNull(Me!txt_PLANTS_Code) Then
+'    lbl_Link_to_PLANTS.HyperlinkAddress = "http://plants.usda.gov"
+'Else
+'    lbl_Link_to_PLANTS.HyperlinkAddress = "http://plants.usda.gov/java/nameSearch?keywordquery=" & Me!txt_PLANTS_Code & "&mode=symbol"
+'End If
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxPLANTSCode_Change[frm_Plants])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxPickAPlant_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  John R. Boetsch, Jan 2010
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   JB/ML/GS - 1/2010+ - initial version
+'   BLC - 1/27/2021 - documentation, error handling
+' ---------------------------------
 Private Sub cmbo_PickAPlant_AfterUpdate()
+On Error GoTo Err_Handler
+ 
  ' Find the record that matches the control.
     Dim rs As Object
     Set rs = Me.Recordset.Clone
@@ -1514,34 +1814,200 @@ Private Sub cmbo_PickAPlant_AfterUpdate()
     Else
         lbl_Link_to_PLANTS.HyperlinkAddress = "http://plants.usda.gov/java/profile?symbol=" & Me!txt_PLANTS_Code
     End If
-End Sub
-
-Private Sub cmbo_PickAPlant_GotFocus()
-    Me!cmbo_PickAPlant.Requery
-End Sub
-
-Private Sub cmbo_Species_GotFocus()
-If Me!cmbo_Genus = "" Or IsNull(Me!cmbo_Genus) Then
-    MsgBox "You must enter a Genus prior to selecting a species.", , "Vegetation DB"
-    Me!cmbo_Genus.SetFocus
-End If
-    Me!cmbo_Species.Requery
-End Sub
-
-Private Sub cmd_Close_Form_Click()
-On Error GoTo Err_cmd_close_form_Click
-
-    DoCmd.Close
-
-Exit_cmd_close_form_Click:
+Exit_Handler:
     Exit Sub
-
-Err_cmd_close_form_Click:
-    MsgBox Err.Description
-    Resume Exit_cmd_close_form_Click
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxPickAPlant_AfterUpdate[frm_Plants])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
+' ---------------------------------
+' SUB:          cbxFamily_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  John R. Boetsch, Jan 2010
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   JB/ML/GS - 1/2010+ - initial version
+'   BLC - 1/27/2021 - documentation, error handling
+' ---------------------------------
+Private Sub cmbo_Family_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    Me!cmbo_Genus.Requery
+    Me!cmbo_Species.Requery
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxFamily_AfterUpdate[frm_Plants])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          cbxGenus_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  John R. Boetsch, Jan 2010
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   JB/ML/GS - 1/2010+ - initial version
+'   BLC - 1/27/2021 - documentation, error handling
+' ---------------------------------
+Private Sub cmbo_Genus_AfterUpdate()
+On Error GoTo Err_Handler
+
+If Me!cmbo_Family = "" Or Me!cmbo_Family = "*" Or IsNull(Me!cmbo_Family) Then
+    Me!cmbo_Family.Value = Me!cmbo_Genus.Column(0)
+End If
+    Me!cmbo_Species.Locked = False
+    Me!cmbo_Species.Requery
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxGenus_AfterUpdate[frm_Plants])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          tbxPLANTSCode_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  John R. Boetsch, Jan 2010
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   JB/ML/GS - 1/2010+ - initial version
+'   BLC - 1/27/2021 - documentation, error handling
+' ---------------------------------
+Private Sub txt_PLANTS_Code_AfterUpdate()
+On Error GoTo Err_Handler
+'If Me!txt_PLANTS_Code = "" Or IsNull(Me!txt_PLANTS_Code) Then
+'    lbl_Link_to_PLANTS.HyperlinkAddress = "http://plants.usda.gov"
+'Else
+'    lbl_Link_to_PLANTS.HyperlinkAddress = "http://plants.usda.gov/java/nameSearch?keywordquery=" & Me!txt_PLANTS_Code & "&mode=symbol"
+'End If
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tbxPlantsCode_AfterUpdate[frm_Plants])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          tglExport_AfterUpdate
+' Description:  toggle button after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 27, 2021
+' Adapted:      -
+' Revisions:
+'   BLC - 1/27/2021 - initial version
+' ---------------------------------
+Private Sub tglExport_AfterUpdate()
+On Error GoTo Err_Handler
+
+    Me!Export = Abs(tglExport) 'i.e. 1 or 0 for the byte-wise Export field in tlu_PLANTS
+
+    SetToggle
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglExport_AfterUpdate[frm_Plants])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          tglExport_Click
+' Description:  toggle button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 27, 2021
+' Adapted:      -
+' Revisions:
+'   BLC - 1/27/2021 - initial version
+' ---------------------------------
+Private Sub tglExport_Click()
+On Error GoTo Err_Handler
+
+'    MsgBox tglExport, vbCritical
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglExport_Click[frm_Plants])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          btnUnlockAttributes_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  John R. Boetsch, Jan 2010
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   JB/ML/GS - 1/2010+ - initial version
+'   BLC - 1/27/2021 - documentation, error handling
+' ---------------------------------
 Private Sub cmd_Unlock_Attributes_Click()
+On Error GoTo Err_Handler
     Dim LockStatus As Boolean
     If cmd_Unlock_Attributes.Caption = "Unlock Attributes" Then
         LockStatus = False
@@ -1570,20 +2036,106 @@ Private Sub cmd_Unlock_Attributes_Click()
     Me!chk_Exotic.Locked = LockStatus
     Me!chk_Sensitive.Locked = LockStatus
     Me!chk_Accepted_Found.Locked = LockStatus
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnUnlockAttributes_Click[frm_Plants])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub txt_PLANTS_Code_AfterUpdate()
-'If Me!txt_PLANTS_Code = "" Or IsNull(Me!txt_PLANTS_Code) Then
-'    lbl_Link_to_PLANTS.HyperlinkAddress = "http://plants.usda.gov"
-'Else
-'    lbl_Link_to_PLANTS.HyperlinkAddress = "http://plants.usda.gov/java/nameSearch?keywordquery=" & Me!txt_PLANTS_Code & "&mode=symbol"
-'End If
+' ---------------------------------
+' SUB:          btnCloseForm_Click
+' Description:  button click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  John R. Boetsch, Jan 2010
+'               Mark Lehman/Geoffrey Sanders, unknown
+' Adapted:      -
+' Revisions:
+'   JB/ML/GS - 1/2010+ - initial version
+'   BLC - 1/27/2021 - documentation, error handling
+' ---------------------------------
+Private Sub cmd_Close_Form_Click()
+On Error GoTo Err_Handler
+
+    DoCmd.Close
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnCloseForm_Click[frm_Plants])"
+    End Select
+    Resume Exit_Handler
 End Sub
 
-Private Sub txt_PLANTS_Code_Change()
-'If Me!txt_PLANTS_Code = "" Or IsNull(Me!txt_PLANTS_Code) Then
-'    lbl_Link_to_PLANTS.HyperlinkAddress = "http://plants.usda.gov"
-'Else
-'    lbl_Link_to_PLANTS.HyperlinkAddress = "http://plants.usda.gov/java/nameSearch?keywordquery=" & Me!txt_PLANTS_Code & "&mode=symbol"
-'End If
+' ---------------------------------
+' SUB:          SetToggle
+' Description:  sets toggle button attributes
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 27, 2021
+' Adapted:      -
+' Revisions:
+'   BLC - 1/27/2021 - initial version
+' ---------------------------------
+Private Sub SetToggle()
+On Error GoTo Err_Handler
+
+    'set button caption
+    tglExport.Caption = IIf(tglExport = -1, "Export", "Not Exported")
+
+    'set background/fore (text) color
+    Dim bgd As Long
+    Dim fore As Long
+    
+    Select Case tglExport
+        Case 1 'export
+            bgd = lngYellow
+            fore = lngWhite
+        Case 0 'do not export
+            bgd = lngLtCyan
+            fore = lngRed
+    End Select
+    
+    With tglExport
+        .BackColor = bgd
+        .ForeColor = fore
+    End With
+    
+    'set hints caption
+    Me.lblHintExports.Caption = Me!Export
+
+    If Me.TSN = Me.TSN_Accepted And Me.Export = 0 Then
+        lblHintExports.Caption = "Check the Export setting. This species may be a default synonym that needs to be exported since TSN = TSN_Accepted."
+    Else
+        lblHintExports.Caption = "Species will" & IIf(Me!Export = 1, "", " not") & " export for annual data closeout"
+    End If
+
+    Me.Form.Requery 'update the caption
+
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - SetToggle[frm_Plants])"
+    End Select
+    Resume Exit_Handler
 End Sub

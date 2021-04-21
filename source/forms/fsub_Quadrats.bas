@@ -1571,7 +1571,7 @@ On Error GoTo Err_Handler
     Dim strQuadrat As String
     Me!txtQuadrat_Number.DefaultValue = ""
     Me!txtQuadrat_Number.Requery
-    Me!lblQuadrat_Selection.forecolor = 255
+    Me!lblQuadrat_Selection.ForeColor = 255
     
     Me!fsub_Quad_Herbaceous.visible = False
     Me!fsub_Quad_Seedlings.visible = False
@@ -2227,7 +2227,7 @@ On Error GoTo Err_Handler
             strQuadrat = "300"
     End Select
     
-    Me!lblQuadrat_Selection.forecolor = 0
+    Me!lblQuadrat_Selection.ForeColor = 0
     Me!fsub_Quad_Herbaceous.visible = True
     Me!fsub_Quad_Seedlings.visible = True
     Me!txtQuadrat_Comments.visible = True

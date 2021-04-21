@@ -1124,7 +1124,7 @@ End Property
 
 Public Property Let CountLabelFontColor(Value As Long)
     m_CountLabelFontColor = Value
-    lblCount.forecolor = m_CountLabelFontColor
+    lblCount.ForeColor = m_CountLabelFontColor
 End Property
 
 Public Property Get CurrentCountFontColor() As Long
@@ -1133,7 +1133,7 @@ End Property
 
 Public Property Let CurrentCountFontColor(Value As Long)
     m_CurrentCountFontColor = Value
-    lblCount.forecolor = m_CurrentCountFontColor
+    lblCount.ForeColor = m_CurrentCountFontColor
 End Property
 
 Public Property Get MaxCountFontColor() As Long
@@ -1142,7 +1142,7 @@ End Property
 
 Public Property Let MaxCountFontColor(Value As Long)
     m_MaxCountFontColor = Value
-    lblMaxCount.forecolor = m_MaxCountFontColor
+    lblMaxCount.ForeColor = m_MaxCountFontColor
 End Property
 
 Public Property Get RemainingCountFontColor() As Long
@@ -1151,7 +1151,7 @@ End Property
 
 Public Property Let RemainingCountFontColor(Value As Long)
     m_RemainingCountFontColor = Value
-    lblMaxCount.forecolor = m_RemainingCountFontColor
+    lblMaxCount.ForeColor = m_RemainingCountFontColor
 End Property
 
 Public Property Get AlertBoxBackgroundColor() As Long
@@ -1161,7 +1161,7 @@ End Property
 Public Property Let AlertBoxBackgroundColor(Value As Long)
     rctAlert.backstyle = 1 '1 = Normal, 0 = Transparent
     m_AlertBoxBackgroundColor = Value
-    rctAlert.backcolor = m_AlertBoxBackgroundColor
+    rctAlert.BackColor = m_AlertBoxBackgroundColor
 End Property
 
 ' ==== Visibility ====
@@ -1253,8 +1253,8 @@ On Error GoTo Err_Handler
                             "To format your template text, use the Notepad button at right," & vbCrLf & _
                             "then copy && paste it into the template textbox."
     tbxIcon.Value = StringFromCodepoint(uLocked)
-    tbxIcon.forecolor = lngDkGreen
-    lblDirections.forecolor = lngLtBlue
+    tbxIcon.ForeColor = lngDkGreen
+    lblDirections.ForeColor = lngLtBlue
     
     lblTemplateNameHint.Caption = "Naming conventions: " & _
                                 vbCrLf & Space(30) & "s_ = select" & _
@@ -1282,12 +1282,12 @@ On Error GoTo Err_Handler
     Me.AlertCount = 10
     Me.CurrentCount = Me.MaxCount
     'set hover
-    btnDelete.hoverColor = lngGreen
-    btnSave.hoverColor = lngGreen
-    btnOpenNotepad.hoverColor = lngGreen
+    btnDelete.HoverColor = lngGreen
+    btnSave.HoverColor = lngGreen
+    btnOpenNotepad.HoverColor = lngGreen
     
     btnDelete.Caption = StringFromCodepoint(uDelete)
-    btnDelete.forecolor = lngRed
+    btnDelete.ForeColor = lngRed
 
     'set syntax values
     SetTempVar "EnumType", "SyntaxType"
@@ -1300,8 +1300,8 @@ On Error GoTo Err_Handler
     'defaults
     btnSave.Enabled = False
     Me.rctAlert.visible = False
-    Me.lblCount.forecolor = vbBlack
-    Me.lblMaxCount.forecolor = vbBlack
+    Me.lblCount.ForeColor = vbBlack
+    Me.lblMaxCount.ForeColor = vbBlack
     
 Exit_Handler:
     Exit Sub
@@ -1865,7 +1865,7 @@ On Error GoTo Err_Handler
         isOK = True
     End If
     
-    tbxIcon.forecolor = IIf(isOK = True, lngDkGreen, lngRed)
+    tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK
     
     'refresh form

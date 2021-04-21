@@ -1984,7 +1984,7 @@ Private Sub chkDBHCheck_Click()
 On Error GoTo Err_Handler
     
     'Toggle check label color based on if checked or not
-    lblDBHCheck.forecolor = IIf(chkDBHCheck, lngBlue, lngRed)
+    lblDBHCheck.ForeColor = IIf(chkDBHCheck, lngBlue, lngRed)
     
     'update the record's value (since DBH_Check is 0/1 vs. 0/-1)
     SetDBHCheck Me.Tree_Data_ID, "Tree", chkDBHCheck
@@ -2920,7 +2920,7 @@ Private Sub CheckDBH()
 On Error GoTo Err_Handler
     
     'set default comment bgd color
-    tbxComments.backcolor = lngWhite
+    tbxComments.BackColor = lngWhite
     
     'fetch DBH_Check value from db (convert 1 -> -1 for Access logic)
     chkDBHCheck = IIf(Me!DBH_Check = 1, -1, 0)
@@ -2934,7 +2934,7 @@ On Error GoTo Err_Handler
     End If
 
     'set text color if checked
-    If Me!DBH_Check = 1 Then Me.lblDBHCheck.forecolor = lngBlue
+    If Me!DBH_Check = 1 Then Me.lblDBHCheck.ForeColor = lngBlue
     
     Debug.Print "xx_Data_ID " & Me.Tag_ID & " Prior DBH - " & GetPriorDBH(Nz(Me.Tree_Data_ID, "No Tree_Data_ID"), "Tree", Nz(Me.Tag_ID, "No Tag_ID"))
     

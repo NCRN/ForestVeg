@@ -474,7 +474,7 @@ On Error GoTo Err_Handler
         'set values if controls exist
         If ControlExists("tbxIcon", frm) Then
             .Controls("tbxIcon") = StringFromCodepoint(uBullet)
-            .Controls("tbxIcon").forecolor = lngRed
+            .Controls("tbxIcon").ForeColor = lngRed
         End If
         
         If ControlExists("tbxID", frm) Then .Controls("tbxID") = 0
@@ -483,7 +483,7 @@ On Error GoTo Err_Handler
         If ControlExists("lblMsgIcon", frm) Then
             .Controls("lblMsgIcon").Caption = ""
             .Controls("lblMsg").Caption = ""
-            .Controls("lblMsgIcon").forecolor = lngRobinEgg
+            .Controls("lblMsgIcon").ForeColor = lngRobinEgg
         End If
         
         If ControlExists("btnSave", frm) Then .Controls("btnSave").Enabled = False
@@ -826,7 +826,7 @@ End Sub
 Public Function ChangeBackColor(ctrl As Control, lngColor As Long)
 On Error GoTo Err_Handler
 
-    ctrl.backcolor = lngColor
+    ctrl.BackColor = lngColor
     
 Exit_Handler:
     Exit Function
@@ -869,8 +869,8 @@ Public Sub ResetHeaders(frm As Form, _
                         ctrlTag As String, _
                         Optional fontBold As Boolean = True, _
                         Optional backstyle As Integer = 1, _
-                        Optional forecolor As Long, _
-                        Optional backcolor As Long, _
+                        Optional ForeColor As Long, _
+                        Optional BackColor As Long, _
                         Optional oCtrl As Control)
 On Error GoTo Err_Handler
 
@@ -892,8 +892,8 @@ Dim ctrl As Control
                 If ctrl.Tag = ctrlTag Then
                     If varType(fontBold) = vbBoolean Then ctrl.fontBold = fontBold
                     If varType(backstyle) = vbInteger Then ctrl.backstyle = backstyle
-                    If varType(backcolor) = vbLong Then ctrl.backcolor = backcolor
-                    If varType(forecolor) = vbLong Then ctrl.forecolor = forecolor
+                    If varType(BackColor) = vbLong Then ctrl.BackColor = BackColor
+                    If varType(ForeColor) = vbLong Then ctrl.ForeColor = ForeColor
                 End If
                 
           End If
@@ -914,8 +914,8 @@ Dim ctrl As Control
           
                 If varType(fontBold) = vbBoolean Then oCtrl.fontBold = fontBold
                 If varType(backstyle) = vbInteger Then oCtrl.backstyle = backstyle
-                If varType(backcolor) = vbLong Then oCtrl.backcolor = backcolor
-                If varType(forecolor) = vbLong Then oCtrl.forecolor = forecolor
+                If varType(BackColor) = vbLong Then oCtrl.BackColor = BackColor
+                If varType(ForeColor) = vbLong Then oCtrl.ForeColor = ForeColor
              
             End If
             

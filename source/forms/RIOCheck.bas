@@ -1699,9 +1699,9 @@ On Error GoTo Err_Handler
     Directions = "Are all the Retired in Office (RIO) tags actually IN the office?"
     
     'defaults
-    lblDirections.forecolor = lngWhite
+    lblDirections.ForeColor = lngWhite
 '    rctPseudoEvent.BackColor = lngLtTan
-    btnSave.hoverColor = lngGreen
+    btnSave.HoverColor = lngGreen
 '    btnReportRIOHistory.HoverColor = lngGreen
 
     'recordcount
@@ -2422,9 +2422,9 @@ On Error GoTo Err_Handler
     
     With lbxActuallyInOffice
         If .Tag = .ListCount Then
-            .backcolor = lngLtLime
+            .BackColor = lngLtLime
         Else
-            .backcolor = lngWhite
+            .BackColor = lngWhite
         End If
     End With
 

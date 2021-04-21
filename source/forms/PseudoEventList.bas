@@ -653,13 +653,13 @@ On Error GoTo Err_Handler
               & "Click Add New Event to create a new event."
     
     'defaults
-    lblDirections.forecolor = lngBlack
+    lblDirections.ForeColor = lngBlack
 '    rctPseudoEvent.BackColor = lngLtTan
-    btnCreate.hoverColor = lngGreen
-    btnCancel.hoverColor = lngRed
+    btnCreate.HoverColor = lngGreen
+    btnCancel.HoverColor = lngRed
     
     cbxParkCode = "Choose park"
-    cbxParkCode.forecolor = lngLtGray
+    cbxParkCode.ForeColor = lngLtGray
     
     'set the default filter (i.e. no pseudoevents)
     Me.FilterOnLoad = True
@@ -839,7 +839,7 @@ End Sub
 Private Sub cbxParkCode_GotFocus()
 On Error GoTo Err_Handler
 
-    cbxParkCode.forecolor = lngBlack
+    cbxParkCode.ForeColor = lngBlack
     
 Exit_Handler:
     Exit Sub

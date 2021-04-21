@@ -2757,42 +2757,42 @@ On Error GoTo Err_Handler
     
     Title = "Db Admin"
     Directions = "Choose the desired action below."
-    lblDirections.forecolor = lngLtBlue
+    lblDirections.ForeColor = lngLtBlue
     btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.forecolor = lngBlue
+    btnComment.ForeColor = lngBlue
     
     'set mode display
-    tbxAppMode.forecolor = lngGreen
+    tbxAppMode.ForeColor = lngGreen
     tbxAppMode.BorderStyle = 0  '0-transparent, 1-normal
     tbxAppMode.TextAlign = 2    '0-general, 1-left, 2-center, 3-right
     
     'set hovers
-    btnComment.hoverColor = lngGreen
-    btnBackup.hoverColor = lngGreen
-    btnBrowser.hoverColor = lngGreen
-    btnChangeDbInfo.hoverColor = lngGreen
-    btnChangeDefaults.hoverColor = lngGreen
-    btnDbWindow.hoverColor = lngGreen
-    btnEditLog.hoverColor = lngGreen
-    btnEnter.hoverColor = lngGreen
-    btnLookups.hoverColor = lngGreen
-    btnManageLinks.hoverColor = lngGreen
-    btnNavCoords.hoverColor = lngGreen
-    btnNavReport.hoverColor = lngGreen
-    btnQA.hoverColor = lngGreen
-    btnQAReport.hoverColor = lngGreen
-    btnReconnect.hoverColor = lngGreen
-    btnReleaseHistory.hoverColor = lngGreen
-    btnReportBug.hoverColor = lngGreen
-    btnSetRoles.hoverColor = lngGreen
-    btnSpeciesListRpt.hoverColor = lngGreen
-    btnSummaries.hoverColor = lngGreen
-    btnTaskList.hoverColor = lngGreen
-    btnTaskListRpt.hoverColor = lngGreen
-    btnUISetup.hoverColor = lngGreen
-    btnViewTemplates.hoverColor = lngGreen
-    btnImportCSV.hoverColor = lngGreen
-    btnSOPs.hoverColor = lngGreen
+    btnComment.HoverColor = lngGreen
+    btnBackup.HoverColor = lngGreen
+    btnBrowser.HoverColor = lngGreen
+    btnChangeDbInfo.HoverColor = lngGreen
+    btnChangeDefaults.HoverColor = lngGreen
+    btnDbWindow.HoverColor = lngGreen
+    btnEditLog.HoverColor = lngGreen
+    btnEnter.HoverColor = lngGreen
+    btnLookups.HoverColor = lngGreen
+    btnManageLinks.HoverColor = lngGreen
+    btnNavCoords.HoverColor = lngGreen
+    btnNavReport.HoverColor = lngGreen
+    btnQA.HoverColor = lngGreen
+    btnQAReport.HoverColor = lngGreen
+    btnReconnect.HoverColor = lngGreen
+    btnReleaseHistory.HoverColor = lngGreen
+    btnReportBug.HoverColor = lngGreen
+    btnSetRoles.HoverColor = lngGreen
+    btnSpeciesListRpt.HoverColor = lngGreen
+    btnSummaries.HoverColor = lngGreen
+    btnTaskList.HoverColor = lngGreen
+    btnTaskListRpt.HoverColor = lngGreen
+    btnUISetup.HoverColor = lngGreen
+    btnViewTemplates.HoverColor = lngGreen
+    btnImportCSV.HoverColor = lngGreen
+    btnSOPs.HoverColor = lngGreen
       
     'defaults
     Me.RecordSource = GetTemplate("s_db_admin_info") '"tsys_App_Defaults"
@@ -3048,9 +3048,9 @@ On Error GoTo Err_Handler
         
         With Me.tglDevMode
             .Caption = "DEV MODE ON"
-            .backcolor = lngLtLime
+            .BackColor = lngLtLime
             .fontBold = True
-            .forecolor = lngBlue
+            .ForeColor = lngBlue
         End With
     Else
         'false = down
@@ -3058,9 +3058,9 @@ On Error GoTo Err_Handler
     
         With Me.tglDevMode
             .Caption = "DEV MODE OFF"
-            .backcolor = lngLtrYellow
+            .BackColor = lngLtrYellow
             .fontBold = False
-            .forecolor = lngRed
+            .ForeColor = lngRed
         End With
     End If
  

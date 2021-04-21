@@ -225,7 +225,7 @@ On Error GoTo Err_Handler
 '        i = i - 1
 '    Loop
     
-    Me.lblChkDb.forecolor = RandomColor(lngYellow, lngSalmon)
+    Me.lblChkDb.ForeColor = RandomColor(lngYellow, lngSalmon)
 
     'exit if
     If TempVars("Connected") Then

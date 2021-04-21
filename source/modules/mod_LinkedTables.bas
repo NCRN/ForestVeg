@@ -2,9 +2,9 @@ Option Compare Database
 Option Explicit
 
 ' =================================
-' MODULE:       basLinkedTables
+' MODULE:       mod_LinkedTables
 ' Level:        Application form module
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  Standard module for verifying and updating links to back-end tables
 '
@@ -20,6 +20,8 @@ Option Explicit
 ' Source/date:  John R. Boetsch, May 24, 2006
 ' Revisions:    JRB, 5/24/2006 - 1.00 - initial version
 '               BC,  4/2/2020  - 1.01 - updated fxnGetLinkFile to file dialog vs adh for 64-bit update
+'               BC,  3/16/2021 - requires reference to Microsoft Office 16 Object Library for msoFileDialogFilePicker
+'                                object
 ' =================================
 
 ' ---------------------------------

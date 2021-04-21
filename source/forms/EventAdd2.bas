@@ -1185,7 +1185,7 @@ On Error GoTo Err_Handler
 Debug.Print "newrecord = " & Me.NewRecord
 
     'defaults
-    rctPseudoEvent.backcolor = lngLtTan
+    rctPseudoEvent.BackColor = lngLtTan
     
     'disable until data allows
     cbxLocationID.Enabled = False
@@ -1195,16 +1195,16 @@ Debug.Print "newrecord = " & Me.NewRecord
     
     'hints
     lblPseudoEvent.Caption = "Pseudo Event?"
-    lblPseudoEvent.forecolor = lngBlue
+    lblPseudoEvent.ForeColor = lngBlue
     lblPseudoEvent.ControlTipText = "Bush-hogged or other non-data collecting visit that may impact analysis"
     lblPseudoEvent.visible = True
     lblHintPseudoEvent.Caption = "Bush-hogged or other non-data collecting visit that may impact analysis"
-    lblHintPseudoEvent.forecolor = lngBlue
+    lblHintPseudoEvent.ForeColor = lngBlue
     lblHintPseudoEvent.ControlTipText = "Bush-hogged or other non-data collecting visit that may impact analysis"
     lblHintPseudoEvent.visible = True
     
     'set hover
-    tglPseudoEvent.hoverColor = lngGreen
+    tglPseudoEvent.HoverColor = lngGreen
        
     'set park code
     If IsEmpty(Me.OpenArgs) = False And Me.OpenArgs <> "Choose Park" Then

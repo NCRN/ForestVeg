@@ -785,7 +785,7 @@ End Property
 
 Public Property Let CommentHeaderColor(Value As Long)
     m_CommentHeaderColor = Value
-    FormHeader.backcolor = m_CommentHeaderColor
+    FormHeader.BackColor = m_CommentHeaderColor
 End Property
 
 Public Property Get TitleFontColor() As Long
@@ -794,7 +794,7 @@ End Property
 
 Public Property Let TitleFontColor(Value As Long)
     m_TitleFontColor = Value
-    lblTitle.forecolor = m_TitleFontColor
+    lblTitle.ForeColor = m_TitleFontColor
 End Property
 
 Public Property Get InstructionFontColor() As Long
@@ -803,7 +803,7 @@ End Property
 
 Public Property Let InstructionFontColor(Value As Long)
     m_InstructionFontColor = Value
-    lblInstructions.forecolor = m_InstructionFontColor
+    lblInstructions.ForeColor = m_InstructionFontColor
 End Property
 
 Public Property Get CountLabelFontColor() As Long
@@ -812,7 +812,7 @@ End Property
 
 Public Property Let CountLabelFontColor(Value As Long)
     m_CountLabelFontColor = Value
-    lblCount.forecolor = m_CountLabelFontColor
+    lblCount.ForeColor = m_CountLabelFontColor
 End Property
 
 Public Property Get CurrentCountFontColor() As Long
@@ -821,7 +821,7 @@ End Property
 
 Public Property Let CurrentCountFontColor(Value As Long)
     m_CurrentCountFontColor = Value
-    lblCount.forecolor = m_CurrentCountFontColor
+    lblCount.ForeColor = m_CurrentCountFontColor
 End Property
 
 Public Property Get MaxCountFontColor() As Long
@@ -830,7 +830,7 @@ End Property
 
 Public Property Let MaxCountFontColor(Value As Long)
     m_MaxCountFontColor = Value
-    lblMaxCount.forecolor = m_MaxCountFontColor
+    lblMaxCount.ForeColor = m_MaxCountFontColor
 End Property
 
 Public Property Get RemainingCountFontColor() As Long
@@ -839,7 +839,7 @@ End Property
 
 Public Property Let RemainingCountFontColor(Value As Long)
     m_RemainingCountFontColor = Value
-    lblMaxCount.forecolor = m_RemainingCountFontColor
+    lblMaxCount.ForeColor = m_RemainingCountFontColor
 End Property
 
 Public Property Get AlertBoxBackgroundColor() As Long
@@ -849,7 +849,7 @@ End Property
 Public Property Let AlertBoxBackgroundColor(Value As Long)
     rctAlert.backstyle = 1 '1 = Normal, 0 = Transparent
     m_AlertBoxBackgroundColor = Value
-    rctAlert.backcolor = m_AlertBoxBackgroundColor
+    rctAlert.BackColor = m_AlertBoxBackgroundColor
 End Property
 
 ' ==== Visibility ====
@@ -946,7 +946,7 @@ End Property
 
 Public Property Let AddButtonForeColor(Value As Long)
     m_AddButtonForeColor = Value
-    btnAdd.forecolor = m_AddButtonForeColor
+    btnAdd.ForeColor = m_AddButtonForeColor
 End Property
 
 Public Property Get AddButtonColor() As Long
@@ -955,7 +955,7 @@ End Property
 
 Public Property Let AddButtonColor(Value As Long)
     m_AddButtonColor = Value
-    btnAdd.backcolor = m_AddButtonColor
+    btnAdd.BackColor = m_AddButtonColor
 End Property
 
 Public Property Get CancelButtonForeColor() As Long
@@ -964,7 +964,7 @@ End Property
 
 Public Property Let CancelButtonForeColor(Value As Long)
     m_CancelButtonForeColor = Value
-    btnCancel.forecolor = m_CancelButtonForeColor
+    btnCancel.ForeColor = m_CancelButtonForeColor
 End Property
 
 Public Property Get CancelButtonColor() As Long
@@ -973,7 +973,7 @@ End Property
 
 Public Property Let CancelButtonColor(Value As Long)
     m_CancelButtonColor = Value
-    btnCancel.backcolor = m_CancelButtonColor
+    btnCancel.BackColor = m_CancelButtonColor
 End Property
 
 Public Property Get AddButtonVisible() As Byte
@@ -1066,7 +1066,7 @@ On Error GoTo Err_Handler
     'minimize calling form
     ToggleForm Me.CallingForm, -1
     
-    Me.FormHeader.backcolor = lngBrown
+    Me.FormHeader.BackColor = lngBrown
     Me.TitleFontColor = lngWhite
     Me.Title = "Comment"
     
@@ -1117,8 +1117,8 @@ On Error GoTo Err_Handler
     Me.Context = Me.OpenArgs
 
     'set hover
-    btnAdd.hoverColor = lngGreen
-    btnCancel.hoverColor = lngGreen
+    btnAdd.HoverColor = lngGreen
+    btnCancel.HoverColor = lngGreen
 
     'default
     btnAdd.Enabled = False
@@ -1259,8 +1259,8 @@ On Error GoTo Err_Handler
     If Len(tbxComment.text) > 0 And tbxID = 0 And Len(tbxComment.text) < Me.MaxCount + 1 Then
         btnAdd.Enabled = True
     ElseIf Len(tbxComment.text) < MaxCount + 1 And tbxID > 0 Then
-        lblMsg.forecolor = lngYellow
-        lblMsgIcon.forecolor = lngYellow
+        lblMsg.ForeColor = lngYellow
+        lblMsgIcon.ForeColor = lngYellow
         lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
         lblMsg.Caption = "Tab to enter comment changes..."
     Else

@@ -1371,9 +1371,9 @@ Const cBlack As Long = 0
 ctl.FontUnderline = booHyperlink
 
 If booHyperlink Then
-    ctl.forecolor = cBlue
+    ctl.ForeColor = cBlue
 Else
-    ctl.forecolor = cBlack
+    ctl.ForeColor = cBlack
 End If
     
 End Sub

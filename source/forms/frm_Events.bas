@@ -22,12 +22,12 @@ Begin Form
     Width =14400
     DatasheetFontHeight =10
     ItemSuffix =167
-    Left =735
-    Top =45
-    Right =15135
-    Bottom =10395
+    Left =630
+    Top =30
+    Right =15030
+    Bottom =10390
     DatasheetGridlinesColor =12632256
-    Filter ="[Event_ID]='{445DF397-13FD-4344-9209-5889A362FB7C}'"
+    Filter ="[Event_ID]='{87E560DC-0F3E-4E83-8952-B6FB35DF6A64}'"
     RecSrcDt = Begin
         0x47be11900a4be540
     End
@@ -208,7 +208,7 @@ Begin Form
                     Shadow =-1
                     QuickStyle =23
                     QuickStyleMask =-1
-                    WebImagePaddingTop =1
+                    WebImagePaddingLeft =-1
                     Overlaps =1
                 End
                 Begin ToggleButton
@@ -258,7 +258,7 @@ Begin Form
                     Shadow =-1
                     QuickStyle =23
                     QuickStyleMask =-1
-                    WebImagePaddingTop =1
+                    WebImagePaddingLeft =-1
                     Overlaps =1
                 End
                 Begin CommandButton
@@ -343,7 +343,7 @@ Begin Form
                     Shadow =-1
                     QuickStyle =24
                     QuickStyleMask =-1
-                    WebImagePaddingTop =1
+                    WebImagePaddingLeft =-1
                     Overlaps =1
                 End
                 Begin Label
@@ -552,10 +552,10 @@ Begin Form
                             BorderShade =100.0
                             GridlineThemeColorIndex =-1
                             GridlineShade =100.0
-                            WebImagePaddingLeft =2
-                            WebImagePaddingTop =2
-                            WebImagePaddingRight =2
-                            WebImagePaddingBottom =2
+                            WebImagePaddingLeft =3
+                            WebImagePaddingTop =3
+                            WebImagePaddingRight =3
+                            WebImagePaddingBottom =3
                             Begin
                                 Begin Subform
                                     OverlapFlags =247
@@ -693,7 +693,7 @@ Begin Form
                                     Shadow =-1
                                     QuickStyle =23
                                     QuickStyleMask =-1
-                                    WebImagePaddingTop =1
+                                    WebImagePaddingLeft =-1
                                     Overlaps =1
                                 End
                                 Begin CheckBox
@@ -1042,8 +1042,10 @@ Begin Form
                                     LayoutCachedTop =2670
                                     LayoutCachedWidth =4320
                                     LayoutCachedHeight =2970
-                                    WebImagePaddingLeft =1
-                                    WebImagePaddingTop =1
+                                    WebImagePaddingLeft =2
+                                    WebImagePaddingTop =2
+                                    WebImagePaddingRight =1
+                                    WebImagePaddingBottom =1
                                     Overlaps =1
                                 End
                                 Begin Line
@@ -1175,10 +1177,10 @@ Begin Form
                                     LayoutCachedWidth =1620
                                     LayoutCachedHeight =6855
                                     Alignment =3
-                                    WebImagePaddingLeft =2
-                                    WebImagePaddingTop =2
-                                    WebImagePaddingRight =1
-                                    WebImagePaddingBottom =1
+                                    WebImagePaddingLeft =3
+                                    WebImagePaddingTop =3
+                                    WebImagePaddingRight =2
+                                    WebImagePaddingBottom =2
                                 End
                                 Begin Line
                                     LineSlant = NotDefault
@@ -1419,7 +1421,7 @@ Begin Form
                                     Shadow =-1
                                     QuickStyle =23
                                     QuickStyleMask =-49
-                                    WebImagePaddingTop =1
+                                    WebImagePaddingLeft =-1
                                 End
                             End
                         End
@@ -1439,10 +1441,10 @@ Begin Form
                             BorderShade =100.0
                             GridlineThemeColorIndex =-1
                             GridlineShade =100.0
-                            WebImagePaddingLeft =2
-                            WebImagePaddingTop =2
-                            WebImagePaddingRight =2
-                            WebImagePaddingBottom =2
+                            WebImagePaddingLeft =3
+                            WebImagePaddingTop =3
+                            WebImagePaddingRight =3
+                            WebImagePaddingBottom =3
                             Begin
                                 Begin OptionGroup
                                     SpecialEffect =1
@@ -1519,10 +1521,10 @@ Begin Form
                                             PressedForeThemeColorIndex =0
                                             QuickStyle =23
                                             QuickStyleMask =-5
-                                            WebImagePaddingLeft =4
+                                            WebImagePaddingLeft =5
                                             WebImagePaddingTop =2
-                                            WebImagePaddingRight =4
-                                            WebImagePaddingBottom =7
+                                            WebImagePaddingRight =6
+                                            WebImagePaddingBottom =10
                                             Overlaps =1
                                         End
                                         Begin ToggleButton
@@ -1566,10 +1568,10 @@ Begin Form
                                             PressedForeThemeColorIndex =0
                                             QuickStyle =23
                                             QuickStyleMask =-5
-                                            WebImagePaddingLeft =4
+                                            WebImagePaddingLeft =5
                                             WebImagePaddingTop =2
-                                            WebImagePaddingRight =4
-                                            WebImagePaddingBottom =7
+                                            WebImagePaddingRight =6
+                                            WebImagePaddingBottom =10
                                             Overlaps =1
                                         End
                                         Begin ToggleButton
@@ -1613,10 +1615,10 @@ Begin Form
                                             PressedForeThemeColorIndex =0
                                             QuickStyle =23
                                             QuickStyleMask =-5
-                                            WebImagePaddingLeft =4
+                                            WebImagePaddingLeft =5
                                             WebImagePaddingTop =2
-                                            WebImagePaddingRight =4
-                                            WebImagePaddingBottom =7
+                                            WebImagePaddingRight =6
+                                            WebImagePaddingBottom =10
                                             Overlaps =1
                                         End
                                     End
@@ -1872,10 +1874,10 @@ Begin Form
                             BorderShade =100.0
                             GridlineThemeColorIndex =-1
                             GridlineShade =100.0
-                            WebImagePaddingLeft =2
-                            WebImagePaddingTop =2
-                            WebImagePaddingRight =2
-                            WebImagePaddingBottom =2
+                            WebImagePaddingLeft =3
+                            WebImagePaddingTop =3
+                            WebImagePaddingRight =3
+                            WebImagePaddingBottom =3
                             Begin
                                 Begin Subform
                                     OverlapFlags =247
@@ -1912,10 +1914,10 @@ Begin Form
                             BorderShade =100.0
                             GridlineThemeColorIndex =-1
                             GridlineShade =100.0
-                            WebImagePaddingLeft =2
-                            WebImagePaddingTop =2
-                            WebImagePaddingRight =2
-                            WebImagePaddingBottom =2
+                            WebImagePaddingLeft =3
+                            WebImagePaddingTop =3
+                            WebImagePaddingRight =3
+                            WebImagePaddingBottom =3
                             Begin
                                 Begin Subform
                                     OverlapFlags =247
@@ -1956,10 +1958,10 @@ Begin Form
                             BorderShade =100.0
                             GridlineThemeColorIndex =-1
                             GridlineShade =100.0
-                            WebImagePaddingLeft =2
-                            WebImagePaddingTop =2
-                            WebImagePaddingRight =2
-                            WebImagePaddingBottom =2
+                            WebImagePaddingLeft =3
+                            WebImagePaddingTop =3
+                            WebImagePaddingRight =3
+                            WebImagePaddingBottom =3
                             Begin
                                 Begin Subform
                                     OverlapFlags =247
@@ -2022,7 +2024,7 @@ Begin Form
                     Shadow =-1
                     QuickStyle =23
                     QuickStyleMask =-1
-                    WebImagePaddingTop =1
+                    WebImagePaddingLeft =-1
                     Overlaps =1
                 End
                 Begin TextBox
@@ -2117,7 +2119,7 @@ Begin Form
                     Shadow =-1
                     QuickStyle =23
                     QuickStyleMask =-1
-                    WebImagePaddingTop =1
+                    WebImagePaddingLeft =-1
                     Overlaps =1
                 End
                 Begin TextBox
@@ -2188,7 +2190,7 @@ Begin Form
                     Shadow =-1
                     QuickStyle =23
                     QuickStyleMask =-1
-                    WebImagePaddingTop =1
+                    WebImagePaddingLeft =-1
                     Overlaps =1
                 End
                 Begin TextBox
@@ -2294,7 +2296,7 @@ Begin Form
                     Shadow =-1
                     QuickStyle =24
                     QuickStyleMask =-1
-                    WebImagePaddingTop =1
+                    WebImagePaddingLeft =-1
                     Overlaps =1
                 End
                 Begin TextBox
@@ -2553,7 +2555,7 @@ Debug.Print "QCmode = " & TempVars("QC_MODE")
     'defaults
     txtColor = lngWhite
     bgdColor = HTMLConvert("#ECECEC")
-    btnConvertPseudoEvent.hoverColor = lngGreen
+    btnConvertPseudoEvent.HoverColor = lngGreen
     btnConvertPseudoEvent.visible = False
     lblPseudoEventFlag.visible = False
     rctPseudoEvent.visible = False
@@ -2561,9 +2563,9 @@ Debug.Print "QCmode = " & TempVars("QC_MODE")
     If TempVars("IsPseudoEvent") = 1 Then
         'bgdColor = lngLtPink
         txtColor = lngLtPink
-        lblPseudoEventFlag.forecolor = txtColor
+        lblPseudoEventFlag.ForeColor = txtColor
         lblPseudoEventFlag.visible = True
-        rctPseudoEvent.backcolor = txtColor
+        rctPseudoEvent.BackColor = txtColor
         rctPseudoEvent.visible = True
 
         'expose conversion button ONLY in edit mode
@@ -2732,8 +2734,11 @@ End Sub
 Private Sub btnEditEventDate_Click()
 On Error GoTo Err_Handler
 
-    DisplayMessage "notready"
-    GoTo Exit_Handler
+'    DisplayMessage "notready"
+'    GoTo Exit_Handler
+
+    'clear tempvar
+    TempVars.Remove ("UserID")
 
     Dim strOpenArgs As String
     Dim strCriteria As String
@@ -2746,11 +2751,16 @@ On Error GoTo Err_Handler
         Add2Self strOpenArgs, XML_Tag("EditID", Me.txtEvent_ID)
         Add2Self strOpenArgs, XML_Tag("EditField", "Event_Date")
         Add2Self strOpenArgs, XML_Tag("EditIDField", "Event_ID")
-        If IsNull(TempVars("UserID")) Then DoCmd.OpenForm "frm_Select_User", acNormal, , , acFormEdit, acWindowNormal, "frm_Pad_Date"
-        Add2Self strOpenArgs, XML_Tag("UpdateByID", TempVars("UserID"))
-        'strCriteria = GetCriteriaString("Event_Date=", "tbl_Events", "Event_Date", Me.Name, "txtStart_date")
-        strCriteria = ""
-        DoCmd.OpenForm "frm_Pad_Date", , , strCriteria, acFormEdit, acWindowNormal, strOpenArgs
+        If IsNull(TempVars("UserID")) Then
+            DoCmd.OpenForm "frm_Select_User", acNormal, , , acFormEdit, acWindowNormal, "frm_Pad_Date"
+            If Nz(Forms("frm_Select_User").tbxUserID) Then _
+                Debug.Print "userID = " & Forms("frm_Select_User").tbxUserID
+            DoCmd.Close acForm, "frm_Select_User"
+        End If
+'        Add2Self strOpenArgs, XML_Tag("UpdateByID", TempVars("UserID"))
+'        'strCriteria = GetCriteriaString("Event_Date=", "tbl_Events", "Event_Date", Me.Name, "txtStart_date")
+'        strCriteria = ""
+'        DoCmd.OpenForm "frm_Pad_Date", , , strCriteria, acFormEdit, acWindowNormal, strOpenArgs
     End If
 
 Exit_Handler:
@@ -3454,11 +3464,11 @@ On Error GoTo Err_Handler
     
     If booEditOn Then
         Me!tglBrowse_Edit.Caption = "Editing ON"
-        Me!lblEvent_Form_Header.backcolor = RGB(128, 0, 0)
+        Me!lblEvent_Form_Header.BackColor = RGB(128, 0, 0)
         Me.btnConvertPseudoEvent.visible = False
     Else
         Me!tglBrowse_Edit.Caption = "Editing OFF"
-        Me!lblEvent_Form_Header.backcolor = vbBlack
+        Me!lblEvent_Form_Header.BackColor = vbBlack
         Me.btnConvertPseudoEvent.visible = True
     End If
     

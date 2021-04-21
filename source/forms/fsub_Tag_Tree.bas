@@ -687,7 +687,7 @@ Option Explicit
 Private Sub Form_Current()
 On Error GoTo Err_Handler
     
-    Me.Detail.backcolor = IIf(tbxRFS, lngLtRose, lngWhite)
+    Me.Detail.BackColor = IIf(tbxRFS, lngLtRose, lngWhite)
     
     'default
     Me.tbxRFS.visible = False

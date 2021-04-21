@@ -569,10 +569,10 @@ On Error GoTo Err_Handler
     lblQuote.Caption = "A river is the report card for its watershed."
     lblAttrib.Caption = "— Alan Levere, Connecticut Department of Environmental Protection"
     
-    btnNext.forecolor = lngBlue
+    btnNext.ForeColor = lngBlue
     
     'set hover
-    btnNext.hoverColor = lngGreen
+    btnNext.HoverColor = lngGreen
 
     'initialize app settings --> shifted to PreSplash
     'initApp

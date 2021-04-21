@@ -710,11 +710,11 @@ On Error GoTo Err_Handler
                                 & "the date target species monitoring began. " _
                                 & "Then click save to add the target species to the list."
     tbxIcon.Value = StringFromCodepoint(uLocked)
-    tbxIcon.forecolor = lngDkGreen
-    lblDirections.forecolor = lngLtBlue
+    tbxIcon.ForeColor = lngDkGreen
+    lblDirections.ForeColor = lngLtBlue
     
     'set hover
-    btnSave.hoverColor = lngGreen
+    btnSave.HoverColor = lngGreen
     
     'set syntax values
     'SetTempVar "EnumType", "SyntaxType"
@@ -1057,7 +1057,7 @@ On Error GoTo Err_Handler
         isOK = True
     End If
     
-    tbxIcon.forecolor = IIf(isOK = True, lngDkGreen, lngRed)
+    tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
     btnSave.Enabled = isOK
     
     'refresh form

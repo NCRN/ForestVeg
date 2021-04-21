@@ -929,18 +929,18 @@ On Error GoTo Err_Handler
     lblDirections.Caption = "Sort records by clicking the header." _
                             & vbCrLf & "Effective date color reflects if Reference is retired or not."
     tbxIcon.Value = StringFromCodepoint(uLocked)
-    tbxIcon.forecolor = lngDkGreen
-    lblDirections.forecolor = lngLtBlue
+    tbxIcon.ForeColor = lngDkGreen
+    lblDirections.ForeColor = lngLtBlue
     
     'set hover
-    btnCreateVersionTable.hoverColor = lngGreen
-    btnOpenTable.hoverColor = lngGreen
-    btnAddReference.hoverColor = lngGreen
-    btnDelete.hoverColor = lngGreen
-    btnEdit.hoverColor = lngGreen
+    btnCreateVersionTable.HoverColor = lngGreen
+    btnOpenTable.HoverColor = lngGreen
+    btnAddReference.HoverColor = lngGreen
+    btnDelete.HoverColor = lngGreen
+    btnEdit.HoverColor = lngGreen
     
     btnDelete.Caption = StringFromCodepoint(uDelete)
-    btnDelete.forecolor = lngRed
+    btnDelete.ForeColor = lngRed
 
     'enable textbox to ensure scrollbar is available for longer text
     tbxReference.Enabled = True

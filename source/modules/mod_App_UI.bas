@@ -233,14 +233,14 @@ On Error GoTo Err_Handler
     'set the control value?
     'Screen.ActiveControl = ValidPct
     If IsValid = False Then
-        Screen.ActiveControl.backcolor = lngYellow
-        Screen.ActiveControl.forecolor = lngRed
+        Screen.ActiveControl.BackColor = lngYellow
+        Screen.ActiveControl.ForeColor = lngRed
         MsgBox "Percent cover values range from 0 to 100 (inclusive). " _
                 & vbCrLf & "Please check the highlighted value.", vbOKOnly, _
                 "NCRN Vegetation Monitoring > Invalid Percent Value"
     Else
-        Screen.ActiveControl.backcolor = lngWhite
-        Screen.ActiveControl.forecolor = lngBlack
+        Screen.ActiveControl.BackColor = lngWhite
+        Screen.ActiveControl.ForeColor = lngBlack
     End If
     
 Exit_Handler:

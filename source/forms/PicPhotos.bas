@@ -958,8 +958,8 @@ On Error GoTo Err_Handler
     TilesPerRow = 5
     
     'set hover
-    btnPrev.hoverColor = lngGreen
-    btnNext.hoverColor = lngGreen
+    btnPrev.HoverColor = lngGreen
+    btnNext.HoverColor = lngGreen
       
     'defaults
     lblMsgIcon.Caption = ""
@@ -1251,7 +1251,7 @@ On Error GoTo Err_Handler
                     'Case acTextBox
                     Case acLabel
                         If sctrl.Name = "lblName" Then _
-                            sctrl.forecolor = IIf(selection = True, lngGreen, lngLtTextGray)
+                            sctrl.ForeColor = IIf(selection = True, lngGreen, lngLtTextGray)
                     Case acImage
                         If sctrl.Name = "imgPhoto" Then _
                             sctrl.borderColor = IIf(selection = True, lngGreen, lngLtBgdGray)

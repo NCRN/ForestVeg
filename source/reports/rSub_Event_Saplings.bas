@@ -13,9 +13,9 @@ Begin Report
     GridY =24
     Width =11220
     DatasheetFontHeight =10
-    ItemSuffix =54
-    Left =150
-    Top =2160
+    ItemSuffix =57
+    Left =1150
+    Top =430
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x37263bef737de540
@@ -34,7 +34,7 @@ Begin Report
     Caption ="srpt_Microplots"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0xe0010000e0010000680100006801000000000000d42b00001c02000001000000 ,
+        0xe0010000e0010000680100006801000000000000d42b0000d002000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =0
@@ -355,7 +355,7 @@ Begin Report
                     Width =795
                     FontSize =9
                     FontWeight =700
-                    Name ="txtTag"
+                    Name ="tbxSaplingTag"
                     ControlSource ="Tag"
                     StatusBarText ="Number of physical tag attached to tree"
                     FontName ="Calibri"

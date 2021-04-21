@@ -410,7 +410,7 @@ End Property
 Public Property Let TileHeaderColor(Value As Long)
     If Len(Trim(Value)) < 0 Then Value = vbGreen '"#3F3F3F"
     m_TileHeaderColor = Value
-    FormHeader.backcolor = m_TileHeaderColor
+    FormHeader.BackColor = m_TileHeaderColor
     'set font color to match
     Select Case Value
         Case vbGreen
@@ -768,14 +768,14 @@ On Error GoTo Err_Handler
     
     If selection = True Then
         imgPhoto.borderColor = lngGreen
-        lblName.forecolor = lngGreen
+        lblName.ForeColor = lngGreen
         
         'add to PicCatalog form's collection
         frm.SelPhoto = lblID.Caption
         
     Else
         imgPhoto.borderColor = lngLtBgdGray
-        lblName.forecolor = lngLtTextGray
+        lblName.ForeColor = lngLtTextGray
         
         'remove from list
         Dim i As Long

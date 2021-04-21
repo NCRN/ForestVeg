@@ -442,13 +442,13 @@ On Error GoTo Err_Handler
 
     'set selected record backcolor
     If Me.tbxLUCode = curID Then
-        Me.Detail.backcolor = lngYelLime
-        Me.tbxLUCode.backcolor = lngYelLime
+        Me.Detail.BackColor = lngYelLime
+        Me.tbxLUCode.BackColor = lngYelLime
         'Me.tbxSpecies.backcolor = lngYelLime
-        Me.tbxLUCode.backcolor = lngYelLime
+        Me.tbxLUCode.BackColor = lngYelLime
         
     Else
-        Me.Detail.backcolor = lngWhite
+        Me.Detail.BackColor = lngWhite
         'Me.tbxCode.backcolor = lngWhite
     End If
        

@@ -1243,7 +1243,7 @@ Dim blnLeftInsetHide As Boolean
             strTab = "tabDbAdmin"
             lngTabColor = HTMLConvert("#D8D8D8") 'lt gray D8D8D8 RGB(216,216,216) 14211288
             'blnLeftInsetHide = True
-            lblCover.backcolor = lngTabColor
+            lblCover.BackColor = lngTabColor
             lblCover.visible = True
             'update instructions & make visible
             PopulateInstructions Me!lblInstructions, "DbAdmin"
@@ -1278,7 +1278,7 @@ Dim blnLeftInsetHide As Boolean
     PopulateInsetTitle Me!lblInsetTitle, Replace(strTab, "tab", "")
         
     'set tab color
-    rctMainTabColor.backcolor = lngTabColor
+    rctMainTabColor.BackColor = lngTabColor
         
     'keep tabs hidden
     If strTab = "tabView" Or strTab = "tabDbAdmin" Then

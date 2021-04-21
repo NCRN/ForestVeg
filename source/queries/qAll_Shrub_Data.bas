@@ -115,10 +115,6 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="tbl_Sapling_Data.BrowseOld"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="tlu_Plants.Shrub"
         dbLong "AggregateType" ="-1"
     End

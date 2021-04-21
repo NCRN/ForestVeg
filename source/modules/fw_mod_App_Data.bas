@@ -3404,8 +3404,8 @@ On Error GoTo Err_Handler
             
             If rs.NoMatch Then
                 ' --- INSERT ---
-                frm!lblMsg.forecolor = lngLime
-                frm!lblMsgIcon.forecolor = lngLime
+                frm!lblMsg.ForeColor = lngLime
+                frm!lblMsgIcon.ForeColor = lngLime
                 frm!lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
                 frm!lblMsg.Caption = IIf(DoAction = "i", "Inserting new record...", "Updating record...")
             Else
@@ -3415,14 +3415,14 @@ On Error GoTo Err_Handler
                 'retrieve ID
                 If frm!tbxID.Value = rs("ID") Then 'rs("Contact.ID") Then
                     'IDs are equivalent, just change the data
-                    frm!lblMsg.forecolor = lngLime
-                    frm!lblMsgIcon.forecolor = lngLime
+                    frm!lblMsg.ForeColor = lngLime
+                    frm!lblMsgIcon.ForeColor = lngLime
                     frm!lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
                     frm!lblMsg.Caption = "Updating record..."
                 Else
                     'prevent duplicate record entries
-                    frm!lblMsg.forecolor = lngYellow
-                    frm!lblMsgIcon.forecolor = lngYellow
+                    frm!lblMsg.ForeColor = lngYellow
+                    frm!lblMsgIcon.ForeColor = lngYellow
                     frm!lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
                     frm!lblMsg.Caption = "Oops, record already exists."
                     GoTo Exit_Handler
@@ -3457,8 +3457,8 @@ On Error GoTo Err_Handler
         Debug.Print "UpsertRecord " & frm.Name & " DIRTY"
         'frm.Dirty = False
         
-        frm!lblMsg.forecolor = lngYellow
-        frm!lblMsgIcon.forecolor = lngYellow
+        frm!lblMsg.ForeColor = lngYellow
+        frm!lblMsgIcon.ForeColor = lngYellow
         frm!lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
         frm!lblMsg.Caption = "** DIRTY **" 'UNSAVED CHANGES! **"
         

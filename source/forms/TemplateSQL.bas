@@ -525,7 +525,7 @@ On Error GoTo Err_Handler
                             & " Run SQL SELECT statements by clicking the button at right." _
                             & vbCrLf _
                             & " Please contact NCPN data managers to make changes."
-    lblDirections.forecolor = lngLtBlue
+    lblDirections.ForeColor = lngLtBlue
     
     'retrieve data from OpenArgs
     If Len(OpenArgs) > 0 Then
@@ -548,7 +548,7 @@ On Error GoTo Err_Handler
     End If
     
     'set hover
-    btnRunSQL.hoverColor = lngGreen
+    btnRunSQL.HoverColor = lngGreen
     btnRunSQL.Enabled = False
 
     'only enable if it's a SELECT query

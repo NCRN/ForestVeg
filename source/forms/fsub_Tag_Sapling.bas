@@ -698,7 +698,7 @@ On Error GoTo Err_Handler
     
     If IsLoaded("fsub_Tag_Sapling") Then Me.Parent.Form!cbxHabit = Nz(Me.SaplingHabit, "")
 
-    Me.Detail.backcolor = IIf(tbxRFS, lngLtRose, lngWhite)
+    Me.Detail.BackColor = IIf(tbxRFS, lngLtRose, lngWhite)
 
 Exit_Handler:
     Exit Sub

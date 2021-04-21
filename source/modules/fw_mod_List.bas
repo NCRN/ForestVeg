@@ -196,11 +196,11 @@ On Error GoTo Err_Handler
         With ctrl
             If CStr(.Column(tgtCol, Counter)) = normVal Then
                 For col = 0 To .ColumnCount - 1
-                    .Column(col, Counter).forecolor = normColor
+                    .Column(col, Counter).ForeColor = normColor
                 Next col
             ElseIf CStr(.Column(tgtCol, Counter)) = altVal Then
                 For col = 0 To .ColumnCount - 1
-                    .Column(col, Counter).forecolor = altColor
+                    .Column(col, Counter).ForeColor = altColor
                 Next col
             End If
         End With

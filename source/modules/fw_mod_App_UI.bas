@@ -987,8 +987,8 @@ On Error GoTo Err_Handler
 
     With frm
         'clear msg & icon
-        frm.Controls("lblMsg").forecolor = lngRobinEgg
-        frm.Controls("lblMsgIcon").forecolor = lngRobinEgg
+        frm.Controls("lblMsg").ForeColor = lngRobinEgg
+        frm.Controls("lblMsgIcon").ForeColor = lngRobinEgg
         frm.Controls("lblMsg").Caption = ""
         frm.Controls("lblMsgIcon").Caption = ""
     End With
@@ -1032,8 +1032,8 @@ On Error GoTo Err_Handler
 
     With frm
         'set msg & icon
-        frm.Controls("lblMsg").forecolor = color
-        frm.Controls("lblMsgIcon").forecolor = color
+        frm.Controls("lblMsg").ForeColor = color
+        frm.Controls("lblMsgIcon").ForeColor = color
         frm.Controls("lblMsg").Caption = msg
         frm.Controls("lblMsgIcon").Caption = icon
     End With
@@ -1414,7 +1414,7 @@ On Error GoTo Err_Handler
     resetcolor = False
     
     'change the backcolor --> revert to default only if the conditions aren't met
-    ctrl.backcolor = color
+    ctrl.BackColor = color
     
     'null
     If checkNULL Then
@@ -1464,7 +1464,7 @@ On Error GoTo Err_Handler
 Exit_Handler:
     'reset to default backcolor
     If resetcolor Then
-        ctrl.backcolor = CTRL_DEFAULT_BACKCOLOR
+        ctrl.BackColor = CTRL_DEFAULT_BACKCOLOR
     End If
     
     Exit Sub

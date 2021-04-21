@@ -946,16 +946,16 @@ On Error GoTo Err_Handler
     lblDirections.Caption = "Sort records by clicking the header." _
                             & vbCrLf & "Effective date color reflects if template is retired or not."
     tbxIcon.Value = StringFromCodepoint(uLocked)
-    tbxIcon.forecolor = lngDkGreen
-    lblDirections.forecolor = lngLtBlue
+    tbxIcon.ForeColor = lngDkGreen
+    lblDirections.ForeColor = lngLtBlue
     
     'set hover
-    btnDelete.hoverColor = lngGreen
-    btnViewSQL.hoverColor = lngGreen
-    btnOpenTable.hoverColor = lngGreen
+    btnDelete.HoverColor = lngGreen
+    btnViewSQL.HoverColor = lngGreen
+    btnOpenTable.HoverColor = lngGreen
     
     btnDelete.Caption = StringFromCodepoint(uDelete)
-    btnDelete.forecolor = lngRed
+    btnDelete.ForeColor = lngRed
 
     'enable textbox to ensure scrollbar is available for longer text
     tbxTemplate.Enabled = True

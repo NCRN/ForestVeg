@@ -2332,9 +2332,9 @@ On Error GoTo Err_Handler
     Me.Detail.visible = True
     
     'default
-    Me.lblEventsSecondaryImport.forecolor = lngLtGray
-    Me.lblEventSecondary.forecolor = lngLtGray
-    Me.lblMasterEventAppend.forecolor = lngLtGray
+    Me.lblEventsSecondaryImport.ForeColor = lngLtGray
+    Me.lblEventSecondary.ForeColor = lngLtGray
+    Me.lblMasterEventAppend.ForeColor = lngLtGray
     
     '-----------------------
     '  Primary Tablet
@@ -2369,7 +2369,7 @@ On Error GoTo Err_Handler
         
         Me!cmd_Append_Event_Data.Enabled = True
         
-        Me.lblEventsSecondaryImport.forecolor = lngLtBlue
+        Me.lblEventsSecondaryImport.ForeColor = lngLtBlue
     End If
 
 Exit_Handler:
@@ -2413,13 +2413,13 @@ On Error GoTo Err_Handler
         Select Case .Value
             Case True
                 .Caption = "YES, INCLUDE"
-                .backcolor = lngLtLime
-                .forecolor = lngBlue
+                .BackColor = lngLtLime
+                .ForeColor = lngBlue
                 Me.lblPseudoEventsIncluded.visible = True
             Case False
                 .Caption = "NO, EXCLUDE"
-                .backcolor = lngWhite
-                .forecolor = lngRed
+                .BackColor = lngWhite
+                .ForeColor = lngRed
                 Me.lblPseudoEventsDeleted.visible = True
             Case Else
                 .Caption = "??"
@@ -2467,10 +2467,10 @@ On Error GoTo Err_Handler
     Dim EventSQL As String
     
     'default
-    Me.lblEventsSecondaryImport.forecolor = lngLtGray
-    Me.lblEventSecondary.forecolor = lngLtGray
-    Me.lblMasterEventAppend.forecolor = lngLtGray
-    Me.lblStepTwoFinish.forecolor = lngLtGray
+    Me.lblEventsSecondaryImport.ForeColor = lngLtGray
+    Me.lblEventSecondary.ForeColor = lngLtGray
+    Me.lblMasterEventAppend.ForeColor = lngLtGray
+    Me.lblStepTwoFinish.ForeColor = lngLtGray
     
     If Me!cmbo_Select_Import_Event_Table = "" Or IsNull(Me!cmbo_Select_Import_Event_Table) Then
         
@@ -2497,7 +2497,7 @@ Debug.Print "Import EventTable - select import events - EventSQL = " & EventSQL
           
         Me!cmbo_Select_Import_Events.RowSource = EventSQL
 
-        Me.lblEventSecondary.forecolor = lngLtBlue
+        Me.lblEventSecondary.ForeColor = lngLtBlue
 
     End If
 
@@ -2533,10 +2533,10 @@ On Error GoTo Err_Handler
     Dim EventSQL As String
     
     'default
-    Me.lblEventsSecondaryImport.forecolor = lngLtGray
-    Me.lblEventSecondary.forecolor = lngLtGray
-    Me.lblMasterEventAppend.forecolor = lngLtGray
-    Me.lblStepTwoFinish.forecolor = lngLtGray
+    Me.lblEventsSecondaryImport.ForeColor = lngLtGray
+    Me.lblEventSecondary.ForeColor = lngLtGray
+    Me.lblMasterEventAppend.ForeColor = lngLtGray
+    Me.lblStepTwoFinish.ForeColor = lngLtGray
     
     If Me!cmbo_Select_Import_Events = "" Or IsNull(Me!cmbo_Select_Import_Events) Then
         Exit Sub
@@ -2554,7 +2554,7 @@ On Error GoTo Err_Handler
           
         Me!cmbo_Select_Event.RowSource = EventSQL
                
-        Me.lblMasterEventAppend.forecolor = lngLtBlue
+        Me.lblMasterEventAppend.ForeColor = lngLtBlue
                
     End If
 
@@ -2595,17 +2595,17 @@ On Error GoTo Err_Handler
     Dim EventSQL As String
     
     'default
-    Me.lblEventsSecondaryImport.forecolor = lngLtGray
-    Me.lblEventSecondary.forecolor = lngLtGray
-    Me.lblMasterEventAppend.forecolor = lngLtGray
-    Me.lblStepTwoFinish.forecolor = lngLtGray
+    Me.lblEventsSecondaryImport.ForeColor = lngLtGray
+    Me.lblEventSecondary.ForeColor = lngLtGray
+    Me.lblMasterEventAppend.ForeColor = lngLtGray
+    Me.lblStepTwoFinish.ForeColor = lngLtGray
     
     If Me!cmbo_Select_Event = "" Or IsNull(Me!cmbo_Select_Event) Then
         Exit Sub
     
     Else
         
-        Me.lblStepTwoFinish.forecolor = lngLtBlue
+        Me.lblStepTwoFinish.ForeColor = lngLtBlue
                
     End If
     

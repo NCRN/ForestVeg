@@ -1481,7 +1481,7 @@ Private Sub optgMode_AfterUpdate()
         Me.txtQueryDesc.Locked = True
         Me.txtRemedy.Locked = True
         Me.subDataTables.Locked = True
-        Me.Detail.backcolor = 13025979 ' steel blue (default)
+        Me.Detail.BackColor = 13025979 ' steel blue (default)
     Else
     ' Edit mode
         ' Unlock the subform if an editable query
@@ -1491,7 +1491,7 @@ Private Sub optgMode_AfterUpdate()
         Me.txtQueryDesc.Locked = False
         Me.txtRemedy.Locked = False
         Me.subDataTables.Locked = False
-        Me.Detail.backcolor = 12574431 ' haystack
+        Me.Detail.BackColor = 12574431 ' haystack
     End If
 
 Exit_Procedure:
@@ -1754,8 +1754,8 @@ Private Sub selObject_AfterUpdate()
         Me.AllowAdditions = True
         DoCmd.GoToRecord , , acNewRec
         Me.txtEditQuery = ""
-        Me.txtEditQuery.forecolor = 0          'black
-        Me.txtEditQuery.backcolor = 8454143    'yellow
+        Me.txtEditQuery.ForeColor = 0          'black
+        Me.txtEditQuery.BackColor = 8454143    'yellow
         GoTo Exit_Procedure
     End If
     
@@ -2504,15 +2504,15 @@ Private Function fxnSetQueryFlag()
     '   Note: suffix of "_X" means that the query results may be edited
     If Right(Me.selObject.Value, 2) = "_X" Then
         Me.txtEditQuery = "OK"
-        Me.txtEditQuery.forecolor = 16777215   'white
-        Me.txtEditQuery.backcolor = 4227072    'green
+        Me.txtEditQuery.ForeColor = 16777215   'white
+        Me.txtEditQuery.BackColor = 4227072    'green
         ' Unlock the subform if in edit mode
         If Me.optgMode = 1 Then Me.subQueryResults.Locked = False _
             Else Me.subQueryResults.Locked = True
     Else
         Me.txtEditQuery = "No"
-        Me.txtEditQuery.forecolor = 16777215   'white
-        Me.txtEditQuery.backcolor = 255        'red
+        Me.txtEditQuery.ForeColor = 16777215   'white
+        Me.txtEditQuery.BackColor = 255        'red
         ' Lock the subform
         Me.subQueryResults.Locked = True
     End If

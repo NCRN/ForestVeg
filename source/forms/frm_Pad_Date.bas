@@ -804,9 +804,9 @@ On Error GoTo Err_Handler
               & "Changing the date WILL change underlying data."
     
     'defaults
-    lblDirections.forecolor = lngBlue
-    btnSave.hoverColor = lngGreen
-    btnCancel.hoverColor = lngRed
+    lblDirections.ForeColor = lngBlue
+    btnSave.HoverColor = lngGreen
+    btnCancel.HoverColor = lngRed
        
     'set values
     EditTable = XML_Read("EditTable", Me.OpenArgs)
@@ -951,7 +951,7 @@ End Sub
 Private Sub tbxDate_GotFocus()
 On Error GoTo Err_Handler
 
-    tbxDate.forecolor = lngBlack
+    tbxDate.ForeColor = lngBlack
     
 Exit_Handler:
     Exit Sub

@@ -18,10 +18,10 @@ Begin Form
     Width =5040
     DatasheetFontHeight =9
     ItemSuffix =35
-    Left =7605
-    Top =2145
-    Right =12645
-    Bottom =6030
+    Left =7610
+    Top =2150
+    Right =12650
+    Bottom =6040
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0xa818e7379372e540
@@ -470,7 +470,7 @@ Begin Form
                     Shadow =-1
                     QuickStyle =23
                     QuickStyleMask =-1
-                    WebImagePaddingTop =1
+                    WebImagePaddingLeft =-1
                     Overlaps =1
                 End
                 Begin CommandButton
@@ -515,7 +515,7 @@ Begin Form
                     Shadow =-1
                     QuickStyle =23
                     QuickStyleMask =-1
-                    WebImagePaddingTop =1
+                    WebImagePaddingLeft =-1
                     Overlaps =1
                 End
             End
@@ -533,7 +533,7 @@ Option Explicit
 ' =================================
 ' MODULE:       frm_Select_User
 ' Level:        Application module
-' Version:      1.01
+' Version:      1.02
 '
 ' Description:  add event related functions & procedures
 '
@@ -541,6 +541,7 @@ Option Explicit
 ' Adapted:      -
 ' Revisions:    BLC - 4/2/2020 - 1.00 - initial version
 '               BLC - 4/17/2019 - 1.01 - update open pseudo event
+'               BLC - 1/30/2021 - 1.02 - set tempvar for user ID
 ' =================================
 
 '---------------------
@@ -647,9 +648,9 @@ On Error GoTo Err_Handler
     Directions = "Sorry, I can't tell who you are. Please let me know and select the current user (i.e. you!). "
     
     'defaults
-    lblDirections.forecolor = lngBlue
-    btnSave.hoverColor = lngGreen
-    btnCancel.hoverColor = lngRed
+    lblDirections.ForeColor = lngBlue
+    btnSave.HoverColor = lngGreen
+    btnCancel.HoverColor = lngRed
        
 Exit_Handler:
     Exit Sub
@@ -841,6 +842,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 4/2/2020 - initial version
+'   BLC - 1/30/2021 - set temp var w/ user ID value
 ' ---------------------------------
 Private Sub btnSave_Click()
 On Error GoTo Err_Handler
@@ -853,8 +855,9 @@ On Error GoTo Err_Handler
     'maximize calling form
     ToggleForm Me.CallingForm, 0
     
-    DoCmd.Close acForm, Me.Name
+    SetTempVar "UserID", tbxSelectedUser.Value
     
+    'DoCmd.Close acForm, Me.Name
 
 Exit_Handler:
     Exit Sub

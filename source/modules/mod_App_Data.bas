@@ -107,7 +107,7 @@ On Error GoTo Err_Handler
     Set cbx = frm.Controls(cbxName)
     
     'default
-    frmTag.Controls("cbxTagStatus").backcolor = lngWhite
+    frmTag.Controls("cbxTagStatus").BackColor = lngWhite
     
     'dead statuses only
     If Left(cbx, 4) = "Dead" Then
@@ -122,7 +122,7 @@ On Error GoTo Err_Handler
                 'do nothing
             Case Else
                 'highlight
-                frmTag.Controls("cbxTagStatus").backcolor = lngYellow
+                frmTag.Controls("cbxTagStatus").BackColor = lngYellow
         End Select
             
     End If
@@ -230,7 +230,7 @@ On Error GoTo Err_Handler
     
     'unhighlight DBH Double Checked as default
     With Forms!frm_Events.Form.Controls(frmDataName).Form
-        .Controls("lblDBHCheck").forecolor = lngBlack
+        .Controls("lblDBHCheck").ForeColor = lngBlack
         '.Controls("tbxHighlightChk").Visible = False
         '.Controls("tbxComments").BackColor = lngWhite
     End With
@@ -355,9 +355,9 @@ Debug.Print "DBH_mod_App_Data: " & strSQL
                 '.Controls("lblDBHCheck").Visible = True
                 '.Controls("chkDBHCheck").Visible = True
                 .Controls("tbxHighlightChk").visible = True
-                .Controls("lblDBHCheck").forecolor = lngRed
-                .Controls("tbxHighlightChk").backcolor = lngLtYellow
-                .Controls("tbxComments").backcolor = lngYellow
+                .Controls("lblDBHCheck").ForeColor = lngRed
+                .Controls("tbxHighlightChk").BackColor = lngLtYellow
+                .Controls("tbxComments").BackColor = lngYellow
             
                 'set focus
                 .Controls(frmDBHName).Form.Controls("tbxDBH").SetFocus

@@ -2751,20 +2751,20 @@ Private Sub Form_Open(Cancel As Integer)
 
     Title = "QA Tool"
     Directions = "Choose the desired data timeframe && scope."
-    lblDirections.forecolor = lngLtBlue
+    lblDirections.ForeColor = lngLtBlue
 '    btnComment.Caption = StringFromCodepoint(uComment)
 '    btnComment.ForeColor = lngBlue
     
     'set hovers
-    btnClose.hoverColor = lngGreen
-    btnRefresh.hoverColor = lngGreen
-    btnViewSummary.hoverColor = lngGreen
-    btnDesignView.hoverColor = lngGreen
-    btnAutoFix.hoverColor = lngGreen
-    btnOpenBrowser.hoverColor = lngGreen
-    btnExport.hoverColor = lngGreen
-    btnCloseup.hoverColor = lngGreen
-    btnRequery.hoverColor = lngGreen
+    btnClose.HoverColor = lngGreen
+    btnRefresh.HoverColor = lngGreen
+    btnViewSummary.HoverColor = lngGreen
+    btnDesignView.HoverColor = lngGreen
+    btnAutoFix.HoverColor = lngGreen
+    btnOpenBrowser.HoverColor = lngGreen
+    btnExport.HoverColor = lngGreen
+    btnCloseup.HoverColor = lngGreen
+    btnRequery.HoverColor = lngGreen
     
     ' Close the form if the switchboard is not open
     If SwitchboardIsOpen = False Then
@@ -2913,7 +2913,7 @@ Private Sub optgMode_AfterUpdate()
         Me.tbxQueryDesc.Locked = True
         Me.tbxRemedy.Locked = True
         Me.subDataTables.Locked = True
-        Me.Detail.backcolor = 13025979 ' steel blue (default)
+        Me.Detail.BackColor = 13025979 ' steel blue (default)
     Else
     ' Edit mode
         ' Unlock the subform if an editable query
@@ -2923,7 +2923,7 @@ Private Sub optgMode_AfterUpdate()
         Me.tbxQueryDesc.Locked = False
         Me.tbxRemedy.Locked = False
         Me.subDataTables.Locked = False
-        Me.Detail.backcolor = 12574431 ' haystack
+        Me.Detail.BackColor = 12574431 ' haystack
     End If
 
 Exit_Handler:
@@ -3437,8 +3437,8 @@ Private Sub cbxObject_AfterUpdate()
         Me.AllowAdditions = True
         DoCmd.GoToRecord , , acNewRec
         Me.tbxEditQuery = ""
-        Me.tbxEditQuery.forecolor = 0          'black
-        Me.tbxEditQuery.backcolor = 8454143    'yellow
+        Me.tbxEditQuery.ForeColor = 0          'black
+        Me.tbxEditQuery.BackColor = 8454143    'yellow
         GoTo Exit_Handler
     End If
     
@@ -4129,15 +4129,15 @@ Private Function SetQueryFlag()
     '   Note: suffix of "_X" means that the query results may be edited
     If Right(Me.cbxObject.Value, 2) = "_X" Then
         Me.tbxEditQuery = "OK"
-        Me.tbxEditQuery.forecolor = 16777215   'white
-        Me.tbxEditQuery.backcolor = 4227072    'green
+        Me.tbxEditQuery.ForeColor = 16777215   'white
+        Me.tbxEditQuery.BackColor = 4227072    'green
         ' Unlock the subform if in edit mode
         If Me.optgMode = 1 Then Me.subQueryResults.Locked = False _
             Else Me.subQueryResults.Locked = True
     Else
         Me.tbxEditQuery = "No"
-        Me.tbxEditQuery.forecolor = 16777215   'white
-        Me.tbxEditQuery.backcolor = 255        'red
+        Me.tbxEditQuery.ForeColor = 16777215   'white
+        Me.tbxEditQuery.BackColor = 255        'red
         ' Lock the subform
         Me.subQueryResults.Locked = True
     End If

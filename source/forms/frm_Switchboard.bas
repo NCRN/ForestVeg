@@ -4488,11 +4488,11 @@ Private Sub Form_Load()
 
     If IsNothing(varAuthorEmail) Then
         varAuthorEmail = "Author email unknown"
-        Me!lblAuthorEmail.forecolor = vbWhite
+        Me!lblAuthorEmail.ForeColor = vbWhite
         Me!lblAuthorEmail.FontUnderline = False
         Me!lblAuthorEmail.HyperlinkAddress = ""
     Else
-        Me!lblAuthorEmail.forecolor = vbBlue
+        Me!lblAuthorEmail.ForeColor = vbBlue
         Me!lblAuthorEmail.FontUnderline = True
         Me!lblAuthorEmail.HyperlinkAddress = "mailto:" + varAuthorEmail
     End If

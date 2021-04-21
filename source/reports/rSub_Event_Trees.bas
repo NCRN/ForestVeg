@@ -13,7 +13,7 @@ Begin Report
     GridY =24
     Width =10919
     DatasheetFontHeight =10
-    ItemSuffix =49
+    ItemSuffix =52
     Left =600
     Top =780
     DatasheetGridlinesColor =12632256
@@ -34,7 +34,7 @@ Begin Report
     OnOpen ="[Event Procedure]"
     DatasheetFontName ="Arial"
     PrtMip = Begin
-        0x6a010000a8000000660100001e01000000000000a72a0000d809000001000000 ,
+        0x6a010000a8000000660100001e01000000000000a72a0000a005000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
     FilterOnLoad =255

@@ -1288,18 +1288,18 @@ Debug.Print Me.OpenArgs
     lblDirections.Caption = "Add the flag as appropriate." _
                             & vbCrLf & ""
     tbxIcon.Value = StringFromCodepoint(uLocked)
-    tbxIcon.forecolor = lngDkGreen
-    lblDirections.forecolor = lngLtBlue
+    tbxIcon.ForeColor = lngDkGreen
+    lblDirections.ForeColor = lngLtBlue
     
     'set hover
-    btnAddNewFlag.hoverColor = lngGreen
-    btnOpenTable.hoverColor = lngGreen
-    btnAddFlag.hoverColor = lngGreen
-    btnDelete.hoverColor = lngGreen
-    btnEdit.hoverColor = lngGreen
+    btnAddNewFlag.HoverColor = lngGreen
+    btnOpenTable.HoverColor = lngGreen
+    btnAddFlag.HoverColor = lngGreen
+    btnDelete.HoverColor = lngGreen
+    btnEdit.HoverColor = lngGreen
     
     btnDelete.Caption = StringFromCodepoint(uDelete)
-    btnDelete.forecolor = lngRed
+    btnDelete.ForeColor = lngRed
 
     'enable textbox to ensure scrollbar is available for longer text
     tbxFlag.Enabled = True

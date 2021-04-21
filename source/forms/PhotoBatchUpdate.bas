@@ -1203,38 +1203,38 @@ On Error GoTo Err_Handler
     ToggleForm Me.CallingForm, -1
     
     'set context - based on TempVars
-    lblContext.forecolor = lngLime
+    lblContext.ForeColor = lngLime
     lblContext.Caption = GetContext()
 
     Title = "Set Photo Info"
     Directions = "Set the sampling event, photographer and type for the selected photos."
     tbxIcon.Value = StringFromCodepoint(uBullet)
-    lblDirections.forecolor = lngLtBlue
+    lblDirections.ForeColor = lngLtBlue
     lblPhotoTypesHint.Caption = "Photo Types: " & vbCrLf & _
                                 "F-feature" & Space(2) & "T-transect" & Space(2) & "O-overview" & Space(2) & "R-reference" & Space(2) & "U-unclassified " & vbCrLf & _
                                 "OA-OtherAnimal" & Space(2) & "OP-Plant" & Space(2) & "OC-Cultural" & Space(2) & "OD-Disturbance" & Space(2) & "OF-Field Work" & Space(2) & "OS-Scenic" & Space(2) & "OW-Weather" & Space(2) & "OO-Other"
-    lblPhotoTypesHint.forecolor = lngBlue
+    lblPhotoTypesHint.ForeColor = lngBlue
     btnAddTask.Caption = StringFromCodepoint(uCheckItem) & " Add Task"
-    btnAddTask.forecolor = lngBlue
+    btnAddTask.ForeColor = lngBlue
     btnComment.Caption = StringFromCodepoint(uComment)
-    btnComment.forecolor = lngBlue
+    btnComment.ForeColor = lngBlue
     btnAddEvent.Caption = StringFromCodepoint(uCalendarSpiral) & Space(2) & "Add Event"
-    btnAddEvent.forecolor = lngBlue
+    btnAddEvent.ForeColor = lngBlue
     btnAddContact.Caption = StringFromCodepoint(uUsers) & Space(2) & "Add Photographer"
-    btnAddContact.forecolor = lngBlue
+    btnAddContact.ForeColor = lngBlue
     btnUpdatePhotos.Caption = StringFromCodepoint(uPicFramed) & Space(2) & "Update Photos"
-    btnUpdatePhotos.forecolor = lngBlue
+    btnUpdatePhotos.ForeColor = lngBlue
     
-    lblRecordRefID.forecolor = lngLtLime
+    lblRecordRefID.ForeColor = lngLtLime
         
     'set hover
-    btnAddEvent.hoverColor = lngGreen
-    btnAddContact.hoverColor = lngGreen
-    btnUpdatePhotos.hoverColor = lngGreen
-    btnAddTask.hoverColor = lngGreen
-    btnComment.hoverColor = lngGreen
-    btnSave.hoverColor = lngGreen
-    btnUndo.hoverColor = lngGreen
+    btnAddEvent.HoverColor = lngGreen
+    btnAddContact.HoverColor = lngGreen
+    btnUpdatePhotos.HoverColor = lngGreen
+    btnAddTask.HoverColor = lngGreen
+    btnComment.HoverColor = lngGreen
+    btnSave.HoverColor = lngGreen
+    btnUndo.HoverColor = lngGreen
       
     'hidden (unused) controls
     btnComment.visible = False
@@ -1244,7 +1244,7 @@ On Error GoTo Err_Handler
     cbxPhotoFilter.visible = False
       
     'defaults
-    tbxIcon.forecolor = lngRed
+    tbxIcon.ForeColor = lngRed
     btnAddTask.Enabled = False
     btnComment.Enabled = False
     btnSave.Enabled = False
@@ -1742,8 +1742,8 @@ On Error GoTo Err_Handler
                 'filename, i is NOT the row #
                 ' cols: 0-photo ID, 1-photo type, 2-photo directory,
                 '       3-photo filename, 4-date taken
-                lblMsg.forecolor = lngLime
-                lblMsgIcon.forecolor = lngLime
+                lblMsg.ForeColor = lngLime
+                lblMsgIcon.ForeColor = lngLime
                 lblMsgIcon.Caption = StringFromCodepoint(uDoubleTriangleBlkR)
                 'lblMsg.Caption = "Photo " & .Column(3, i) & " updated"
                 lblMsg.Caption = "Photo " & .Column(3, row) & " updated"
@@ -1916,7 +1916,7 @@ On Error GoTo Err_Handler
             isOK = True
     End If
     
-    tbxIcon.forecolor = IIf(isOK = True, lngDkGreen, lngRed)
+    tbxIcon.ForeColor = IIf(isOK = True, lngDkGreen, lngRed)
     'btnSave.Enabled = isOK
     btnUpdatePhotos.Enabled = isOK
     

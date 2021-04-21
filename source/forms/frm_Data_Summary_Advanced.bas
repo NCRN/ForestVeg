@@ -11,6 +11,7 @@ Begin Form
     DividingLines = NotDefault
     DefaultView =0
     ScrollBars =0
+    ViewsAllowed =1
     TabularFamily =48
     BorderStyle =3
     PictureAlignment =2
@@ -18,12 +19,13 @@ Begin Form
     Cycle =1
     GridX =24
     GridY =24
-    Width =14400
+    Width =14520
     DatasheetFontHeight =9
-    ItemSuffix =85
-    Left =1065
-    Right =15465
-    Bottom =10710
+    ItemSuffix =91
+    Left =440
+    Top =-3520
+    Right =14960
+    Bottom =7450
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x2680758ff389e340
@@ -36,6 +38,7 @@ Begin Form
         0xa0050000a0050000a0050000a005000000000000201c0000e010000001000000 ,
         0x010000006801000000000000a10700000100000001000000
     End
+    AllowDatasheetView =0
     FilterOnLoad =0
     ShowPageMargins =0
     AllowLayoutView =0
@@ -49,6 +52,12 @@ Begin Form
             SpecialEffect =3
             BackStyle =0
             BorderLineStyle =0
+        End
+        Begin Line
+            BorderLineStyle =0
+            BorderThemeColorIndex =0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
         End
         Begin CommandButton
             FontSize =8
@@ -102,7 +111,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =10723
+            Height =10980
             BackColor =12574431
             Name ="Detail"
             Begin
@@ -168,17 +177,17 @@ Begin Form
                 Begin Subform
                     Locked = NotDefault
                     OverlapFlags =85
-                    Left =3465
-                    Top =1440
+                    Left =3540
+                    Top =1500
                     Width =10860
-                    Height =9180
+                    Height =9360
                     TabIndex =8
                     Name ="subResults"
 
-                    LayoutCachedLeft =3465
-                    LayoutCachedTop =1440
-                    LayoutCachedWidth =14325
-                    LayoutCachedHeight =10620
+                    LayoutCachedLeft =3540
+                    LayoutCachedTop =1500
+                    LayoutCachedWidth =14400
+                    LayoutCachedHeight =10860
                 End
                 Begin CommandButton
                     OverlapFlags =85
@@ -216,10 +225,11 @@ Begin Form
                     End
                     ControlTipText ="View the selected query in design view"
 
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin CommandButton
                     OverlapFlags =85
@@ -257,10 +267,11 @@ Begin Form
                     End
                     ControlTipText ="View the selected query in chart view"
 
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin CommandButton
                     OverlapFlags =85
@@ -298,10 +309,11 @@ Begin Form
                     End
                     ControlTipText ="View the selected query in pivot table view"
 
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin CommandButton
                     OverlapFlags =85
@@ -339,10 +351,11 @@ Begin Form
                     End
                     ControlTipText ="Open the selected query in a new window"
 
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin CommandButton
                     OverlapFlags =85
@@ -380,10 +393,11 @@ Begin Form
                     End
                     ControlTipText ="Export the selected query to Excel"
 
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin CommandButton
                     OverlapFlags =85
@@ -421,10 +435,11 @@ Begin Form
                     End
                     ControlTipText ="Export the selected query to a text file"
 
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin TextBox
                     Locked = NotDefault
@@ -469,10 +484,11 @@ Begin Form
                     LayoutCachedTop =1065
                     LayoutCachedWidth =4485
                     LayoutCachedHeight =1382
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
@@ -560,10 +576,10 @@ Begin Form
                     LayoutCachedTop =510
                     LayoutCachedWidth =3090
                     LayoutCachedHeight =810
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin ComboBox
@@ -653,10 +669,10 @@ Begin Form
                     LayoutCachedTop =870
                     LayoutCachedWidth =3090
                     LayoutCachedHeight =1170
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin ComboBox
@@ -746,10 +762,10 @@ Begin Form
                     LayoutCachedTop =3255
                     LayoutCachedWidth =3096
                     LayoutCachedHeight =3555
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin CommandButton
@@ -773,10 +789,10 @@ Begin Form
                     LayoutCachedTop =6165
                     LayoutCachedWidth =1621
                     LayoutCachedHeight =6429
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin ToggleButton
@@ -813,10 +829,10 @@ Begin Form
                     LayoutCachedTop =1590
                     LayoutCachedWidth =3090
                     LayoutCachedHeight =1890
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin ComboBox
@@ -1016,10 +1032,10 @@ Begin Form
                     LayoutCachedTop =4035
                     LayoutCachedWidth =3096
                     LayoutCachedHeight =4335
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin Label
@@ -1125,10 +1141,10 @@ Begin Form
                     LayoutCachedTop =1950
                     LayoutCachedWidth =3090
                     LayoutCachedHeight =2250
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin Rectangle
@@ -1189,7 +1205,7 @@ Begin Form
                 Begin CommandButton
                     OverlapFlags =85
                     Left =120
-                    Top =7080
+                    Top =6960
                     Width =1800
                     Height =300
                     FontSize =10
@@ -1204,13 +1220,14 @@ Begin Form
                     End
 
                     LayoutCachedLeft =120
-                    LayoutCachedTop =7080
+                    LayoutCachedTop =6960
                     LayoutCachedWidth =1920
-                    LayoutCachedHeight =7380
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    LayoutCachedHeight =7260
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin Label
                     BackStyle =1
@@ -1239,7 +1256,7 @@ Begin Form
                     ColumnCount =3
                     ListWidth =2880
                     Left =1980
-                    Top =7140
+                    Top =7020
                     FontSize =10
                     TabIndex =26
                     ColumnInfo ="\"Event ID\";\"\";\"\";\"\";\"\";\"\";\"10\";\"200\""
@@ -1253,9 +1270,9 @@ Begin Form
                     ColumnWidths ="0;1440;1440"
                     FontName ="Calibri"
                     LayoutCachedLeft =1980
-                    LayoutCachedTop =7140
+                    LayoutCachedTop =7020
                     LayoutCachedWidth =3420
-                    LayoutCachedHeight =7380
+                    LayoutCachedHeight =7260
                 End
                 Begin ToggleButton
                     OverlapFlags =247
@@ -1294,10 +1311,10 @@ Begin Form
                     LayoutCachedTop =2310
                     LayoutCachedWidth =3075
                     LayoutCachedHeight =2610
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin ComboBox
@@ -1446,10 +1463,10 @@ Begin Form
                     LayoutCachedTop =2670
                     LayoutCachedWidth =3075
                     LayoutCachedHeight =2970
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin CommandButton
@@ -1476,10 +1493,10 @@ Begin Form
                     LayoutCachedTop =6165
                     LayoutCachedWidth =3211
                     LayoutCachedHeight =6429
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin ComboBox
@@ -1575,18 +1592,18 @@ Begin Form
                     LayoutCachedTop =1230
                     LayoutCachedWidth =3090
                     LayoutCachedHeight =1530
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin CommandButton
                     OverlapFlags =85
                     TextFontCharSet =238
                     Left =120
-                    Top =7440
-                    Width =1800
+                    Top =7320
+                    Width =1680
                     Height =299
                     FontSize =10
                     FontWeight =700
@@ -1597,13 +1614,14 @@ Begin Form
                     FontName ="Calibri"
 
                     LayoutCachedLeft =120
-                    LayoutCachedTop =7440
-                    LayoutCachedWidth =1920
-                    LayoutCachedHeight =7739
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    LayoutCachedTop =7320
+                    LayoutCachedWidth =1800
+                    LayoutCachedHeight =7619
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin OptionGroup
                     SpecialEffect =0
@@ -1765,9 +1783,9 @@ Begin Form
                     Enabled = NotDefault
                     OverlapFlags =85
                     TextFontCharSet =238
-                    Left =120
-                    Top =7800
-                    Width =1800
+                    Left =1860
+                    Top =7320
+                    Width =1620
                     Height =299
                     FontSize =10
                     FontWeight =700
@@ -1777,21 +1795,22 @@ Begin Form
                     OnClick ="[Event Procedure]"
                     FontName ="Calibri"
 
-                    LayoutCachedLeft =120
-                    LayoutCachedTop =7800
-                    LayoutCachedWidth =1920
-                    LayoutCachedHeight =8099
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    LayoutCachedLeft =1860
+                    LayoutCachedTop =7320
+                    LayoutCachedWidth =3480
+                    LayoutCachedHeight =7619
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin CommandButton
                     Enabled = NotDefault
                     OverlapFlags =85
-                    Left =120
-                    Top =8160
-                    Width =1800
+                    Left =1860
+                    Top =7680
+                    Width =1620
                     Height =330
                     FontSize =10
                     FontWeight =700
@@ -1801,20 +1820,21 @@ Begin Form
                     OnClick ="[Event Procedure]"
                     FontName ="Calibri"
 
-                    LayoutCachedLeft =120
-                    LayoutCachedTop =8160
-                    LayoutCachedWidth =1920
-                    LayoutCachedHeight =8490
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    LayoutCachedLeft =1860
+                    LayoutCachedTop =7680
+                    LayoutCachedWidth =3480
+                    LayoutCachedHeight =8010
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin CommandButton
                     OverlapFlags =85
                     Left =120
-                    Top =8520
-                    Width =1800
+                    Top =7680
+                    Width =1680
                     Height =330
                     FontSize =10
                     FontWeight =700
@@ -1825,13 +1845,14 @@ Begin Form
                     FontName ="Calibri"
 
                     LayoutCachedLeft =120
-                    LayoutCachedTop =8520
-                    LayoutCachedWidth =1920
-                    LayoutCachedHeight =8850
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    LayoutCachedTop =7680
+                    LayoutCachedWidth =1800
+                    LayoutCachedHeight =8010
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin Label
                     OverlapFlags =215
@@ -1855,13 +1876,14 @@ Begin Form
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
+                    Visible = NotDefault
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =85
                     TextAlign =2
                     IMESentenceMode =3
                     ListRows =20
-                    Left =720
-                    Top =9300
+                    Left =1980
+                    Top =9360
                     Width =1224
                     Height =270
                     FontSize =10
@@ -1880,37 +1902,38 @@ Begin Form
                     FontName ="Calibri"
                     ControlTipText ="Select year for export"
 
-                    LayoutCachedLeft =720
-                    LayoutCachedTop =9300
-                    LayoutCachedWidth =1944
-                    LayoutCachedHeight =9570
+                    LayoutCachedLeft =1980
+                    LayoutCachedTop =9360
+                    LayoutCachedWidth =3204
+                    LayoutCachedHeight =9630
                     Begin
                         Begin Label
                             OverlapFlags =85
                             TextAlign =3
-                            Left =60
-                            Top =9300
+                            Left =1320
+                            Top =9360
                             Width =600
                             Height =255
                             FontSize =10
                             BackColor =-2147483633
                             ForeColor =-2147483630
                             Name ="lblAnnualYr"
-                            Caption ="Year:"
+                            Caption ="Year"
                             FontName ="Calibri"
                             ControlTipText ="Select year for export"
-                            LayoutCachedLeft =60
-                            LayoutCachedTop =9300
-                            LayoutCachedWidth =660
-                            LayoutCachedHeight =9555
+                            LayoutCachedLeft =1320
+                            LayoutCachedTop =9360
+                            LayoutCachedWidth =1920
+                            LayoutCachedHeight =9615
                         End
                     End
                 End
                 Begin CheckBox
+                    Visible = NotDefault
                     Enabled = NotDefault
-                    OverlapFlags =85
-                    Left =2100
-                    Top =9330
+                    OverlapFlags =93
+                    Left =2415
+                    Top =10440
                     Width =240
                     Height =300
                     TabIndex =40
@@ -1920,24 +1943,25 @@ Begin Form
                     ControlTipText ="Create zip file"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2100
-                    LayoutCachedTop =9330
-                    LayoutCachedWidth =2340
-                    LayoutCachedHeight =9630
+                    LayoutCachedLeft =2415
+                    LayoutCachedTop =10440
+                    LayoutCachedWidth =2655
+                    LayoutCachedHeight =10740
                     Begin
                         Begin Label
-                            OverlapFlags =119
-                            Left =2330
-                            Top =9300
+                            Visible = NotDefault
+                            OverlapFlags =85
+                            Left =2715
+                            Top =10440
                             Width =690
                             Height =240
                             Name ="lblZip"
                             Caption ="Zip File"
                             ControlTipText ="Create zip file"
-                            LayoutCachedLeft =2330
-                            LayoutCachedTop =9300
-                            LayoutCachedWidth =3020
-                            LayoutCachedHeight =9540
+                            LayoutCachedLeft =2715
+                            LayoutCachedTop =10440
+                            LayoutCachedWidth =3405
+                            LayoutCachedHeight =10680
                         End
                     End
                 End
@@ -1945,8 +1969,8 @@ Begin Form
                     SpecialEffect =0
                     OldBorderStyle =0
                     OverlapFlags =85
-                    Left =1740
-                    Top =9645
+                    Left =1650
+                    Top =10080
                     Width =1566
                     Height =283
                     TabIndex =41
@@ -1954,84 +1978,84 @@ Begin Form
                     AfterUpdate ="[Event Procedure]"
                     ControlTipText ="Choose the file type for the annual data export"
 
-                    LayoutCachedLeft =1740
-                    LayoutCachedTop =9645
-                    LayoutCachedWidth =3306
-                    LayoutCachedHeight =9928
+                    LayoutCachedLeft =1650
+                    LayoutCachedTop =10080
+                    LayoutCachedWidth =3216
+                    LayoutCachedHeight =10363
                     Begin
                         Begin Label
                             OverlapFlags =85
                             TextAlign =3
-                            Left =285
-                            Top =9660
-                            Width =1245
-                            Height =240
+                            Left =240
+                            Top =10095
+                            Width =1200
+                            Height =220
                             BackColor =12574431
                             Name ="lblFileType"
-                            Caption ="Export File Type:"
+                            Caption ="Export File Type"
                             ControlTipText ="Choose the file type for the annual data export"
-                            LayoutCachedLeft =285
-                            LayoutCachedTop =9660
-                            LayoutCachedWidth =1530
-                            LayoutCachedHeight =9900
+                            LayoutCachedLeft =240
+                            LayoutCachedTop =10095
+                            LayoutCachedWidth =1440
+                            LayoutCachedHeight =10315
                         End
                         Begin OptionButton
                             OverlapFlags =87
-                            Left =1875
-                            Top =9688
+                            Left =1785
+                            Top =10123
                             OptionValue =1
                             Name ="optCSV"
                             ControlTipText ="Export CSV files (*.csv)"
 
-                            LayoutCachedLeft =1875
-                            LayoutCachedTop =9688
-                            LayoutCachedWidth =2135
-                            LayoutCachedHeight =9928
+                            LayoutCachedLeft =1785
+                            LayoutCachedTop =10123
+                            LayoutCachedWidth =2045
+                            LayoutCachedHeight =10363
                             Begin
                                 Begin Label
                                     OverlapFlags =247
-                                    Left =2105
-                                    Top =9660
+                                    Left =2015
+                                    Top =10095
                                     Width =360
                                     Height =240
                                     Name ="Label80"
                                     Caption ="CSV"
                                     ControlTipText ="Export CSV files (*.csv)"
-                                    LayoutCachedLeft =2105
-                                    LayoutCachedTop =9660
-                                    LayoutCachedWidth =2465
-                                    LayoutCachedHeight =9900
+                                    LayoutCachedLeft =2015
+                                    LayoutCachedTop =10095
+                                    LayoutCachedWidth =2375
+                                    LayoutCachedHeight =10335
                                 End
                             End
                         End
                         Begin OptionButton
                             Enabled = NotDefault
                             OverlapFlags =87
-                            Left =2625
-                            Top =9688
+                            Left =2535
+                            Top =10123
                             TabIndex =1
                             OptionValue =2
                             Name ="optXLS"
                             ControlTipText ="Export an Excel file (*.xlsx)"
 
-                            LayoutCachedLeft =2625
-                            LayoutCachedTop =9688
-                            LayoutCachedWidth =2885
-                            LayoutCachedHeight =9928
+                            LayoutCachedLeft =2535
+                            LayoutCachedTop =10123
+                            LayoutCachedWidth =2795
+                            LayoutCachedHeight =10363
                             Begin
                                 Begin Label
                                     OverlapFlags =247
-                                    Left =2855
-                                    Top =9660
+                                    Left =2765
+                                    Top =10095
                                     Width =330
                                     Height =240
                                     Name ="Label82"
                                     Caption ="XLS"
                                     ControlTipText ="Export an Excel file (*.xlsx)"
-                                    LayoutCachedLeft =2855
-                                    LayoutCachedTop =9660
-                                    LayoutCachedWidth =3185
-                                    LayoutCachedHeight =9900
+                                    LayoutCachedLeft =2765
+                                    LayoutCachedTop =10095
+                                    LayoutCachedWidth =3095
+                                    LayoutCachedHeight =10335
                                 End
                             End
                         End
@@ -2039,27 +2063,161 @@ Begin Form
                 End
                 Begin CommandButton
                     Enabled = NotDefault
-                    OverlapFlags =85
-                    Left =600
-                    Top =10080
+                    OverlapFlags =247
+                    Left =555
+                    Top =10500
                     Width =2115
                     Height =330
                     FontWeight =600
                     TabIndex =42
+                    ForeColor =0
                     Name ="btnAnnualExport"
                     Caption ="Prepare Annual Export"
                     OnClick ="[Event Procedure]"
                     ControlTipText ="Prepare the annual data export"
 
-                    LayoutCachedLeft =600
-                    LayoutCachedTop =10080
-                    LayoutCachedWidth =2715
-                    LayoutCachedHeight =10410
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    LayoutCachedLeft =555
+                    LayoutCachedTop =10500
+                    LayoutCachedWidth =2670
+                    LayoutCachedHeight =10830
+                    HoverColor =65280
+                    HoverForeColor =16711680
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
+                End
+                Begin ToggleButton
+                    OverlapFlags =93
+                    Left =140
+                    Top =9320
+                    Width =960
+                    Height =300
+                    TabIndex =43
+                    ForeColor =16777215
+                    Name ="tglExportType"
+                    AfterUpdate ="[Event Procedure]"
+                    DefaultValue ="True"
+                    Caption ="Cumulative"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="What type of export will be done? A single year (annual) or all years (cumulativ"
+                        "e)?"
+                    LeftPadding =70
+                    RightPadding =80
+                    BottomPadding =120
+
+                    LayoutCachedLeft =140
+                    LayoutCachedTop =9320
+                    LayoutCachedWidth =1100
+                    LayoutCachedHeight =9620
+                    ForeThemeColorIndex =1
+                    UseTheme =1
+                    Shape =2
+                    Gradient =25
+                    BackColor =14262536
+                    BackThemeColorIndex =6
+                    BorderColor =14262536
+                    BorderThemeColorIndex =6
+                    HoverColor =16236067
+                    HoverThemeColorIndex =6
+                    HoverTint =80.0
+                    PressedColor =11436294
+                    PressedShade =80.0
+                    HoverForeThemeColorIndex =1
+                    PressedForeThemeColorIndex =1
+                    Shadow =-1
+                    QuickStyle =32
+                    QuickStyleMask =-1
+                    Overlaps =1
+                End
+                Begin Label
+                    OverlapFlags =215
+                    Left =300
+                    Top =9720
+                    Width =2760
+                    Height =300
+                    FontSize =7
+                    ForeColor =16711680
+                    Name ="lblHintExports"
+                    Caption ="Sampling data will be exported for ALL years"
+                    LayoutCachedLeft =300
+                    LayoutCachedTop =9720
+                    LayoutCachedWidth =3060
+                    LayoutCachedHeight =10020
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =540
+                    Top =8520
+                    Width =2335
+                    Height =330
+                    FontWeight =600
+                    TabIndex =44
+                    ForeColor =0
+                    Name ="btnExportSpeciesLists"
+                    Caption ="Export Top X Species Lists"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Get top X species lists"
+
+                    LayoutCachedLeft =540
+                    LayoutCachedTop =8520
+                    LayoutCachedWidth =2875
+                    LayoutCachedHeight =8850
+                    HoverColor =65280
+                    HoverForeColor =16711680
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
+                    Overlaps =1
+                End
+                Begin ComboBox
+                    LimitToList = NotDefault
+                    RowSourceTypeInt =1
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    ListWidth =1440
+                    Left =1800
+                    Top =8220
+                    FontSize =10
+                    TabIndex =45
+                    Name ="cbxTopX"
+                    RowSourceType ="Value List"
+                    ColumnWidths ="1440"
+                    AfterUpdate ="[Event Procedure]"
+                    FontName ="Calibri"
+                    ControlTipText ="Choose the # of species to return in the Top X species lists"
+
+                    LayoutCachedLeft =1800
+                    LayoutCachedTop =8220
+                    LayoutCachedWidth =3240
+                    LayoutCachedHeight =8460
+                End
+                Begin Line
+                    OverlapFlags =85
+                    Left =240
+                    Top =8100
+                    Width =3120
+                    Name ="lnTopXSpecies"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =240
+                    LayoutCachedTop =8100
+                    LayoutCachedWidth =3360
+                    LayoutCachedHeight =8100
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =180
+                    Top =8220
+                    Width =1510
+                    Height =220
+                    Name ="Label90"
+                    Caption ="Top # species to get"
+                    LayoutCachedLeft =180
+                    LayoutCachedTop =8220
+                    LayoutCachedWidth =1690
+                    LayoutCachedHeight =8440
                 End
             End
         End
@@ -2076,7 +2234,7 @@ Option Explicit
 ' =================================
 ' MODULE:       frm_Data_Summary_Advanced
 ' Level:        Application module
-' Version:      1.04
+' Version:      1.07
 '
 ' Description:  Standard form for summarizing/exploring project data
 ' Source/date:  John Boetsch, Jan 2010
@@ -2087,6 +2245,9 @@ Option Explicit
 '               BLC   - 1/xx/2019 - 1.02 - added annual data exports
 '               BLC   - 10/9/2019 - 1.03 - added status messaging for progress
 '               BLC   - 8/19/2020 - 1.04 - updated fxnSave parameters
+'               BLC   - 1/2/2021  - 1.05 - added PrepareExport() cumulative parameter for cumulative (all years) exports
+'               BLC   - 1/14/2021 - 1.06 - added cumulative/annual export dataset toggle functions
+'               BLC   - 2/1/2021  - 1.07 - added top X species lists
 ' =================================
 
 ' ---------------------------------
@@ -2115,6 +2276,8 @@ Option Explicit
 '   JB/ML/GS - 1/2010+ - initial version
 '   BLC - 5/14/2018 - documentation, error handling
 '   BLC - 1/xx/2019 - add btnAnnualExport defaults
+'   BLC - 1/19/2021 - add cbxAnnualYear visible default
+'   BLC - 2/1/2021  - added top X species lists
 ' ---------------------------------
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo Err_Handler
@@ -2129,9 +2292,17 @@ On Error GoTo Err_Handler
     fxnFilterRecords
     
     'defaults
-    btnAnnualExport.forecolor = lngBlack
-    btnAnnualExport.hoverForeColor = lngBlue
-    btnAnnualExport.hoverColor = lngGreen
+    btnExportSpeciesLists.ForeColor = lngBlack
+    btnExportSpeciesLists.HoverForeColor = lngBlue
+    btnExportSpeciesLists.HoverColor = lngGreen
+    btnExportSpeciesLists.Enabled = False
+    cbxTopX.RowSource = "5,10,20,25,50,75,100"
+    
+    cbxAnnualYear.visible = False
+    lblHintExports.Caption = "Sampling data will be exported for ALL years"
+    btnAnnualExport.ForeColor = lngBlack
+    btnAnnualExport.HoverForeColor = lngBlue
+    btnAnnualExport.HoverColor = lngGreen
     btnAnnualExport.Enabled = False
         
 Exit_Handler:
@@ -2235,8 +2406,8 @@ On Error GoTo Err_Handler
     ' Exit if no query selected
     If IsNull(Me.cbxSelectQuery) Then
         Me.tbxUnfilteredFlag = ""
-        Me.tbxUnfilteredFlag.forecolor = 0          'black
-        Me.tbxUnfilteredFlag.backcolor = 8454143    'yellow
+        Me.tbxUnfilteredFlag.ForeColor = 0          'black
+        Me.tbxUnfilteredFlag.BackColor = 8454143    'yellow
         Me.subResults.SourceObject = ""
         GoTo Exit_Handler
     End If
@@ -2263,12 +2434,12 @@ On Error GoTo Err_Handler
     '   Note: suffix of "_X" means that the query cannot accept parameters (e.g., crosstab)
     If Right(Me.cbxSelectQuery.Value, 2) = "_X" Then
         Me.tbxUnfilteredFlag = "No"
-        Me.tbxUnfilteredFlag.forecolor = 16777215   'white
-        Me.tbxUnfilteredFlag.backcolor = 255        'red
+        Me.tbxUnfilteredFlag.ForeColor = 16777215   'white
+        Me.tbxUnfilteredFlag.BackColor = 255        'red
     Else
         Me.tbxUnfilteredFlag = "Yes"
-        Me.tbxUnfilteredFlag.forecolor = 16777215   'white
-        Me.tbxUnfilteredFlag.backcolor = 4227072    'green
+        Me.tbxUnfilteredFlag.ForeColor = 16777215   'white
+        Me.tbxUnfilteredFlag.BackColor = 4227072    'green
     End If
 
     ' Set focus to the subform to allow scrolling, etc.
@@ -2466,6 +2637,55 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' SUB:          tglExportType_Click
+' Description:  toggle click actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 19, 2021
+' Adapted:      -
+' Revisions:
+'   BLC - 1/19/2021 - initial version
+' ---------------------------------
+Private Sub tglExportType_Click()
+On Error GoTo Err_Handler
+    
+    Select Case Nz(Me.tglExportType, 2)
+        Case 2 'NULL > Cumulative
+        Case -1 'True > Cumulative
+            Me.cbxAnnualYear.visible = False
+            Me.lblAnnualYr.visible = False
+            Me.tglExportType.Caption = "Cumulative"
+            'Me.tglExportType.BackColor = lngBlue
+            Me.lblHintExports.Caption = "Sampling data will be exported for ALL years"
+        Case 0 'False > Annual
+            Me.cbxAnnualYear.visible = True
+            Me.lblAnnualYr.visible = True
+            Me.tglExportType.Caption = "Annual"
+            Me.tglExportType.BackColor = lngSpringGreen
+            Me.tglExportType.ForeColor = lngWhite
+            Me.cbxAnnualYear.Value = Year(Now()) 'set default
+            Me.lblHintExports.Caption = "Set the sampling year you want to export data for"
+    End Select
+    
+    Debug.Print Me.tglExportType.Caption & "-" & Me.tglExportType.Value
+    Me.Form.Requery 'update the caption
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglExportType_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' SUB:          cbxParkFilter_AfterUpdate
 ' Description:  combobox after udpate actions
 ' Assumptions:  -
@@ -2500,6 +2720,7 @@ Err_Handler:
     End Select
     Resume Exit_Handler
 End Sub
+
 ' =================================
 ' Location filter controls
 
@@ -3121,6 +3342,36 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' SUB:          cbxTopX_AfterUpdate
+' Description:  combobox after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, February 1, 2021
+' Adapted:      -
+' Revisions:
+'   BLC - 2/1/2021 - initial version
+' ---------------------------------
+Private Sub cbxTopX_AfterUpdate()
+On Error GoTo Err_Handler
+    
+    If Not IsNull(cbxTopX) And IsNumeric(cbxTopX) Then btnExportSpeciesLists.Enabled = True
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - cbxTopX_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' SUB:          optgScope_AfterUpdate
 ' Description:  option group after update actions
 ' Assumptions:  -
@@ -3336,6 +3587,49 @@ Err_Handler:
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
             "Error encountered (#" & Err.Number & " - optgFileType_AfterUpdate[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
+' SUB:          tglExportType_AfterUpdate
+' Description:  toggle after update actions
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, January 14, 2021
+' Adapted:      -
+' Revisions:
+'   BLC - 1/14/2021 - initial version
+' ---------------------------------
+Private Sub tglExportType_AfterUpdate()
+On Error GoTo Err_Handler
+    
+'    Select Case Nz(Me.tglExportType, 2)
+'        Case 2 'NULL > Cumulative
+'        Case -1 'True > Cumulative
+'            Me.cbxAnnualYear.visible = False
+'            Me.lblAnnualYr.visible = False
+'            Me.tglExportType.Caption = "Cumulative"
+'        Case 0 'False > Annual
+'            Me.cbxAnnualYear.visible = True
+'            Me.lblAnnualYr.visible = True
+'            Me.tglExportType.Caption = "Annual"
+'    End Select
+'
+'    Debug.Print Me.tglExportType.Caption & "-" & Me.tglExportType.Value
+'    Me.Form.Requery 'update the caption
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - tglFilterByYear_AfterUpdate[frm_Data_Summary_Advanced])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -4024,6 +4318,42 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' SUB:          btnExportSpeciesLists
+' Description:  button click actions
+'               exports top X species lists for trees, saplings, vines, herbaceous species
+' Assumptions:  -
+' Parameters:   -
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:  Bonnie Campbell, February 1, 2021
+' Adapted:      -
+' Revisions:
+'   BLC - 2/1/2021 - initial version
+' ---------------------------------
+Private Sub btnExportSpeciesLists_Click()
+On Error GoTo Err_Handler
+   
+    'prompt for save location
+    Dim SavePath As Variant
+    SavePath = BrowseFolder("Select the location to save the top " & Me.cbxTopX & " species list export files", Environ("USERPROFILE") & "\")
+   
+    'export based on topX value
+    PrepareSpeciesListsExports CStr(SavePath), Me.cbxTopX, True
+    
+Exit_Handler:
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - btnExportSpeciesLists_Click[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+' ---------------------------------
 ' SUB:          btnAnnualExport_Click
 ' Description:  button click actions
 '               Prepares a set annual data files for the year chosen
@@ -4048,6 +4378,7 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 1/31/2019 - initial version
+'   BLC - 1/19/2021 - add cumulative/annual check
 ' ---------------------------------
 Private Sub btnAnnualExport_Click()
 On Error GoTo Err_Handler
@@ -4067,11 +4398,24 @@ On Error GoTo Err_Handler
     
     'zip the file(s)
     
-    'filter the data based on the year chosen
-    PrepareExports CStr(SavePath), cbxAnnualYear, Me.optgFileType, Me.chkZip
+    'filter the data based on the toggle (cumulative/annual) and if annual, year chosen
+    Dim ExportYear As Integer
+    Dim IsCumulative As Boolean
+    
+    IsCumulative = tglExportType 'set based on toggle value
+    
+    Select Case Nz(tglExportType, 2)
+        Case 2
+        Case -1 'cumulative
+            ExportYear = 0
+        Case 0 'annual
+            ExportYear = Me.cbxAnnualYear
+    End Select
+    
+    PrepareExports CStr(SavePath), ExportYear, Me.optgFileType, Me.chkZip, IsCumulative
     
     'open DataStore location
-    Application.FollowHyperlink uri, , True, False
+'    Application.FollowHyperlink uri, , True, False
     
     'open save location
     shell "C:\WINDOWS\explorer.exe """ & SavePath & "", vbNormalFocus
@@ -4092,6 +4436,160 @@ Err_Handler:
 End Sub
 
 ' ---------------------------------
+' SUB:          PrepareSpeciesListsExports
+' Description:  Generates and saves files for species lists exports based on top X # of species
+' Assumptions:
+' Parameters:
+'   TopX -  # of species to list (integer)
+'   Cumulative - returns top X across all years when true (boolean, default=true)
+'   Running PrepareSpeciesListsExports(x)
+'
+' Returns:      -
+' Throws:       none
+' References:   -
+' Source/date:
+' Adapted:      -
+' Revisions:
+'   BLC - 2/1/2021 - initial version
+' ---------------------------------
+Public Sub PrepareSpeciesListsExports(SavePath As String, TopX As Integer, Optional Cumulative = True)
+On Error GoTo Err_Handler
+        
+    Dim QryName As String
+    Dim strInitFile As String
+    Dim strSaveFile As String
+    Dim strSaveFolder As String
+
+    Dim i As Integer
+    Dim tpl As String
+    Dim FileType As String
+    Dim FileName As String
+    Dim FilePath As String
+    Dim FileFullPath As String
+    Dim NewDir As String
+    Dim NewFile As String
+    Dim DataPeriod As String
+    
+    'prep export year
+    SetTempVar "TopX", CInt(TopX)
+    
+    'prep filename
+    FileType = "CSV"
+    FileName = Format(Now(), "YYYYMMDD") & "_Top_" & TopX & "_SpeciesList." & LCase(FileType) ' & FileType
+    FilePath = IIf(Len(SavePath) > 0, SavePath, Application.CurrentProject.Path)
+    FileFullPath = FilePath & "\" & FileName
+    
+    'create new directory
+    NewDir = SavePath & "\NCRN_Top_" & TopX & "_Species_ForestVeg"
+    CreateFolder NewDir
+    
+    'export either cumulative or annual data
+    Dim rs As DAO.Recordset
+    Set rs = GetRecords("s_annual_data_tables") '"s_annual_data_export")
+    
+    i = 0
+    
+    'prep array to handle the species lists to prepare
+    Dim aryQuery(7, 2) As String
+    'Populate an array with the name of a query and the worksheet name to be used for the results of this query.
+    aryQuery(0, 0) = "s_top_trees"
+    aryQuery(0, 1) = "Trees"
+    aryQuery(1, 0) = "s_top_saplings"
+    aryQuery(1, 1) = "Saplings"
+    aryQuery(2, 0) = "s_top_vines"
+    aryQuery(2, 1) = "Vines"
+    aryQuery(3, 0) = "s_top_herbaceous"
+    aryQuery(3, 1) = "Herbaceous"
+    aryQuery(4, 0) = "s_top_shrubs"
+    aryQuery(4, 1) = "Shrubs"
+    aryQuery(4, 0) = "s_top_targeted_herb"
+    aryQuery(4, 1) = "Targeted Herbaceous"
+    aryQuery(5, 0) = "s_top_woody_herbaceous"
+    aryQuery(5, 1) = "Woody Herbaceous"
+    aryQuery(6, 0) = "s_top_exotics"
+    aryQuery(6, 1) = "Exotics"
+
+
+'    Do Until rs.EOF
+    For i = 0 To UBound(aryQuery) - 1
+        
+'        qryName = IIf(rs("TableName") <> "Tag_History", "qExport_All_" & rs("TableName"), "qExport_Tag_Status_by_Cycle_x")
+        tpl = aryQuery(i, 0)
+        'tpl = IIf(Cumulative = False, rs("RelatedTemplate"), rs("RelatedCumTemplate"))
+Debug.Print tpl
+        Dim rs2 As DAO.Recordset
+        Set rs2 = GetRecords(tpl)
+        
+        'set temp query SQL
+        Dim qdf As DAO.QueryDef
+        Set qdf = CurrDb.QueryDefs("usys_temp_qdf")
+        
+        SysCmd acSysCmdInitMeter, "Exporting...", rs.RecordCount
+        
+        With qdf
+        
+            SysCmd acSysCmdUpdateMeter, i
+            SysCmd acSysCmdSetStatus, "Exporting " & aryQuery(i, 1) & "..."
+            'SysCmd acSysCmdSetStatus, "Exporting " & rs("AnnualData") & "..."
+                                    
+            'remove year parameter for cumulative queries
+            If Cumulative = True Then
+                '------ Cumulative data -----
+                '.SQL = Replace(.SQL, "[yr]", DataYear)
+                '2nd level replace of (TOP 25 handles UNION queries
+                .SQL = Replace(Replace(GetTemplate(tpl), "SELECT ", "SELECT TOP " & TopX & " "), "(SELECT TOP " & TopX, "(SELECT ")
+            
+            Debug.Print vbCrLf & aryQuery(i, 1) & ": " & vbCrLf & .SQL & vbCrLf
+                
+            Else
+'                '------ Annual data -----
+'                'remove parameterization since it triggers popups
+'                .SQL = Replace(GetTemplate(tpl), "Parameters yr integer;", "")
+'
+''               .Parameters("yr") = DataYear >> DoCmd.TransferText retriggers params
+'                .SQL = Replace(.SQL, "[yr]", DataYear)
+            End If
+            
+ 'Debug.Print "IsCum? " & Cumulative & " - " & .SQL
+ 
+ '           Set rs2 = GetRecords(tpl) '<-- retains parameters (yr)
+                          
+            NewFile = NewDir & "\Top_" & TopX & "_" & aryQuery(i, 1) & "_" & CStr(Format(Now(), "yyyymmdd")) & ".csv"
+            DoCmd.TransferText acExportDelim, , qdf.Name, NewFile, True
+                    
+        End With
+    
+'        If rs.EOF = True Then Exit Do
+                
+        SysCmd acSysCmdClearStatus
+        
+'        rs.MoveNext
+'        i = i + 1
+    Next
+
+    MsgBox "File saved to:" & vbCrLf & vbCrLf & FilePath 'strSaveFile
+    
+    'open save location
+    shell "C:\WINDOWS\explorer.exe """ & FilePath & "", vbNormalFocus
+    
+Exit_Handler:
+    'Remove progress meter
+    SysCmd acSysCmdRemoveMeter
+    SysCmd acSysCmdClearStatus
+    
+    Exit Sub
+    
+Err_Handler:
+    Select Case Err.Number
+      Case Else
+        MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+            "Error encountered (#" & Err.Number & " - PrepareSpeciesListsExports[frm_Data_Summary_Advanced])"
+    End Select
+    Resume Exit_Handler
+End Sub
+
+
+' ---------------------------------
 ' SUB:          PrepareExports
 ' Description:  Generates and saves files based on desired export information
 ' Assumptions:
@@ -4101,6 +4599,7 @@ End Sub
 '   DataYear - year to export (integer)
 '   iFileType - type of file(s) to create (optional, integer, 1="CSV" or 2="XLS", 1 - default (CSV))
 '   ZipFile - whether the file(s) should be bundled into a zip file (optional, boolean, True - default)
+'   Cumulative - if a cumulative export (covering all years) is desired (optional, boolean, True = default)
 '
 '   Running PrepareExports(yyyy) using the 4-digit year and defaults will prepare a zipped file of CSVs from the
 '   data tables listed in the AnnualDataTables table filtered by the DataYear entered that
@@ -4119,8 +4618,10 @@ End Sub
 ' Adapted:      -
 ' Revisions:
 '   BLC - 1/31/2019 - initial version
+'   BLC - 1/2/2021  - added cumulative option for creating cumulative exports
 ' ---------------------------------
-Public Sub PrepareExports(SavePath As String, DataYear As Integer, Optional iFileType As Integer = 1, Optional ZipFile As Boolean = True)
+Public Sub PrepareExports(SavePath As String, DataYear As Integer, Optional iFileType As Integer = 1, _
+    Optional ZipFile As Boolean = True, Optional Cumulative As Boolean = True)
 On Error GoTo Err_Handler
         
     Dim QryName As String
@@ -4136,27 +4637,32 @@ On Error GoTo Err_Handler
     Dim FileFullPath As String
     Dim NewDir As String
     Dim NewFile As String
+    Dim DataPeriod As String
     
-'    'Generate the default output file name and allow user to edit it
-    strInitFile = Application.CurrentProject.Path & "\Exports\NCRN_ForestVeg_All_Data_" & CStr(Format(Now(), "yyyymmdd")) & ".xlsx"
-    strSaveFile = SaveFile(strInitFile, "Excel", "xls*", "Save Export File As", "Save Export File")
+''    'Generate the default output file name and allow user to edit it
+'    strInitFile = Application.CurrentProject.Path & "\Exports\NCRN_ForestVeg_All_Data_" & CStr(Format(Now(), "yyyymmdd")) & ".xlsx"
+'    strSaveFile = SaveFile(strInitFile, "Excel", "xls*", "Save Export File As", "Save Export File")
 '    strSaveFile = fxnSaveFile(strInitFile, "Excel", "xls*", "Microsoft Excel (*.xls*) - *.xls*")
 '    strSaveFile = fxnSaveFile(strInitFile, "Microsoft Excel (*.xls*)", "*.xls*")
 '    strSaveFolder = fPathParsing(strSaveFile, "D")
     
     'prep export year
     SetTempVar "ExportYear", CInt(DataYear)
+    
+    DataPeriod = IIf(DataYear > 0, DataYear, "Cumulative")
 
     'prep filename
     FileType = IIf(iFileType = 1, "CSV", "XLS")
-    FileName = Format(Now(), "YYYYMMDD") & "_" & DataYear & "_AnnualData." & LCase(FileType) & FileType
+'    FileName = Format(Now(), "YYYYMMDD") & "_" & DataYear & "_AnnualData." & LCase(FileType) & FileType
+    FileName = Format(Now(), "YYYYMMDD") & "_" & DataPeriod & "_AnnualData." & LCase(FileType) & FileType
     FilePath = IIf(Len(SavePath) > 0, SavePath, Application.CurrentProject.Path)
     FileFullPath = FilePath & "\" & FileName
     
     'create new directory
-    NewDir = SavePath & "\NCRN_" & DataYear & "_ForestVeg"
+    NewDir = SavePath & "\NCRN_" & DataPeriod & "_ForestVeg"
     CreateFolder NewDir
     
+    'export either cumulative or annual data
     Dim rs As DAO.Recordset
     Set rs = GetRecords("s_annual_data_tables") '"s_annual_data_export")
     
@@ -4167,7 +4673,7 @@ On Error GoTo Err_Handler
             Dim ZipPath As String
 '            Dim AppendTo As Boolean
             
-            ZipPath = FilePath & "\NCRN_" & DataYear & "_ForestVeg.zip"
+            ZipPath = FilePath & "\NCRN_" & DataPeriod & "_ForestVeg.zip"
             
 '            If FileExists(ZipPath) = False Then
 '                AppendTo = True
@@ -4182,10 +4688,10 @@ On Error GoTo Err_Handler
     Do Until rs.EOF '(rs.BOF = True And rs.EOF = True)
         
 '        qryName = IIf(rs("TableName") <> "Tag_History", "qExport_All_" & rs("TableName"), "qExport_Tag_Status_by_Cycle_x")
-        tpl = rs("RelatedTemplate")
+        tpl = IIf(Cumulative = False, rs("RelatedTemplate"), rs("RelatedCumTemplate"))
 Debug.Print tpl
         Dim rs2 As DAO.Recordset
-'        Set rs2 = GetRecords(tpl)
+        Set rs2 = GetRecords(tpl)
         
         'set temp query SQL
         Dim qdf As DAO.QueryDef
@@ -4199,13 +4705,23 @@ Debug.Print tpl
             SysCmd acSysCmdSetStatus, "Exporting " & rs("AnnualData") & "..."
             
             Debug.Print vbCrLf & rs("AnnualData") & ": " & vbCrLf & .SQL & vbCrLf
-            .SQL = Replace(GetTemplate(tpl), "Parameters yr integer;", "")
-'            .Parameters("yr") = DataYear >> DoCmd.TransferText retriggers params
-            .SQL = Replace(.SQL, "[yr]", DataYear)
- Debug.Print .SQL
+                        
+            'remove year parameter for cumulative queries
+            If Cumulative = True Then
+                '------ Cumulative data -----
+                '.SQL = Replace(.SQL, "[yr]", DataYear)
+            Else
+                '------ Annual data -----
+                'remove parameterization since it triggers popups
+                .SQL = Replace(GetTemplate(tpl), "Parameters yr integer;", "")
+
+'               .Parameters("yr") = DataYear >> DoCmd.TransferText retriggers params
+                .SQL = Replace(.SQL, "[yr]", DataYear)
+            End If
+            
+ Debug.Print "IsCum? " & Cumulative & " - " & .SQL
+ 
  '           Set rs2 = GetRecords(tpl) '<-- retains parameters (yr)
-            
-            
             
             Select Case FileType
                 Case "XLS"
@@ -4251,10 +4767,8 @@ Debug.Print tpl
         If FSO.FolderExists(NewDir) Then Call FSO.DeleteFolder(NewDir, True)
         
     End If
-       
-        
+
     MsgBox "File saved to:" & vbCrLf & vbCrLf & FilePath 'strSaveFile
-    
     
 Exit_Handler:
     'Remove progress meter
@@ -4267,7 +4781,7 @@ Err_Handler:
     Select Case Err.Number
       Case Else
         MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
-            "Error encountered (#" & Err.Number & " - btnExportAll_Click[frm_Data_Summary_Advanced])"
+            "Error encountered (#" & Err.Number & " - PrepareExports[frm_Data_Summary_Advanced])"
     End Select
     Resume Exit_Handler
 End Sub
@@ -4289,7 +4803,10 @@ Private Sub EnableAnnualExport()
 On Error GoTo Err_Handler
 
     'enable btnAnnualExport?
-    If cbxAnnualYear > 1970 And _
+    If ((Me.tglExportType = False And cbxAnnualYear > 1970) _
+        Or _
+       (Me.tglExportType = True)) _
+       And _
       (optgFileType = 1 Or optgFileType = 2) Then
       btnAnnualExport.Enabled = True
     Else
